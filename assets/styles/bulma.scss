@@ -1,0 +1,10 @@
+// Import variables
+@import "./index";
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+.navbar.is-transparent {
+  background: transparent none;
+}

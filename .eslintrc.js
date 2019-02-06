@@ -11,5 +11,10 @@ module.exports = {
     '@nuxtjs'
   ],
   // add your custom rules here
-  rules: {}
+  rules: {
+    'comma-dangle': [
+      'warn',
+      'only-multiline'
+    ]
+  }
 }

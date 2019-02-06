@@ -27,7 +27,17 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '@/assets/styles/bulma.scss',
   ],
+
+  /*
+   ** Global SCSS definitions
+   */
+  styleResources: {
+    scss: [
+      '@/assets/styles/index.scss',
+    ]
+  },
 
   /*
   ** Plugins to load before mounting the App
@@ -43,13 +53,20 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/style-resources',
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  buefy: {
+    css: false,
+    materialDesignIcons: false,
+    defaultIconPack: 'fas',
   },
 
   /*
