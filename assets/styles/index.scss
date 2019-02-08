@@ -2,11 +2,9 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: $white-bis;
-$primary-invert: findColorInvert($primary);
-$light: $white-bis;
-$light-invert: findColorInvert($primary);
-$background: #212529;
+
+$dark: #212529;
+$dark-invert: findColorInvert($dark);
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
     "white": ($white, $black),
@@ -20,9 +18,9 @@ $colors: (
     "danger": ($danger, $danger-invert),
 );
 
-// Links
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
-
-$body-background-color: $background;
+$lightning: linear-gradient(to right,#DD2476,#FF512F);
+$calm: linear-gradient(to left,#B06AB3,#4568DC);
+$effects: (
+  "lightning": ($lightning, $white-bis),
+  "calm": ($calm, $white-bis),
+);

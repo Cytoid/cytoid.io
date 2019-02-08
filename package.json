@@ -16,6 +16,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/style-resources": "^0.1.1",
+    "bulma": "^0.7.4",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "nuxt": "^2.3.4",
@@ -35,6 +36,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0"
   }
 }
