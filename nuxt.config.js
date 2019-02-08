@@ -65,8 +65,9 @@ module.exports = {
 
   buefy: {
     css: false,
-    materialDesignIcons: false,
+    materialDesignIcons: true,
     defaultIconPack: 'fas',
+    materialDesignIconsHRef: 'https://use.fontawesome.com/releases/v5.7.1/css/all.css',
   },
 
   /*

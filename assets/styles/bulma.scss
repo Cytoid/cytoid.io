@@ -1,10 +1,41 @@
-// Import variables
 @import "./index";
 
-// Import Bulma and Buefy styles
+$footer-padding: 1.5rem 1.5rem 2rem;
+$footer-background-color: $dark;
+
+$body-background-color: $dark;
+$navbar-item-color: $grey-light;
+$navbar-item-hover-color: $grey-lighter;
+$navbar-item-active-color: $white;
+
+@each $name, $effects in $effects {
+  $color: nth($effects, 1);
+  $color-invert: nth($effects, 2);
+  .is-#{$name} {
+    background: $color;
+  }
+}
+
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 
 .navbar.is-transparent {
   background: transparent none;
+}
+
+.button {
+  @each $name, $effects in $effects {
+    $color: nth($effects, 1);
+    $color-invert: nth($effects, 2);
+    &.is-#{$name} {
+      background: $color;
+      border-color: transparent;
+      color: $color-invert;
+      &:hover,
+      &.is-hovered {
+        filter: brightness(.8);
+        color: $color-invert
+      }
+    }
+  }
 }
