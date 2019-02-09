@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ranking'
+  name: 'LevelDetailRanking'
 }
 </script>
 
