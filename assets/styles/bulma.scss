@@ -8,6 +8,8 @@ $navbar-item-color: $grey-light;
 $navbar-item-hover-color: $grey-lighter;
 $navbar-item-active-color: $white;
 
+$gap: 128px;
+
 @each $name, $effects in $effects {
   $color: nth($effects, 1);
   $color-invert: nth($effects, 2);

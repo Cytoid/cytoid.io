@@ -2,14 +2,14 @@
 nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
   .container
     .navbar-brand
-      a.navbar-item(href='/') Cytoid
+      nuxt-link.navbar-item(to="/") Cytoid
       .navbar-burger
         span
         span
         span
     .navbar-menu
       .navbar-start
-        a.navbar-item Levels
+        nuxt-link.navbar-item(to="/levels") Levels
       .navbar-end
         span.navbar-item.has-dropdown.is-hoverable
           span.navbar-link Me

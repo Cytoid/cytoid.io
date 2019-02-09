@@ -13,7 +13,7 @@ async function start() {
 
   const {
     host = process.env.HOST || '127.0.0.1',
-    port = process.env.PORT || 3000
+    port = process.env.PORT || 8080
   } = nuxt.options.server
 
   // Build only in dev mode
