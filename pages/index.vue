@@ -2,7 +2,9 @@
 div
   section.section
     .container
-      | test content
+      .tile.is-ancestor
+        .tile
+          .tile.
   section.hero.is-medium.is-dark.is-bold
     .hero-body
       .container.has-text-centered
@@ -25,6 +27,7 @@ div
 <script>
 export default {
   name: 'HomePage',
+  layout: 'background',
 }
 </script>
 
