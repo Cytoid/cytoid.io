@@ -2,7 +2,10 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
+  server: {
+    port: 8080,
+    host: '0.0.0.0',
+  },
   /*
   ** Headers of the page
   */
@@ -60,7 +63,9 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.SERVER_API_URL || process.env.API_URL || 'http://localhost:3000',
+    browserBaseURL: process.env.CLIENT_API_URL || process.env.API_URL || 'http://localhost:3000',
+    progress: true,
   },
 
   buefy: {
@@ -74,9 +79,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
+    extractCSS: true,
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

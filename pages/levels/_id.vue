@@ -1,12 +1,14 @@
 <template lang="pug">
 div
-  section.hero.is-dark.is-fullheight-with-navbar#level-hero(:style="{ backgroundImage: 'url(' + backgroundImage + ')' }")
+  section.hero.is-dark.is-fullheight-with-navbar#level-hero(
+    :style="{ backgroundImage: 'url(' + level.background.url + ')' }"
+    )
     .hero-head
       nav-bar
     .hero-body: .container.has-text-left
       div#title-container.is-inline-block
-        h1.title DDDDDDD
-        h2.subtitle AAAAAAA
+        h1.title(v-text="level.title")
+        h2.subtitle(v-text="level.metadata.artist && level.metadata.artist.name")
     .hero-foot
       nav.tabs.is-boxed.is-fullwidth.container
         ul
@@ -24,10 +26,31 @@ export default {
   components: {
     NavBar,
   },
-  computed: {
-    backgroundImage() {
-      return 'https://cytoid.io/browse/flina.touhou.ccmoon/header.jpg'
+  data() {
+    return {
+      level: null,
     }
+  },
+  asyncData({ params, $axios, error }) {
+    return $axios.get('/levels/' + params.id)
+      .then((res) => {
+        res.data.background.url = 'https://storage.googleapis.com/staging.cytoid.appspot.com' + res.data.background.url
+        return {
+          level: res.data
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          error({
+            statusCode: error.response.status,
+            message: error.response.status === 404 ? 'Level not found' : 'Server Error'
+          })
+        } else if (error.request) {
+          error({ statusCode: 504, message: 'Request Timeout' })
+        } else {
+          error({ statusCode: 503, message: 'Can not communicate with the server' })
+        }
+      })
   },
 }
 </script>
