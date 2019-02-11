@@ -1,7 +1,10 @@
-# cytoid
+# Cytoid
 
-> Cytoid is a music game where you can create, share and play your own levels! Powered by community, with many dedicated creators, Cytoid provides a huge variety of musical genres to enjoy and a diverse range of gameplay design.
+> Cytoid is a music game where you can create, share and play your own levels!
+Powered by community, with many dedicated creators, Cytoid provides a huge
+variety of musical genres to enjoy and a diverse range of gameplay design.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/04925836-e9d4-4d9f-8a24-d8883d49544a/deploy-status)](https://app.netlify.com/sites/cytoid/deploys)
 ## Build Setup
 
 ``` bash
@@ -18,5 +21,3 @@ $ yarn start
 # generate static project
 $ yarn run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).

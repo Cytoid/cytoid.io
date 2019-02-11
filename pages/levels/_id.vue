@@ -42,10 +42,10 @@ export default {
       .catch((err) => {
         if (err.response) {
           error({
-            statusCode: error.response.status,
-            message: error.response.status === 404 ? 'Level not found' : 'Server Error'
+            statusCode: err.response.status,
+            message: err.response.status === 404 ? 'Level not found' : 'Server Error'
           })
-        } else if (error.request) {
+        } else if (err.request) {
           error({ statusCode: 504, message: 'Request Timeout' })
         } else {
           error({ statusCode: 503, message: 'Can not communicate with the server' })
