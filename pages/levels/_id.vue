@@ -15,7 +15,7 @@ div
           nuxt-link(tag="li" replace exact active-class="is-active" :to="{ name: 'levels-id-ranking' }"): a Ranking
           nuxt-link(tag="li" replace exact active-class="is-active" :to="{ name: 'levels-id' }"): a Details
           nuxt-link(tag="li" replace exact active-class="is-active" :to="{ name: 'levels-id-playback' }"): a Playback
-  nuxt-child
+  nuxt-child(:value="level")
 </template>
 
 <script>
