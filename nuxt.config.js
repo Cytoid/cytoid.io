@@ -1,14 +1,17 @@
+const config = require('config')
 const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
+  srcDir: 'src',
   server: {
-    port: 8080,
-    host: '0.0.0.0',
+    port: process.env.PORT || 8080,
+    host: process.env.HOST || '0.0.0.0',
   },
-  /*
-  ** Headers of the page
-  */
+  env: {
+    assetURL: config.get('assetURL'),
+    apiURL: config.get('apiURLClient'),
+  },
   head: {
     title: '%s' + ' - ' + pkg.name,
     meta: [
@@ -63,8 +66,8 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: process.env.SERVER_API_URL || process.env.API_URL || 'http://localhost:3000',
-    browserBaseURL: process.env.CLIENT_API_URL || process.env.API_URL || 'http://localhost:3000',
+    baseURL: config.get('apiURLServer'),
+    browserBaseURL: config.get('apiURLClient'),
     progress: true,
   },
 
@@ -80,6 +83,13 @@ module.exports = {
   */
   build: {
     extractCSS: true,
+    analyze: process.env.NODE_ENV === 'development',
+    publicPath: config.get('staticURL') + '/assets/',
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : 'css/[contenthash].css',
+    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

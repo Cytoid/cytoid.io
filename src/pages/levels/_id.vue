@@ -31,10 +31,10 @@ export default {
       level: null,
     }
   },
-  asyncData({ params, $axios, error }) {
+  asyncData({ params, $axios, error, env }) {
     return $axios.get('/levels/' + params.id)
       .then((res) => {
-        res.data.background.url = 'https://storage.googleapis.com/staging.cytoid.appspot.com' + res.data.background.url
+        res.data.background.url = env.assetURL + res.data.background.url
         return {
           level: res.data
         }
