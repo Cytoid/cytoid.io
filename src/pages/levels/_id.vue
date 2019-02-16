@@ -46,9 +46,9 @@ export default {
             message: err.response.status === 404 ? 'Level not found' : 'Server Error'
           })
         } else if (err.request) {
-          error({ statusCode: 504, message: 'Request Timeout' })
+          error({ statusCode: 504, message: 'Request timed out' })
         } else {
-          error({ statusCode: 503, message: 'Can not communicate with the server' })
+          error({ statusCode: 503, message: 'Could not communicate with the server' })
         }
       })
   },
