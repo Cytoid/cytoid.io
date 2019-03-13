@@ -45,13 +45,11 @@ export default {
         return
       }
       this.loading = true
-      this.$axios.post('/users', this.form, {
-        withCredentials: true,
-      })
+      this.$axios.post('/users', this.form)
         .then((res) => {
           const data = res.data
           this.loading = false
-          this.$store.dispatch('login', data.token)
+          this.$store.commit('setUser', data.user)
           this.$toast.open({
             message: 'Registration Succeed!!',
             type: 'is-success'

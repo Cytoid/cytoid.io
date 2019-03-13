@@ -12,6 +12,7 @@
           @click="login"
           :class="{'is-loading': loading}"
         ) Sign In
+        nuxt-link#forgot-password(to="/register") Forgot Password
         hr
         .level.is-mobile
           .level-item: button.button.is-rounded.is-medium#discord-login: i.fab.fa-discord
@@ -20,7 +21,7 @@
           .level-item: button.button.is-rounded.is-medium#facebook-login: i.fab.fa-facebook
         p.has-text-grey
           | Don't have an account? &nbsp;
-          nuxt-link(to="/register") Sign Up
+          nuxt-link(to="/session/register") Sign Up
 </template>
 
 <script>
@@ -38,14 +39,11 @@ export default {
   methods: {
     login() {
       this.loading = true
-      this.$axios.post('/session', this.form, {
-        withCredentials: true,
-      })
+      this.$axios.post('/session', this.form)
         .then((res) => {
           this.loading = false
           const data = res.data
-          const token = data.token
-          this.$store.dispatch('login', token)
+          this.$store.commit('setUser', data.user)
           this.$toast.open({
             message: 'Login In Succeed',
             type: 'is-success'
@@ -90,5 +88,10 @@ export default {
   background-color: #7289da;
   color: white;
   border-style: none;
+}
+#forgot-password {
+  display: block;
+  text-align: right;
+  margin-top: 0.5rem;
 }
 </style>

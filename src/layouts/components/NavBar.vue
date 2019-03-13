@@ -14,7 +14,7 @@ nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
       .navbar-start
         nuxt-link.navbar-item(to="/levels") Levels
       .navbar-end
-        span(v-if="token").navbar-item.has-dropdown.is-hoverable
+        span(v-if="user").navbar-item.has-dropdown.is-hoverable
           span.navbar-link Me
           .navbar-dropdown.is-right.is-boxed
             a.navbar-item Profile
@@ -27,7 +27,7 @@ nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
             a.navbar-item(@click="logout") Logout
         .navbar-item(v-else)
           .buttons
-            nuxt-link.button.is-primary(to="/login") Login
+            nuxt-link.button.is-primary(to="/session/login") Login
 </template>
 
 <script>
@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: mapState([
-    'token',
+    'user',
   ]),
   methods: {
     ...mapActions([

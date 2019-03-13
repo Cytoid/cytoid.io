@@ -53,7 +53,6 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/vee-validate' },
-    { src: '~/plugins/auth', mode: 'client' }
   ],
 
   /*
@@ -74,13 +73,14 @@ module.exports = {
     baseURL: config.get('apiURLServer'),
     browserBaseURL: config.get('apiURLClient'),
     progress: true,
+    credentials: true,
   },
 
   buefy: {
     css: false,
     materialDesignIcons: true,
     defaultIconPack: 'fas',
-    materialDesignIconsHRef: 'https://use.fontawesome.com/releases/v5.7.1/css/all.css',
+    materialDesignIconsHRef: 'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
   },
 
   /*
