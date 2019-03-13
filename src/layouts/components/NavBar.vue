@@ -15,12 +15,12 @@ nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
         nuxt-link.navbar-item(to="/levels") Levels
       .navbar-end
         span(v-if="user").navbar-item.has-dropdown.is-hoverable
-          span.navbar-link Me
+          span.navbar-link(v-text="user.name")
           .navbar-dropdown.is-right.is-boxed
             a.navbar-item Profile
             a.navbar-item Favorites
             hr.navbar-divider
-            a.navbar-item Create Levels
+            nuxt-link.navbar-item(to="/my/levels/upload") Create Level
             a.navbar-item Create Collections
             hr.navbar-divider
             a.navbar-item Settings
