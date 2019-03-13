@@ -14,25 +14,37 @@ nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
       .navbar-start
         nuxt-link.navbar-item(to="/levels") Levels
       .navbar-end
-        span.navbar-item.has-dropdown.is-hoverable
-          span.navbar-link Me
+        span(v-if="user").navbar-item.has-dropdown.is-hoverable
+          span.navbar-link(v-text="user.name")
           .navbar-dropdown.is-right.is-boxed
             a.navbar-item Profile
             a.navbar-item Favorites
             hr.navbar-divider
-            a.navbar-item Create Levels
+            nuxt-link.navbar-item(to="/my/levels/upload") Create Level
             a.navbar-item Create Collections
             hr.navbar-divider
             a.navbar-item Settings
-            a.navbar-item Logout
+            a.navbar-item(@click="logout") Logout
+        .navbar-item(v-else)
+          .buttons
+            nuxt-link.button.is-primary(to="/session/login") Login
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   data() {
     return {
       navbarActivated: false,
     }
-  }
+  },
+  computed: mapState([
+    'user',
+  ]),
+  methods: {
+    ...mapActions([
+      'logout',
+    ])
+  },
 }
 </script>

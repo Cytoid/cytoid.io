@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   section.hero.is-dark.is-fullheight-with-navbar#level-hero(
-    :style="{ backgroundImage: 'url(' + level.background.url + ')' }"
+    :style="{ backgroundImage: 'url(' + level.bundle.background + ')' }"
     )
     .hero-head
       nav-bar
@@ -34,7 +34,6 @@ export default {
   asyncData({ params, $axios, error, env }) {
     return $axios.get('/levels/' + params.id)
       .then((res) => {
-        res.data.background.url = env.assetURL + res.data.background.url
         return {
           level: res.data
         }

@@ -4,6 +4,9 @@ const pkg = require('./package')
 module.exports = {
   mode: 'universal',
   srcDir: 'src',
+  dir: {
+    static: '../public',
+  },
   server: {
     port: process.env.PORT || 8080,
     host: process.env.HOST || '0.0.0.0',
@@ -13,7 +16,7 @@ module.exports = {
     apiURL: config.get('apiURLClient'),
   },
   head: {
-    title: '%s' + ' - ' + pkg.name,
+    title: 'Cytoid',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -49,6 +52,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~plugins/vee-validate' },
   ],
 
   /*
@@ -69,13 +73,14 @@ module.exports = {
     baseURL: config.get('apiURLServer'),
     browserBaseURL: config.get('apiURLClient'),
     progress: true,
+    credentials: true,
   },
 
   buefy: {
     css: false,
     materialDesignIcons: true,
     defaultIconPack: 'fas',
-    materialDesignIconsHRef: 'https://use.fontawesome.com/releases/v5.7.1/css/all.css',
+    materialDesignIconsHRef: 'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
   },
 
   /*

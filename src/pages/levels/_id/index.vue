@@ -8,7 +8,7 @@
             li(v-for="(v, key) in metadata")
               strong(v-text="key")
               template(v-if="v && (v.url || v.name)")
-                a(v-if="v.url" :href="v.url" v-text="v.name")
+                a(v-if="v.url" :href="v.url" v-text="v.name" target="_blank")
                 span(v-else v-text="v.name")
               span(v-else v-text="v")
 </template>
@@ -16,6 +16,7 @@
 <script>
 import NavBar from '@/layouts/components/NavBar'
 import marked from 'marked'
+import moment from 'moment'
 export default {
   name: 'LevelDetail',
   layout: 'blank',
@@ -25,14 +26,17 @@ export default {
   props: { value: { default: null, type: Object } },
   computed: {
     contentMarkdown() {
-      return marked(this.value.content)
+      return marked(this.value.description)
     },
     metadata() {
-      return Object.assign({
+      const result = Object.assign({
         duration: this.value.duration,
-        modified: this.value.last_modified,
-        uploaded: this.value.creation_date,
+        modified: moment(this.value.modificationDate).calendar(),
+        uploaded: moment(this.value.creationDate).calendar(),
       }, this.value.metadata)
+      delete result.title_localized
+      delete result.title
+      return result
     }
   },
 }
