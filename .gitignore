@@ -85,3 +85,6 @@ sw.*
 
 $ Development environment
 config/development.json
+config/production.json
+secrets.tar
+deploy-secret.json

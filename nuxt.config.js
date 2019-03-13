@@ -89,7 +89,7 @@ module.exports = {
   build: {
     extractCSS: true,
     analyze: process.env.NODE_ENV === 'development',
-    publicPath: config.get('staticURL') + '/assets/',
+    publicPath: config.get('staticURL'),
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
       chunk: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
