@@ -1,18 +1,20 @@
 <template lang="pug">
-  div
-    div(class="columns")
-        LevelCard(v-for="level in levels", :level="level", class="column is-one-third")
+  #level-container
+    LevelCard(v-for="level in levels", :value="level", :key="level.id")
 </template>
 
 <script>
 import LevelCard from '~/components/LevelCard'
 export default {
   name: 'LevelList',
+  components: {
+    LevelCard
+  },
   asyncData({ params, $axios, error, env }) {
     return $axios.get('/levels')
       .then((res) => {
         return {
-          levels: res.data.data
+          levels: res.data
         }
       })
       .catch((err) => {
@@ -28,12 +30,18 @@ export default {
         }
       })
   },
-  components: {
-    LevelCard
-  }
 }
 </script>
 
 <style scoped>
-
+#level-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#level-container .level-card {
+  margin: 1rem;
+  height: 20vh;
+  width: 30vh;
+}
 </style>

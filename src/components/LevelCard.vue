@@ -1,112 +1,72 @@
 <template lang="pug">
-  div(class="card")
-    div(class="cover-container")
-      img(class="card-img unselectable", :src="backgroundURL")
-    nuxt-link(:to="'/levels/' + level.id")
-      div(class="card-img-overlay cover")
-    div(class="card-img-overlay unselectable")
-      div(class="m-l-lg m-t-sm")
-        div(class="time-text unselectable m-b-none m-r-none m-l-none is-pulled-left")
-          | 2 days ago
-    div(class="m-t-md m-r-md")
-      div(class="unselectable m-b-none m-r-none m-l-none is-pulled-right")
-    div(class="cover-overlay")
-      div(class="m-b-lg")
-      h4(class="trun-text m-b-sm")
-        | {{level.title}}
-        span {{level.metadata.artist.name}}
-    div(class="columns is-flex flex-nowrap")
-      div(class="m-b-none column")
-        nuxt-link(:to="'/profile/' + level.owner.name", class="avatar")
-          img(class="is-rounded avatar-img", src="https://cytoid.io/io.png")
-          span(class="is-vcentered uploader-text")
-          | level.owner.name
+  .level-card(@click="enterLevel")
+    img(:src="value.bundle.background")
+    .content
+      .title-block
+        h1(v-text="value.title")
+        h3(v-if="value.metadata.artist && value.metadata.artist.name" v-text="value.metadata.artist.name")
 </template>
 
 <script>
 export default {
   props: {
-    level: {
-      default: () => ({
-        title: 'Loading...',
-
-      }),
+    value: {
       type: Object
     }
   },
-  computed: {
-    backgroundURL() {
-      return process.env.assetURL + this.level.background
+  methods: {
+    enterLevel() {
+      this.$router.push({ name: 'levels-id', params: { id: this.value.uid } })
     }
   }
 }
 </script>
 
-<style scoped>
-  .card {
-    border-radius: 4px;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
-    padding: 0;
+<style scoped lang="scss">
+.level-card {
+  min-height: 200px;
+  min-width: 320px;
+  display: inline-block;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+  color: white;
+  position: relative;
+  user-select: none;
+  &:hover img {
+    filter: brightness(70%);
   }
-  .card-img {
-    border-radius: 4px;
+  &:active img {
+    filter: brightness(50%);
+  }
+  img {
+    transition: filter 0.15s linear;
+    filter: brightness(60%);
+    border-radius: .5rem;
+    z-index: -1;
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
+    left: 0;
     top: 0;
   }
-  .card-img-overlay {
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    padding:0;
-  }
-  .cover {
-    background: rgba(0, 0, 0, 0.25);
-    transition: all .25s ease-in-out;
-    position: absolute;
-    width: 100%;
-    border-radius: 4px;
-  }
-  .cover-container {
-    width: 100%;
-    padding-top: 62.5% !important;
-  }
-  .cover-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%);
-    pointer-events: none;
-    border-radius: 4px;
-    padding: 1em
-  }
-  .avatar {
-    pointer-events: auto; cursor: default; color: #fff; text-decoration: none; white-space: nowrap;
-  }
-  .avatar-img {
-    max-width:none;width:25px;height:25px;
-  }
-  .unselectable {
-    user-select: none;
-    pointer-events: none;
-  }
-  .time-text {
-    font-size: 14px;
-  }
-  .trun-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding: .5rem;
+  .title-block {
     display: block;
-    max-width: 100%;
+    h1 {
+      font-size: 25px;
+      color: white;
+      margin: 0;
+      display: block;
+    }
+    small {
+      font-size: 10px;
+    }
+    h3 {
+      color: white;
+      margin: 0;
+      display: inline;
+      font-size: 12px;
+      font-weight: normal;
+    }
   }
-  .uploader-text {
-    font-size: 14px; padding-left: 6px; text-decoration: none;
-  }
-  .flex-nowrap {
-    flex-wrap: nowrap !important;
-  }
+}
 </style>
