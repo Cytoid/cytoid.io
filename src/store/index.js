@@ -1,23 +1,22 @@
 export const state = () => ({
-  token: null
+  user: null
 })
 export const mutations = {
-  setToken(state, auth) {
-    state.token = auth
+  setUser(state, user) {
+    state.user = user
   },
 }
 export const actions = {
-  nuxtServerInit(a, { req }) {
-    console.log(req)
-  },
-  login({ commit }, token) {
-    commit('setToken', token)
-    this.$axios.setToken(token, 'Bearer')
-    localStorage.setItem('cytoid:token', token)
+  nuxtServerInit({ commit }, { req }) {
+    const session = req.ctx.session
+    if (session && session.passport && session.passport.user) {
+      commit('setUser', req.ctx.session.passport.user)
+    }
   },
   logout({ commit }) {
-    commit('setToken', null)
-    this.$axios.setToken(false)
-    localStorage.removeItem('cytoid:token')
-  }
+    return this.$axios.delete('/session')
+      .then(() => {
+        commit('setUser', null)
+      })
+  },
 }
