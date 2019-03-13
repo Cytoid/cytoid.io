@@ -7,7 +7,7 @@ export const mutations = {
   },
 }
 export const actions = {
-  nuxtServerInit(a, {req}) {
+  nuxtServerInit(a, { req }) {
     console.log(req)
   },
   login({ commit }, token) {
