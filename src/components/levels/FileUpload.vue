@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'FileUpload',
   data() {
@@ -21,9 +22,9 @@ export default {
         return
       }
       const uploadInfo = await this.$axios.post('/levels/packages').then(res => res.data)
-      await this.$axios.put(uploadInfo.uploadURL, newFile, {
+      await axios.put(uploadInfo.uploadURL, newFile, {
         headers: {
-          'Content-Type': 'application/zip'
+          'Content-Type': 'application/zip',
         },
         onUploadProgress: (progressEvent) => {
           this.uploadProgress = progressEvent.loaded / progressEvent.total

@@ -22,7 +22,8 @@
     "express": "^4.16.4",
     "marked": "^0.6.0",
     "nuxt": "^2.3.4",
-    "nuxt-buefy": "^0.3.2"
+    "nuxt-buefy": "^0.3.2",
+    "vee-validate": "^2.1.7"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",
