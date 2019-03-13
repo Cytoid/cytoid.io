@@ -56,6 +56,8 @@ export default {
 
 <style scoped lang="scss">
 #level-hero {
+  background-size: cover;
+  background-position: center;
   .hero-head {
     background-color: rgba($dark, .5);
     box-shadow: 0 0 1rem 1rem rgba($dark,.5);
