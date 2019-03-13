@@ -1,0 +1,45 @@
+language: node_js
+node_js:
+- lts/*
+cache:
+  yarn: true
+branches:
+  only:
+  - master
+  - develop
+  - "/^release.*/"
+script:
+- yarn generate
+deploy:
+- provider: gcs
+  edge:
+    branch: gcs-ng
+  bucket: static.cytoid.io
+  project_id: cytoid
+  credentials: "./deploy-secret.json"
+  skip_cleanup: true
+  local-dir: ".nuxt/dist/client"
+  detect_encoding: true
+  cache_control: "public,max-age=604800"
+  acl: public-read
+  on:
+    repo: Cytoid/cytoid.io
+    branch: master
+- provider: gcs
+  edge:
+    branch: gcs-ng
+  bucket: staging.cytoid.io
+  project_id: cytoid
+  credentials: "./deploy-secret.json"
+  skip_cleanup: true
+  local-dir: "dist"
+  detect_encoding: true
+  cache_control: public,max-age=3600
+  acl: public-read
+  on:
+    repo: Cytoid/cytoid.io
+    branch: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_5e0a3a26b52b_key -iv $encrypted_5e0a3a26b52b_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
