@@ -1,0 +1,7 @@
+{
+  "assetURL": "https://assets.cytoid.io",
+  "staticURL": "https://static.cytoid.io",
+  "apiURLServer": "http://localhost:3000",
+  "apiURLClient": "http://localhost:3000",
+  "secret": "keyboard cat"
+}

@@ -8,12 +8,14 @@ export const mutations = {
 }
 export const actions = {
   nuxtServerInit({ commit }, { req }) {
-    if (!req) {
-      return
-    }
-    const session = req.ctx.session
-    if (session && session.passport && session.passport.user) {
-      commit('setUser', req.ctx.session.passport.user)
+    if (req) {
+      // Obtain User Info from the session
+      const session = req.ctx.session
+      if (session && session.passport && session.passport.user) {
+        commit('setUser', req.ctx.session.passport.user)
+      } else {
+        commit('setUser', false)
+      }
     }
   },
   logout({ commit }) {
