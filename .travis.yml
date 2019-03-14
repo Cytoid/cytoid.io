@@ -20,22 +20,16 @@ deploy:
   skip_cleanup: true
   local-dir: ".nuxt/dist/client"
   detect_encoding: true
-  cache_control: "public,max-age=604800"
+  cache_control: public,max-age=604800
   acl: public-read
   on:
     repo: Cytoid/cytoid.io
     branch: master
-- provider: gcs
-  edge:
-    branch: gcs-ng
-  bucket: staging.cytoid.io
-  project_id: cytoid
-  credentials: "./deploy-secret.json"
+- provider: firebase
+  project: cytoid
   skip_cleanup: true
-  local-dir: "dist"
-  detect_encoding: true
-  cache_control: public,max-age=3600
-  acl: public-read
+  token:
+    secure: "jf3rm6UXOUDHpkug2gjOpIa0qndeSl/5yuQgP/FabxiP5aQnZ3yuSOl4trLZSxjI3MSqdMW730Y0xPxmRVsqrlqYuy418LeCSytjwbe4BeXOh7ItqQfZp9b0b8JfGsF+ssaE33Gn7AwZ5hxaRs0hNP8beg+azHNFwpJcxDBLYxcqxT2qqGd2lEjGbwep2FkzGXQ3cgrq96ml4V6p0xQ3llRIaxxtGvfpzihJfmudQGJ6hgsQke0slkYdcpdmGI1jIPaOTt4aXrKOB66Lnw7ycrGjSDomGDtf541BOVvLvcBQ2w0P7UgtSFMCL+NJluuSlSCeF2W9+2WDXO2lJCVwydY5dG6MNBIxh2G2cql10A2FqMUuDA+vzwTsJc4cnhWDTAreoY4lFzIYdXfJcq2h44Mjs+LzKGlpckOOt2kjwAF8TFhJFBuXLalv1HgiMNegl/4h2LQzD6xXd2wjOc705Vl9LIuqs2PPdCyCIudii9C+WlNmppKl3GcyqBAqgCWH/k1yUoitSjwDq42+6a0vEUGXLzOtFYHtbwaAKRukAeg5p3sHG0zXLXv01UIiIggS+Wn9ZyDIdF9ZDbf2HeY5GIMtSOgAP20eS8QXAizT5UwnUDT07s/lWf+frByVi6jSfk+Kq3M7qhRZdfYUJO7BZJpSMwzDoJ63i5PGjG8ELsE="
   on:
     repo: Cytoid/cytoid.io
     branch: master
@@ -43,3 +37,6 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_5e0a3a26b52b_key -iv $encrypted_5e0a3a26b52b_iv
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
+env:
+  global:
+    secure: VWH6dJmD6bNCPd4FRZs4bEy6jLG/78naObvsG9xbsCpSJ/QAoJzUFt3PwMVIa+hwiY6QWP0blVfRZ1THnxUtlWkpR8F29ViJMuDLzYC1hH1oXl2N7M9fnB+qf6SILPG9AB/J0KUgB3qzNimP3JTTw9u4rs4BfYAAzcuTWMWqFnlfvNWtI4g04nqRoa4Khi+1XYw8hKJW6McsNqo1OtS35sEZcQRDm6BTAwxPbSIPwNOM/sUHv6bj+zwhons2sEaH336poKV16mfD+pzhAmrqQYjvdTx57qksnTWvu5KWBwGpz9Qh/dTBYcGlsynRuboiibHHzlPqgWW8xxX/i3UJaRoUZemp8FhpHTE4kpwTwzT9pBSsUzwWDQ1Xz4hOZ3V65s7P0M2cVU/ng+7Xwu26DsrIVN889g5+s10TmifY+zVve40uzzX7ZbCjZtUv5bXcK2nvtjMv1PjpgnMfovUUTm2S4KVm9imRAj7CvsjEVFqACj7O4ZGXttHr7UkouCpt9X4tCqAsY8lJGNpQZ/hZ6oQunYr7KV5dFh0c6nHtyTBT3AvFSrHMBWJfPFZaDmWtwiR/yuff1/u9IbWwSdidfhpvOrwwmZwGChWxD5OP6Ix0uXt7SHI1oIb0ZBJsn9/7+tZ1mXtRJsYtWO4EVJEOiuNGPpfPCVLIGVm5xAPypXM=
