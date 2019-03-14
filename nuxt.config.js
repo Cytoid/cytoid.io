@@ -53,6 +53,7 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/vee-validate' },
+    { src: '~plugins/authentication', mode: 'client' },
   ],
 
   /*
