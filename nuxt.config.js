@@ -15,6 +15,9 @@ module.exports = {
     assetURL: config.get('assetURL'),
     apiURL: config.get('apiURLClient'),
   },
+  generate: {
+    subFolders: false,
+  },
   head: {
     title: 'Cytoid',
     meta: [
@@ -66,6 +69,7 @@ module.exports = {
     'nuxt-buefy',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    '~modules/generate.js',
   ],
   /*
   ** Axios module configuration
