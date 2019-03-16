@@ -87,6 +87,5 @@ dist
 sw.*
 
 $ Development environment
-config/production.json
 secrets.tar
 deploy-secret.json
