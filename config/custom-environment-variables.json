@@ -2,5 +2,6 @@
   "assetURL": "ASSET_URL",
   "staticURL": "STATIC_URL",
   "apiURLServer": "SERVER_API_URL",
-  "apiURLClient": "CLIENT_API_URL"
+  "apiURLClient": "CLIENT_API_URL",
+  "secret": "SECRET_KEY"
 }
