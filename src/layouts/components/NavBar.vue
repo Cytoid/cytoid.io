@@ -14,8 +14,8 @@ nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
       .navbar-start
         nuxt-link.navbar-item(to="/levels") Levels
       .navbar-end
-        span(v-if="user").navbar-item.has-dropdown.is-hoverable
-          span.navbar-link(v-text="user.name")
+        span(v-if="$auth.loggedIn").navbar-item.has-dropdown.is-hoverable
+          span.navbar-link(v-text="$auth.user.name")
           .navbar-dropdown.is-right.is-boxed
             a.navbar-item Profile
             a.navbar-item Favorites
@@ -31,20 +31,16 @@ nav.navbar.is-transparent(role='navigation', aria-label='main navigation')
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 export default {
   data() {
     return {
       navbarActivated: false,
     }
   },
-  computed: mapState([
-    'user',
-  ]),
   methods: {
-    ...mapActions([
-      'logout',
-    ])
+    logout() {
+      this.$auth.logout()
+    }
   },
 }
 </script>

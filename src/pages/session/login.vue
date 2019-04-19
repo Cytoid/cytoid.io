@@ -39,11 +39,11 @@ export default {
   methods: {
     login() {
       this.loading = true
-      this.$axios.post('/session', this.form)
+      this.$auth.loginWith('local', {
+        data: this.form
+      })
         .then((res) => {
           this.loading = false
-          const data = res.data
-          this.$store.commit('setUser', data.user)
           this.$toast.open({
             message: 'Login In Succeed',
             type: 'is-success'

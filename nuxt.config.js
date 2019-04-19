@@ -56,7 +56,6 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/vee-validate' },
-    { src: '~plugins/authentication', mode: 'client' },
   ],
 
   /*
@@ -69,6 +68,7 @@ module.exports = {
     'nuxt-buefy',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    '@nuxtjs/auth',
     '~modules/generate.js',
   ],
   /*
@@ -79,6 +79,21 @@ module.exports = {
     browserBaseURL: config.get('apiURLClient'),
     progress: true,
     credentials: true,
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        _scheme: '~/modules/passportAuthStrategy.js',
+        endpoints: {
+          login: { url: '/session', method: 'post', propertyName: null },
+          logout: { url: '/session', method: 'delete' },
+          user: { url: '/session', method: 'get', propertyName: 'user' }
+        },
+        tokenRequired: false,
+        tokenType: 'bearer',
+      }
+    }
   },
 
   buefy: {
@@ -99,6 +114,11 @@ module.exports = {
       app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
       chunk: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
       css: ({ isDev }) => isDev ? '[name].css' : 'css/[contenthash].css',
+    },
+    babel: {
+      plugins: [
+        '@babel/plugin-proposal-optional-chaining',
+      ]
     },
     extend(config, ctx) {
       // Run ESLint on save
