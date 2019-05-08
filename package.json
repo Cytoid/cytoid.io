@@ -24,6 +24,7 @@
     "koa-session": "^5.10.1",
     "marked": "^0.6.0",
     "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
     "nuxt": "^2.3.4",
     "nuxt-buefy": "^0.3.2",
     "vee-validate": "^2.1.7"
@@ -41,7 +42,6 @@
     "eslint-plugin-promise": ">=4.0.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
