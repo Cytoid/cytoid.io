@@ -1,26 +1,26 @@
 export default class LocalScheme {
-  constructor (auth, options) {
+  constructor(auth, options) {
     this.$auth = auth
     this.name = options._name
 
     this.options = Object.assign({}, DEFAULTS, options)
   }
 
-  _setToken (token) {
+  _setToken(token) {
     if (this.options.globalToken) {
       // Set Authorization token for all axios requests
       this.$auth.ctx.app.$axios.setHeader(this.options.tokenName, token)
     }
   }
 
-  _clearToken () {
+  _clearToken() {
     if (this.options.globalToken) {
       // Clear Authorization token for all axios requests
       this.$auth.ctx.app.$axios.setHeader(this.options.tokenName, false)
     }
   }
 
-  mounted () {
+  mounted() {
     if (this.options.tokenRequired) {
       const token = this.$auth.syncToken(this.name)
       this._setToken(token)
@@ -46,7 +46,7 @@ export default class LocalScheme {
     }
   }
 
-  async login (endpoint) {
+  async login(endpoint) {
     if (!this.options.endpoints.login) {
       return
     }
@@ -73,7 +73,7 @@ export default class LocalScheme {
     this.$auth.setUser(user)
   }
 
-  async fetchUser (endpoint) {
+  async fetchUser(endpoint) {
     // User endpoint is disabled.
     if (!this.options.endpoints.user) {
       this.$auth.setUser({})
@@ -94,7 +94,7 @@ export default class LocalScheme {
     this.$auth.setUser(user)
   }
 
-  async logout (endpoint) {
+  async logout(endpoint) {
     // Only connect to logout endpoint if it's configured
     if (this.options.endpoints.logout) {
       await this.$auth
@@ -106,7 +106,7 @@ export default class LocalScheme {
     return this._logoutLocally()
   }
 
-  async _logoutLocally () {
+  async _logoutLocally() {
     if (this.options.tokenRequired) {
       this._clearToken()
     }

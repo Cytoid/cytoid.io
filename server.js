@@ -1,9 +1,9 @@
+const { createServer } = require('http2')
 const Koa = require('koa')
 const conf = require('config')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const session = require('koa-session')
-const { createServer } = require('http2')
 
 const app = new Koa()
 app.keys = [conf.secret]
@@ -27,7 +27,6 @@ async function start() {
     await builder.build()
   }
 
-
   app.use(session({
     key: 'cytoid:sess', /** (string) cookie key (default is koa:sess) */
     /** (number || 'session') maxAge in ms (default is 1 days) */
@@ -38,11 +37,11 @@ async function start() {
     httpOnly: true, /** (boolean) httpOnly or not (default true) */
     signed: true, /** (boolean) signed or not (default true) */
     rolling: false, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
-    renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
+    renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false) */
   }, app))
 
   // Give nuxt middleware to Koa
-  app.use(ctx => {
+  app.use((ctx) => {
     ctx.status = 200
     ctx.respond = false // Mark request as handled for Koa
     ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
@@ -50,7 +49,7 @@ async function start() {
   })
 
   // Listen the server
-  if (process.env['HTTP2']) {
+  if (process.env.HTTP2) {
     createServer(app.callback())
       .listen(port, host, (err) => {
         if (err) {
@@ -69,6 +68,5 @@ async function start() {
       })
     })
   }
-
 }
 start()
