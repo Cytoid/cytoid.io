@@ -39,6 +39,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    'ant-design-vue/dist/antd.css',
   ],
 
   /*
@@ -52,6 +53,7 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/vee-validate' },
+    { src: '~plugins/antd' },
   ],
 
   /*
