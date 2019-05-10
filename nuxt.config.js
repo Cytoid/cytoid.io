@@ -39,16 +39,12 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/assets/styles/bulma.scss',
   ],
 
   /*
    ** Global SCSS definitions
    */
   styleResources: {
-    scss: [
-      '@/assets/styles/index.scss',
-    ]
   },
 
   /*
@@ -64,8 +60,6 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/auth',
@@ -95,14 +89,6 @@ module.exports = {
       }
     }
   },
-
-  buefy: {
-    css: false,
-    materialDesignIcons: true,
-    defaultIconPack: 'fas',
-    materialDesignIconsHRef: 'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
-  },
-
   /*
   ** Build configuration
   */
