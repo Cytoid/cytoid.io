@@ -62,7 +62,7 @@
             ref="buttonSignIn"
             type="primary"
             html-type="submit"
-            style="width: 100%;"
+            block
           >
             Sign in
           </a-button>
@@ -73,13 +73,15 @@
     <div>
       <h2>New to Cytoid?</h2>
       <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
-      <a-button
-        type="primary"
-        html-type="submit"
-        style="width: 100%;"
-      >
-        Sign up
-      </a-button>
+      <nuxt-link to="./signup">
+        <a-button
+          type="primary"
+          html-type="submit"
+          block
+        >
+          Sign up
+        </a-button>
+      </nuxt-link>
     </div>
   </div>
 </template>
