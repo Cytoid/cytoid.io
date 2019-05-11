@@ -21,7 +21,6 @@
     "koa": "^2.7.0",
     "koa-session": "^5.10.1",
     "marked": "^0.6.0",
-    "moment": "^2.24.0",
     "nuxt": "^2.3.4",
     "vee-validate": "^2.1.7"
   },
@@ -38,6 +37,8 @@
     "eslint-plugin-promise": ">=4.0.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0"
   }
