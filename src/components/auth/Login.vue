@@ -93,7 +93,7 @@ export default {
   methods: {
     handleLogin(e) {
       e.preventDefault()
-      this.index.validateFields((err, values) => {
+      this.session.validateFields((err, values) => {
         if (!err) {
           this.$refs.buttonLogin.loading = true // TODO: 帮我看下这样写会不会 anti-pattern
           console.log('Received values of form: ', values)
