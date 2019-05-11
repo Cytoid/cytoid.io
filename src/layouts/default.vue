@@ -1,4 +1,5 @@
 <template lang="pug">
+
   div
     header.cy-navbar
       cy-menu
@@ -17,6 +18,9 @@
 
 <script>
 export default {
+  components: {
+
+  },
   data() {
     return {
       userPopoverVisible: false,
@@ -40,5 +44,4 @@ export default {
     padding-right: 2rem;
   }
 }
-
 </style>

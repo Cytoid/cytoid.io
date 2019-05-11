@@ -1,23 +1,42 @@
 <template>
   <div class="card-container">
-    <div
-      ref="card"
-      class="card-wrap"
-      @mousemove="handleMouseMove"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-    >
+    <a href="/levels/">
       <div
-        class="card"
-        :style="cardStyle"
+        ref="card"
+        class="card-wrap"
+        @mousemove="handleMouseMove"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
       >
-        <div class="card-bg" :style="[cardBgTransform, cardBgImage]" />
-        <div class="card-info">
-          <slot name="header" />
-          <slot name="content" />
+        <div
+          class="card"
+          :style="cardStyle"
+        >
+          <div class="card-bg" :style="[cardBgTransform, cardBgImage]" />
+          <div class="card-info">
+            <h1 style="margin-bottom: 4px;">
+              <slot name="title" />
+            </h1>
+            <p>
+              <slot name="subtitle" />
+            </p>
+            <a-row type="flex" align="middle">
+              <a-col :span="20" style="display: flex; align-items: center;">
+                <span style="display: flex; align-items: center;">
+                  <a-avatar :size="24" icon="user" style="margin-right: 8px;" />
+                  <a href="/profile/" style="color: white;">
+                    <slot name="uploader" />
+                  </a>
+                </span>
+              </a-col>
+              <a-col :span="4" style="display: flex; align-items: center; justify-content: flex-end;">
+                <a-icon type="caret-right" style="font-size: 24px;" />
+              </a-col>
+            </a-row>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </template>
 
@@ -41,17 +60,17 @@ export default {
       return this.mouseY / this.height
     },
     cardStyle() {
-      const rX = this.mousePX * 30
-      const rY = this.mousePY * -30
+      const rX = this.mousePX * 6
+      const rY = this.mousePY * -6
       return {
         transform: `rotateY(${rX}deg) rotateX(${rY}deg)`,
       }
     },
     cardBgTransform() {
-      const tX = this.mousePX * -40
-      const tY = this.mousePY * -40
+      const tX = this.mousePX * -10
+      const tY = this.mousePY * -10
       return {
-        transform: `translateX(${tX}px) translateY(${tY}px)`,
+        transform: `translateX(${tX}px) translateY(${tY}px) scale(${this.mouseX * this.mouseY === 0 ? 1.00 : 1.02}, ${this.mouseX * this.mouseY === 0 ? 1.00 : 1.02})`,
       }
     },
     cardBgImage() {
@@ -78,8 +97,17 @@ export default {
       this.mouseLeaveDelay = setTimeout(() => {
         this.mouseX = 0
         this.mouseY = 0
-      }, 1000)
+      }, 200)
     },
   },
 }
 </script>
+
+<style scoped>
+  h1 {
+    margin-bottom: 0;
+  }
+  p {
+    margin-bottom: 0;
+  }
+</style>
