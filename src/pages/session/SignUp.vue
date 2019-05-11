@@ -11,7 +11,7 @@
       @submit.prevent="signIn"
     >
       <a-form-item>
-        <div slot="extra" style="font-size: 12px;">
+        <div slot="extra">
           Your player ID must be in between 3 and 16 characters and contain only <b>lowercase letters</b>, numbers,
           underscores, and hyphens.
         </div>
@@ -29,7 +29,6 @@
           <a-icon
             slot="prefix"
             type="user"
-            style="color: rgba(0,0,0,.25)"
           />
         </a-input>
       </a-form-item>
@@ -49,7 +48,6 @@
           <a-icon
             slot="prefix"
             type="mail"
-            style="color: rgba(0,0,0,.25)"
           />
         </a-input>
       </a-form-item>
@@ -65,7 +63,6 @@
           <a-icon
             slot="prefix"
             type="lock"
-            style="color: rgba(0,0,0,.25)"
           />
         </a-input>
       </a-form-item>
