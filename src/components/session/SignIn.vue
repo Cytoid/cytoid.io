@@ -4,15 +4,13 @@
       <h2>Already have a Cytoid account?</h2>
       <p>Please sign in below.</p>
       <a-form
-        id="components-form-demo-normal-login"
         :form="form"
-        class="login-form"
-        @submit="handleLogin"
+        @submit="handleSignIn"
       >
         <a-form-item>
           <a-input
             v-decorator="[
-              'userName',
+              'player_id',
               { rules: [{ required: true, message: 'Please input your player ID or email address.' }] }
             ]"
             placeholder="Player ID / Email address"
@@ -58,8 +56,10 @@
           >
             Forgot password
           </a>
+        </a-form-item>
+        <a-form-item>
           <a-button
-            ref="buttonLogin"
+            ref="buttonSignIn"
             type="primary"
             html-type="submit"
             style="width: 100%;"
@@ -86,16 +86,15 @@
 
 <script>
 export default {
-  name: 'SignInForm',
   beforeCreate() {
     this.form = this.$form.createForm(this)
   },
   methods: {
-    handleLogin(e) {
+    handleSignIn(e) {
       e.preventDefault()
-      this.session.validateFields((err, values) => {
+      this.form.validateFields((err, values) => {
         if (!err) {
-          this.$refs.buttonLogin.loading = true // TODO: 帮我看下这样写会不会 anti-pattern
+          this.$refs.buttonSignIn.loading = true // TODO: 帮我看下这样写会不会 anti-pattern
           console.log('Received values of form: ', values)
         }
       })

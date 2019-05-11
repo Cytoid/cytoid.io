@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Antd from 'ant-design-vue/lib'
 
-import Menu from '../components/Menu/Menu'
-import MenuLinkItem from '../components/Menu/MenuLinkItem'
+import Menu from '../components/menu/Menu'
+import MenuLinkItem from '../components/menu/MenuLinkItem'
 
 export default function () {
   Vue.use(Antd)

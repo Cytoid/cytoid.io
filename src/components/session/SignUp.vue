@@ -1,21 +1,29 @@
 <template>
   <div>
     <div>
-      <h2>Already have a Cytoid account?</h2>
-      <p>Please sign in below.</p>
+      <a-button type="primary" shape="circle" icon="left" :size="large" />
+      <br>
+      <br>
+      <h2>Sign up</h2>
       <a-form
-        id="components-form-demo-normal-login"
         :form="form"
-        class="login-form"
-        @submit="handleLogin"
+        @submit="handleSignUp"
       >
         <a-form-item>
+          <div slot="extra" style="font-size: 12px;">
+            Your player ID must be in between 3 and 16 characters and contain only <b>lowercase letters</b>, numbers,
+            underscores, and hyphens.
+          </div>
           <a-input
             v-decorator="[
-              'userName',
-              { rules: [{ required: true, message: 'Please input your player ID or email address.' }] }
+              'player_id',
+              { rules: [{
+                required: true,
+                pattern: '^[a-z0-9_-]{3,16}$',
+                message: 'Please input a correct player ID.',
+              }] }
             ]"
-            placeholder="Player ID / Email address"
+            placeholder="Player ID"
           >
             <a-icon
               slot="prefix"
@@ -27,8 +35,28 @@
         <a-form-item>
           <a-input
             v-decorator="[
+              'email',
+              { rules: [{
+                required: true,
+                pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: 'Please input a correct email address.'
+              }] }
+            ]"
+            html-type="envelope"
+            placeholder="Email address"
+          >
+            <a-icon
+              slot="prefix"
+              type="mail"
+              style="color: rgba(0,0,0,.25)"
+            />
+          </a-input>
+        </a-form-item>
+        <a-form-item>
+          <a-input
+            v-decorator="[
               'password',
-              { rules: [{ required: true, message: 'Please input your password.' }] }
+              { rules: [{ required: true, message: 'Please input a password.' }] }
             ]"
             type="password"
             placeholder="Password"
@@ -43,43 +71,33 @@
         <a-form-item>
           <a-checkbox
             v-decorator="[
-              'remember',
+              'agree_tos',
               {
                 valuePropName: 'checked',
-                initialValue: true,
+                initialValue: false,
+                rules: [{
+                  required: true,
+                  transform: value => (value || undefined),
+                  type: 'boolean',
+                  message: 'You must agree our terms of services.'
+                }],
               }
             ]"
           >
-            Remember me
+            I agree to Cytoid's <a href="">terms of services.</a>
           </a-checkbox>
-          <a
-            href=""
-            style="float: right;"
-          >
-            Forgot password
-          </a>
+        </a-form-item>
+        <a-form-item>
           <a-button
-            ref="buttonLogin"
+            ref="buttonSignUp"
             type="primary"
             html-type="submit"
             style="width: 100%;"
           >
-            Sign in
+            Join the community
           </a-button>
         </a-form-item>
       </a-form>
-    </div>
-    <a-divider />
-    <div>
-      <h2>New to Cytoid?</h2>
-      <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
-      <a-button
-        type="primary"
-        html-type="submit"
-        style="width: 100%;"
-      >
-        Sign up
-      </a-button>
     </div>
   </div>
 </template>
@@ -90,11 +108,11 @@ export default {
     this.form = this.$form.createForm(this)
   },
   methods: {
-    handleLogin(e) {
+    handleSignUp(e) {
       e.preventDefault()
-      this.session.validateFields((err, values) => {
+      this.form.validateFields((err, values) => {
         if (!err) {
-          this.$refs.buttonLogin.loading = true // TODO: 帮我看下这样写会不会 anti-pattern
+          this.$refs.buttonSignUp.loading = true
           console.log('Received values of form: ', values)
         }
       })
