@@ -8,7 +8,7 @@
     </h2>
     <a-form
       :form="form"
-      @submit="handleSignUp"
+      @submit.prevent="signIn"
     >
       <a-form-item>
         <div slot="extra" style="font-size: 12px;">
@@ -90,10 +90,10 @@
       </a-form-item>
       <a-form-item>
         <a-button
-          ref="buttonSignUp"
           type="primary"
           html-type="submit"
           block
+          :loading="loading"
         >
           Join the community
         </a-button>
@@ -104,15 +104,19 @@
 
 <script>
 export default {
+  data() {
+    return {
+      loading: false,
+    }
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this)
   },
   methods: {
-    handleSignUp(e) {
-      e.preventDefault()
+    signIn() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.$refs.buttonSignUp.loading = true
+          this.loading = true
           console.log('Received values of form: ', values)
         }
       })

@@ -5,7 +5,7 @@
       <p>Please sign in below.</p>
       <a-form
         :form="form"
-        @submit="handleSignIn"
+        @submit.prevent="signIn"
       >
         <a-form-item>
           <a-input
@@ -59,7 +59,6 @@
         </a-form-item>
         <a-form-item>
           <a-button
-            ref="buttonSignIn"
             type="primary"
             html-type="submit"
             block
@@ -78,6 +77,7 @@
           type="primary"
           html-type="submit"
           block
+          :loading="loading"
         >
           Sign up
         </a-button>
@@ -88,15 +88,19 @@
 
 <script>
 export default {
+  data() {
+    return {
+      loading: false,
+    }
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this)
   },
   methods: {
-    handleSignIn(e) {
-      e.preventDefault()
+    signIn() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.$refs.buttonSignIn.loading = true // TODO: 帮我看下这样写会不会 anti-pattern
+          this.loading = true
           console.log('Received values of form: ', values)
         }
       })
