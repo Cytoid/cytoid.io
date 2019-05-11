@@ -39,7 +39,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'ant-design-vue/dist/antd.css',
+    '~assets/styles/index.less',
   ],
 
   /*
@@ -96,7 +96,7 @@ module.exports = {
   */
   build: {
     extractCSS: true,
-    analyze: process.env.NODE_ENV === 'development',
+    analyze: false,
     publicPath: config.get('staticURL'),
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
@@ -109,6 +109,7 @@ module.exports = {
       ]
     },
     extend(config, ctx) {
+      ctx.loaders.less.javascriptEnabled = true
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
