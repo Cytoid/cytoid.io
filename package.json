@@ -22,7 +22,8 @@
     "koa-session": "^5.10.1",
     "marked": "^0.6.0",
     "nuxt": "^2.3.4",
-    "vee-validate": "^2.1.7"
+    "vee-validate": "^2.1.7",
+    "vue-parallax-js": "^0.2.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
