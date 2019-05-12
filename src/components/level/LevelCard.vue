@@ -14,19 +14,13 @@
         >
           <div class="card-bg" :style="[cardBgTransform, cardBgImage]" />
           <div class="card-info">
-            <h1 style="margin-bottom: 4px;">
-              <slot name="title" />
-            </h1>
-            <p>
-              <slot name="subtitle" />
-            </p>
+            <h1 style="margin-bottom: 4px;" v-text="level.title" />
+            <p>This is the subtitle</p>
             <a-row type="flex" align="middle">
               <a-col :span="20" style="display: flex; align-items: center;">
                 <span style="display: flex; align-items: center;">
                   <a-avatar :size="24" icon="user" style="margin-right: 8px;" />
-                  <a href="/profile/" style="color: white;">
-                    <slot name="uploader" />
-                  </a>
+                  <a href="/profile/" style="color: white;" v-text="'ddd'" />
                 </span>
               </a-col>
               <a-col :span="4" style="display: flex; align-items: center; justify-content: flex-end;">
@@ -42,7 +36,12 @@
 
 <script>
 export default {
-  props: ['dataImage'],
+  props: {
+    level: {
+      type: Object,
+      required: true
+    },
+  },
 
   data: () => ({
     width: 0,
@@ -75,7 +74,7 @@ export default {
     },
     cardBgImage() {
       return {
-        backgroundImage: `url(${this.dataImage})`,
+        backgroundImage: `url(${this.level.bundle.background})`,
       }
     },
   },
