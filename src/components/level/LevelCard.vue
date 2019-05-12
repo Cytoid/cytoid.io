@@ -16,7 +16,7 @@
           <div class="card-bg" :style="[cardBgTransform, cardBgImage]" />
           <div class="card-info">
             <h1 style="margin-bottom: 4px;" v-text="level.title" />
-            <p>This is the subtitle</p>
+            <!-- <p>This is the subtitle</p> -->
             <a-row type="flex" align="middle">
               <a-col :span="20" style="display: flex; align-items: center;">
                 <span style="display: flex; align-items: center;">
