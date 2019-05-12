@@ -46,6 +46,9 @@ module.exports = {
    ** Global SCSS definitions
    */
   styleResources: {
+    less: [
+      '~assets/styles/theme.less',
+    ]
   },
 
   /*
