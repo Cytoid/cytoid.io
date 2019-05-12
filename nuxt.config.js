@@ -56,7 +56,7 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/vee-validate' },
-    { src: '~plugins/antd' },
+    { src: '~plugins/antd' }
   ],
 
   /*

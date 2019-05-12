@@ -17,7 +17,10 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueParallaxJs from 'vue-parallax-js'
 import Background from '@/components/Background'
+Vue.use(VueParallaxJs)
 export default {
   components: {
     Background

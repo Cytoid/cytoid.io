@@ -1,5 +1,5 @@
 <template lang="pug">
-  .class-container: a()
+  .class-container: a(href="/levels/level")
     div(
       ref="card"
       class="card-wrap"

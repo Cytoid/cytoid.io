@@ -42,5 +42,8 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$root.$emit('background', { source: this.level.bundle.background })
+  }
 }
 </script>
