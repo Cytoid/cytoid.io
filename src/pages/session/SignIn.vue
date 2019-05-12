@@ -10,7 +10,7 @@
         <a-form-item>
           <a-input
             v-decorator="[
-              'player_id',
+              'username',
               { rules: [{ required: true, message: 'Please input your player ID or email address.' }] }
             ]"
             placeholder="Player ID / Email address"
@@ -59,6 +59,7 @@
           <a-button
             type="primary"
             html-type="submit"
+            :loading="loading"
             block
           >
             Sign in
@@ -75,7 +76,6 @@
           type="primary"
           html-type="submit"
           block
-          :loading="loading"
         >
           Sign up
         </a-button>
@@ -97,10 +97,22 @@ export default {
   methods: {
     signIn() {
       this.form.validateFields((err, values) => {
-        if (!err) {
-          this.loading = true
-          console.log('Received values of form: ', values)
+        if (err) {
+          return
         }
+        this.loading = true
+        this.$auth.loginWith('local', {
+          data: values,
+        })
+          .then((response) => {
+            this.loading = false
+            this.$message.info('signed in')
+          })
+          .catch((error) => {
+            this.loading = false
+            console.log(error)
+            this.$message.error('Error!')
+          })
       })
     },
   },
