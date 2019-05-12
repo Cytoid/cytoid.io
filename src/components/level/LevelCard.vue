@@ -1,48 +1,38 @@
-<template>
-  <div class="card-container">
-    <a href="/levels/">
-      <div
-        ref="card"
-        class="card-wrap"
-        @mousemove="handleMouseMove"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
-      >
-        <div
-          class="card"
-          :style="cardStyle"
-        >
-          <div class="card-bg" :style="[cardBgTransform, cardBgImage]" />
-          <div class="card-info">
-            <h1 style="margin-bottom: 4px;" v-text="level.title" />
-            <p>This is the subtitle</p>
-            <a-row type="flex" align="middle">
-              <a-col :span="20" style="display: flex; align-items: center;">
-                <span style="display: flex; align-items: center;">
-                  <a-avatar :size="24" icon="user" style="margin-right: 8px;" />
-                  <span>hjk</span>
-                </span>
-              </a-col>
-              <a-col :span="4" style="display: flex; align-items: center; justify-content: flex-end;">
-                <a-icon type="caret-right" style="font-size: 24px;" />
-              </a-col>
-            </a-row>
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
+<template lang="pug">
+  .class-container: a()
+    div(
+      ref="card"
+      class="card-wrap"
+      @mousemove="handleMouseMove"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+    )
+      .card(:style="cardStyle")
+        .card-bg(:style="[cardBgTransform, cardBgImage]")
+        .card-info
+          h1(style="margin-bottom: 4px;" v-text="level.title")
+          p This is the subtitle
+          a-row(type="flex" align="middle")
+            a-col(:span="20" style="display: flex; align-items: center;")
+              span(style="display: flex; align-items: center;")
+                a-avatar(:size="24" icon="user" style="margin-right: 8px;")
+                span hjk
+            a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
+              play-button(:src="level.bundle.music_preview")
 </template>
 
 <script>
+import PlayButton from '@/components/level/PlayButton'
 export default {
+  components: {
+    PlayButton,
+  },
   props: {
     level: {
       type: Object,
       required: true
     },
   },
-
   data: () => ({
     mouseX: null,
     mouseY: null,
