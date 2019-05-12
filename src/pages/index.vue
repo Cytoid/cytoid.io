@@ -5,6 +5,5 @@ div Here is your awesome web app.
 <script>
 export default {
   name: 'HomePage',
-  layout: 'background',
 }
 </script>
