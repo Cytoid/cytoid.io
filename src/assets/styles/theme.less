@@ -6,6 +6,10 @@
 @font-family: 'Nunito', sans-serif;
 @primary-color: #4568dc;
 @link-color: #4568dc;
+@heading-color: rgba(255, 255, 255, 1);              // heading text color
+@text-color: rgba(255, 255, 255, 1);                 // major text color
+@text-color-secondary : rgba(255, 255, 255, 1);      // secondary text color
+@disabled-color : rgba(255, 255, 255, .4);            // disable state color
 
 @ele1: 0 1px 3px hsla(0, 0%, 0%, .12), 0 1px 2px hsla(0, 0%, 0%, .24);
 @ele2: 0 3px 6px hsla(0, 0%, 0%, .15), 0 2px 4px hsla(0, 0%, 0%, .12);
@@ -29,6 +33,20 @@
 
 // Custom styles
 
+body {
+  background: hsla(226, 68%, 6%, 1);
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 24px;
+}
+
 .ele1 {
   box-shadow: @ele1;
 }
@@ -51,4 +69,36 @@
 
 .unselectable {
   user-select: none;
+}
+
+.container {
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
 }

@@ -1,6 +1,6 @@
 <template lang="pug">
-
   div
+    background
     header.cy-navbar
       cy-menu
         cy-menu-link-item(to="/" exact) Home
@@ -17,9 +17,10 @@
 </template>
 
 <script>
+import Background from '@/components/Background'
 export default {
   components: {
-
+    Background
   },
   data() {
     return {
