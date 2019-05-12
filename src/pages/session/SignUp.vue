@@ -8,7 +8,7 @@
     </h2>
     <a-form
       :form="form"
-      @submit.prevent="signIn"
+      @submit.prevent="signUp"
     >
       <a-form-item>
         <div slot="extra">
@@ -17,11 +17,11 @@
         </div>
         <a-input
           v-decorator="[
-            'player_id',
+            'name',
             { rules: [{
               required: true,
               pattern: '^[a-z0-9_-]{3,16}$',
-              message: 'Please input a correct player ID.',
+              message: 'Please input a valid player ID.',
             }] }
           ]"
           placeholder="Player ID"
@@ -110,12 +110,21 @@ export default {
     this.form = this.$form.createForm(this)
   },
   methods: {
-    signIn() {
+    signUp() {
       this.form.validateFields((err, values) => {
-        if (!err) {
-          this.loading = true
-          console.log('Received values of form: ', values)
+        if (err) {
+          return
         }
+        this.loading = true
+        this.$axios.post('/users', values)
+          .then((res) => {
+            this.loading = false
+            this.$message.info('Registration succeed')
+          })
+          .catch((error) => {
+            this.loading = false
+            this.$message.error(error.response?.data?.message)
+          })
       })
     },
   },
