@@ -1,5 +1,5 @@
 <template>
-  <button class="play-button" @click="play">
+  <button class="play-button" @click.stop="play">
     <a-icon :type="playing ? 'pause' : 'caret-right'" class="icon" />
     <a-progress v-if="playing" type="circle" :percent="progress * 100" :show-info="false" :width="60" />
     <audio ref="audio" :src="src" />
@@ -23,20 +23,15 @@ export default {
   }),
   mounted() {
     const player = this.$refs.audio
-    player.addEventListener('timeupdate', () => {
-      this.progress = player.currentTime / player.duration
-    })
-    player.addEventListener('ended', () => {
-      this.progress = 0
-      this.playing = false
-    })
-    Bus.$on('play', (id) => {
-      if (id === this.src) {
-        return
-      }
-      this.$refs.audio.pause()
-      this.playing = false
-    })
+    player.addEventListener('timeupdate', this.playbackUpdate)
+    player.addEventListener('ended', this.playbackEnded)
+    Bus.$on('play', this.playbackInterrupted)
+  },
+  beforeDestroy() {
+    const player = this.$refs.audio
+    player.removeEventListener('timeupdate', this.playbackUpdate)
+    player.removeEventListener('ended', this.playbackEnded)
+    Bus.$off('play', this.playbackInterrupted)
   },
   methods: {
     play() {
@@ -48,6 +43,21 @@ export default {
         this.$refs.audio.play()
         Bus.$emit('play', this.src)
       }
+    },
+    playbackUpdate() {
+      const player = this.$refs.audio
+      this.progress = player.currentTime / player.duration
+    },
+    playbackEnded() {
+      this.progress = 0
+      this.playing = false
+    },
+    playbackInterrupted(id) {
+      if (id === this.src) {
+        return
+      }
+      this.$refs.audio.pause()
+      this.playing = false
     }
   }
 }
