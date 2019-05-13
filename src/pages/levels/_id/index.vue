@@ -14,18 +14,20 @@
       <a-rate :defaultValue="4.5" allowHalf />
       4.5 (273)
     </div>
-    <div>
+    <div style="margin-bottom: 32px;">
       <a-tag v-for="tag in level.tags" :key="tag">
         {{ tag }}
       </a-tag>
     </div>
+    <player-avatar></player-avatar>
   </div>
 </template>
 
 <script>
 import DifficultyBadge from '@/components/level/DifficultyBadge'
+import PlayerAvatar from '@/components/player/PlayerAvatar'
 export default {
-  components: { DifficultyBadge },
+  components: { PlayerAvatar, DifficultyBadge },
   data: () => ({
     level: null,
     defaultDifficulty: {
