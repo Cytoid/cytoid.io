@@ -1,11 +1,12 @@
 <template lang="pug">
-  .class-container
+  .card-container
     div(
       ref="card"
       class="card-wrap"
       @mousemove="handleMouseMove"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
+      @click="enter"
     )
       .card(:style="cardStyle")
         .card-bg(:style="[cardBgTransform, cardBgImage]")
@@ -37,7 +38,6 @@ export default {
     mouseX: null,
     mouseY: null,
   }),
-
   computed: {
     mousePX() {
       return this.mouseX / this.$refs.card.offsetWidth
@@ -72,20 +72,35 @@ export default {
       }
     },
   },
+  beforeDestroy() {
+    if (this.mouseLeaveDelayTimeout) {
+      clearTimeout(this.mouseLeaveDelayTimeut)
+      this.mouseLeaveDelayTimeout = null
+    }
+  },
   methods: {
     handleMouseMove(e) {
+      if (!this.$refs.card) {
+        // Bugfix for vue routing bug. Event sent after component destruction.
+        return
+      }
       this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.$refs.card.offsetWidth / 2
       this.mouseY = e.pageY - this.$refs.card.offsetTop - this.$refs.card.offsetHeight / 2
     },
     handleMouseEnter() {
-      clearTimeout(this.mouseLeaveDelay)
+      clearTimeout(this.mouseLeaveDelayTimeout)
+      this.mouseLeaveDelayTimeout = null
     },
     handleMouseLeave() {
-      this.mouseLeaveDelay = setTimeout(() => {
+      this.mouseLeaveDelayTimeout = setTimeout(() => {
         this.mouseX = null
         this.mouseY = null
+        this.mouseLeaveDelayTimeout = null
       }, 200)
     },
+    enter() {
+      this.$router.push({ name: 'levels-id', params: { id: this.level.uid } })
+    }
   },
 }
 </script>
