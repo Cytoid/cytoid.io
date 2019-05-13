@@ -1,8 +1,9 @@
 <template lang="pug">
-  .badge(:class="badgeClass")
-    span.title(v-text="value.name || convertedDifficultyName(value.type)")
-    span.level Lv. {{convertedDifficultyLevel}}
-  </div>
+  a-popover(placement="top" title="")
+    p(slot="content" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") 1560 Notes
+    .badge(:class="badgeClass")
+      span.title(v-text="value.name || convertedDifficultyName(value.type)")
+      span.level Lv. {{convertedDifficultyLevel}}
 </template>
 
 <script>
