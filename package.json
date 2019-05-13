@@ -21,6 +21,7 @@
     "koa": "^2.7.0",
     "koa-session": "^5.10.1",
     "marked": "^0.6.0",
+    "moment": "^2.24.0",
     "nuxt": "^2.3.4",
     "vee-validate": "^2.1.7",
     "vue-parallax-js": "https://github.com/Cytoid/vue-parallax-js.git"
