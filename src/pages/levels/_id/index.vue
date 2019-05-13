@@ -26,21 +26,18 @@
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
   components: { DifficultyBadge },
-  props: {
-    level: {
-      type: Object,
-      required: true,
-      default: () => {
-        return JSON.parse('{"version":1,"title":"Cross Fire","metadata":{"title":"Cross Fire","artist":{"url":"https://twitter.com/uno_roughsketch","name":"Hommar ju vs RoughSketch"},"charter":{"name":"tigertiger"},"illustrator":{"name":"和魂を以て癒しみ、荒魂と闇を以て世界を試そう-{月夜見尊)-暮麗簾∞球Q"}},"duration":0,"description":"","tags":["tigertiger", "bms", "bofu2018"],"id":6,"uid":"tigertiger.crossfire","published":true,"creationDate":"2019-03-14T05:54:10.531Z","modificationDate":"2019-03-14T05:54:10.531Z","bundle":{"music":"https://assets.cytoid.io/levels/bundles/uyOBTeCPMQ7kpbuyHEF7sSDkWHTH6X8Y1pJHmh/bgm.mp3","background":"https://assets.cytoid.io/levels/bundles/uyOBTeCPMQ7kpbuyHEF7sSDkWHTH6X8Y1pJHmh/songcover.png","music_preview":"https://assets.cytoid.io/levels/bundles/uyOBTeCPMQ7kpbuyHEF7sSDkWHTH6X8Y1pJHmh/pv.mp3"}}')
-      }
-    },
+  data: () => ({
+    level: null,
     defaultDifficulty: {
-      type: Object,
-      required: true,
-      default: () => {
-        return JSON.parse('{"type": "extreme", "name": "EX"}')
-      }
+      type: 'extreme',
+      name: 'EX',
     }
+  }),
+  asyncData({ $axios, params }) {
+    return $axios.get('/levels/' + params.id)
+      .then(response => ({
+        level: response.data
+      }))
   },
   mounted() {
     this.$root.$emit('background', { source: this.level.bundle.background })
