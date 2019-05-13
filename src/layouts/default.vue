@@ -7,12 +7,15 @@
         cy-menu-link-item(to="/levels") Levels
       .cy-navbar-end
         a-popover(
+          v-if="$auth.loggedIn"
           trigger="click"
           v-model="userPopoverVisible"
           placement="bottomLeft"
         )
           div(slot="content") This is the content
           a-button(type="primary" shape="circle" icon="user")
+        nuxt-link(v-else to="/session/signin")
+          a-button(type="primary") Sign In
     nuxt
 </template>
 
