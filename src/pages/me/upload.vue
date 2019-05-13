@@ -19,40 +19,13 @@ a-row(type="flex" justify="center" align="middle")
 
 <script>
 import axios from 'axios'
-const CancelToken = axios.CancelToken
-const source = CancelToken.source()
-function upload(option) {
-  axios.put(option.action, option.file, {
-    withCredentials: option.withCredentials,
-    headers: option.headers || {},
-    cancelToken: source.token,
-    onUploadProgress(e) {
-      if (e.total > 0) {
-        e.percent = (e.loaded / e.total) * 100
-      }
-      option.onProgress(e)
-    }
-  })
-    .then((response) => {
-      option.onSuccess(response.data)
-    })
-    .catch((error) => {
-      option.onError(error, error.response?.data)
-    })
-
-  return {
-    abort() {
-      source.cancel()
-    }
-  }
-}
 
 export default {
   data: () => ({
     status: false,
   }),
-  computed: {
-    upload: () => upload,
+  mounted() {
+    this.source = axios.CancelToken.source()
   },
   methods: {
     getUploadURL() {
@@ -64,6 +37,36 @@ export default {
           this.cachedUploadInfo = response.data
           return this.cachedUploadInfo.uploadURL
         })
+    },
+    upload(option) {
+      axios.put(option.action, option.file, {
+        withCredentials: option.withCredentials,
+        headers: option.headers || {},
+        cancelToken: this.source.token,
+        onUploadProgress(e) {
+          if (e.total > 0) {
+            e.percent = (e.loaded / e.total) * 100
+          }
+          option.onProgress(e)
+        }
+      })
+        .then((response) => {
+          return this.$axios.post('/levels/packages', { key: this.cachedUploadInfo.key })
+        })
+        .then((response) => {
+          const details = response.data
+          console.log(details)
+          option.onSuccess(details)
+        })
+        .catch((error) => {
+          option.onError(error, error.response?.data)
+        })
+
+      return {
+        abort() {
+          this.source.cancel()
+        }
+      }
     },
     removeUploadedFile() {
       // TODO: request to remove the file from the server
