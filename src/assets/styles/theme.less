@@ -4,8 +4,9 @@
 @import '~ant-design-vue/lib/style/themes/default.less';
 
 @shade1: hsla(226, 68%, 6%, 1);
-@shade2: hsla(226, 15%, 19%, 1);
-@shade3: hsla(226, 15%, 38%, 1);
+@shade2: hsla(226, 15%, 14%, 1);
+@shade3: hsla(226, 15%, 19%, 1);
+@shade4: hsla(226, 15%, 38%, 1);
 
 @font-family: 'Nunito', sans-serif;
 @primary-color: #4568dc;
@@ -17,14 +18,17 @@
 @body-background: @shade1;
 
 @table-header-bg: rgba(0, 0, 0, 0);
-@table-padding-vertical: 8px;
+@table-padding-vertical: 4px;
 @table-padding-horizontal: 4px;
+@table-row-hover-bg: rgba(0, 0, 0, 0.2);
 
 @ele1: 0 1px 3px hsla(0, 0%, 0%, .12), 0 1px 2px hsla(0, 0%, 0%, .24);
 @ele2: 0 3px 6px hsla(0, 0%, 0%, .15), 0 2px 4px hsla(0, 0%, 0%, .12);
 @ele3: 0 10px 20px hsla(0, 0%, 0%, .15), 0 3px 6px hsla(0, 0%, 0%, .10);
 @ele4: 0 15px 25px hsla(0, 0%, 0%, .15), 0 5px 10px hsla(0, 0%, 0%, .5);
 @ele5: 0 20px 40px hsla(0, 0%, 0%, .2);
+
+@hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
 
 // Ant Design overrides
 
@@ -51,8 +55,84 @@
 }
 
 .ant-tag {
-  color: @shade3;
+  color: @shade4;
   border: none;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: none;
+}
+
+.ant-table-thead > tr > th {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.3);
+  border-bottom: none;
+}
+
+.ant-pagination-item {
+  border: none;
+  background: none;
+  transition: 0.4s @hoverEasing;
+}
+
+.ant-pagination-item:hover {
+  color: white;
+  background: @shade2;
+}
+
+.ant-pagination-item a {
+  color: @shade4;
+  font-weight: bold;
+  transition: 0.4s @hoverEasing;
+}
+
+.ant-pagination-item a:hover {
+  color: white;
+  transition: 0.4s @hoverEasing;
+}
+
+.ant-pagination-item-active {
+  background: @shade2;
+}
+
+.ant-pagination-item-active a {
+  color: white;
+}
+
+.ant-pagination-item:hover a, .ant-pagination-item:focus a {
+  color: white;
+}
+
+.ant-pagination-item-active:hover a, .ant-pagination-item-active:focus a {
+  color: white;
+}
+
+.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+  border: none;
+  background-color: unset;
+  color: @shade4;
+  font-size: 14px;
+  transition: 0.4s @hoverEasing;
+}
+
+.ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link,
+.ant-pagination-prev:focus .ant-pagination-item-link, .ant-pagination-next:focus .ant-pagination-item-link {
+  color: white;
+}
+
+:root .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, :root .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: white;
+  font-size: 14px;
+}
+
+.ant-spin-dot i {
+  background-color: white;
+}
+
+.ant-table-pagination.ant-pagination {
+  margin-bottom: 0;
 }
 
 // Custom styles
@@ -136,9 +216,74 @@ h2 {
 
 .card-secondary-text {
   color: rgba(255, 255, 255, 0.8);
-  transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: 0.4s @hoverEasing;
 }
 
 .card-secondary-text:hover {
   color: rgba(255, 255, 255, 1)
+}
+
+.row-score-max {
+  // background: hsla(45, 100%, 51%, 0.8);
+  // color: @shade1;
+  color: white;
+}
+
+.row-score-sss {
+  // background: hsla(211, 100%, 50%, 0.8);
+  color: white;
+}
+
+.row-score {
+  color: rgba(255, 255, 255, 0.8);
+  transition: 0.4s @hoverEasing;
+}
+
+.row-score:hover {
+  color: rgba(255, 255, 255, 1)
+}
+
+.row-score-max a {
+  // color: @shade1;
+  color: white;
+}
+
+.row-score-sss a {
+  color: white;
+}
+
+.row-score a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: 0.4s @hoverEasing;
+}
+
+.row-score a:hover {
+  color: rgba(255, 255, 255, 1)
+}
+
+.badge-score-max .ant-badge-count {
+  padding-left: 8px;
+  padding-right: 8px;
+  width: fit-content;
+  box-shadow: none;
+  background: #ffc107;
+  color: @shade1;
+}
+
+.badge-score-sss .ant-badge-count {
+  padding-left: 8px;
+  padding-right: 8px;
+  width: fit-content;
+  box-shadow: none;
+  background: #007bff;
+  color: white;
+}
+
+.badge-score .ant-badge-count {
+  padding-left: 8px;
+  padding-right: 8px;
+  width: fit-content;
+  box-shadow: none;
+  background: @shade4;
+  color: white;
 }
