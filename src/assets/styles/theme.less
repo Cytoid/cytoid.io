@@ -3,6 +3,10 @@
 // https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less
 @import '~ant-design-vue/lib/style/themes/default.less';
 
+@shade1: hsla(226, 68%, 6%, 1);
+@shade2: hsla(226, 15%, 19%, 1);
+@shade3: hsla(226, 15%, 38%, 1);
+
 @font-family: 'Nunito', sans-serif;
 @primary-color: #4568dc;
 @link-color: #4568dc;
@@ -10,7 +14,7 @@
 @text-color: rgba(255, 255, 255, 1);                 // major text color
 @text-color-secondary : rgba(255, 255, 255, 1);      // secondary text color
 @disabled-color: rgba(255, 255, 255, .4);            // disable state color
-@body-background: hsla(226, 68%, 6%, 1);
+@body-background: @shade1;
 
 @ele1: 0 1px 3px hsla(0, 0%, 0%, .12), 0 1px 2px hsla(0, 0%, 0%, .24);
 @ele2: 0 3px 6px hsla(0, 0%, 0%, .15), 0 2px 4px hsla(0, 0%, 0%, .12);
@@ -22,6 +26,8 @@
 
 .ant-card {
   border-radius: 4px;
+  border: none;
+  background: hsla(226, 15%, 19%, 1);
 }
 
 .ant-form-extra {
@@ -38,6 +44,11 @@
 
 .ant-popover-inner {
   box-shadow: @ele3;
+}
+
+.ant-tag {
+  color: @shade3;
+  border: none;
 }
 
 // Custom styles
@@ -109,4 +120,21 @@ h2 {
   .container {
     max-width: 1140px;
   }
+}
+
+.card-heading {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.card-secondary-text {
+  color: rgba(255, 255, 255, 0.8);
+  transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-secondary-text:hover {
+  color: rgba(255, 255, 255, 1)
 }
