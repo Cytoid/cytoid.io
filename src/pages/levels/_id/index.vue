@@ -140,6 +140,11 @@ export default {
     rankings_loading: false,
     columns
   }),
+  computed: {
+    levelDescription() {
+      return marked(this.level.description || 'The author was too lazy to write some descriptions.')
+    }
+  },
   asyncData({ $axios, params }) {
     return Promise.all([
       $axios.get('/levels/' + params.id),
