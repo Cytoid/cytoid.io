@@ -1,10 +1,15 @@
 <template>
-  <div class="badge" :class="badgeClass">
-    <span style="font-weight: 500; margin-left: 16px; margin-right: 12px; color: white;" v-text="difficulty.name" />
-    <span style="margin-left: auto; margin-right: 16px; color: white;">
-      Lv.<span v-text="convertedDifficultyLevel" />
-    </span>
-  </div>
+  <a-popover placement="top" title="">
+    <template slot="content">
+      <p style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);">1560 Notes</p>
+    </template>
+    <div class="badge" :class="badgeClass">
+      <span style="font-weight: 500; margin-left: 16px; margin-right: 12px; color: white;" v-text="difficulty.name" />
+      <span style="margin-left: auto; margin-right: 16px; color: white;">
+        Lv.<span v-text="convertedDifficultyLevel" />
+      </span>
+    </div>
+  </a-popover>
 </template>
 
 <script>

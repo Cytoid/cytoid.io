@@ -10,13 +10,13 @@
       .card(:style="cardStyle")
         .card-bg(:style="[cardBgTransform, cardBgImage]")
         .card-info
-          h1(style="margin-bottom: 4px;" v-text="level.title")
-          p This is the subtitle
+          h1(style="margin-bottom: 0px;" v-text="level.title")
+          p(style="margin-bottom: 0px;") This is the subtitle
           a-row(type="flex" align="middle")
             a-col(:span="20" style="display: flex; align-items: center;")
               span(style="display: flex; align-items: center;")
                 a-avatar(:size="24" icon="user" style="margin-right: 8px;")
-                span hjk
+                span cytoid
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
 </template>
