@@ -13,9 +13,8 @@
     <a-row :gutter="16">
       <a-col :xs="24" :lg="8">
         <a-card style="margin-bottom: 16px;">
-          <player-avatar style="margin-bottom: 16px;"></player-avatar>
-          <p>This is a test description!</p>
-          <!-- TODO: Marked -->
+          <player-avatar style="margin-bottom: 16px;" />
+          <p v-html="levelDescription" />
           <p class="card-heading">Rating</p>
           <div style="margin-bottom: 16px;">
             <a-rate
@@ -49,6 +48,7 @@
 
 <script>
 import moment from 'moment'
+import marked from 'marked'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 export default {
@@ -57,6 +57,11 @@ export default {
     level: null,
     ratings: null,
   }),
+  computed: {
+    levelDescription() {
+      return marked(this.level.description || 'The author was too lazy to write some descriptions.')
+    }
+  },
   asyncData({ $axios, params }) {
     return Promise.all([
       $axios.get('/levels/' + params.id),
@@ -81,6 +86,6 @@ export default {
           this.ratings = response.data
         })
     },
-  }
+  },
 }
 </script>
