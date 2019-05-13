@@ -18,8 +18,13 @@
           <!-- TODO: Marked -->
           <p class="card-heading">Rating</p>
           <div style="margin-bottom: 16px;">
-            <a-rate :defaultValue="4.5" allowHalf />
-            <span class="card-secondary-text">4.5 (273)</span>
+            <a-rate
+              :default-value="(ratings.rating || ratings.average) * 0.5"
+              allow-half
+              :disabled="!ratings.rating"
+              @change="rate"
+            />
+            <span class="card-secondary-text">{{ ratings.average }} ({{ ratings.total }})</span>
           </div>
           <p class="card-heading">Tags</p>
           <div style="margin-bottom: 16px;">
@@ -50,24 +55,32 @@ export default {
   components: { PlayerAvatar, DifficultyBadge },
   data: () => ({
     level: null,
-    defaultDifficulty: {
-      type: 'extreme',
-      name: 'EX',
-    }
+    ratings: null,
   }),
   asyncData({ $axios, params }) {
-    return $axios.get('/levels/' + params.id)
-      .then(response => ({
-        level: response.data
+    return Promise.all([
+      $axios.get('/levels/' + params.id),
+      $axios.get(`/levels/${params.id}/ratings`)
+    ])
+      .then(([levelResponse, ratingResponse]) => ({
+        level: levelResponse.data,
+        ratings: ratingResponse.data,
       }))
   },
   mounted() {
     this.$root.$emit('background', { source: this.level.bundle.background })
   },
   methods: {
-    readableDate: function (date) {
+    readableDate(date) {
       return moment(date).fromNow()
-    }
+    },
+    rate(e) {
+      e *= 2
+      this.$axios.post(`/levels/${this.level.uid}/ratings`, { rating: e })
+        .then((response) => {
+          this.ratings = response.data
+        })
+    },
   }
 }
 </script>
