@@ -3,9 +3,7 @@
     <h1 style="margin-bottom: 0;" v-text="level.metadata.title" />
     <p style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name" />
     <div style="margin-bottom: 48px;">
-      <difficulty-badge :difficulty="{ type: 'easy', name: 'Easy', level: 6 }" />
-      <difficulty-badge :difficulty="{ type: 'hard', name: 'Hard', level: 12 }" />
-      <difficulty-badge :difficulty="{ type: 'extreme', name: 'EX', level: 17 }" />
+      <difficulty-badge v-for="chart in level.charts" :key="chart.id" :value="chart" />
     </div>
     <div style="margin-bottom: 32px;">
       <a-button type="primary" icon="download" size="large">Download (10.2MB)</a-button>
