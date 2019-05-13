@@ -2,7 +2,9 @@
   <div>
     <a-row type="flex" justify="center">
       <a-col v-for="level in levels" :key="level.id">
-        <level-card :level="level" />
+        <nuxt-link :to="{ name: 'levels-id', params: { id: level.uid } }">
+          <level-card :level="level" />
+        </nuxt-link>
       </a-col>
     </a-row>
   </div>
