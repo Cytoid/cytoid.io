@@ -25,7 +25,7 @@ export default {
     this.$root.$on('background', (data) => {
       this.source = data.source
       this.$refs.backgroundImage.style.animation = 'none'
-      console.log(this.$refs.backgroundImage.offsetHeight) /* trigger reflow */
+      this.$refs.backgroundImage.offsetHeight.toString() // Trigger reflow
       this.$refs.backgroundImage.style.animation = null
     })
   }
