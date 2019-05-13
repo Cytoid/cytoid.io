@@ -25,6 +25,9 @@ export default {
           levels: response.data
         }
       })
+  },
+  mounted() {
+    this.$root.$emit('background', { source: '/images/blank.png' })
   }
 }
 </script>

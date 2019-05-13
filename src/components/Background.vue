@@ -16,13 +16,9 @@ export default {
       source: '/images/blank.png'
     }
   },
-  watch: {
-    $route(to, from) {
-      this.$refs.backgroundImage.src = '/images/blank.png'
-    }
-  },
   mounted() {
     this.$root.$on('background', (data) => {
+      console.log('received background, source: ' + data.source)
       this.source = data.source
       this.$refs.backgroundImage.style.animation = 'none'
       this.$refs.backgroundImage.offsetHeight.toString() // Trigger reflow
@@ -70,12 +66,12 @@ export default {
   height: 125%;
   z-index: -256;
   position: absolute;
-  animation: background-overlay 2s 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: background-overlay 2s 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 @keyframes background-overlay {
   0% {
-    opacity: 0.5;
+    opacity: 0.3;
   }
   100% {
     opacity: 1;
