@@ -8,18 +8,22 @@
       <difficulty-badge :difficulty="{ type: 'extreme', name: 'EX', level: 17 }" />
     </div>
     <div style="margin-bottom: 32px;">
-      <a-button type="primary" icon="download" size="large">Download (10.2MB)</a-button>
+      <a-button type="primary" icon="download" size="large">
+        Download (10.2MB)
+      </a-button>
     </div>
-    <div style="margin-bottom: 32px;">
-      <a-rate :defaultValue="4.5" allowHalf />
-      4.5 (273)
-    </div>
-    <div style="margin-bottom: 32px;">
-      <a-tag v-for="tag in level.tags" :key="tag">
-        {{ tag }}
-      </a-tag>
-    </div>
-    <player-avatar></player-avatar>
+    <a-card>
+      <player-avatar></player-avatar>
+      <div style="margin-bottom: 32px;">
+        <a-rate :defaultValue="4.5" allowHalf />
+        4.5 (273)
+      </div>
+      <div style="margin-bottom: 32px;">
+        <a-tag v-for="tag in level.tags" :key="tag">
+          {{ tag }}
+        </a-tag>
+      </div>
+    </a-card>
   </div>
 </template>
 
