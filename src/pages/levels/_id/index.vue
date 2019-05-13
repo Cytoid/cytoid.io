@@ -23,7 +23,7 @@
               :disabled="!ratings.rating"
               @change="rate"
             />
-            <span class="card-secondary-text">{{ ratings.average }} ({{ ratings.total }})</span>
+            <span class="card-secondary-text">{{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})</span>
           </div>
           <p class="card-heading">
             Tags
@@ -42,26 +42,52 @@
         </a-card>
       </a-col>
       <a-col :xs="24" :lg="16">
-        <a-card>
+        <a-card style="margin-bottom: 16px;">
           <a-table
             :columns="columns"
             :row-key="record => record.id"
             :data-source="rankings"
             :pagination="rankings_pagination"
             :loading="rankings_loading"
-            :scroll="{ x: 1800 }"
+            :scroll="{ x: 800 }"
+            :rowClassName="(record, index) => rowClass(record, index)"
             @change="handleTableChange"
           >
             <template slot="rank" slot-scope="text">
-              #{{ text }}
+              # {{ text }}
             </template>
             <template slot="owner" slot-scope="text">
-              <div class="player-avatar">
-                <nuxt-link :to="'/profile/' + text">
+              <div class="ranking-player-avatar">
+                <nuxt-link :to="'/profile/' + text" style="display: flex; align-items: center;">
                   <a-avatar :size="24" src="https://cytoid.io/api/avatar.php?size=64&id=tigerhix" />
-                  <span v-text="'tigerhix'" class="player-avatar-name"></span>
+                  <span v-text="'tigerhix'" class="ranking-player-avatar-name"></span>
                 </nuxt-link>
               </div>
+            </template>
+            <template slot="score" slot-scope="text">
+              <div style="display: flex; align-items: center;">
+                <a-badge :count="scoreGrade(text)" :class="scoreBadgeClass(text)" />
+                <span style="margin-left: 4px;">
+                  {{
+                    text
+                  }}
+                </span>
+              </div>
+            </template>
+            <template slot="accuracy" slot-scope="text">
+              {{ (Math.floor(text * 100 * 100) / 100) + '%' }}
+            </template>
+            <template slot="max_combo" slot-scope="text">
+              {{ text + 'x' }}
+            </template>
+            <template slot="mods" slot-scope="text">
+              <span v-if="text.length === 0">
+                N/A
+              </span>
+              <img v-for="mod in text" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset;" />
+            </template>
+            <template slot="achieved" slot-scope="text">
+              {{ readableDate(text) }}
             </template>
           </a-table>
         </a-card>
@@ -79,7 +105,7 @@ const columns = [
   {
     title: 'Rank',
     dataIndex: 'rank',
-    width: 30,
+    width: 10,
     scopedSlots: {
       customRender: 'rank'
     }
@@ -87,45 +113,90 @@ const columns = [
   {
     title: 'Player',
     dataIndex: 'ownerId',
-    width: 200,
+    width: 120,
     scopedSlots: {
       customRender: 'owner'
     }
   },
   {
-    title: 'Grade',
-    width: 100,
-  },
-  {
     title: 'Score',
     dataIndex: 'score',
-    width: 160,
+    width: 40,
+    scopedSlots: {
+      customRender: 'score'
+    }
   },
   {
-    title: 'Accuracy',
+    title: 'Acc.',
     dataIndex: 'accuracy',
-    width: 120,
+    width: 10,
+    scopedSlots: {
+      customRender: 'accuracy'
+    }
   },
   {
     title: 'Max combo',
     dataIndex: 'details.max_combo',
-    width: 120,
+    width: 10,
+    scopedSlots: {
+      customRender: 'max_combo'
+    }
   },
   {
-    title: 'Distribution',
-    width: 300,
+    title: 'Perfect',
+    dataIndex: 'details.perfect',
+    width: 10,
+  },
+  {
+    title: 'Great',
+    dataIndex: 'details.great',
+    width: 10,
+  },
+  {
+    title: 'Good',
+    dataIndex: 'details.good',
+    width: 10,
+  },
+  {
+    title: 'Bad',
+    dataIndex: 'details.bad',
+    width: 10,
+  },
+  {
+    title: 'Miss',
+    dataIndex: 'details.miss',
+    width: 10,
   },
   {
     title: 'Mods',
     dataIndex: 'mods',
-    width: 300,
+    width: 10,
+    scopedSlots: {
+      customRender: 'mods'
+    }
   },
   {
     title: 'Achieved',
     dataIndex: 'date',
-    width: 300,
+    width: 80,
+    scopedSlots: {
+      customRender: 'achieved'
+    }
   },
 ]
+const modNames = {
+  'hidenotes': 'Invisible',
+  'hidescanline': 'No Scanline',
+  'slow': 'Slow',
+  'fast': 'Fast',
+  'hard': 'HYPER',
+  'exhard': 'ANOTHER',
+  'ap': 'All Perfect',
+  'fc': 'Full Combo',
+  'flipall': 'Flip All',
+  'flipx': 'Flip X',
+  'flipy': 'Flip Y'
+}
 export default {
   components: { PlayerAvatar, DifficultyBadge },
   data: () => ({
@@ -138,7 +209,8 @@ export default {
     rankings: [],
     rankings_pagination: {},
     rankings_loading: false,
-    columns
+    columns,
+    modNames
   }),
   computed: {
     levelDescription() {
@@ -192,7 +264,6 @@ export default {
         },
         type: 'json',
       }).then((data) => {
-        console.log(data)
         const pagination = { ...this.rankings_pagination }
         // Read total count from server
         // pagination.total = data.totalCount;
@@ -201,32 +272,67 @@ export default {
         this.rankings = data.data
         this.rankings_pagination = pagination
       })
+    },
+    scoreGrade(score) {
+      if (score === 1000000) {
+        return 'MAX'
+      } else if (score >= 999500) {
+        return 'SSS'
+      } else if (score >= 990000) {
+        return 'SS'
+      } else if (score >= 950000) {
+        return 'S'
+      } else if (score >= 900000) {
+        return 'A'
+      } else if (score >= 800000) {
+        return 'B'
+      } else if (score >= 700000) {
+        return 'C'
+      } else if (score >= 600000) {
+        return 'D'
+      } else {
+        return 'F'
+      }
+    },
+    scoreBadgeClass(score) {
+      if (score === 765432) {
+        return 'badge-score-max'
+      } else if (score >= 999500) {
+        return 'badge-score-sss'
+      } else {
+        return 'badge-score'
+      }
+    },
+    rowClass(record) {
+      if (record.score === 765432) {
+        return 'row-score-max'
+      } else if (record.score >= 999500) {
+        return 'row-score-sss'
+      } else {
+        return 'row-score'
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-  .player-avatar {
-    display: inline-block;
+  .ranking-player-avatar {
+    display: flex;
     transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .player-avatar:hover {
+  .ranking-player-avatar:hover {
     transform: scale(1.04, 1.04);
   }
-  .player-avatar:active {
+  .ranking-player-avatar:active {
     transform: scale(0.98, 0.98);
   }
-  .player-avatar a {
-    color: white;
+  .ranking-player-avatar a {
     text-decoration: none !important;
   }
-  .player-avatar-name {
-    margin-left: 4px;
+  .ranking-player-avatar-name {
+    margin-left: 8px;
+    padding-bottom: 2px;
     font-size: 14px;
-  }
-  .row-max {
-    background: orange;
-    color: black;
   }
 </style>
