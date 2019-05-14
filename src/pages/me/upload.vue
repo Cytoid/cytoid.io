@@ -4,9 +4,7 @@ a-row(type="flex" justify="center" align="middle")
     a-upload-dragger(
       supportServerRender
       accept=".cytoidlevel"
-      :action="getUploadURL"
       :customRequest="upload"
-      :headers="{ 'Content-Type': 'application/zip' }"
       :remove="removeUploadedFile"
       @change="uploadStatusChanged"
     )
@@ -25,37 +23,37 @@ export default {
     status: false,
   }),
   mounted() {
-    this.source = axios.CancelToken.source()
   },
   methods: {
-    getUploadURL() {
-      if (this.cachedUploadInfo) {
-        return this.cachedUploadInfo.uploadURL
-      }
-      return this.$axios.post('/levels/packages')
-        .then((response) => {
-          this.cachedUploadInfo = response.data
-          return this.cachedUploadInfo.uploadURL
-        })
-    },
     upload(option) {
-      axios.put(option.action, option.file, {
-        withCredentials: option.withCredentials,
-        headers: option.headers || {},
-        cancelToken: this.source.token,
-        onUploadProgress(e) {
-          if (e.total > 0) {
-            e.percent = (e.loaded / e.total) * 100
-          }
-          option.onProgress(e)
-        }
+      const source = axios.CancelToken.source()
+      let uploadConfig = null
+      this.$axios.post('/levels/packages', {}, {
+        cancelToken: source.token,
       })
         .then((response) => {
-          return this.$axios.post('/levels/packages', { key: this.cachedUploadInfo.key })
+          uploadConfig = response.data
+          return axios.put(uploadConfig.uploadURL, option.file, {
+            withCredentials: option.withCredentials,
+            headers: {
+              'Content-Type': 'application/zip'
+            },
+            cancelToken: source.token,
+            onUploadProgress(e) {
+              if (e.total > 0) {
+                e.percent = (e.loaded / e.total) * 100
+              }
+              option.onProgress(e)
+            }
+          })
+        })
+        .then(() => {
+          return this.$axios.post('/levels/packages', { key: uploadConfig.key }, {
+            cancelToken: source.token,
+          })
         })
         .then((response) => {
           const details = response.data
-          console.log(details)
           option.onSuccess(details)
         })
         .catch((error) => {
@@ -64,7 +62,7 @@ export default {
 
       return {
         abort() {
-          this.source.cancel()
+          source.cancel()
         }
       }
     },
