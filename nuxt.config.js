@@ -40,6 +40,7 @@ module.exports = {
   */
   css: [
     '~assets/styles/index.less',
+    '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
   /*
@@ -58,6 +59,7 @@ module.exports = {
     { src: '~plugins/vee-validate' },
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
+    { src: '~plugins/fontawesome' }
   ],
 
   /*
