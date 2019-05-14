@@ -295,7 +295,7 @@ export default {
       }
     },
     scoreBadgeClass(score) {
-      if (score === 765432) {
+      if (score === 1000000) {
         return 'badge-score-max'
       } else if (score >= 999500) {
         return 'badge-score-sss'
@@ -304,7 +304,7 @@ export default {
       }
     },
     rowClass(record) {
-      if (record.score === 765432) {
+      if (record.score === 1000000) {
         return 'row-score-max'
       } else if (record.score >= 999500) {
         return 'row-score-sss'
