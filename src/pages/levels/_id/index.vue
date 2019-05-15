@@ -13,7 +13,7 @@
     <a-row :gutter="16">
       <a-col :xs="24" :lg="8">
         <a-card style="margin-bottom: 16px;">
-          <player-avatar style="margin-bottom: 16px;" />
+          <player-avatar style="margin-bottom: 16px;" :player="level.owner"/>
           <p v-html="levelDescription" />
           <p class="card-heading">Rating</p>
           <div style="margin-bottom: 16px;">
@@ -53,41 +53,37 @@
             :rowClassName="(record, index) => rowClass(record, index)"
             @change="handleTableChange"
           >
-            <template slot="rank" slot-scope="text">
-              # {{ text }}
+            <template v-slot:rank="ranking">
+              # {{ ranking }}
             </template>
-            <template slot="owner" slot-scope="text">
+            <template v-slot:owner="owner">
               <div class="ranking-player-avatar">
-                <nuxt-link :to="'/profile/' + text" style="display: flex; align-items: center;">
+                <nuxt-link to="/profile" style="display: flex; align-items: center;">
                   <a-avatar :size="24" src="https://cytoid.io/api/avatar.php?size=64&id=tigerhix" />
-                  <span v-text="'tigerhix'" class="ranking-player-avatar-name"></span>
+                  <span v-text="owner.name || owner.uid" class="ranking-player-avatar-name"></span>
                 </nuxt-link>
               </div>
             </template>
-            <template slot="score" slot-scope="text">
+            <template v-slot:score="score">
               <div style="display: flex; align-items: center;">
-                <a-badge :count="scoreGrade(text)" :class="scoreBadgeClass(text)" />
-                <span style="margin-left: 4px;">
-                  {{
-                    text
-                  }}
-                </span>
+                <a-badge :count="scoreGrade(score)" :class="scoreBadgeClass(score)" />
+                <span style="margin-left: 4px;" v-text="score" />
               </div>
             </template>
-            <template slot="accuracy" slot-scope="text">
-              {{ (Math.floor(text * 100 * 100) / 100) + '%' }}
+            <template v-slot:accuracy="accuracy">
+              {{ (Math.floor(accuracy * 100 * 100) / 100) + '%' }}
             </template>
-            <template slot="max_combo" slot-scope="text">
-              {{ text + 'x' }}
+            <template v-slot:maxcombo="maxCombo">
+              {{ maxCombo ? (maxCombo + 'x') : 'Unknown' }}
             </template>
-            <template slot="mods" slot-scope="text">
-              <span v-if="text.length === 0">
+            <template v-slot:mods="mods">
+              <span v-if="mods.length === 0">
                 N/A
               </span>
-              <img v-for="mod in text" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset;" />
+              <img v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset;" />
             </template>
-            <template slot="achieved" slot-scope="text">
-              {{ readableDate(text) }}
+            <template v-slot:achieved="date">
+              {{ readableDate(date) }}
             </template>
           </a-table>
         </a-card>
@@ -112,7 +108,7 @@ const columns = [
   },
   {
     title: 'Player',
-    dataIndex: 'ownerId',
+    dataIndex: 'owner',
     width: 120,
     scopedSlots: {
       customRender: 'owner'
@@ -139,7 +135,7 @@ const columns = [
     dataIndex: 'details.max_combo',
     width: 10,
     scopedSlots: {
-      customRender: 'max_combo'
+      customRender: 'maxcombo'
     }
   },
   {
@@ -257,12 +253,11 @@ export default {
     fetchRankings(params = {}) {
       console.log('params:', params)
       this.rankings_loading = true
-      this.$axios.get('https://api.cytoid.io/levels/tigertiger.crossfire/charts/hard/ranking', {
+      this.$axios.get(`/levels/${this.level.uid}/charts/${this.level.charts[0].type}/ranking`, {
         params: {
           results: 10,
           ...params,
         },
-        type: 'json',
       }).then((data) => {
         const pagination = { ...this.rankings_pagination }
         // Read total count from server
@@ -274,25 +269,18 @@ export default {
       })
     },
     scoreGrade(score) {
-      if (score === 1000000) {
-        return 'MAX'
-      } else if (score >= 999500) {
-        return 'SSS'
-      } else if (score >= 990000) {
-        return 'SS'
-      } else if (score >= 950000) {
-        return 'S'
-      } else if (score >= 900000) {
-        return 'A'
-      } else if (score >= 800000) {
-        return 'B'
-      } else if (score >= 700000) {
-        return 'C'
-      } else if (score >= 600000) {
-        return 'D'
-      } else {
-        return 'F'
-      }
+      const cutoffs = [
+        [0, 'F'],
+        [600000, 'D'],
+        [700000, 'C'],
+        [800000, 'B'],
+        [900000, 'A'],
+        [950000, 'S'],
+        [990000, 'SS'],
+        [999500, 'SSS'],
+        [1000000, 'MAX'],
+      ]
+      return cutoffs.reduce((prev, [cutoff, str]) => (score > cutoff) ? str : prev, 'F')
     },
     scoreBadgeClass(score) {
       if (score === 1000000) {
