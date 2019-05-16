@@ -47,13 +47,81 @@
         </div>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row :gutter="16">
       <a-col :xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 6 }">
-        <a-card>
+        <a-card style="margin-bottom: 16px;">
           <p class="card-heading">
             Bio
           </p>
           <p style="margin-bottom: -1rem;" v-html="bio" />
+        </a-card>
+        <a-card>
+          <p class="card-heading">
+            Recent ranks
+          </p>
+          <p
+            v-for="rank in data.activity.recent_ranks"
+            :key="rank.timestamp"
+            class="recent-rank">
+            Ranked #{{ rank.rank }} in
+            <nuxt-link :to="'/levels/' + rank.uid">
+              {{ rank.title }}
+            </nuxt-link>
+          </p>
+        </a-card>
+      </a-col>
+      <a-col :xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 18 }">
+        <a-card class="statistics-card">
+          <a-row>
+            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
+              <p class="card-heading">
+                Ranked plays
+              </p>
+              <p class="statistics-slot">
+                {{ data.activity.total_ranked_plays }}
+              </p>
+            </a-col>
+            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
+              <p class="card-heading">
+                Cleared notes
+              </p>
+              <p class="statistics-slot">
+                {{ commaSeparated(data.activity.cleared_notes) }}
+              </p>
+            </a-col>
+            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
+              <p class="card-heading">
+                Max combo
+              </p>
+              <p class="statistics-slot">
+                {{ commaSeparated(data.activity.max_combo) }}
+              </p>
+            </a-col>
+            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
+              <p class="card-heading">
+                Average ranked accuracy
+              </p>
+              <p class="statistics-slot">
+                {{ data.activity.average_ranked_accuracy }}
+              </p>
+            </a-col>
+            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
+              <p class="card-heading">
+                Total ranked score
+              </p>
+              <p class="statistics-slot">
+                {{ commaSeparated(data.activity.total_ranked_score) }}
+              </p>
+            </a-col>
+            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
+              <p class="card-heading">
+                Total play time
+              </p>
+              <p class="statistics-slot">
+                {{ data.activity.total_play_time }}
+              </p>
+            </a-col>
+          </a-row>
         </a-card>
       </a-col>
     </a-row>
@@ -96,21 +164,22 @@ export default {
         max_combo: 3122,
         average_ranked_accuracy: 97.69,
         total_ranked_score: 2311154638,
+        total_play_time: '32d 12h 13m',
         recent_ranks: [
           {
             rank: 1,
-            type: 'extreme',
+            type: 'easy',
             score: 999700,
-            title: 'Between Boundaries',
-            uid: 'yy.between_boundaries',
+            title: '第三套全国中学生广播体操',
+            uid: 'kailaizuozaocao',
             timestamp: 192319231,
           },
           {
             rank: 40,
-            type: 'easy',
+            type: 'extreme',
             score: 852300,
-            title: '夢のまた夢',
-            uid: 'bombman-dreamwithinadream',
+            title: 'Show me your Rage',
+            uid: 'flina.showmeyourdespair',
             timestamp: 192319231,
           },
         ],
@@ -122,13 +191,18 @@ export default {
       return marked(this.data.profile.bio || 'There is no bio yet.')
     }
   },
+  methods: {
+    commaSeparated(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+  },
   mounted() {
     this.$root.$emit('background', { source: '/images/Laeti.jpg' })
   },
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .level-badge {
     position: absolute;
     display: flex;
@@ -163,5 +237,22 @@ export default {
     border-radius: 16px;
     transform: translate(-50%, 0);
     background: linear-gradient(to left, #B06AB3, #4568DC);
+  }
+  .statistics-card {
+    background: linear-gradient(to right bottom, @theme4, @theme5);
+  }
+  .statistics-slot {
+    margin-top: -4px;
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-weight: 300;
+  }
+  .recent-rank {
+    margin: 0 -24px;
+    padding: 4px 24px;
+    transition: 0.4s @hoverEasing;
+  }
+  .recent-rank:hover {
+    background: rgba(0, 0, 0, 0.2);
   }
 </style>
