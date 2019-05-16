@@ -14,15 +14,6 @@ export default {
       required: true,
     },
   },
-  methods: {
-    convertedDifficultyName(name) {
-      return {
-        easy: 'Easy',
-        hard: 'Hard',
-        extreme: 'EX',
-      }[name]
-    }
-  },
   computed: {
     badgeClass() {
       return {
@@ -36,6 +27,15 @@ export default {
       if (this.value.difficulty >= 16) return '15+'
       return this.value.difficulty
     },
+  },
+  methods: {
+    convertedDifficultyName(name) {
+      return {
+        easy: 'Easy',
+        hard: 'Hard',
+        extreme: 'EX',
+      }[name]
+    }
   },
 }
 </script>

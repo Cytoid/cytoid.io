@@ -17,7 +17,7 @@
         </div>
         <a-input
           v-decorator="[
-            'name',
+            'uid',
             { rules: [{
               required: true,
               pattern: '^[a-z0-9_-]{3,16}$',
