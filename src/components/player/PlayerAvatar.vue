@@ -1,8 +1,8 @@
 <template>
   <div class="player-avatar">
     <nuxt-link :to="'/profile/' + player.name">
-      <a-avatar :size="64" :src="player.image" />
-      <span v-text="player.name" class="player-avatar-name"></span>
+      <a-avatar :size="64" src="https://cytoid.io/api/avatar.php?size=256&id=tigerhix" />
+      <span v-text="player.name || player.uid" class="player-avatar-name"></span>
     </nuxt-link>
   </div>
 </template>
@@ -13,12 +13,6 @@ export default {
     player: {
       type: Object,
       required: true,
-      default: () => {
-        return {
-          name: 'tigerhix',
-          image: 'https://cytoid.io/api/avatar.php?size=256&id=tigerhix'
-        }
-      }
     },
   }
 }
