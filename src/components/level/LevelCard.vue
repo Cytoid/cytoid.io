@@ -10,22 +10,38 @@
     )
       .card(:style="cardStyle")
         .card-bg(:style="[cardBgTransform, cardBgImage]")
-        .card-info
+        .card-bottom
           h1(style="margin-bottom: 0px;" v-text="level.title")
-          p(style="margin-bottom: 0px;") This is the subtitle
+          p(v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="margin-bottom: 0px;")
           a-row(type="flex" align="middle")
             a-col(:span="20" style="display: flex; align-items: center;")
               span(style="display: flex; align-items: center;")
                 a-avatar(:size="24" icon="user" style="margin-right: 8px;")
-                span cytoid
+                span(v-text="level.metadata.charter.name")
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
+        .card-top
+          difficulty-badge(v-for="chart in charts" :key="getRandomInt()" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
 </template>
 
 <script>
 import PlayButton from '@/components/level/PlayButton'
+import DifficultyBadge from '@/components/level/DifficultyBadge'
+const charts = [
+  {
+    name: 'Mousou',
+    type: 'extreme',
+    difficulty: 13
+  },
+  {
+    name: null,
+    type: 'hard',
+    difficulty: 9
+  }
+]
 export default {
   components: {
+    DifficultyBadge,
     PlayButton,
   },
   props: {
@@ -37,6 +53,7 @@ export default {
   data: () => ({
     mouseX: null,
     mouseY: null,
+    charts
   }),
   computed: {
     mousePX() {
@@ -79,6 +96,9 @@ export default {
     }
   },
   methods: {
+    getRandomInt() {
+      return Math.random() * 1000
+    },
     handleMouseMove(e) {
       if (!this.$refs.card) {
         // Bugfix for vue routing bug. Event sent after component destruction.
@@ -112,8 +132,6 @@ h1 {
 p {
   margin-bottom: 0;
 }
-@hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
-@returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 @card-background-gutter: 1rem;
 
 .card-container {
@@ -183,15 +201,30 @@ p {
   box-sizing: unset;
 }
 
-.card-info {
+.card-top {
   width: 100%;
-  padding: 20px;
+  padding: 16px;
+  position: absolute;
+  top: 0;
+  color: #fff;
+  p {
+    transition: 0.6s 1.6s @hoverEasing;
+  }
+  * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.card-bottom {
+  width: 100%;
+  padding: 16px;
   position: absolute;
   bottom: 0;
   color: #fff;
   transition: 0.6s 1.6s @hoverEasing;
   h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     color: white;
     //text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
@@ -211,7 +244,7 @@ p {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
     background-blend-mode: overlay;
     transition: 5s 1s @returnEasing;
   }
