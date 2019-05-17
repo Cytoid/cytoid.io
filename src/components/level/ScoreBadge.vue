@@ -32,15 +32,6 @@ export default {
       } else {
         return 'badge-score'
       }
-    },
-    rowClass(record) {
-      if (record.score === 1000000) {
-        return 'row-score-max'
-      } else if (record.score >= 999500) {
-        return 'row-score-sss'
-      } else {
-        return 'row-score'
-      }
     }
   }
 }

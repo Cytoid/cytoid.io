@@ -3,10 +3,10 @@
     <h1 style="margin-bottom: 0;" v-text="level.metadata.title" />
     <p style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name" />
     <div style="margin-bottom: 48px;">
-      <difficulty-badge v-for="chart in level.charts" :key="chart.id" :value="chart" />
+      <difficulty-badge v-for="chart in level.charts" :key="chart.id" :value="chart" style="margin-right: 8px;" />
     </div>
     <div style="margin-bottom: 32px;">
-      <a-button type="primary" icon="download" size="large">
+      <a-button type="primary" icon="download" size="large" class="download-button">
         Download (10.2MB)
       </a-button>
     </div>
@@ -77,12 +77,14 @@
               {{ maxCombo ? (maxCombo + 'x') : 'Unknown' }}
             </template>
             <template v-slot:mods="mods">
-              <span v-if="mods.length === 0">
+              <span v-if="mods.length === 0 || mods[0] === ''">
                 N/A
               </span>
-              <img v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset;" />
+              <span v-if="mods.length > 0 && mods[0] !== ''">
+                <img v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;" />
+              </span>
             </template>
-            <template v-slot:achieved="date">
+            <template v-slot:achieved="date" style="font-size: 12px;">
               {{ readableDate(date) }}
             </template>
           </a-table>
@@ -133,7 +135,7 @@ const columns = [
   },
   {
     title: 'Max combo',
-    dataIndex: 'details.max_combo',
+    dataIndex: 'details.maxCombo',
     width: 10,
     scopedSlots: {
       customRender: 'maxcombo'
@@ -167,7 +169,6 @@ const columns = [
   {
     title: 'Mods',
     dataIndex: 'mods',
-    width: 10,
     scopedSlots: {
       customRender: 'mods'
     }
@@ -175,7 +176,6 @@ const columns = [
   {
     title: 'Achieved',
     dataIndex: 'date',
-    width: 80,
     scopedSlots: {
       customRender: 'achieved'
     }
@@ -251,6 +251,15 @@ export default {
         ...filters,
       })
     },
+    rowClass(record) {
+      if (record.score === 1000000) {
+        return 'row-score-max'
+      } else if (record.score >= 999500) {
+        return 'row-score-sss'
+      } else {
+        return 'row-score'
+      }
+    },
     fetchRankings(params = {}) {
       console.log('params:', params)
       this.rankings_loading = true
@@ -273,7 +282,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .ranking-player-avatar {
     display: flex;
     transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -291,5 +300,15 @@ export default {
     margin-left: 8px;
     padding-bottom: 2px;
     font-size: 14px;
+  }
+  .download-button.ant-btn-primary {
+    background: linear-gradient(to right, @theme4, @theme6);
+    border: none;
+    transition: all 0.4s @hoverEasing;
+    background-size: 384px 100%;
+    &:hover {
+      background-position: -180px;
+      transition: all 0.4s @hoverEasing;
+    }
   }
 </style>

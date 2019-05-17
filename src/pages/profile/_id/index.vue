@@ -72,9 +72,8 @@
                 :style="{
                   'font-weight': rank.rank <= 3 ? 'bold' : 'normal'
                 }"
-              >#{{ rank.rank }}</span>
-              &nbsp;in&nbsp;
-              <nuxt-link :to="'/levels/' + rank.uid">
+              ># {{ rank.rank }}</span>
+              <nuxt-link :to="'/levels/' + rank.uid" style="margin-left: 4px;">
                 {{ rank.title }}
               </nuxt-link>
             </div>
