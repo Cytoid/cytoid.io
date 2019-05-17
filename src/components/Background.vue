@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-parallax.absY="0.2" class="background-wrap">
+    <div v-parallax.absY="parallaxSpeed" class="background-wrap">
       <img ref="backgroundImage" :src="source" class="background-image">
     </div>
     <div class="background-overlay" />
@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      parallaxSpeed: 0.2,
       source: '/images/blank.png'
     }
   },
@@ -20,6 +21,7 @@ export default {
     this.$root.$on('background', (data) => {
       console.log('received background, source: ' + data.source)
       this.source = data.source
+      this.parallaxSpeed = data.parallaxSpeed !== null ? data.parallaxSpeed : 0.2
       this.$refs.backgroundImage.style.animation = 'none'
       this.$refs.backgroundImage.offsetHeight.toString() // Trigger reflow
       this.$refs.backgroundImage.style.animation = null

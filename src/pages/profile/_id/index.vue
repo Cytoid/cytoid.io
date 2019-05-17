@@ -92,7 +92,7 @@
         </a-card>
       </a-col>
       <a-col :xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }">
-        <a-card class="statistics-card">
+        <a-card class="statistics-card" style="margin-bottom: 16px;">
           <a-row>
             <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
               <p class="card-heading">
@@ -151,6 +151,22 @@
           </a-radio-group>
           <line-chart :styles="chartStyles" :chart-data="chartData" :options="chartOptions" />
         </a-card>
+        <a-tabs defaultActiveKey="featured_levels" :size="sm">
+          <a-tab-pane tab="Featured Levels" key="featured_levels">
+            <a-row type="flex" justify="center">
+              <a-col :xs="{ span: 24 }" :md="{ span: 12 }" v-for="level in levels" :key="level.id">
+                <level-card :level="level" />
+              </a-col>
+            </a-row>
+          </a-tab-pane>
+          <a-tab-pane tab="Levels" key="levels">
+          </a-tab-pane>
+          <a-tab-pane tab="Collections" key="collections">
+            <p style="margin: auto; display: flex; justify-content: center; align-items: center; height: 384px;">
+              Work in progress...
+            </p>
+          </a-tab-pane>
+        </a-tabs>
       </a-col>
     </a-row>
   </div>
@@ -159,12 +175,14 @@
 <script>
 import moment from 'moment'
 import marked from 'marked'
+import LevelCard from '@/components/level/LevelCard'
 import LineChart from '@/components/profile/LineChart'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
-  components: { LineChart, DifficultyBadge, ScoreBadge },
+  components: { LevelCard, LineChart, DifficultyBadge, ScoreBadge },
   data: () => ({
+    levels: [],
     data: {
       user: {
         name: 'tigerhix',
@@ -226,6 +244,14 @@ export default {
     chartData: null,
     chartOptions: null,
   }),
+  asyncData({ $axios }) {
+    return $axios.get('/levels')
+      .then((response) => {
+        return {
+          levels: response.data
+        }
+      })
+  },
   computed: {
     bio() {
       return marked(this.data.profile.bio || 'There is no bio yet.')
@@ -346,7 +372,7 @@ export default {
     }
   },
   mounted() {
-    this.$root.$emit('background', { source: '/images/Laeti.jpg' })
+    this.$root.$emit('background', { source: '/images/Laeti.jpg', parallaxSpeed: 0.8 })
     this.updateChart('global_ranking')
   },
 }
