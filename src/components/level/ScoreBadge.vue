@@ -22,7 +22,7 @@ export default {
         [999500, 'SSS'],
         [1000000, 'MAX'],
       ]
-      return cutoffs.reduce((prev, [cutoff, str]) => (score > cutoff) ? str : prev, 'F')
+      return cutoffs.reduce((prev, [cutoff, str]) => (score >= cutoff) ? str : prev, 'F')
     },
     scoreBadgeClass(score) {
       if (score === 1000000) {
