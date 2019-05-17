@@ -53,6 +53,8 @@ export default {
   data: () => ({
     mouseX: null,
     mouseY: null,
+    offsetTop: null,
+    offsetLeft: null,
     charts
   }),
   computed: {
@@ -100,12 +102,16 @@ export default {
       return Math.random() * 1000
     },
     handleMouseMove(e) {
-      if (!this.$refs.card) {
+      const target = this.$refs.card
+      if (!target) {
         // Bugfix for vue routing bug. Event sent after component destruction.
         return
       }
-      this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.$refs.card.offsetWidth / 2
-      this.mouseY = e.pageY - this.$refs.card.offsetTop - this.$refs.card.offsetHeight / 2
+      const offset = this.getOffset(this.$refs.card)
+      this.offsetLeft = offset.left
+      this.offsetTop = offset.top
+      this.mouseX = e.pageX - this.offsetLeft - target.offsetWidth / 2
+      this.mouseY = e.pageY - this.offsetTop - target.offsetHeight / 2
     },
     handleMouseEnter() {
       clearTimeout(this.mouseLeaveDelayTimeout)
@@ -120,6 +126,17 @@ export default {
     },
     enter() {
       this.$router.push({ name: 'levels-id', params: { id: this.level.uid } })
+    },
+    getOffset(el) {
+      console.log('??')
+      let _x = 0
+      let _y = 0
+      while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+        _x += el.offsetLeft - el.scrollLeft
+        _y += el.offsetTop - el.scrollTop
+        el = el.offsetParent
+      }
+      return { top: _y, left: _x }
     }
   },
 }
@@ -138,6 +155,8 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .card-wrap {
@@ -145,6 +164,8 @@ p {
   transform: perspective(800px);
   transform-style: preserve-3d;
   cursor: default;
+  width: 100%;
+  padding-top: 62.5%;
   &:hover {
     .card-info {
       transform: translateY(0);
@@ -171,10 +192,11 @@ p {
   }
 }
 .card {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
   flex: 0 0 240px;
-  width: 384px;
-  height: 240px;
   background-color: #333;
   overflow: hidden;
   border-radius: 4px;
