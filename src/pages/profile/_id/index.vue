@@ -48,29 +48,51 @@
       </a-col>
     </a-row>
     <a-row :gutter="16">
-      <a-col :xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 6 }">
-        <a-card style="margin-bottom: 16px;">
+      <a-col :xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }">
+        <a-card style="background: none; margin-bottom: 16px;">
           <p class="card-heading">
             Bio
           </p>
           <p style="margin-bottom: -1rem;" v-html="bio" />
         </a-card>
-        <a-card>
+        <a-card style="background: none; margin-bottom: 16px;">
           <p class="card-heading">
             Recent ranks
           </p>
-          <p
+          <div
             v-for="rank in data.activity.recent_ranks"
             :key="rank.timestamp"
-            class="recent-rank">
-            Ranked #{{ rank.rank }} in
-            <nuxt-link :to="'/levels/' + rank.uid">
-              {{ rank.title }}
-            </nuxt-link>
-          </p>
+            class="recent-rank"
+            style="position: relative; margin-top: 8px;"
+          >
+            <div class="recent-rank-background" :style="{ 'background-image': 'url(' + rank.image + ')', 'background-size': 'cover' }" />
+            <div class="recent-rank-overlay" />
+            <div style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;">
+              <span
+                :style="{
+                  'font-weight': rank.rank <= 3 ? 'bold' : 'normal'
+                }"
+              >#{{ rank.rank }}</span>
+              &nbsp;in&nbsp;
+              <nuxt-link :to="'/levels/' + rank.uid">
+                {{ rank.title }}
+              </nuxt-link>
+            </div>
+            <div style="display: flex; position: relative; z-index: 2;">
+              <div style="display: flex; font-size: 12px;">
+                <difficulty-badge :value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty }" :small="true" />
+                <score-badge :value="rank.score" style="margin-left: 4px;" />
+              </div>
+              <div style="display: flex; margin-left: auto;">
+                <span class="card-secondary-text" style="font-size: 12px; padding-top: 1px;">
+                  {{ readableDate(rank.timestamp) }}
+                </span>
+              </div>
+            </div>
+          </div>
         </a-card>
       </a-col>
-      <a-col :xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 18 }">
+      <a-col :xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }">
         <a-card class="statistics-card">
           <a-row>
             <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
@@ -94,7 +116,7 @@
                 Max combo
               </p>
               <p class="statistics-slot">
-                {{ commaSeparated(data.activity.max_combo) }}
+                {{ commaSeparated(data.activity.max_combo) }}x
               </p>
             </a-col>
             <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
@@ -102,7 +124,7 @@
                 Average ranked accuracy
               </p>
               <p class="statistics-slot">
-                {{ data.activity.average_ranked_accuracy }}
+                {{ data.activity.average_ranked_accuracy }}%
               </p>
             </a-col>
             <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
@@ -122,6 +144,13 @@
               </p>
             </a-col>
           </a-row>
+          <a-radio-group defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;">
+            <a-radio-button value="global_ranking">Global ranking</a-radio-button>
+            <a-radio-button value="region_ranking">Region ranking</a-radio-button>
+            <a-radio-button value="rating">Rating</a-radio-button>
+            <a-radio-button value="accuracy">Average Accuracy</a-radio-button>
+          </a-radio-group>
+          <line-chart :styles="chartStyles" :chart-data="chartData" :options="chartOptions" />
         </a-card>
       </a-col>
     </a-row>
@@ -129,8 +158,13 @@
 </template>
 
 <script>
+import moment from 'moment'
 import marked from 'marked'
+import LineChart from '@/components/profile/LineChart'
+import ScoreBadge from '@/components/level/ScoreBadge'
+import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
+  components: { LineChart, DifficultyBadge, ScoreBadge },
   data: () => ({
     data: {
       user: {
@@ -169,35 +203,152 @@ export default {
           {
             rank: 1,
             type: 'easy',
+            name: 'Beginner',
+            difficulty: 1,
             score: 999700,
-            title: '第三套全国中学生广播体操',
-            uid: 'kailaizuozaocao',
-            timestamp: 192319231,
+            title: 'First Step',
+            uid: 'anthony.lena_fs',
+            image: 'https://assets.cytoid.io/levels/bundles/itZJhychrDVDEofa9lwUeBZs5nql4dn81kKciT/bg.PNG',
+            timestamp: 1558018259000,
           },
           {
             rank: 40,
             type: 'extreme',
+            difficulty: 15,
             score: 852300,
             title: 'Show me your Rage',
             uid: 'flina.showmeyourdespair',
-            timestamp: 192319231,
+            image: 'https://assets.cytoid.io/levels/bundles/GvQLiaCpd1335NxRAE6HRG1px1ZPHJuuQBAZNUlb/judgment.png',
+            timestamp: 1557038259000,
           },
         ],
       },
     },
+    chartData: null,
+    chartOptions: null,
   }),
   computed: {
     bio() {
       return marked(this.data.profile.bio || 'There is no bio yet.')
+    },
+    chartStyles() {
+      return {
+        position: 'relative',
+        height: '192px',
+      }
     }
   },
   methods: {
     commaSeparated(number) {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    },
+    readableDate(date) {
+      return moment(date).fromNow()
+    },
+    updateChart(type) {
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              fontColor: 'rgba(255, 255, 255, 0.3)',
+              fontSize: 12,
+              fontFamily: 'Nunito',
+              beginAtZero: false,
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: 'rgba(255, 255, 255, 0.3)',
+              fontSize: 12,
+              fontFamily: 'Nunito',
+              stepSize: 1,
+            }
+          }]
+        },
+        elements: {
+          line: {
+            tension: 0
+          }
+        }
+      }
+      switch (type) {
+        case 'global_ranking':
+          this.chartData = {
+            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
+            datasets: [
+              {
+                label: 'Global ranking',
+                backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                fontColor: 'white',
+                data: [13, 12, 12, 12, 12, 11, 11],
+                fill: 'start',
+              }
+            ],
+          }
+          options.scales.yAxes[0].ticks.reverse = true
+          options.scales.yAxes[0].ticks.stepSize = 1
+          break
+        case 'region_ranking':
+          this.chartData = {
+            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
+            datasets: [
+              {
+                label: 'Region ranking',
+                backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                fontColor: 'white',
+                data: [2, 2, 1, 1, 1, 1, 1],
+                fill: 'start',
+              }
+            ],
+          }
+          options.scales.yAxes[0].ticks.reverse = true
+          options.scales.yAxes[0].ticks.stepSize = 1
+          break
+        case 'rating':
+          this.chartData = {
+            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
+            datasets: [
+              {
+                label: 'Rating',
+                backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                fontColor: 'white',
+                data: [0, 14.13, 14.57, 14.82, 15.11, 15.03, 15.08, 15.15]
+              }
+            ],
+          }
+          options.scales.yAxes[0].ticks.reverse = false
+          options.scales.yAxes[0].ticks.stepSize = undefined
+          break
+        case 'accuracy':
+          this.chartData = {
+            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
+            datasets: [
+              {
+                label: 'Average accuracy',
+                backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                fontColor: 'white',
+                data: [97.20, 97.24, 97.33, 97.01, 97.44, 97.50, 97.69]
+              }
+            ],
+          }
+          options.scales.yAxes[0].ticks.reverse = false
+          options.scales.yAxes[0].ticks.stepSize = undefined
+          break
+      }
+      this.chartOptions = options
+    },
+    handleChartChange(e) {
+      this.updateChart(e.target.value)
     }
   },
   mounted() {
     this.$root.$emit('background', { source: '/images/Laeti.jpg' })
+    this.updateChart('global_ranking')
   },
 }
 </script>
@@ -243,16 +394,57 @@ export default {
   }
   .statistics-slot {
     margin-top: -4px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     font-size: 24px;
     font-weight: 300;
   }
   .recent-rank {
+    position: relative;
+    border-left: 4px solid @theme5;
     margin: 0 -24px;
-    padding: 4px 24px;
+    padding: 12px 24px 16px;
+    transition: 0.4s @hoverEasing;
+    overflow: hidden;
+    &:hover {
+      border-left: 4px solid @theme6;
+    }
+    &:hover .recent-rank-background {
+      transform: scale(1.05, 1.05);
+    }
+  }
+  .recent-rank-background {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     transition: 0.4s @hoverEasing;
   }
-  .recent-rank:hover {
-    background: rgba(0, 0, 0, 0.2);
+  .recent-rank-overlay {
+    .recent-rank-background;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .statistics-card {
+    .ant-radio-button-wrapper {
+      font-size: 12px;
+      font-weight: normal;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.3);
+      border: none;
+    }
+    .ant-radio-button-wrapper-checked {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 1);
+      border: white;
+      box-shadow: none;
+      font-weight: bold;
+      &:hover {
+        box-shadow: none;
+      }
+    }
+    .ant-radio-button-wrapper:not(:first-child)::before {
+      background-color: unset;
+    }
   }
 </style>

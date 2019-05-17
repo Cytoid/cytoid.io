@@ -7,6 +7,7 @@
 @shade2: hsla(226, 15%, 14%, 1);
 @shade3: hsla(226, 15%, 19%, 1);
 @shade4: hsla(226, 15%, 38%, 1);
+@shade5: hsla(226, 15%, 55%, 1);
 
 @theme1: hsla(226, 68%, 27%, 1);
 @theme2: hsla(226, 68%, 37%, 1);
@@ -161,6 +162,17 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: @theme6;
+  text-decoration: none !important;
+  &:hover {
+    color: @theme7;
+  }
+  &:focus {
+    color: white;
+  }
+}
+
 h1 {
   font-size: 48px;
   font-weight: 300;
@@ -286,7 +298,7 @@ h2 {
   padding-right: 8px;
   width: fit-content;
   box-shadow: none;
-  background: #ffc107;
+  background: linear-gradient(to right bottom, hsl(45, 100%, 50%), hsl(45, 100%, 70%));
   color: @shade1;
 }
 
@@ -295,7 +307,7 @@ h2 {
   padding-right: 8px;
   width: fit-content;
   box-shadow: none;
-  background: #007bff;
+  background: linear-gradient(to right bottom, hsl(211, 100%, 50%), hsl(211, 100%, 70%));
   color: white;
 }
 
@@ -304,6 +316,6 @@ h2 {
   padding-right: 8px;
   width: fit-content;
   box-shadow: none;
-  background: @shade4;
+  background: linear-gradient(to right bottom, @shade4, @shade5);
   color: white;
 }

@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="container" style="margin-top: 256px;">
     <h1 style="margin-bottom: 0;" v-text="level.metadata.title" />
     <p style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name" />
@@ -66,7 +66,7 @@
             </template>
             <template v-slot:score="score">
               <div style="display: flex; align-items: center;">
-                <a-badge :count="scoreGrade(score)" :class="scoreBadgeClass(score)" />
+                <score-badge :value="score" />
                 <span style="margin-left: 4px;" v-text="score" />
               </div>
             </template>
@@ -97,6 +97,7 @@ import moment from 'moment'
 import marked from 'marked'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
+import ScoreBadge from '@/components/level/ScoreBadge'
 const columns = [
   {
     title: 'Rank',
@@ -194,7 +195,7 @@ const modNames = {
   'flipy': 'Flip Y'
 }
 export default {
-  components: { PlayerAvatar, DifficultyBadge },
+  components: { ScoreBadge, PlayerAvatar, DifficultyBadge },
   data: () => ({
     level: null,
     ratings: null,
@@ -268,38 +269,6 @@ export default {
         this.rankings_pagination = pagination
       })
     },
-    scoreGrade(score) {
-      const cutoffs = [
-        [0, 'F'],
-        [600000, 'D'],
-        [700000, 'C'],
-        [800000, 'B'],
-        [900000, 'A'],
-        [950000, 'S'],
-        [990000, 'SS'],
-        [999500, 'SSS'],
-        [1000000, 'MAX'],
-      ]
-      return cutoffs.reduce((prev, [cutoff, str]) => (score > cutoff) ? str : prev, 'F')
-    },
-    scoreBadgeClass(score) {
-      if (score === 1000000) {
-        return 'badge-score-max'
-      } else if (score >= 999500) {
-        return 'badge-score-sss'
-      } else {
-        return 'badge-score'
-      }
-    },
-    rowClass(record) {
-      if (record.score === 1000000) {
-        return 'row-score-max'
-      } else if (record.score >= 999500) {
-        return 'row-score-sss'
-      } else {
-        return 'row-score'
-      }
-    }
   }
 }
 </script>
