@@ -1,9 +1,9 @@
 <template lang="pug">
   a-popover(placement="top" title="")
     p(slot="content" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") 1560 Notes
-    .badge(:class="badgeClass")
+    div(:class="badgeClass")
       span.title(v-text="value.name || convertedDifficultyName(value.type)")
-      span.level Lv. {{convertedDifficultyLevel}}
+      span.level {{convertedDifficultyLevel}}
 </template>
 
 <script>
@@ -13,19 +13,26 @@ export default {
       type: Object,
       required: true,
     },
+    small: {
+      type: Boolean,
+      default: () => false,
+    }
   },
   computed: {
     badgeClass() {
       return {
+        'badge': true,
+        'badge-small': this.small,
         'badge-easy': this.value.type === 'easy',
         'badge-hard': this.value.type === 'hard',
         'badge-extreme': this.value.type === 'extreme',
       }
     },
     convertedDifficultyLevel() {
-      if (this.value.difficulty <= 0) return '?'
-      if (this.value.difficulty >= 16) return '15+'
-      return this.value.difficulty
+      const str = this.small ? '' : 'Lv. '
+      if (this.value.difficulty <= 0) return str + '?'
+      if (this.value.difficulty >= 16) return str + '15+'
+      return str + this.value.difficulty
     },
   },
   methods: {
@@ -47,7 +54,6 @@ export default {
   height: 32px;
   min-width: 104px;
   border-radius: 16px;
-  margin-right: 4px;
   .title {
     font-weight: 500;
     margin-left: 16px;
@@ -57,6 +63,24 @@ export default {
   .level {
     margin-left: auto;
     margin-right: 16px;
+    color: white;
+  }
+}
+
+.badge-small {
+  height: 20px;
+  min-width: unset;
+  border-radius: 10px;
+  font-size: 12px;
+  .title {
+    font-weight: unset;
+    margin-left: 8px;
+    margin-right: 4px;
+    color: white;
+  }
+  .level {
+    margin-left: unset;
+    margin-right: 8px;
     color: white;
   }
 }
