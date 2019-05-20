@@ -2,7 +2,7 @@
   .container(style="margin-top: 256px;")
     a-row(style="margin-bottom: 48px;")
       a-col(:span="24")
-        div(style="display: inline-flex; padding-left: 32px;")
+        div(style="padding-left: 32px;")
           player-info-avatar(
             :exp="data.exp"
             :prevExp="data.prev_level_exp"
@@ -10,19 +10,18 @@
             :level="data.level"
             :rating="data.rating"
           )
-          div(style="display: inline-block; margin-left: 32px;")
-            h2(style="margin-bottom: 4px;" v-text="data.user.name")
-            div(style="display: flex; align-items: center; margin-bottom: 32px;")
-              div(style="display: inline-flex; align-items: center; justify-content: center; font-size: 14px; width: 16px;")
-                font-awesome-icon(icon="circle" style="color: hsla(120, 68%, 57%, 1);")
-              span(style="display: inline-block; font-size: 14px; margin-left: 8px;") Online
-            div(style="display: flex; align-items: center;")
-              span(style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px;")
+          .player-info-container
+            h2.username(v-text="data.user.name")
+            p.status
+              font-awesome-icon.status-icon(icon="circle" style="color: hsla(120, 68%, 57%, 1);")
+              | Online
+            p.details
+              span
                 font-awesome-icon(icon="map-marker-alt")
-              span(style="font-size: 12px; margin-left: 8px;") Hong Kong
-              span(style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px; margin-left: 16px;")
+                | Hong Kong
+              span
                 font-awesome-icon(icon="calendar")
-              span(style="font-size: 12px; margin-left: 8px;") Joined August 2017
+                | Joined August 2017
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card(style="background: none; margin-bottom: 16px;")
@@ -351,6 +350,30 @@ export default {
     }
     .ant-radio-button-wrapper:not(:first-child)::before {
       background-color: unset;
+    }
+  }
+  .player-info-container {
+    margin-left: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    .status {
+      font-size: 14px;
+      .status-icon {
+        margin-right: 0.5rem;
+      }
+      margin-bottom: 2rem;
+    }
+    .username {
+      margin-bottom: 4px;
+    }
+    .details {
+      font-size: 12px;
+      span {
+        margin-right: 3rem;
+        svg {
+          margin-right: 0.5rem;
+        }
+      }
     }
   }
 </style>

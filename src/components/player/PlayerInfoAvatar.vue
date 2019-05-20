@@ -49,6 +49,7 @@ export default {
 @level-badge-inner-size: 36px;
 @rating-badge-size: 32px;
 .player-info-avatar {
+  display: inline-block;
   position: relative;
   .level-avatar {
     width: @level-size;
