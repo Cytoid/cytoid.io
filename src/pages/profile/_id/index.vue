@@ -3,23 +3,13 @@
     a-row(style="margin-bottom: 48px;")
       a-col(:span="24")
         div(style="display: inline-flex; padding-left: 32px;")
-          div(style="display: inline-block;")
-            a-avatar(:size="128" src="https://cytoid.io/api/avatar.php?id=tigerhix&size=512")
-            a-progress(
-              type="dashboard"
-              :percent="((data.exp - data.prev_level_exp) / (data.next_level_exp - data.prev_level_exp)) * 100"
-              :format="percent => ''"
-              :width="152"
-              :stroke-width="4"
-              :stroke-color="'hsla(226, 68%, 67%, 1)'"
-              style="position: absolute; margin-top: -140px; margin-left: -12px"
-            )
-            span.level-badge-background
-            span.level-badge
-              span(style="display: flex; font-size: 12px; font-weight: bold; color: hsla(226, 68%, 87%, 1); margin-bottom: -4px;") LV.
-              span(style="display: flex; font-size: 14px; color: hsla(226, 68%, 67%, 1);" v-text="data.level")
-            span.rating-badge
-              span(style="display: flex; font-size: 14px; color: white;") {{ data.rating }} rt
+          player-info-avatar(
+            :exp="data.exp"
+            :prevExp="data.prev_level_exp"
+            :nextExp="data.next_level_exp"
+            :level="data.level"
+            :rating="data.rating"
+          )
           div(style="display: inline-block; margin-left: 32px;")
             h2(style="margin-bottom: 4px;" v-text="data.user.name")
             div(style="display: flex; align-items: center; margin-bottom: 32px;")
@@ -29,7 +19,6 @@
             div(style="display: flex; align-items: center;")
               span(style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px;")
                 font-awesome-icon(icon="map-marker-alt")
-              </span>
               span(style="font-size: 12px; margin-left: 8px;") Hong Kong
               span(style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px; margin-left: 16px;")
                 font-awesome-icon(icon="calendar")
@@ -95,8 +84,9 @@ import marked from 'marked'
 import LineChart from '@/components/profile/LineChart'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
+import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 export default {
-  components: { LineChart, DifficultyBadge, ScoreBadge },
+  components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar },
   data: () => ({
     data: {
       user: {
@@ -286,41 +276,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .level-badge {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    padding: 8px 16px;
-    margin-top: -148px;
-    margin-left: 64px;
-    transform: translate(-50%, 0);
-  }
-  .level-badge-background {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-    margin-top: -156px;
-    margin-left: 64px;
-    transform: translate(-50%, 0);
-    background: #fff;
-  }
-  .rating-badge {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    padding: 8px 16px;
-    margin-top: -20px;
-    margin-left: 64px;
-    border-radius: 16px;
-    transform: translate(-50%, 0);
-    background: linear-gradient(to left, #B06AB3, #4568DC);
-  }
   .statistics-card {
     background: linear-gradient(to right bottom, @theme4, @theme5);
   }
