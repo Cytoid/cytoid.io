@@ -50,7 +50,7 @@
               div(style="display: flex; margin-left: auto;")
                 span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(rank.timestamp)")
       a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
-        a-card.statistics-card
+        a-card.statistics-card(style="margin-bottom: 16px;")
           a-row
             a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Ranked plays
@@ -76,18 +76,29 @@
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
           line-chart(:styles="chartStyles" :chart-data="chartData" :options="chartOptions")
+        a-tabs(defaultActiveKey="featured_levels" :size="sm")
+          a-tab-pane(tab="Featured Levels" key="featured_levels")
+            a-row(type="flex" justify="center")
+              a-col(:xs="{ span: 24 }" :md="{ span: 12 }" v-for="level in levels" :key="level.id")
+                level-card(:level="level")
+          a-tab-pane(tab="Levels" key="levels")
+          a-tab-pane(tab="Collections" key="collections")
+            p(style="margin: auto; display: flex; justify-content: center; align-items: center; height: 384px;")
+              | Work in progress...
 </template>
 
 <script>
 import moment from 'moment'
 import marked from 'marked'
+import LevelCard from '@/components/level/LevelCard'
 import LineChart from '@/components/profile/LineChart'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 export default {
-  components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar },
+  components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar, LevelCard },
   data: () => ({
+    levels: [],
     data: {
       user: {
         name: 'tigerhix',
@@ -149,6 +160,14 @@ export default {
     chartData: null,
     chartOptions: null,
   }),
+  asyncData({ $axios }) {
+    return $axios.get('/levels')
+      .then((response) => {
+        return {
+          levels: response.data
+        }
+      })
+  },
   computed: {
     bio() {
       return marked(this.data.profile.bio || 'There is no bio yet.')
@@ -161,7 +180,7 @@ export default {
     }
   },
   mounted() {
-    this.$root.$emit('background', { source: '/images/Laeti.jpg' })
+    this.$root.$emit('background', { source: '/images/Laeti.jpg', parallaxSpeed: 0.8 })
     this.updateChart('global_ranking')
   },
   methods: {

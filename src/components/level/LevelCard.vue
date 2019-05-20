@@ -10,22 +10,38 @@
     )
       .card(:style="cardStyle")
         .card-bg(:style="[cardBgTransform, cardBgImage]")
-        .card-info
+        .card-bottom
           h1(style="margin-bottom: 0px;" v-text="level.title")
-          p(style="margin-bottom: 0px;") This is the subtitle
+          p(v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="margin-bottom: 0px;")
           a-row(type="flex" align="middle")
             a-col(:span="20" style="display: flex; align-items: center;")
               span(style="display: flex; align-items: center;")
                 a-avatar(:size="24" icon="user" style="margin-right: 8px;")
-                span cytoid
+                span(v-text="level.metadata.charter.name")
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
+        .card-top
+          difficulty-badge(v-for="chart in charts" :key="getRandomInt()" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
 </template>
 
 <script>
 import PlayButton from '@/components/level/PlayButton'
+import DifficultyBadge from '@/components/level/DifficultyBadge'
+const charts = [
+  {
+    name: 'Mousou',
+    type: 'extreme',
+    difficulty: 13
+  },
+  {
+    name: null,
+    type: 'hard',
+    difficulty: 9
+  }
+]
 export default {
   components: {
+    DifficultyBadge,
     PlayButton,
   },
   props: {
@@ -37,6 +53,9 @@ export default {
   data: () => ({
     mouseX: null,
     mouseY: null,
+    offsetTop: null,
+    offsetLeft: null,
+    charts
   }),
   computed: {
     mousePX() {
@@ -79,13 +98,20 @@ export default {
     }
   },
   methods: {
+    getRandomInt() {
+      return Math.random() * 1000
+    },
     handleMouseMove(e) {
-      if (!this.$refs.card) {
+      const target = this.$refs.card
+      if (!target) {
         // Bugfix for vue routing bug. Event sent after component destruction.
         return
       }
-      this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.$refs.card.offsetWidth / 2
-      this.mouseY = e.pageY - this.$refs.card.offsetTop - this.$refs.card.offsetHeight / 2
+      const offset = this.getOffset(this.$refs.card)
+      this.offsetLeft = offset.left
+      this.offsetTop = offset.top
+      this.mouseX = e.pageX - this.offsetLeft - target.offsetWidth / 2
+      this.mouseY = e.pageY - this.offsetTop - target.offsetHeight / 2
     },
     handleMouseEnter() {
       clearTimeout(this.mouseLeaveDelayTimeout)
@@ -100,6 +126,17 @@ export default {
     },
     enter() {
       this.$router.push({ name: 'levels-id', params: { id: this.level.uid } })
+    },
+    getOffset(el) {
+      console.log('??')
+      let _x = 0
+      let _y = 0
+      while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+        _x += el.offsetLeft - el.scrollLeft
+        _y += el.offsetTop - el.scrollTop
+        el = el.offsetParent
+      }
+      return { top: _y, left: _x }
     }
   },
 }
@@ -112,14 +149,14 @@ h1 {
 p {
   margin-bottom: 0;
 }
-@hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
-@returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 @card-background-gutter: 1rem;
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .card-wrap {
@@ -127,6 +164,8 @@ p {
   transform: perspective(800px);
   transform-style: preserve-3d;
   cursor: default;
+  width: 100%;
+  padding-top: 62.5%;
   &:hover {
     .card-info {
       transform: translateY(0);
@@ -153,10 +192,11 @@ p {
   }
 }
 .card {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
   flex: 0 0 240px;
-  width: 384px;
-  height: 240px;
   background-color: #333;
   overflow: hidden;
   border-radius: 4px;
@@ -183,15 +223,30 @@ p {
   box-sizing: unset;
 }
 
-.card-info {
+.card-top {
   width: 100%;
-  padding: 20px;
+  padding: 16px;
+  position: absolute;
+  top: 0;
+  color: #fff;
+  p {
+    transition: 0.6s 1.6s @hoverEasing;
+  }
+  * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.card-bottom {
+  width: 100%;
+  padding: 16px;
   position: absolute;
   bottom: 0;
   color: #fff;
   transition: 0.6s 1.6s @hoverEasing;
   h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     color: white;
     //text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
@@ -211,7 +266,7 @@ p {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
     background-blend-mode: overlay;
     transition: 5s 1s @returnEasing;
   }

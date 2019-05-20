@@ -1,8 +1,10 @@
 <template lang="pug">
   a-popover(placement="top" title="")
     p(slot="content" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") 1560 Notes
-    div(:class="badgeClass")
+    div(v-if="!ball" :class="badgeClass")
       span.title(v-text="value.name || convertedDifficultyName(value.type)")
+      span.level {{convertedDifficultyLevel}}
+    div(v-if="ball" :class="badgeBallClass")
       span.level {{convertedDifficultyLevel}}
 </template>
 
@@ -14,6 +16,10 @@ export default {
       required: true,
     },
     small: {
+      type: Boolean,
+      default: () => false,
+    },
+    ball: {
       type: Boolean,
       default: () => false,
     }
@@ -28,8 +34,17 @@ export default {
         'badge-extreme': this.value.type === 'extreme',
       }
     },
+    badgeBallClass() {
+      return {
+        'badge-ball': true,
+        'badge-small': this.small,
+        'badge-easy': this.value.type === 'easy',
+        'badge-hard': this.value.type === 'hard',
+        'badge-extreme': this.value.type === 'extreme',
+      }
+    },
     convertedDifficultyLevel() {
-      const str = this.small ? '' : 'Lv. '
+      const str = (this.small || this.ball) ? '' : 'Lv. '
       if (this.value.difficulty <= 0) return str + '?'
       if (this.value.difficulty >= 16) return str + '15+'
       return str + this.value.difficulty
@@ -82,6 +97,17 @@ export default {
     margin-left: unset;
     margin-right: 8px;
     color: white;
+  }
+}
+
+.badge-ball {
+  display: inline-flex;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  .level {
+    margin: auto;
   }
 }
 
