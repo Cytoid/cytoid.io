@@ -1,10 +1,8 @@
-<template>
-  <div class="player-avatar">
-    <nuxt-link :to="'/profile/' + player.name">
-      <a-avatar :size="64" src="https://cytoid.io/api/avatar.php?size=256&id=tigerhix" />
-      <span v-text="player.name || player.uid" class="player-avatar-name"></span>
-    </nuxt-link>
-  </div>
+<template lang="pug">
+  .player-avatar
+    nuxt-link(:to="'/profile/' + player.name")
+      a-avatar(:size="64" src="https://cytoid.io/api/avatar.php?size=256&id=tigerhix")
+      span(v-text="player.name || player.uid" class="player-avatar-name")
 </template>
 
 <script>
