@@ -1,11 +1,11 @@
-<template>
-  <div class="container" style="margin-top: 256px;">
-    <a-row style="margin-bottom: 48px;">
-      <a-col :span="24">
-        <div style="display: inline-flex; padding-left: 32px;">
-          <div style="display: inline-block;">
-            <a-avatar :size="128" src="https://cytoid.io/api/avatar.php?id=tigerhix&size=512" style="" />
-            <a-progress
+<template lang="pug">
+  .container(style="margin-top: 256px;")
+    a-row(style="margin-bottom: 48px;")
+      a-col(:span="24")
+        div(style="display: inline-flex; padding-left: 32px;")
+          div(style="display: inline-block;")
+            a-avatar(:size="128" src="https://cytoid.io/api/avatar.php?id=tigerhix&size=512")
+            a-progress(
               type="dashboard"
               :percent="((data.exp - data.prev_level_exp) / (data.next_level_exp - data.prev_level_exp)) * 100"
               :format="percent => ''"
@@ -13,147 +13,80 @@
               :stroke-width="4"
               :stroke-color="'hsla(226, 68%, 67%, 1)'"
               style="position: absolute; margin-top: -140px; margin-left: -12px"
-            />
-            <span class="level-badge-background" />
-            <span class="level-badge">
-              <span style="display: flex; font-size: 12px; font-weight: bold; color: hsla(226, 68%, 87%, 1); margin-bottom: -4px;">LV.</span>
-              <span style="display: flex; font-size: 14px; color: hsla(226, 68%, 67%, 1);">{{ data.level }}</span>
-            </span>
-            <span class="rating-badge">
-              <span style="display: flex; font-size: 14px; color: white;">{{ data.rating }} rt</span>
-            </span>
-          </div>
-          <div style="display: inline-block; margin-left: 32px;">
-            <h2 style="margin-bottom: 4px;">
-              {{ data.user.name }}
-            </h2>
-            <div style="display: flex; align-items: center; margin-bottom: 32px;">
-              <div style="display: inline-flex; align-items: center; justify-content: center; font-size: 14px; width: 16px;">
-                <font-awesome-icon icon="circle" style="color: hsla(120, 68%, 57%, 1);" />
-              </div>
-              <span style="display: inline-block; font-size: 14px; margin-left: 8px;">Online</span>
-            </div>
-            <div style="display: flex; align-items: center;">
-              <span style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px;">
-                <font-awesome-icon icon="map-marker-alt" />
+            )
+            span.level-badge-background
+            span.level-badge
+              span(style="display: flex; font-size: 12px; font-weight: bold; color: hsla(226, 68%, 87%, 1); margin-bottom: -4px;") LV.
+              span(style="display: flex; font-size: 14px; color: hsla(226, 68%, 67%, 1);" v-text="data.level")
+            span.rating-badge
+              span(style="display: flex; font-size: 14px; color: white;") {{ data.rating }} rt
+          div(style="display: inline-block; margin-left: 32px;")
+            h2(style="margin-bottom: 4px;" v-text="data.user.name")
+            div(style="display: flex; align-items: center; margin-bottom: 32px;")
+              div(style="display: inline-flex; align-items: center; justify-content: center; font-size: 14px; width: 16px;")
+                font-awesome-icon(icon="circle" style="color: hsla(120, 68%, 57%, 1);")
+              span(style="display: inline-block; font-size: 14px; margin-left: 8px;") Online
+            div(style="display: flex; align-items: center;")
+              span(style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px;")
+                font-awesome-icon(icon="map-marker-alt")
               </span>
-              <span style="font-size: 12px; margin-left: 8px;">Hong Kong</span>
-              <span style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px; margin-left: 16px;">
-                <font-awesome-icon icon="calendar" />
-              </span>
-              <span style="font-size: 12px; margin-left: 8px;">Joined August 2017</span>
-            </div>
-          </div>
-        </div>
-      </a-col>
-    </a-row>
-    <a-row :gutter="16">
-      <a-col :xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }">
-        <a-card style="background: none; margin-bottom: 16px;">
-          <p class="card-heading">
-            Bio
-          </p>
-          <p style="margin-bottom: -1rem;" v-html="bio" />
-        </a-card>
-        <a-card style="background: none; margin-bottom: 16px;">
-          <p class="card-heading">
-            Recent ranks
-          </p>
-          <div
+              span(style="font-size: 12px; margin-left: 8px;") Hong Kong
+              span(style="display: inline-flex; align-items: center; justify-content: center; font-size: 12px; width: 16px; margin-left: 16px;")
+                font-awesome-icon(icon="calendar")
+              span(style="font-size: 12px; margin-left: 8px;") Joined August 2017
+    a-row(:gutter="16")
+      a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
+        a-card(style="background: none; margin-bottom: 16px;")
+          p.card-heading Bio
+          p(style="margin-bottom: -1rem;" v-html="bio")
+        a-card(style="background: none; margin-bottom: 16px;")
+          p.card-heading Recent ranks
+          div(
             v-for="rank in data.activity.recent_ranks"
             :key="rank.timestamp"
             class="recent-rank"
             style="position: relative; margin-top: 8px;"
-          >
-            <div class="recent-rank-background" :style="{ 'background-image': 'url(' + rank.image + ')', 'background-size': 'cover' }" />
-            <div class="recent-rank-overlay" />
-            <div style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;">
-              <span
-                :style="{
-                  'font-weight': rank.rank <= 3 ? 'bold' : 'normal'
-                }"
-              ># {{ rank.rank }}</span>
-              <nuxt-link :to="'/levels/' + rank.uid" style="margin-left: 4px;">
-                {{ rank.title }}
-              </nuxt-link>
-            </div>
-            <div style="display: flex; position: relative; z-index: 2;">
-              <div style="display: flex; font-size: 12px;">
-                <difficulty-badge :value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty }" :small="true" />
-                <score-badge :value="rank.score" style="margin-left: 4px;" />
-              </div>
-              <div style="display: flex; margin-left: auto;">
-                <span class="card-secondary-text" style="font-size: 12px; padding-top: 1px;">
-                  {{ readableDate(rank.timestamp) }}
-                </span>
-              </div>
-            </div>
-          </div>
-        </a-card>
-      </a-col>
-      <a-col :xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }">
-        <a-card class="statistics-card">
-          <a-row>
-            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
-              <p class="card-heading">
-                Ranked plays
-              </p>
-              <p class="statistics-slot">
-                {{ data.activity.total_ranked_plays }}
-              </p>
-            </a-col>
-            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
-              <p class="card-heading">
-                Cleared notes
-              </p>
-              <p class="statistics-slot">
-                {{ commaSeparated(data.activity.cleared_notes) }}
-              </p>
-            </a-col>
-            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
-              <p class="card-heading">
-                Max combo
-              </p>
-              <p class="statistics-slot">
-                {{ commaSeparated(data.activity.max_combo) }}x
-              </p>
-            </a-col>
-            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
-              <p class="card-heading">
-                Average ranked accuracy
-              </p>
-              <p class="statistics-slot">
-                {{ data.activity.average_ranked_accuracy }}%
-              </p>
-            </a-col>
-            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
-              <p class="card-heading">
-                Total ranked score
-              </p>
-              <p class="statistics-slot">
-                {{ commaSeparated(data.activity.total_ranked_score) }}
-              </p>
-            </a-col>
-            <a-col :xs="{ span: 12 }" :md="{ span: 8 }">
-              <p class="card-heading">
-                Total play time
-              </p>
-              <p class="statistics-slot">
-                {{ data.activity.total_play_time }}
-              </p>
-            </a-col>
-          </a-row>
-          <a-radio-group defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;">
-            <a-radio-button value="global_ranking">Global ranking</a-radio-button>
-            <a-radio-button value="region_ranking">Region ranking</a-radio-button>
-            <a-radio-button value="rating">Rating</a-radio-button>
-            <a-radio-button value="accuracy">Average Accuracy</a-radio-button>
-          </a-radio-group>
-          <line-chart :styles="chartStyles" :chart-data="chartData" :options="chartOptions" />
-        </a-card>
-      </a-col>
-    </a-row>
-  </div>
+          )
+            .recent-rank-background(:style="{ 'background-image': 'url(' + rank.image + ')', 'background-size': 'cover' }")
+            .recent-rank-overlay
+            div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
+              span(
+                :style="{ 'font-weight': rank.rank <= 3 ? 'bold' : 'normal' }"
+              ) # {{ rank.rank }}
+              nuxt-link(:to="'/levels/' + rank.uid" style="margin-left: 4px;" v-text="rank.title")
+            div(style="display: flex; position: relative; z-index: 2;")
+              div(style="display: flex; font-size: 12px;")
+                difficulty-badge(:value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty }" :small="true")
+                score-badge(:value="rank.score" style="margin-left: 4px;")
+              div(style="display: flex; margin-left: auto;")
+                span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(rank.timestamp)")
+      a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
+        a-card.statistics-card
+          a-row
+            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+              p.card-heading Ranked plays
+              p.statistics-slot(v-text="data.activity.total_ranked_plays")
+            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+              p.card-heading Cleared notes
+              p.statistics-slot(v-text="commaSeparated(data.activity.cleared_notes)")
+            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+              p.card-heading Max combo
+              p.statistics-slot(v-text="commaSeparated(data.activity.max_combo)")
+            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+              p.card-heading Average ranked accuracy
+              p.statistics-slot(v-text="data.activity.average_ranked_accuracy + '%'")
+            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+              p.card-heading Total ranked score
+              p.statistics-slot(v-text="commaSeparated(data.activity.total_ranked_score)")
+            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+              p.card-heading Total play time
+              p.statistics-slot(v-text="data.activity.total_play_time")
+          a-radio-group(defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;")
+            a-radio-button(value="global_ranking") Global ranking
+            a-radio-button(value="region_ranking") Region ranking
+            a-radio-button(value="rating") Rating
+            a-radio-button(value="accuracy") Average Accuracy
+          line-chart(:styles="chartStyles" :chart-data="chartData" :options="chartOptions")
 </template>
 
 <script>
@@ -236,6 +169,10 @@ export default {
         height: '192px',
       }
     }
+  },
+  mounted() {
+    this.$root.$emit('background', { source: '/images/Laeti.jpg' })
+    this.updateChart('global_ranking')
   },
   methods: {
     commaSeparated(number) {
@@ -344,10 +281,6 @@ export default {
     handleChartChange(e) {
       this.updateChart(e.target.value)
     }
-  },
-  mounted() {
-    this.$root.$emit('background', { source: '/images/Laeti.jpg' })
-    this.updateChart('global_ranking')
   },
 }
 </script>

@@ -5,6 +5,7 @@
         <level-card :level="level" />
       </a-col>
     </a-row>
+    <a-pagination showSizeChanger :pageSize.sync="pageLimit" :total="500" v-model="pageNum"/>
   </div>
 </template>
 
@@ -25,6 +26,24 @@ export default {
           levels: response.data
         }
       })
+  },
+  computed: {
+    pageNum: {
+      get() {
+        return this.$route.query.page || 0
+      },
+      set(val) {
+        this.$route.query.page = val
+      }
+    },
+    pageLimit: {
+      get() {
+        return this.$route.query.limit || 30
+      },
+      set(val) {
+        this.$route.query.limit = val
+      }
+    }
   },
   mounted() {
     this.$root.$emit('background', { source: '/images/blank.png' })
