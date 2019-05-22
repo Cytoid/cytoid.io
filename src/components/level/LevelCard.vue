@@ -29,14 +29,14 @@ import PlayButton from '@/components/level/PlayButton'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 const charts = [
   {
-    name: 'Mousou',
-    type: 'extreme',
-    difficulty: 13
-  },
-  {
     name: null,
     type: 'hard',
-    difficulty: 9
+    difficulty: 12
+  },
+  {
+    name: 'Mousou',
+    type: 'extreme',
+    difficulty: 15
   }
 ]
 export default {
@@ -128,7 +128,6 @@ export default {
       this.$router.push({ name: 'levels-id', params: { id: this.level.uid } })
     },
     getOffset(el) {
-      console.log('??')
       let _x = 0
       let _y = 0
       while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {

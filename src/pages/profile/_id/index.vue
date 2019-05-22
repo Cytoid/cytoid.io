@@ -51,22 +51,22 @@
       a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
         a-card.statistics-card(style="margin-bottom: 16px;")
           a-row
-            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Ranked plays
               p.statistics-slot(v-text="data.activity.total_ranked_plays")
-            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Cleared notes
               p.statistics-slot(v-text="commaSeparated(data.activity.cleared_notes)")
-            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Max combo
               p.statistics-slot(v-text="commaSeparated(data.activity.max_combo)")
-            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Average ranked accuracy
               p.statistics-slot(v-text="data.activity.average_ranked_accuracy + '%'")
-            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total ranked score
               p.statistics-slot(v-text="commaSeparated(data.activity.total_ranked_score)")
-            a-col(:xs="{ span: 12 }" :md="{ span: 8 }")
+            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total play time
               p.statistics-slot(v-text="data.activity.total_play_time")
           a-radio-group(defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;")
@@ -179,7 +179,7 @@ export default {
       })
   },
   mounted() {
-    this.$root.$emit('background', { source: '/images/Laeti.jpg', parallaxSpeed: 0.8 })
+    this.$root.$emit('background', { source: '/images/normal.png', parallaxSpeed: 0.8 })
     this.updateChart('global_ranking')
   },
   methods: {
@@ -353,7 +353,8 @@ export default {
     }
   }
   .player-info-container {
-    margin-left: 32px;
+    margin-top: 48px;
+    margin-left: 0;
     display: inline-block;
     vertical-align: middle;
     .status {
@@ -374,6 +375,12 @@ export default {
           margin-right: 0.5rem;
         }
       }
+    }
+  }
+  @media(min-width: @screen-md) {
+    .player-info-container {
+      margin-top: 0;
+      margin-left: 32px;
     }
   }
 </style>

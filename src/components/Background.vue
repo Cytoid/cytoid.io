@@ -3,7 +3,7 @@
     <div v-parallax.absY="parallaxSpeed" class="background-wrap">
       <img ref="backgroundImage" :src="source" class="background-image">
     </div>
-    <div class="background-overlay" />
+    <div ref="backgroundOverlay" class="background-overlay" />
     <div class="background-fade-out" />
     <div class="background-block" />
   </div>
@@ -25,6 +25,9 @@ export default {
       this.$refs.backgroundImage.style.animation = 'none'
       this.$refs.backgroundImage.offsetHeight.toString() // Trigger reflow
       this.$refs.backgroundImage.style.animation = null
+      this.$refs.backgroundOverlay.style.animation = 'none'
+      this.$refs.backgroundOverlay.offsetHeight.toString() // Trigger reflow
+      this.$refs.backgroundOverlay.style.animation = null
     })
   }
 }
@@ -63,17 +66,20 @@ export default {
 
 .background-overlay {
   opacity: 1;
-  background: hsla(226, 68%, 2%, 0.75);
+  background: hsla(226, 68%, 2%, 0.6);
   width: 100%;
   height: 125%;
   z-index: -256;
   position: absolute;
-  animation: background-overlay 2s 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: background-overlay 1.6s 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 @keyframes background-overlay {
   0% {
-    opacity: 0.3;
+    opacity: 0.1;
+  }
+  33% {
+    opacity: 0.35;
   }
   100% {
     opacity: 1;
