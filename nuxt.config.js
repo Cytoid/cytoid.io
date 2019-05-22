@@ -40,6 +40,7 @@ module.exports = {
   */
   css: [
     '~assets/styles/index.less',
+    '~assets/styles/bulma.scss',
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
@@ -49,6 +50,9 @@ module.exports = {
   styleResources: {
     less: [
       '~assets/styles/theme.less',
+    ],
+    scss: [
+      '~assets/styles/bulma-theme.scss',
     ]
   },
 
@@ -96,6 +100,10 @@ module.exports = {
         tokenType: 'bearer',
       }
     }
+  },
+  router: {
+    linkExactActiveClass: 'is-exact-active',
+    linkActiveClass: 'is-active',
   },
   /*
   ** Build configuration

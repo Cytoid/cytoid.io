@@ -1,29 +1,25 @@
 <template lang="pug">
   div
     background
-    header.cy-navbar
-      cy-menu
-        cy-menu-link-item(to="/" exact) Home
-        cy-menu-link-item(to="/levels") Levels
-      .cy-navbar-end
-        a-popover(
-          v-if="$auth.loggedIn"
-          trigger="click"
-          v-model="userPopoverVisible"
-          placement="bottomLeft"
-        )
-          div(slot="content") This is the content
-          a-button(type="primary" shape="circle" icon="user")
-        nuxt-link(v-else to="/session/signin")
-          a-button(type="primary") Sign In
+    nav-bar.is-transparent
+      nuxt-link.navbar-item(slot="brand" to="/" exact) Cytoid
+      template(slot="start")
+        nuxt-link.navbar-item(to="/levels") Levels
+        nuxt-link.navbar-item(to="/collections") Collections
+      template(slot="append")
+        nuxt-link.navbar-item(v-if="$auth.loggedIn" to="/me") Profile
+        .navbar-item(v-else)
+          nuxt-link.button.is-primary(to="/session/signin") Sign In
     nuxt
 </template>
 
 <script>
 import Background from '@/components/Background'
+import NavBar from '@/components/NavBar'
 export default {
   components: {
-    Background
+    Background,
+    NavBar,
   },
   data() {
     return {
@@ -32,20 +28,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-.cy-navbar {
-  ul.ant-menu-root {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  display: flex;
-  .cy-navbar-end {
-    justify-content: flex-end;
-    flex-grow: 3;
-    display: flex;
-    align-items: center;
-    padding-right: 2rem;
-  }
-}
-</style>
