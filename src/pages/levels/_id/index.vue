@@ -6,7 +6,13 @@
       <difficulty-badge v-for="chart in level.charts" :key="chart.id" :value="chart" style="margin-right: 8px;" />
     </div>
     <div style="margin-bottom: 32px;">
-      <a-button type="primary" icon="download" size="large" class="download-button">
+      <a-button
+        type="primary"
+        icon="download"
+        size="large"
+        class="download-button"
+        @click="download"
+      >
         Download (10.2MB)
       </a-button>
     </div>
@@ -211,8 +217,8 @@ export default {
   }),
   computed: {
     levelDescription() {
-      return marked(this.level.description || 'The author was too lazy to write some descriptions.')
-    }
+      return marked(this.level.description || 'The author was too lazy to write any descriptions.')
+    },
   },
   asyncData({ $axios, params }) {
     return Promise.all([
@@ -278,6 +284,13 @@ export default {
         this.rankings_pagination = pagination
       })
     },
+    download() {
+      if (this.$auth.loggedIn) {
+        window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
+      } else {
+        this.$router.push('/session/signin')
+      }
+    }
   }
 }
 </script>
