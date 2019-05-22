@@ -23,7 +23,7 @@
             a-rate(
               :default-value="(ratings.rating || ratings.average) * 0.5"
               allow-half
-              :disabled="!ratings.rating"
+              :disabled="ratings.rating === undefined"
               @change="rate"
             )
             span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
