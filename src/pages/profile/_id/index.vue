@@ -159,14 +159,6 @@ export default {
     chartData: null,
     chartOptions: null,
   }),
-  asyncData({ $axios }) {
-    return $axios.get('/levels')
-      .then((response) => {
-        return {
-          levels: response.data
-        }
-      })
-  },
   computed: {
     bio() {
       return marked(this.data.profile.bio || 'There is no bio yet.')
@@ -177,6 +169,14 @@ export default {
         height: '192px',
       }
     }
+  },
+  asyncData({ $axios }) {
+    return $axios.get('/levels')
+      .then((response) => {
+        return {
+          levels: response.data
+        }
+      })
   },
   mounted() {
     this.$root.$emit('background', { source: '/images/Laeti.jpg', parallaxSpeed: 0.8 })

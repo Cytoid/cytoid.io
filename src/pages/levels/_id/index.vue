@@ -1,55 +1,40 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <div class="container" style="margin-top: 256px;">
-    <h1 style="margin-bottom: 0;" v-text="level.metadata.title" />
-    <p style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name" />
-    <div style="margin-bottom: 48px;">
-      <difficulty-badge v-for="chart in level.charts" :key="chart.id" :value="chart" style="margin-right: 8px;" />
-    </div>
-    <div style="margin-bottom: 32px;">
-      <a-button
+<template lang="pug">
+  .container(style="margin-top: 256px;")
+    h1(style="margin-bottom: 0;" v-text="level.metadata.title")
+    p(style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name")
+    div(style="margin-bottom: 48px;")
+      difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" style="margin-right: 8px;")
+    div(style="margin-bottom: 32px;")
+      a-button(
         type="primary"
         icon="download"
         size="large"
         class="download-button"
         @click="download"
-      >
-        Download (10.2MB)
-      </a-button>
-    </div>
-    <a-row :gutter="16">
-      <a-col :xs="24" :lg="8">
-        <a-card style="margin-bottom: 16px;">
-          <player-avatar style="margin-bottom: 16px;" :player="level.owner" />
-          <div v-html="levelDescription" />
-          <p class="card-heading">Rating</p>
-          <div style="margin-bottom: 16px;">
-            <a-rate
+      )
+        |  Download (10.2MB)
+    a-row(:gutter="16")
+      a-col(:xs="24" :lg="8")
+        a-card(style="margin-bottom: 16px;")
+          player-avatar(style="margin-bottom: 16px;" :player="level.owner")
+          div(v-html="levelDescription")
+          p(class="card-heading") Rating
+          div(style="margin-bottom: 16px;")
+            a-rate(
               :default-value="(ratings.rating || ratings.average) * 0.5"
               allow-half
               :disabled="!ratings.rating"
               @change="rate"
-            />
-            <span class="card-secondary-text">{{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})</span>
-          </div>
-          <p class="card-heading">
-            Tags
-          </p>
-          <div style="margin-bottom: 16px;">
-            <a-tag v-for="tag in level.tags" :key="tag">
-              {{ tag }}
-            </a-tag>
-          </div>
-          <p class="card-heading">
-            Last updated
-          </p>
-          <div class="card-secondary-text" style="margin-bottom: 0px;">
-            {{ readableDate(level.modificationDate) }}
-          </div>
-        </a-card>
-      </a-col>
-      <a-col :xs="24" :lg="16">
-        <a-card style="margin-bottom: 16px;">
-          <a-table
+            )
+            span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
+          .card-heading Tags
+          div(style="margin-bottom: 16px;")
+            a-tag(v-for="tag in level.tags" :key="tag") {{ tag }}
+          .card-heading Last updated
+          .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(level.modificationDate) }}
+      a-col(:xs="24" :lg="16")
+        a-card(style="margin-bottom: 16px;")
+          a-table(
             :columns="columns"
             :row-key="record => record.id"
             :data-source="rankings"
@@ -58,46 +43,24 @@
             :scroll="{ x: 800 }"
             :rowClassName="(record, index) => rowClass(record, index)"
             @change="handleTableChange"
-          >
-            <template v-slot:rank="ranking">
-              # {{ ranking }}
-            </template>
-            <template v-slot:owner="owner">
-              <div class="ranking-player-avatar">
-                <nuxt-link to="/profile" style="display: flex; align-items: center;">
-                  <a-avatar :size="24" src="https://cytoid.io/api/avatar.php?size=64&id=tigerhix" />
-                  <span v-text="owner.name || owner.uid" class="ranking-player-avatar-name"></span>
-                </nuxt-link>
-              </div>
-            </template>
-            <template v-slot:score="score">
-              <div style="display: flex; align-items: center;">
-                <score-badge :value="score" />
-                <span style="margin-left: 4px;" v-text="score" />
-              </div>
-            </template>
-            <template v-slot:accuracy="accuracy">
-              {{ (Math.floor(accuracy * 100 * 100) / 100) + '%' }}
-            </template>
-            <template v-slot:maxcombo="maxCombo">
-              {{ maxCombo ? (maxCombo + 'x') : 'Unknown' }}
-            </template>
-            <template v-slot:mods="mods">
-              <span v-if="mods.length === 0 || mods[0] === ''">
-                N/A
-              </span>
-              <span v-if="mods.length > 0 && mods[0] !== ''">
-                <img v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;" />
-              </span>
-            </template>
-            <template v-slot:achieved="date" style="font-size: 12px;">
-              {{ readableDate(date) }}
-            </template>
-          </a-table>
-        </a-card>
-      </a-col>
-    </a-row>
-  </div>
+          )
+            template(v-slot:rank="ranking") # {{ ranking }}
+            template(v-slot:owner="owner")
+              .ranking-player-avatar
+                nuxt-link(to="/profile" style="display: flex; align-items: center;")
+                  a-avatar(:size="24" src="https://cytoid.io/api/avatar.php?size=64&id=tigerhix")
+                  span.ranking-player-avatar-name(v-text="owner.name || owner.uid")
+            template(v-slot:score="score")
+              div(style="display: flex; align-items: center;")
+                score-badge(:value="score")
+                span(style="margin-left: 4px;" v-text="score")
+            template(v-slot:accuracy="accuracy") {{ (Math.floor(accuracy * 100 * 100) / 100) + '%' }}
+            template(v-slot:maxcombo="maxCombo") {{ maxCombo ? (maxCombo + 'x') : 'Unknown' }}
+            template(v-slot:mods="mods")
+              span(v-if="mods.length === 0 || mods[0] === ''") N/A
+              span(v-else)
+                img(v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;")
+            template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date) }}
 </template>
 
 <script>
