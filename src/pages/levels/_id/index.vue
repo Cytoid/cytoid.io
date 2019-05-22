@@ -14,7 +14,7 @@
       <a-col :xs="24" :lg="8">
         <a-card style="margin-bottom: 16px;">
           <player-avatar style="margin-bottom: 16px;" :player="level.owner" />
-          <p v-html="levelDescription" />
+          <div v-html="levelDescription" />
           <p class="card-heading">Rating</p>
           <div style="margin-bottom: 16px;">
             <a-rate
