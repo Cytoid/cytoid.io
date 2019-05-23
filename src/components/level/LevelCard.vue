@@ -21,24 +21,12 @@
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
         .card-top
-          difficulty-badge(v-for="chart in charts" :key="getRandomInt()" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
+          difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
 </template>
 
 <script>
 import PlayButton from '@/components/level/PlayButton'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
-const charts = [
-  {
-    name: null,
-    type: 'hard',
-    difficulty: 12
-  },
-  {
-    name: 'Mousou',
-    type: 'extreme',
-    difficulty: 15
-  }
-]
 export default {
   components: {
     DifficultyBadge,
@@ -55,7 +43,6 @@ export default {
     mouseY: null,
     offsetTop: null,
     offsetLeft: null,
-    charts
   }),
   computed: {
     mousePX() {
@@ -98,9 +85,6 @@ export default {
     }
   },
   methods: {
-    getRandomInt() {
-      return Math.random() * 1000
-    },
     handleMouseMove(e) {
       const target = this.$refs.card
       if (!target) {
