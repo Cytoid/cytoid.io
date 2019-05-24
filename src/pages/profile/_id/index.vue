@@ -4,14 +4,12 @@
       a-col(:span="24")
         div(style="padding-left: 32px;")
           player-info-avatar(
-            :exp="data.exp"
-            :prevExp="data.prev_level_exp"
-            :nextExp="data.next_level_exp"
-            :level="data.level"
-            :rating="data.rating"
+            :exp="profile.exp"
+            :avatar="profile.user.avatarURL"
+            :rating="profile.rating || 0"
           )
           .player-info-container
-            h2.username(v-text="data.user.name")
+            h2.username(v-text="profile.user.name || profile.user.uid")
             p.status
               font-awesome-icon.status-icon(icon="circle" style="color: hsla(120, 68%, 57%, 1);")
               | Online
@@ -21,7 +19,7 @@
                 | Hong Kong
               span
                 font-awesome-icon(icon="calendar")
-                | Joined August 2017
+                | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card(style="background: none; margin-bottom: 16px;")
@@ -30,51 +28,55 @@
         a-card(style="background: none; margin-bottom: 16px;")
           p.card-heading Recent ranks
           div(
-            v-for="rank in data.activity.recent_ranks"
-            :key="rank.timestamp"
+            v-for="rank in profile.recents.ranks"
+            :key="rank.uid"
             class="recent-rank"
             style="position: relative; margin-top: 8px;"
           )
-            .recent-rank-background(:style="{ 'background-image': 'url(' + rank.image + ')', 'background-size': 'cover' }")
+            .recent-rank-background(
+              v-if="rank.backgroundURL"
+              :style="{ 'background-image': 'url(' + rank.backgroundURL + ')', 'background-size': 'cover' }"
+            )
             .recent-rank-overlay
             div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
               span(
                 :style="{ 'font-weight': rank.rank <= 3 ? 'bold' : 'normal' }"
               ) # {{ rank.rank }}
-              nuxt-link(:to="'/levels/' + rank.uid" style="margin-left: 4px;" v-text="rank.title")
+              nuxt-link(:to="{ name: 'levels-id', params: { id: rank.uid }}" style="margin-left: 4px;" v-text="rank.title")
             div(style="display: flex; position: relative; z-index: 2;")
               div(style="display: flex; font-size: 12px;")
                 difficulty-badge(:value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty }" :small="true")
                 score-badge(:value="rank.score" style="margin-left: 4px;")
               div(style="display: flex; margin-left: auto;")
-                span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(rank.timestamp)")
+                span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(rank.date).fromNow()")
       a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
         a-card.statistics-card(style="margin-bottom: 16px;")
           a-row
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Ranked plays
-              p.statistics-slot(v-text="data.activity.total_ranked_plays")
+              p.statistics-slot(v-text="profile.activities.total_ranked_plays")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Cleared notes
-              p.statistics-slot(v-text="commaSeparated(data.activity.cleared_notes)")
+              p.statistics-slot(v-text="commaSeparated(profile.activities.cleared_notes)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Max combo
-              p.statistics-slot(v-text="commaSeparated(data.activity.max_combo)")
+              p.statistics-slot(v-text="commaSeparated(profile.activities.max_combo)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Average ranked accuracy
-              p.statistics-slot(v-text="data.activity.average_ranked_accuracy + '%'")
+              p.statistics-slot(v-text="Math.round(profile.activities.average_ranked_accuracy*100) + '%'")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total ranked score
-              p.statistics-slot(v-text="commaSeparated(data.activity.total_ranked_score)")
+              p.statistics-slot(v-text="commaSeparated(profile.activities.total_ranked_score)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total play time
-              p.statistics-slot(v-text="data.activity.total_play_time")
+              p.statistics-slot(v-text="profile.activities.total_play_time")
           a-radio-group(defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;")
             a-radio-button(value="global_ranking") Global ranking
             a-radio-button(value="region_ranking") Region ranking
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
-          line-chart(:styles="chartStyles" :chart-data="chartData" :options="chartOptions")
+          line-chart(v-if="false" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
+          // Disable the line chart just for now.
         a-tabs(defaultActiveKey="featured_levels" :size="sm")
           a-tab-pane(tab="Featured Levels" key="featured_levels")
             a-row(type="flex" justify="center")
@@ -98,70 +100,13 @@ export default {
   components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar, LevelCard },
   data: () => ({
     levels: [],
-    data: {
-      user: {
-        name: 'tigerhix',
-        uid: 'tigerhix',
-        birthday: 911508473,
-        last_login: 1557866873,
-        registration_date: 1502743673,
-        region: 'hk',
-      },
-      profile: {
-        badges: ['developer'],
-        bio: 'I made this game. Please donate.',
-      },
-      rating: 11.92,
-      level: 110,
-      exp: 1770057,
-      prev_level_exp: 1750000,
-      next_level_exp: 1802797,
-      grades: {
-        'max': 1,
-        'sss': 78,
-        'ss': 143,
-        's': 87,
-        'aa': 327,
-        'a': 145,
-      },
-      activity: {
-        total_ranked_plays: 2396,
-        cleared_notes: 2175411,
-        max_combo: 3122,
-        average_ranked_accuracy: 97.69,
-        total_ranked_score: 2311154638,
-        total_play_time: '32d 12h 13m',
-        recent_ranks: [
-          {
-            rank: 1,
-            type: 'easy',
-            name: 'Beginner',
-            difficulty: 1,
-            score: 999700,
-            title: 'First Step',
-            uid: 'anthony.lena_fs',
-            image: 'https://assets.cytoid.io/levels/bundles/itZJhychrDVDEofa9lwUeBZs5nql4dn81kKciT/bg.PNG',
-            timestamp: 1558018259000,
-          },
-          {
-            rank: 40,
-            type: 'extreme',
-            difficulty: 15,
-            score: 852300,
-            title: 'Show me your Rage',
-            uid: 'flina.showmeyourdespair',
-            image: 'https://assets.cytoid.io/levels/bundles/GvQLiaCpd1335NxRAE6HRG1px1ZPHJuuQBAZNUlb/judgment.png',
-            timestamp: 1557038259000,
-          },
-        ],
-      },
-    },
+    profile: null,
     chartData: null,
     chartOptions: null,
   }),
   computed: {
     bio() {
-      return marked(this.data.profile.bio || 'There is no bio yet.')
+      return marked(this.profile.profile.bio || 'There is no bio yet.')
     },
     chartStyles() {
       return {
@@ -170,24 +115,26 @@ export default {
       }
     }
   },
-  asyncData({ $axios }) {
-    return $axios.get('/levels')
-      .then((response) => {
-        return {
-          levels: response.data
-        }
-      })
+  asyncData({ $axios, params }) {
+    return $axios.get('/profile/' + params.id)
+      .then(res => ({
+        profile: res.data
+      }))
   },
   mounted() {
     this.$root.$emit('background', { source: '/images/normal.png', parallaxSpeed: 0.8 })
     this.updateChart('global_ranking')
+    console.log(this.profile)
   },
   methods: {
     commaSeparated(number) {
-      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      if (number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      }
+      return '0'
     },
     readableDate(date) {
-      return moment(date).fromNow()
+      return moment(date)
     },
     updateChart(type) {
       const options = {
