@@ -1,9 +1,9 @@
 <template functional lang="pug">
 .player-info-avatar
-  a-avatar.level-avatar(src="https://cytoid.io/api/avatar.php?id=tigerhix&size=512")
+  a-avatar.level-avatar(:src="props.avatar")
   a-progress.level-badge-progress(
     type="dashboard"
-    :percent="((props.exp - props.prev_level_exp) / (props.next_level_exp - props.prev_level_exp)) * 100"
+    :percent="((props.exp.totalExp - 0) / (props.exp.nextLevelExp - props.exp.totalExp)) * 100"
     :format="percent => ''"
     :width="152"
     :stroke-width="4"
@@ -11,7 +11,7 @@
   )
   .level-badge
     .lv LV.
-    .num(v-text="props.level")
+    .num(v-text="props.exp.currentLevel")
   .rating-badge {{ props.rating }} rt
 </template>
 
@@ -19,25 +19,21 @@
 export default {
   props: {
     exp: {
-      type: Number,
+      type: Object,
       required: true,
     },
-    prevExp: {
-      type: Number,
-      required: true,
-    },
-    nextExp: {
-      type: Number,
-      required: true,
-    },
-    level: {
-      type: Number,
-      required: true,
+    avatar: {
+      type: String,
+      required: false,
+      default: '' // TODO: default avatar image
     },
     rating: {
       type: Number,
-      required: true
-    },
+      required: true,
+    }
+  },
+  mounted() {
+    console.log(this.avatar)
   }
 }
 </script>
