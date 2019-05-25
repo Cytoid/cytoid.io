@@ -33,11 +33,13 @@
 @table-padding-horizontal: 4px;
 @table-row-hover-bg: rgba(0, 0, 0, 0.2);
 
-@ele1: 0 1px 3px hsla(0, 0%, 0%, .12), 0 1px 2px hsla(0, 0%, 0%, .24);
-@ele2: 0 3px 6px hsla(0, 0%, 0%, .15), 0 2px 4px hsla(0, 0%, 0%, .12);
-@ele3: 0 10px 20px hsla(0, 0%, 0%, .15), 0 3px 6px hsla(0, 0%, 0%, .10);
-@ele4: 0 15px 25px hsla(0, 0%, 0%, .15), 0 5px 10px hsla(0, 0%, 0%, .5);
-@ele5: 0 20px 40px hsla(0, 0%, 0%, .2);
+@ele1: 0 1px 3px hsla(0, 0%, 0%, .08), 0 1px 2px hsla(0, 0%, 0%, .16);
+@ele2: 0 3px 6px hsla(0, 0%, 0%, .10), 0 2px 4px hsla(0, 0%, 0%, .08);
+@ele3: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
+@ele4: 0 15px 25px hsla(0, 0%, 0%, .10), 0 5px 10px hsla(0, 0%, 0%, .33);
+@ele5: 0 20px 40px hsla(0, 0%, 0%, .15);
+
+@text-ele: 0px 2px 6px rgba(0, 0, 0, 0.3);
 
 @hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
 @returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -48,6 +50,7 @@
   border-radius: 4px;
   border: none;
   background: hsla(226, 15%, 19%, 1);
+  overflow-wrap: break-word;
 }
 
 .ant-form-extra {
@@ -162,6 +165,27 @@
   margin-bottom: 8px;
 }
 
+.ant-tabs-nav .ant-tabs-tab {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  color: hsl(226, 68%, 67%);
+  text-shadow: @text-ele;
+}
+
+.ant-tabs-bar {
+  border-bottom: none;
+}
+
+.ant-tabs-ink-bar {
+  background: hsl(226, 68%, 67%);
+}
+
 // Custom styles
 
 body {
@@ -206,6 +230,10 @@ h2 {
 
 .ele5 {
   box-shadow: @ele5;
+}
+
+.text-ele {
+  text-shadow: @text-ele;
 }
 
 .unselectable {

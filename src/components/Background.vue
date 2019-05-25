@@ -66,7 +66,7 @@ export default {
 
 .background-overlay {
   opacity: 1;
-  background: hsla(226, 68%, 2%, 0.6);
+  background: hsla(226, 68%, 2%, 0.4);
   width: 100%;
   height: 125%;
   z-index: -256;
@@ -76,10 +76,7 @@ export default {
 
 @keyframes background-overlay {
   0% {
-    opacity: 0.1;
-  }
-  33% {
-    opacity: 0.35;
+    opacity: 0.4;
   }
   100% {
     opacity: 1;

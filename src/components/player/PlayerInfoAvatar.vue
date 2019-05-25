@@ -1,6 +1,6 @@
 <template functional lang="pug">
 .player-info-avatar
-  a-avatar.level-avatar(:src="props.avatar")
+  a-avatar.level-avatar(class="ele3" :src="props.avatar")
   a-progress.level-badge-progress(
     type="dashboard"
     :percent="((props.exp.totalExp - 0) / (props.exp.nextLevelExp - props.exp.totalExp)) * 100"
@@ -9,10 +9,10 @@
     :stroke-width="4"
     :stroke-color="'hsla(226, 68%, 67%, 1)'"
   )
-  .level-badge
+  .level-badge(class="ele3")
     .lv LV.
     .num(v-text="props.exp.currentLevel")
-  .rating-badge {{ props.rating }} rt
+  .rating-badge(class="ele3") {{ Math.floor(props.rating * 100) / 100 }} rt
 </template>
 
 <script>
