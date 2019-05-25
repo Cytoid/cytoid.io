@@ -1,21 +1,21 @@
 <template lang="pug">
   .container(style="margin-top: 256px;")
-    h1(style="margin-bottom: 0;" v-text="level.metadata.title")
-    p(style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name")
+    h1(class="text-ele" style="margin-bottom: 0;" v-text="level.metadata.title")
+    p(class="text-ele" style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name")
     div(style="margin-bottom: 48px;")
-      difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" style="margin-right: 8px;")
+      difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" class="ele3" style="margin-right: 8px;")
     div(style="margin-bottom: 32px;")
       a-button(
         type="primary"
         icon="download"
         size="large"
-        class="download-button"
+        class="download-button ele3"
         @click="download"
       )
         |  Download (10.2MB)
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
-        a-card(style="margin-bottom: 16px;")
+        a-card(class="ele2" style="margin-bottom: 16px;")
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           div(v-html="levelDescription")
           p(class="card-heading") Rating
@@ -33,7 +33,7 @@
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(level.modificationDate) }}
       a-col(:xs="24" :lg="16")
-        a-card(style="margin-bottom: 16px;")
+        a-card(class="ele2" style="margin-bottom: 16px;")
           a-table(
             :columns="columns"
             :row-key="record => record.id"

@@ -10,18 +10,18 @@
     )
       .card(:style="cardStyle")
         .card-bg(:style="[cardBgTransform, cardBgImage]")
-        .card-bottom
-          h1(style="margin-bottom: 0px;" v-text="level.title")
-          p(v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="margin-bottom: 0px;")
+        .card-bottom(style="padding-top: 48px;")
+          h1(class="text-ele" style="margin-bottom: 0px;" v-text="level.title")
+          p(class="text-ele" v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="margin-bottom: 0px;")
           a-row(type="flex" align="middle")
             a-col(:span="20" style="display: flex; align-items: center;")
               span(style="display: flex; align-items: center;")
                 a-avatar(:size="24" icon="user" style="margin-right: 8px;")
-                span(v-text="level.metadata.charter.name")
+                span(class="text-ele" v-text="level.metadata.charter.name")
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
         .card-top
-          difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
+          difficulty-badge(class="ele3" v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
 </template>
 
 <script>
@@ -191,7 +191,7 @@ p {
 }
 
 .card-bg {
-  opacity: 0.5;
+  opacity: 0.6;
   position: relative;
   top: -@card-background-gutter;
   left: -@card-background-gutter;

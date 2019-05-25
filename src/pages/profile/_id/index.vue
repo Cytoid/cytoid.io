@@ -9,11 +9,11 @@
             :rating="profile.rating || 0"
           )
           .player-info-container
-            h2.username(v-text="profile.user.name || profile.user.uid")
-            p.status
+            h2.username(class="text-ele" v-text="profile.user.name || profile.user.uid")
+            p.status(class="text-ele")
               font-awesome-icon.status-icon(icon="circle" style="color: hsla(120, 68%, 57%, 1);")
               | Online
-            p.details
+            p.details(class="text-ele")
               span
                 font-awesome-icon(icon="map-marker-alt")
                 | Hong Kong
@@ -24,7 +24,7 @@
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card(style="background: none; margin-bottom: 16px;")
           p.card-heading Bio
-          p(style="margin-bottom: -1rem;" v-html="bio")
+          p(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
         a-card(style="background: none; margin-bottom: 16px;")
           p.card-heading Recent ranks
           div(
@@ -34,6 +34,7 @@
             style="position: relative; margin-top: 8px;"
           )
             .recent-rank-background(
+              class="ele3"
               v-if="rank.backgroundURL"
               :style="{ 'background-image': 'url(' + rank.backgroundURL + ')', 'background-size': 'cover' }"
             )
@@ -50,7 +51,7 @@
               div(style="display: flex; margin-left: auto;")
                 span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(rank.date).fromNow()")
       a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
-        a-card.statistics-card(style="margin-bottom: 16px;")
+        a-card.statistics-card(class="ele3" style="margin-bottom: 16px;")
           a-row
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Ranked plays
@@ -324,7 +325,7 @@ export default {
       }
     }
   }
-  @media(min-width: @screen-md) {
+  @media(min-width: 523px) {
     .player-info-container {
       margin-top: 0;
       margin-left: 32px;
