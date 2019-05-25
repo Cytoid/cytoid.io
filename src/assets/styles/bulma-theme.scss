@@ -19,3 +19,6 @@ $navbar-item-color: $grey-light;
 $navbar-item-active-color: $white;
 $navbar-item-hover-color: $grey-lighter;
 $navbar-burger-color: $grey-light;
+.navbar-item.is-active {
+  font-weight: bold;
+}
