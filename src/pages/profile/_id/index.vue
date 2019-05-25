@@ -24,7 +24,7 @@
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card(style="background: none; margin-bottom: 16px;")
           p.card-heading Bio
-          p(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
+          div(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
         a-card(style="background: none; margin-bottom: 16px;")
           p.card-heading Recent ranks
           div(
@@ -78,7 +78,7 @@
             a-radio-button(value="accuracy") Average Accuracy
           line-chart(v-if="false" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
           // Disable the line chart just for now.
-        a-tabs(defaultActiveKey="featured_levels" :size="sm")
+        a-tabs(defaultActiveKey="featured_levels" size="small")
           a-tab-pane(tab="Featured Levels" key="featured_levels")
             a-row(type="flex" justify="center")
               a-col(:xs="{ span: 24 }" :md="{ span: 12 }" v-for="level in levels" :key="level.id")
