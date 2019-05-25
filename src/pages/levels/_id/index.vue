@@ -1,7 +1,7 @@
 <template lang="pug">
   .container(style="margin-top: 256px;")
-    h1(class="text-ele" style="margin-bottom: 0;" v-text="level.metadata.title")
-    p(class="text-ele" style="font-size: 16px; margin-bottom: 16px;" v-text="level.metadata.artist.name")
+    h1(class="text-ele" style="margin-bottom: 16px; line-height: 1.0;" v-text="level.metadata.title")
+    p(class="text-ele" style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;" v-text="level.metadata.artist.name")
     div(style="margin-bottom: 48px;")
       difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" class="ele3" style="margin-right: 8px;")
     div(style="margin-bottom: 32px;")
@@ -17,7 +17,7 @@
       a-col(:xs="24" :lg="8")
         a-card(class="ele2" style="margin-bottom: 16px;")
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
-          div(v-html="levelDescription")
+          div(style="overflow: auto;" v-html="levelDescription")
           p(class="card-heading") Rating
           div(style="margin-bottom: 16px;")
             a-rate(
@@ -44,7 +44,7 @@
             :rowClassName="(record, index) => rowClass(record, index)"
             @change="handleTableChange"
           )
-            template(v-slot:rank="ranking") # {{ ranking }}
+            template(v-slot:rank="ranking") {{ '#' + ranking }}
             template(v-slot:owner="owner")
               .ranking-player-avatar
                 nuxt-link(to="/profile" style="display: flex; align-items: center;")

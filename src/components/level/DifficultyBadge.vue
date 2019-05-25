@@ -73,12 +73,12 @@ export default {
     font-weight: 500;
     margin-left: 16px;
     margin-right: 12px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
   }
   .level {
     margin-left: auto;
     margin-right: 16px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 
@@ -91,12 +91,12 @@ export default {
     font-weight: unset;
     margin-left: 8px;
     margin-right: 4px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
   }
   .level {
     margin-left: unset;
     margin-right: 8px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 

@@ -11,13 +11,14 @@
       .card(:style="cardStyle")
         .card-bg(:style="[cardBgTransform, cardBgImage]")
         .card-bottom(style="padding-top: 48px;")
-          h1(class="text-ele" style="margin-bottom: 0px;" v-text="level.title")
-          p(class="text-ele" v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="margin-bottom: 0px;")
-          a-row(type="flex" align="middle")
+          p(class="text-ele" style="color: rgba(255, 255, 255, 0.7); font-size: 12px; margin-bottom: 8px; line-height: 1.1;" v-text="level.metadata.artist.name")
+          h1(class="text-ele" style="margin-left: -1px; margin-bottom: 4px; line-height: 1.1;" v-text="level.title")
+          p(class="text-ele" v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="color: rgba(255, 255, 255, 0.7); margin-bottom: 0px;")
+          a-row(type="flex" align="middle" style="margin-top: 8px;")
             a-col(:span="20" style="display: flex; align-items: center;")
               span(style="display: flex; align-items: center;")
                 a-avatar(:size="24" icon="user" style="margin-right: 8px;")
-                span(class="text-ele" v-text="level.metadata.charter.name")
+                span(class="text-ele" v-text="level.owner.name || level.owner.uid")
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
         .card-top
@@ -191,7 +192,7 @@ p {
 }
 
 .card-bg {
-  opacity: 0.6;
+  opacity: 0.5;
   position: relative;
   top: -@card-background-gutter;
   left: -@card-background-gutter;

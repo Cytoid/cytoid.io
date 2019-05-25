@@ -42,7 +42,7 @@
             div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
               span(
                 :style="{ 'font-weight': rank.rank <= 3 ? 'bold' : 'normal' }"
-              ) # {{ rank.rank }}
+              ) {{ '#' + rank.rank }}
               nuxt-link(:to="{ name: 'levels-id', params: { id: rank.uid }}" style="margin-left: 4px;" v-text="rank.title")
             div(style="display: flex; position: relative; z-index: 2;")
               div(style="display: flex; font-size: 12px;")
@@ -123,7 +123,7 @@ export default {
       }))
   },
   mounted() {
-    this.$root.$emit('background', { source: '/images/normal.png', parallaxSpeed: 0.8 })
+    this.$root.$emit('background', { source: '/images/bright.png', parallaxSpeed: 0.8 })
     this.updateChart('global_ranking')
     console.log(this.profile)
   },
@@ -262,7 +262,7 @@ export default {
       border-left: 4px solid @theme6;
     }
     &:hover .recent-rank-background {
-      transform: scale(1.05, 1.05);
+      transform: scale(1.2, 1.2);
     }
   }
   .recent-rank-background {
