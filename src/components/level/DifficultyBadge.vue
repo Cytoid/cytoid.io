@@ -1,10 +1,8 @@
 <template lang="pug">
   a-popover(placement="top" title="")
-    p(slot="content" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") 1560 Notes
-    div(v-if="!ball" :class="badgeClass")
-      span.title(v-text="value.name || convertedDifficultyName(value.type)")
-      span.level {{convertedDifficultyLevel}}
-    div(v-if="ball" :class="badgeBallClass")
+    p(slot="content" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") {{value.notesCount}} Notes
+    div(:class="badgeClass")
+      span.title(v-if="!ball" v-text="value.name || convertedDifficultyName(value.type)")
       span.level {{convertedDifficultyLevel}}
 </template>
 
@@ -27,16 +25,8 @@ export default {
   computed: {
     badgeClass() {
       return {
-        'badge': true,
-        'badge-small': this.small,
-        'badge-easy': this.value.type === 'easy',
-        'badge-hard': this.value.type === 'hard',
-        'badge-extreme': this.value.type === 'extreme',
-      }
-    },
-    badgeBallClass() {
-      return {
-        'badge-ball': true,
+        'badge': !this.ball,
+        'badge-ball': this.ball,
         'badge-small': this.small,
         'badge-easy': this.value.type === 'easy',
         'badge-hard': this.value.type === 'hard',
