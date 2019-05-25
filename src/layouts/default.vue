@@ -11,6 +11,16 @@
         .navbar-item(v-else)
           nuxt-link.button.is-primary(to="/session/signin") Sign In
     nuxt
+    footer.footer.has-text-centered
+      ul
+        li Terms & Services
+        li Status
+        li: a(href="https://github.com/Cytoid/" target="_blank") GitHub
+        li Glory Wall
+      p.
+        #[strong Cytoid] built by
+        #[strong Tiger Tang] and #[strong Zhixing Zhang].
+        All rights reserved.
 </template>
 
 <script>
@@ -28,3 +38,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.footer ul li {
+  display: inline;
+  &:not(:first-child)::before {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    content: '|';
+  }
+}
+</style>
