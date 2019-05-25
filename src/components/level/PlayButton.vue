@@ -1,7 +1,7 @@
 <template>
   <button class="play-button" @click.stop="play">
     <a-icon :type="playing ? 'pause' : 'caret-right'" class="icon" />
-    <a-progress v-if="playing" type="circle" :percent="progress * 100" :show-info="false" :width="60" />
+    <a-progress v-if="playing" type="circle" :percent="progress * 100" :show-info="false" :width="48" />
     <audio ref="audio" :src="src" />
   </button>
 </template>
@@ -66,7 +66,7 @@ export default {
 <style lang="less">
 .play-button {
   background: none;
-  font-size: 36px;
+  font-size: 24px;
   padding: 0;
   border: none;
   outline: none;
