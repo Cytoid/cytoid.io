@@ -63,7 +63,7 @@ module.exports = {
     { src: '~plugins/vee-validate' },
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
-    { src: '~plugins/fontawesome' }
+    { src: '~plugins/fontawesome' },
   ],
 
   /*
