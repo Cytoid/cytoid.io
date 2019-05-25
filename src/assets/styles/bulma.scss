@@ -1,10 +1,13 @@
 @import './bulma-theme';
 
+@import "~bulma/sass/base/helpers";
 @import "~bulma/sass/elements/container";
 @import "~bulma/sass/elements/button";
 @import "~bulma/sass/grid/columns";
 @import "~bulma/sass/components/menu";
 @import "~bulma/sass/components/navbar";
+@import "~bulma/sass/layout/footer";
+@import "~bulma/sass/layout/section";
 
 .navbar-item.is-active {
   font-weight: bold;

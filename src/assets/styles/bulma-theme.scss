@@ -1,6 +1,7 @@
 @import "~bulma/sass/utilities/_all";
 
 $primary: #4568dc;
+$link: #4568dc;
 $primary-invert: findColorInvert($primary);
 $colors: (
   "white": ($white, $black),
@@ -26,3 +27,5 @@ $navbar-item-color: $grey-light;
 $navbar-item-active-color: $white;
 $navbar-item-hover-color: $grey-lighter;
 $navbar-burger-color: $grey-light;
+
+$footer-background-color: transparent;
