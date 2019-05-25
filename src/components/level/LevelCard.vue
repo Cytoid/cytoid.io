@@ -53,6 +53,8 @@ export default {
       return this.mouseY / this.$refs.card.offsetHeight
     },
     cardStyle() {
+      return {}
+      /*
       if (this.mouseX === null || this.mouseY === null) {
         return {}
       }
@@ -61,6 +63,7 @@ export default {
       return {
         transform: `rotateY(${rX}deg) rotateX(${rY}deg)`,
       }
+      */
     },
     cardBgTransform() {
       if (this.mouseX === null || this.mouseY === null) {
@@ -152,7 +155,6 @@ p {
   padding-top: 62.5%;
   &:hover {
     .card-info {
-      transform: translateY(0);
       transition: 0.6s @hoverEasing;
       p {
         opacity: 1;
@@ -161,16 +163,21 @@ p {
       &:after {
         transition: 5s @hoverEasing;
         opacity: 1;
-        transform: translateY(0);
       }
     }
     .card {
-      transition: 0.6s @hoverEasing, box-shadow 2s @hoverEasing;
+      transition: 0.4s @hoverEasing, box-shadow 0.4s @hoverEasing;
       box-shadow: @ele3; //rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px, rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
     }
     .card-bg {
-      transition: 0.6s @hoverEasing, opacity 0.4s 0s @hoverEasing;
+      transition: 0.4s @hoverEasing, opacity 0.4s @hoverEasing;
       transform: scale(1.02, 1.02) translateX(var(--translate-x, 0)) translateY(var(--translate-y, 0));
+      border-radius: 4px;
+      // transform: scale(1.02, 1.02) translateX(var(--translate-x, 0)) translateY(var(--translate-y, 0));
       opacity: 0.8;
     }
   }
@@ -185,7 +192,7 @@ p {
   overflow: hidden;
   border-radius: 4px;
   box-shadow: @ele2; //rgba(0, 0, 0, 0.66) 0 px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
-  transition: 1s @returnEasing;
+  transition: 0.4s @returnEasing;
   &:active {
     transform: scale(0.98, 0.98) !important;
   }
@@ -202,7 +209,7 @@ p {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  transition: 1s @returnEasing, opacity 0.4s 0s @returnEasing;
+  transition: 0.4s @returnEasing, opacity 0.4s @returnEasing;
   pointer-events: none;
   box-sizing: unset;
 }
@@ -213,9 +220,6 @@ p {
   position: absolute;
   top: 0;
   color: #fff;
-  p {
-    transition: 0.6s 1.6s @hoverEasing;
-  }
   * {
     position: relative;
     z-index: 1;
@@ -228,15 +232,10 @@ p {
   position: absolute;
   bottom: 0;
   color: #fff;
-  transition: 0.6s 1.6s @hoverEasing;
   h1 {
     font-size: 20px;
     font-weight: 300;
     color: white;
-    //text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
-  }
-  p {
-    transition: 0.6s 1.6s @hoverEasing;
   }
   * {
     position: relative;
@@ -250,9 +249,8 @@ p {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
     background-blend-mode: overlay;
-    transition: 5s 1s @returnEasing;
   }
 }
 </style>

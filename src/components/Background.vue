@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="z-index: 0;">
     <div v-parallax.absY="parallaxSpeed" class="background-wrap">
       <img ref="backgroundImage" :src="source" class="background-image">
     </div>
