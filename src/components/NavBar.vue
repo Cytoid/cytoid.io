@@ -25,27 +25,3 @@ export default {
   })
 }
 </script>
-
-<style lang="scss">
-@import "~bulma/sass/components/navbar";
-.navbar-append {
-  display: flex;
-  align-items: stretch;
-  &.is-brand {
-    @include from($navbar-breakpoint) {
-      .navbar-item,
-      .navbar-link {
-        display: none
-      }
-    }
-  }
-  &.is-end {
-    @include until($navbar-breakpoint) {
-      .navbar-item,
-      .navbar-link {
-        display: none;
-      }
-    }
-  }
-}
-</style>

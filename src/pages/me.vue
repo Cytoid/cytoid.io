@@ -1,12 +1,33 @@
 <template lang="pug">
-  a-row
-    a-col(:span="8")
-      a-menu
-        a-menu-item 菜单项
-        a-sub-menu(title="子菜单")
-          a-menu-item 子菜单项
-    a-col(:span="16")
-      nuxt
+  .container: .columns
+    .column.is-one-quarter
+      aside.menu
+        p.menu-label General
+        ul.menu-list
+          li: nuxt-link(:to="{name: 'me-account'}")
+            font-awesome-icon(icon="user-alt")
+            | Account
+          li: a
+            font-awesome-icon(icon="lock")
+            | Security
+          li: a
+            font-awesome-icon(icon="address-card")
+            | Profile
+          li: a
+            font-awesome-icon(icon="user-friends")
+            | Friends
+        p.menu-label My Content
+        ul.menu-list
+          li: a
+            font-awesome-icon(icon="dice-d6")
+            | Levels
+          li: a
+            font-awesome-icon(icon="archive")
+            | Collections
+          li: nuxt-link(:to="{name: 'me-upload'}")
+            font-awesome-icon(icon="cloud-upload-alt")
+            | Upload
+    .column: nuxt
 </template>
 
 <script>
@@ -15,5 +36,7 @@ export default {
 </script>
 
 <style scoped>
-
+.svg-inline--fa {
+  margin-right: 1rem;
+}
 </style>

@@ -14,11 +14,15 @@ $colors: (
   "danger": ($danger, $danger-invert),
 );
 
+$text: $white-ter;
+$text-invert: findColorInvert($text);
+$text-light: $grey-lighter;
+$text-strong: $white;
+
+$background: $grey-dark;
+
 $navbar-background-color: transparent;
 $navbar-item-color: $grey-light;
 $navbar-item-active-color: $white;
 $navbar-item-hover-color: $grey-lighter;
 $navbar-burger-color: $grey-light;
-.navbar-item.is-active {
-  font-weight: bold;
-}

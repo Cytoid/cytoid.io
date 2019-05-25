@@ -2,3 +2,36 @@
 
 @import "~bulma/sass/elements/container";
 @import "~bulma/sass/elements/button";
+@import "~bulma/sass/grid/columns";
+@import "~bulma/sass/components/menu";
+@import "~bulma/sass/components/navbar";
+
+.navbar-item.is-active {
+  font-weight: bold;
+}
+.navbar-append {
+  display: flex;
+  align-items: stretch;
+  &.is-brand {
+    @include from($navbar-breakpoint) {
+      .navbar-item,
+      .navbar-link {
+        display: none
+      }
+    }
+  }
+  &.is-end {
+    @include until($navbar-breakpoint) {
+      .navbar-item,
+      .navbar-link {
+        display: none;
+      }
+    }
+  }
+}
+
+// reset
+ul {
+  list-style: none;
+  padding: 0;
+}
