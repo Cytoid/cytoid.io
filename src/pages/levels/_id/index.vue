@@ -12,7 +12,7 @@
         class="download-button ele3"
         @click="download"
       )
-        |  Download (10.2MB)
+        |  Download ({{formattedSize}})
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
         a-card(class="ele2" style="margin-bottom: 16px;")
@@ -69,6 +69,7 @@ import marked from 'marked'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
+import { formatBytes } from '@/utils'
 const columns = [
   {
     title: 'Rank',
@@ -168,10 +169,6 @@ export default {
   data: () => ({
     level: null,
     ratings: null,
-    defaultDifficulty: {
-      type: 'extreme',
-      name: 'EX',
-    },
     rankings: [],
     rankings_pagination: {},
     rankings_loading: false,
@@ -182,6 +179,9 @@ export default {
     levelDescription() {
       return marked(this.level.description || 'The author was too lazy to write any descriptions.')
     },
+    formattedSize() {
+      return formatBytes(this.level.packageSize)
+    }
   },
   asyncData({ $axios, params }) {
     return Promise.all([
