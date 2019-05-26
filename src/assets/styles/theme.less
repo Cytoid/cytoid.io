@@ -186,6 +186,17 @@
   background: hsl(226, 68%, 67%);
 }
 
+// Bulma styles
+
+.navbar-item {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: @text-ele;
+  &.is-active {
+    color: white;
+    font-weight: bold;
+  }
+}
+
 // Custom styles
 
 body {
@@ -238,6 +249,14 @@ h2 {
 
 .unselectable {
   user-select: none;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4px;
+  text-transform: uppercase;
 }
 
 .card-heading {
@@ -322,4 +341,36 @@ h2 {
   box-shadow: none;
   background: linear-gradient(to right bottom, @shade4, @shade5);
   color: white;
+}
+
+.container {
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
 }
