@@ -23,18 +23,17 @@
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card(style="background: none; margin-bottom: 16px;")
-          p.card-heading Bio
+          p.heading Bio
           div(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
         a-card(style="background: none; margin-bottom: 16px;")
-          p.card-heading Recent ranks
+          p.heading Recent ranks
           div(
             v-for="rank in profile.recents.ranks"
             :key="rank.uid"
-            class="recent-rank"
+            class="recent-rank ele3"
             style="position: relative; margin-top: 8px;"
           )
             .recent-rank-background(
-              class="ele3"
               v-if="rank.backgroundURL"
               :style="{ 'background-image': 'url(' + rank.backgroundURL + ')', 'background-size': 'cover' }"
             )
@@ -242,9 +241,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .statistics-card {
-    background: linear-gradient(to right bottom, @theme4, @theme5);
-  }
   .statistics-slot {
     margin-top: -4px;
     margin-bottom: 16px;
@@ -253,8 +249,9 @@ export default {
   }
   .recent-rank {
     position: relative;
+    border-radius: 4px;
     border-left: 4px solid @theme5;
-    margin: 0 -24px;
+    margin: 8px -8px;
     padding: 12px 24px 16px;
     transition: 0.4s @hoverEasing;
     overflow: hidden;
@@ -279,6 +276,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.8);
   }
   .statistics-card {
+    background: linear-gradient(to right bottom, @theme4, @theme5);
     .ant-radio-button-wrapper {
       font-size: 12px;
       font-weight: normal;
