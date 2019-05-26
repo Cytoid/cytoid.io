@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container(style="margin-top: 256px;")
+  .section: .container(style="margin-top: 256px;")
     a-row(style="margin-bottom: 48px;")
       a-col(:span="24")
         div(style="padding-left: 32px;")
