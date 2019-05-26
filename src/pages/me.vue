@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container: .columns
+  .section: .container: .columns
     .column.is-one-quarter
       aside.menu
         p.menu-label General
