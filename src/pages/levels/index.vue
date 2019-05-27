@@ -1,26 +1,33 @@
-<template>
-  <div style="padding: 16px;">
-    <a-row type="flex" justify="center">
-      <a-col
+<template lang="pug">
+  .section
+    a-select(v-model="filters.sort" @change="updateRoute" style="width: 10rem;" :disabled="loading")
+      a-select-option(value="creation_date") New Uploads
+      a-select-option(value="modification_date") Recent Updates
+      a-select-option(value="difficulty") Difficulty
+      a-select-option(value="duration") Duration
+      a-select-option(value="downloads") Downloads
+      a-select-option(value="rating") Rating
+    a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading")
+      font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
+    a-row(type="flex" justify="center")
+      a-col(
         v-for="level in levels"
         :key="level.id"
         :xs="{ span: 24 }"
         :sm="{ span: 12 }"
         :lg="{ span: 8 }"
         :xxl="{ span: 6 }"
-      >
-        <level-card :level="level" />
-      </a-col>
-    </a-row>
-    <a-pagination
+      )
+        level-card(:level="level")
+    a-pagination(
+      :disabled="loading"
       v-model="page"
       :total="totalEntries"
       :page-size="pageSize"
       show-quick-jumper
       show-size-changer
       :show-total="(total, range) => `${total} levels (${range})`"
-    />
-  </div>
+    )
 </template>
 
 <script>
@@ -32,23 +39,22 @@ export default {
   },
   data() {
     return {
+      loading: false,
       levels: [],
       page: 1,
       totalEntries: 0,
       totalPages: 0,
       pageSize: 30,
+      filters: {
+        sort: 'creation_date',
+        order: 'asc',
+      }
     }
   },
   watch: {
-    page(pageNum) {
-      this.$router.replace({ query: { page: pageNum } })
-      this.$axios.get('/levels', { params: { page: pageNum - 1 } })
-        .then((response) => {
-          this.levels = response.data
-          this.totalEntries = parseInt(response.headers['x-total-entries'])
-          this.totalPages = parseInt(response.headers['x-total-page'])
-        })
-    }
+    page() {
+      this.updateRoute()
+    },
   },
   asyncData({ $axios, query }) {
     const page = parseInt(query.page) || 1
@@ -64,6 +70,23 @@ export default {
   },
   mounted() {
     this.$root.$emit('background', { source: '/images/blank.png' })
+  },
+  methods: {
+    updateRoute() {
+      this.$router.replace({ query: { page: this.page, ...this.filters } })
+      this.loading = true
+      this.$axios.get('/levels', { params: { page: this.page - 1, ...this.filters } })
+        .then((response) => {
+          this.levels = response.data
+          this.totalEntries = parseInt(response.headers['x-total-entries'])
+          this.totalPages = parseInt(response.headers['x-total-page'])
+          this.loading = false
+        })
+        .catch((error) => {
+          this.loading = false
+          console.log(error)
+        })
+    }
   }
 }
 </script>
