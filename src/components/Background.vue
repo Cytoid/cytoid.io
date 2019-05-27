@@ -38,12 +38,11 @@ export default {
   position: absolute;
   width: 100%;
   height: 125%;
-  z-index: -512;
 }
 
 .background-image {
   position: absolute;
-  z-index: -512;
+  z-index: -1;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -66,8 +65,9 @@ export default {
   opacity: 1;
   background: hsla(226, 68%, 2%, 0.5);
   width: 100%;
-  height: 125%;
-  z-index: -256;
+  top: -25%;
+  height: 150%;
+  z-index: 0;
   position: absolute;
   animation: background-overlay 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
@@ -86,7 +86,7 @@ export default {
   bottom: -25%;
   width: 100%;
   height: 50%;
-  z-index: -128;
+  z-index: 0;
   background-image: linear-gradient(to top, hsla(226, 68%, 6%, 1), rgba(0, 0, 0, 0));
 }
 
@@ -95,7 +95,7 @@ export default {
   top: 125%;
   width: 100%;
   height: 50%;
-  z-index: -64;
+  z-index: 0;
   background: hsla(226, 68%, 6%, 1);
 }
 </style>

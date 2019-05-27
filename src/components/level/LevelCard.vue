@@ -209,7 +209,7 @@ p {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  transition: 0.4s @returnEasing, opacity 0.4s @returnEasing;
+  transition: 0.2s @returnEasing, opacity 0.4s @returnEasing;
   pointer-events: none;
   box-sizing: unset;
 }
