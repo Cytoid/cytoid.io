@@ -12,7 +12,7 @@
         class="download-button ele3"
         @click="download"
       )
-        |  Download ({{formattedSize}})
+        |  Download #[span(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
         a-card(class="ele2" style="margin-bottom: 16px;")
@@ -179,9 +179,6 @@ export default {
     levelDescription() {
       return marked(this.level.description || 'The author was too lazy to write any descriptions.')
     },
-    formattedSize() {
-      return formatBytes(this.level.packageSize)
-    }
   },
   asyncData({ $axios, params }) {
     return Promise.all([
@@ -230,22 +227,22 @@ export default {
       }
     },
     fetchRankings(params = {}) {
-      console.log('params:', params)
       this.rankings_loading = true
       this.$axios.get(`/levels/${this.level.uid}/charts/${this.level.charts[0].type}/ranking`, {
         params: {
           results: 10,
           ...params,
         },
-      }).then((data) => {
+      }).then((res) => {
         const pagination = { ...this.rankings_pagination }
-        // Read total count from server
-        // pagination.total = data.totalCount;
-        pagination.total = 200
+        pagination.total = res.headers['x-total-entries']
         this.rankings_loading = false
-        this.rankings = data.data
+        this.rankings = res.data
         this.rankings_pagination = pagination
       })
+    },
+    formatSize(size) {
+      return formatBytes(size)
     },
     download() {
       if (this.$auth.loggedIn) {
