@@ -55,7 +55,10 @@
         <a-input
           v-decorator="[
             'password',
-            { rules: [{ required: true, message: 'Please input a password.' }] }
+            { rules: [
+              { required: true, message: 'Please input a password.' },
+              { min: 8, message: 'Password has to contain at least 8 characters.'},
+            ] }
           ]"
           type="password"
           placeholder="Password"
