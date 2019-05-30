@@ -15,10 +15,7 @@
             ]"
             placeholder="Player ID / Email address"
           >
-            <a-icon
-              slot="prefix"
-              type="user"
-            />
+            <font-awesome-icon slot="prefix" icon="user" />
           </a-input>
         </a-form-item>
         <a-form-item>
@@ -30,10 +27,7 @@
             type="password"
             placeholder="Password"
           >
-            <a-icon
-              slot="prefix"
-              type="lock"
-            />
+            <font-awesome-icon slot="prefix" icon="lock" />
           </a-input>
         </a-form-item>
         <a-form-item>
@@ -48,12 +42,9 @@
           >
             Remember me
           </a-checkbox>
-          <a
-            href=""
-            style="float: right;"
-          >
+          <nuxt-link to="/session/reset" class="is-pulled-right">
             Forgot password
-          </a>
+          </nuxt-link>
         </a-form-item>
         <a-form-item>
           <a-button
