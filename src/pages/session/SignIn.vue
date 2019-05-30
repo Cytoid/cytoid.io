@@ -96,13 +96,14 @@ export default {
   },
   methods: {
     signIn() {
-      this.form.validateFields((err, values) => {
+      this.form.validateFields(async (err, values) => {
         if (err) {
           return
         }
         this.loading = true
+        const token = await this.$captcha('login')
         this.$auth.loginWith('local', {
-          data: values,
+          data: { ...values, token },
         })
           .then((response) => {
             this.loading = false

@@ -5650,9 +5650,9 @@ number-is-nan@^1.0.0:
   resolved "https://registry.npm.taobao.org/number-is-nan/download/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
 nuxt-recaptcha@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/nuxt-recaptcha/-/nuxt-recaptcha-0.1.0.tgz#4d782612fb38d712bbca68169fcf75420d09ff4d"
-  integrity sha512-qX7JUR0NOq0BL0FLmSPawfGFiyqVDwLBtvITvggMZj1V7TL/0qsfbqGOsFT+R4OS1j/Eu7Wxe9ZyCY0c5s7ldA==
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/nuxt-recaptcha/-/nuxt-recaptcha-0.1.1.tgz#84e1da5344d7527f96954e6972ba4b3f1102f40d"
+  integrity sha512-f1wqRAul55LlJBnBcScxrhMmBVcPOx0sH81KlGgJQEOYIdFGaAuMidfpj0GI+cDH6yaSB1t5E7BSCeLvwekZcg==
 
 nuxt@^2.3.4:
   version "2.6.3"
