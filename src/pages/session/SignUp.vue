@@ -119,7 +119,7 @@ export default {
           return
         }
         this.loading = true
-        this.$captcha('login')
+        this.$captcha('signup')
           .then(token => this.$axios.post('/users', { ...values, token }))
           .then((res) => {
             this.loading = false
@@ -127,7 +127,7 @@ export default {
           })
           .catch((error) => {
             this.loading = false
-            this.$message.error(error.response?.data?.message)
+            this.$message.error(error.response?.data?.message || error.message)
           })
       })
     },
