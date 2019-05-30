@@ -3,5 +3,5 @@
   "staticURL": "https://static.cytoid.io",
   "apiURLServer": "https://api.cytoid.io",
   "apiURLClient": "https://api.cytoid.io",
-  "secret": "keyboard cat"
+  "captchaKey": "6LcI0I4UAAAAAJN852dnK__gRXfkyIW_9oC4bc5S"
 }
