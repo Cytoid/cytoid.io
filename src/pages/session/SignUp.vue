@@ -119,7 +119,8 @@ export default {
           return
         }
         this.loading = true
-        this.$axios.post('/users', values)
+        this.$captcha('login')
+          .then(token => this.$axios.post('/users', { ...values, token }))
           .then((res) => {
             this.loading = false
             this.$message.info('Registration succeed')

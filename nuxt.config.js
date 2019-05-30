@@ -77,6 +77,7 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/auth',
+    ['nuxt-recaptcha', { key: config.get('captchaKey'), hideBadge: true }],
     '~modules/generate.js',
   ],
   /*
