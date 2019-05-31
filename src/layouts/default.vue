@@ -11,7 +11,7 @@
         .navbar-item(v-else)
           nuxt-link.button.is-primary(to="/session/signin") Sign In
     nuxt
-    footer.footer.has-text-centered
+    footer.container.footer.has-text-centered
       ul
         li Terms & Services
         li Status
