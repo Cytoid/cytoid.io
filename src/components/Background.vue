@@ -19,11 +19,11 @@ export default {
   },
   mounted() {
     this.$root.$on('background', (data) => {
-      this.$refs.backgroundOverlay.style.background = 'hsla(226, 68%, 2%, ' + (data.overlayOpacity !== null ? data.overlayOpacity : 0.5) + ')'
+      this.$refs.backgroundOverlay.style.background = 'hsla(226, 68%, 2%, ' + (data.overlayOpacity !== undefined ? data.overlayOpacity : 0.5) + ')'
       console.log(this.$refs.backgroundOverlay.style.background)
-      console.log('received background, source: ' + data.source)
+      console.log('received background, source: ' + data.source + ', overlayOpacity: ' + data.overlayOpacity)
       this.source = data.source
-      this.parallaxSpeed = data.parallaxSpeed !== null ? data.parallaxSpeed : 0.2
+      this.parallaxSpeed = data.parallaxSpeed !== undefined ? data.parallaxSpeed : 0.2
       this.$refs.backgroundImage.style.animation = 'none'
       this.$refs.backgroundImage.offsetHeight.toString() // Trigger reflow
       this.$refs.backgroundImage.style.animation = null
