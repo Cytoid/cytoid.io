@@ -9,9 +9,10 @@
       template(slot="append")
         nuxt-link.navbar-item(v-if="$auth.loggedIn" to="/me") Profile
         .navbar-item(v-else)
-          nuxt-link.button.is-primary(to="/session/signin") Sign In
+          nuxt-link(to="/session/signin")
+            a-button(style="font-size: 14px;") Sign in
     nuxt
-    footer.footer.has-text-centered
+    footer.container.footer.has-text-centered
       ul
         li Terms & Services
         li Status

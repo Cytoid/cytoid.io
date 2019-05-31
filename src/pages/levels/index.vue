@@ -1,15 +1,15 @@
 <template lang="pug">
   .section
-    a-select(v-model="filters.sort" @change="updateRoute" style="width: 10rem;" :disabled="loading")
-      a-select-option(value="creation_date") New Uploads
-      a-select-option(value="modification_date") Recent Updates
+    a-select(v-model="filters.sort" @change="updateRoute" style="width: 192px;" :disabled="loading")
+      a-select-option(value="creation_date") Uploaded date
+      a-select-option(value="modification_date") Modified date
       a-select-option(value="difficulty") Difficulty
       a-select-option(value="duration") Duration
       a-select-option(value="downloads") Downloads
       a-select-option(value="rating") Rating
-    a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading")
+    a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading" style="margin-left: 8px;")
       font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
-    a-row(type="flex" justify="center")
+    a-row(type="flex" justify="center" style="margin-left: -8px; margin-right: -8px;")
       a-col(
         v-for="level in levels"
         :key="level.id"
@@ -47,7 +47,7 @@ export default {
       pageSize: 30,
       filters: {
         sort: 'creation_date',
-        order: 'asc',
+        order: 'desc',
       }
     }
   },

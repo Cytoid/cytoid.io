@@ -26,29 +26,22 @@
           ]"
           placeholder="Player ID"
         >
-          <a-icon
-            slot="prefix"
-            type="user"
-          />
+          <font-awesome-icon slot="prefix" icon="user" />
         </a-input>
       </a-form-item>
       <a-form-item>
         <a-input
           v-decorator="[
             'email',
-            { rules: [{
-              required: true,
-              pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message: 'Please input a correct email address.'
-            }] }
+            { rules: [
+              { required: true, message: 'An email address is required.' },
+              { type: 'email', message: 'The input is not a valid email' },
+            ] }
           ]"
           html-type="envelope"
           placeholder="Email address"
         >
-          <a-icon
-            slot="prefix"
-            type="mail"
-          />
+          <font-awesome-icon slot="prefix" icon="envelope" />
         </a-input>
       </a-form-item>
       <a-form-item>
@@ -63,10 +56,7 @@
           type="password"
           placeholder="Password"
         >
-          <a-icon
-            slot="prefix"
-            type="lock"
-          />
+          <font-awesome-icon slot="prefix" icon="lock" />
         </a-input>
       </a-form-item>
       <a-form-item>
@@ -80,7 +70,7 @@
                 required: true,
                 transform: value => (value || undefined),
                 type: 'boolean',
-                message: 'You must agree our terms of services.'
+                message: 'You must agree to our terms of services.'
               }],
             }
           ]"
@@ -119,15 +109,16 @@ export default {
           return
         }
         this.loading = true
-        this.$captcha('login')
+        this.$captcha('signup')
           .then(token => this.$axios.post('/users', { ...values, token }))
           .then((res) => {
             this.loading = false
             this.$message.info('Registration succeed')
           })
           .catch((error) => {
+            console.log(error)
             this.loading = false
-            this.$message.error(error.response?.data?.message)
+            this.$message.error(error.response?.data?.message || error.message)
           })
       })
     },
