@@ -26,6 +26,7 @@
     "chart.js": "^2.8.0",
     "config": "^3.0.1",
     "koa": "^2.7.0",
+    "koa-route": "^3.2.0",
     "koa-session": "^5.10.1",
     "marked": "^0.6.0",
     "moment": "^2.24.0",

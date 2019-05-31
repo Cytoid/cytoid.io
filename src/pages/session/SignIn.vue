@@ -99,6 +99,7 @@ export default {
           .then((response) => {
             this.loading = false
             this.$message.info('signed in')
+            this.$router.go(-1)
           })
           .catch((error) => {
             this.loading = false

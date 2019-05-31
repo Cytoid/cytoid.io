@@ -4,6 +4,7 @@ const conf = require('config')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const session = require('koa-session')
+const router = require('koa-route')
 
 const app = new Koa()
 app.keys = [conf.secret]
@@ -40,6 +41,10 @@ async function start() {
     renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false) */
   }, app))
 
+  // Old site redirects
+  app.use(router.get('/browse', ctx => ctx.redirect('/levels')))
+  app.use(router.get('/browse/:name', (ctx, name) => ctx.redirect('/levels/' + name)))
+
   // Give nuxt middleware to Koa
   app.use((ctx) => {
     ctx.status = 200
@@ -56,7 +61,7 @@ async function start() {
           throw new Error(err)
         }
         consola.ready({
-          message: `HTTP1.2 Server listening on http://${host}:${port}`,
+          message: `HTTP2.0 Server listening on http://${host}:${port}`,
           badge: true
         })
       })
