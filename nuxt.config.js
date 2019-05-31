@@ -93,7 +93,6 @@ module.exports = {
   auth: {
     strategies: {
       local: {
-        _scheme: '~/modules/passportAuthStrategy.js',
         endpoints: {
           login: { url: '/session', method: 'post', propertyName: null },
           logout: { url: '/session', method: 'delete' },
