@@ -57,12 +57,18 @@ export default {
     },
   },
   asyncData({ $axios, query }) {
-    const page = parseInt(query.page) || 1
-    return $axios.get('/levels', { params: { page: page - 1 } })
+    query.page = query.page || 1
+    query.page -= 1
+    query.sort = query.sort || 'creation_date'
+    query.order = query.order || 'desc'
+    return $axios.get('/levels', { params: query })
       .then((response) => {
+        const page = query.page
+        delete query.page
         return {
           levels: response.data,
-          page: page,
+          page: page + 1,
+          filters: query,
           totalEntries: parseInt(response.headers['x-total-entries']),
           totalPages: parseInt(response.headers['x-total-page']),
         }
