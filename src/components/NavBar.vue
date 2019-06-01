@@ -2,32 +2,20 @@
 header.navbar.light.container(role="navigation")
   nuxt-link.navbar-item(to="/levels") Levels
   search.left
-  nuxt-link(v-if="!user" to="/session/signin"): a-button(type="primary") Login
-  a-popover(v-else title="Title" placement="bottomRight" trigger="click")
-    a-avatar(:src="user.avatarURL")
-    template(slot="content")
-      Content
-      Content
+  no-ssr
+    nuxt-link(v-if="!$auth.user" to="/session/signin"): a-button(type="primary") Login
+    a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
+      a-avatar(:src="$auth.user.avatarURL")
+      nav-card(slot="content")
 </template>
 
 <script>
 import Search from './SearchInput'
+import NavCard from './NavCard'
 export default {
   components: {
     Search,
-  },
-  data: () => ({
-    expanded: false,
-  }),
-  computed: {
-    user() {
-      return this.$auth.user
-    }
-  },
-  methods: {
-    logout() {
-      this.$auth.logout()
-    }
+    NavCard,
   },
 }
 </script>
