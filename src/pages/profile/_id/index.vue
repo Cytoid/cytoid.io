@@ -22,7 +22,7 @@
                 | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
-        a-card(style="background: none; margin-bottom: 16px;")
+        a-card.bio(style="background: none; margin-bottom: 16px;")
           p.heading Bio
           div(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
         a-card(style="background: none; margin-bottom: 16px;")
@@ -240,7 +240,10 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+  .bio img {
+    max-width: 100%;
+  }
   .statistics-slot {
     margin-top: -4px;
     margin-bottom: 16px;
