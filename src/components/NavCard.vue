@@ -1,9 +1,9 @@
 <template lang="pug">
 .navcard
-  img.navcard-avatar(src="https://www.gravatar.com/avatar/32f47f0c1d23f9f584e3aa23db920a6f")
+  img.navcard-avatar(:src="$auth.user.avatarURL")
   img.navcard-header(src="/images/normal.png")
   .navcard-grid
-    nuxt-link.navcard-item(to="/profile/neo")
+    nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $auth.user.uid || $auth.user.id } }")
       font-awesome-icon.icon(:icon="['far', 'user']")
       .title Profile
     nuxt-link.navcard-item(to="/me")
@@ -22,6 +22,9 @@
 <script>
 export default {
   name: 'NavCard',
+  mounted() {
+    console.log('dld')
+  }
 }
 </script>
 
