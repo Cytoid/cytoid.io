@@ -106,6 +106,7 @@ module.exports = {
   router: {
     linkExactActiveClass: 'is-exact-active',
     linkActiveClass: 'is-active',
+    middleware: 'background',
   },
   /*
   ** Build configuration

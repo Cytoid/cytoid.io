@@ -22,9 +22,6 @@
 <script>
 export default {
   name: 'NavCard',
-  mounted() {
-    console.log('dld')
-  }
 }
 </script>
 
