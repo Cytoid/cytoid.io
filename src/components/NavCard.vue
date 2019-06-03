@@ -6,13 +6,13 @@
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $auth.user.uid || $auth.user.id } }")
       font-awesome-icon.icon(:icon="['far', 'user']")
       .title Profile
-    nuxt-link.navcard-item(to="/me")
+    nuxt-link.navcard-item(to="/studio")
       font-awesome-icon.icon(:icon="['far', 'puzzle-piece']")
       .title My Content
     .navcard-item
       font-awesome-icon.icon(:icon="['far', 'heart']")
       .title Favorites
-    .navcard-item
+    nuxt-link.navcard-item(to="/settings")
       font-awesome-icon.icon(:icon="['far', 'cog']")
       .title Settings
   .section

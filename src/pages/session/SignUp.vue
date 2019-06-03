@@ -38,7 +38,7 @@
               { type: 'email', message: 'The input is not a valid email' },
             ] }
           ]"
-          html-type="envelope"
+          html-type="email"
           placeholder="Email address"
         >
           <font-awesome-icon slot="prefix" icon="envelope" />

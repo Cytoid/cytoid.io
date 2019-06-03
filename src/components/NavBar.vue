@@ -1,5 +1,6 @@
 <template lang="pug">
 header.navbar.light.container(role="navigation")
+  nuxt-link.navbar-item(to="/" exact) Cytoid
   nuxt-link.navbar-item(to="/levels") Levels
   search.left
   no-ssr
@@ -34,6 +35,7 @@ export default {
   }
   .navbar-item {
     color: $grey-lighter;
+    padding: 0 1rem;
     &:hover {
       color: $white-bis;
     }

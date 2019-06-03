@@ -4,7 +4,7 @@
       aside.menu
         p.menu-label General
         ul.menu-list
-          li: nuxt-link(:to="{name: 'me-account'}")
+          li: nuxt-link(:to="{name: 'settings-account'}")
             font-awesome-icon(icon="user-alt")
             | Account
           li: a
@@ -24,7 +24,7 @@
           li: a
             font-awesome-icon(icon="archive")
             | Collections
-          li: nuxt-link(:to="{name: 'me-upload'}")
+          li: nuxt-link(:to="{name: 'settings-upload'}")
             font-awesome-icon(icon="cloud-upload-alt")
             | Upload
     .column: nuxt
