@@ -9,16 +9,16 @@
             :rating="profile.rating || 0"
           )
           .player-info-container
-            h2.username(class="text-ele" v-text="profile.user.name || profile.user.uid")
+            h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
             p.status(class="text-ele")
-              font-awesome-icon.status-icon(icon="circle" style="color: hsla(120, 68%, 57%, 1);")
+              font-awesome-icon.status-icon(:icon="['fas', 'circle']" style="color: hsla(120, 68%, 57%, 1);")
               | Online
             p.details(class="text-ele")
               span
-                font-awesome-icon(icon="map-marker-alt")
+                font-awesome-icon(:icon="['far', 'map-marker-alt']")
                 | Hong Kong
               span
-                font-awesome-icon(icon="calendar")
+                font-awesome-icon(:icon="['far', 'calendar']")
                 | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
@@ -77,15 +77,16 @@
             a-radio-button(value="accuracy") Average Accuracy
           line-chart(v-if="false" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
           // Disable the line chart just for now.
-        a-tabs(defaultActiveKey="featured_levels" size="small")
-          a-tab-pane(tab="Featured Levels" key="featured_levels")
-            a-row(type="flex" justify="center")
-              a-col(:xs="{ span: 24 }" :md="{ span: 12 }" v-for="level in levels" :key="level.id")
-                level-card(:level="level")
-          a-tab-pane(tab="Levels" key="levels")
-          a-tab-pane(tab="Collections" key="collections")
-            p(style="margin: auto; display: flex; justify-content: center; align-items: center; height: 384px;")
-              | Work in progress...
+        a-card.content-card
+          a-tabs(defaultActiveKey="featured_levels" size="small")
+            a-tab-pane(tab="Featured Levels" key="featured_levels")
+              a-row(type="flex" justify="center")
+                a-col(:xs="{ span: 24 }" :md="{ span: 12 }" v-for="level in levels" :key="level.id")
+                  level-card(:level="level")
+            a-tab-pane(tab="Levels" key="levels")
+            a-tab-pane(tab="Collections" key="collections")
+              p(style="margin: auto; display: flex; justify-content: center; align-items: center; height: 384px;")
+                | Work in progress...
 </template>
 
 <script>
@@ -240,7 +241,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .bio img {
     max-width: 100%;
   }
@@ -325,6 +326,9 @@ export default {
         }
       }
     }
+  }
+  .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
+    padding: 8px 0 !important;
   }
   @media(min-width: 523px) {
     .player-info-container {

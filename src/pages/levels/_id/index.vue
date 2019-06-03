@@ -208,7 +208,6 @@ export default {
     handleTableChange(pagination, filters, sorter) {
       const pager = { ...this.rankings_pagination }
       pager.current = pagination.current
-      this.pagination = pager
       this.fetchRankings({
         results: pagination.pageSize,
         page: pagination.current,

@@ -4,16 +4,16 @@
   img.navcard-header(src="/images/normal.png")
   .navcard-grid
     nuxt-link.navcard-item(to="/profile/neo")
-      font-awesome-icon.icon(icon="user")
+      font-awesome-icon.icon(:icon="['far', 'user']")
       .title Profile
     nuxt-link.navcard-item(to="/me")
-      font-awesome-icon.icon(icon="puzzle-piece")
+      font-awesome-icon.icon(:icon="['far', 'puzzle-piece']")
       .title My Content
     .navcard-item
-      font-awesome-icon.icon(icon="heart")
+      font-awesome-icon.icon(:icon="['far', 'heart']")
       .title Favorites
     .navcard-item
-      font-awesome-icon.icon(icon="cog")
+      font-awesome-icon.icon(:icon="['far', 'cog']")
       .title Settings
   .section
     a-button(type="danger" block @click="$auth.logout()") Sign Out

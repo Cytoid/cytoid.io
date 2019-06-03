@@ -1,6 +1,6 @@
 <template lang="pug">
 .search-input
-  font-awesome-icon(icon="search").icon
+  font-awesome-icon(:icon="['far', 'search']").icon
   input(type="search")
 </template>
 
