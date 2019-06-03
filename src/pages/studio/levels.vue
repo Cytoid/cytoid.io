@@ -2,20 +2,17 @@
   div
     a-table(
       :columns="columns"
-      :row-key="record => record.id"
-      :data-source="rankings"
-      :pagination="rankings_pagination"
-      :loading="rankings_loading"
+      :row-key="level => level.id"
+      :data-source="levels"
+      :pagination="levels_pagination"
+      :loading="levels_loading"
       :scroll="{ x: 800 }"
-      :rowClassName="(record, index) => rowClass(record, index)"
       @change="handleTableChange"
     )
-      template(v-slot:rank="ranking") {{ '#' + ranking }}
-      template(v-slot:owner="owner")
-        .ranking-player-avatar
-          nuxt-link(to="/profile" style="display: flex; align-items: center;")
-            a-avatar(:size="24" src="https://cytoid.io/api/avatar.php?size=64&id=tigerhix")
-            span.ranking-player-avatar-name(v-text="owner.name || owner.uid")
+      template(slot="metadata" slot-scope="text, record")
+        div(style="display: flex; flex-direction: row;")
+          img(:src="record.bundle.background" style="width: 128px; height: 80px; object-fit: cover; border-radius: 4px;")
+          div(style="margin-left: 8px") {{ record.title }}
       template(v-slot:score="score")
         div(style="display: flex; align-items: center;")
           score-badge(:value="score")
@@ -30,84 +27,61 @@
 </template>
 
 <script>
-const columns = [
-  {
-    title: 'Level',
-    dataIndex: 'metadata',
-    scopedSlots: {
-      customRender: 'metadata'
-    }
-  },
-  {
-    title: 'Visibility',
-    dataIndex: 'unlisted',
-    scopedSlots: {
-      customRender: 'owner'
-    }
-  },
-  {
-    title: 'Uploaded on',
-    dataIndex: 'score',
-    scopedSlots: {
-      customRender: 'score'
-    }
-  },
-  {
-    title: 'Acc.',
-    dataIndex: 'accuracy',
-    scopedSlots: {
-      customRender: 'accuracy'
-    }
-  },
-  {
-    title: 'Max combo',
-    dataIndex: 'details.maxCombo',
-    scopedSlots: {
-      customRender: 'maxcombo'
-    }
-  },
-  {
-    title: 'Perfect',
-    dataIndex: 'details.perfect'
-  },
-  {
-    title: 'Great',
-    dataIndex: 'details.great'
-  },
-  {
-    title: 'Good',
-    dataIndex: 'details.good'
-  },
-  {
-    title: 'Bad',
-    dataIndex: 'details.bad'
-  },
-  {
-    title: 'Miss',
-    dataIndex: 'details.miss'
-  },
-  {
-    title: 'Mods',
-    dataIndex: 'mods',
-    scopedSlots: {
-      customRender: 'mods'
-    }
-  },
-  {
-    title: 'Achieved',
-    dataIndex: 'date',
-    scopedSlots: {
-      customRender: 'achieved'
-    }
-  },
-]
 export default {
-  data: () => ({
-    levels: [],
-    levels_pagination: {},
-    levels_loading: false,
-    columns
-  }),
+  data() {
+    const columns = [
+      {
+        title: 'Level',
+        scopedSlots: {
+          customRender: 'metadata'
+        }
+      },
+      {
+        title: 'Visibility',
+        dataIndex: 'unlisted',
+        scopedSlots: {
+          customRender: 'unlisted'
+        }
+      },
+      {
+        title: 'Date',
+        dataIndex: 'creation_date',
+        scopedSlots: {
+          customRender: 'creation_date'
+        }
+      },
+      {
+        title: 'Downloads',
+        dataIndex: 'downloads',
+        scopedSlots: {
+          customRender: 'downloads'
+        }
+      },
+      {
+        title: 'Plays',
+        dataIndex: 'plays',
+        scopedSlots: {
+          customRender: 'plays'
+        }
+      },
+      {
+        title: 'Rating',
+        dataIndex: 'rating',
+        scopedSlots: {
+          customRender: 'rating'
+        }
+      }
+    ]
+    return {
+      levels: [],
+      levels_pagination: {},
+      levels_loading: false,
+      columns
+    }
+  },
+  mounted() {
+    this.fetchLevels()
+  },
   methods: {
     handleTableChange(pagination, filters, sorter) {
       const pager = { ...this.levels_pagination }
