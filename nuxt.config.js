@@ -101,11 +101,17 @@ module.exports = {
         tokenRequired: false,
         tokenType: 'bearer',
       }
-    }
+    },
+    redirect: {
+      login: '/session/signin',
+      logout: '/session/signin',
+      home: '/'
+    },
   },
   router: {
     linkExactActiveClass: 'is-exact-active',
     linkActiveClass: 'is-active',
+    middleware: 'background',
   },
   /*
   ** Build configuration
