@@ -74,7 +74,12 @@ export default {
     ]
     return {
       levels: [],
-      levels_pagination: {},
+      levels_pagination: {
+        pageSize: 10,
+        total: 0,
+        showTotal: (total, range) => `${total} levels (${range})`,
+        current: 1,
+      },
       levels_loading: false,
       columns
     }
@@ -84,30 +89,23 @@ export default {
   },
   methods: {
     handleTableChange(pagination, filters, sorter) {
-      const pager = { ...this.levels_pagination }
-      pager.current = pagination.current
-      this.fetchLevels({
-        results: pagination.pageSize,
-        page: pagination.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
-        ...filters,
-      })
+      this.levels_pagination = pagination
+      this.fetchLevels()
     },
-    fetchLevels(params = {}) {
+    fetchLevels() {
       this.levels_loading = true
-      this.$axios.get(`/levels?uploader=neo&sort=creation_date&order=desc`, {
-        params: {
-          results: 10,
-          ...params,
-        },
-      }).then((res) => {
-        const pagination = { ...this.levels_pagination }
-        pagination.total = res.headers['x-total-entries']
-        this.levels_loading = false
-        this.levels = res.data
-        this.levels_pagination = pagination
-      })
+      this.$axios.get(`/levels`, { params: {
+        uploader: this.$auth.user.id,
+        page: this.levels_pagination.current - 1,
+        limit: this.levels_pagination.pageSize,
+        sort: 'creation_date',
+        order: 'desc'
+      } })
+        .then((res) => {
+          this.levels_pagination.total = parseInt(res.headers['x-total-entries'], 10)
+          this.levels_loading = false
+          this.levels = res.data
+        })
     }
   }
 }

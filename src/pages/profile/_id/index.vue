@@ -116,11 +116,18 @@ export default {
       }
     }
   },
-  asyncData({ $axios, params }) {
+  asyncData({ $axios, params, error }) {
     return $axios.get('/profile/' + params.id)
       .then(res => ({
         profile: res.data
       }))
+      .catch((err) => {
+        if (err.response?.status === 404) {
+          error({ statusCode: 404, message: 'Profile not found' })
+        } else {
+          throw error
+        }
+      })
   },
   mounted() {
     this.$root.$emit('background', { source: '/images/bright.png', parallaxSpeed: 0.8 })
