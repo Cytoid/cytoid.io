@@ -11,7 +11,7 @@
         a-button(v-if="!item.verified" @click="verify(item.address)")
           font-awesome-icon(icon="envelope").icon
           | Verify
-        a-button(v-if="!item.primary && item.verified")
+        a-button(v-if="!item.primary && item.verified" @click="makePrimary(item)")
           font-awesome-icon(icon="chevron-up").icon
           | Make Primary
         a-button(type="danger" @click="removeEmail(item.address, index)")
@@ -85,6 +85,22 @@ export default {
       this.$axios.post(`/users/${this.$auth.user.id}/emails/${email}/verify`)
         .then(() => {
           this.$message.info('Confirmation email sent')
+        })
+        .catch((error) => {
+          this.$message.error(error.response?.data?.message || error.message)
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
+    makePrimary(item) {
+      this.loading = true
+      this.$axios.patch(`/users/${this.$auth.user.id}/emails/${item.address}`, { primary: true })
+        .then(() => {
+          this.emails.forEach((email) => {
+            email.primary = false
+          })
+          item.primary = true
         })
         .catch((error) => {
           this.$message.error(error.response?.data?.message || error.message)
