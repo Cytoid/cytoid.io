@@ -1,5 +1,6 @@
 <template lang="pug">
-  .section
+.section
+  .container
     a-select(v-model="filters.sort" @change="updateRoute" style="width: 192px;" :disabled="loading")
       a-select-option(value="creation_date") Uploaded date
       a-select-option(value="modification_date") Modified date
@@ -9,16 +10,8 @@
       a-select-option(value="rating") Rating
     a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading" style="margin-left: 8px;")
       font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
-    a-row(type="flex" justify="center" style="margin-left: -8px; margin-right: -8px;")
-      a-col(
-        v-for="level in levels"
-        :key="level.id"
-        :xs="{ span: 24 }"
-        :sm="{ span: 12 }"
-        :lg="{ span: 8 }"
-        :xxl="{ span: 6 }"
-      )
-        level-card(:level="level")
+    .level-card-container
+        level-card(v-for="level in levels" :key="level.id" :level="level")
     a-pagination(
       :disabled="loading"
       v-model="page"
@@ -96,3 +89,33 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.level-card-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  @include mobile {
+    .card-wrap {
+      margin: 8px;
+    }
+  }
+  @include tablet {
+    display: grid;
+    grid-gap: 16px 16px;
+    grid-auto-flow: row;
+  }
+  @include tablet-only {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include desktop-only {
+    grid-template-columns: repeat(3, auto);
+  }
+  @include widescreen-only {
+    grid-template-columns: repeat(3, auto);
+  }
+  @include fullhd {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+</style>

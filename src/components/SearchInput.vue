@@ -34,7 +34,7 @@ $search-input-size: 2rem;
     padding-left: $search-input-size / 2;
     padding-right: $search-input-size;
     width: 100%;
-    @include until($tablet) {
+    @include mobile {
       &:not(:focus) {
         width: 0;
         padding-left: $search-input-size / 2;
