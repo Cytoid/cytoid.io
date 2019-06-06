@@ -21,7 +21,7 @@
             { rules: [{
               required: true,
               pattern: '^[a-z0-9_-]{3,16}$',
-              message: 'Please input a valid player ID.',
+              message: '3-16 lowercase letters, numbers, _ or -',
             }] }
           ]"
           placeholder="Player ID"

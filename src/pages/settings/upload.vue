@@ -28,8 +28,8 @@ export default {
     upload(option) {
       const source = axios.CancelToken.source()
       let uploadConfig = null
-      this.$captcha('upload-level')
-        .then(token => this.$axios.post('/levels/packages', { token }, {
+      this.$captcha('upload')
+        .then(token => this.$axios.post('/files/packages', { token }, {
           cancelToken: source.token,
         }))
         .then((response) => {
@@ -48,9 +48,8 @@ export default {
             }
           })
         })
-        .then(() => this.$captcha('upload-level'))
-        .then((token) => {
-          return this.$axios.post('/levels/packages', { key: uploadConfig.key, token }, {
+        .then(() => {
+          return this.$axios.post('/files/' + uploadConfig.path, {}, {
             cancelToken: source.token,
           })
         })
