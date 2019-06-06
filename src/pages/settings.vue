@@ -7,26 +7,15 @@
           li: nuxt-link(:to="{name: 'settings-account'}")
             font-awesome-icon(icon="user-alt")
             | Account
-          li: a
+          li: nuxt-link(:to="{name: 'settings-security'}")
             font-awesome-icon(icon="lock")
             | Security
-          li: a
+          li: nuxt-link(:to="{name: 'settings-profile'}")
             font-awesome-icon(icon="address-card")
             | Profile
           li: a
             font-awesome-icon(icon="user-friends")
             | Friends
-        p.menu-label My Content
-        ul.menu-list
-          li: a
-            font-awesome-icon(icon="dice-d6")
-            | Levels
-          li: a
-            font-awesome-icon(icon="archive")
-            | Collections
-          li: nuxt-link(:to="{name: 'settings-upload'}")
-            font-awesome-icon(icon="cloud-upload-alt")
-            | Upload
     .column: nuxt
 </template>
 
