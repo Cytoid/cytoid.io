@@ -1,18 +1,15 @@
 <template lang="pug">
-a-row(type="flex" justify="center" align="middle")
-  a-col(:span="12")
-    a-upload-dragger(
-      supportServerRender
-      accept=".cytoidlevel"
-      :customRequest="upload"
-      :remove="removeUploadedFile"
-      @change="uploadStatusChanged"
-    )
-      p.ant-upload-drag-icon
-        a-icon(type="inbox")
-      p.ant-upload-text Click or drag your .cytoidlevel to this area
-      p.ant-upload-hint Some other descriptions
-  a-button(v-if="status") Next
+a-upload-dragger(
+  supportServerRender
+  accept=".cytoidlevel"
+  :customRequest="upload"
+  :remove="removeUploadedFile"
+  @change="uploadStatusChanged"
+)
+  p.ant-upload-drag-icon
+    a-icon(type="inbox")
+  p.ant-upload-text Click or drag your .cytoidlevel to this area
+  p.ant-upload-hint Some other descriptions
 </template>
 
 <script>
@@ -22,8 +19,6 @@ export default {
   data: () => ({
     status: false,
   }),
-  mounted() {
-  },
   methods: {
     upload(option) {
       const source = axios.CancelToken.source()
@@ -76,7 +71,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>
