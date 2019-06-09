@@ -17,7 +17,7 @@
           a-row(type="flex" align="middle" style="margin-top: 8px;")
             a-col(:span="20" style="display: flex; align-items: center;")
               span(style="display: flex; align-items: center;")
-                a-avatar(:size="24" icon="user" style="margin-right: 8px;")
+                a-avatar(:size="24" :src="level.owner.avatarURL" style="margin-right: 8px;")
                 span(class="text-ele" v-text="level.owner.name || level.owner.uid")
             a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
               play-button(:src="level.bundle.music_preview")
