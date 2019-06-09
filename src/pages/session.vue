@@ -14,5 +14,7 @@
 
 <script>
 export default {
+  layout: 'background',
+  background: '/images/dark.png'
 }
 </script>

@@ -5,9 +5,11 @@
 
 <script>
 export default {
-  mounted() {
-    this.$root.$emit('background', { source: '/images/normal.png', overlayOpacity: 0.1 })
-  }
+  layout: 'background',
+  background: {
+    source: '/images/normal.png',
+    overlayOpacity: 0.1,
+  },
 }
 </script>
 

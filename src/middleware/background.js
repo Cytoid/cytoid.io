@@ -20,5 +20,9 @@ function routeOption(route, key) {
 
 export default function ({ route, store }) {
   const background = routeOption(route, 'background')
-  store.commit('setBackground', background)
+  if (background instanceof String || typeof background === 'string') {
+    store.commit('setBackground', { source: background })
+  } else {
+    store.commit('setBackground', background)
+  }
 }
