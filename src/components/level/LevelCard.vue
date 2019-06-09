@@ -147,6 +147,7 @@ p {
 }
 
 .card-wrap {
+  margin: 8px;
   transform: perspective(800px);
   transform-style: preserve-3d;
   cursor: default;

@@ -10,8 +10,16 @@
       a-select-option(value="rating") Rating
     a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading" style="margin-left: 8px;")
       font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
-    .level-card-container
-        level-card(v-for="level in levels" :key="level.id" :level="level")
+    a-row(type="flex" justify="center" style="margin-left: -8px; margin-right: -8px;")
+      a-col(
+        v-for="level in levels"
+        :key="level.id"
+        :xs="{ span: 24 }"
+        :sm="{ span: 12 }"
+        :lg="{ span: 8 }"
+        :xxl="{ span: 6 }"
+      )
+        level-card(:level="level")
     a-pagination(
       :disabled="loading"
       v-model="page"

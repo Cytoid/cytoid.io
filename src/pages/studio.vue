@@ -15,7 +15,7 @@
           li: a
             font-awesome-icon(:icon="['far', 'file-signature']" fixed-width)
             span.menu-text Posts
-    .column: nuxt
+    .column.is-three-quarters: nuxt
 </template>
 
 <script>

@@ -6,10 +6,11 @@ a-upload-dragger(
   :remove="removeUploadedFile"
   @change="uploadStatusChanged"
 )
-  p.ant-upload-drag-icon
-    a-icon(type="inbox")
-  p.ant-upload-text Click or drag your .cytoidlevel to this area
-  p.ant-upload-hint Some other descriptions
+  font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
+  p.ant-upload-text(style="font-weight: bold;") Click or drag a Cytoid level to this area
+  p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);") Don't know how to create one? Read our
+    a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level")  wiki
+    span !
 </template>
 
 <script>
@@ -71,3 +72,17 @@ export default {
   },
 }
 </script>
+
+<style lang="less">
+.ant-upload.ant-upload-drag {
+  transition: 0.4s @hoverEasing;
+  border: none;
+  background-color: #FF3CAC;
+  background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  box-shadow: 0 0 0 0 hsla(226, 68%, 67%, 0.5);
+  &:hover {
+    transition: 0.4s @hoverEasing;
+    box-shadow: 0 0 0 2px hsla(226, 68%, 67%, 0.5);
+  }
+}
+</style>
