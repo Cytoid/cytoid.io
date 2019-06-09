@@ -102,7 +102,8 @@ export default {
 
   @include mobile {
     .card-wrap {
-      margin: 8px;
+      margin-top: 8px;
+      margin-bottom: 8px;
     }
   }
   @include tablet {
