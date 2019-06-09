@@ -1,23 +1,21 @@
 <template lang="pug">
 div
-  div(style="z-index: 0;")
-    .background-wrap(v-if="background && background.source" v-parallax.absY="background.parallaxSpeed")
+  .background-container(v-if="background && background.source")
+    .background-wrap(v-parallax.absY="background.parallaxSpeed" :style="{opacity: 1-background.overlayOpacity}")
       img.background-image(v-show="loaded" :src="background.source" @load="animateBackground")
-    .background-overlay(v-show="loaded" :style="{ background: `hsla(226, 68%, 2%, ${this.background.overlayOpacity})` }")
     .background-fade-out
-    .background-block
   nav-bar
   nuxt
-  footer
+  footer-bar
 </template>
 
 <script>
-import Footer from '@/components/Footer'
+import FooterBar from '@/components/Footer'
 import NavBar from '@/components/NavBar'
 import { mapState } from 'vuex'
 export default {
   components: {
-    Footer,
+    FooterBar,
     NavBar
   },
   data: () => ({
@@ -41,16 +39,21 @@ export default {
 }
 </script>
 
-<style scoped>
-.background-wrap {
+<style scoped lang="less">
+.background-container {
   position: absolute;
   width: 100%;
-  height: 125%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.background-wrap {
+  width: 100%;
+  height: 100%;
 }
 
 .background-image {
-  position: absolute;
-  z-index: -1;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -68,42 +71,11 @@ export default {
     transform: scale(1);
   }
 }
-
-.background-overlay {
-  opacity: 1;
-  background: hsla(226, 68%, 2%, 0.5);
-  width: 100%;
-  top: -25%;
-  height: 150%;
-  z-index: 0;
-  position: absolute;
-  animation: background-overlay 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-}
-
-@keyframes background-overlay {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
 .background-fade-out {
   position: absolute;
-  bottom: -25%;
+  bottom: 0;
   width: 100%;
   height: 50%;
-  z-index: 0;
-  background-image: linear-gradient(to top, hsla(226, 68%, 6%, 1), rgba(0, 0, 0, 0));
-}
-
-.background-block {
-  position: absolute;
-  top: 125%;
-  width: 100%;
-  height: 50%;
-  z-index: 0;
-  background: hsla(226, 68%, 6%, 1);
+  background-image: linear-gradient(to top, @body-background, rgba(0, 0, 0, 0));
 }
 </style>
