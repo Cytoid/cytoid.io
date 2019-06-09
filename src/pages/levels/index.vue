@@ -67,9 +67,6 @@ export default {
         }
       })
   },
-  mounted() {
-    this.$root.$emit('background', { source: '/images/blank.png' })
-  },
   methods: {
     updateRoute() {
       this.$router.replace({ query: { page: this.page, ...this.filters } })

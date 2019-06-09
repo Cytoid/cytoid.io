@@ -130,7 +130,6 @@ export default {
       })
   },
   mounted() {
-    this.$root.$emit('background', { source: '/images/bright.png', parallaxSpeed: 0.8 })
     this.updateChart('global_ranking')
     console.log(this.profile)
   },

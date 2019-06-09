@@ -1,7 +1,7 @@
 <template lang="pug">
 .navcard
   img.navcard-avatar(:src="$auth.user.avatarURL")
-  img.navcard-header(src="/images/normal.png")
+  img.navcard-header(:src="require('@/assets/images/normal.png')")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $auth.user.uid || $auth.user.id } }")
       font-awesome-icon.icon(:icon="['far', 'user']")

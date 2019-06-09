@@ -3,7 +3,7 @@ div
   div(style="z-index: 0;")
     .background-wrap(v-if="background && background.source" v-parallax.absY="background.parallaxSpeed")
       img.background-image(v-show="loaded" :src="background.source" @load="animateBackground")
-    .background-overlay(v-show="loaded" :style="{ background: backgroundOverlayStyle }")
+    .background-overlay(v-show="loaded" :style="{ background: `hsla(226, 68%, 2%, ${this.background.overlayOpacity})` }")
     .background-fade-out
     .background-block
   nav-bar
@@ -27,9 +27,6 @@ export default {
     ...mapState([
       'background',
     ]),
-    backgroundOverlayStyle() {
-      return `hsla(226, 68%, 2%, ${this.background.overlayOpacity})`
-    }
   },
   watch: {
     'background.source'() {

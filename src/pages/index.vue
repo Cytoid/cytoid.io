@@ -1,13 +1,13 @@
 <template lang="pug">
   div.container.logo
-    img(src="/images/logo.png")
+    img(:src="require('@/assets/images/logo.png')")
 </template>
 
 <script>
 export default {
   layout: 'background',
   background: {
-    source: '/images/normal.png',
+    source: require('@/assets/images/normal.png'),
     overlayOpacity: 0.1,
   },
 }
