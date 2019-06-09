@@ -282,5 +282,9 @@ export default {
       background-position: -180px;
       transition: all 0.4s @hoverEasing;
     }
+    &:active {
+      transform: scale(0.95, 0.95);
+      box-shadow: @ele1;
+    }
   }
 </style>

@@ -28,8 +28,8 @@
 @disabled-color: rgba(255, 255, 255, .4);            // disable state color
 @body-background: @shade1;
 @component-background : @shade3;
-@border-color-base: @shade5; // base border outline a component
-@border-color-split: @shade4; // split border inside a component
+@border-color-base: @shade1; // base border outline a component
+@border-color-split: @shade2; // split border inside a component
 @background-color-light: @shade4; // background of header and selected item
 @background-color-base: @shade2; // Default grey background color
 @item-hover-bg: @shade1;
@@ -212,6 +212,24 @@
   border-color: white;
 }
 
+.ant-modal-header {
+  padding: 24px;
+  border-bottom: none;
+}
+
+.ant-modal-title {
+  font-weight: bold;
+}
+
+.ant-modal-body {
+  padding: 0 24px;
+}
+
+.ant-modal-footer {
+  padding: 24px;
+  border-top: none;
+}
+
 // Custom styles
 
 body {
@@ -356,4 +374,20 @@ h2 {
   box-shadow: none;
   background: linear-gradient(to right bottom, @shade4, @shade5);
   color: white;
+}
+
+.icon-button {
+  padding: 0 8px;
+  opacity: .3;
+  border: none;
+  background: none;
+  transition: 0.4s @hoverEasing;
+  &:hover {
+    opacity: 1;
+    color: @theme5;
+  }
+  &:active {
+    opacity: 0.7;
+    transform: scale(0.9, 0.9);
+  }
 }
