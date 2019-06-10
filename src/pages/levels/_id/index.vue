@@ -165,6 +165,7 @@ const modNames = {
   'flipy': 'Flip Y'
 }
 export default {
+  layout: 'background',
   components: { ScoreBadge, PlayerAvatar, DifficultyBadge },
   data: () => ({
     level: null,
@@ -180,18 +181,20 @@ export default {
       return marked(this.level.description || 'The author was too lazy to write any descriptions.')
     },
   },
-  asyncData({ $axios, params }) {
+  asyncData({ $axios, params, store }) {
     return Promise.all([
       $axios.get('/levels/' + params.id),
       $axios.get(`/levels/${params.id}/ratings`)
     ])
-      .then(([levelResponse, ratingResponse]) => ({
-        level: levelResponse.data,
-        ratings: ratingResponse.data,
-      }))
+      .then(([levelResponse, ratingResponse]) => {
+        store.commit('setBackground', { source: levelResponse.data.bundle.background })
+        return {
+          level: levelResponse.data,
+          ratings: ratingResponse.data,
+        }
+      })
   },
   mounted() {
-    this.$root.$emit('background', { source: this.level.bundle.background })
     this.fetchRankings()
   },
   methods: {
