@@ -1,28 +1,24 @@
 <template lang="pug">
-  .card-container
-    div(
-      ref="card"
-      class="card-wrap"
-      @mousemove="handleMouseMove"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-      @click="enter"
-    )
-      .card(:style="cardStyle")
-        .card-bg(:style="[cardBgTransform, cardBgImage]")
-        .card-bottom(style="padding-top: 48px;")
-          p(class="text-ele" style="color: rgba(255, 255, 255, 0.7); font-size: 12px; margin-bottom: 8px; line-height: 1.1;" v-text="level.metadata.artist.name")
-          h1(class="text-ele" style="margin-left: -1px; margin-bottom: 4px; line-height: 1.1;" v-text="level.title")
-          p(class="text-ele" v-if="level.metadata.title_localized !== null" v-text="level.metadata.title_localized" style="color: rgba(255, 255, 255, 0.7); margin-bottom: 0px;")
-          a-row(type="flex" align="middle" style="margin-top: 8px;")
-            a-col(:span="20" style="display: flex; align-items: center;")
-              span(style="display: flex; align-items: center;")
-                a-avatar(:size="24" :src="level.owner.avatarURL" style="margin-right: 8px;")
-                span(class="text-ele" v-text="level.owner.name || level.owner.uid")
-            a-col(:span="4" style="display: flex; align-items: center; justify-content: flex-end;")
-              play-button(:src="level.bundle.music_preview")
-        .card-top
-          difficulty-badge(class="ele3" v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
+.card-wrap(
+  ref="card"
+  @mousemove="handleMouseMove"
+  @mouseenter="handleMouseEnter"
+  @mouseleave="handleMouseLeave"
+)
+  .card
+    .card-bg(:style="[cardBgTransform, cardBgImage]")
+    nuxt-link.card-overlay(:to="{ name: 'levels-id', params: { id: this.level.uid } }")
+    .card-top
+      difficulty-badge(class="ele3" v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
+    .card-bottom
+      p.artist(v-text="level.metadata.artist.name")
+      h1.title(v-text="level.title")
+      p.title-localized(v-if="level.metadata.title_localized" v-text="level.metadata.title_localized")
+      .actions
+        nuxt-link.profile-link(:to="{name: 'profile-id', params: { id: level.owner.uid || level.owner.id }}")
+          a-avatar(:size="24" :src="level.owner.avatarURL" style="margin-right: 8px;")
+          span(class="text-ele" v-text="level.owner.name || level.owner.uid")
+        play-button(:src="level.bundle.music_preview")
 </template>
 
 <script>
@@ -51,19 +47,6 @@ export default {
     },
     mousePY() {
       return this.mouseY / this.$refs.card.offsetHeight
-    },
-    cardStyle() {
-      return {}
-      /*
-      if (this.mouseX === null || this.mouseY === null) {
-        return {}
-      }
-      const rX = this.mousePX * 6
-      const rY = this.mousePY * -6
-      return {
-        transform: `rotateY(${rX}deg) rotateX(${rY}deg)`,
-      }
-      */
     },
     cardBgTransform() {
       if (this.mouseX === null || this.mouseY === null) {
@@ -112,9 +95,6 @@ export default {
         this.mouseLeaveDelayTimeout = null
       }, 200)
     },
-    enter() {
-      this.$router.push({ name: 'levels-id', params: { id: this.level.uid } })
-    },
     getOffset(el) {
       let _x = 0
       let _y = 0
@@ -138,40 +118,14 @@ p {
 }
 @card-background-gutter: 1rem;
 
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
 .card-wrap {
-  margin: 8px;
-  transform: perspective(800px);
-  transform-style: preserve-3d;
-  cursor: default;
+  position: relative;
   width: 100%;
   padding-top: 62.5%;
   &:hover {
-    .card-info {
-      transition: 0.6s @hoverEasing;
-      p {
-        opacity: 1;
-        transition: 0.6s @hoverEasing;
-      }
-      &:after {
-        transition: 5s @hoverEasing;
-        opacity: 1;
-      }
-    }
     .card {
       transition: 0.4s @hoverEasing, box-shadow 0.4s @hoverEasing;
       box-shadow: @ele3; //rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px, rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -webkit-transform: translate3d(0, 0, 0);
-      -moz-transform: translate3d(0, 0, 0);
     }
     .card-bg {
       transition: 0.4s @hoverEasing, opacity 0.4s @hoverEasing;
@@ -194,63 +148,97 @@ p {
   box-shadow: @ele2; //rgba(0, 0, 0, 0.66) 0 px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
   transition: 0.4s @returnEasing;
   &:active {
-    transform: scale(0.98, 0.98) !important;
+    transform: scale(0.98, 0.98);
   }
-}
-
-.card-bg {
-  opacity: 0.5;
-  position: relative;
-  top: -@card-background-gutter;
-  left: -@card-background-gutter;
-  width: 100%;
-  height: 100%;
-  padding: @card-background-gutter;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  transition: 0.2s @returnEasing, opacity 0.4s @returnEasing;
-  pointer-events: none;
-  box-sizing: unset;
-}
-
-.card-top {
-  width: 100%;
   padding: 16px;
-  position: absolute;
-  top: 0;
-  color: #fff;
-  * {
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.card-bottom {
-  width: 100%;
-  padding: 16px;
-  position: absolute;
-  bottom: 0;
-  color: #fff;
-  h1 {
-    font-size: 20px;
-    font-weight: 300;
-    color: white;
-  }
-  * {
-    position: relative;
-    z-index: 1;
-  }
-  &:after {
+  .card-overlay {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 0;
-    width: 100%;
-    height: 100%;
     background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
     background-blend-mode: overlay;
+    cursor: default;
+  }
+  .card-bg {
+    opacity: 0.5;
+    position: absolute;
+    top: -@card-background-gutter;
+    left: -@card-background-gutter;
+    width: 100%;
+    height: 100%;
+    padding: @card-background-gutter;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: 0.2s @returnEasing, opacity 0.4s @returnEasing;
+    pointer-events: none;
+    box-sizing: unset;
+  }
+
+  display: flex;
+  flex-direction: column;
+  .card-top {
+    color: #fff;
+    * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  .card-bottom {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    min-height: 0; // Without this, the container won't narrow past the implied height of the texts
+    color: #fff;
+    .artist {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      margin-bottom: 8px;
+      line-height: 1.1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      text-shadow: @text-ele;
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 300;
+      color: white;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      margin-left: -1px;
+      margin-bottom: 4px;
+      line-height: 1.1;
+      text-shadow: @text-ele;
+    }
+    .title-localized {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      text-shadow: @text-ele;
+    }
+    .actions {
+      margin-top: 8px;
+      .profile-link {
+        color: white;
+      }
+      .play-button {
+        float: right;
+      }
+    }
+    * {
+      position: relative;
+      z-index: 1;
+    }
   }
 }
 </style>
