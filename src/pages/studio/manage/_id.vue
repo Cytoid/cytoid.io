@@ -3,19 +3,16 @@
     .column.is-one-quarter
       aside.menu
         ul.menu-list
-          li: nuxt-link(:to="{name: 'studio-analytics'}")
+          li: nuxt-link(:to="{name: '_id-analytics'}")
             font-awesome-icon(:icon="['far', 'analytics']" fixed-width)
             span.menu-text Analytics
-          li: nuxt-link(:to="{name: 'studio-levels'}")
+          li: nuxt-link(:to="{name: '_id-listing'}")
             font-awesome-icon(:icon="['far', 'chart-network']" fixed-width)
-            span.menu-text Levels
-          li: a
+            span.menu-text Details
+          li: nuxt-link(:to="{name: '_id-editor'}")
             font-awesome-icon(:icon="['far', 'archive']" fixed-width)
-            span.menu-text Collections
-          li: a
-            font-awesome-icon(:icon="['far', 'file-signature']" fixed-width)
-            span.menu-text Posts
-    .column.is-three-quarters: nuxt-child
+            span.menu-text Editor
+    .column.is-three-quarters: nuxt
 </template>
 
 <script>
@@ -40,7 +37,8 @@ a.is-active .menu-text {
     padding: 12px 16px;
   }
   a.is-active {
-    background: linear-gradient(to right, @theme4, @theme5);
+    background-color: #FFE53B;
+    background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
   }
 }
 </style>

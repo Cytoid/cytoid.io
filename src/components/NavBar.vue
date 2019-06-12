@@ -7,7 +7,7 @@ header.navbar.light.container(role="navigation")
     nuxt-link(v-if="!$auth.user" to="/session/signin"): a-button(type="primary") Login
     a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
       a-avatar(:src="$auth.user.avatarURL")
-      nav-card(slot="content")
+      nav-card(slot="editor.vue")
 </template>
 
 <script>

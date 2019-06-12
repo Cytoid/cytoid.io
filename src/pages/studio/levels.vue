@@ -16,6 +16,7 @@
           p(style="font-weight: bold;") This level is only visible to anybody who has the link.
           p This level won't appear to viewers who visit the level listing or your profile. It also won't appear in the search results.
             span(style="font-weight: bold;")  However, it is visible in a public collection which contains the level.
+
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level(slot="header")
@@ -43,7 +44,7 @@
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'download']" fixed-width)
                 a-button(class="icon-button")
-                  font-awesome-icon(:icon="['fas', 'edit']" fixed-width)
+                  font-awesome-icon(:icon="['fas', 'manage']" fixed-width)
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(v-slot:unlisted="unlisted")
@@ -141,7 +142,7 @@ export default {
     fetchLevels() {
       this.levels_loading = true
       this.$axios.get(`/levels`, { params: {
-        // uploader: this.$auth.user.id,
+        uploader: this.$auth.user.id,
         page: this.levels_pagination.current - 1,
         limit: this.levels_pagination.pageSize,
         sort: 'creation_date',
