@@ -3,13 +3,13 @@
     .column.is-one-quarter
       aside.menu
         ul.menu-list
-          li: nuxt-link(:to="{name: '_id-analytics'}")
+          li: nuxt-link(:to="{name: 'LevelManageAnalytics'}")
             font-awesome-icon(:icon="['far', 'analytics']" fixed-width)
             span.menu-text Analytics
-          li: nuxt-link(:to="{name: '_id-listing'}")
+          li: nuxt-link(:to="{name: 'LevelManageListing'}")
             font-awesome-icon(:icon="['far', 'chart-network']" fixed-width)
             span.menu-text Details
-          li: nuxt-link(:to="{name: '_id-editor'}")
+          li: nuxt-link(:to="{name: 'LevelManageEditor'}")
             font-awesome-icon(:icon="['far', 'archive']" fixed-width)
             span.menu-text Editor
     .column.is-three-quarters: nuxt

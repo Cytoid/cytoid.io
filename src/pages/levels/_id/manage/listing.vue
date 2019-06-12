@@ -5,6 +5,12 @@
     a-card Latest comments
 </template>
 
+<script>
+export default {
+  name: 'LevelManageListing'
+}
+</script>
+
 <style lang="less" scoped>
   .ant-card {
     margin-bottom: 16px;
