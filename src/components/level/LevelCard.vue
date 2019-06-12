@@ -15,10 +15,10 @@
       h1.title(v-text="level.title")
       p.title-localized(v-if="level.metadata.title_localized" v-text="level.metadata.title_localized")
       .actions
+        play-button(:src="level.bundle.music_preview")
         nuxt-link.profile-link(:to="{name: 'profile-id', params: { id: level.owner.uid || level.owner.id }}")
           a-avatar(:size="24" :src="level.owner.avatarURL" style="margin-right: 8px;")
-          span(class="text-ele" v-text="level.owner.name || level.owner.uid")
-        play-button(:src="level.bundle.music_preview")
+          span(v-text="level.owner.name || level.owner.uid")
 </template>
 
 <script>
@@ -205,6 +205,8 @@ p {
       white-space: nowrap;
       overflow: hidden;
       text-shadow: @text-ele;
+      user-select: none;
+      pointer-events: none;
     }
     .title {
       font-size: 20px;
@@ -217,6 +219,8 @@ p {
       margin-bottom: 4px;
       line-height: 1.1;
       text-shadow: @text-ele;
+      user-select: none;
+      pointer-events: none;
     }
     .title-localized {
       color: rgba(255, 255, 255, 0.7);
@@ -225,11 +229,18 @@ p {
       white-space: nowrap;
       overflow: hidden;
       text-shadow: @text-ele;
+      user-select: none;
+      pointer-events: none;
     }
     .actions {
       margin-top: 8px;
       .profile-link {
         color: white;
+        display: block;
+        & > span {
+          text-shadow: @text-ele;
+          vertical-align: middle;
+        }
       }
       .play-button {
         float: right;
