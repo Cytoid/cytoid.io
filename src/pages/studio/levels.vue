@@ -17,17 +17,18 @@
         :scroll="{ x: 800 }"
         @change="handleTableChange"
       )
-        template(slot="metadata" slot-scope="text, record")
+        template(slot="metadata" slot-scope="text, level")
           div(style="display: flex; flex-direction: row;")
-            nuxt-link.level-thumbnail(:to="{name: 'levels-id-manage', params: { id: record.uid }}")
-              img(:src="record.bundle.background" style="width: 128px; height: 80px; object-fit: cover; border-radius: 4px;")
+            nuxt-link.level-thumbnail(:to="{name: 'levels-id', params: { id: level.uid }}")
+              img(:src="level.bundle.background" style="width: 128px; height: 80px; object-fit: cover; border-radius: 4px;")
             div(style="margin-left: 8px")
-              p(style="margin-left: 8px; padding-top: 8px; margin-bottom: 0;") {{ record.title }}
-                p(style="margin-left: 8px; font-size: 10px; color: rgba(255, 255, 255, 0.3);") {{ 'ID: ' + record.uid }}
+              p(style="margin-left: 8px; padding-top: 8px; margin-bottom: 0;") {{ level.title }}
+                p(style="margin-left: 8px; font-size: 10px; color: rgba(255, 255, 255, 0.3);") {{ 'ID: ' + level.uid }}
               div
-                a-button(class="icon-button")
-                  font-awesome-icon(:icon="['fas', 'download']" fixed-width)
-                a-button(class="icon-button")
+                a(:href="downloadURL(level)")
+                  a-button(class="icon-button")
+                    font-awesome-icon(:icon="['fas', 'download']" fixed-width)
+                nuxt-link(:to="{name: 'levels-id-manage', params: { id: level.uid }}"): a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
@@ -117,6 +118,9 @@ export default {
     this.fetchLevels()
   },
   methods: {
+    downloadURL(level) {
+      return process.env.apiURL + '/levels/' + level.uid + '/package'
+    },
     formatDate(date) {
       return moment.utc(date).calendar()
     },
