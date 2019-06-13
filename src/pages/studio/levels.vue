@@ -35,7 +35,7 @@
       )
         template(slot="metadata" slot-scope="text, record")
           div(style="display: flex; flex-direction: row;")
-            a(class="level-thumbnail" :href="'/levels/' + record.uid")
+            nuxt-link.level-thumbnail(:to="{name: 'levels-id-manage', params: { id: record.uid }}")
               img(:src="record.bundle.background" style="width: 128px; height: 80px; object-fit: cover; border-radius: 4px;")
             div(style="margin-left: 8px")
               p(style="margin-left: 8px; padding-top: 8px; margin-bottom: 0;") {{ record.title }}
@@ -44,23 +44,24 @@
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'download']" fixed-width)
                 a-button(class="icon-button")
-                  font-awesome-icon(:icon="['fas', 'manage']" fixed-width)
+                  font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(v-slot:unlisted="unlisted")
           a.ant-dropdown-link(href="#" @click="showChangeVisibilityModel")
             span {{ unlisted ? "Unlisted" : "Public" }}
               font-awesome-icon(:icon="['fas', 'caret-down']" fixed-width)
-        template(v-slot:creation_date="creation_date") {{ creation_date }}
+        template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
         template(v-slot:rating="rating")
           div(style="display: flex;")
             font-awesome-icon(:icon="['fas', 'star']" fixed-width style="margin-top: 2px; margin-right: 4px;")
-            span(style="white-space: nowrap;") {{ (Math.floor(10 * 0.5 * 100) / 100).toFixed(2) + ' (' + 27 + ')' }}
+            span(style="white-space: nowrap;") {{ rating ? (Math.floor(rating * 0.5 * 100) / 100).toFixed(2) : 'N/A' }}
         template(v-slot:downloads="downloads") {{ downloads }}
         template(v-slot:plays="plays") {{ plays }}
 </template>
 
 <script>
+import moment from 'moment'
 import UploadLevel from '@/components/studio/UploadLevel'
 export default {
   components: {
@@ -104,9 +105,9 @@ export default {
       },
       {
         title: 'Date',
-        dataIndex: 'creation_date',
+        dataIndex: 'creationDate',
         scopedSlots: {
-          customRender: 'creation_date'
+          customRender: 'creationDate'
         }
       },
     ]
@@ -115,7 +116,7 @@ export default {
       levels_pagination: {
         pageSize: 10,
         total: 0,
-        showTotal: (total, range) => `${total} levels (${range})`,
+        showTotal: (total, range) => `${total} levels (${range.join('-')})`,
         current: 1,
       },
       levels_loading: false,
@@ -128,6 +129,9 @@ export default {
     this.fetchLevels()
   },
   methods: {
+    formatDate(date) {
+      return moment.utc(date).calendar()
+    },
     showChangeVisibilityModel() {
       this.change_visibility_modal_visible = true
     },
