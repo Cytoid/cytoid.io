@@ -1,41 +1,62 @@
 <template lang="pug">
 a-modal(
-  title="Change level visibility"
+  :title="title"
   v-model="modalVisible"
+  v-if="level && modalVisible"
   :closable="false"
 )
-  a-radio-group(:value="value" size="large")
-    a-radio-button(:value="'public'") Public
-    a-radio-button(:value="'unlisted'") Unlisted
-  div(style="padding-top: 16px;")
-    p(v-if="value === 'public'") This level is visible to everybody.
-    template(v-else-if="value === 'unlisted'")
-      p(style="font-weight: bold;") This level is only visible to anybody who has the link.
-      p This level won't appear to viewers who visit the level listing or your profile. It also won't appear in the search results.
-      span(style="font-weight: bold;")  However, it is visible in a public collection which contains the level.
-
+  p(v-if="value === 0").
+    You're making #[b(v-text="level.title")] visible to anyone.
+    #[br]
+    The level will appear in search results and in your profile page.
+    As a result, please be aware of the copyright implications of this action.
+    It will be helpful to review our #[a(href="#") Terms & Services]
+    and #[a(href="#") Community Guidelines] before you proceed.
+  p(v-else-if="value === 1").
+    #[b(v-text="level.title")] will no longer appear
+    to viewers who visit the level listing or your profile.
+    It will also disappear from the search results.
+    However, it will stay visible in a public collection containing this level.
+  p(v-else-if="value === 2").
+    #[b(v-text="level.title")] will be removed from your profile page
+    and all search results. It will stay in a public collection if it's already been added,
+    but the other players will not be able to check the details of the level.
+    Only you can see or download the level.
+  p Please input the uid of the level #[b(v-text="level.uid")] to proceed
+  action-confirm(
+    slot="footer"
+    :value="level.uid"
+    :button-title="['Publish', 'Unlist', 'Make Private'][value]"
+    :button-type="['primary', 'dashed', 'danger'][value]"
+  )
 </template>
 
 <script>
+import ActionConfirm from './ActionConfirm'
 export default {
   name: 'VisibilityModal',
+  components: { ActionConfirm },
   data: () => ({
     modalVisible: false,
+    level: null,
+    value: null,
   }),
-  props: {
-    value: {
-      type: Object,
-      required: false,
+  computed: {
+    title() {
+      const title = this.level.title
+      return [
+        'Publish ' + title,
+        `Make ${title} accessible only by URL`,
+        `Make ${title} private`
+      ][this.value]
     },
   },
-  watch: {
-    value() {
-      this.modalVisible = !!this.value
+  methods: {
+    show(level, visibility) {
+      this.level = level
+      this.value = visibility
+      this.modalVisible = true
     }
-  }
+  },
 }
 </script>
-
-<style scoped>
-
-</style>

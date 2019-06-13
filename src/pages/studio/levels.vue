@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    visibility-modal(:value="visibilityModal")
+    visibility-modal(ref="visibilityModal")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level(slot="header")
@@ -31,10 +31,15 @@
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
-        template(v-slot:unlisted="unlisted")
-          a.ant-dropdown-link(href="#" @click.prevent="showChangeVisibilityModel")
-            span {{ unlisted ? "Unlisted" : "Public" }}
+        template(slot="visibility" slot-scope="text, level")
+          a-dropdown
+            a.ant-dropdown-link
+              | Public
               font-awesome-icon(:icon="['fas', 'caret-down']" fixed-width)
+            a-menu(slot="overlay")
+              a-menu-item(v-for="(mode, index) of ['Public', 'Unlisted', 'Private']" @click="changeVisibility(level, index)")
+                font-awesome-icon(:icon="['globe', 'eye-slash', 'lock'][index]" fixed-width style="margin-right: 0.5rem;")
+                | {{mode}}
         template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
         template(v-slot:rating="rating")
           div(style="display: flex;")
@@ -63,9 +68,8 @@ export default {
       },
       {
         title: 'Visibility',
-        dataIndex: 'unlisted',
         scopedSlots: {
-          customRender: 'unlisted'
+          customRender: 'visibility'
         }
       },
       {
@@ -106,7 +110,6 @@ export default {
         current: 1,
       },
       levels_loading: false,
-      visibilityModal: null,
       columns
     }
   },
@@ -117,10 +120,8 @@ export default {
     formatDate(date) {
       return moment.utc(date).calendar()
     },
-    showChangeVisibilityModel() {
-      this.visibilityModal = { published: false }
-    },
-    changeVisibility() {
+    changeVisibility(level, visibility) {
+      this.$refs.visibilityModal.show(level, visibility)
     },
     handleTableChange(pagination, filters, sorter) {
       this.levels_pagination = pagination
