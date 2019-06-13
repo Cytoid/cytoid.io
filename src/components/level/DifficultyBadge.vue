@@ -1,6 +1,6 @@
 <template lang="pug">
   a-popover(placement="top" title="")
-    p(slot="editor.vue" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") {{value.notesCount}} Notes
+    p(slot="content" style="margin-bottom: 0; color: hsla(226, 68%, 6%, 1);") {{value.notesCount}} Notes
     div(:class="badgeClass")
       span.title(v-if="!ball" v-text="value.name || convertedDifficultyName(value.type)")
       span.level {{convertedDifficultyLevel}}

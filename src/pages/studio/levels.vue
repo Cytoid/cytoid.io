@@ -1,22 +1,6 @@
 <template lang="pug">
   div
-    a-modal(
-      title="Change level visibility"
-      v-model="change_visibility_modal_visible"
-      :closable="false"
-      @ok="changeVisibility"
-    )
-      a-radio-group(v-model="change_visibility_value" size="large")
-        a-radio-button(:value="'public'") Public
-        a-radio-button(:value="'unlisted'") Unlisted
-      div(style="padding-top: 16px;")
-        template(v-if="change_visibility_value === 'public'")
-          p This level is visible to everybody.
-        template(v-if="change_visibility_value === 'unlisted'")
-          p(style="font-weight: bold;") This level is only visible to anybody who has the link.
-          p This level won't appear to viewers who visit the level listing or your profile. It also won't appear in the search results.
-            span(style="font-weight: bold;")  However, it is visible in a public collection which contains the level.
-
+    visibility-modal(:value="visibilityModal")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level(slot="header")
@@ -48,7 +32,7 @@
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(v-slot:unlisted="unlisted")
-          a.ant-dropdown-link(href="#" @click="showChangeVisibilityModel")
+          a.ant-dropdown-link(href="#" @click.prevent="showChangeVisibilityModel")
             span {{ unlisted ? "Unlisted" : "Public" }}
               font-awesome-icon(:icon="['fas', 'caret-down']" fixed-width)
         template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
@@ -63,9 +47,11 @@
 <script>
 import moment from 'moment'
 import UploadLevel from '@/components/studio/UploadLevel'
+import VisibilityModal from '@/components/studio/VisibilityModal'
 export default {
   components: {
     UploadLevel,
+    VisibilityModal,
   },
   data() {
     const columns = [
@@ -120,8 +106,7 @@ export default {
         current: 1,
       },
       levels_loading: false,
-      change_visibility_modal_visible: false,
-      change_visibility_value: null,
+      visibilityModal: null,
       columns
     }
   },
@@ -133,11 +118,9 @@ export default {
       return moment.utc(date).calendar()
     },
     showChangeVisibilityModel() {
-      this.change_visibility_modal_visible = true
+      this.visibilityModal = { published: false }
     },
     changeVisibility() {
-      // TODO: API request
-      this.change_visibility_modal_visible = false
     },
     handleTableChange(pagination, filters, sorter) {
       this.levels_pagination = pagination

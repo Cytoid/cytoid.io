@@ -11,9 +11,9 @@
     .card-top
       difficulty-badge(class="ele3" v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
     .card-bottom
-      p.artist(v-text="level.metadata.artist.name" style="pointer-events: none;")
-      h1.title(v-text="level.title" style="pointer-events: none;")
-      p.title-localized(v-if="level.metadata.title_localized" v-text="level.metadata.title_localized" style="pointer-events: none;")
+      p.artist(v-text="level.metadata.artist.name")
+      h1.title(v-text="level.title")
+      p.title-localized(v-if="level.metadata.title_localized" v-text="level.metadata.title_localized")
       .actions
         play-button(:src="level.bundle.music_preview")
         nuxt-link.profile-link(:to="{name: 'profile-id', params: { id: level.owner.uid || level.owner.id }}")
