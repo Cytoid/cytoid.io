@@ -33,6 +33,13 @@ deploy:
   on:
     repo: Cytoid/cytoid.io
     branch: master
+- provider: gae
+  keyfile: "./deploy-secret.json"
+  project: cytoid
+  on:
+    repo: Cytoid/cytoid.io
+    branch: master
+  skip_cleanup: true
 before_install:
 - openssl aes-256-cbc -K $encrypted_5e0a3a26b52b_key -iv $encrypted_5e0a3a26b52b_iv
   -in secrets.tar.enc -out secrets.tar -d

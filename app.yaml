@@ -1,0 +1,3 @@
+runtime: nodejs10
+service: ssr
+instance_class: F2

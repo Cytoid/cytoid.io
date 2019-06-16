@@ -5,9 +5,9 @@
   "author": "Neo Zhang",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node server.js --watch server",
+    "dev": "node server.js --watch server",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server.js",
+    "start": "node server.js",
     "generate": "nuxt generate --modern",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
@@ -41,7 +41,6 @@
     "@fortawesome/fontawesome-pro": "^5.8.2",
     "@nuxtjs/eslint-config": "^0.0.1",
     "babel-eslint": "^8.2.1",
-    "cross-env": "^5.2.0",
     "eslint": "^5.0.1",
     "eslint-config-standard": ">=12.0.0",
     "eslint-loader": "^2.0.0",
