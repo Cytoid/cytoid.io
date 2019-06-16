@@ -77,11 +77,16 @@
             a-radio-button(value="accuracy") Average Accuracy
           line-chart(v-if="false" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
           // Disable the line chart just for now.
-        a-card(title="Levels").levels-container-card
-          a-button(slot="extra") View All {{profile.levels.totalLevelsCount}}
-          .level-card-container.small.featured-levels-container
+        a-card(
+          title="Levels"
+          v-if="featuredLevels.length > 0 || levels.length > 0"
+          :class="{ 'levels-card-has-featured': featuredLevels.length > 0 }"
+        )
+          nuxt-link(slot="extra" :to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
+            a-button View All {{profile.levels.totalLevelsCount}}
+          .level-card-container.small.featured-levels-container(v-if="featuredLevels.length > 0")
             level-card(v-for="level in featuredLevels" :key="level.id" :value="level")
-          .level-card-container.small.regular-levels-container
+          .level-card-container.small.regular-levels-container(v-if="levels.length > 0")
             level-card(v-for="level in levels" :key="level.id" :value="level")
 </template>
 
@@ -119,14 +124,14 @@ export default {
       .then(profile => Promise.all([
         Promise.resolve(profile),
         $axios.get('/levels', { params: {
-          uploader: profile.user.id,
+          owner: profile.user.id,
           featured: true,
           limit: 6,
           sort: 'creation_date',
           order: 'desc',
         } }).then(res => res.data),
         $axios.get('/levels', { params: {
-          uploader: profile.user.id,
+          owner: profile.user.id,
           limit: 6,
           featured: false,
           sort: 'creation_date',
@@ -358,7 +363,7 @@ export default {
 </style>
 
 <style lang="less">
-.levels-container-card {
+.levels-card-has-featured {
   overflow: hidden;
   .ant-card-body {
     padding: 0;

@@ -1,7 +1,7 @@
 <template lang="pug">
 header.navbar.light.container(role="navigation")
-  nuxt-link.navbar-item(to="/" exact) Cytoid
-  nuxt-link.navbar-item(to="/levels") Levels
+  nuxt-link.navbar-item(:to="{ name: 'index' }" exact) Cytoid
+  nuxt-link.navbar-item(:to="{ name: 'levels' }") Levels
   search.left
   no-ssr
     nuxt-link(v-if="!$auth.user" to="/session/signin"): a-button(type="primary") Login

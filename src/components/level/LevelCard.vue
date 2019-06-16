@@ -11,17 +11,18 @@
     .card-top
       difficulty-badge(class="ele3" v-for="chart in value.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
     .card-bottom
-      p.artist(v-text="value.metadata.artist.name")
-      h1.title(v-text="value.title")
-      p.title-localized(v-if="value.metadata.title_localized" v-text="value.metadata.title_localized")
-      .actions
-        play-button(:src="value.bundle.music_preview")
+      .info-text
+        p.artist(v-text="value.metadata.artist.name")
+        h1.title(v-text="value.title")
+        p.title-localized(v-if="value.metadata.title_localized" v-text="value.metadata.title_localized")
         nuxt-link.profile-link(
           v-if="value.owner"
           :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"
         )
           a-avatar(:size="24" :src="value.owner.avatarURL" style="margin-right: 8px;")
           span(v-text="value.owner.name || value.owner.uid")
+
+      play-button(:src="value.bundle.music_preview")
 </template>
 
 <script>
@@ -194,64 +195,68 @@ p {
   .card-bottom {
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
-
-    justify-content: flex-end;
+    flex-direction: row;
+    align-items: flex-end;
     min-height: 0; // Without this, the container won't narrow past the implied height of the texts
-    color: #fff;
-    .artist {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 12px;
-      margin-bottom: 8px;
-      line-height: 1.1;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      text-shadow: @text-ele;
-      user-select: none;
-      pointer-events: none;
-    }
-    .title {
-      font-size: 20px;
-      font-weight: 300;
-      color: white;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      margin-left: -1px;
-      margin-bottom: 4px;
-      line-height: 1.1;
-      text-shadow: @text-ele;
-      user-select: none;
-      pointer-events: none;
-    }
-    .title-localized {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 0;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      text-shadow: @text-ele;
-      user-select: none;
-      pointer-events: none;
-    }
-    .actions {
-      margin-top: 8px;
+    color: white;
+    .info-text {
+      flex-grow: 1;
+      min-width: 0; // To make the texts shrink
+      .artist {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+        margin-bottom: 8px;
+        line-height: 1.1;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-shadow: @text-ele;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: 300;
+        color: white;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin-left: -1px;
+        margin-bottom: 4px;
+        line-height: 1.1;
+        text-shadow: @text-ele;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .title-localized {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-shadow: @text-ele;
+        user-select: none;
+        pointer-events: none;
+      }
+
       .profile-link {
+        margin-top: 8px;
         color: white;
         display: block;
+
         & > span {
           text-shadow: @text-ele;
           vertical-align: middle;
         }
       }
-      .play-button {
-        float: right;
-      }
+    }
+    .play-button {
     }
     * {
-      position: relative;
       z-index: 1;
+      position: relative;
     }
   }
 }

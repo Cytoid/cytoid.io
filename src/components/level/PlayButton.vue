@@ -64,10 +64,11 @@ export default {
 </script>
 
 <style lang="less">
+@play-button-size: 24px;
 .play-button {
   background: none;
-  font-size: 24px;
-  padding: 0;
+  font-size: @play-button-size;
+  padding: @play-button-size/2;
   border: none;
   outline: none;
   user-select: none;
@@ -85,8 +86,8 @@ export default {
   .ant-progress {
     display: block;
     position: absolute;
-    top: -12px;
-    left: -12px;
+    top: 0;
+    left: 0;
   }
 }
 </style>

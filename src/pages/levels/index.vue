@@ -1,24 +1,24 @@
 <template lang="pug">
 .section
   .container
-    a-select(v-model="filters.sort" @change="updateRoute" style="width: 192px;" :disabled="loading")
+    a-select(:value="filters.sort" style="width: 192px;" :disabled="loading")
       a-select-option(value="creation_date") Uploaded date
       a-select-option(value="modification_date") Modified date
       a-select-option(value="difficulty") Difficulty
       a-select-option(value="duration") Duration
       a-select-option(value="downloads") Downloads
       a-select-option(value="rating") Rating
-    a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading" style="margin-left: 8px;")
+    a-button(:disabled="loading" style="margin-left: 8px;")
       font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
     .level-card-container.large
       level-card(v-for="level in levels" :key="level.id" :value="level")
     a-pagination(
       :disabled="loading"
-      v-model="page"
+      :current="page"
+      @change="handlePagination"
       :total="totalEntries"
       :page-size="pageSize"
       show-quick-jumper
-      show-size-changer
       :show-total="(total, range) => `${total} levels (${range})`"
     )
 </template>
@@ -34,44 +34,26 @@ export default {
     return {
       loading: false,
       levels: [],
-      page: 1,
       totalEntries: 0,
       totalPages: 0,
-      pageSize: 30,
-      filters: {
-        sort: 'creation_date',
-        order: 'desc',
-      }
+      pageSize: 24,
+    }
+  },
+  computed: {
+    page() {
+      return parseInt(this.$route.query.page, 10) || 1
+    },
+    filters() {
+      const filters = Object.assign({}, this.$route.query)
+      filters.sort = filters.sort || 'creation_date'
+      filters.order = filters.order || 'desc'
+      return filters
     }
   },
   watch: {
-    page() {
-      this.updateRoute()
-    },
-  },
-  asyncData({ $axios, query }) {
-    query.page = query.page || 1
-    query.page -= 1
-    query.sort = query.sort || 'creation_date'
-    query.order = query.order || 'desc'
-    return $axios.get('/levels', { params: query })
-      .then((response) => {
-        const page = query.page
-        delete query.page
-        return {
-          levels: response.data,
-          page: page + 1,
-          filters: query,
-          totalEntries: parseInt(response.headers['x-total-entries']),
-          totalPages: parseInt(response.headers['x-total-page']),
-        }
-      })
-  },
-  methods: {
-    updateRoute() {
-      this.$router.replace({ query: { page: this.page, ...this.filters } })
+    '$route'() {
       this.loading = true
-      this.$axios.get('/levels', { params: { page: this.page - 1, ...this.filters } })
+      this.$axios.get('/levels', { params: { ...this.filters, page: this.page - 1, limit: this.pageSize } })
         .then((response) => {
           this.levels = response.data
           this.totalEntries = parseInt(response.headers['x-total-entries'])
@@ -82,6 +64,24 @@ export default {
           this.loading = false
           console.log(error)
         })
+    }
+  },
+  asyncData({ $axios, query }) {
+    query.page = query.page || 1
+    query.sort = query.sort || 'creation_date'
+    query.order = query.order || 'desc'
+    return $axios.get('/levels', { params: { ...query, page: query.page - 1, limit: 24 } })
+      .then((response) => {
+        return {
+          levels: response.data,
+          totalEntries: parseInt(response.headers['x-total-entries']),
+          totalPages: parseInt(response.headers['x-total-page']),
+        }
+      })
+  },
+  methods: {
+    handlePagination(current) {
+      this.$router.replace({ query: { ...this.filters, page: current } })
     }
   }
 }
