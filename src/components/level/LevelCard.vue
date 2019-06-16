@@ -7,18 +7,21 @@
 )
   .card
     .card-bg(:style="[cardBgTransform, cardBgImage]")
-    nuxt-link.card-overlay(:to="{ name: 'levels-id', params: { id: this.level.uid } }")
+    nuxt-link.card-overlay(:to="{ name: 'levels-id', params: { id: value.uid } }")
     .card-top
-      difficulty-badge(class="ele3" v-for="chart in level.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
+      difficulty-badge(class="ele3" v-for="chart in value.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
     .card-bottom
-      p.artist(v-text="level.metadata.artist.name")
-      h1.title(v-text="level.title")
-      p.title-localized(v-if="level.metadata.title_localized" v-text="level.metadata.title_localized")
+      p.artist(v-text="value.metadata.artist.name")
+      h1.title(v-text="value.title")
+      p.title-localized(v-if="value.metadata.title_localized" v-text="value.metadata.title_localized")
       .actions
-        play-button(:src="level.bundle.music_preview")
-        nuxt-link.profile-link(:to="{name: 'profile-id', params: { id: level.owner.uid || level.owner.id }}")
-          a-avatar(:size="24" :src="level.owner.avatarURL" style="margin-right: 8px;")
-          span(v-text="level.owner.name || level.owner.uid")
+        play-button(:src="value.bundle.music_preview")
+        nuxt-link.profile-link(
+          v-if="value.owner"
+          :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"
+        )
+          a-avatar(:size="24" :src="value.owner.avatarURL" style="margin-right: 8px;")
+          span(v-text="value.owner.name || value.owner.uid")
 </template>
 
 <script>
@@ -30,7 +33,7 @@ export default {
     PlayButton,
   },
   props: {
-    level: {
+    value: {
       type: Object,
       required: true
     },
@@ -61,7 +64,7 @@ export default {
     },
     cardBgImage() {
       return {
-        backgroundImage: `url(${this.level.bundle.background})`,
+        backgroundImage: `url(${this.value.bundle.background})`,
       }
     },
   },

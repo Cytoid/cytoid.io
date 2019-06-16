@@ -38,7 +38,11 @@
               | Public
               font-awesome-icon(:icon="['fas', 'caret-down']" fixed-width)
             a-menu(slot="overlay")
-              a-menu-item(v-for="(mode, index) of ['Public', 'Unlisted', 'Private']" @click="changeVisibility(level, index)")
+              a-menu-item(
+                v-for="(mode, index) of ['Public', 'Unlisted', 'Private']"
+                @click="changeVisibility(level, index)"
+                :key="index"
+              )
                 font-awesome-icon(:icon="['globe', 'eye-slash', 'lock'][index]" fixed-width style="margin-right: 0.5rem;")
                 | {{mode}}
         template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}

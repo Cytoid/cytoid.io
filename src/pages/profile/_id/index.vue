@@ -77,16 +77,12 @@
             a-radio-button(value="accuracy") Average Accuracy
           line-chart(v-if="false" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
           // Disable the line chart just for now.
-        a-card.content-card
-          a-tabs(defaultActiveKey="featured_levels" size="small")
-            a-tab-pane(tab="Featured Levels" key="featured_levels")
-              a-row(type="flex" justify="center")
-                a-col(:xs="{ span: 24 }" :md="{ span: 12 }" v-for="level in levels" :key="level.id")
-                  level-card(:level="level")
-            a-tab-pane(tab="Levels" key="levels")
-            a-tab-pane(tab="Collections" key="collections")
-              p(style="margin: auto; display: flex; justify-content: center; align-items: center; height: 384px;")
-                | Work in progress...
+        a-card(title="Levels").levels-container-card
+          a-button(slot="extra") View All {{profile.levels.totalLevelsCount}}
+          .level-card-container.small.featured-levels-container
+            level-card(v-for="level in featuredLevels" :key="level.id" :value="level")
+          .level-card-container.small.regular-levels-container
+            level-card(v-for="level in levels" :key="level.id" :value="level")
 </template>
 
 <script>
@@ -101,6 +97,7 @@ export default {
   components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar, LevelCard },
   data: () => ({
     levels: [],
+    featuredLevels: [],
     profile: null,
     chartData: null,
     chartOptions: null,
@@ -118,14 +115,30 @@ export default {
   },
   asyncData({ $axios, params, error }) {
     return $axios.get('/profile/' + params.id)
-      .then(res => ({
-        profile: res.data
-      }))
+      .then(res => res.data)
+      .then(profile => Promise.all([
+        Promise.resolve(profile),
+        $axios.get('/levels', { params: {
+          uploader: profile.user.id,
+          featured: true,
+          limit: 6,
+          sort: 'creation_date',
+          order: 'desc',
+        } }).then(res => res.data),
+        $axios.get('/levels', { params: {
+          uploader: profile.user.id,
+          limit: 6,
+          featured: false,
+          sort: 'creation_date',
+          order: 'desc',
+        } }).then(res => res.data),
+      ]))
+      .then(([profile, featuredLevels, levels]) => ({ profile, featuredLevels, levels }))
       .catch((err) => {
         if (err.response?.status === 404) {
           error({ statusCode: 404, message: 'Profile not found' })
         } else {
-          throw error
+          throw err
         }
       })
   },
@@ -342,4 +355,24 @@ export default {
       margin-left: 32px;
     }
   }
+</style>
+
+<style lang="less">
+.levels-container-card {
+  overflow: hidden;
+  .ant-card-body {
+    padding: 0;
+  }
+  background: linear-gradient(to right, #b91d73, #f953c6);
+  .featured-levels-container {
+    padding: 24px;
+  }
+  .regular-levels-container {
+    background: @component-background;
+    padding: 48px 24px;
+    margin: 0;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+}
 </style>

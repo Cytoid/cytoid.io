@@ -10,8 +10,8 @@
       a-select-option(value="rating") Rating
     a-button(@click="(filters.order = (filters.order === 'asc' ? 'desc' : 'asc')) && updateRoute()" :disabled="loading" style="margin-left: 8px;")
       font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
-    .level-card-container
-      level-card(v-for="level in levels" :key="level.id" :level="level")
+    .level-card-container.large
+      level-card(v-for="level in levels" :key="level.id" :value="level")
     a-pagination(
       :disabled="loading"
       v-model="page"
@@ -86,33 +86,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.level-card-container {
-  margin-top: 16px;
-  margin-bottom: 16px;
-
-  @include mobile {
-    .card-wrap {
-      margin: 16px 0;
-    }
-  }
-  @include tablet {
-    display: grid;
-    grid-gap: 16px 16px;
-    grid-auto-flow: row;
-  }
-  @include tablet-only {
-    grid-template-columns: repeat(2, auto);
-  }
-  @include desktop-only {
-    grid-template-columns: repeat(3, auto);
-  }
-  @include widescreen-only {
-    grid-template-columns: repeat(3, auto);
-  }
-  @include fullhd {
-    grid-template-columns: repeat(4, auto);
-  }
-}
-</style>

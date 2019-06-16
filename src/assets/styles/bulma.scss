@@ -13,3 +13,45 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+.level-card-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  @include mobile {
+    .card-wrap {
+      margin: 16px 0;
+    }
+  }
+  @include tablet {
+    display: grid;
+    grid-gap: 16px 16px;
+    grid-auto-flow: row;
+  }
+  &.large {
+    @include desktop-only {
+      grid-template-columns: repeat(3, auto);
+    }
+    @include widescreen-only {
+      grid-template-columns: repeat(3, auto);
+    }
+    @include fullhd {
+      grid-template-columns: repeat(4, auto);
+    }
+  }
+  &.small {
+    @include desktop-only {
+      grid-template-columns: repeat(2, auto);
+    }
+    @include widescreen-only {
+      grid-template-columns: repeat(3, auto);
+    }
+    @include fullhd {
+      grid-template-columns: repeat(3, auto);
+    }
+  }
+  @include tablet-only {
+    grid-template-columns: repeat(2, auto);
+  }
+
+}

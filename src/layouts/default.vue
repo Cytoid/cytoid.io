@@ -2,16 +2,16 @@
   div
     nav-bar
     nuxt
-    footer
+    footer-bar
 </template>
 
 <script>
-import Footer from '@/components/Footer'
+import FooterBar from '@/components/Footer'
 import NavBar from '@/components/NavBar'
 export default {
   components: {
     NavBar,
-    Footer,
+    FooterBar,
   },
 }
 </script>
