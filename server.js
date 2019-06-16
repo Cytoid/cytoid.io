@@ -1,3 +1,12 @@
+require('@google-cloud/trace-agent').start()
+require('@google-cloud/debug-agent').start({
+  serviceContext: {
+    service: 'Frontend',
+    version: '1.0.0'
+  }
+})
+
+
 const { createServer } = require('http2')
 const Koa = require('koa')
 const conf = require('config')

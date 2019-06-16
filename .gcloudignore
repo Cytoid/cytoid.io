@@ -1,0 +1,19 @@
+.git
+.gitignore
+
+# Node.js dependencies:
+node_modules/
+
+.editorconfig
+.firebaserc
+.eslintrc.js
+.gitattributes
+.idea/
+.travis.yml
+firebase.json
+make-secret.sh
+README.md
+secrets.tar.enc
+
+/dist
+
