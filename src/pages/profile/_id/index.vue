@@ -83,7 +83,7 @@
           class="levels-card"
         )
           p.heading(style="position: absolute; margin-left: 24px; margin-top: 24px; z-index: 1;") Uploaded levels
-          div(v-if="featuredLevels.length > 0" :class="{ 'levels-card-has-featured': featuredLevels.length > 0 }")
+          div(v-if="featuredLevels.length > 0" :class="{ 'levels-card-has-featured ele3': featuredLevels.length > 0 }")
             div(style="position: absolute; bottom: 0px; background: linear-gradient(to bottom, transparent, hsla(226, 15%, 19%, 15%)); width: 100%; height: 48px;")
             .level-card-container.small.featured-levels-container(style="padding: 56px 16px 0 16px;")
               level-card(v-for="level in featuredLevels" :key="level.id" :value="level")

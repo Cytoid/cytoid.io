@@ -36,6 +36,7 @@
     "nuxt-recaptcha": "^0.1.0",
     "vee-validate": "^2.1.7",
     "vue-chartjs": "^3.4.2",
+    "vue-easymde": "^0.1.6",
     "vue-parallax-js": "https://github.com/Cytoid/vue-parallax-js.git"
   },
   "devDependencies": {

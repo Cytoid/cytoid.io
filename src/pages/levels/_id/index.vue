@@ -7,12 +7,12 @@
     div(style="margin-bottom: 32px;")
       a-button(
         type="primary"
-        icon="download"
         size="large"
         class="download-button ele3"
         @click="download"
       )
-        |  Download #[span(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
+        font-awesome-icon(icon="download" fixed-width style="margin-right: 8px;")
+        span Download #[span(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
         a-card(class="ele2" style="margin-bottom: 16px;")

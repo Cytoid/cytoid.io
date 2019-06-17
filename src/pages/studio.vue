@@ -42,6 +42,7 @@ a.is-active .menu-text {
   }
   a.is-active {
     background: linear-gradient(to right, @theme4, @theme5);
+    box-shadow: @ele4;
   }
 }
 </style>

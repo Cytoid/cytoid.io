@@ -66,6 +66,7 @@ module.exports = {
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
+    { src: '~plugins/vue-easymde', ssr: false },
   ],
 
   /*
