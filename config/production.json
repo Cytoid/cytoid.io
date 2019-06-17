@@ -1,7 +1,7 @@
 {
   "assetURL": "https://assets.cytoid.io",
   "staticURL": "https://static.cytoid.io",
-  "apiURLServer": "https://api.cytoid.io",
+  "apiURLServer": "http://api.cytoid.appspot.com",
   "apiURLClient": "https://api.cytoid.io",
   "captchaKey": "6LcI0I4UAAAAAJN852dnK__gRXfkyIW_9oC4bc5S"
 }

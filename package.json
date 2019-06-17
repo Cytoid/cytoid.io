@@ -17,6 +17,8 @@
     "@fortawesome/pro-regular-svg-icons": "^5.8.2",
     "@fortawesome/pro-solid-svg-icons": "^5.8.2",
     "@fortawesome/vue-fontawesome": "^0.1.6",
+    "@google-cloud/debug-agent": "^4.0.0",
+    "@google-cloud/trace-agent": "^4.0.0",
     "@nuxtjs/auth": "^4.5.3",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",

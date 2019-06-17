@@ -1,14 +1,23 @@
 <template lang="pug">
 .section
   .container
-    a-select(:value="filters.sort" style="width: 192px;" :disabled="loading")
+    a-select(
+      :value="filters.sort"
+      style="width: 192px;"
+      :disabled="loading"
+      @change="handleSortSelector"
+    )
       a-select-option(value="creation_date") Uploaded date
       a-select-option(value="modification_date") Modified date
       a-select-option(value="difficulty") Difficulty
       a-select-option(value="duration") Duration
       a-select-option(value="downloads") Downloads
       a-select-option(value="rating") Rating
-    a-button(:disabled="loading" style="margin-left: 8px;")
+    a-button(
+      :disabled="loading"
+      style="margin-left: 8px;"
+      @click="handleOrderButton"
+    )
       font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
     .level-card-container.large
       level-card(v-for="level in levels" :key="level.id" :value="level")
@@ -80,8 +89,17 @@ export default {
       })
   },
   methods: {
+    updateRoute(query) {
+      this.$router.replace({ query: { ...this.filters, ...query } })
+    },
     handlePagination(current) {
-      this.$router.replace({ query: { ...this.filters, page: current } })
+      this.updateRoute({ ...this.filters, page: current })
+    },
+    handleOrderButton() {
+      this.updateRoute({ order: this.filters.order === 'asc' ? 'desc' : 'asc' })
+    },
+    handleSortSelector(value) {
+      this.updateRoute({ sort: value })
     }
   }
 }

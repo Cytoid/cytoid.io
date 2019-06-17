@@ -15,6 +15,5 @@ make-secret.sh
 README.md
 secrets.tar.enc
 
-src/
-dist/
-.nuxt/dist/client/
+/dist
+
