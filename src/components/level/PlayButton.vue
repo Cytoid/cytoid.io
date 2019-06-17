@@ -1,7 +1,15 @@
 <template>
   <button class="play-button" @click.stop="play">
-    <a-icon :type="playing ? 'pause' : 'caret-right'" class="icon" />
-    <a-progress v-if="playing" type="circle" :percent="progress * 100" :show-info="false" :width="48" />
+    <font-awesome-icon :icon="playing ? 'pause' : 'play'" fixed-width />
+    <a-progress
+      v-if="playing"
+      type="circle"
+      :percent="progress * 100"
+      :show-info="false"
+      :width="36"
+      stroke-line-cap="square"
+      stroke-color="#fff"
+    />
     <audio ref="audio" :src="src" />
   </button>
 </template>
@@ -64,11 +72,11 @@ export default {
 </script>
 
 <style lang="less">
-@play-button-size: 24px;
+@play-button-size: 16px;
 .play-button {
   background: none;
   font-size: @play-button-size;
-  padding: @play-button-size/2;
+  padding: 0;
   border: none;
   outline: none;
   user-select: none;
@@ -79,15 +87,17 @@ export default {
      transform: scale(1.1, 1.1);
    }
   &:active {
-     color: @primary-color;
+     transform: scale(0.95, 0.95);
    }
   transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-
   .ant-progress {
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -7px;
+    left: -8px;
+  }
+  .ant-progress-circle-trail {
+    stroke: transparent;
   }
 }
 </style>

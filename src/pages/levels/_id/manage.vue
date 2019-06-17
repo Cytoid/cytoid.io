@@ -6,7 +6,7 @@
           li: nuxt-link(:to="{name: 'levels-id-manage-analytics'}")
             font-awesome-icon(:icon="['far', 'analytics']" fixed-width)
             span.menu-text Analytics
-          li: nuxt-link(:to="{name: 'levels-id-manage-listing'}")
+          li: nuxt-link(:to="{name: 'levels-id-manage-details'}")
             font-awesome-icon(:icon="['far', 'chart-network']" fixed-width)
             span.menu-text Details
           li: nuxt-link(:to="{name: 'levels-id-manage-editor'}")
@@ -37,8 +37,7 @@ a.is-active .menu-text {
     padding: 12px 16px;
   }
   a.is-active {
-    background-color: #FFE53B;
-    background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(209,14,134,1) 0%, rgba(234,55,59,0.76) 90.8% );
   }
 }
 </style>

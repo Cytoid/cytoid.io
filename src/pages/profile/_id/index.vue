@@ -31,6 +31,7 @@
             v-for="rank in profile.recents.ranks"
             :key="rank.uid"
             class="recent-rank ele3"
+            :class="Number(rank.rank) === 1 ? 'gold' : (Number(rank.rank) === 2 ? 'silver' : (Number(rank.rank) === 3 ? 'bronze' : ''))"
             style="position: relative; margin-top: 8px;"
           )
             .recent-rank-background(
@@ -40,7 +41,7 @@
             .recent-rank-overlay
             div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
               span(
-                :style="{ 'font-weight': rank.rank <= 3 ? 'bold' : 'normal' }"
+                :style="{ 'font-weight': Number(rank.rank) <= 3 ? 'bold' : 'normal' }"
               ) {{ '#' + rank.rank }}
               nuxt-link(:to="{ name: 'levels-id', params: { id: rank.uid }}" style="margin-left: 4px;" v-text="rank.title")
             div(style="display: flex; position: relative; z-index: 2;")
@@ -75,19 +76,29 @@
             a-radio-button(value="region_ranking") Region ranking
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
-          line-chart(v-if="false" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
+          line-chart(v-if="true" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
           // Disable the line chart just for now.
         a-card(
-          title="Levels"
           v-if="featuredLevels.length > 0 || levels.length > 0"
-          :class="{ 'levels-card-has-featured': featuredLevels.length > 0 }"
+          class="levels-card"
         )
-          nuxt-link(slot="extra" :to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
-            a-button View All {{profile.levels.totalLevelsCount}}
-          .level-card-container.small.featured-levels-container(v-if="featuredLevels.length > 0")
-            level-card(v-for="level in featuredLevels" :key="level.id" :value="level")
-          .level-card-container.small.regular-levels-container(v-if="levels.length > 0")
+          p.heading(style="position: absolute; margin-left: 24px; margin-top: 24px; z-index: 1;") Uploaded levels
+          div(v-if="featuredLevels.length > 0" :class="{ 'levels-card-has-featured': featuredLevels.length > 0 }")
+            div(style="position: absolute; bottom: 0px; background: linear-gradient(to bottom, transparent, hsla(226, 15%, 19%, 15%)); width: 100%; height: 48px;")
+            .level-card-container.small.featured-levels-container(style="padding: 56px 16px 0 16px;")
+              level-card(v-for="level in featuredLevels" :key="level.id" :value="level")
+            div(style="padding: 16px;")
+              nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
+                a-button(class="card-button" style="width: 100%;")
+                  font-awesome-icon(icon="angle-double-right" fixed-width)
+                  span View all {{profile.levels.featuredLevelsCount}} featured
+          .level-card-container.small.regular-levels-container(v-if="levels.length > 0" :style="featuredLevels.length > 0 ? 'padding: 16px 16px 0 16px;' : 'padding: 56px 16px 0 16px;'")
             level-card(v-for="level in levels" :key="level.id" :value="level")
+          div(style="padding: 16px;")
+            nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
+              a-button(class="card-button" style="width: 100%;")
+                font-awesome-icon(icon="angle-double-right" fixed-width)
+                span View all {{profile.levels.totalLevelsCount}}
 </template>
 
 <script>
@@ -266,9 +277,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .bio img {
-    max-width: 100%;
-  }
   .statistics-slot {
     margin-top: -4px;
     margin-bottom: 16px;
@@ -288,6 +296,24 @@ export default {
     }
     &:hover .recent-rank-background {
       transform: scale(1.2, 1.2);
+    }
+  }
+  .recent-rank.gold {
+    border-left: 4px solid @gold-record;
+    &:hover {
+      border-left: 4px solid @gold-record;
+    }
+  }
+  .recent-rank.silver {
+    border-left: 4px solid @silver-record;
+    &:hover {
+      border-left: 4px solid @silver-record;
+    }
+  }
+  .recent-rank.bronze {
+    border-left: 4px solid @bronze-record;
+    &:hover {
+      border-left: 4px solid @bronze-record;
     }
   }
   .recent-rank-background {
@@ -363,21 +389,37 @@ export default {
 </style>
 
 <style lang="less">
-.levels-card-has-featured {
-  overflow: hidden;
-  .ant-card-body {
-    padding: 0;
+  .bio img {
+    max-width: 100%;
   }
-  background: linear-gradient(to right, #b91d73, #f953c6);
-  .featured-levels-container {
-    padding: 24px;
+  .levels-card-has-featured {
+    position: relative;
+    background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    border-radius: 4px;
   }
-  .regular-levels-container {
-    background: @component-background;
-    padding: 48px 24px;
-    margin: 0;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+  .levels-card {
+    .ant-card-body {
+      padding: 0;
+    }
   }
-}
+  .card-button {
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.4s @hoverEasing;
+    &:hover {
+      background: rgba(255, 255, 255, 0.3) !important;
+      color: white !important;
+      transform: scale(1.01, 1.01);
+    }
+    &:active, &:focus {
+      background: rgba(255, 255, 255, 0.3) !important;
+      color: white !important;
+      transform: scale(0.98, 0.98);
+    }
+  }
 </style>

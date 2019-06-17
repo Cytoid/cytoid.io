@@ -1,8 +1,8 @@
 <template lang="pug">
   div
     a-card Plays & Downloads
-    a-card Most played levels
-    a-card Latest comments
+    a-card Rankings
+    a-card Comments
 </template>
 
 <script>

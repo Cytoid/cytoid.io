@@ -252,8 +252,6 @@ p {
         }
       }
     }
-    .play-button {
-    }
     * {
       z-index: 1;
       position: relative;
