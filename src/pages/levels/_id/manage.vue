@@ -4,14 +4,14 @@
       aside.menu
         ul.menu-list
           li: nuxt-link(:to="{name: 'levels-id-manage-analytics'}")
-            font-awesome-icon(:icon="['far', 'analytics']" fixed-width)
+            font-awesome-icon(:icon="['fas', 'analytics']" fixed-width)
             span.menu-text Analytics
-          li: nuxt-link(:to="{name: 'levels-id-manage-details'}")
-            font-awesome-icon(:icon="['far', 'chart-network']" fixed-width)
-            span.menu-text Details
-          li: nuxt-link(:to="{name: 'levels-id-manage-editor'}")
-            font-awesome-icon(:icon="['far', 'archive']" fixed-width)
-            span.menu-text Editor
+          li: nuxt-link(:to="{name: 'levels-id-manage-listing'}")
+            font-awesome-icon(:icon="['fas', 'edit']" fixed-width)
+            span.menu-text Edit listing
+          li: nuxt-link(:to="{name: 'levels-id-manage-level'}")
+            font-awesome-icon(:icon="['fas', 'file-edit']" fixed-width)
+            span.menu-text Edit level
     .column.is-three-quarters: nuxt
 </template>
 
@@ -49,8 +49,16 @@ a.is-active .menu-text {
   }
   a {
     padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    transition: 0.4s @hoverEasing;
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+      background-color: hsla(226, 15%, 19%, 0.3);
+    }
   }
   a.is-active {
+    color: rgba(255, 255, 255, 1);
     background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(209,14,134,1) 0%, rgba(234,55,59,0.76) 90.8% );
     box-shadow: @ele4;
   }

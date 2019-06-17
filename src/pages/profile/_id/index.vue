@@ -90,14 +90,14 @@
             div(style="padding: 16px;")
               nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
                 a-button(class="card-button" style="width: 100%;")
-                  font-awesome-icon(icon="angle-double-right" fixed-width)
+                  font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                   span View all {{profile.levels.featuredLevelsCount}} featured
           .level-card-container.small.regular-levels-container(v-if="levels.length > 0" :style="featuredLevels.length > 0 ? 'padding: 16px 16px 0 16px;' : 'padding: 56px 16px 0 16px;'")
             level-card(v-for="level in levels" :key="level.id" :value="level")
           div(style="padding: 16px;")
             nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
               a-button(class="card-button" style="width: 100%;")
-                font-awesome-icon(icon="angle-double-right" fixed-width)
+                font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                 span View all {{profile.levels.totalLevelsCount}}
 </template>
 
@@ -400,26 +400,6 @@ export default {
   .levels-card {
     .ant-card-body {
       padding: 0;
-    }
-  }
-  .card-button {
-    border: none;
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    background: rgba(255, 255, 255, 0.1);
-    transition: 0.4s @hoverEasing;
-    &:hover {
-      background: rgba(255, 255, 255, 0.3) !important;
-      color: white !important;
-      transform: scale(1.01, 1.01);
-    }
-    &:active, &:focus {
-      background: rgba(255, 255, 255, 0.3) !important;
-      color: white !important;
-      transform: scale(0.98, 0.98);
     }
   }
 </style>

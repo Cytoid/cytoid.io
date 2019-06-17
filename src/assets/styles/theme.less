@@ -202,6 +202,10 @@
   background: hsl(226, 68%, 67%);
 }
 
+.ant-select-selection {
+  border: 1px solid rgba(255, 255, 255, 0.3)
+}
+
 .ant-select-dropdown-menu-item-active {
   background: hsl(226, 68%, 67%);
 }
@@ -389,5 +393,26 @@ h2 {
   &:active {
     opacity: 0.7;
     transform: scale(0.9, 0.9);
+  }
+}
+
+.card-button {
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+  transition: 0.4s @hoverEasing;
+  &:hover, &:active {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    transform: scale(1.01, 1.01);
+  }
+  &:focus {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    transform: scale(0.99, 0.99);
   }
 }

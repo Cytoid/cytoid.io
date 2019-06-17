@@ -202,6 +202,8 @@ p {
     .info-text {
       flex-grow: 1;
       min-width: 0; // To make the texts shrink
+      pointer-events: none;
+      
       .artist {
         color: rgba(255, 255, 255, 0.7);
         font-size: 12px;
@@ -212,7 +214,6 @@ p {
         overflow: hidden;
         text-shadow: @text-ele;
         user-select: none;
-        pointer-events: none;
       }
 
       .title {
@@ -227,7 +228,6 @@ p {
         line-height: 1.1;
         text-shadow: @text-ele;
         user-select: none;
-        pointer-events: none;
       }
 
       .title-localized {
@@ -238,13 +238,14 @@ p {
         overflow: hidden;
         text-shadow: @text-ele;
         user-select: none;
-        pointer-events: none;
       }
 
       .profile-link {
+        pointer-events: auto;
         margin-top: 8px;
         color: white;
         display: block;
+        width: fit-content;
 
         & > span {
           text-shadow: @text-ele;
