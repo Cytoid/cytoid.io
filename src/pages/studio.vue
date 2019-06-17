@@ -4,16 +4,16 @@
       aside.menu
         ul.menu-list
           li: nuxt-link(:to="{name: 'studio-analytics'}")
-            font-awesome-icon(:icon="['far', 'analytics']" fixed-width)
+            font-awesome-icon(:icon="['fas', 'analytics']" fixed-width)
             span.menu-text Analytics
           li: nuxt-link(:to="{name: 'studio-levels'}")
-            font-awesome-icon(:icon="['far', 'chart-network']" fixed-width)
+            font-awesome-icon(:icon="['fas', 'chart-network']" fixed-width)
             span.menu-text Levels
           li: a
-            font-awesome-icon(:icon="['far', 'archive']" fixed-width)
+            font-awesome-icon(:icon="['fas', 'archive']" fixed-width)
             span.menu-text Collections
           li: a
-            font-awesome-icon(:icon="['far', 'file-signature']" fixed-width)
+            font-awesome-icon(:icon="['fas', 'file-signature']" fixed-width)
             span.menu-text Posts
     .column.is-three-quarters: nuxt-child
 </template>
@@ -39,8 +39,16 @@ a.is-active .menu-text {
   }
   a {
     padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    transition: 0.4s @hoverEasing;
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+      background-color: hsla(226, 15%, 19%, 0.3);
+    }
   }
   a.is-active {
+    color: rgba(255, 255, 255, 1);
     background: linear-gradient(to right, @theme4, @theme5);
     box-shadow: @ele4;
   }

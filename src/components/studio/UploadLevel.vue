@@ -1,16 +1,16 @@
 <template lang="pug">
-a-upload-dragger(
-  supportServerRender
-  accept=".cytoidlevel"
-  :customRequest="upload"
-  :remove="removeUploadedFile"
-  @change="uploadStatusChanged"
-)
-  font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
-  p.ant-upload-text(style="font-weight: bold;") Click or drag a Cytoid level to this area
-  p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);") Don't know how to create one? Read our
-    a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level")  wiki
-    span !
+  div.ele5
+    a-upload-dragger(
+      supportServerRender
+      accept=".cytoidlevel"
+      :customRequest="upload"
+      :remove="removeUploadedFile"
+      @change="uploadStatusChanged"
+    )
+      font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
+      p.ant-upload-text(style="font-weight: bold;") Click or drag a Cytoid level to this area
+      p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);")
+        slot
 </template>
 
 <script>

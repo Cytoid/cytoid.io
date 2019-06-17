@@ -4,6 +4,9 @@
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level(slot="header")
+      span Don't know how to create one? Read our
+        a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level")  wiki
+        span !
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
     a-card(class="studio-levels-card ele2")
@@ -43,7 +46,7 @@
                 @click="changeVisibility(level, index)"
                 :key="index"
               )
-                font-awesome-icon(:icon="['globe', 'eye-slash', 'lock'][index]" fixed-width style="margin-right: 0.5rem;")
+                font-awesome-icon(:icon="['globe', 'eye-slash', 'lock'][index]" fixed-width style="margin-right: 4px;")
                 | {{mode}}
         template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
         template(v-slot:rating="rating")
@@ -138,7 +141,7 @@ export default {
     fetchLevels() {
       this.levels_loading = true
       this.$axios.get(`/levels`, { params: {
-        owner: this.$auth.user.id,
+        owner: 'neo',
         page: this.levels_pagination.current - 1,
         limit: this.levels_pagination.pageSize,
         sort: 'creation_date',

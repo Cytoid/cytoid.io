@@ -67,6 +67,7 @@ module.exports = {
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
     { src: '~plugins/vue-easymde', ssr: false },
+    { src: '~plugins/vue-tags-input', ssr: false },
   ],
 
   /*
