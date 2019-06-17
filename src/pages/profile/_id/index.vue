@@ -394,7 +394,7 @@ export default {
   }
   .levels-card-has-featured {
     position: relative;
-    background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    background-image: linear-gradient(to right bottom, #b91d73, #f953c6);
     border-radius: 4px;
   }
   .levels-card {
