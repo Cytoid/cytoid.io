@@ -65,7 +65,14 @@ export default {
     },
     cardBgImage() {
       return {
-        backgroundImage: `url(${this.value.bundle.background})`,
+        backgroundImage: `url(${
+          this.$img(this.value.bundle.background, {
+            maxWidth: 320,
+            maxHeight: 200,
+            fitMode: 'crop',
+            cropMode: 'entropy',
+          })
+        })`,
       }
     },
   },
@@ -203,7 +210,6 @@ p {
       flex-grow: 1;
       min-width: 0; // To make the texts shrink
       pointer-events: none;
-      
       .artist {
         color: rgba(255, 255, 255, 0.7);
         font-size: 12px;

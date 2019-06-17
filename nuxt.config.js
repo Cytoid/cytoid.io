@@ -14,6 +14,7 @@ module.exports = {
   env: {
     assetURL: config.get('assetURL'),
     apiURL: config.get('apiURLClient'),
+    imageURL: config.get('imageURL'),
   },
   generate: {
     subFolders: false,
@@ -68,6 +69,7 @@ module.exports = {
     { src: '~plugins/fontawesome' },
     { src: '~plugins/vue-easymde', ssr: false },
     { src: '~plugins/vue-tags-input', ssr: false },
+    { src: '~plugins/imgresize' },
   ],
 
   /*

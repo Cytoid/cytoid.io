@@ -86,10 +86,8 @@ export default {
       easyDifficultyRating: 4,
       hardDifficultyRating: 6,
       extremeDifficultyRating: 12,
+      form: this.$form.createForm(this),
     }
-  },
-  beforeCreate() {
-    this.form = this.$form.createForm(this)
   },
   asyncData({ $axios, params, store }) {
     return Promise.all([
