@@ -76,6 +76,8 @@
               span(v-else)
                 img(v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;")
             template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date) }}
+        div(style="margin: 12px;")
+          vue-disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
 </template>
 
 <script>

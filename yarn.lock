@@ -8620,6 +8620,10 @@ vue-chartjs@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-3.4.2.tgz#0323e6a99a10a68f38d426899c3994f48596fd23"
 
+vue-disqus@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/vue-disqus/-/vue-disqus-3.0.5.tgz#8d0dd5cabdba7c47f82d129d2907a64366842fa8"
+
 vue-easymde@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/vue-easymde/-/vue-easymde-0.1.6.tgz#a1afc5c28913c6ae1f18de19d69cb8bd3df2ba01"
