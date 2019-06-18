@@ -27,9 +27,10 @@
               @change="rate"
             )
             span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
-          .card-heading Tags
-          div(style="margin-bottom: 16px;")
-            a-tag(v-for="tag in level.tags" :key="tag") {{ tag }}
+          template(v-if="level.tags.length > 0")
+            .card-heading Tags
+            div(style="margin-bottom: 16px;")
+              a-tag(v-for="tag in level.tags" :key="tag") {{ tag }}
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(level.modificationDate) }}
         a-card(class="ele3" style="margin-bottom: 16px;")
