@@ -15,9 +15,9 @@
         span Download #[span(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
-        a-card(class="ele2" style="margin-bottom: 16px;")
+        a-card(class="ele3" style="margin-bottom: 16px;")
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
-          div(style="overflow: auto;" v-html="levelDescription")
+          div(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
           p(class="card-heading") Rating
           div(style="margin-bottom: 16px;")
             a-rate(
@@ -32,8 +32,23 @@
             a-tag(v-for="tag in level.tags" :key="tag") {{ tag }}
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(level.modificationDate) }}
+        a-card(class="ele3" style="margin-bottom: 16px;")
+          p(class="card-heading") Music
+          p(class="card-em-text" style="margin-bottom: 4px;") SOTUI vs. Missionary
+          a-button(class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
+            font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
+            span Source
+          p(class="card-heading") Cover art
+          p(class="card-em-text" style="margin-bottom: 4px;") ゆなこ
+          a-button(class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
+            font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
+            span Source
+          p(class="card-heading") Chart
+          p(class="card-em-text" style="margin-bottom: 16px;") PTB10
+          p(class="card-heading") Storyboard
+          p(class="card-em-text" style="margin-bottom: 0px;") Fizzest
       a-col(:xs="24" :lg="16")
-        a-card(class="ele2" style="margin-bottom: 16px;")
+        a-card(class="ele3" style="margin-bottom: 16px;")
           a-table(
             :columns="columns"
             :row-key="record => record.id"
@@ -178,7 +193,7 @@ export default {
   }),
   computed: {
     levelDescription() {
-      return marked(this.level.description || 'The author was too lazy to write any descriptions.')
+      return this.level.description !== null ? marked(this.level.description) : null
     },
   },
   asyncData({ $axios, params, store }) {

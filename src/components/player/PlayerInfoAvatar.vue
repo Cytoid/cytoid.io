@@ -1,12 +1,12 @@
 <template functional lang="pug">
 .player-info-avatar
-  a-avatar.level-avatar(class="ele3" :src="props.avatar")
+  a-avatar.level-avatar(class="ele3" :src="props.avatar + '?size=512'")
   a-progress.level-badge-progress(
     type="dashboard"
     :percent="((props.exp.totalExp - 0) / (props.exp.nextLevelExp - props.exp.totalExp)) * 100"
     :format="percent => ''"
     :width="152"
-    :stroke-width="4"
+    :stroke-width="3"
     :stroke-color="'hsla(226, 68%, 67%, 1)'"
   )
   .level-badge(class="ele3")
@@ -62,7 +62,7 @@ export default {
     height: @level-badge-size;
     border-radius: @level-badge-size / 2;
     left: (@level-size / 2) - (@level-badge-size / 2);
-    top: -@level-badge-size / 2;
+    top: -@level-badge-size / 2 - 4px;
     background: #fff;
     text-align: center;
     line-height: @level-badge-inner-size / 2;
@@ -89,7 +89,7 @@ export default {
     left: @level-size / 2;
     bottom: -@rating-badge-size / 2;
     transform: translate(-50%, 0);
-    background: linear-gradient(to left, #B06AB3, #4568DC);
+    background: linear-gradient(60deg, hsl(226, 68%, 57%), hsl(226, 68%, 67%));
     font-size: 14px;
     color: white;
     white-space: nowrap;

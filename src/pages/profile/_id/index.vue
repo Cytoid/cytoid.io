@@ -55,22 +55,22 @@
           a-row
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Ranked plays
-              p.statistics-slot(v-text="profile.activities.total_ranked_plays")
+              p.card-em-text(v-text="profile.activities.total_ranked_plays")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Cleared notes
-              p.statistics-slot(v-text="commaSeparated(profile.activities.cleared_notes)")
+              p.card-em-text(v-text="commaSeparated(profile.activities.cleared_notes)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Max combo
-              p.statistics-slot(v-text="commaSeparated(profile.activities.max_combo)")
+              p.card-em-text(v-text="commaSeparated(profile.activities.max_combo)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Average ranked accuracy
-              p.statistics-slot(v-text="Math.round(profile.activities.average_ranked_accuracy*100) + '%'")
+              p.card-em-text(v-text="Math.round(profile.activities.average_ranked_accuracy*100) + '%'")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total ranked score
-              p.statistics-slot(v-text="commaSeparated(profile.activities.total_ranked_score)")
+              p.card-em-text(v-text="commaSeparated(profile.activities.total_ranked_score)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total play time
-              p.statistics-slot(v-text="profile.activities.total_play_time")
+              p.card-em-text(v-text="profile.activities.total_play_time")
           a-radio-group(defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;")
             a-radio-button(value="global_ranking") Global ranking
             a-radio-button(value="region_ranking") Region ranking
@@ -277,12 +277,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .statistics-slot {
-    margin-top: -4px;
-    margin-bottom: 16px;
-    font-size: 24px;
-    font-weight: 300;
-  }
   .recent-rank {
     position: relative;
     border-radius: 4px;
