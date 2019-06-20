@@ -5,14 +5,24 @@
     div(style="margin-bottom: 48px;")
       difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" class="ele3" style="margin-right: 8px;")
     div(style="margin-bottom: 32px;")
-      a-button(
+      a-button.download-button.ele3(
         type="primary"
         size="large"
-        class="download-button ele3"
         @click="download"
       )
-        font-awesome-icon(icon="download" fixed-width style="margin-right: 8px;")
-        span Download #[span(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
+        font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
+        span Download #[template(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
+      nuxt-link(
+        :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
+        v-if="$auth.user && (level.owner.id === $auth.user.id)"
+      )
+        a-button.ele3(
+          type="default"
+          size="large"
+          :style="{ 'margin-left': '1rem' }"
+        )
+          font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
+          span Manage
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
         a-card(class="ele3" style="margin-bottom: 16px;")

@@ -126,9 +126,12 @@ module.exports = {
     analyze: false,
     publicPath: config.get('staticURL'),
     filenames: {
-      app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
+      app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].app.js',
       chunk: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].js',
       css: ({ isDev }) => isDev ? '[name].css' : 'css/[contenthash].css',
+      img: 'img/[name].[ext]',
+      font: 'font/[name].[ext]',
+      video: 'vid/[name].[ext]',
     },
     babel: {
       plugins: [
