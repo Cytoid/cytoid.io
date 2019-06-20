@@ -49,23 +49,24 @@
           p(class="card-heading") Storyboard
           p(class="card-em-text" style="margin-bottom: 0px;") Fizzest
       a-col(:xs="24" :lg="16")
-        a-card(class="ele3" style="margin-bottom: 16px;")
+        a-card(class="ele3 rankings-card" style="margin-bottom: 16px;")
           a-table(
+            class="rankings-table"
             :columns="columns"
             :row-key="record => record.id"
             :data-source="rankings"
             :pagination="rankings_pagination"
             :loading="rankings_loading"
-            :scroll="{ x: 800 }"
+            :scroll="{ x: true }"
             :rowClassName="(record, index) => rowClass(record, index)"
             @change="handleTableChange"
           )
             template(v-slot:rank="ranking") {{ '#' + ranking }}
-            template(v-slot:owner="owner")
+            template(slot="owner" slot-scope="text, record")
               .ranking-player-avatar
-                nuxt-link(to="/profile" style="display: flex; align-items: center;")
-                  a-avatar(:size="24" src="https://cytoid.io/api/avatar.php?size=64&id=tigerhix")
-                  span.ranking-player-avatar-name(v-text="owner.name || owner.uid")
+                nuxt-link(:to="'/profile/' + (record.owner.name || record.owner.uid)" style="display: flex; align-items: center;")
+                  a-avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="'https://cytoid.io/api/avatar.php?size=96&id=' + record.owner.uid")
+                  span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
             template(v-slot:score="score")
               div(style="display: flex; align-items: center;")
                 score-badge(:value="score")
@@ -157,6 +158,7 @@ const columns = [
   {
     title: 'Mods',
     dataIndex: 'mods',
+    width: 0,
     scopedSlots: {
       customRender: 'mods'
     }
@@ -164,6 +166,7 @@ const columns = [
   {
     title: 'Achieved',
     dataIndex: 'date',
+    width: 0,
     scopedSlots: {
       customRender: 'achieved'
     }
@@ -238,13 +241,20 @@ export default {
       })
     },
     rowClass(record) {
+      let classes = 'row-score'
       if (record.score === 1000000) {
-        return 'row-score-max'
+        classes += ' row-score-max'
       } else if (record.score >= 999500) {
-        return 'row-score-sss'
-      } else {
-        return 'row-score'
+        classes += ' row-score-sss'
       }
+      if (record.rank === 1) {
+        classes += ' row-score-1st'
+      } else if (record.rank === 2) {
+        classes += ' row-score-2nd'
+      } else if (record.rank === 3) {
+        classes += ' row-score-3rd'
+      }
+      return classes
     },
     fetchRankings(params = {}) {
       this.rankings_loading = true
@@ -291,7 +301,6 @@ export default {
   }
   .ranking-player-avatar-name {
     margin-left: 8px;
-    padding-bottom: 2px;
     font-size: 14px;
   }
   .download-button.ant-btn-primary {
@@ -308,4 +317,63 @@ export default {
       box-shadow: @ele1;
     }
   }
+</style>
+
+<style lang="less">
+    .ant-table td, .ant-table th {
+        white-space: nowrap;
+    }
+    .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+        padding: 6px 8px;
+    }
+    .row-score-sss {
+        color: white;
+        background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 74%);
+    }
+    .row-score-max {
+        color: white;
+        background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    }
+    .row-score-1st {
+        font-size: 20px !important;
+        .ranking-player-avatar-name {
+            font-size: 20px !important;
+        }
+    }
+    .row-score-2nd {
+        font-size: 18px !important;
+        .ranking-player-avatar-name {
+            font-size: 18px !important;
+        }
+    }
+    .row-score-3rd {
+        font-size: 16px !important;
+        .ranking-player-avatar-name {
+            font-size: 16px !important;
+        }
+    }
+    .rankings-table {
+        .ant-badge {
+            margin-right: 2px;
+        }
+        table {
+            padding: 0px 24px;
+            border-collapse: separate;
+            border-spacing: 0 4px;
+        }
+        td:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        td:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+    }
+    .rankings-card .ant-card-body {
+        padding: 24px 0;
+        .ant-pagination {
+            padding: 0 24px;
+        }
+    }
 </style>
