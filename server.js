@@ -1,11 +1,3 @@
-const { createServer } = require('http2')
-const Koa = require('koa')
-const conf = require('config')
-const consola = require('consola')
-const { Nuxt, Builder } = require('nuxt')
-const session = require('koa-session')
-const router = require('koa-route')
-
 if (process.env.NODE_ENV === 'production') {
   require('@google-cloud/trace-agent').start()
   require('@google-cloud/debug-agent').start({
@@ -15,6 +7,14 @@ if (process.env.NODE_ENV === 'production') {
     }
   })
 }
+
+const { createServer } = require('http2')
+const Koa = require('koa')
+const conf = require('config')
+const consola = require('consola')
+const { Nuxt, Builder } = require('nuxt')
+const session = require('koa-session')
+const router = require('koa-route')
 
 const config = require('./nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
