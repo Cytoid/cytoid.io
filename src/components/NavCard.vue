@@ -1,9 +1,9 @@
 <template lang="pug">
 .navcard
-  img.navcard-avatar(:src="$auth.user.avatarURL")
+  img.navcard-avatar(:src="$store.state.user.avatarURL")
   img.navcard-header(:src="require('@/assets/images/normal.png')")
   .navcard-grid
-    nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $auth.user.uid || $auth.user.id } }")
+    nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['far', 'user']")
       .title Profile
     nuxt-link.navcard-item(to="/studio")
@@ -16,7 +16,7 @@
       font-awesome-icon.icon(:icon="['far', 'cog']")
       .title Settings
   .section
-    a-button(type="danger" block @click="$auth.logout()") Sign Out
+    a-button(type="danger" block @click="$store.dispatch('logout')") Sign Out
 </template>
 
 <script>

@@ -81,7 +81,6 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
-    '@nuxtjs/auth',
     ['nuxt-recaptcha', { key: config.get('captchaKey'), hideBadge: true }],
     '~modules/generate.js',
   ],
@@ -93,25 +92,6 @@ module.exports = {
     browserBaseURL: config.get('apiURLClient'),
     progress: true,
     credentials: true,
-  },
-
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: '/session', method: 'post', propertyName: null },
-          logout: { url: '/session', method: 'delete' },
-          user: { url: '/session', method: 'get', propertyName: 'user' }
-        },
-        tokenRequired: false,
-        tokenType: 'bearer',
-      }
-    },
-    redirect: {
-      login: '/session/signin',
-      logout: '/session/signin',
-      home: '/'
-    },
   },
   router: {
     linkExactActiveClass: 'is-exact-active',

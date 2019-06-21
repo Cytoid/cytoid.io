@@ -87,18 +87,18 @@ export default {
   },
   methods: {
     signIn() {
-      this.form.validateFields(async (err, values) => {
+      this.form.validateFields((err, values) => {
         if (err) {
           return
         }
         this.loading = true
-        const token = await this.$captcha('login')
-        this.$auth.loginWith('local', {
-          data: { ...values, token },
-        })
+        this.$captcha('login')
+          .then(token => this.$axios.post('/session', { ...values, token }, { withCredentials: true }))
           .then((response) => {
             this.loading = false
-            this.$message.info('signed in')
+            const user = response.data.user
+            this.$message.info('Welcome, ' + (user.name || user.uid))
+            this.$store.commit('setUser', user)
             this.$router.go(-1)
           })
           .catch((error) => {

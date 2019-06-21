@@ -16,7 +16,7 @@ a-card(title="User Info")
         :showUploadList="false"
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       )
-        img(v-if="$auth.user.avatarURL" :src="$auth.user.avatarURL" alt="avatar")
+        img(v-if="$store.state.user.avatarURL" :src="$store.state.user.avatarURL" alt="avatar")
       | Or
       a-button Upload from Gravatar
     a-form-item(label="Language" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       form: this.$form.createForm(this),
-      formValidation: formValidation(this.$auth.user),
+      formValidation: formValidation(this.$store.state.user),
       loading: false,
     }
   },
@@ -52,7 +52,7 @@ export default {
           return
         }
         this.loading = true
-        this.$axios.put('/users/' + this.$auth.user.id, values)
+        this.$axios.put('/users/' + this.$store.state.user.id, values)
           .then((res) => {
             this.loading = false
           })

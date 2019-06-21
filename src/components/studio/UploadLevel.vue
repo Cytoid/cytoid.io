@@ -2,53 +2,58 @@
   div.ele5
     a-upload-dragger(
       supportServerRender
-      accept=".cytoidlevel"
+      :accept="accept"
       :customRequest="upload"
       :remove="removeUploadedFile"
       @change="uploadStatusChanged"
     )
       font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
-      p.ant-upload-text(style="font-weight: bold;") Click or drag a Cytoid level to this area
+      p.ant-upload-text(style="font-weight: bold;"): slot(name="text")
       p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);")
-        slot
+        slot(name="hint")
 </template>
 
 <script>
 import axios from 'axios'
 
 export default {
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+    accept: {
+      type: String,
+      required: true,
+    },
+  },
   data: () => ({
     status: false,
   }),
   methods: {
     upload(option) {
       const source = axios.CancelToken.source()
-      let uploadConfig = null
       this.$captcha('upload')
-        .then(token => this.$axios.post('/files/packages', { token }, {
+        .then(token => this.$axios.post('/files/' + this.type, { token }, {
           cancelToken: source.token,
         }))
-        .then((response) => {
-          uploadConfig = response.data
-          return axios.put(uploadConfig.uploadURL, option.file, {
-            withCredentials: option.withCredentials,
-            headers: {
-              'Content-Type': 'application/zip'
-            },
-            cancelToken: source.token,
-            onUploadProgress(e) {
-              if (e.total > 0) {
-                e.percent = (e.loaded / e.total) * 100
-              }
-              option.onProgress(e)
+        .then(response => axios.put(response.data.uploadURL, option.file, {
+          withCredentials: option.withCredentials,
+          headers: {
+            'Content-Type': 'application/zip'
+          },
+          cancelToken: source.token,
+          onUploadProgress(e) {
+            if (e.total > 0) {
+              e.percent = (e.loaded / e.total) * 100
             }
-          })
+            option.onProgress(e)
+          }
         })
-        .then(() => {
-          return this.$axios.post('/files/' + uploadConfig.path, {}, {
+          .then(() => this.$axios.post('/files/' + response.data.path, {}, {
             cancelToken: source.token,
-          })
-        })
+          }))
+        )
         .then((response) => {
           const details = response.data
           option.onSuccess(details)
@@ -58,9 +63,7 @@ export default {
         })
 
       return {
-        abort() {
-          source.cancel()
-        }
+        abort: source.cancel
       }
     },
     removeUploadedFile() {

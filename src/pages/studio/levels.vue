@@ -3,10 +3,12 @@
     visibility-modal(ref="visibilityModal")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
-    upload-level(slot="header")
-      span Don't know how to create one? Read our
+    upload-level(slot="header" accept=".cytoidlevel" type="packages")
+      template(slot="text") Click or drag a Cytoid level to this area
+      template(slot="hint")
+        | Don't know how to create one? Read our
         a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level")  wiki
-        span !
+        | !
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
     a-card(class="studio-levels-card ele2")

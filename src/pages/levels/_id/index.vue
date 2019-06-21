@@ -14,7 +14,7 @@
         span Download #[template(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
       nuxt-link(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
-        v-if="$auth.user && (level.owner.id === $auth.user.id)"
+        v-if="$store.state.user && (level.owner.id === $store.state.user.id)"
       )
         a-button.ele3(
           type="default"
@@ -285,7 +285,7 @@ export default {
       return formatBytes(size)
     },
     download() {
-      if (this.$auth.loggedIn) {
+      if (this.$store.state.user) {
         window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
       } else {
         this.$router.push('/session/signin')
