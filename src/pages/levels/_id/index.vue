@@ -337,12 +337,32 @@ export default {
         padding: 6px 8px;
     }
     .row-score-sss {
-        color: white;
-        background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 74%);
+        color: white !important;
+        background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 100%);
+        a {
+            color: white !important;
+        }
     }
     .row-score-max {
         color: white;
         background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+        a {
+            color: white !important;
+        }
+    }
+    // Tell Safari to fix their shit
+    // See https://bug.webkit.org/show_bug.cgi?id=9268
+    @media not all and (min-resolution: .001dpcm) {
+        @supports  (-webkit-appearance: none) {
+            .row-score-sss {
+                color: white;
+                background-image: linear-gradient(315deg, #FD7C5C 0%, #FD7C5C 100%);
+            }
+            .row-score-max {
+                color: white;
+                background-image: linear-gradient(19deg, #6C7BFE 0%, #6C7BFE 100%);
+            }
+        }
     }
     .row-score-1st {
         font-size: 20px !important;
