@@ -4,5 +4,6 @@
   "apiURLServer": "https://api.cytoid.io",
   "apiURLClient": "https://api.cytoid.io",
   "imageURL": "https://assets.cytoid.io",
-  "captchaKey": "6LcI0I4UAAAAAJN852dnK__gRXfkyIW_9oC4bc5S"
+  "captchaKey": "6LcI0I4UAAAAAJN852dnK__gRXfkyIW_9oC4bc5S",
+  "secret": "keyboard cat"
 }

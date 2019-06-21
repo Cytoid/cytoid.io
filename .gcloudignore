@@ -29,3 +29,7 @@ secrets.tar.enc
 !/.nuxt/dist
 /.nuxt/dist/*
 !/.nuxt/dist/server
+
+/src/*
+!/src/modules
+!/src/store

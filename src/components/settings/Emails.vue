@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get(`/users/${this.$auth.user.id}/emails`)
+    this.$axios.get(`/users/${this.$store.state.user.id}/emails`)
       .then((response) => {
         this.emails = response.data
       })
@@ -53,7 +53,7 @@ export default {
           return
         }
         this.loading = true
-        this.$axios.post(`/users/${this.$auth.user.id}/emails`, values)
+        this.$axios.post(`/users/${this.$store.state.user.id}/emails`, values)
           .then(() => {
             this.emails.push({ address: values.email, primary: false, verified: false })
           })
@@ -67,7 +67,7 @@ export default {
     },
     removeEmail(email, index) {
       this.loading = true
-      this.$axios.delete(`/users/${this.$auth.user.id}/emails/${email}`)
+      this.$axios.delete(`/users/${this.$store.state.user.id}/emails/${email}`)
         .then(() => {
           this.emails.splice(index, 1)
         })
@@ -80,7 +80,7 @@ export default {
     },
     verify(email) {
       this.loading = true
-      this.$axios.post(`/users/${this.$auth.user.id}/emails/${email}/verify`)
+      this.$axios.post(`/users/${this.$store.state.user.id}/emails/${email}/verify`)
         .then(() => {
           this.$message.info('Confirmation email sent')
         })
@@ -93,7 +93,7 @@ export default {
     },
     makePrimary(item) {
       this.loading = true
-      this.$axios.patch(`/users/${this.$auth.user.id}/emails/${item.address}`, { primary: true })
+      this.$axios.patch(`/users/${this.$store.state.user.id}/emails/${item.address}`, { primary: true })
         .then(() => {
           this.emails.forEach((email) => {
             email.primary = false

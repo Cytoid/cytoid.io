@@ -2,8 +2,9 @@
   div
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Replace
-    upload-level(slot="header")
-      span Your level must have the same ID as the current one.
+    upload-level(slot="header" accept=".cytoidlevel" type="package")
+      template(slot="text") Click or drag a Cytoid level to this area
+      template(slot="hint") Your level must have the same ID as the current one.
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Metadata
     div
