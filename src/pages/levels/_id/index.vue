@@ -99,6 +99,8 @@ import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import { formatBytes } from '@/utils'
+import simplebar from 'simplebar-vue'
+import 'simplebar/dist/simplebar.min.css'
 const columns = [
   {
     title: 'Rank',
@@ -197,7 +199,7 @@ const modNames = {
 }
 export default {
   layout: 'background',
-  components: { ScoreBadge, PlayerAvatar, DifficultyBadge },
+  components: { ScoreBadge, PlayerAvatar, DifficultyBadge, simplebar },
   data: () => ({
     level: null,
     ratings: null,

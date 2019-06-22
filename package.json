@@ -34,6 +34,7 @@
     "moment": "^2.24.0",
     "nuxt": "^2.3.4",
     "nuxt-recaptcha": "^0.1.0",
+    "simplebar-vue": "^1.0.0",
     "vee-validate": "^2.1.7",
     "vue-chartjs": "^3.4.2",
     "vue-disqus": "^3.0.5",
