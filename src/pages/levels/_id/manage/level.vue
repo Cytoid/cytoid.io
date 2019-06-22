@@ -11,8 +11,8 @@
       a-card.ele3
         a-form(:form="form")
           p.heading(style="margin-bottom: 4px;") ID
-            a-form-item
-              a-input(value="io.cytoid.glow_dance" disabled)
+          a-form-item
+            a-input(value="io.cytoid.glow_dance" disabled)
           p.heading(style="margin-bottom: 4px;") Title
           a-form-item
             div(slot="extra") The music title in its original form and language.
@@ -48,25 +48,13 @@
           // TODO: Only show respective difficulty ratings if the level has that difficulty type available
           p.heading(style="margin-bottom: 4px;") Easy difficulty rating
           a-form-item
-            a-select(v-model="easyDifficultyRating")
-              a-select-option(v-for="rating in Array(15).keys()" :value="rating")
-                span {{ rating }}
-              a-select-option(value="15+")
-                span 15+
+            a-input-number(:min="1" :max="15" :defaultValue="3")
           p.heading(style="margin-bottom: 4px;") Hard difficulty rating
           a-form-item
-            a-select(v-model="hardDifficultyRating")
-              a-select-option(v-for="rating in Array(15).keys()" :value="rating")
-                span {{ rating }}
-              a-select-option(value="15+")
-                span 15+
+            a-input-number(:min="1" :max="15" :defaultValue="7")
           p.heading(style="margin-bottom: 4px;") Extreme difficulty rating
           a-form-item
-            a-select(v-model="extremeDifficultyRating")
-              a-select-option(v-for="rating in Array(15).keys()" :value="rating")
-                span {{ rating }}
-              a-select-option(value="15+")
-                span 15+
+            a-input-number(:min="1" :max="15" :defaultValue="13")
           div(style="font-size: 12px; color: white;")
             | Please follow the #[a(href="https://cytoid.io/posts/difficulty-v2") difficulty rating guidelines] when rating your charts.
           a-button(class="card-button" style="width: 100%; margin-top: 24px;")
@@ -78,7 +66,6 @@
 import UploadLevel from '@/components/studio/UploadLevel'
 export default {
   name: 'LevelManageEditor',
-  layout: 'background',
   components: {
     UploadLevel
   },
@@ -89,19 +76,6 @@ export default {
       extremeDifficultyRating: 12,
       form: this.$form.createForm(this),
     }
-  },
-  asyncData({ $axios, params, store }) {
-    return Promise.all([
-      $axios.get('/levels/' + params.id),
-      $axios.get(`/levels/${params.id}/ratings`)
-    ])
-      .then(([levelResponse, ratingResponse]) => {
-        store.commit('setBackground', { source: levelResponse.data.bundle.background })
-        return {
-          level: levelResponse.data,
-          ratings: ratingResponse.data,
-        }
-      })
   },
 }
 </script>

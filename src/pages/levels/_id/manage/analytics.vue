@@ -8,20 +8,6 @@
 <script>
 export default {
   name: 'LevelManageAnalytics',
-  layout: 'background',
-  asyncData({ $axios, params, store }) {
-    return Promise.all([
-      $axios.get('/levels/' + params.id),
-      $axios.get(`/levels/${params.id}/ratings`)
-    ])
-      .then(([levelResponse, ratingResponse]) => {
-        store.commit('setBackground', { source: levelResponse.data.bundle.background })
-        return {
-          level: levelResponse.data,
-          ratings: ratingResponse.data,
-        }
-      })
-  },
 }
 </script>
 

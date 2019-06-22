@@ -21,6 +21,11 @@
 <script>
 export default {
   middleware: 'auth',
+  fetch({ route, redirect }) {
+    if (route.fullPath === '/studio') {
+      redirect('/studio/levels')
+    }
+  }
 }
 </script>
 

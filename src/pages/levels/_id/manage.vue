@@ -17,20 +17,12 @@
 
 <script>
 export default {
-  layout: 'background',
-  asyncData({ $axios, params, store }) {
-    return Promise.all([
-      $axios.get('/levels/' + params.id),
-      $axios.get(`/levels/${params.id}/ratings`)
-    ])
-      .then(([levelResponse, ratingResponse]) => {
-        store.commit('setBackground', { source: levelResponse.data.bundle.background })
-        return {
-          level: levelResponse.data,
-          ratings: ratingResponse.data,
-        }
-      })
-  },
+  fetch({ route, redirect }) {
+    const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)
+    if (test) {
+      return redirect(route.fullPath + '/level')
+    }
+  }
 }
 </script>
 

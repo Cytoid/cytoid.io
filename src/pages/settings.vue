@@ -21,7 +21,12 @@
 
 <script>
 export default {
-  middleware: 'auth'
+  middleware: 'auth',
+  fetch({ route, redirect }) {
+    if (route.fullPath === '/settings') {
+      redirect('/settings/account')
+    }
+  }
 }
 </script>
 
