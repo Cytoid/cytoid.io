@@ -41,7 +41,7 @@ deploy:
     branch: master
   skip_cleanup: true
 before_install:
-- openssl aes-256-cbc -K $encrypted_884d1675a8db_key -iv $encrypted_884d1675a8db_iv
+- openssl aes-256-cbc -K $encrypted_6e9208acd6c4_key -iv $encrypted_6e9208acd6c4_iv
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 env:
