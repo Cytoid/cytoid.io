@@ -12,17 +12,32 @@
           li: nuxt-link(:to="{name: 'levels-id-manage-level'}")
             font-awesome-icon(:icon="['fas', 'file-edit']" fixed-width)
             span.menu-text Edit level
-    .column.is-three-quarters: nuxt
+    .column.is-three-quarters: nuxt-child(v-if="level" :value="level")
 </template>
 
 <script>
 export default {
+  layout: 'background',
+  data() {
+    return {
+      level: null,
+    }
+  },
+  asyncData({ $axios, params, store }) {
+    return $axios.get('/levels/' + params.id)
+      .then((resposne) => {
+        store.commit('setBackground', { source: resposne.data.bundle.background })
+        return {
+          level: resposne.data,
+        }
+      })
+  },
   fetch({ route, redirect }) {
     const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)
     if (test) {
       return redirect(route.fullPath + '/level')
     }
-  }
+  },
 }
 </script>
 

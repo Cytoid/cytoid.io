@@ -12,11 +12,11 @@
         a-form(:form="form")
           p.heading(style="margin-bottom: 4px;") ID
           a-form-item
-            a-input(value="io.cytoid.glow_dance" disabled)
+            a-input(:value="value.uid" disabled)
           p.heading(style="margin-bottom: 4px;") Title
           a-form-item
             div(slot="extra") The music title in its original form and language.
-            a-input(value="Glow Dance")
+            a-input(:value="value.name")
           p.heading(style="margin-bottom: 4px;") Localized title (optional)
           a-form-item
             div(slot="extra") The music title in English. Literal translation is preferred.
@@ -66,8 +66,15 @@
 import UploadLevel from '@/components/studio/UploadLevel'
 export default {
   name: 'LevelManageEditor',
+  background: null,
   components: {
     UploadLevel
+  },
+  props: {
+    value: {
+      type: Object,
+      required: true,
+    }
   },
   data() {
     return {

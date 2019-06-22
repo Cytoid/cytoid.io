@@ -8,6 +8,7 @@
 <script>
 export default {
   name: 'LevelManageAnalytics',
+  background: null,
 }
 </script>
 

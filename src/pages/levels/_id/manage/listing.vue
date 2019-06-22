@@ -39,6 +39,7 @@
 <script>
 export default {
   name: 'LevelManageListing',
+  background: null,
   data() {
     return {
       description: 'Hi',
