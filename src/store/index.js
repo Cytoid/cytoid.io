@@ -4,7 +4,7 @@ export const state = () => ({
     overlayOpacity: 0.5,
     parallaxSpeed: 0.2,
   },
-  user: null,
+  user: false,
 })
 export const mutations = {
   setBackground(state, background) {
@@ -18,8 +18,11 @@ export const mutations = {
 }
 export const actions = {
   nuxtServerInit({ dispatch, commit }, { $axios, error, req }) {
-    const user = req.ctx.session?.passport?.user
-    commit('setUser', user)
+    if (req) {
+      // Read cookies success
+      const user = req.ctx.session?.passport?.user
+      commit('setUser', user)
+    }
   },
   logout({ commit }) {
     this.$axios.delete('/session')

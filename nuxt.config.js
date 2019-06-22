@@ -70,7 +70,8 @@ module.exports = {
     { src: '~plugins/vue-easymde', ssr: false },
     { src: '~plugins/vue-tags-input', ssr: false },
     { src: '~plugins/vue-disqus' },
-    { src: '~plugins/imgresize' }
+    { src: '~plugins/imgresize' },
+    { src: '~plugins/authentication', mode: 'client' },
   ],
 
   /*

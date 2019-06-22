@@ -41,6 +41,20 @@ app.use(session({
 app.use(router.get('/browse', ctx => ctx.redirect('/levels')));
 app.use(router.get('/browse/:name', (ctx, name) => ctx.redirect('/levels/' + name)));
 
+if (config.dev) {
+  const routeRegex = /^\/api(\/.+)/
+  app.use(require('koa-proxy')({
+    host: require('config').apiURLServer,
+    match: routeRegex,
+    jar: true, // send cookies
+    map: (path) => {
+      const test = routeRegex.exec(path)
+      return test ? test[1] : path
+    }
+  })
+  )
+}
+
 // Give nuxt middleware to Koa
 app.use((ctx) => {
   ctx.status = 200
