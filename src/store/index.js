@@ -25,7 +25,7 @@ export const actions = {
     }
   },
   logout({ commit }) {
-    this.$axios.delete('/session')
-      .then(() => commit('setUser', null))
+    commit('setUser', null)
+    return this.$axios.delete('/session')
   }
 }

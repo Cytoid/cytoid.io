@@ -16,12 +16,18 @@
       font-awesome-icon.icon(:icon="['far', 'cog']")
       .title Settings
   .section
-    a-button(type="danger" block @click="$store.dispatch('logout')") Sign Out
+    a-button(type="danger" block @click="logout") Sign Out
 </template>
 
 <script>
 export default {
   name: 'NavCard',
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+        .then(() => this.$router.go(0))
+    }
+  }
 }
 </script>
 
