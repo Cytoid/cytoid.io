@@ -89,5 +89,6 @@ sw.*
 $ Development environment
 secrets.tar
 deploy-secret.json
+config/production.json
 
 .DS_Store

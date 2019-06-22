@@ -33,3 +33,5 @@ secrets.tar.enc
 /src/*
 !/src/modules
 !/src/store
+
+/config/development.json
