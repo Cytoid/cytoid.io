@@ -297,7 +297,7 @@ export default {
       if (this.$store.state.user) {
         window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
       } else {
-        this.$router.push('/session/signin')
+        this.$router.push('/session/login')
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt-link to="./signin">
+    <nuxt-link to="./login">
       <a-button type="primary" shape="circle" icon="left" size="large" />
     </nuxt-link>
     <h2 style="margin-top: 1rem;">

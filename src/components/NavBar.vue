@@ -4,7 +4,7 @@ header.navbar.light.container(role="navigation")
   nuxt-link.navbar-item(:to="{ name: 'levels' }") Levels
   search.left
   div
-    nuxt-link(v-if="!$store.state.user" to="/session/signin"): a-button(type="primary") Login
+    nuxt-link(v-if="!$store.state.user" to="/session/login"): a-button(type="primary") Login
     a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
       a-avatar(:src="$store.state.user.avatarURL")
       nav-card(slot="content")

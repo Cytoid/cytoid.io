@@ -5,8 +5,8 @@
   "author": "Neo Zhang",
   "private": true,
   "scripts": {
-    "dev": "node server.js --watch server",
-    "build": "nuxt build",
+    "dev": "node server.js",
+    "build": "nuxt build --modern",
     "start": "node server.js",
     "generate": "nuxt generate --modern",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."

@@ -19,7 +19,7 @@
   .section(v-else-if="state === 1")
     h2.has-text-centered Success!
     h1.has-text-centered: font-awesome-icon(icon="check-circle")
-    nuxt-link(to="/session/signin")
+    nuxt-link(to="/session/login")
       a-button(type="primary" block) Log In
   .section(v-else)
     h2.has-text-centered Oops...
