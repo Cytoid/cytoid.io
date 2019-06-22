@@ -44,7 +44,8 @@ module.exports = {
   css: [
     '~assets/styles/index.less',
     '~assets/styles/bulma.scss',
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    'easymde/dist/easymde.min.css',
   ],
 
   /*
@@ -67,11 +68,9 @@ module.exports = {
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
-    { src: '~plugins/vue-easymde', ssr: false },
-    { src: '~plugins/vue-tags-input', ssr: false },
-    { src: '~plugins/vue-disqus' },
     { src: '~plugins/imgresize' },
     { src: '~plugins/authentication', mode: 'client' },
+    { src: '~plugins/nossr', mode: 'client' }
   ],
 
   /*

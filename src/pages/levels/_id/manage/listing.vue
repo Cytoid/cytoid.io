@@ -2,18 +2,16 @@
   div
     a-card.ele3
       p.heading Description
-      markdown-editor(
+      no-ssr: markdown-editor(
         v-model="description"
         ref="markdownEditor"
         :configs="{ spellChecker: false }"
         style="margin-top: 4px;")
       p.heading Tags
-      vue-tags-input(
-        placeholder="Add tags..."
-        v-model="tag"
-        :tags="tags"
-        @tags-changed="newTags => this.tags = newTags"
-        style="max-width: unset; color: hsla(226, 68%, 6%, 1); font-size: 16px; border-radius: 2px;"
+      a-select(
+        :style="{ width: '100%' }"
+        mode="tags"
+        :tokenSeparators="[' ', ',']"
       )
       p.heading(style="margin-top: 24px;") Visibility
       a-select(v-model="visibility" style="margin-right: 8px;")

@@ -1127,12 +1127,6 @@
   dependencies:
     core-js "^2.5.7"
 
-"@johmun/vue-tags-input@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@johmun/vue-tags-input/-/vue-tags-input-2.0.1.tgz#5ca22a573858c8df6c05788e3ffabe92e1baa1df"
-  dependencies:
-    vue "^2.5.16"
-
 "@nuxt/babel-preset-app@2.8.1":
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/@nuxt/babel-preset-app/-/babel-preset-app-2.8.1.tgz#4b6b9ec293d66426034b30409ebda8b17e625014"
@@ -9692,7 +9686,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.5.16, vue@^2.6.10:
+vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 

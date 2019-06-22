@@ -89,7 +89,7 @@
                 img(v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;")
             template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date) }}
         div(style="margin: 12px;")
-          vue-disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
+          disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
 </template>
 
 <script>
@@ -98,6 +98,7 @@ import marked from 'marked'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
+import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import { formatBytes } from '@/utils'
 import simplebar from 'simplebar-vue'
 import 'simplebar/dist/simplebar.min.css'
@@ -199,7 +200,13 @@ const modNames = {
 }
 export default {
   layout: 'background',
-  components: { ScoreBadge, PlayerAvatar, DifficultyBadge, simplebar },
+  components: {
+    ScoreBadge,
+    PlayerAvatar,
+    DifficultyBadge,
+    simplebar,
+    Disqus,
+  },
   data: () => ({
     level: null,
     ratings: null,

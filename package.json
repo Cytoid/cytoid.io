@@ -19,7 +19,6 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "@google-cloud/debug-agent": "^4.0.0",
     "@google-cloud/trace-agent": "^4.0.0",
-    "@johmun/vue-tags-input": "^2.0.1",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/style-resources": "^0.1.1",
