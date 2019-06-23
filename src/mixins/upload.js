@@ -1,16 +1,16 @@
 import axios from 'axios'
-export default {
+const uploadMixin = (type, contentType) => ({
   methods: {
     upload(option) {
       const source = axios.CancelToken.source()
       this.$captcha('upload')
-        .then(token => this.$axios.post('/files/' + this.type, { token }, {
+        .then(token => this.$axios.post('/files/' + type, { token }, {
           cancelToken: source.token,
         }))
         .then(response => axios.put(response.data.uploadURL, option.file, {
           withCredentials: option.withCredentials,
           headers: {
-            'Content-Type': 'application/zip'
+            'Content-Type': contentType,
           },
           cancelToken: source.token,
           onUploadProgress(e) {
@@ -37,4 +37,6 @@ export default {
       }
     },
   }
-}
+})
+
+export default uploadMixin

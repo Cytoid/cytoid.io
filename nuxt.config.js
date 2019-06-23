@@ -70,7 +70,7 @@ module.exports = {
     { src: '~plugins/fontawesome' },
     { src: '~plugins/imgresize' },
     { src: '~plugins/authentication', mode: 'client' },
-    { src: '~plugins/nossr', mode: 'client' }
+    { src: '~plugins/nossr', mode: 'client' },
   ],
 
   /*

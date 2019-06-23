@@ -93,13 +93,11 @@ export default {
         }
         this.loading = true
         this.$captcha('login')
-          .then(token => this.$axios.post('/session', { ...values, token }, { withCredentials: true }))
-          .then((response) => {
+          .then(token => this.$store.dispatch('login', { ...values, token }))
+          .then((user) => {
             this.loading = false
-            const user = response.data.user
             this.$message.info('Welcome, ' + (user.name || user.uid))
-            this.$store.commit('setUser', user)
-            this.$router.go(-1)
+            this.$router.replace('/')
           })
           .catch((error) => {
             this.loading = false

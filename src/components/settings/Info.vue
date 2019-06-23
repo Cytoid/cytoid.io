@@ -5,18 +5,19 @@ a-card(title="User Info")
       a-input(
         addonBefore="https://cytoid.io/profile/"
         v-decorator="['uid', formValidation.uid]"
-        )
+      )
     a-form-item(label="Display Name" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
       a-input(v-decorator="['name', formValidation.name]")
     a-form-item.avatar-upload(label="Avatar" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
       a-upload(
         name="avatar"
         listType="picture-card"
-        class="avatar-uploader"
+        accept="image/*"
         :showUploadList="false"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        :customRequest="upload"
+        @change="avatarUploaded"
       )
-        img(v-if="$store.state.user.avatarURL" :src="$store.state.user.avatarURL" alt="avatar")
+        a-avatar(:size="64" :src="$store.state.avatar")
       | Or
       a-button Upload from Gravatar
     a-form-item(label="Language" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
@@ -25,6 +26,7 @@ a-card(title="User Info")
 </template>
 
 <script>
+import UploadMixin from '@/mixins/upload'
 const formValidation = user => ({
   uid: {
     rules: [
@@ -38,6 +40,9 @@ const formValidation = user => ({
 })
 export default {
   name: 'Info',
+  mixins: [
+    UploadMixin('avatar', 'image/*'),
+  ],
   data() {
     return {
       form: this.$form.createForm(this),
@@ -46,6 +51,16 @@ export default {
     }
   },
   methods: {
+    avatarUploaded({ file }) {
+      if (file.status !== 'done') {
+        return
+      }
+      this.$axios.get('/users/' + this.$store.state.user.id)
+        .then((response) => {
+          this.$store.commit('setAvatar', response.data.avatarURL)
+          return this.$message.success('Avatar Updated!')
+        })
+    },
     save() {
       this.form.validateFields((err, values) => {
         if (err) {

@@ -3,7 +3,7 @@
     visibility-modal(ref="visibilityModal")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
-    upload-level(slot="header" accept=".cytoidlevel" type="packages")
+    upload-level(slot="header" accept=".cytoidlevel")
       template(slot="text") Click or drag a Cytoid level to this area
       template(slot="hint")
         | Don't know how to create one? Read our

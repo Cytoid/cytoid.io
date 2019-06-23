@@ -16,13 +16,9 @@ a-upload-dragger(
 import UploadMixin from '@/mixins/upload'
 export default {
   mixins: [
-    UploadMixin,
+    UploadMixin('packages', 'application/zip'),
   ],
   props: {
-    type: {
-      type: String,
-      required: true,
-    },
     accept: {
       type: String,
       required: true,

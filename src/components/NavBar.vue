@@ -3,10 +3,10 @@ header.navbar.light.container(role="navigation")
   nuxt-link.navbar-item(:to="{ name: 'index' }" exact) Cytoid
   nuxt-link.navbar-item(:to="{ name: 'levels' }") Levels
   search.left
-  div
+  no-ssr
     nuxt-link(v-if="!$store.state.user" to="/session/login"): a-button(type="primary") Login
     a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
-      a-avatar(:src="$store.state.user.avatarURL")
+      a-avatar(:src="$store.state.avatar")
       nav-card(slot="content")
 </template>
 
