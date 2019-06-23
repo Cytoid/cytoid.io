@@ -111,6 +111,7 @@ import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 export default {
   components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar, LevelCard },
+  layout: 'background',
   data: () => ({
     levels: [],
     featuredLevels: [],
@@ -129,9 +130,12 @@ export default {
       }
     }
   },
-  asyncData({ $axios, params, error }) {
-    return $axios.get('/profile/' + params.id)
-      .then(res => res.data)
+  asyncData({ $axios, params, error, store }) {
+    return $axios.get('/profile/' + params.id, { params: { stats: true } })
+      .then((res) => {
+        store.commit('setBackground', { source: res.data.profile.headerURL })
+        return res.data
+      })
       .then(profile => Promise.all([
         Promise.resolve(profile),
         $axios.get('/levels', { params: {

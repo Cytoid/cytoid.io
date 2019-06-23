@@ -18,6 +18,9 @@ const keyMappings = {
   minWidth: 'min-w',
 }
 function resize(path, options) {
+  if (!path) {
+    return null
+  }
   path = path.replace(process.env.assetURL, process.env.imageURL)
   const optionArr = []
   for (const key in keyMappings) {

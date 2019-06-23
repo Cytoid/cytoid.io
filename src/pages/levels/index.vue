@@ -75,7 +75,7 @@ export default {
         })
     }
   },
-  asyncData({ $axios, query }) {
+  asyncData({ $axios, query, error }) {
     query.page = query.page || 1
     query.sort = query.sort || 'creation_date'
     query.order = query.order || 'desc'
@@ -87,6 +87,7 @@ export default {
           totalPages: parseInt(response.headers['x-total-page']),
         }
       })
+      .catch(err => error(err.response?.data))
   },
   methods: {
     updateRoute(query) {

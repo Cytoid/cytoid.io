@@ -1,7 +1,7 @@
 <template lang="pug">
 .navcard
   img.navcard-avatar(:src="$store.state.avatar")
-  img.navcard-header(:src="require('@/assets/images/normal.png')")
+  img.navcard-header(:src="$img(headerURL, { height: 128 })")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['far', 'user']")
@@ -22,6 +22,24 @@
 <script>
 export default {
   name: 'NavCard',
+  data() {
+    return {
+      headerURL: null,
+    }
+  },
+  mounted() {
+    const headerURL = window.localStorage.getItem('profile:header')
+    if (headerURL) {
+      this.headerURL = headerURL
+      return
+    }
+    this.$axios.get('/profile/' + this.$store.state.user.id)
+      .then((res) => {
+        console.log(res.data)
+        this.headerURL = res.data.headerURL
+        window.localStorage.setItem('profile:header', this.headerURL)
+      })
+  },
   methods: {
     logout() {
       this.$store.dispatch('logout')

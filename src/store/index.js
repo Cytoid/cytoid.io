@@ -18,7 +18,7 @@ export const mutations = {
   },
   setAvatar(state, avatarURL) {
     state.avatar = avatarURL
-  }
+  },
 }
 export const actions = {
   nuxtServerInit({ dispatch, commit, state }, { $axios, error, req }) {
