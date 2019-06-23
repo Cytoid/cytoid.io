@@ -1,22 +1,23 @@
 <template lang="pug">
-  div.ele5
-    a-upload-dragger(
-      supportServerRender
-      :accept="accept"
-      :customRequest="upload"
-      :remove="removeUploadedFile"
-      @change="uploadStatusChanged"
-    )
-      font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
-      p.ant-upload-text(style="font-weight: bold;"): slot(name="text")
-      p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);")
-        slot(name="hint")
+a-upload-dragger(
+  supportServerRender
+  :accept="accept"
+  :customRequest="upload"
+  :remove="removeUploadedFile"
+  @change="uploadStatusChanged"
+).ele5
+  font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
+  p.ant-upload-text(style="font-weight: bold;"): slot(name="text")
+  p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);")
+    slot(name="hint")
 </template>
 
 <script>
-import axios from 'axios'
-
+import UploadMixin from '@/mixins/upload'
 export default {
+  mixins: [
+    UploadMixin,
+  ],
   props: {
     type: {
       type: String,
@@ -31,48 +32,13 @@ export default {
     status: false,
   }),
   methods: {
-    upload(option) {
-      const source = axios.CancelToken.source()
-      this.$captcha('upload')
-        .then(token => this.$axios.post('/files/' + this.type, { token }, {
-          cancelToken: source.token,
-        }))
-        .then(response => axios.put(response.data.uploadURL, option.file, {
-          withCredentials: option.withCredentials,
-          headers: {
-            'Content-Type': 'application/zip'
-          },
-          cancelToken: source.token,
-          onUploadProgress(e) {
-            if (e.total > 0) {
-              e.percent = (e.loaded / e.total) * 100
-            }
-            option.onProgress(e)
-          }
-        })
-          .then(() => this.$axios.post('/files/' + response.data.path, {}, {
-            cancelToken: source.token,
-          }))
-        )
-        .then((response) => {
-          const details = response.data
-          option.onSuccess(details)
-        })
-        .catch((error) => {
-          option.onError(error, error.response?.data)
-        })
-
-      return {
-        abort: source.cancel
-      }
-    },
     removeUploadedFile() {
       // TODO: request to remove the file from the server
     },
     uploadStatusChanged({ file }) {
       this.status = file.status === 'done'
-    }
-  },
+    },
+  }
 }
 </script>
 
