@@ -38,18 +38,17 @@
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(slot="visibility" slot-scope="text, level")
-          a-dropdown
-            a.ant-dropdown-link
-              | Public
-              font-awesome-icon(:icon="['fas', 'caret-down']" fixed-width)
-            a-menu(slot="overlay")
-              a-menu-item(
-                v-for="(mode, index) of ['Public', 'Unlisted', 'Private']"
-                @click="changeVisibility(level, index)"
-                :key="index"
-              )
-                font-awesome-icon(:icon="['globe', 'eye-slash', 'lock'][index]" fixed-width style="margin-right: 4px;")
-                | {{mode}}
+          a-select.is-no-border(
+            :value="visibility(level)"
+            @change="changeVisibility(level, $event)"
+          )
+            a-select-option(
+              v-for="(mode, index) of ['Private', 'Unlisted', 'Public']"
+              :key="index"
+              :value="index"
+            )
+              font-awesome-icon(:icon="['lock', 'eye-slash', 'globe'][index]" fixed-width style="margin-right: 4px;")
+              | {{mode}}
         template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
         template(v-slot:rating="rating")
           div(style="display: flex;")
@@ -154,6 +153,16 @@ export default {
           this.levels_loading = false
           this.levels = res.data
         })
+    },
+    visibility(level) {
+      const published = level.published
+      if (published === true) {
+        return 2
+      } else if (published === false) {
+        return 0
+      } else {
+        return 1
+      }
     }
   }
 }

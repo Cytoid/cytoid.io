@@ -5,7 +5,7 @@ a-modal(
   v-if="level && modalVisible"
   :closable="false"
 )
-  p(v-if="value === 0").
+  p(v-if="value === 2").
     This level will be visible to everybody.
     #[br]#[br]
     The level will appear in search results and in your profile page.
@@ -19,7 +19,7 @@ a-modal(
     to viewers who visit the level listing or your profile.
     It will also disappear from the search results.
     However, it will stay visible in a public collection that contains this level.
-  p(v-else-if="value === 2").
+  p(v-else-if="value === 0").
     This video will be only visible to you.
     #[br]#[br]
     #[b(v-text="level.title")] will be removed from your profile page
@@ -30,8 +30,9 @@ a-modal(
   action-confirm(
     slot="footer"
     :value="level.uid"
-    :button-title="['Publish', 'Unlist', 'Make Private'][value]"
-    :button-type="['primary', 'dashed', 'danger'][value]"
+    :button-title="['Make Private', 'Unlist', 'Publish'][value]"
+    :button-type="['danger', 'dashed', 'primary'][value]"
+    @click="submit"
   )
 </template>
 
@@ -49,9 +50,9 @@ export default {
     title() {
       const title = this.level.title
       return [
-        'Make ' + title + ' public',
+        `Make ${title} private`,
         `Make ${title} unlisted`,
-        `Make ${title} private`
+        'Make ' + title + ' public',
       ][this.value]
     },
   },
@@ -60,7 +61,12 @@ export default {
       this.level = level
       this.value = visibility
       this.modalVisible = true
-    }
+    },
+    submit() {
+      // todo: send request
+      this.level.published = [null, false, true][this.value]
+      this.modalVisible = false
+    },
   },
 }
 </script>

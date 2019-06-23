@@ -5,6 +5,7 @@
       block
       :disabled="userInput !== value"
       :type="buttonType"
+      @click="$emit('click', $event)"
     >
       {{ buttonTitle }}
     </a-button>
@@ -26,7 +27,7 @@ export default {
     value: {
       type: String,
       required: true,
-    }
+    },
   },
   data: () => ({
     userInput: null,
