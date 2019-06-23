@@ -23,15 +23,18 @@ export default async ({ store, $axios, error }) => {
     if (avatar) {
       store.commit('setAvatar', avatar)
     }
-    store.subscribe((mutation, state) => {
-      if (mutation.type !== 'setAvatar') {
-        return
-      }
-      window.localStorage.setItem('avatar', mutation.payload)
-    })
+
     if (!avatar) {
       await $axios.get('/users/' + store.state.user.id)
-        .then(res => store.commit('setAvatar', res.data.avatarURL))
+        .then((res) => {
+          store.commit('setAvatar', res.data.avatarURL)
+          window.localStorage.setItem('avatar', res.data.avatarURL)
+        })
     }
   }
+  store.subscribe((mutation, state) => {
+    if (mutation.type === 'setAvatar' && mutation.payload) {
+      window.localStorage.setItem('avatar', mutation.payload)
+    }
+  })
 }
