@@ -10,9 +10,9 @@ div
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import FooterBar from '@/components/Footer'
 import NavBar from '@/components/NavBar'
-import { mapState } from 'vuex'
 export default {
   components: {
     FooterBar,

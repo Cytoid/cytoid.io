@@ -95,13 +95,11 @@
 <script>
 import moment from 'moment'
 import marked from 'marked'
+import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
-import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import { formatBytes } from '@/utils'
-import simplebar from 'simplebar-vue'
-import 'simplebar/dist/simplebar.min.css'
 const columns = [
   {
     title: 'Rank',
@@ -204,7 +202,6 @@ export default {
     ScoreBadge,
     PlayerAvatar,
     DifficultyBadge,
-    simplebar,
     Disqus,
   },
   data: () => ({
