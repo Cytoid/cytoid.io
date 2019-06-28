@@ -1,29 +1,34 @@
 <template lang="pug">
-a-form(:form="form" layout="horizontal")
-  no-ssr: markdown-editor(
-    v-model="profile.bio"
-    :configs="{ spellChecker: false }"
-  )
+a-form(:form="form" layout="horizontal" @submit.prevent="submit")
   a-form-item(label="Header Image" :label-col="{ span: 20, sm: 5 }")
     a-upload-dragger.header-uploader(
       name="header"
       :showUploadList="false"
       :customRequest="upload"
-      @change="avatarUploaded"
-      :style="{ '--bg-url': `url(\"${profile.headerURL}\")` }"
+      @change="headerUploaded"
+      :style="headerURL && { '--bg-url': `url(\"${headerURL}\")` }"
     )
       p.ant-upload-drag-icon
         a-icon(type="inbox")
       p.ant-upload-text Click or drag file to this area to upload
       p.ant-upload-hint Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+  no-ssr: markdown-editor(
+    :configs="{ spellChecker: false }"
+    v-model="form.bio"
+  )
   a-form-item(label="Birthday" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
-    a-date-picker
-  a-form-item(label="Region" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
-    a-input
+    a-date-picker(v-model="birthday")
+  a-button.is-pulled-right(
+    :loading="submitLoading"
+    size="large"
+    html-type="submit"
+    type="primary"
+  ) Submit
 </template>
 
 <script>
 import UploadMixin from '@/mixins/upload'
+import moment from 'moment'
 export default {
   name: 'Profile',
   mixins: [
@@ -31,24 +36,56 @@ export default {
   ],
   data() {
     return {
-      form: this.$form.createForm(this),
-      profile: null
+      form: {
+        bio: null,
+        birthday: null,
+      },
+      submitLoading: false,
+      headerURL: null,
+    }
+  },
+  computed: {
+    birthday: {
+      get() { return this.form.birthday && moment(this.form.birthday) },
+      set(value) { this.form.birthday = value.toISOString() },
     }
   },
   asyncData({ $axios, store }) {
     return $axios.get('/profile/' + store.state.user.id)
-      .then(response => ({ profile: response.data }))
+      .then((response) => {
+        const profile = response.data
+
+        console.log(moment(profile.birthday))
+        return {
+          headerURL: profile.headerURL,
+          form: {
+            bio: profile.bio,
+            birthday: profile.birthday,
+          }
+        }
+      })
   },
   methods: {
-    avatarUploaded({ file }) {
+    headerUploaded({ file }) {
       if (file.status !== 'done') {
         return
       }
       this.$axios.get('/profile/' + this.$store.state.user.id)
         .then((response) => {
           this.$message.success('Profile Header Image Updated!')
-          this.profile = response.data
-          window.localStorage.setItem('profile:header', this.profile.headerURL)
+          this.headerURL = response.data.headerURL
+          window.localStorage.setItem('profile:header', this.headerURL)
+        })
+    },
+    submit() {
+      this.submitLoading = true
+      this.$axios.put('/profile/' + this.$store.state.user.id, this.form)
+        .then(() => {
+          this.$message.success('Profile Updated')
+        })
+        .catch(err => this.$message.error(err.response?.data?.message || err.message))
+        .then(() => {
+          this.submitLoading = false
         })
     },
   }
