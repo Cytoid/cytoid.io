@@ -4,19 +4,15 @@ div
     .background-wrap(v-parallax.absY="background.parallaxSpeed" :style="{opacity: 1-background.overlayOpacity}")
       img.background-image(v-show="loaded" :src="background.source" @load="animateBackground")
     .background-fade-out
-  nav-bar
-  nuxt
-  footer-bar
+  layout
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import FooterBar from '@/components/Footer'
-import NavBar from '@/components/NavBar'
+import Layout from './default'
 export default {
   components: {
-    FooterBar,
-    NavBar
+    Layout,
   },
   data: () => ({
     loaded: false,
@@ -43,7 +39,6 @@ export default {
 .background-container {
   position: absolute;
   width: 100%;
-  height: 100%;
   z-index: 0;
   overflow: hidden;
 }

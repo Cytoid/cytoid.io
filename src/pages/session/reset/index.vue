@@ -1,22 +1,24 @@
 <template lang="pug">
-.section.has-text-centered(v-if="sent")
-  h2 Sent
-  h1: font-awesome-icon(icon="paper-plane")
-  p Please check your inbox to continue
-  a-button(@click="resend" :loading="loading" :disabled="time>0" block)
-    | Resend
-    span(v-if="time>0") ({{time}})
-.section(v-else)
-  h2.has-text-centered Reset your password
-  h1.has-text-centered 🤔
-  p Enter your email address and we will send you a link to reset your password.
-  a-form(:form="form" @submit.prevent="submit")
-    a-form-item
-      a-input(
-        v-decorator="['email', {rules: [{type: 'email', message: 'The input is not a valid email'}, {required: true, message: 'please input your email address!'}]}]"
-      )
-        font-awesome-icon(icon="envelope" slot="prefix")
-    a-button(type="primary" html-type="submit" block :loading="loading") Send
+.section.has-text-centered
+  template(v-if="sent")
+    h2 Sent
+    h1: font-awesome-icon(icon="paper-plane")
+    p Please check your inbox to continue
+    a-button(@click="resend" :loading="loading" :disabled="time>0" block)
+      | Resend
+      span(v-if="time>0") ({{time}})
+  template(v-else)
+    h2.has-text-centered Reset your password
+    h1.has-text-centered 🤔
+    p Enter your email address and we will send you a link to reset your password.
+    a-form(:form="form" @submit.prevent="submit")
+      a-form-item
+        a-input(
+          v-decorator="['email', {rules: [{type: 'email', message: 'The input is not a valid email'}, {required: true, message: 'please input your email address!'}]}]"
+        )
+          font-awesome-icon(icon="envelope" slot="prefix")
+      a-button(type="primary" html-type="submit" block :loading="loading") Send
+  captcha(theme="dark" invisible badge="bottomright")
 </template>
 
 <script>
@@ -38,6 +40,7 @@ export default {
         }
         const email = values.email
         this.loading = true
+        setTimeout(() => { this.loading = false }, 1000)
         this.$captcha('reset_password')
           .then(token => this.$axios.post('/session/reset', { email, token }))
           .then(() => {
@@ -60,6 +63,7 @@ export default {
     },
     resend() {
       this.loading = true
+      setTimeout(() => { this.loading = false }, 1000)
       this.$captcha('reset_password')
         .then(token => this.$axios.post('/session/reset', { email: this.sent, token }))
         .then(() => {

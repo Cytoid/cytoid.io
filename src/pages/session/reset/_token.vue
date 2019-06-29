@@ -16,6 +16,7 @@
           placeholder="Repeat Password"
         )
       a-button(type="primary" html-type="submit" block :loading="loading") Submit
+      captcha(theme="dark" invisible badge="bottomright")
   .section(v-else-if="state === 1")
     h2.has-text-centered Success!
     h1.has-text-centered: font-awesome-icon(icon="check-circle")
@@ -46,6 +47,7 @@ export default {
         }
         const password = values.password
         this.loading = true
+        setTimeout(() => { this.loading = false }, 1000)
         this.$captcha('reset_password_continue')
           .then(token => this.$axios.post('/session/reset/' + this.$route.params.token, { password, token }))
           .then(() => {

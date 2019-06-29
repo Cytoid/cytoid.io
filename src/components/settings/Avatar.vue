@@ -14,7 +14,7 @@ a-card.avatar-upload(title="Avatar")
         :loading="avatarDeleteLoading",
         @click="avatarDelete"
       ) Use Gravatar
-    span(v-else) You're using your avatar from #[a(href="https://gravatar.com/") Gravatar]
+    span(v-else) You're using your avatar from #[a(href="https://gravatar.com/" target="_blank") Gravatar]
 </template>
 
 <script>

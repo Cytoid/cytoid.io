@@ -46,16 +46,16 @@
             Forgot password
           </nuxt-link>
         </a-form-item>
-        <a-form-item>
-          <a-button
-            type="primary"
-            html-type="submit"
-            :loading="loading"
-            block
-          >
-            Sign in
-          </a-button>
-        </a-form-item>
+        <captcha theme="dark" :token.sync="captchaToken" style="margin-bottom: 1rem;" />
+        <a-button
+          type="primary"
+          html-type="submit"
+          :loading="loading"
+          :disabled="!captchaToken"
+          block
+        >
+          Sign in
+        </a-button>
       </a-form>
     </div>
     <a-divider />
@@ -80,6 +80,7 @@ export default {
   data() {
     return {
       loading: false,
+      captchaToken: null,
     }
   },
   beforeCreate() {
@@ -92,8 +93,7 @@ export default {
           return
         }
         this.loading = true
-        this.$captcha('login')
-          .then(token => this.$store.dispatch('login', { ...values, token }))
+        this.$store.dispatch('login', { ...values, token: this.captchaToken })
           .then((user) => {
             this.loading = false
             this.$message.info('Welcome, ' + (user.name || user.uid))
@@ -101,6 +101,7 @@ export default {
           })
           .catch((error) => {
             this.loading = false
+            this.$captcha.reset()
             if (error.response && error.response.status === 401) {
               this.$message.error('Username/password mismatch!')
             } else {
