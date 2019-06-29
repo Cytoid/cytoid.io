@@ -29,7 +29,12 @@ const uploadMixin = (type, contentType) => ({
           option.onSuccess(details)
         })
         .catch((error) => {
-          option.onError(error, error.response?.data)
+          const message = error.response?.data?.message || error.message
+          option.onError(error, message)
+          this.$message.error(message)
+        })
+        .then(() => {
+          this.$captcha.reset()
         })
 
       return {

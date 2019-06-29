@@ -9,6 +9,7 @@
         | Don't know how to create one? Read our
         a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level")  wiki
         | !
+    captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
     a-card(class="studio-levels-card ele2")

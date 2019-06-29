@@ -78,12 +78,14 @@
           I agree to Cytoid's <a href="">terms of services.</a>
         </a-checkbox>
       </a-form-item>
+      <captcha theme="dark" :token.sync="captchaToken" />
       <a-form-item>
         <a-button
           type="primary"
           html-type="submit"
           block
           :loading="loading"
+          :disabled="!captchaToken"
         >
           Join the community
         </a-button>
@@ -96,6 +98,7 @@
 export default {
   data() {
     return {
+      captchaToken: null,
       loading: false,
     }
   },
@@ -109,16 +112,17 @@ export default {
           return
         }
         this.loading = true
-        this.$captcha('signup')
-          .then(token => this.$axios.post('/users', { ...values, token }))
+        this.$axios.post('/users', { ...values, token: this.captchaToken })
           .then((res) => {
             this.loading = false
             this.$message.info('Registration succeed')
+            this.$router.push({ name: 'session-login' })
           })
           .catch((error) => {
-            console.log(error)
-            this.loading = false
             this.$message.error(error.response?.data?.message || error.message)
+            this.loading = false
+            this.$captcha.reset()
+            this.captchaToken = null
           })
       })
     },

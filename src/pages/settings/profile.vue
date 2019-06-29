@@ -1,6 +1,7 @@
 <template lang="pug">
 a-form(:form="form" layout="horizontal" @submit.prevent="submit")
   a-form-item(label="Header Image" :label-col="{ span: 20, sm: 5 }")
+    captcha(invisible badge="bottomleft")
     a-upload-dragger.header-uploader(
       name="header"
       :showUploadList="false"
@@ -10,8 +11,8 @@ a-form(:form="form" layout="horizontal" @submit.prevent="submit")
     )
       p.ant-upload-drag-icon
         a-icon(type="inbox")
-      p.ant-upload-text Click or drag file to this area to upload
-      p.ant-upload-hint Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+      p.ant-upload-text Profile Header Image
+      p.ant-upload-hint Click or drag the image to this area to upload
   no-ssr: markdown-editor(
     :configs="{ spellChecker: false }"
     v-model="form.bio"
@@ -27,8 +28,9 @@ a-form(:form="form" layout="horizontal" @submit.prevent="submit")
 </template>
 
 <script>
-import UploadMixin from '@/mixins/upload'
 import moment from 'moment'
+import UploadMixin from '@/mixins/upload'
+
 export default {
   name: 'Profile',
   mixins: [
@@ -54,8 +56,6 @@ export default {
     return $axios.get('/profile/' + store.state.user.id)
       .then((response) => {
         const profile = response.data
-
-        console.log(moment(profile.birthday))
         return {
           headerURL: profile.headerURL,
           form: {

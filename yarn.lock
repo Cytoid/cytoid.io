@@ -7153,10 +7153,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt-recaptcha-v2@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/nuxt-recaptcha-v2/-/nuxt-recaptcha-v2-0.1.0.tgz#e692b930c94f93e13a874003ddcafef516818f2f"
-  integrity sha512-ek582dY/v24KwUFO/Urhs1wVvvKXqmuzFsfccf4rW2TdNIDgWIINHU0SyaV9UtUsdExf7ZhYGy83Dbyo1tBEJw==
+nuxt-recaptcha-v2@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/nuxt-recaptcha-v2/-/nuxt-recaptcha-v2-0.1.3.tgz#19f76c7a45813bc37b6019dd26cba1784f9b04bb"
+  integrity sha512-2b0y/0r8/kf6b8nBB+zSJy1ZbN+YgDFIDlwO72ioZLsQdE/Z0sFARF0gwjFbVgcF+f7xsDl1+nbGm+f23JkZZQ==
 
 nuxt@^2.3.4:
   version "2.8.1"
