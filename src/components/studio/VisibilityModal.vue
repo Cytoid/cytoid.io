@@ -33,6 +33,7 @@ a-modal(
     :button-title="['Make Private', 'Unlist', 'Publish'][value]"
     :button-type="['danger', 'dashed', 'primary'][value]"
     @click="submit"
+    :loading="loading"
   )
 </template>
 
@@ -45,6 +46,7 @@ export default {
     modalVisible: false,
     level: null,
     value: null,
+    loading: false,
   }),
   computed: {
     title() {
@@ -63,9 +65,19 @@ export default {
       this.modalVisible = true
     },
     submit() {
-      // todo: send request
-      this.level.published = [null, false, true][this.value]
-      this.modalVisible = false
+      this.loading = true
+      this.$axios
+        .patch('/levels/' + this.level.uid, { published: [false, null, true][this.value] })
+        .then(() => {
+          this.level.published = [null, false, true][this.value]
+          this.modalVisible = false
+        })
+        .catch((err) => {
+          this.$message.error(err.response?.data?.message || err.message)
+        })
+        .then(() => {
+          this.loading = false
+        })
     },
   },
 }
