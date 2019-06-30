@@ -4,8 +4,10 @@
     mode="tags"
     :token-separators="[',']"
     placeholder="Soundtrack, Touhou, Acoustic..."
+    :value="value"
     @search="handleSearch"
     @focus="initialKeywords"
+    @change="change"
   >
     <a-select-option v-for="d in data" :key="d">
       {{ d }}
@@ -16,6 +18,12 @@
 <script>
 export default {
   name: 'TagInput',
+  props: {
+    value: {
+      type: Array,
+      required: true,
+    }
+  },
   data() {
     return {
       data: null,
@@ -39,6 +47,9 @@ export default {
         .then((res) => {
           this.data = res.data
         })
+    },
+    change(val) {
+      this.$emit('change', val)
     }
   }
 }

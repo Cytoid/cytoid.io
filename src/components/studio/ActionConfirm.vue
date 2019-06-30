@@ -4,6 +4,7 @@
     <a-button
       block
       :disabled="userInput !== value"
+      :loading="loading"
       :type="buttonType"
       @click="$emit('click', $event)"
     >
@@ -28,6 +29,10 @@ export default {
       type: String,
       required: true,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    }
   },
   data: () => ({
     userInput: null,

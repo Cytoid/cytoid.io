@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    visibility-modal(ref="visibilityModal")
+    visibility-modal(ref="visibilityModal" @change="sendVisibilityReq")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level(slot="header" accept=".cytoidlevel")
@@ -42,17 +42,7 @@
                 a-button(class="icon-button")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(slot="visibility" slot-scope="text, level")
-          a-select.is-no-border(
-            :value="visibility(level)"
-            @change="changeVisibility(level, $event)"
-          )
-            a-select-option(
-              v-for="(mode, index) of ['Private', 'Unlisted', 'Public']"
-              :key="index"
-              :value="index"
-            )
-              font-awesome-icon(:icon="['lock', 'eye-slash', 'globe'][index]" fixed-width style="margin-right: 4px;")
-              | {{mode}}
+          visibility-select(:value="level.published" @change="changeVisibility(level, $event)")
         template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
         template(v-slot:rating="rating")
           div(style="display: flex;")
@@ -66,10 +56,12 @@
 import moment from 'moment'
 import UploadLevel from '@/components/studio/UploadLevel'
 import VisibilityModal from '@/components/studio/VisibilityModal'
+import VisibilitySelect from '@/components/studio/VisibilitySelect'
 export default {
   components: {
     UploadLevel,
     VisibilityModal,
+    VisibilitySelect,
   },
   data() {
     const columns = [
@@ -138,6 +130,21 @@ export default {
     },
     changeVisibility(level, visibility) {
       this.$refs.visibilityModal.show(level, visibility)
+    },
+    sendVisibilityReq([level, val]) {
+      this.$refs.visibilityModal.loading = true
+      this.$axios
+        .patch('/levels/' + level.uid, { published: val })
+        .then(() => {
+          level.published = val
+          this.$refs.visibilityModal.modalVisible = false
+        })
+        .catch((err) => {
+          this.$message.error(err.response?.data?.message || err.message)
+        })
+        .then(() => {
+          this.$refs.visibilityModal.loading = false
+        })
     },
     handleTableChange(pagination, filters, sorter) {
       this.levels_pagination = pagination

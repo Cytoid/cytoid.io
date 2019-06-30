@@ -1,54 +1,80 @@
 <template lang="pug">
-  div
-    a-card.ele3
-      p.heading Description
-      no-ssr: markdown-editor(
-        v-model="description"
-        ref="markdownEditor"
-        :configs="{ spellChecker: false }"
-        style="margin-top: 4px;")
-      p.heading Tags
-      tag-input
-      p.heading(style="margin-top: 24px;") Visibility
-      a-select(v-model="visibility" style="margin-right: 8px;")
-        a-select-option(value="public")
-          font-awesome-icon(icon="globe" style="margin-right: 4px;" fixed-width)
-          span Public
-        a-select-option(value="unlisted")
-          font-awesome-icon(icon="eye-slash" style="margin-right: 4px;" fixed-width)
-          span Unlisted
-        a-select-option(value="private")
-          font-awesome-icon(icon="lock" style="margin-right: 4px;" fixed-width)
-          span Private
-      span(v-if="visibility === 'public'") This level will be visible to everybody.
-      span(v-if="visibility === 'unlisted'") This level will only be visible to anybody who has the link.
-      span(v-if="visibility === 'private'") This video will be only visible to you.
-      p.heading(style="margin-top: 24px;") Moderation
-      a-switch(v-model="featured" style="margin-right: 8px;")
-      span Featured
-      a-button(class="card-button" style="width: 100%; margin-top: 24px;")
+  a-card.ele3
+    a-form(:form="form" @submit.prevent="submit")
+      a-form-item(label="Description")
+        no-ssr: markdown-editor(v-model="form.description")
+      a-form-item(label="Tags" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
+        tag-input(:value="form.tags" @change="form.tags=$event")
+      a-form-item(
+        label="Visibility"
+        :label-col="{ span: 5 }"
+        :wrapper-col="{ span: 19 }"
+        :help="visibilityText"
+      )
+        visibility-select(:value="form.published" bordered @change="form.published=$event")
+      a-button.card-button(
+        block
+        :loading="loading"
+        style="margin-top: 2rem;"
+        html-type="submit"
+        size="large"
+      )
         font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
-        span Save
+        | Save
 
 </template>
 
 <script>
 import TagInput from '@/components/TagInput'
+import VisibilitySelect from '@/components/studio/VisibilitySelect'
 export default {
   name: 'LevelManageListing',
   background: null,
   components: {
-    TagInput
+    TagInput,
+    VisibilitySelect,
+  },
+  props: {
+    value: {
+      type: Object,
+      required: true,
+    }
   },
   data() {
     return {
-      description: 'Hi',
-      tag: '',
-      tags: [],
-      visibility: 'public',
-      featured: false,
+      loading: false,
+      form: {
+        tags: this.value.tags,
+        description: this.value.description,
+        published: this.value.published,
+      },
     }
   },
+  computed: {
+    visibilityText() {
+      const index = [false, null, true].indexOf(this.value.published)
+      return [
+        'This video will be only visible to you.',
+        'This level will only be visible to anybody who has the link.',
+        'This level will be visible to everybody.'
+      ][index]
+    }
+  },
+  methods: {
+    submit() {
+      this.loading = true
+      this.$axios.patch('/levels/' + this.value.uid, this.form)
+        .then(() => {
+          this.$message.success('Level Listing Saved')
+        })
+        .catch((error) => {
+          this.$message.error(error.response?.data.message || error.message)
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
+  }
 }
 </script>
 
@@ -59,9 +85,6 @@ export default {
 </style>
 
 <style lang="less">
-  .ti-input {
-    border: none !important;
-  }
   .editor-toolbar {
     padding: 0 4px;
     border: none;
@@ -70,20 +93,32 @@ export default {
     color: #fff !important;
   }
   .editor-toolbar button.active, .editor-toolbar button:hover {
-    background: rgba(0, 0, 0, 0.3) !important;
+    background: @shade4 !important;
     border-color: rgba(0, 0, 0, 0) !important;
   }
   .editor-toolbar.fullscreen {
     background: #343a40 !important;
   }
-  .editor-toolbar.fullscreen::before, .editor-toolbar.fullscreen::after {
-    background: none !important;
+  .CodeMirror-cursor {
+    border-left: 1px solid @text-color;
   }
   .editor-preview-side {
     color: #343a40 !important;
+    background-color: @shade3;
+    border: none;
   }
   .CodeMirror {
-    border: none;
+    border-color: rgba(255, 255, 255, 0.3);
     border-radius: 2px;
+    background: @shade4;
+    color: @text-color;
+    transition: all 0.3s ease;
+  }
+  .CodeMirror:focus-within {
+    border-color: #6d8ee8;
+    box-shadow: 0 0 0 2px rgba(69, 104, 220, 0.2);
+  }
+  .markdown-editor {
+    line-height: initial;
   }
 </style>

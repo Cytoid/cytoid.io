@@ -1,5 +1,5 @@
 <template lang="pug">
-a-form(:form="form" layout="horizontal" @submit.prevent="submit")
+a-form(layout="horizontal" @submit.prevent="submit")
   a-form-item(label="Header Image" :label-col="{ span: 20, sm: 5 }")
     captcha(invisible badge="bottomleft")
     a-upload-dragger.header-uploader(

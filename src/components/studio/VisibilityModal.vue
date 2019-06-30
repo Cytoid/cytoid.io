@@ -61,23 +61,11 @@ export default {
   methods: {
     show(level, visibility) {
       this.level = level
-      this.value = visibility
+      this.value = [false, null, true].indexOf(visibility)
       this.modalVisible = true
     },
     submit() {
-      this.loading = true
-      this.$axios
-        .patch('/levels/' + this.level.uid, { published: [false, null, true][this.value] })
-        .then(() => {
-          this.level.published = [null, false, true][this.value]
-          this.modalVisible = false
-        })
-        .catch((err) => {
-          this.$message.error(err.response?.data?.message || err.message)
-        })
-        .then(() => {
-          this.loading = false
-        })
+      this.$emit('change', [this.level, [false, null, true][this.value]])
     },
   },
 }
