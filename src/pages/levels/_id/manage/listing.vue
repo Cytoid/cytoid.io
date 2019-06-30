@@ -8,11 +8,7 @@
         :configs="{ spellChecker: false }"
         style="margin-top: 4px;")
       p.heading Tags
-      a-select(
-        :style="{ width: '100%' }"
-        mode="tags"
-        :tokenSeparators="[' ', ',']"
-      )
+      tag-input
       p.heading(style="margin-top: 24px;") Visibility
       a-select(v-model="visibility" style="margin-right: 8px;")
         a-select-option(value="public")
@@ -37,16 +33,20 @@
 </template>
 
 <script>
+import TagInput from '@/components/TagInput'
 export default {
   name: 'LevelManageListing',
   background: null,
+  components: {
+    TagInput
+  },
   data() {
     return {
       description: 'Hi',
       tag: '',
       tags: [],
       visibility: 'public',
-      featured: false
+      featured: false,
     }
   },
 }
