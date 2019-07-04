@@ -71,13 +71,11 @@
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total play time
               p.card-em-text(v-text="profile.activities.total_play_time")
-          a-radio-group(defaultValue="global_ranking" size="small" @change="handleChartChange" style="margin-bottom: 16px;")
-            a-radio-button(value="global_ranking") Global ranking
-            a-radio-button(value="region_ranking") Region ranking
+          a-radio-group(size="small" v-model="chartMode" style="margin-bottom: 16px;")
+            a-radio-button(value="activity") Activities
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
-          line-chart(v-if="true" :styles="chartStyles" :chart-data="chartData" :options="chartOptions")
-          // Disable the line chart just for now.
+          line-chart(:data="profile.timeseries" :mode="chartMode")
         a-card(
           v-if="featuredLevels.length > 0 || levels.length > 0"
           class="levels-card"
@@ -116,19 +114,12 @@ export default {
     levels: [],
     featuredLevels: [],
     profile: null,
-    chartData: null,
-    chartOptions: null,
+    chartMode: 'activity'
   }),
   computed: {
     bio() {
       return marked(this.profile.profile.bio || 'There is no bio yet.')
     },
-    chartStyles() {
-      return {
-        position: 'relative',
-        height: '192px',
-      }
-    }
   },
   asyncData({ $axios, params, error, store }) {
     return $axios.get('/profile/' + params.id, { params: { stats: true } })
@@ -162,10 +153,6 @@ export default {
         }
       })
   },
-  mounted() {
-    this.updateChart('global_ranking')
-    console.log(this.profile)
-  },
   methods: {
     commaSeparated(number) {
       if (number) {
@@ -176,106 +163,6 @@ export default {
     readableDate(date) {
       return moment(date)
     },
-    updateChart(type) {
-      const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              fontColor: 'rgba(255, 255, 255, 0.3)',
-              fontSize: 12,
-              fontFamily: 'Nunito',
-              beginAtZero: false,
-            }
-          }],
-          xAxes: [{
-            ticks: {
-              fontColor: 'rgba(255, 255, 255, 0.3)',
-              fontSize: 12,
-              fontFamily: 'Nunito',
-              stepSize: 1,
-            }
-          }]
-        },
-        elements: {
-          line: {
-            tension: 0
-          }
-        }
-      }
-      switch (type) {
-        case 'global_ranking':
-          this.chartData = {
-            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
-            datasets: [
-              {
-                label: 'Global ranking',
-                backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                fontColor: 'white',
-                data: [13, 12, 12, 12, 12, 11, 11],
-                fill: 'start',
-              }
-            ],
-          }
-          options.scales.yAxes[0].ticks.reverse = true
-          options.scales.yAxes[0].ticks.stepSize = 1
-          break
-        case 'region_ranking':
-          this.chartData = {
-            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
-            datasets: [
-              {
-                label: 'Region ranking',
-                backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                fontColor: 'white',
-                data: [2, 2, 1, 1, 1, 1, 1],
-                fill: 'start',
-              }
-            ],
-          }
-          options.scales.yAxes[0].ticks.reverse = true
-          options.scales.yAxes[0].ticks.stepSize = 1
-          break
-        case 'rating':
-          this.chartData = {
-            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
-            datasets: [
-              {
-                label: 'Rating',
-                backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                fontColor: 'white',
-                data: [0, 14.13, 14.57, 14.82, 15.11, 15.03, 15.08, 15.15]
-              }
-            ],
-          }
-          options.scales.yAxes[0].ticks.reverse = false
-          options.scales.yAxes[0].ticks.stepSize = undefined
-          break
-        case 'accuracy':
-          this.chartData = {
-            labels: ['05/12', '05/13', '05/13', '05/14', '05/15', '05/16', '05/17'],
-            datasets: [
-              {
-                label: 'Average accuracy',
-                backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                fontColor: 'white',
-                data: [97.20, 97.24, 97.33, 97.01, 97.44, 97.50, 97.69]
-              }
-            ],
-          }
-          options.scales.yAxes[0].ticks.reverse = false
-          options.scales.yAxes[0].ticks.stepSize = undefined
-          break
-      }
-      this.chartOptions = options
-    },
-    handleChartChange(e) {
-      this.updateChart(e.target.value)
-    }
   },
 }
 </script>

@@ -3,7 +3,7 @@
   a-avatar.level-avatar(class="ele3" :src="props.avatar + '?size=512'")
   a-progress.level-badge-progress(
     type="dashboard"
-    :percent="((props.exp.totalExp - 0) / (props.exp.nextLevelExp - props.exp.totalExp)) * 100"
+    :percent="((props.exp.totalExp - props.exp.currentLevelExp) / (props.exp.nextLevelExp - props.exp.currentLevelExp)) * 100"
     :format="percent => ''"
     :width="152"
     :stroke-width="3"
