@@ -4,34 +4,15 @@
 # Node.js dependencies:
 node_modules/
 
-.firebaserc
-firebase.json
-.firebase/
-
 .idea/
 
 .editorconfig
 .eslintrc.js
-.gitattributes
-.travis.yml
 
-make-secret.sh
-deploy-secret.json
-secrets.tar
+
 README.md
-secrets.tar.enc
-
-
 
 /dist/
-
-/.nuxt/*
-!/.nuxt/dist
-/.nuxt/dist/*
-!/.nuxt/dist/server
-
-/src/*
-!/src/modules
-!/src/store
+/.nuxt
 
 /config/development.json

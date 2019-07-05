@@ -6,7 +6,7 @@ header.navbar.light.container(role="navigation")
   no-ssr
     nuxt-link(v-if="!$store.state.user" to="/session/login"): a-button(type="primary") Login
     a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
-      a-avatar(:src="$store.state.avatar")
+      a-avatar(:src="$store.state.avatar").avatar-icon
       nav-card(slot="content")
 </template>
 
@@ -42,6 +42,9 @@ export default {
     &.is-active {
       color: $white;
     }
+  }
+  .avatar-icon {
+    cursor: pointer;
   }
 }
 </style>

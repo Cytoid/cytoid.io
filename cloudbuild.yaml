@@ -1,0 +1,25 @@
+steps:
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['install']
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['generate']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["build", "-t", "gcr.io/$PROJECT_ID/ssr", "."]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "gcr.io/$PROJECT_ID/ssr"]
+- name: 'gcr.io/cloud-builders/gsutil'
+  args:
+  # Parallel Uploading
+  - "-m"
+  #  Synchronize content of two buckets/directories
+  - "rsync"
+  # Synchronized recursively
+  - "-r"
+  # Compute Checksum
+  - "-c"
+  # Delete extra files
+  - "-d"
+  # Local Dir
+  - "./.nuxt/dist/client"
+  # Remote Bucket
+  - "gs://static.cytoid.io"
