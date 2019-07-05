@@ -68,7 +68,7 @@ export default {
           this.$message.success('Level Listing Saved')
         })
         .catch((error) => {
-          this.$message.error(error.response?.data.message || error.message)
+          this.handleErrorToast(error)
         })
         .then(() => {
           this.loading = false

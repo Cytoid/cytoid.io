@@ -48,12 +48,12 @@ export default {
             this.startTimer()
           })
           .catch((error) => {
-            if (error.response && error.response.status === 404) {
+            if (error.response?.status === 404) {
               this.form.setFields({
                 email: { errors: [{ message: 'The email was never registered / confirmed!' }] }
               })
             } else {
-              this.$message.error((error.response && error.response.data) || error.message)
+              this.handleErrorToast(error)
             }
           })
           .then(() => {
@@ -71,7 +71,7 @@ export default {
           this.startTimer()
         })
         .catch((error) => {
-          this.$message.error((error.response && error.response.data) || error.message)
+          this.handleErrorToast(error)
         })
         .then(() => {
           this.loading = false

@@ -107,6 +107,8 @@ import LineChart from '@/components/profile/LineChart'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
+import { handleErrorBlock } from '@/plugins/antd'
+
 export default {
   components: { LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar, LevelCard },
   layout: 'background',
@@ -145,13 +147,7 @@ export default {
         } }).then(res => res.data),
       ]))
       .then(([profile, featuredLevels, levels]) => ({ profile, featuredLevels, levels }))
-      .catch((err) => {
-        if (err.response?.status === 404) {
-          error({ statusCode: 404, message: 'Profile not found' })
-        } else {
-          throw err
-        }
-      })
+      .catch(err => handleErrorBlock(err, error))
   },
   methods: {
     commaSeparated(number) {

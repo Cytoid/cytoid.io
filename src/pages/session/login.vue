@@ -107,7 +107,7 @@ export default {
             if (error.response && error.response.status === 401) {
               this.$message.error('Username/password mismatch!')
             } else {
-              this.$message.error((error.response && error.response.data) || error.message)
+              this.handleErrorToast(error)
             }
           })
       })

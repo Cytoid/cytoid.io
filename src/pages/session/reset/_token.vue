@@ -58,7 +58,7 @@ export default {
               console.log('wrong code!')
               this.state = -1
             } else {
-              this.$message.error((error.response && error.response.data) || error.message)
+              this.handleErrorToast(error)
             }
           })
           .then(() => {

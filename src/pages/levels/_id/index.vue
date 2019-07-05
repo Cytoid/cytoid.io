@@ -101,6 +101,8 @@ import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import { formatBytes } from '@/utils'
+import { handleErrorBlock } from '@/plugins/antd'
+
 const columns = [
   {
     title: 'Rank',
@@ -229,7 +231,7 @@ export default {
       this.loadRankings(this.rankings_pagination)
     }
   },
-  asyncData({ $axios, params, store }) {
+  asyncData({ $axios, params, store, error }) {
     return Promise.all([
       $axios.get('/levels/' + params.id),
       $axios.get(`/levels/${params.id}/ratings`),
@@ -242,6 +244,7 @@ export default {
           rankingsChart: levelResponse.data.charts[0].type
         }
       })
+      .catch(err => handleErrorBlock(err, error))
   },
   mounted() {
     this.loadRankings(this.rankings_pagination)

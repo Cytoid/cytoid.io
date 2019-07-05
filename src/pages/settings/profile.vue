@@ -83,7 +83,7 @@ export default {
         .then(() => {
           this.$message.success('Profile Updated')
         })
-        .catch(err => this.$message.error(err.response?.data?.message || err.message))
+        .catch(error => this.handleErrorToast(error))
         .then(() => {
           this.submitLoading = false
         })

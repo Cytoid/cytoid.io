@@ -58,7 +58,7 @@ export default {
             this.emails.push({ address: values.email, primary: false, verified: false })
           })
           .catch((error) => {
-            this.$message.error(error.response?.data?.message || error.message)
+            this.handleErrorToast(error)
           })
           .then(() => {
             this.loading = false
@@ -72,7 +72,7 @@ export default {
           this.emails.splice(index, 1)
         })
         .catch((error) => {
-          this.$message.error(error.response?.data?.message || error.message)
+          this.handleErrorToast(error)
         })
         .then(() => {
           this.loading = false
@@ -85,7 +85,7 @@ export default {
           this.$message.info('Confirmation email sent')
         })
         .catch((error) => {
-          this.$message.error(error.response?.data?.message || error.message)
+          this.handleErrorToast(error)
         })
         .then(() => {
           this.loading = false
@@ -101,7 +101,7 @@ export default {
           item.primary = true
         })
         .catch((error) => {
-          this.$message.error(error.response?.data?.message || error.message)
+          this.handleErrorToast(error)
         })
         .then(() => {
           this.loading = false

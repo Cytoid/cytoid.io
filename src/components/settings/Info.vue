@@ -44,9 +44,8 @@ export default {
             this.loading = false
           })
           .catch((error) => {
-            console.log(error)
             this.loading = false
-            this.$message.error(error.response?.data?.message || error.message)
+            this.handleErrorToast(error)
           })
       })
     },

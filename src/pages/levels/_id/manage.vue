@@ -16,21 +16,27 @@
 </template>
 
 <script>
+import { handleErrorBlock } from '@/plugins/antd'
 export default {
   layout: 'background',
+  middleware: 'auth',
   data() {
     return {
       level: null,
     }
   },
-  asyncData({ $axios, params, store }) {
+  asyncData({ $axios, params, store, error }) {
     return $axios.get('/levels/' + params.id)
-      .then((resposne) => {
-        store.commit('setBackground', { source: resposne.data.bundle.background })
-        return {
-          level: resposne.data,
+      .then((res) => {
+        const level = res.data
+        if (level.owner.id !== store.state.user?.id) {
+          error({ statusCode: 403, message: "You don't have the permission to edit this level!" })
+          return
         }
+        store.commit('setBackground', { source: level.bundle.background })
+        return { level }
       })
+      .catch(err => handleErrorBlock(err, error))
   },
   fetch({ route, redirect }) {
     const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)

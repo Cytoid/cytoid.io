@@ -119,7 +119,7 @@ export default {
             this.$router.push({ name: 'session-login' })
           })
           .catch((error) => {
-            this.$message.error(error.response?.data?.message || error.message)
+            this.handleErrorToast(error)
             this.loading = false
             this.$captcha.reset()
             this.captchaToken = null
