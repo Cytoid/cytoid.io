@@ -60,8 +60,9 @@
           p(class="card-em-text" style="margin-bottom: 0px;") Fizzest
       a-col(:xs="24" :lg="16")
         a-card(class="ele3 rankings-card" style="margin-bottom: 16px;")
-          a-table(
-            class="rankings-table"
+          a-radio-group(v-model="rankingsChart")
+            a-radio-button(v-for="chart in level.charts" :value="chart.type" :key="chart.id") {{ chart.name }}
+          a-table.rankings-table(
             :columns="columns"
             :row-key="record => record.id"
             :data-source="rankings"
@@ -69,13 +70,13 @@
             :loading="rankings_loading"
             :scroll="{ x: true }"
             :rowClassName="(record, index) => rowClass(record, index)"
-            @change="handleTableChange"
+            @change="loadRankings"
           )
             template(v-slot:rank="ranking") {{ '#' + ranking }}
             template(slot="owner" slot-scope="text, record")
               .ranking-player-avatar
                 nuxt-link(:to="'/profile/' + (record.owner.name || record.owner.uid)" style="display: flex; align-items: center;")
-                  a-avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="'https://cytoid.io/api/avatar.php?size=96&id=' + record.owner.uid")
+                  a-avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL")
                   span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
             template(v-slot:score="score")
               div(style="display: flex; align-items: center;")
@@ -208,8 +209,13 @@ export default {
     level: null,
     ratings: null,
     rankings: [],
-    rankings_pagination: {},
-    rankings_loading: false,
+    rankings_pagination: {
+      current: 1,
+      total: 0,
+      pageSize: 10,
+    },
+    rankings_loading: true,
+    rankingsChart: null,
     columns,
     modNames
   }),
@@ -221,18 +227,19 @@ export default {
   asyncData({ $axios, params, store }) {
     return Promise.all([
       $axios.get('/levels/' + params.id),
-      $axios.get(`/levels/${params.id}/ratings`)
+      $axios.get(`/levels/${params.id}/ratings`),
     ])
       .then(([levelResponse, ratingResponse]) => {
         store.commit('setBackground', { source: levelResponse.data.bundle.background })
         return {
           level: levelResponse.data,
           ratings: ratingResponse.data,
+          rankingsChart: levelResponse.data.charts[0].type
         }
       })
   },
   mounted() {
-    this.fetchRankings()
+    this.loadRankings(this.rankings_pagination)
   },
   methods: {
     readableDate(date) {
@@ -245,15 +252,19 @@ export default {
           this.ratings = response.data
         })
     },
-    handleTableChange(pagination, filters, sorter) {
-      const pager = { ...this.rankings_pagination }
-      pager.current = pagination.current
-      this.fetchRankings({
-        results: pagination.pageSize,
-        page: pagination.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
-        ...filters,
+    loadRankings(pagination) {
+      this.rankings_loading = true
+      // TODO: adjust difficulty
+      this.$axios.get(`/levels/${this.level.uid}/charts/${this.rankingsChart}/ranking`, {
+        params: {
+          limit: pagination.pageSize,
+          page: pagination.current - 1,
+        },
+      }).then((res) => {
+        this.rankings_pagination.total = parseInt(res.headers['x-total-entries'])
+        this.rankings_pagination.current = parseInt(res.headers['x-current-page']) + 1
+        this.rankings_loading = false
+        this.rankings = res.data
       })
     },
     rowClass(record) {
@@ -272,21 +283,6 @@ export default {
       }
       return classes
     },
-    fetchRankings(params = {}) {
-      this.rankings_loading = true
-      this.$axios.get(`/levels/${this.level.uid}/charts/${this.level.charts[0].type}/ranking`, {
-        params: {
-          results: 10,
-          ...params,
-        },
-      }).then((res) => {
-        const pagination = { ...this.rankings_pagination }
-        pagination.total = res.headers['x-total-entries']
-        this.rankings_loading = false
-        this.rankings = res.data
-        this.rankings_pagination = pagination
-      })
-    },
     formatSize(size) {
       return formatBytes(size)
     },
@@ -296,6 +292,11 @@ export default {
       } else {
         this.$router.push('/session/login')
       }
+    }
+  },
+  watch: {
+    rankingsChart() {
+      this.loadRankings(this.rankings_pagination)
     }
   }
 }
