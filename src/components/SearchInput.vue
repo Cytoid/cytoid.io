@@ -1,16 +1,72 @@
 <template lang="pug">
-.search-input
-  font-awesome-icon(:icon="['far', 'search']").icon
-  input(type="search")
+a-auto-complete.search-input-container(
+  @search="keyPressed"
+  @select="itemSelected"
+  :dataSource="data"
+)
+  .search-input(slot="default")
+    button.icon(@click="submit")
+      font-awesome-icon(:icon="['far', 'search']")
+    input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
 </template>
 
 <script>
 export default {
+  name: 'Search',
+  data() {
+    return {
+      data: null,
+      searchKey: '',
+    }
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearTimeout(this.timer)
+      this.timer = null
+    }
+  },
+  methods: {
+    keyPressed(key) {
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = null
+      }
+      this.timer = setTimeout(() => {
+        this.$axios.get('/tags/full', {
+          params: {
+            search: key,
+            limit: 5,
+          }
+        })
+          .then((res) => {
+            this.data = res.data.map(a => ({ value: a.uid, text: a.title }))
+          })
+      }, 300)
+    },
+    itemSelected(value) {
+      this.$router.push({
+        name: 'levels-id',
+        params: { id: value },
+      })
+    },
+    submit() {
+      this.$router.push({
+        name: 'levels',
+        query: { search: this.searchKey }
+      })
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 $search-input-size: 2rem;
+.search-input-container {
+  margin-right: 1rem;
+  .ant-select-selection {
+    background: none;
+  }
+}
 .search-input {
   position: relative;
   .icon {
@@ -18,8 +74,10 @@ $search-input-size: 2rem;
     height: $search-input-size;
     width: $search-input-size;
     padding: $search-input-size / 4;
-    pointer-events: none;
     right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
   input {
     background-color: $shade4;

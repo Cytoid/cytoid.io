@@ -224,6 +224,11 @@ export default {
       return this.level.description !== null ? marked(this.level.description) : null
     },
   },
+  watch: {
+    rankingsChart() {
+      this.loadRankings(this.rankings_pagination)
+    }
+  },
   asyncData({ $axios, params, store }) {
     return Promise.all([
       $axios.get('/levels/' + params.id),
@@ -294,11 +299,6 @@ export default {
       }
     }
   },
-  watch: {
-    rankingsChart() {
-      this.loadRankings(this.rankings_pagination)
-    }
-  }
 }
 </script>
 

@@ -36,11 +36,11 @@ export default {
       }
     },
     handleSearch(keyword) {
-      if (this.searchTimeout) {
-        clearTimeout(this.searchTimeout)
-        this.searchTimeout = null
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = null
       }
-      this.searchTimeout = setTimeout(this.search.bind(this, keyword), 300)
+      this.timer = setTimeout(this.search.bind(this, keyword), 300)
     },
     search(keyword = '') {
       this.$axios.get('/tags', { params: { search: keyword } })
