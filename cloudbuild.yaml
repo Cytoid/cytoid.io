@@ -1,15 +1,4 @@
 steps:
-- name: 'gcr.io/$PROJECT_ID/git-lfs'
-  args: ['init']
-- name: 'gcr.io/$PROJECT_ID/git-lfs'
-  args: ['remote', 'add', 'origin', 'https://github.com/Cytoid/cytoid.io.git']
-- name: 'gcr.io/$PROJECT_ID/git-lfs'
-  args: ['fetch']
-- name: 'gcr.io/$PROJECT_ID/git-lfs'
-  args: ['reset', '--soft', 'origin/$BRANCH_NAME']
-- name: 'gcr.io/$PROJECT_ID/git-lfs'
-  args: ['lfs', 'fetch']
-
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
 - name: 'gcr.io/cloud-builders/yarn'
@@ -22,6 +11,8 @@ steps:
   args:
   # Parallel Uploading
   - "-m"
+  - "-h"
+  - '"Cache-Control:public, max-age=31536000"'
   #  Synchronize content of two buckets/directories
   - "rsync"
   # Synchronized recursively
