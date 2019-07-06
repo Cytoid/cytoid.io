@@ -37,6 +37,11 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+  meta: {
+    theme_color: 'hsla(226, 68%, 6%, 1)',
+    nativeUI: true,
+    appleStatusBarStyle: 'black-translucent',
+  },
 
   /*
   ** Global CSS

@@ -26,7 +26,7 @@ a-modal(
     and all search results. It will stay in a public collection if it's already been added,
     but the other players will not be able to check the details of the level.
     Only you can see or download the level.
-  p Please input the uid of the level #[b(v-text="level.uid")] to proceed
+  p Please input the uid of the level #[b(v-text="level.uid" style="color: red;")] to proceed
   action-confirm(
     slot="footer"
     :value="level.uid"

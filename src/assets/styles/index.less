@@ -1,18 +1,12 @@
 @import "~ant-design-vue/dist/antd.less";
 
-.background {
-  position: absolute;
-  top: 0;
-  z-index: -100;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 html, .scroll-bar {
   scrollbar-color: @shade2 @shade1;
   scrollbar-width: thin;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 body {
