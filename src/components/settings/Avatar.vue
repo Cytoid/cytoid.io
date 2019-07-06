@@ -1,20 +1,21 @@
 <template lang="pug">
 a-card.avatar-upload(title="Avatar")
-    a-upload(
-      name="avatar"
-      listType="picture-card"
-      accept="image/*"
-      :showUploadList="false"
-      :customRequest="upload"
-      @change="avatarUploaded"
-    )
-      a-avatar.avatar(:src="$store.state.avatar")
-    template(v-if="!usingGravatar")
-      a-button(
-        :loading="avatarDeleteLoading",
-        @click="avatarDelete"
-      ) Use Gravatar
-    span(v-else) You're using your avatar from #[a(href="https://gravatar.com/" target="_blank") Gravatar]
+  captcha(invisible badge="bottomleft")
+  a-upload(
+    name="avatar"
+    listType="picture-card"
+    accept="image/*"
+    :showUploadList="false"
+    :customRequest="upload"
+    @change="avatarUploaded"
+  )
+    a-avatar.avatar(:src="$store.state.avatar")
+  template(v-if="!usingGravatar")
+    a-button(
+      :loading="avatarDeleteLoading",
+      @click="avatarDelete"
+    ) Use Gravatar
+  span(v-else) You're using your avatar from #[a(href="https://gravatar.com/" target="_blank") Gravatar]
 </template>
 
 <script>
