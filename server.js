@@ -1,25 +1,8 @@
-if (process.env.NODE_ENV === 'production') {
-  require('@google-cloud/trace-agent').start()
-  require('@google-cloud/debug-agent').start({
-    serviceContext: {
-      service: 'Frontend',
-      version: '1.0.0'
-    }
-  })
-}
-
-const { createServer } = require('http2')
 const Koa = require('koa')
 const conf = require('config')
-const consola = require('consola')
-const { Nuxt, Builder } = require('nuxt')
 const session = require('koa-session')
-const router = require('koa-route')
-
 const config = require('./nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
-
-const nuxt = new Nuxt(config)
 
 const app = new Koa()
 app.keys = [conf.secret]
@@ -37,10 +20,6 @@ app.use(session({
   renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false) */
 }, app))
 
-// Old site redirects
-app.use(router.get('/browse', ctx => ctx.redirect('/levels')));
-app.use(router.get('/browse/:name', (ctx, name) => ctx.redirect('/levels/' + name)));
-
 if (config.dev) {
   const routeRegex = /^\/api(\/.+)/
   app.use(require('koa-proxy')({
@@ -51,43 +30,59 @@ if (config.dev) {
       const test = routeRegex.exec(path)
       return test ? test[1] : path
     }
-  })
-  )
+  }))
+} else {
+  // Old site redirects
+  const router = require('koa-route')
+  app.use(router.get('/browse', ctx => ctx.redirect('/levels')));
+  app.use(router.get('/browse/:name', (ctx, name) => ctx.redirect('/levels/' + name)));
 }
 
-// Give nuxt middleware to Koa
-app.use((ctx) => {
-  ctx.status = 200
-  ctx.respond = false // Mark request as handled for Koa
-  ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
-  nuxt.render(ctx.req, ctx.res);
-})
+function getNuxtInstance() {
+  if (config.dev) {
+    const { Nuxt, Builder } = require('nuxt')
+    const nuxt = new Nuxt(config)
+    const builder = new Builder(nuxt)
+    return builder
+      .build()
+      .then(() => nuxt)
+  } else {
+    const { Nuxt } = require('nuxt-start')
+    const nuxt = new Nuxt(config)
+    return nuxt.ready()
+      .then(() => nuxt)
+  }
+}
 
-const {
-  host = process.env.HOST || '127.0.0.1',
-  port = process.env.PORT || 3000
-} = nuxt.options.server;
+getNuxtInstance()
+  .then((nuxt) => {
+    // Give nuxt middleware to Koa
+    app.use((ctx) => {
+      ctx.status = 200
+      ctx.respond = false // Mark request as handled for Koa
+      ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
+      nuxt.render(ctx.req, ctx.res);
+    })
 
-(config.dev ? ((new Builder(nuxt)).build()) : nuxt.ready())
-  .then(() => {
-    // Listen the server
+    const {
+      host = process.env.HOST || '127.0.0.1',
+      port = process.env.PORT || 3000
+    } = nuxt.options.server
+    return { host, port }
+  })
+  .then(({ host, port }) => {
     if (process.env.HTTP2) {
+      const { createServer } = require('http2')
       createServer(app.callback())
         .listen(port, host, (err) => {
           if (err) {
             throw new Error(err)
           }
-          consola.ready({
-            message: `HTTP2.0 Server listening on http://${host}:${port}`,
-            badge: true
-          })
+          console.log(`HTTP2.0 Server listening on http://${host}:${port}`)
         })
     } else {
       app.listen(port, host, () => {
-        consola.ready({
-          message: `HTTP1.1 Server listening on http://${host}:${port}`,
-          badge: true
-        })
+        console.log(`HTTP1.1 Server listening on http://${host}:${port}`)
       })
     }
   })

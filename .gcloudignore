@@ -7,7 +7,6 @@ node_modules/
 .idea/
 
 .editorconfig
-.eslintrc.js
 
 
 README.md

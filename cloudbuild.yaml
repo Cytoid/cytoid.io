@@ -1,4 +1,15 @@
 steps:
+- name: 'gcr.io/$PROJECT_ID/git-lfs'
+  args: ['init']
+- name: 'gcr.io/$PROJECT_ID/git-lfs'
+  args: ['remote', 'add', 'origin', 'https://github.com/Cytoid/cytoid.io.git']
+- name: 'gcr.io/$PROJECT_ID/git-lfs'
+  args: ['fetch']
+- name: 'gcr.io/$PROJECT_ID/git-lfs'
+  args: ['reset', '--soft', 'origin/$BRANCH_NAME']
+- name: 'gcr.io/$PROJECT_ID/git-lfs'
+  args: ['lfs', 'fetch']
+
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
 - name: 'gcr.io/cloud-builders/yarn'
@@ -23,3 +34,17 @@ steps:
   - "./.nuxt/dist/client"
   # Remote Bucket
   - "gs://static.cytoid.io"
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'beta'
+  - 'run'
+  - 'deploy'
+  - 'ssr'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/ssr'
+  - '--region'
+  - 'us-central1'
+  - '--platform'
+  - 'managed'
+images:
+  - gcr.io/$PROJECT_ID/ssr
