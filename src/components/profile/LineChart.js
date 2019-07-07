@@ -1,5 +1,6 @@
 import { Line } from 'vue-chartjs'
 import Chart from 'chart.js'
+import moment from 'moment'
 
 export default {
   extends: Line,
@@ -25,27 +26,16 @@ export default {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: this.mode === 'activity',
+              precision: this.mode === 'accuracy' ? 2 : (this.mode === 'activity' ? 0 : 1),
+              callback: (value, index, values) => {
+                if (this.mode === 'accuracy') return Math.round(value * 100) + '%'
+                if (this.mode === 'rating') return value + ' rt'
+                return value
+              }
             }
           }],
           xAxes: [{
-            type: 'time',
-            offset: this.mode === 'activity',
-            distribution: 'linear',
-            bounds: 'ticks',
-            time: {
-              unit: 'week',
-              displayFormats: {
-                week: 'W'
-              },
-              parser: 'GGGG-W', // Two digits week year, plus two digits week number
-            },
-            ticks: {
-              autoSkip: true,
-              maxTicksLimit: 10,
-              source: 'data',
-            }
-          }, {
             type: 'time',
             offset: this.mode === 'activity',
             distribution: 'linear',
@@ -64,6 +54,24 @@ export default {
             },
           }]
         },
+        tooltips: {
+          callbacks: {
+            title: (tooltipItems, data) => {
+              return moment(tooltipItems[0].label, 'Y-w').format('YYYY/MM/DD')
+            },
+            label: (tooltipItem, data) => {
+              switch (this.mode) {
+                case 'activity':
+                  return tooltipItem.yLabel + ' ranked plays'
+                case 'rating':
+                  return tooltipItem.yLabel.toFixed(2) + ' rt'
+                case 'accuracy':
+                  return (tooltipItem.yLabel * 100).toFixed(2) + '%'
+              }
+              return tooltipItem.yLabel
+            }
+          }
+        }
       }
     },
     chartData() {

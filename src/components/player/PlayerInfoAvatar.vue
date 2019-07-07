@@ -62,7 +62,7 @@ export default {
     height: @level-badge-size;
     border-radius: @level-badge-size / 2;
     left: (@level-size / 2) - (@level-badge-size / 2);
-    top: -@level-badge-size / 2 - 4px;
+    top: -@level-badge-size / 2 - 16px;
     background: #fff;
     text-align: center;
     line-height: @level-badge-inner-size / 2;

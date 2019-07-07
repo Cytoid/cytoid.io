@@ -15,9 +15,6 @@
               | Online
             p.details(class="text-ele")
               span
-                font-awesome-icon(:icon="['far', 'map-marker-alt']")
-                | Hong Kong
-              span
                 font-awesome-icon(:icon="['far', 'calendar']")
                 | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
     a-row(:gutter="16")
@@ -54,17 +51,17 @@
         a-card.statistics-card(class="ele3" style="margin-bottom: 16px;")
           a-row
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
-              p.card-heading Ranked plays
+              p.card-heading Total ranked plays
               p.card-em-text(v-text="profile.activities.total_ranked_plays")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
-              p.card-heading Cleared notes
+              p.card-heading Total cleared notes
               p.card-em-text(v-text="commaSeparated(profile.activities.cleared_notes)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
-              p.card-heading Max combo
+              p.card-heading Highest max combo
               p.card-em-text(v-text="commaSeparated(profile.activities.max_combo)")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Average ranked accuracy
-              p.card-em-text(v-text="Math.round(profile.activities.average_ranked_accuracy*100) + '%'")
+              p.card-em-text(v-text="(profile.activities.average_ranked_accuracy * 100).toFixed(2) + '%'")
             a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
               p.card-heading Total ranked score
               p.card-em-text(v-text="commaSeparated(profile.activities.total_ranked_score)")
@@ -72,10 +69,10 @@
               p.card-heading Total play time
               p.card-em-text(v-text="profile.activities.total_play_time")
           a-radio-group(size="small" v-model="chartMode" style="margin-bottom: 16px;")
-            a-radio-button(value="activity") Activities
+            a-radio-button(value="activity") Ranked plays
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
-          line-chart(:data="profile.timeseries" :mode="chartMode")
+          line-chart(:data="profile.timeseries" :mode="chartMode" :style="chartStyles", :options="chartOptions")
         a-card(
           v-if="featuredLevels.length > 0 || levels.length > 0"
           class="levels-card"
@@ -86,7 +83,7 @@
             .level-card-container.small.featured-levels-container(style="padding: 56px 16px 0 16px;")
               level-card(v-for="level in featuredLevels" :key="level.id" :value="level")
             div(style="padding: 16px;")
-              nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
+              nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id }, featured: true }")
                 a-button(class="card-button" style="width: 100%;")
                   font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                   span View all {{profile.levels.featuredLevelsCount}} featured
@@ -122,12 +119,57 @@ export default {
     bio() {
       return marked(this.profile.profile.bio || 'There is no bio yet.')
     },
+    chartStyles() {
+      return {
+        position: 'relative',
+        height: '192px',
+      }
+    },
+    chartOptions() {
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              fontColor: 'rgba(255, 255, 255, 0.3)',
+              fontSize: 12,
+              fontFamily: 'Nunito',
+              beginAtZero: false,
+            }
+          }],
+          xAxes: [{
+            type: 'time',
+            ticks: {
+              fontColor: 'rgba(255, 255, 255, 0.3)',
+              fontSize: 12,
+              fontFamily: 'Nunito',
+              stepSize: 1,
+            },
+            time: {
+              unit: 'week'
+            }
+          }]
+        },
+        elements: {
+          line: {
+            tension: 0
+          }
+        }
+      }
+      return options
+    }
   },
   asyncData({ $axios, params, error, store }) {
     return $axios.get('/profile/' + params.id, { params: { stats: true } })
       .then((res) => {
-        store.commit('setBackground', { source: res.data.profile.headerURL })
-        return res.data
+        const data = res.data
+        store.commit('setBackground', { source: data.profile.headerURL })
+
+        return data
       })
       .then(profile => Promise.all([
         Promise.resolve(profile),
@@ -158,7 +200,7 @@ export default {
     },
     readableDate(date) {
       return moment(date)
-    },
+    }
   },
 }
 </script>
