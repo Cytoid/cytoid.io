@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Bowser from 'bowser'
 import PlayButton from '@/components/level/PlayButton'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
@@ -40,6 +41,7 @@ export default {
     },
   },
   data: () => ({
+    parallax: false,
     mouseX: null,
     mouseY: null,
     offsetTop: null,
@@ -82,11 +84,20 @@ export default {
       this.mouseLeaveDelayTimeout = null
     }
   },
+  mounted() {
+    if (Bowser.getParser(window.navigator.userAgent).satisfies({ chrome: '>=1' })) {
+      this.parallax = true
+    }
+    console.log(`parallax: ${this.parallax}`)
+  },
   methods: {
     handleMouseMove(e) {
       const target = this.$refs.card
       if (!target) {
         // Bugfix for vue routing bug. Event sent after component destruction.
+        return
+      }
+      if (!this.parallax) {
         return
       }
       const offset = this.getOffset(this.$refs.card)
