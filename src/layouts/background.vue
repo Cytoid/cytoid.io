@@ -1,9 +1,11 @@
 <template lang="pug">
 div
-  .background-container(v-if="background && background.source")
+  .background-container(
+    v-if="background && background.source"
+    v-parallax.absY="background.parallaxSpeed"
+  )
     img.background-image(
       v-show="loaded"
-      v-parallax.absY="background.parallaxSpeed"
       :style="{filter: `brightness(${1 - this.background.overlayOpacity})` }"
       :src="background.source"
       @load="animateBackground"
