@@ -1,5 +1,7 @@
 <template lang="pug">
 div
+  .gradient-container(
+    )
   .background-container(
     v-if="background && background.source"
     v-parallax.absY="background.parallaxSpeed"
@@ -43,6 +45,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+.gradient-container {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  z-index: 150;
+  background: linear-gradient(to left, #B06AB3, #4568DC);
+}
+
 .background-container {
   position: absolute;
   width: 100%;

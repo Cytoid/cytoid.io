@@ -81,6 +81,7 @@
       <captcha theme="dark" :token.sync="captchaToken" />
       <a-form-item>
         <a-button
+          class="card-button"
           type="primary"
           html-type="submit"
           block

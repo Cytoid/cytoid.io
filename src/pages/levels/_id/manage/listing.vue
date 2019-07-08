@@ -1,12 +1,14 @@
 <template lang="pug">
   a-card.ele3
     a-form(:form="form" @submit.prevent="submit")
-      a-form-item(label="Description")
+      p.heading Description
+      a-form-item
         no-ssr: markdown-editor(v-model="form.description")
-      a-form-item(label="Tags" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
+      p.heading Tags
+      a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
         tag-input(:value="form.tags" @change="form.tags=$event")
+      p.heading Visibility
       a-form-item(
-        label="Visibility"
         :label-col="{ span: 5 }"
         :wrapper-col="{ span: 19 }"
         :help="visibilityText"

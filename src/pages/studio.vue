@@ -11,10 +11,7 @@
             span.menu-text Levels
           li: a
             font-awesome-icon(:icon="['fas', 'archive']" fixed-width)
-            span.menu-text Collections
-          li: a
-            font-awesome-icon(:icon="['fas', 'file-signature']" fixed-width)
-            span.menu-text Posts
+            span.menu-text Collections (WIP)
     .column.is-three-quarters: nuxt-child
 </template>
 
@@ -46,7 +43,7 @@ a.is-active .menu-text {
     padding: 12px 16px;
     color: rgba(255, 255, 255, 0.5);
     background-color: transparent;
-    transition: 0.4s @hoverEasing;
+    transition: 0.2s @hoverEasing;
     &:hover {
       color: rgba(255, 255, 255, 1);
       background-color: hsla(226, 15%, 19%, 0.3);

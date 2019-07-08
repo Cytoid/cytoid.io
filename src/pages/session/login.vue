@@ -48,6 +48,7 @@
         </a-form-item>
         <captcha theme="dark" :token.sync="captchaToken" style="margin-bottom: 1rem;" />
         <a-button
+          class="card-button"
           type="primary"
           html-type="submit"
           :loading="loading"
@@ -64,6 +65,7 @@
       <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
       <nuxt-link to="./signup">
         <a-button
+          class="card-button"
           type="primary"
           html-type="submit"
           block

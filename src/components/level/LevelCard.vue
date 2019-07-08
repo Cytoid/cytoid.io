@@ -85,10 +85,9 @@ export default {
     }
   },
   mounted() {
-    if (Bowser.getParser(window.navigator.userAgent).satisfies({ chrome: '>=1' })) {
+    if (Bowser.getParser(window.navigator.userAgent).satisfies({ desktop: { chrome: '>=1' } })) {
       this.parallax = true
     }
-    console.log(`parallax: ${this.parallax}`)
   },
   methods: {
     handleMouseMove(e) {
@@ -107,10 +106,12 @@ export default {
       this.mouseY = e.pageY - this.offsetTop - target.offsetHeight / 2
     },
     handleMouseEnter() {
+      if (!this.parallax) return
       clearTimeout(this.mouseLeaveDelayTimeout)
       this.mouseLeaveDelayTimeout = null
     },
     handleMouseLeave() {
+      if (!this.parallax) return
       this.mouseLeaveDelayTimeout = setTimeout(() => {
         this.mouseX = null
         this.mouseY = null
@@ -146,11 +147,11 @@ p {
   padding-top: 62.5%;
   &:hover {
     .card {
-      transition: 0.4s @hoverEasing, box-shadow 0.4s @hoverEasing;
+      transition: 0.2s @hoverEasing, box-shadow 0.2s @hoverEasing;
       box-shadow: @ele3; //rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px, rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
     }
     .card-bg {
-      transition: 0.4s @hoverEasing, opacity 0.4s @hoverEasing;
+      transition: 0.2s @hoverEasing, opacity 0.2s @hoverEasing;
       transform: scale(1.02, 1.02) translateX(var(--translate-x, 0)) translateY(var(--translate-y, 0));
       border-radius: 4px;
       // transform: scale(1.02, 1.02) translateX(var(--translate-x, 0)) translateY(var(--translate-y, 0));
@@ -168,7 +169,7 @@ p {
   overflow: hidden;
   border-radius: 4px;
   box-shadow: @ele2; //rgba(0, 0, 0, 0.66) 0 px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
-  transition: 0.4s @returnEasing;
+  transition: 0.2s @returnEasing;
   &:active {
     transform: scale(0.98, 0.98);
   }
@@ -196,7 +197,7 @@ p {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    transition: 0.2s @returnEasing, opacity 0.4s @returnEasing;
+    transition: 0.2s @returnEasing, opacity 0.2s @returnEasing;
     pointer-events: none;
     box-sizing: unset;
   }

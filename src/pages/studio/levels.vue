@@ -163,6 +163,7 @@ export default {
           this.levels_pagination.total = parseInt(res.headers['x-total-entries'], 10)
           this.levels_loading = false
           this.levels = res.data
+          window.scrollTo(0, 0)
         })
     },
     visibility(level) {
@@ -189,7 +190,7 @@ export default {
 .level-thumbnail {
   display: flex;
   align-items: center;
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
   &:hover {
     filter: brightness(50%);
   }

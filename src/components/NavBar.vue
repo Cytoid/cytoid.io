@@ -1,6 +1,6 @@
 <template lang="pug">
 header.navbar.light.container(role="navigation")
-  nuxt-link.navbar-item(:to="{ name: 'index' }" exact) Cytoid
+  nuxt-link.navbar-item(:to="{ name: 'index' }" exact) Home
   nuxt-link.navbar-item(:to="{ name: 'levels' }") Levels
   search.left
   no-ssr
@@ -34,13 +34,14 @@ export default {
     margin-right: 1rem;
   }
   .navbar-item {
-    color: $grey-lighter;
+    color: rgba(255, 255, 255, 0.5);
     padding: 0 1rem;
     &:hover {
-      color: $white-bis;
+      color: rgba(255, 255, 255, 1);
     }
     &.is-active {
-      color: $white;
+      color: rgba(255, 255, 255, 1);
+      font-weight: bold;
     }
   }
   .avatar-icon {

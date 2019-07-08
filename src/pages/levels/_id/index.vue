@@ -40,20 +40,20 @@
           template(v-if="level.tags.length > 0")
             .card-heading Tags
             div(style="margin-bottom: 16px;")
-              a(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag")
+              a(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()")
                 a-tag {{ tag }}
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(level.modificationDate) }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Music
           p(class="card-em-text" style="margin-bottom: 4px;") {{ level.metadata.artist.name }}
-          a(:href="level.metadata.artist.url")
+          a(:href="makeLink(level.metadata.artist.url)")
             a-button(v-if='level.metadata.artist.url !== null' class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
           p(class="card-heading") Cover art
           p(class="card-em-text" style="margin-bottom: 4px;") {{ level.metadata.illustrator.name }}
-          a(:href="level.metadata.illustrator.url")
+          a(:href="makeLink(level.metadata.illustrator.url)")
             a-button(v-if='level.metadata.illustrator.url !== null' class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
@@ -329,6 +329,10 @@ export default {
         hard: 'Hard',
         extreme: 'Extreme',
       }[name]
+    },
+    makeLink(link) {
+      if (link == null) return 'about:blank'
+      return (link.indexOf('://') === -1) ? 'http://' + link : link
     }
   },
 }
@@ -337,13 +341,13 @@ export default {
 <style lang="less" scoped>
   .ranking-player-avatar {
     display: flex;
-    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .ranking-player-avatar:hover {
-    transform: scale(1.04, 1.04);
+    transform: scale(0.98, 0.98);
   }
   .ranking-player-avatar:active {
-    transform: scale(0.98, 0.98);
+    transform: scale(0.95, 0.95);
   }
   .ranking-player-avatar a {
     text-decoration: none !important;
@@ -355,15 +359,17 @@ export default {
   .download-button.ant-btn-primary {
     background: linear-gradient(to right, @theme4, @theme6);
     border: none;
-    transition: all 0.4s @hoverEasing;
-    background-size: 384px 100%;
+    background-size: 200% 100%;
     &:hover {
-      background-position: -180px;
-      transition: all 0.4s @hoverEasing;
+      background: linear-gradient(to right, @theme4, @theme6);
+      background-size: 200% 100%;
+      transform: scale(0.98, 0.98);
     }
-    &:active {
+    &:active, &:focus {
+      background: linear-gradient(to right, @theme4, @theme6);
+      background-size: 200% 100%;
+      box-shadow: @ele3;
       transform: scale(0.95, 0.95);
-      box-shadow: @ele1;
     }
   }
 </style>

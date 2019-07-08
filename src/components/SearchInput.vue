@@ -5,7 +5,7 @@ a-auto-complete.search-input-container(
   :dataSource="data"
 )
   .search-input(slot="default")
-    button.icon(@click="submit")
+    button.icon(@click="submit" style="outline: none;")
       font-awesome-icon(:icon="['far', 'search']")
     input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
 </template>
@@ -80,14 +80,16 @@ $search-input-size: 2rem;
     cursor: pointer;
   }
   input {
-    background-color: $shade4;
-    &:hover {
-      background-color: $shade5;
+    background-color: hsla(226, 68%, 6%, 1);
+    transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid transparent;
+    &:hover, &:focus, &:active {
+      background-color: hsla(226, 68%, 6%, 1);
+      border: 1px solid #3e4045;
     }
     display: block;
     margin-left: auto;
     height: $search-input-size;
-    border: none;
     border-radius: $search-input-size / 2;
     padding-left: $search-input-size / 2;
     padding-right: $search-input-size;
@@ -101,8 +103,6 @@ $search-input-size: 2rem;
         background-color: $primary;
       }
     }
-
-    transition: all 0.25s ease-in-out;
   }
 }
 

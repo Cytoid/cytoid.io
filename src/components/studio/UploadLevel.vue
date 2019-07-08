@@ -40,13 +40,13 @@ export default {
 
 <style lang="less">
 .ant-upload.ant-upload-drag {
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
   border: none;
   background-color: #FF3CAC;
   background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   box-shadow: 0 0 0 0 hsla(226, 68%, 67%, 0.5);
   &:hover {
-    transition: 0.4s @hoverEasing;
+    transition: 0.2s @hoverEasing;
     box-shadow: 0 0 0 2px hsla(226, 68%, 67%, 0.5);
   }
 }

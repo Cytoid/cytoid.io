@@ -7,7 +7,7 @@
 export default {
   layout: 'background',
   background: {
-    source: require('@/assets/images/normal.png'),
+    source: require('@/assets/images/bright.png'),
     overlayOpacity: 0.1,
   },
 }

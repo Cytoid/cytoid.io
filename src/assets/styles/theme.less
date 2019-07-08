@@ -24,25 +24,26 @@
 @bronze-record: #cd7f32;
 
 @font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif;
-@primary-color: #4568dc;
-@link-color: #4568dc;
+@primary-color: @shade3;
+@link-color: @shade3;
 @heading-color: rgba(255, 255, 255, 1);              // heading text color
 @text-color: rgba(255, 255, 255, 1);                 // major text color
 @text-color-secondary : rgba(255, 255, 255, 1);      // secondary text color
 @disabled-color: rgba(255, 255, 255, .4);            // disable state color
-@body-background: @shade1;
+@body-background: @shade2;
 @component-background : @shade3;
-@border-color-base: @shade1; // base border outline a component
-@border-color-split: @shade2; // split border inside a component
+@border-color-base: transparent; // base border outline a component
+@border-color-split: transparent; // split border inside a component
 @background-color-light: @shade4; // background of header and selected item
 @background-color-base: @shade2; // Default grey background color
 @item-hover-bg: @shade1;
+@checkbox-color: @theme5;
 
 @btn-default-color: @text-color;
 @btn-default-bg: @component-background;
 @btn-default-border: @border-color-base;
 
-@input-bg: @shade4;
+@input-bg: @shade1;
 
 @table-header-bg: rgba(0, 0, 0, 0);
 @table-padding-vertical: 4px;
@@ -105,7 +106,7 @@
 .ant-pagination-item {
   border: none;
   background: none;
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .ant-pagination-item:hover {
@@ -116,12 +117,12 @@
 .ant-pagination-item a {
   color: @shade4;
   font-weight: bold;
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .ant-pagination-item a:hover {
   color: white;
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .ant-pagination-item-active {
@@ -145,7 +146,7 @@
   background-color: unset;
   color: @shade4;
   font-size: 14px;
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link,
@@ -203,17 +204,28 @@
 }
 
 .ant-select-selection {
-  border: 1px solid rgba(255, 255, 255, 0.3)
+  border: none;
 }
 
 .ant-select-dropdown-menu-item-active {
-  background: hsl(226, 68%, 67%);
+  background: @theme5;
 }
 
-.ant-btn:active, .ant-btn.active {
-  color: white;
-  background-color: hsl(226, 15%, 19%);
-  border-color: white;
+.ant-btn {
+  background: @shade3;
+  border: none;
+  &:not([disabled]):hover {
+    background: @shade4;
+    color: unset;
+    border: none;
+    transform: translateY(1px);
+  }
+  &:not([disabled]):focus, &:active {
+    background: @shade4;
+    color: unset;
+    border: none;
+    transform: translateY(2px);
+  }
 }
 
 .ant-modal-header {
@@ -236,10 +248,22 @@
 
 // Custom styles
 
+input:focus {
+  outline: none !important;
+}
+
+div:focus {
+  outline: none !important;
+}
+
+[contenteditable]:focus {
+  outline: none !important;
+}
+
 a {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none !important;
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
   &:hover {
     color: white;
   }
@@ -310,7 +334,7 @@ h2 {
 
 .card-secondary-text {
   color: rgba(255, 255, 255, 0.8);
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .card-secondary-text:hover {
@@ -332,7 +356,7 @@ h2 {
 
 .row-score {
   color: rgba(255, 255, 255, 0.8);
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .row-score:hover {
@@ -350,7 +374,7 @@ h2 {
 
 .row-score a {
   color: rgba(255, 255, 255, 0.8);
-  transition: 0.4s @hoverEasing;
+  transition: 0.2s @hoverEasing;
 }
 
 .row-score a:hover {
@@ -391,14 +415,10 @@ h2 {
   opacity: .3;
   border: none;
   background: none;
-  transition: 0.4s @hoverEasing;
-  &:hover {
-    opacity: 1;
-    color: @theme5;
-  }
-  &:active {
-    opacity: 0.7;
-    transform: scale(0.9, 0.9);
+  transition: 0.2s @hoverEasing;
+  &:hover, &:active, &:focus {
+    background: none !important;
+    opacity: 1 !important;
   }
 }
 
@@ -406,20 +426,18 @@ h2 {
   border: none;
   font-size: 12px;
   font-weight: bold;
-  color: white;
+  color: white !important;
   margin-bottom: 4px;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.1);
-  transition: 0.4s @hoverEasing;
-  &:hover, &:active {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transition: 0.2s @hoverEasing;
+  &:hover, &:active, &:focus {
     background: rgba(255, 255, 255, 0.3) !important;
     color: white !important;
-    transform: scale(1.01, 1.01);
   }
-  &:focus {
-    background: rgba(255, 255, 255, 0.3) !important;
-    color: white !important;
-    transform: scale(0.99, 0.99);
+  &:disabled {
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
   }
 }
 

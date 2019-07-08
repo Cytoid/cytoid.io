@@ -212,7 +212,7 @@ export default {
     border-left: 4px solid @theme5;
     margin: 8px -8px;
     padding: 12px 24px 16px;
-    transition: 0.4s @hoverEasing;
+    transition: 0.2s @hoverEasing;
     overflow: hidden;
     &:hover {
       border-left: 4px solid @theme6;
@@ -246,7 +246,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    transition: 0.4s @hoverEasing;
+    transition: 0.2s @hoverEasing;
   }
   .recent-rank-overlay {
     .recent-rank-background;

@@ -1,9 +1,0 @@
-{
-  "assetURL": "https://assets.cytoid.io",
-  "staticURL": "https://static.cytoid.io",
-  "apiURLServer": "http://localhost:3000",
-  "apiURLClient": "/api",
-  "imageURL": "https://assets.cytoid.io",
-  "captchaKey": "6Le6KqsUAAAAANemJwIe18ld-0kKSQn9aqR4-ltM",
-  "secret": "keyboard cat"
-}

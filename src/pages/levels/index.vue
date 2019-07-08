@@ -1,9 +1,10 @@
 <template lang="pug">
 .section
   .container
+    p(class="card-heading") Sort
     a-select(
       :value="filters.sort"
-      style="width: 192px;"
+      style="width: 192px; top: -1px;"
       :disabled="loading"
       @change="handleSortSelector"
     )
@@ -18,7 +19,7 @@
       style="margin-left: 8px;"
       @click="handleOrderButton"
     )
-      font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-up' : 'sort-down'")
+      font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-amount-up' : 'sort-amount-down'")
     .level-card-container.large
       level-card(v-for="level in levels" :key="level.id" :value="level")
     a-pagination(
@@ -91,6 +92,7 @@ export default {
   },
   methods: {
     updateRoute(query) {
+      window.scrollTo(0, 0)
       this.$router.replace({ query: { ...this.filters, ...query } })
     },
     handlePagination(current) {
