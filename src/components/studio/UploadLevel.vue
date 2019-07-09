@@ -33,6 +33,9 @@ export default {
     },
     uploadStatusChanged({ file }) {
       this.status = file.status === 'done'
+      if (this.status && file.response) {
+        this.$router.push({ name: 'levels-id-manage', params: { id: file.response.uid } })
+      }
     },
   }
 }

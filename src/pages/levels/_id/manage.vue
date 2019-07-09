@@ -41,7 +41,7 @@ export default {
   fetch({ route, redirect }) {
     const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)
     if (test) {
-      return redirect(route.fullPath + '/level')
+      return redirect(route.fullPath + '/listing')
     }
   },
 }
