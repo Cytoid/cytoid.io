@@ -10,7 +10,7 @@
       stroke-line-cap="square"
       stroke-color="#fff"
     />
-    <audio ref="audio" :src="src" />
+    <audio ref="audio" :src="src" preload="none" @timeupdate="playbackUpdate" @ended="playbackEnded" />
   </button>
 </template>
 
@@ -30,15 +30,9 @@ export default {
     progress: 0,
   }),
   mounted() {
-    const player = this.$refs.audio
-    player.addEventListener('timeupdate', this.playbackUpdate)
-    player.addEventListener('ended', this.playbackEnded)
     Bus.$on('play', this.playbackInterrupted)
   },
   beforeDestroy() {
-    const player = this.$refs.audio
-    player.removeEventListener('timeupdate', this.playbackUpdate)
-    player.removeEventListener('ended', this.playbackEnded)
     Bus.$off('play', this.playbackInterrupted)
   },
   methods: {
@@ -54,7 +48,9 @@ export default {
     },
     playbackUpdate() {
       const player = this.$refs.audio
-      this.progress = player.currentTime / player.duration
+      if (player) {
+        this.progress = player.currentTime / player.duration
+      }
     },
     playbackEnded() {
       this.progress = 0

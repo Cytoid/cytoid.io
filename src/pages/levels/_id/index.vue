@@ -33,7 +33,7 @@
             a-rate(
               :default-value="(ratings.rating || ratings.average) * 0.5"
               allow-half
-              :disabled="ratings.rating === undefined"
+              :disabled="!$store.state.user"
               @change="rate"
             )
             span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
@@ -43,7 +43,7 @@
               a(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()")
                 a-tag {{ tag }}
           .card-heading Last updated
-          .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(level.modificationDate) }}
+          .card-secondary-text(style="margin-bottom: 0px;") {{readableDate(level.modificationDate).calendar()}}, {{ readableDate(level.modificationDate).fromNow() }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Music
           p(class="card-em-text" style="margin-bottom: 4px;") {{ level.metadata.artist.name }}
@@ -93,7 +93,7 @@
                 span(v-if="mods.length === 0 || mods[0] === ''") N/A
                 span(v-else)
                   img(v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;")
-              template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date) }}
+              template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date).fromNow() }}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
 </template>
@@ -250,7 +250,7 @@ export default {
     }
   },
   watch: {
-    rankingsChart() {
+    rankingsChartType() {
       this.loadRankings(this.rankings_pagination)
     }
   },
@@ -274,7 +274,7 @@ export default {
   },
   methods: {
     readableDate(date) {
-      return moment(date).fromNow()
+      return moment(date)
     },
     rate(e) {
       e *= 2

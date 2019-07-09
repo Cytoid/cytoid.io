@@ -54,10 +54,10 @@ export default {
   },
   computed: {
     visibilityText() {
-      const index = [false, null, true].indexOf(this.value.published)
+      const index = [false, null, true].indexOf(this.form.published)
       return [
-        'This video will be only visible to you.',
-        'This level will only be visible to anybody who has the link.',
+        'This level will be visible to nobody but you.',
+        'This level will only be visible through the URL.',
         'This level will be visible to everybody.'
       ][index]
     }
