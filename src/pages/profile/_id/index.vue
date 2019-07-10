@@ -33,7 +33,7 @@
           )
             .recent-rank-background(
               v-if="rank.backgroundURL"
-              :style="{ 'background-image': 'url(' + rank.backgroundURL + ')', 'background-size': 'cover' }"
+              :style="{ 'background-image': 'url(' + $img(rank.backgroundURL, { maxHeight: 100, maxWidth: 500, fitMode: 'crop' }) + ')', 'background-size': 'cover' }"
             )
             .recent-rank-overlay
             div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
