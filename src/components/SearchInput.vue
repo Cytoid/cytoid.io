@@ -1,13 +1,31 @@
 <template lang="pug">
-a-auto-complete.search-input-container(
-  @search="keyPressed"
-  @select="itemSelected"
-  :dataSource="data"
-)
-  .search-input(slot="default")
-    button.icon(@click="submit" style="outline: none;")
+  div
+    a-auto-complete.search-input-container(
+      @search="keyPressed"
+      @select="itemSelected"
+      :dataSource="data"
+    )
+      .search-input(slot="default")
+        button.icon(@click="submit" style="outline: none;")
+          font-awesome-icon(:icon="['far', 'search']")
+        input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
+    a-button.fullscreen-search-button(
+      @click="handleSearchButton"
+    )
       font-awesome-icon(:icon="['far', 'search']")
-    input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
+    .fullscreen-search-overlay(v-show="overlay" @click="handleOverlay")
+      .fullscreen-search-container(v-show="overlay")
+        p.card-heading(style="color: white;") Search
+        a-auto-complete.fullscreen-search-input-container(
+          @search="keyPressed"
+          @select="itemSelected"
+          :dataSource="data"
+          v-show="overlay"
+        )
+          .fullscreen-search-input(slot="default")
+            button.icon(@click="submit" style="outline: none;")
+              font-awesome-icon(:icon="['far', 'search']")
+            input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
 </template>
 
 <script>
@@ -17,6 +35,7 @@ export default {
     return {
       data: null,
       searchKey: '',
+      overlay: false
     }
   },
   beforeDestroy() {
@@ -26,6 +45,12 @@ export default {
     }
   },
   methods: {
+    handleSearchButton() {
+      this.overlay = true
+    },
+    handleOverlay() {
+      this.overlay = false
+    },
     keyPressed(key) {
       if (this.timer) {
         clearTimeout(this.timer)
@@ -44,12 +69,14 @@ export default {
       }, 300)
     },
     itemSelected(value) {
+      this.overlay = false
       this.$router.push({
         name: 'levels-id',
         params: { id: value },
       })
     },
     submit() {
+      this.overlay = false
       this.$router.push({
         name: 'levels',
         query: { search: this.searchKey }
@@ -63,6 +90,14 @@ export default {
 $search-input-size: 2rem;
 .search-input-container {
   margin-right: 1rem;
+  .ant-select-selection {
+    background: none;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+.fullscreen-search-input-container {
   .ant-select-selection {
     background: none;
   }
@@ -80,7 +115,7 @@ $search-input-size: 2rem;
     cursor: pointer;
   }
   input {
-    background-color: hsla(226, 68%, 6%, 1);
+    background-color: hsla(226, 68%, 6%, 0.7);
     transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     border: 1px solid transparent;
     &:hover, &:focus, &:active {
@@ -95,15 +130,63 @@ $search-input-size: 2rem;
     padding-right: $search-input-size;
     width: 100%;
     @include mobile {
-      &:not(:focus) {
-        width: 0;
-        padding-left: $search-input-size / 2;
-        padding-right: $search-input-size / 2;
-        cursor: pointer;
-        background-color: $primary;
-      }
+      display: none;
     }
   }
 }
-
+.fullscreen-search-input {
+  position: relative;
+  .icon {
+    position: absolute;
+    height: $search-input-size;
+    width: $search-input-size;
+    padding: $search-input-size / 4;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  input {
+    background-color: transparent;
+    transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    border: none;
+    border-bottom: 1px solid white;
+    display: block;
+    margin-left: auto;
+    height: $search-input-size;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 384px;
+  }
+}
+.fullscreen-search-button {
+  position: relative;
+  margin-right: 8px;
+  @include tablet {
+    display: none;
+  }
+}
+.fullscreen-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 128;
+  background: hsla(226, 68%, 6%, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include tablet {
+    display: none;
+  }
+}
+.fullscreen-search-container {
+  position: relative;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  pointer-events: all;
+}
 </style>
