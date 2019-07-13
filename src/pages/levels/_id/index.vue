@@ -92,7 +92,13 @@
               template(v-slot:mods="mods")
                 span(v-if="mods.length === 0 || mods[0] === ''") N/A
                 span(v-else)
-                  img(v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;")
+                  img(
+                    v-for="mod in mods"
+                    :key="mod"
+                    :title="modNames[mod.toLowerCase()]"
+                    :src="modIconKeyPathMap[mod.toLowerCase()]"
+                    style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
+                  )
               template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date).fromNow() }}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
@@ -108,6 +114,27 @@ import ScoreBadge from '@/components/level/ScoreBadge'
 import { formatBytes } from '@/utils'
 import { handleErrorBlock } from '@/plugins/antd'
 
+const ModIconKeys = [
+  'ap',
+  'auto',
+  'autodrag',
+  'autoflick',
+  'autohold',
+  'exhard',
+  'fast',
+  'fc',
+  'flipall',
+  'flipx',
+  'flipy',
+  'hard',
+  'hidenotes',
+  'hidescanline',
+  'slow'
+]
+const ModIconKeyPathMap = {}
+for (const key of ModIconKeys) {
+  ModIconKeyPathMap[key] = require(`@/assets/icons/${key}.png`)
+}
 const columns = [
   {
     title: 'Rank',
@@ -224,7 +251,8 @@ export default {
     rankings_loading: true,
     rankingsChartType: null,
     columns,
-    modNames
+    modNames,
+    modIconKeyPathMap: ModIconKeyPathMap
   }),
   computed: {
     levelDescription() {

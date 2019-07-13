@@ -15,6 +15,7 @@ module.exports = {
     assetURL: config.get('assetURL'),
     apiURL: config.get('apiURLClient'),
     imageURL: config.get('imageURL'),
+    webURL: config.get('webURL'),
   },
   generate: {
     subFolders: false,
@@ -43,7 +44,7 @@ module.exports = {
     appleStatusBarStyle: 'black-translucent',
   },
   icon: {
-    iconSrc: 'src/assets/images/icon.png',
+    iconSrc: '~assets/images/icon.png',
   },
 
   /*

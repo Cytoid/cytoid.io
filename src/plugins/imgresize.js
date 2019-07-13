@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+const URL = process.server ? require('url').URL : window.URL
+
 const keyMappings = {
   // https://docs.imgix.com/apis/url/size/crop
   // top, bottom, left, right, faces, focalpointt, edges, entropy
@@ -17,12 +19,17 @@ const keyMappings = {
   minHeight: 'min-h',
   minWidth: 'min-w',
 }
+
+const ImageURL = new URL(process.env.imageURL)
+const ImageHost = ImageURL.host
+
 function resize(path, options) {
   if (!path) {
     return null
   }
-  const url = new URL(path)
-  url.host = process.env.imageURL
+  const url = new URL(path, process.env.webURL)
+  url.host = ImageHost
+
   for (const key in options) {
     const urlKey = keyMappings[key]
     if (urlKey) {
@@ -31,23 +38,27 @@ function resize(path, options) {
   }
   return url.href
 }
+
+const defaultAvatarURL = (new URL(require('@/assets/images/avatar.jpg'), process.env.webURL)).href
+
 function avatar(path, size) {
   if (!path) {
-    path = 'https://www.gravatar.com/avatar?f=y&d=mp'
+    path = defaultAvatarURL
   }
   if (!size) {
     return path
   }
-  const url = new URL(path)
-  if (path.host.includes('gravatar')) {
+  const url = new URL(path, process.env.webURL)
+  if (url.host.includes('gravatar')) {
     // Served from Gravatar
     url.searchParams.append('s', size)
-  } else {
+    url.searchParams.append('d', defaultAvatarURL)
+  } /* else {
     // Served from GCS
-    url.host = process.env.imageURL
+    url.host = ImageHost
     url.searchParams.append('h', size)
     url.searchParams.append('w', size)
-  }
+  } */
   return url.href
 }
 
