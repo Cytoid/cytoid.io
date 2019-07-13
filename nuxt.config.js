@@ -38,9 +38,12 @@ module.exports = {
   */
   loading: { color: '#fff' },
   meta: {
-    theme_color: 'hsla(226, 68%, 6%, 1)',
+    theme_color: 'hsla(226, 15%, 14%, 1)',
     nativeUI: true,
     appleStatusBarStyle: 'black-translucent',
+  },
+  icon: {
+    iconSrc: 'src/assets/images/icon.png',
   },
 
   /*

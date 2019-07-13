@@ -21,23 +21,41 @@ function resize(path, options) {
   if (!path) {
     return null
   }
-  path = path.replace(process.env.assetURL, process.env.imageURL)
-  const optionArr = []
-  for (const key in keyMappings) {
-    if (keyMappings.hasOwnProperty(key) && options[key]) {
-      optionArr.push(keyMappings[key] + '=' + options[key])
+  const url = new URL(path)
+  url.host = process.env.imageURL
+  for (const key in options) {
+    const urlKey = keyMappings[key]
+    if (urlKey) {
+      url.searchParams.append(urlKey, options[key].toString())
     }
   }
-  if (optionArr.length > 0) {
-    path += '?' + optionArr.join('&')
+  return url.href
+}
+function avatar(path, size) {
+  if (!path) {
+    path = 'https://www.gravatar.com/avatar?f=y&d=mp'
   }
-  return path
+  if (!size) {
+    return path
+  }
+  const url = new URL(path)
+  if (path.host.includes('gravatar')) {
+    // Served from Gravatar
+    url.searchParams.append('s', size)
+  } else {
+    // Served from GCS
+    url.host = process.env.imageURL
+    url.searchParams.append('h', size)
+    url.searchParams.append('w', size)
+  }
+  return url.href
 }
 
 export default function () {
   Vue.mixin({
     methods: {
-      $img: resize
+      $img: resize,
+      $avatar: avatar,
     }
   })
 }

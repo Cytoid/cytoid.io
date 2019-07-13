@@ -19,7 +19,7 @@
           v-if="value.owner"
           :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"
         )
-          a-avatar(:size="24" :src="value.owner.avatarURL" style="margin-right: 8px;")
+          a-avatar(:size="24" :src="$avatar(value.owner.avatarURL, 24)" style="margin-right: 8px;")
           span(v-text="value.owner.name || value.owner.uid")
 
       play-button(:src="value.bundle.music_preview")
