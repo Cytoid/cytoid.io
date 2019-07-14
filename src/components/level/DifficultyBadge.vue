@@ -25,7 +25,7 @@ export default {
   computed: {
     badgeClass() {
       return {
-        'badge': !this.ball,
+        badge: !this.ball,
         'badge-ball': this.ball,
         'badge-small': this.small,
         'badge-easy': this.value.type === 'easy',
