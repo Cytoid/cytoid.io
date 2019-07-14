@@ -52,8 +52,9 @@ export default {
 </script>
 
 <style>
-  .cytoid-avatar {
-    max-height: 100%;
-    max-width: 100%;
-  }
+.cytoid-avatar {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 50%;
+}
 </style>

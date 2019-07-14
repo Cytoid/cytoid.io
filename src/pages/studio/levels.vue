@@ -1,18 +1,19 @@
 <template lang="pug">
   div
     visibility-modal(ref="visibilityModal" @change="sendVisibilityReq")
+    delete-modal(ref="deleteModal" @change="deleteLevel")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level(slot="header" accept=".cytoidlevel")
       template(slot="text") Click or drag a Cytoid level to this area
       template(slot="hint")
         | Don't know how to create one? Read our
-        a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level")  wiki
+        a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level" @click.stop)  wiki
         | !
     captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
-    a-card(class="studio-levels-card ele2")
+    a-card.studio-levels-card.ele2
       a-table(
         class="studio-levels-table"
         :columns="columns"
@@ -35,11 +36,12 @@
                 p(style="margin-left: 8px; font-size: 10px; color: rgba(255, 255, 255, 0.3);") {{ 'ID: ' + level.uid }}
               div
                 a(:href="downloadURL(level)")
-                  a-button(class="icon-button")
+                  a-button.icon-button
                     font-awesome-icon(:icon="['fas', 'download']" fixed-width)
-                nuxt-link(:to="{name: 'levels-id-manage', params: { id: level.uid }}"): a-button(class="icon-button")
-                  font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
-                a-button(class="icon-button")
+                nuxt-link(:to="{name: 'levels-id-manage', params: { id: level.uid }}")
+                  a-button.icon-button
+                    font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
+                a-button.icon-button(@click="$refs.deleteModal.show(level)")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(slot="visibility" slot-scope="text, level")
           visibility-select(:value="level.published" @change="changeVisibility(level, $event)")
@@ -56,12 +58,14 @@
 import moment from 'moment'
 import UploadLevel from '@/components/studio/UploadLevel'
 import VisibilityModal from '@/components/studio/VisibilityModal'
+import DeleteModal from '@/components/studio/DeleteModal'
 import VisibilitySelect from '@/components/studio/VisibilitySelect'
 export default {
   components: {
     UploadLevel,
     VisibilityModal,
     VisibilitySelect,
+    DeleteModal,
   },
   data() {
     const columns = [
@@ -130,6 +134,22 @@ export default {
     },
     changeVisibility(level, visibility) {
       this.$refs.visibilityModal.show(level, visibility)
+    },
+    deleteLevel(level) {
+      this.$refs.deleteModal.loading = true
+      this.$axios.delete('/levels/' + level.uid)
+        .then(() => {
+          this.$message.success(level.title + ' Deleted!')
+          this.$refs.deleteModal.modalVisible = false
+          const index = this.levels.indexOf(level)
+          if (index !== -1) {
+            this.levels.splice(index, 1)
+          }
+        })
+        .catch(this.handleErrorToast)
+        .then(() => {
+          this.$refs.deleteModal.loading = false
+        })
     },
     sendVisibilityReq([level, val]) {
       this.$refs.visibilityModal.loading = true
