@@ -261,6 +261,7 @@ export default {
     const self = this
     function loadCrate() {
       if (self.$store.crate != null) {
+        self.$store.crate.show()
         return
       }
       if (typeof Crate !== 'function') {
@@ -281,6 +282,9 @@ export default {
     if (this.styleTweetTimer) {
       clearTimeout(this.styleTweetTimer)
       this.styleTweetTimer = null
+    }
+    if (this.$store.crate) {
+      this.$store.crate.hide()
     }
   }
 }
