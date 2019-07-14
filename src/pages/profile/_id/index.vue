@@ -10,10 +10,10 @@
           )
           .player-info-container
             h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
-            p.status(class="text-ele")
-              font-awesome-icon.status-icon(:icon="['fas', 'circle']" style="color: hsla(120, 68%, 57%, 1);")
-              | Online
-            p.details(class="text-ele")
+            p.status.text-ele
+              font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: profile.online }")
+              | {{ profile.online ? 'Online' : 'Offline' }}
+            p.details.text-ele
               span
                 font-awesome-icon(:icon="['far', 'calendar']")
                 | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
@@ -221,6 +221,10 @@ export default {
       font-size: 14px;
       .status-icon {
         margin-right: 0.5rem;
+        &.online {
+          color: hsla(120, 68%, 57%, 1);
+        }
+        color: #757575;
       }
       margin-bottom: 2rem;
     }
