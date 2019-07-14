@@ -35,19 +35,6 @@
                   a-button(class="card-button" style="width: 100%;")
                     font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                     span View previous news
-          a-row(:gutter="16")
-            a-col(:xs="24" :md="12")
-              a-card(class="ranks-card" style="background: none; margin-bottom: 16px;")
-                p.heading Recent ranks
-                player-recent-rank(
-                  v-for="rank in latestRanks.slice(0, 5)"
-                  :key="rank.uid"
-                  :rank="rank"
-                  :showPlayer="true"
-                )
-            a-col(:xs="24" :md="12")
-              a-card(class="ele3" style="margin-bottom: 16px;")
-                | lol
         a-col(:xs="24" :md="10" :lg="8")
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #b91d73, #f953c6); max-width: 256px;")
@@ -55,12 +42,47 @@
             div(style="position: relative; z-index: 2; margin: 12px;")
               p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Latest featured level
               level-card.level-card(v-if="latestFeaturedLevel" :value="latestFeaturedLevel")
-          a-card(class="ele3" style="margin-bottom: 16px;")
-            | lol
+          a-button.browse-button.ele3(
+            type="primary"
+            size="large"
+            style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold;"
+          )
+            | Browse all {{ totalLevels }} levels!
+      a-row(:gutter="16")
+        a-col(:xs="24" :lg="8")
+          a-card(class="ranks-card" style="background: none; margin-bottom: 16px;")
+            p.heading Recent ranks
+            player-recent-rank(
+              v-for="rank in latestRanks"
+              :key="rank.uid"
+              :rank="rank"
+              :showPlayer="true"
+            )
+        a-col(:xs="24" :lg="8")
+          div.tweet-card(style="padding-top: 24px; margin-bottom: 16px;")
+            p.heading Latest Tweet
+            blockquote.twitter-tweet(data-lang="en" data-dnt="true")
+              p(lang="en" dir="ltr")
+                | For technical reasons, we are deferring the scheduled maintenance by 15 hours. The maintenance will now start at 12… https://t.co/6X0gTkvnko
+                | &mdash; Cytoid (@cytoidio)
+              a(href="https://twitter.com/cytoidio/status/1149547797898678278") 1 day ago
+            script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
+          a-card(class="comments-card" style="background: none; margin-bottom: 16px;")
+            p.heading New comments
+            a-spin(:spinning="loadingComments" style="min-height: 128px;")
+              p(v-show="loadingCommentsFailed") Cannot fetch Disqus comments.
+              player-recent-comment(
+                v-for="comment in latestComments"
+                :key="comment.uid"
+                :comment="comment"
+              )
+        a-col(:xs="24" :lg="8")
+          a-card LOL
 </template>
 
 <script>
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
+import PlayerRecentComment from '@/components/player/PlayerRecentComment'
 import PostCard from '@/components/post/PostCard'
 import LevelCard from '@/components/level/LevelCard'
 
@@ -68,6 +90,7 @@ export default {
   layout: 'background',
   components: {
     PlayerRecentRank,
+    PlayerRecentComment,
     PostCard,
     LevelCard,
   },
@@ -103,26 +126,30 @@ export default {
       totalLevels: 0,
       latestFeaturedLevel: null,
       latestRanks: [],
+      latestComments: [],
+      loadingComments: true,
+      loadingCommentsFailed: false
     }
+  },
+  mounted() {
+    this.$axios.get(
+      'https://disqus.com/api/3.0/posts/list?forum=cytoid&related=thread&limit=5&api_key=2oagGwNP861vUbeaEGBNjF1w4tal8nzadoRMz5k1rwdItCIQX133xtq1K3nUwcs3'
+    ).then((response) => {
+      this.latestComments = response.data.response
+      this.loadingComments = false
+    }).catch(err => console.log(err))
   },
   asyncData({ $axios, error }) {
     return Promise.all([
       $axios.get('/levels', { params: { sort: 'creation_date', order: 'desc', page: 0, limit: 0 } }),
       $axios.get('/levels', { params: { sort: 'creation_date', order: 'desc', page: 0, limit: 1, featured: true } }),
-      $axios.get('/profile/mekko?stats=true')
+      $axios.get('/records')
     ])
       .then(([response1, response2, response3]) => {
-        const ranks = response3.data.recents.ranks
-        for (const rank of ranks) {
-          rank.owner = {
-            uid: 'mekko',
-            avatarURL: 'https://www.gravatar.com/avatar/afb6bb59bee2a480e255f66a64e27098'
-          }
-        }
         return {
           totalLevels: parseInt(response1.headers['x-total-entries']),
           latestFeaturedLevel: response2.data.length > 0 ? response2.data[0] : null,
-          latestRanks: ranks
+          latestRanks: response3.data.slice(0, 5)
         }
       })
       .catch(err => error(err.response?.data))
@@ -152,6 +179,44 @@ export default {
       box-shadow: @ele3;
       transform: scale(0.95, 0.95);
     }
+  }
+  .browse-button.ant-btn-primary {
+    background: linear-gradient(270deg, #21d4fd, #b721ff);
+    background-size: 400% 400%;
+
+    -webkit-animation: flow 25s ease infinite;
+    -moz-animation: flow 25s ease infinite;
+    animation: flow 25s ease infinite;
+
+    @-webkit-keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @-moz-keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    &:hover {
+      background: linear-gradient(270deg, #21d4fd, #b721ff);
+      background-size: 400% 400%;
+      transform: scale(0.98, 0.98);
+    }
+
+    &:active, &:focus {
+      box-shadow: @ele3;
+      background: linear-gradient(270deg, #21d4fd, #b721ff);
+      background-size: 400% 400%;
+      transform: scale(0.95, 0.95);
+    }
+
   }
 </style>
 
@@ -195,8 +260,12 @@ export default {
     margin-bottom: 12px;
   }
 
-  .ranks-card .ant-card-body {
+  .ranks-card .ant-card-body, .comments-card .ant-card-body {
     padding-bottom: 8px;
+  }
+
+  .tweet-card {
+    padding: 0 16px;
   }
 
   .download-button-group {

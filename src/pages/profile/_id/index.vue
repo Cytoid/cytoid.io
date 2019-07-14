@@ -65,7 +65,7 @@
             .level-card-container.small.featured-levels-container(style="padding: 56px 16px 0 16px;")
               level-card(v-for="level in featuredLevels" :key="level.id" :value="level")
             div(style="padding: 16px;")
-              nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id }, featured: true }")
+              nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
                 a-button(class="card-button" style="width: 100%;")
                   font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                   span View all {{profile.levels.featuredLevelsCount}} featured
