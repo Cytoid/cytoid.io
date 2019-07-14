@@ -1,6 +1,6 @@
 <template lang="pug">
   nuxt-link.player-avatar(:to="{ name: 'profile-id', params: { id: player.uid } }")
-    a-avatar(:size="64" :src="$avatar(player.avatarURL, 64)")
+    avatar(:size="64" :src="player.avatarURL")
     span(v-text="player.name || player.uid" class="player-avatar-name")
 </template>
 

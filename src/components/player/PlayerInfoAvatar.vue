@@ -1,6 +1,6 @@
 <template functional lang="pug">
 .player-info-avatar
-  a-avatar.level-avatar(class="ele3" :src="$avatar(props.avatar)")
+  avatar.level-avatar.ele3(:src="props.avatar")
   a-progress.level-badge-progress(
     type="dashboard"
     :percent="((props.exp.totalExp - props.exp.currentLevelExp) / (props.exp.nextLevelExp - props.exp.currentLevelExp)) * 100"

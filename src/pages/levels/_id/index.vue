@@ -81,7 +81,7 @@
               template(slot="owner" slot-scope="text, record")
                 .ranking-player-avatar
                   nuxt-link(:to="'/profile/' + (record.owner.name || record.owner.uid)" style="display: flex; align-items: center;")
-                    a-avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="$avatar(record.owner.avatarURL, 24)")
+                    avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL" fixed)
                     span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
               template(v-slot:score="score")
                 div(style="display: flex; align-items: center;")
