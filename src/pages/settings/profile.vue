@@ -43,21 +43,24 @@ export default {
         birthday: null,
       },
       submitLoading: false,
-      headerURL: null,
     }
   },
   computed: {
     birthday: {
       get() { return this.form.birthday && moment(this.form.birthday) },
       set(value) { this.form.birthday = value.toISOString() },
+    },
+    headerURL: {
+      get() { return this.$store.state.header },
+      set(value) { this.$store.commit('setHeader', value) },
     }
   },
   asyncData({ $axios, store }) {
     return $axios.get('/profile/' + store.state.user.id)
       .then((response) => {
         const profile = response.data
+        store.commit('setHeader', profile.headerURL)
         return {
-          headerURL: profile.headerURL,
           form: {
             bio: profile.bio,
             birthday: profile.birthday,
@@ -74,7 +77,6 @@ export default {
         .then((response) => {
           this.$message.success('Profile Header Image Updated!')
           this.headerURL = response.data.headerURL
-          window.localStorage.setItem('profile:header', this.headerURL)
         })
     },
     submit() {
@@ -96,6 +98,6 @@ export default {
 .header-uploader .ant-upload.ant-upload-drag {
   background-size: cover;
   background-position: center;
-  background-image: linear-gradient(fade(@shade2, 40%), fade(@shade1, 60%)), var(--bg-url);
+  background-image: var(--bg-url);
 }
 </style>

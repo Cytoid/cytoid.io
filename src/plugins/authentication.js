@@ -8,6 +8,8 @@ export default async ({ store, $axios, error }) => {
         const data = res.data
         const user = data.user
         store.commit('setUser', user)
+        store.commit('setAvatar', user.avatarURL)
+        store.commit('setHeader', data.headerURL)
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
@@ -17,24 +19,4 @@ export default async ({ store, $axios, error }) => {
         error(err)
       })
   }
-
-  if (store.state.user) {
-    const avatar = window.localStorage.getItem('avatar')
-    if (avatar) {
-      store.commit('setAvatar', avatar)
-    }
-
-    if (!avatar) {
-      await $axios.get('/users/' + store.state.user.id)
-        .then((res) => {
-          store.commit('setAvatar', res.data.avatarURL)
-          window.localStorage.setItem('avatar', res.data.avatarURL)
-        })
-    }
-  }
-  store.subscribe((mutation, state) => {
-    if (mutation.type === 'setAvatar' && mutation.payload) {
-      window.localStorage.setItem('avatar', mutation.payload)
-    }
-  })
 }

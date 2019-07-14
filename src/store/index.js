@@ -6,6 +6,7 @@ export const state = () => ({
   },
   user: false,
   avatar: null,
+  header: null
 })
 export const mutations = {
   setBackground(state, background) {
@@ -19,6 +20,9 @@ export const mutations = {
   setAvatar(state, avatarURL) {
     state.avatar = avatarURL
   },
+  setHeader(state, headerURL) {
+    state.header = headerURL
+  },
 }
 export const actions = {
   nuxtServerInit({ dispatch, commit, state }, { $axios, error, req }) {
@@ -26,6 +30,7 @@ export const actions = {
       // Read cookies success
       const user = req.ctx.session?.passport?.user
       commit('setUser', user)
+      commit('setAvatar', process.env.apiURL + '/users/neo/avatar')
     }
   },
   login({ commit }, payload) {
@@ -33,7 +38,6 @@ export const actions = {
       .post('/session', payload, { withCredentials: true })
       .then((response) => {
         const user = response.data.user
-        console.log(user)
         commit('setUser', user)
         commit('setAvatar', user.avatarURL)
         return user
@@ -42,6 +46,7 @@ export const actions = {
   logout({ commit }) {
     commit('setUser', null)
     commit('setAvatar', null)
+    commit('setHeader', null)
     return this.$axios.delete('/session')
   }
 }

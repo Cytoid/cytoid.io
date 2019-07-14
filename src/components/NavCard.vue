@@ -1,7 +1,7 @@
 <template lang="pug">
 .navcard
   avatar.navcard-avatar(:src="$store.state.avatar")
-  img.navcard-header(:src="$img(headerURL, { height: 128 })")
+  img.navcard-header(:src="$img(header, { height: 128 })")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['far', 'user']")
@@ -20,32 +20,27 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'NavCard',
-  data() {
-    return {
-      headerURL: null,
-    }
+  computed: {
+    ...mapState(['header', 'user']),
   },
   mounted() {
-    const headerURL = window.localStorage.getItem('profile:header')
-    if (headerURL) {
-      this.headerURL = headerURL
-      return
+    if (this.user && !this.header) {
+      this.$axios.get('/profile/' + this.user.id)
+        .then((res) => {
+          this.$store.commit('setHeader', res.data.headerURL)
+          this.$store.commit('setAvatar', res.data.user.avatarURL)
+        })
     }
-    this.$axios.get('/profile/' + this.$store.state.user.id)
-      .then((res) => {
-        console.log(res.data)
-        this.headerURL = res.data.headerURL
-        window.localStorage.setItem('profile:header', this.headerURL)
-      })
   },
   methods: {
     logout() {
       this.$store.dispatch('logout')
-        .then(() => this.$router.go(0))
+        .then(() => this.$router.push('/'))
     }
-  }
+  },
 }
 </script>
 
