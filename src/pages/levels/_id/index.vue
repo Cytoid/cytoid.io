@@ -219,17 +219,17 @@ const columns = [
   },
 ]
 const modNames = {
-  'hidenotes': 'Invisible',
-  'hidescanline': 'No Scanline',
-  'slow': 'Slow',
-  'fast': 'Fast',
-  'hard': 'HYPER',
-  'exhard': 'ANOTHER',
-  'ap': 'All Perfect',
-  'fc': 'Full Combo',
-  'flipall': 'Flip All',
-  'flipx': 'Flip X',
-  'flipy': 'Flip Y'
+  hidenotes: 'Invisible',
+  hidescanline: 'No Scanline',
+  slow: 'Slow',
+  fast: 'Fast',
+  hard: 'HYPER',
+  exhard: 'ANOTHER',
+  ap: 'All Perfect',
+  fc: 'Full Combo',
+  flipall: 'Flip All',
+  flipx: 'Flip X',
+  flipy: 'Flip Y'
 }
 export default {
   layout: 'background',
