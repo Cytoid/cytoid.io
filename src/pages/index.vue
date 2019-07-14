@@ -26,7 +26,7 @@
         a-col(:xs="24" :md="14" :lg="16")
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to top left, #B06AB3, #4568DC); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(ellipse farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
+            div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
             div(style="position: relative; z-index: 2; margin: 12px;")
               p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Cytoid News
               post-card.post-card(v-for="post in posts" :key="post.id" :value="post")
@@ -38,7 +38,7 @@
         a-col(:xs="24" :md="10" :lg="8")
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #b91d73, #f953c6); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(ellipse farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
+            div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
             div(style="position: relative; z-index: 2; margin: 12px;")
               p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Latest featured level
               level-card.level-card(v-if="latestFeaturedLevel" :value="latestFeaturedLevel")
@@ -50,31 +50,80 @@
             | Browse all {{ totalLevels }} levels!
       a-row(:gutter="16")
         a-col(:xs="24" :lg="8")
-          a-card(class="ranks-card" style="background: none; margin-bottom: 16px;")
-            p.heading Recent ranks
-            player-recent-rank(
-              v-for="rank in latestRanks"
-              :key="rank.uid"
-              :rank="rank"
-              :showPlayer="true"
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Recent ranks
+          player-recent-rank(
+            v-for="rank in latestRanks"
+            :key="rank.uid"
+            :rank="rank"
+            :showPlayer="true"
+            style="margin: 8px 0;"
+          )
+        a-col(:xs="24" :lg="8")
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
+          a-spin(:spinning="loadingTweet" style="min-height: 128px;")
+            p(v-show="loadTweetFailed") Cannot fetch latest tweet.
+            Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId" :key="latestTweetId" :options="{ theme: 'dark' }")
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;") New comments
+          a-spin(:spinning="loadingComments" style="min-height: 128px;")
+            p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
+            player-recent-comment(
+              v-for="comment in latestComments"
+              :key="comment.uid"
+              :comment="comment"
+              style="margin: 8px 0;"
             )
         a-col(:xs="24" :lg="8")
-          div.tweet-card(style="padding-top: 24px; margin-bottom: 16px;")
-            p.heading Latest Tweet
-            a-spin(:spinning="loadingTweet" style="min-height: 128px;")
-              p(v-show="loadTweetFailed") Cannot fetch latest tweet.
-              Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId" :key="latestTweetId" :options="{ theme: 'dark' }")
-          a-card(class="comments-card" style="background: none; margin-bottom: 16px;")
-            p.heading New comments
-            a-spin(:spinning="loadingComments" style="min-height: 128px;")
-              p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
-              player-recent-comment(
-                v-for="comment in latestComments"
-                :key="comment.uid"
-                :comment="comment"
-              )
-        a-col(:xs="24" :lg="8")
-          a-card LOL
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Connect
+          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
+            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #7289DA, #7289DA); max-width: 256px;")
+            div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
+            div(style="position: relative; z-index: 2; margin: 32px 32px 24px 32px;")
+              img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
+              p(v-show="onlineDiscordMembersCount > 0" style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);")
+                | {{ onlineDiscordMembersCount }} members online
+              p(style="margin-top: 8px")
+                | Join our Discord community for charting help, weekly tournaments,
+                |
+                span(style="text-decoration: line-through;") memes
+                |
+                | and more!
+              a(href="https://discord.gg/cytoid")
+                a-button(class="card-button" style="width: 100%;")
+                  font-awesome-icon(icon="sign-in" fixed-width style="margin-right: 4px;")
+                  span Join the community!
+          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
+            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #F96854, #F96854); max-width: 256px;")
+            div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
+            div(style="position: relative; z-index: 2; margin: 20px 32px 24px 32px;")
+              img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
+              p(style="margin-top: 24px")
+                | Cytoid is
+                |
+                strong 100% free
+                |
+                | and
+                |
+                strong open-source
+                | . However, keeping the game servers running costs
+                |
+                em $$$
+                | . Maybe you can...
+              a(href="https://www.patreon.com/tigerhix")
+                a-button(class="card-button" style="width: 100%;")
+                  font-awesome-icon(icon="heart" fixed-width style="margin-right: 4px;")
+                  span Become a patron!
+          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
+            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1)); max-width: 256px;")
+            div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
+            div(style="position: relative; z-index: 2; margin: 32px 32px 24px 32px;")
+              img(:src="require('@/assets/images/afdian.png')" style="width: 110px;")
+              p(style="margin-top: 24px")
+                | Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑...
+              a(href="https://afdian.net/@tigerhix")
+                a-button(class="card-button" style="width: 100%;")
+                  font-awesome-icon(icon="mug-hot" fixed-width style="margin-right: 4px;")
+                  span 请作者喝咖啡
+    script(src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer)
 </template>
 
 <script>
@@ -127,6 +176,7 @@ export default {
       latestRanks: [],
       latestComments: [],
       latestTweetId: 'tweet-does-not-exist',
+      onlineDiscordMembersCount: -1,
       loadingComments: true,
       loadCommentsFailed: false,
       loadingTweet: true,
@@ -203,6 +253,29 @@ export default {
       this.loadTweetFailed = true
       console.log(err)
     })
+    this.$axios.get('https://discordapp.com/api/guilds/362884768498712579/widget.json').then((response) => {
+      this.onlineDiscordMembersCount = response.data.members.length
+    }).catch((err) => {
+      console.log(err)
+    })
+    const self = this
+    function loadCrate() {
+      if (self.$store.crate != null) {
+        return
+      }
+      if (typeof Crate !== 'function') {
+        // Try again!
+        setTimeout(loadCrate, 200)
+        return
+      }
+      // eslint-disable-next-line no-undef
+      self.$store.crate = new Crate({
+        server: '362884768498712579',
+        channel: '362884769333248001',
+        shard: 'https://disweb.deploys.io'
+      })
+    }
+    setImmediate(loadCrate)
   },
   destroyed() {
     if (this.styleTweetTimer) {
@@ -314,14 +387,6 @@ export default {
 
   .post-card, .level-card {
     margin-bottom: 12px;
-  }
-
-  .ranks-card .ant-card-body, .comments-card .ant-card-body {
-    padding-bottom: 8px;
-  }
-
-  .tweet-card {
-    padding: 0 16px;
   }
 
   .download-button-group {
