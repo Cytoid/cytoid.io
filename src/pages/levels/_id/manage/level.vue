@@ -2,9 +2,10 @@
   div
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Replace
-    upload-level(slot="header" accept=".cytoidlevel")
+    upload-level(slot="header" accept=".cytoidlevel"  :level="value")
       template(slot="text") Click or drag a Cytoid level to this area
       template(slot="hint") Your level must have the same ID as the current one.
+    captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Metadata
     div

@@ -20,9 +20,13 @@ const uploadMixin = (type, contentType) => ({
             option.onProgress(e)
           }
         })
-          .then(() => this.$axios.post('/files/' + response.data.path, {}, {
-            cancelToken: source.token,
-          }))
+          .then(() => this.$axios.post(
+            '/files/' + response.data.path,
+            this.getUploadCallbackData ? this.getUploadCallbackData() : {},
+            {
+              cancelToken: source.token,
+            }
+          ))
         )
         .then((response) => {
           const details = response.data

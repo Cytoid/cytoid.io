@@ -23,6 +23,10 @@ export default {
       type: String,
       required: true,
     },
+    level: {
+      type: Object,
+      default: null,
+    }
   },
   data: () => ({
     status: false,
@@ -37,6 +41,16 @@ export default {
         this.$router.push({ name: 'levels-id-manage', params: { id: file.response.uid } })
       }
     },
+    getUploadCallbackData() {
+      // called by mixin
+      if (this.level) {
+        return {
+          replaceUID: this.level.uid,
+        }
+      } else {
+        return {}
+      }
+    }
   }
 }
 </script>
