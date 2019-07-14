@@ -30,7 +30,7 @@ export const actions = {
       // Read cookies success
       const user = req.ctx.session?.passport?.user
       commit('setUser', user)
-      commit('setAvatar', process.env.apiURL + '/users/neo/avatar')
+      commit('setAvatar', `${process.env.apiURL}/users/${user.id}/avatar`)
     }
   },
   login({ commit }, payload) {

@@ -73,7 +73,6 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/vee-validate' },
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
