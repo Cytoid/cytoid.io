@@ -1,19 +1,19 @@
 <template lang="pug">
 .section
-  info(style="margin-bottom: 16px;")
-  avatar(style="margin-bottom: 16px;")
-  emails(style="margin-bottom: 16px;")
+  info-panel(style="margin-bottom: 16px;")
+  avatar-panel(style="margin-bottom: 16px;")
+  emails-panel(style="margin-bottom: 16px;")
 </template>
 
 <script>
-import Emails from '@/components/settings/Emails'
-import Info from '@/components/settings/Info'
-import Avatar from '@/components/settings/Avatar'
+import EmailsPanel from '@/components/settings/Emails'
+import InfoPanel from '@/components/settings/Info'
+import AvatarPanel from '@/components/settings/Avatar'
 export default {
   components: {
-    Emails,
-    Info,
-    Avatar,
+    EmailsPanel,
+    InfoPanel,
+    AvatarPanel,
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template lang="pug">
 .navcard
-  img.navcard-avatar(:src="$store.state.avatar")
+  avatar.navcard-avatar(:src="$store.state.avatar")
   img.navcard-header(:src="$img(headerURL, { height: 128 })")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")

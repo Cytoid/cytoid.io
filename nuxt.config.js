@@ -15,6 +15,7 @@ module.exports = {
     assetURL: config.get('assetURL'),
     apiURL: config.get('apiURLClient'),
     imageURL: config.get('imageURL'),
+    webURL: config.get('webURL'),
   },
   generate: {
     subFolders: false,
@@ -38,9 +39,12 @@ module.exports = {
   */
   loading: { color: '#fff' },
   meta: {
-    theme_color: 'hsla(226, 68%, 6%, 1)',
+    theme_color: 'hsla(226, 15%, 14%, 1)',
     nativeUI: true,
     appleStatusBarStyle: 'black-translucent',
+  },
+  icon: {
+    iconSrc: '~assets/images/icon.png',
   },
 
   /*

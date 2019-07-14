@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+const URL = process.server ? require('url').URL : window.URL
+
 const keyMappings = {
   // https://docs.imgix.com/apis/url/size/crop
   // top, bottom, left, right, faces, focalpointt, edges, entropy
@@ -17,27 +19,30 @@ const keyMappings = {
   minHeight: 'min-h',
   minWidth: 'min-w',
 }
+
+const ImageURL = new URL(process.env.imageURL)
+const ImageHost = ImageURL.host
+
 function resize(path, options) {
   if (!path) {
     return null
   }
-  path = path.replace(process.env.assetURL, process.env.imageURL)
-  const optionArr = []
-  for (const key in keyMappings) {
-    if (keyMappings.hasOwnProperty(key) && options[key]) {
-      optionArr.push(keyMappings[key] + '=' + options[key])
+  const url = new URL(path, process.env.webURL)
+  url.host = ImageHost
+
+  for (const key in options) {
+    const urlKey = keyMappings[key]
+    if (urlKey) {
+      url.searchParams.append(urlKey, options[key].toString())
     }
   }
-  if (optionArr.length > 0) {
-    path += '?' + optionArr.join('&')
-  }
-  return path
+  return url.href
 }
 
 export default function () {
   Vue.mixin({
     methods: {
-      $img: resize
+      $img: resize,
     }
   })
 }

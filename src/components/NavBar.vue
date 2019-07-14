@@ -7,7 +7,7 @@ header.navbar.light.container(role="navigation")
   no-ssr
     nuxt-link(v-if="!$store.state.user" to="/session/login"): a-button(type="primary") Login
     a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
-      a-avatar(:src="$store.state.avatar").avatar-icon
+      a.avatar-icon: avatar(:src="$store.state.avatar")
       nav-card(slot="content")
 </template>
 
@@ -46,7 +46,8 @@ export default {
     }
   }
   .avatar-icon {
-    cursor: pointer;
+    height: 100%;
+    padding: 4px;
   }
 }
 </style>

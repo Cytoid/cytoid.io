@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Antd from 'ant-design-vue/lib'
+import Avatar from '@/components/Avatar'
 
 function getMessage(err) {
   if (err.response?.status === 404) {
@@ -20,6 +21,7 @@ export function handleErrorBlock(err, handler) {
 
 export default function ({ store, $axios, error }) {
   Vue.use(Antd)
+  Vue.component('avatar', Avatar)
 
   // Global error handlers
   Vue.mixin({

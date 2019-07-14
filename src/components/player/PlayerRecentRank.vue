@@ -13,7 +13,7 @@
       nuxt-link.profile-link(
         :to="{name: 'profile-id', params: { id: rank.owner.uid || rank.owner.id }}"
       )
-        a-avatar(:size="24" :src="rank.owner.avatarURL" style="margin-right: 8px;")
+        avatar(:size="24" fixed :src="rank.owner.avatarURL" style="margin-right: 8px;")
         span(v-text="rank.owner.name || rank.owner.uid")
     div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
       span(

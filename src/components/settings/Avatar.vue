@@ -9,7 +9,7 @@ a-card.avatar-upload(title="Avatar")
     :customRequest="upload"
     @change="avatarUploaded"
   )
-    a-avatar.avatar(:src="$store.state.avatar")
+    avatar.avatar(:src="$store.state.avatar")
   template(v-if="!usingGravatar")
     a-button(
       :loading="avatarDeleteLoading",
@@ -21,7 +21,7 @@ a-card.avatar-upload(title="Avatar")
 <script>
 import UploadMixin from '@/mixins/upload'
 export default {
-  name: 'Avatar',
+  name: 'AvatarPanel',
   mixins: [
     UploadMixin('avatar', 'image/*'),
   ],
@@ -72,5 +72,6 @@ export default {
 .avatar-upload .avatar {
   width: 100%;
   height: 100%;
+  border-radius: 3px;
 }
 </style>

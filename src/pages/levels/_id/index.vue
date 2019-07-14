@@ -81,7 +81,7 @@
               template(slot="owner" slot-scope="text, record")
                 .ranking-player-avatar
                   nuxt-link(:to="'/profile/' + (record.owner.name || record.owner.uid)" style="display: flex; align-items: center;")
-                    a-avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL")
+                    avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL" fixed)
                     span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
               template(v-slot:score="score")
                 div(style="display: flex; align-items: center;")
@@ -92,7 +92,13 @@
               template(v-slot:mods="mods")
                 span(v-if="mods.length === 0 || mods[0] === ''") N/A
                 span(v-else)
-                  img(v-for="mod in mods" :key="mod" :title="modNames[mod.toLowerCase()]" :src="'/icons/' + mod.toLowerCase() + '.png'" style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;")
+                  img(
+                    v-for="mod in mods"
+                    :key="mod"
+                    :title="modNames[mod.toLowerCase()]"
+                    :src="modIconKeyPathMap[mod.toLowerCase()]"
+                    style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
+                  )
               template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date).fromNow() }}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
@@ -108,6 +114,27 @@ import ScoreBadge from '@/components/level/ScoreBadge'
 import { formatBytes } from '@/utils'
 import { handleErrorBlock } from '@/plugins/antd'
 
+const ModIconKeys = [
+  'ap',
+  'auto',
+  'autodrag',
+  'autoflick',
+  'autohold',
+  'exhard',
+  'fast',
+  'fc',
+  'flipall',
+  'flipx',
+  'flipy',
+  'hard',
+  'hidenotes',
+  'hidescanline',
+  'slow'
+]
+const ModIconKeyPathMap = {}
+for (const key of ModIconKeys) {
+  ModIconKeyPathMap[key] = require(`@/assets/icons/${key}.png`)
+}
 const columns = [
   {
     title: 'Rank',
@@ -224,7 +251,8 @@ export default {
     rankings_loading: true,
     rankingsChartType: null,
     columns,
-    modNames
+    modNames,
+    modIconKeyPathMap: ModIconKeyPathMap
   }),
   computed: {
     levelDescription() {
