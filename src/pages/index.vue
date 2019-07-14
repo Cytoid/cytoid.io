@@ -61,16 +61,13 @@
         a-col(:xs="24" :lg="8")
           div.tweet-card(style="padding-top: 24px; margin-bottom: 16px;")
             p.heading Latest Tweet
-            blockquote.twitter-tweet(data-lang="en" data-dnt="true")
-              p(lang="en" dir="ltr")
-                | For technical reasons, we are deferring the scheduled maintenance by 15 hours. The maintenance will now start at 12… https://t.co/6X0gTkvnko
-                | &mdash; Cytoid (@cytoidio)
-              a(href="https://twitter.com/cytoidio/status/1149547797898678278") 1 day ago
-            script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
+            a-spin(:spinning="loadingTweet" style="min-height: 128px;")
+              p(v-show="loadTweetFailed") Cannot fetch latest tweet.
+              Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId" :key="latestTweetId" :options="{ theme: 'dark' }")
           a-card(class="comments-card" style="background: none; margin-bottom: 16px;")
             p.heading New comments
             a-spin(:spinning="loadingComments" style="min-height: 128px;")
-              p(v-show="loadingCommentsFailed") Cannot fetch Disqus comments.
+              p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
               player-recent-comment(
                 v-for="comment in latestComments"
                 :key="comment.uid"
@@ -81,6 +78,7 @@
 </template>
 
 <script>
+import { Tweet } from 'vue-tweet-embed'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import PlayerRecentComment from '@/components/player/PlayerRecentComment'
 import PostCard from '@/components/post/PostCard'
@@ -93,6 +91,7 @@ export default {
     PlayerRecentComment,
     PostCard,
     LevelCard,
+    Tweet
   },
   background: {
     source: require('@/assets/images/sayaka.png'),
@@ -127,17 +126,13 @@ export default {
       latestFeaturedLevel: null,
       latestRanks: [],
       latestComments: [],
+      latestTweetId: 'tweet-does-not-exist',
       loadingComments: true,
-      loadingCommentsFailed: false
+      loadCommentsFailed: false,
+      loadingTweet: true,
+      loadTweetFailed: false,
+      styleTweetTimer: null
     }
-  },
-  mounted() {
-    this.$axios.get(
-      'https://disqus.com/api/3.0/posts/list?forum=cytoid&related=thread&limit=5&api_key=2oagGwNP861vUbeaEGBNjF1w4tal8nzadoRMz5k1rwdItCIQX133xtq1K3nUwcs3'
-    ).then((response) => {
-      this.latestComments = response.data.response
-      this.loadingComments = false
-    }).catch(err => console.log(err))
   },
   asyncData({ $axios, error }) {
     return Promise.all([
@@ -153,6 +148,67 @@ export default {
         }
       })
       .catch(err => error(err.response?.data))
+  },
+  mounted() {
+    this.$axios.get('/integrations/disqus').then((response) => {
+      this.latestComments = response.data.response
+      this.loadingComments = false
+    }).catch((err) => {
+      this.loadCommentsFailed = true
+      console.log(err)
+    })
+    this.$axios.get('/integrations/twitter').then((response) => {
+      this.latestTweetId = response.data[0].id_str
+      const self = this
+      function styleTweet() {
+        const widget = document.querySelector('[id^="twitter-widget-"]')
+        if (widget == null) {
+          // Try next time!
+          self.styleTweetTimer = setTimeout(styleTweet, 200)
+          return
+        }
+        const style = document.createElement('style')
+        style.innerHTML = `
+          .EmbeddedTweet {
+            border: none !important;
+            background: hsla(226, 15%, 19%, 1) !important;
+            box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
+          }
+          .CallToAction {
+            border: none !important;
+          }
+          .CallToAction-icon .Icon {
+            display: none !important;
+          }
+          .CallToAction-text {
+            margin-left: -2px !important;
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1) !important;
+          }
+          .CallToAction-text:hover {
+            color: white !important;
+          }
+        `
+        style.type = 'text/css'
+        if (widget.contentDocument) {
+          widget.contentDocument.head.appendChild(style)
+        } else {
+          widget.shadowRoot.insertBefore(style, widget.shadowRoot.childNodes[0])
+        }
+
+        self.loadingTweet = false
+      }
+      this.styleTweetTimer = setTimeout(styleTweet, 200)
+    }).catch((err) => {
+      this.loadTweetFailed = true
+      console.log(err)
+    })
+  },
+  destroyed() {
+    if (this.styleTweetTimer) {
+      clearTimeout(this.styleTweetTimer)
+      this.styleTweetTimer = null
+    }
   }
 }
 </script>
