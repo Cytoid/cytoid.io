@@ -11,7 +11,7 @@
         @click="download"
       )
         font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
-        span Download #[template(v-if="level.packageSize") ({{formatSize(level.packageSize)}})]
+        span Download #[template(v-if="level.size") ({{formatSize(level.size)}})]
       nuxt-link(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
         v-if="$store.state.user && (level.owner.id === $store.state.user.id)"

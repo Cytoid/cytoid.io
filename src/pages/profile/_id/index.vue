@@ -1,22 +1,21 @@
 <template lang="pug">
   .section: .container(style="margin-top: 256px;")
-    a-row(style="margin-bottom: 48px;")
-      a-col(:span="24")
-        div(style="padding-left: 32px; display: flex;")
-          player-info-avatar(
-            :exp="profile.exp"
-            :avatar="profile.user.avatarURL"
-            :rating="profile.rating || 0"
-          )
-          .player-info-container
-            h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
-            p.status.text-ele
-              font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: profile.online }")
-              | {{ profile.online ? 'Online' : 'Offline' }}
-            p.details.text-ele
-              span
-                font-awesome-icon(:icon="['far', 'calendar']")
-                | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
+    .header-container
+      .avatar-container
+        player-info-avatar(
+          :exp="profile.exp"
+          :avatar="profile.user.avatarURL"
+          :rating="profile.rating || 0"
+        )
+      .player-info-container
+        h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
+        p.status.text-ele
+          font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: profile.online }")
+          | {{ profile.online ? 'Online' : 'Offline' }}
+        p.details.text-ele
+          span
+            font-awesome-icon(:icon="['far', 'calendar']")
+            | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card.bio(style="background: none; margin-bottom: 16px;")
@@ -214,34 +213,51 @@ export default {
       background-color: unset;
     }
   }
-  .player-info-container {
-    margin-left: 40px;
-    display: inline-block;
-    vertical-align: middle;
-    .status {
-      font-size: 14px;
-      .status-icon {
-        margin-right: 0.5rem;
-        &.online {
-          color: hsla(120, 68%, 57%, 1);
-        }
-        color: #757575;
-      }
-      margin-bottom: 2rem;
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    @gutter-y: 32px;
+    @gutter-x: 24px;
+    .avatar-container {
+      flex-shrink: 0;
+      flex-grow: 1;
+      padding: @gutter-y @gutter-x;
+      // text-align: center;
     }
-    .username {
-      margin-bottom: 4px;
-    }
-    .details {
-      font-size: 12px;
-      span {
-        margin-right: 3rem;
-        svg {
+    .player-info-container {
+      padding: @gutter-y @gutter-x;
+      flex-grow: 9999;
+      display: inline-block;
+      vertical-align: middle;
+      .status {
+        font-size: 14px;
+        .status-icon {
           margin-right: 0.5rem;
+          &.online {
+            color: hsla(120, 68%, 57%, 1);
+          }
+          color: #757575;
+        }
+        margin-bottom: 2rem;
+      }
+      .username {
+        margin-bottom: 4px;
+      }
+      .details {
+        font-size: 12px;
+        span {
+          margin-right: 3rem;
+          svg {
+            margin-right: 0.5rem;
+          }
         }
       }
     }
   }
+
   .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
     padding: 8px 0 !important;
   }
