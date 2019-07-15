@@ -12,7 +12,7 @@
               a(v-for="tag in post.tags" :key="tag" :href="'/posts?tags=' + tag.toLowerCase()")
                 a-tag {{ tag }}
           .card-heading Last updated
-          .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(post.modified_on).fromNow() }}
+          .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(post.published_date).fromNow() }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Cover art
           p(class="card-em-text" style="margin-bottom: 4px;") {{ post.cover_artist }}

@@ -3,8 +3,8 @@
     div.container.logo
       img(:src="require('@/assets/images/logo.png')")
       div.slogan A community-driven touchscreen music game
-      div.download-button-group
-        div(v-if="!isInChina")
+      div
+        div.download-button-group(v-if="!isInChina")
           a(href="https://itunes.apple.com/us/app/cytoid/id1266582726" target="_blank")
             a-button.download-button.ele3(
               type="primary"
@@ -21,7 +21,7 @@
               div(style="display: flex; align-content: center; padding-top: 2px;")
                 font-awesome-icon(:icon="['fab', 'google-play']" fixed-width style="margin-right: .5rem; font-size: 20px;")
                 span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on Google Play
-        div(v-if="isInChina")
+        div.download-button-group(v-if="isInChina")
           a(href="https://itunes.apple.com/us/app/cytoid/id1266582726" target="_blank")
             a-button.download-button.ele3(
               type="primary"
@@ -50,7 +50,7 @@
               div(v-for="post in posts" :key="post.slug")
                 nuxt-link(:to="{ name: 'posts-id', params: { id: post.slug } }")
                   post-card.post-card(:post="post")
-              div(style="")
+              div(v-show="false")
                 nuxt-link(:to="{ name: 'posts' }")
                   a-button(class="card-button" style="width: 100%;")
                     font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")

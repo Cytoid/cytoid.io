@@ -9,7 +9,7 @@
     .card-bg(:style="[cardBgTransform, cardBgImage]")
     nuxt-link.card-overlay(:to="{ name: 'posts-id', params: { id: post.slug } }")
     .card-top
-      | {{ readableDate(post.modified_on) }}
+      | {{ readableDate(post.published_date) }}
     .card-bottom
       .info-text
         h1.title(v-text="post.title")

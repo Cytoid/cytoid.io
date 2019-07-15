@@ -2,7 +2,7 @@
   .section: .container(style="margin-top: 256px;")
     a-row(style="margin-bottom: 48px;")
       a-col(:span="24")
-        div(style="padding-left: 32px;")
+        div(style="padding-left: 32px; display: flex;")
           player-info-avatar(
             :exp="profile.exp"
             :avatar="profile.user.avatarURL"
@@ -76,6 +76,8 @@
               a-button(class="card-button" style="width: 100%;")
                 font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                 span View all {{profile.levels.totalLevelsCount}}
+        div(style="margin: 12px;")
+          disqus(shortname="cytoid" :identifier="'profile/' + profile.user.uid" :url="'https://cytoid.io/profile/' + profile.user.uid")
 </template>
 
 <script>
@@ -157,14 +159,14 @@ export default {
       .then(profile => Promise.all([
         Promise.resolve(profile),
         $axios.get('/levels', { params: {
-          owner: profile.user.id,
+          owner: profile.user.uid,
           featured: true,
           limit: 6,
           sort: 'creation_date',
           order: 'desc',
         } }).then(res => res.data),
         $axios.get('/levels', { params: {
-          owner: profile.user.id,
+          owner: profile.user.uid,
           limit: 6,
           featured: false,
           sort: 'creation_date',
@@ -213,8 +215,7 @@ export default {
     }
   }
   .player-info-container {
-    margin-top: 48px;
-    margin-left: 0;
+    margin-left: 40px;
     display: inline-block;
     vertical-align: middle;
     .status {
@@ -243,12 +244,6 @@ export default {
   }
   .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
     padding: 8px 0 !important;
-  }
-  @media(min-width: 523px) {
-    .player-info-container {
-      margin-top: 0;
-      margin-left: 32px;
-    }
   }
 </style>
 
