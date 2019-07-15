@@ -16,6 +16,7 @@ module.exports = {
     apiURL: config.get('apiURLClient'),
     imageURL: config.get('imageURL'),
     webURL: config.get('webURL'),
+    cmsURL: config.get('cmsURL'),
     analyticsCode: config.get('analyticsCode')
   },
   generate: {

@@ -47,7 +47,7 @@ export default {
   }),
   async asyncData({ $axios, params, store, error }) {
     const results = {}
-    const postResponse = await $axios.get(`http://cms.cytoid.io/api/items/posts?filter[slug][eq]=${params.id}&fields=*.*`)
+    const postResponse = await $axios.get(process.env.cmsURL + `/api/items/posts?filter[slug][eq]=${params.id}&fields=*.*`)
     const postData = postResponse.data.data[0]
     store.commit('setBackground', { source: postData.cover_art.data.full_url })
     results.post = postData
