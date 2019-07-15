@@ -102,6 +102,15 @@
               template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date).fromNow() }}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
+    a-button.play-fab(
+      type="primary"
+      size="large"
+      @click="togglePreview"
+    )
+      a-tooltip(placement='left')
+        template(slot='title')
+          span Preview
+        play-button(:src="level.bundle.music_preview" :embedded="true" ref="playButton")
 </template>
 
 <script>
@@ -111,6 +120,7 @@ import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
+import PlayButton from '@/components/level/PlayButton'
 import { formatBytes } from '@/utils'
 import { handleErrorBlock } from '@/plugins/antd'
 
@@ -237,6 +247,7 @@ export default {
     ScoreBadge,
     PlayerAvatar,
     DifficultyBadge,
+    PlayButton,
     Disqus,
   },
   data: () => ({
@@ -360,7 +371,6 @@ export default {
         })
         this.$router.push('/session/login')
       }
-
     },
     convertedDifficultyName(name) {
       return {
@@ -372,6 +382,9 @@ export default {
     makeLink(link) {
       if (link == null) return 'about:blank'
       return (link.indexOf('://') === -1) ? 'http://' + link : link
+    },
+    togglePreview() {
+      this.$refs.playButton.play()
     }
   },
 }
@@ -520,5 +533,22 @@ export default {
     .rankings-card .ant-radio-button-wrapper-checked::before {
         background: none !important;
         left: 0;
+    }
+    .play-fab {
+      position: fixed;
+      display: flex;
+      z-index: 64;
+      justify-content: center;
+      align-items: center;
+      width: 56px;
+      height: 56px;
+      bottom: 20px;
+      right: 20px;
+      padding: 0;
+      margin: 0;
+      color: #FFF !important;
+      border-radius: 50%;
+      background-image: linear-gradient(to right, #DD2476, #FF512F) !important;
+      box-shadow: rgba(221, 36, 118, 0.3) 0px 3px 5px -1px, rgba(221, 36, 118, 0.14) 0px 6px 10px 0px, rgba(221, 36, 118, 0.12) 0px 1px 18px 0px;
     }
 </style>

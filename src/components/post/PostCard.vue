@@ -7,20 +7,21 @@
 )
   .card
     .card-bg(:style="[cardBgTransform, cardBgImage]")
-    nuxt-link.card-overlay(:to="{ name: 'posts-id', params: { id: value.uid } }")
+    nuxt-link.card-overlay(:to="{ name: 'posts-id', params: { id: post.slug } }")
     .card-top
-      | 3 days ago
+      | {{ readableDate(post.modified_on) }}
     .card-bottom
       .info-text
-        h1.title(v-text="value.title")
-        p.description(v-if="value.description" v-text="value.description")
+        h1.title(v-text="post.title")
+        p.description(v-if="post.description" v-text="post.description")
 </template>
 
 <script>
 import Bowser from 'bowser'
+import moment from 'moment'
 export default {
   props: {
-    value: {
+    post: {
       type: Object,
       required: true
     },
@@ -52,14 +53,7 @@ export default {
     },
     cardBgImage() {
       return {
-        backgroundImage: `url(${
-          this.$img(this.value.background, {
-            maxWidth: 320,
-            maxHeight: 200,
-            fitMode: 'crop',
-            cropMode: 'entropy',
-          })
-        })`,
+        backgroundImage: `url(${this.post.cover_art.data.full_url})`,
       }
     },
   },
@@ -112,6 +106,9 @@ export default {
         el = el.offsetParent
       }
       return { top: _y, left: _x }
+    },
+    readableDate(time) {
+      return moment.utc(time).fromNow()
     }
   },
 }

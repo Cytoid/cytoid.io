@@ -21,7 +21,6 @@
         )
           avatar(:size="24" fixed :src="value.owner.avatarURL" style="margin-right: 8px;")
           span(v-text="value.owner.name || value.owner.uid")
-
       play-button(:src="value.bundle.music_preview")
 </template>
 

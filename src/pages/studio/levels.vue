@@ -177,7 +177,7 @@ export default {
     fetchLevels() {
       this.levels_loading = true
       this.$axios.get(`/levels`, { params: {
-        owner: 'neo',
+        owner: this.$store.state.user.id,
         page: this.levels_pagination.current - 1,
         limit: this.levels_pagination.pageSize,
         sort: 'creation_date',

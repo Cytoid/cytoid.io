@@ -3,7 +3,7 @@
     class="recent-comment ele3"
     style="position: relative; margin-top: 8px; padding: 12px 16px;"
   )
-    a(href="comment.url" style="padding-bottom: 4px; font-size: 12px;" v-text="comment.thread.clean_title")
+    a(:href="comment.url" style="padding-bottom: 4px; font-size: 12px;" v-text="comment.thread.clean_title")
     p(style="margin-bottom: 8px;") {{ comment.raw_message }}
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")
