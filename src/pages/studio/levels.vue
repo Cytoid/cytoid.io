@@ -145,6 +145,10 @@ export default {
           if (index !== -1) {
             this.levels.splice(index, 1)
           }
+          global.window.gtag('event', 'delete', {
+            event_category: 'levels',
+            value: level.uid,
+          })
         })
         .catch(this.handleErrorToast)
         .then(() => {

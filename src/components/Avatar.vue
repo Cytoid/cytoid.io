@@ -11,7 +11,6 @@
 <script>
 const URL = process.server ? require('url').URL : window.URL
 const defaultAvatarURL = require('@/assets/images/avatar.jpg')
-const imagesHostname = (new URL(process.env.imageURL)).host
 export default {
   name: 'Avatar',
   props: {
@@ -44,9 +43,8 @@ export default {
         // Served from Gravatar
         url.searchParams.append('s', this.size)
         url.searchParams.append('d', '404')
-      } else {
+      } else if (url.host === process.env.imagesURL) {
         // Served from images.cytoid.io
-        url.host = imagesHostname
         url.searchParams.set('max-w', this.size)
         url.searchParams.set('max-h', this.size)
       }

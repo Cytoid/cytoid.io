@@ -118,6 +118,10 @@ export default {
             this.loading = false
             this.$message.info('Registration succeed')
             this.$router.push({ name: 'session-login' })
+            global.window.gtag('event', 'signup', {
+              event_category: 'auth',
+              value: values.uid
+            })
           })
           .catch((error) => {
             this.handleErrorToast(error)

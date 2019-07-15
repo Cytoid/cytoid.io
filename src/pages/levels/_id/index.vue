@@ -346,10 +346,21 @@ export default {
     },
     download() {
       if (this.$store.state.user) {
+        global.window.gtag('event', 'download', {
+          event_category: 'levels',
+          event_label: 'succeed',
+          value: this.level.uid
+        })
         window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
       } else {
+        global.window.gtag('event', 'download', {
+          event_category: 'levels',
+          event_label: 'rejected-login',
+          value: this.level.uid
+        })
         this.$router.push('/session/login')
       }
+
     },
     convertedDifficultyName(name) {
       return {

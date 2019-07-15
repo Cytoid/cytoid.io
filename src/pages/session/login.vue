@@ -100,6 +100,10 @@ export default {
             this.loading = false
             this.$message.info('Welcome, ' + (user.name || user.uid))
             this.$router.replace('/')
+            global.window.gtag('event', 'login', {
+              event_category: 'auth',
+              value: user.uid || 'nouid'
+            })
           })
           .catch((error) => {
             this.loading = false

@@ -16,6 +16,7 @@ module.exports = {
     apiURL: config.get('apiURLClient'),
     imageURL: config.get('imageURL'),
     webURL: config.get('webURL'),
+    analyticsCode: config.get('analyticsCode')
   },
   generate: {
     subFolders: false,
@@ -32,8 +33,11 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,700,700i&display=swap' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400&display=swap' }
     ],
+    script: [
+      { src: 'https://www.googletagmanager.com/gtag/js?id=' + config.get('analyticsCode'), async: true },
+      { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` }
+    ]
   },
-
   /*
   ** Customize the progress-bar color
   */
@@ -73,6 +77,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~plugins/ga' },
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
