@@ -52,6 +52,7 @@ export default {
               this.form.setFields({
                 email: { errors: [{ message: 'The email was never registered / confirmed!' }] }
               })
+              this.$captcha.reset()
             } else {
               this.handleErrorToast(error)
             }

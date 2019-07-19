@@ -46,15 +46,18 @@ export default {
     }
   }),
   async asyncData({ $axios, params, store, error }) {
-    const results = {}
     const postResponse = await $axios.get(process.env.cmsURL + `/api/items/posts?filter[slug][eq]=${params.id}&fields=*.*`)
     const postData = postResponse.data.data[0]
+    if (!postData) {
+      error('Post not found!')
+      return
+    }
     store.commit('setBackground', { source: postData.cover_art.data.full_url })
-    results.post = postData
-    const ownerResponse = await $axios.get('/profile/' + postData.owner)
-    results.owner = ownerResponse.data.user
-    console.log(results.owner.user)
-    return results
+    const ownerResponse = await $axios.get('/users/' + postData.owner)
+    return {
+      post: postData,
+      owner: ownerResponse.data
+    }
   },
   methods: {
     readableDate(date) {

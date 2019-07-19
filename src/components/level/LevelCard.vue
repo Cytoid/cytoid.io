@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import Bowser from 'bowser'
 import PlayButton from '@/components/level/PlayButton'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
@@ -84,7 +83,7 @@ export default {
     }
   },
   mounted() {
-    if (Bowser.getParser(window.navigator.userAgent).satisfies({ desktop: { chrome: '>=1' } })) {
+    if (window.chrome) {
       this.parallax = true
     }
   },

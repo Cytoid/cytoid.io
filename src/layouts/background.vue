@@ -2,8 +2,7 @@
 div
   .background-container(
     v-if="background && background.source"
-    v-parallax.absY="parallaxSpeed"
-    :key="'background:' + parallaxSpeed"
+    v-parallax.absY="background.parallaxSpeed"
   )
     img.background-image(
       v-show="loaded"
@@ -17,7 +16,6 @@ div
 
 <script>
 import { mapState } from 'vuex'
-import Bowser from 'bowser'
 import Layout from './default'
 export default {
   components: {
@@ -25,27 +23,15 @@ export default {
   },
   data: () => ({
     loaded: false,
-    parallax: null
   }),
   computed: {
     ...mapState([
       'background',
     ]),
-    parallaxSpeed() {
-      console.log('speed: ' + this.background.parallaxSpeed)
-      return this.parallax ? this.background.parallaxSpeed : 0
-    }
   },
   watch: {
     'background.source'() {
       this.loaded = false
-    }
-  },
-  mounted() {
-    if (this.parallax == null) {
-      if (Bowser.getParser(window.navigator.userAgent).satisfies({ desktop: { chrome: '>=1' } })) {
-        this.parallax = true
-      }
     }
   },
   methods: {

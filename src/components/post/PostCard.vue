@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import Bowser from 'bowser'
 import moment from 'moment'
 export default {
   props: {
@@ -64,7 +63,7 @@ export default {
     }
   },
   mounted() {
-    if (Bowser.getParser(window.navigator.userAgent).satisfies({ desktop: { chrome: '>=1' } })) {
+    if (window.chrome) {
       this.parallax = true
     }
   },

@@ -119,22 +119,13 @@
             div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
             div(style="position: relative; z-index: 2; margin: 20px 32px 24px 32px;")
               img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
-              p(style="margin-top: 24px")
-                | Cytoid is
-                |
-                strong 100% free
-                |
-                | and
-                |
-                strong open-source
-                | . However, keeping the game servers running costs
-                |
-                em $$$
-                | . Maybe you can...
+              p(style="margin-top: 24px").
+                Cytoid is #[strong 100% free] and #[strong open-source].
+                However, keeping the game servers running costs #[em $$$]. Maybe you can...
               a(href="https://www.patreon.com/tigerhix")
-                a-button(class="card-button" style="width: 100%;")
+                a-button.card-button(style="width: 100%;")
                   font-awesome-icon(icon="heart" fixed-width style="margin-right: 4px;")
-                  span Become a patron!
+                  | Become a patron!
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1)); max-width: 256px;")
             div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")

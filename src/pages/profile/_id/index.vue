@@ -148,7 +148,7 @@ export default {
     }
   },
   asyncData({ $axios, params, error, store }) {
-    return $axios.get('/profile/' + params.id, { params: { stats: true } })
+    return $axios.get(`/profile/${params.id}/full`)
       .then((res) => {
         const data = res.data
         store.commit('setBackground', { source: data.profile.headerURL })
