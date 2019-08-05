@@ -2,43 +2,24 @@
   div
     div.container.logo
       img(:src="require('@/assets/images/logo.png')")
-      div.slogan A community-driven touchscreen music game
-      div
-        div.download-button-group(v-if="!isInChina")
-          a(href="https://itunes.apple.com/us/app/cytoid/id1266582726" target="_blank")
-            a-button.download-button.ele3(
-              type="primary"
-              size="large"
-            )
-              div(style="display: flex; align-content: center; padding-top: 2px;")
-                font-awesome-icon(:icon="['fab', 'app-store']" fixed-width style="margin-right: .5rem; font-size: 20px;")
-                span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on App Store
-          a(href="https://play.google.com/store/apps/details?id=me.tigerhix.cytoid" target="_blank")
-            a-button.download-button.ele3(
-              type="primary"
-              size="large"
-            )
-              div(style="display: flex; align-content: center; padding-top: 2px;")
-                font-awesome-icon(:icon="['fab', 'google-play']" fixed-width style="margin-right: .5rem; font-size: 20px;")
-                span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on Google Play
-        div.download-button-group(v-if="isInChina")
-          a(href="https://itunes.apple.com/us/app/cytoid/id1266582726" target="_blank")
-            a-button.download-button.ele3(
-              type="primary"
-              size="large"
-            )
-              div(style="display: flex; align-content: center; padding-top: 2px;")
-                font-awesome-icon(:icon="['fab', 'app-store']" fixed-width style="margin-right: .5rem; font-size: 20px;")
-                span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") 去 App Store 下载
-          a(href="https://www.taptap.com/app/158749" target="_blank")
-            a-button.download-button.ele3(
-              type="primary"
-              size="large"
-            )
-              div(style="display: flex; align-content: center; padding-top: 2px;")
-                font-awesome-icon(:icon="['fas', 'text']" fixed-width style="margin-right: .5rem; font-size: 20px;")
-                span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") 去 TapTap 下载
-
+      .slogan A community-driven touchscreen music game
+      .download-button-group
+        a(href="https://itunes.apple.com/us/app/cytoid/id1266582726" target="_blank")
+          a-button.download-button.ele3(
+            type="primary"
+            size="large"
+          )
+            div(style="display: flex; align-content: center; padding-top: 2px;")
+              font-awesome-icon(:icon="['fab', 'app-store']" fixed-width style="margin-right: .5rem; font-size: 20px;")
+              span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on App Store
+        a(href="https://play.google.com/store/apps/details?id=me.tigerhix.cytoid" target="_blank")
+          a-button.download-button.ele3(
+            type="primary"
+            size="large"
+          )
+            div(style="display: flex; align-content: center; padding-top: 2px;")
+              font-awesome-icon(:icon="['fab', 'google-play']" fixed-width style="margin-right: .5rem; font-size: 20px;")
+              span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on Google Play
     .section: .container(style="margin-top: -10vh;")
       a-row(:gutter="16")
         a-col(:xs="24" :md="14" :lg="16")
@@ -80,12 +61,10 @@
             style="margin: 8px 0;"
           )
         a-col(:xs="24" :lg="8")
-          div(v-show="isInChina !== true")
-            p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
-            a-spin(:spinning="loadingTweet" style="min-height: 128px;")
-              p(v-show="loadTweetFailed") Cannot fetch latest tweet.
-              div(v-if="isInChina === false")
-                Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId" :key="latestTweetId" :options="{ theme: 'dark' }")
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
+          a-spin(:spinning="loadingTweet" style="min-height: 128px;")
+            p(v-show="loadTweetFailed") Cannot fetch latest tweet.
+            Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId" :key="latestTweetId" :options="{ theme: 'dark' }")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") New comments
           a-spin(:spinning="loadingComments" style="min-height: 128px;")
             p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
@@ -141,7 +120,6 @@
 </template>
 
 <script>
-import Axios from 'axios'
 import { Tweet } from 'vue-tweet-embed'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import PlayerRecentComment from '@/components/player/PlayerRecentComment'
@@ -175,7 +153,6 @@ export default {
       loadingTweet: true,
       loadTweetFailed: false,
       styleTweetTimer: null,
-      isInChina: null,
     }
   },
   asyncData({ $axios, error }) {
@@ -207,10 +184,6 @@ export default {
       this.latestTweetId = response.data[0].id_str
       const self = this
       function styleTweet() {
-        if (this.isInChina === true) {
-          // Give up
-          return
-        }
         const widget = document.querySelector('[id^="twitter-widget-"]')
         if (widget == null) {
           // Try next time!
@@ -260,14 +233,11 @@ export default {
     })
     const self = this
     function loadCrate() {
-      if (self.isInChina === true) {
-        return
-      }
       if (self.$store.crate != null) {
         self.$store.crate.show()
         return
       }
-      if (typeof Crate !== 'function' || self.isInChina == null) {
+      if (typeof Crate !== 'function') {
         // Try again!
         setTimeout(loadCrate, 100)
         return
@@ -280,17 +250,6 @@ export default {
       })
     }
     setImmediate(loadCrate)
-    // Detect region
-    Axios.create({ timeout: 1000 }).get('https://graph.facebook.com/feed?callback=h')
-      .then(() => {
-        this.isInChina = false
-        console.log('In China: false')
-      })
-      .catch((error) => {
-        console.log(error)
-        this.isInChina = true
-        console.log('In China: true')
-      })
   },
   destroyed() {
     if (this.styleTweetTimer) {
