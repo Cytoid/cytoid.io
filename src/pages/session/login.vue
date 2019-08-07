@@ -1,21 +1,27 @@
-<i18n>
+<i18n locale="en">
 {
-  "en": {
-    "title": "Already have a Cytoid account?",
-    "subtitle": "Please sign in below."
-  },
-  "cn": {
-    "title": "已有Cytoid账号？",
-    "subtitle": "请在下方登录"
-  }
+  "title": "Already have a Cytoid account?",
+  "subtitle": "Please sign in below."
+}
+</i18n>
+<i18n locale="zh-cn">
+{
+  "title": "已有Cytoid账号？",
+  "subtitle": "请在下方登录"
+}
+</i18n>
+<i18n locale="zh-tw">
+{
+  "title": "已有Cytoid賬號？",
+  "subtitle": "請在下方登錄"
 }
 </i18n>
 
 <template>
   <div>
     <div>
-      <h2 v-text="$t('title')" />
-      <p v-text="$t('subtitle')" />
+      <h2 v-t="'title'" />
+      <p v-t="'subtitle'" />
       <a-form
         :form="form"
         @submit.prevent="signIn"

@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 export const state = () => ({
   background: {
     source: null,
@@ -6,7 +8,8 @@ export const state = () => ({
   },
   user: false,
   avatar: null,
-  header: null
+  header: null,
+  locale: null,
 })
 export const mutations = {
   setBackground(state, background) {
@@ -23,9 +26,16 @@ export const mutations = {
   setHeader(state, headerURL) {
     state.header = headerURL
   },
+  setLocale(state, lang) {
+    state.locale = lang
+    if (this.app.i18n) {
+      this.app.i18n.locale = lang
+    }
+    Cookies.set('locale', lang, { expires: 3600 * 24 * 14 })
+  }
 }
 export const actions = {
-  nuxtServerInit({ dispatch, commit, state }, { $axios, error, req }) {
+  nuxtServerInit({ dispatch, commit, state }, { $axios, error, req, app }) {
     if (req) {
       // Read cookies success
       const user = req.ctx.session?.passport?.user
@@ -34,6 +44,8 @@ export const actions = {
         commit('setAvatar', `${process.env.apiURL}/users/${user.id}/avatar`)
       }
     }
+
+    // i18n
   },
   login({ commit }, payload) {
     return this.$axios
@@ -50,5 +62,5 @@ export const actions = {
     commit('setAvatar', null)
     commit('setHeader', null)
     return this.$axios.delete('/session')
-  }
+  },
 }

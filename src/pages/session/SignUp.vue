@@ -1,11 +1,16 @@
-<i18n>
+<i18n locale="en">
 {
-  "en": {
-    "title": "Sign Up"
-  },
-  "cn": {
-    "title": "注册"
-  }
+  "title": "Sign Up"
+}
+</i18n>
+<i18n locale="zh-cn">
+{
+  "title": "注册"
+}
+</i18n>
+<i18n locale="zh-tw">
+{
+  "title": "註冊"
 }
 </i18n>
 
@@ -14,7 +19,7 @@
     <nuxt-link to="./login">
       <a-button type="primary" shape="circle" icon="left" size="large" />
     </nuxt-link>
-    <h2 style="margin-top: 1rem;" v-text="$t('title')" />
+    <h2 v-t="'title'" style="margin-top: 1rem;" />
     <a-form
       :form="form"
       @submit.prevent="signUp"

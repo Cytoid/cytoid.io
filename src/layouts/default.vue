@@ -13,5 +13,12 @@ export default {
     NavBar,
     FooterBar,
   },
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.$store.state.locale,
+      }
+    }
+  }
 }
 </script>
