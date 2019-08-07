@@ -67,39 +67,53 @@
             p(class="card-heading" style="margin-top: 24px; margin-left: 32px; position: relative;") Difficulty
             a-radio-group(style="padding-left: 32px;" v-model="rankingsChartType")
               a-radio-button(v-for="chart in level.charts.slice().reverse()" :value="chart.type" :key="chart.id") {{ chart.name || convertedDifficultyName(chart.type) }}
-            a-table.rankings-table(
-              :columns="columns"
-              :row-key="record => record.id"
-              :data-source="rankings"
-              :pagination="rankings_pagination"
-              :loading="rankings_loading"
-              :scroll="{ x: true }"
-              :rowClassName="(record, index) => rowClass(record, index)"
-              @change="loadRankings"
-            )
-              template(v-slot:rank="ranking") {{ '#' + ranking }}
-              template(slot="owner" slot-scope="text, record")
-                .ranking-player-avatar(style="padding-right: 32px;")
-                  nuxt-link(:to="'/profile/' + (record.owner.name || record.owner.uid)" style="display: flex; align-items: center;")
-                    avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL" fixed)
-                    span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
-              template(v-slot:score="score")
-                div(style="display: flex; align-items: center;")
-                  score-badge(:value="score")
-                  span(style="margin-left: 4px;" v-text="score")
-              template(v-slot:accuracy="accuracy") {{ (Math.floor(accuracy * 100 * 100) / 100) + '%' }}
-              template(v-slot:maxcombo="maxCombo") {{ maxCombo ? (maxCombo + 'x') : 'Unknown' }}
-              template(v-slot:mods="mods")
-                span(v-if="mods.length === 0 || mods[0] === ''") N/A
-                span(v-else)
-                  img(
-                    v-for="mod in mods"
-                    :key="mod"
-                    :title="modNames[mod.toLowerCase()]"
-                    :src="modIconKeyPathMap[mod.toLowerCase()]"
-                    style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
-                  )
-              template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date).fromNow() }}
+            .table-container: table.table
+              thead
+                tr
+                  th Rank
+                  th Player
+                  th Score
+                  th: abbr(title="Accuracy") Acc
+                  th Max Combo
+                  th Perfect
+                  th Great
+                  th Good
+                  th Bad
+                  th Miss
+                  th Mods
+                  th Achieved
+              tbody(style="white-space: nowrap;")
+                tr(v-for="r, index in rankings" :key="r.id")
+                  td(v-text="'#' + r.rank")
+                  // Player
+                  td(:style="{ height: 20 + Math.max(0, 4 - r.rank) * 4 + 'px' }")
+                    nuxt-link.ranking-player-container(:to="{ name: 'profile-id', params: { id: r.owner.name || r.owner.uid }}")
+                      avatar.avatar(:src="r.owner.avatarURL")
+                      span.name(v-text="r.owner.name || r.owner.uid")
+                  // Score
+                  td
+                    div(style="display: flex; align-items: center;")
+                      score-badge(:value="r.score")
+                      span(style="margin-left: 4px;" v-text="r.score")
+                  // Accuracy
+                  td(v-text="(Math.floor(r.accuracy * 100 * 100) / 100) + '%'")
+                  td(v-text="r.details.maxCombo ? (r.details.maxCombo + 'x') : 'Unknown'")
+                  td(v-text="r.details.perfect")
+                  td(v-text="r.details.great")
+                  td(v-text="r.details.good")
+                  td(v-text="r.details.bad")
+                  td(v-text="r.details.miss")
+                  td
+                    span(v-if="r.mods.length === 0") N/A
+                    span(v-else)
+                      img(
+                        v-for="mod in r.mods"
+                        :key="mod"
+                        :title="modNames[mod.toLowerCase()]"
+                        :src="modIconKeyPathMap[mod.toLowerCase()]"
+                        style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
+                      )
+                  td(v-text="readableDate(r.date).fromNow()")
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
     a-button.play-fab(
@@ -392,21 +406,24 @@ export default {
 
 <style lang="less" scoped>
   .ranking-player-avatar {
-    display: flex;
     transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .ranking-player-avatar:hover {
-    transform: scale(0.98, 0.98);
-  }
-  .ranking-player-avatar:active {
-    transform: scale(0.95, 0.95);
-  }
-  .ranking-player-avatar a {
-    text-decoration: none !important;
-  }
-  .ranking-player-avatar-name {
-    margin-left: 8px;
-    font-size: 14px;
+    &:hover {
+      transform: scale(0.98, 0.98);
+    }
+    &:active {
+      transform: scale(0.95, 0.95);
+    }
+    a {
+      text-decoration: none !important;
+    }
+    .avatar {
+      height: 100%;
+      width: 100%;
+    }
+    .name {
+      margin-left: 8px;
+      font-size: 14px;
+    }
   }
   .download-button.ant-btn-primary {
     background: linear-gradient(to right, @theme4, @theme6);

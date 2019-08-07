@@ -1,5 +1,19 @@
 @import "~bulma/sass/utilities/_all";
 
+$shade1: hsla(226, 68%, 6%, 1);
+$shade2: hsla(226, 15%, 14%, 1);
+$shade3: hsla(226, 15%, 19%, 1);
+$shade4: hsla(226, 15%, 38%, 1);
+$shade5: hsla(226, 15%, 55%, 1);
+
+$theme1: hsla(226, 68%, 27%, 1);
+$theme2: hsla(226, 68%, 37%, 1);
+$theme3: hsla(226, 68%, 47%, 1);
+$theme4: hsla(226, 68%, 57%, 1);
+$theme5: hsla(226, 68%, 67%, 1);
+$theme6: hsla(226, 68%, 77%, 1);
+$theme7: hsla(226, 68%, 87%, 1);
+
 $primary: #4568dc;
 $link: #4568dc;
 $primary-invert: findColorInvert($primary);
@@ -27,10 +41,12 @@ $text-invert: findColorInvert($text);
 $text-light: $grey-lighter;
 $text-strong: $white;
 
-$background: $grey-dark;
+$background: $shade2;
 
 $footer-background-color: transparent;
 
 $section-padding: 16px;
 $section-padding-medium: 48px;
 $section-padding-large: 96px;
+
+$table-background-color: $background;
