@@ -181,7 +181,7 @@ export default {
       console.log(err)
     })
     this.$axios.get('/integrations/twitter').then((response) => {
-      this.latestTweetId = response.data[0].id_str
+      this.latestTweetId = response.data
       const self = this
       function styleTweet() {
         const widget = document.querySelector('[id^="twitter-widget-"]')
