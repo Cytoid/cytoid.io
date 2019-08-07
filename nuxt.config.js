@@ -78,6 +78,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~plugins/i18n'},
     { src: '~plugins/ga' },
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
@@ -148,6 +149,11 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+      config.module.rules.push({
+        resourceQuery: /blockType=i18n/,
+        type: 'javascript/auto',
+        loader: '@kazupon/vue-i18n-loader'
+      })
     }
   }
 }
