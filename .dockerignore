@@ -11,6 +11,7 @@ cloudbuild.yaml
 /src/*
 !/src/modules
 !/src/store
+!/src/plugins
 
 /.nuxt/*
 !/.nuxt/dist
