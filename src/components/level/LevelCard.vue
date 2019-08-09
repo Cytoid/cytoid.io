@@ -1,20 +1,15 @@
 <template lang="pug">
-.card-wrap(
-  ref="card"
-  @mousemove="handleMouseMove"
-  @mouseenter="handleMouseEnter"
-  @mouseleave="handleMouseLeave"
-)
+.card-wrap(ref="card")
   .card
-    .card-bg(:style="[cardBgTransform, cardBgImage]")
+    .card-bg(:style="cardBgImage")
     nuxt-link.card-overlay(:to="{ name: 'levels-id', params: { id: value.uid } }")
     .card-top
-      difficulty-badge(class="ele3" v-for="chart in value.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
+      difficulty-badge.ele3(v-for="chart in value.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
     .card-bottom
       .info-text
-        p.artist(v-text="value.metadata.artist")
+        p.artist(v-text="value.metadata && value.metadata.artist")
         h1.title(v-text="value.title")
-        p.title-localized(v-if="value.metadata.title_localized" v-text="value.metadata.title_localized")
+        p.title-localized(v-if="value.metadata && value.metadata.title_localized" v-text="value.metadata && value.metadata.title_localized")
         nuxt-link.profile-link(
           v-if="value.owner"
           :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"
@@ -46,23 +41,6 @@ export default {
     offsetLeft: null,
   }),
   computed: {
-    mousePX() {
-      return this.mouseX / this.$refs.card.offsetWidth
-    },
-    mousePY() {
-      return this.mouseY / this.$refs.card.offsetHeight
-    },
-    cardBgTransform() {
-      if (this.mouseX === null || this.mouseY === null) {
-        return {}
-      }
-      const tX = this.mousePX * -10
-      const tY = this.mousePY * -10
-      return {
-        '--translate-x': tX + 'px',
-        '--translate-y': tY + 'px',
-      }
-    },
     cardBgImage() {
       return {
         backgroundImage: `url(${
@@ -75,57 +53,6 @@ export default {
         })`,
       }
     },
-  },
-  beforeDestroy() {
-    if (this.mouseLeaveDelayTimeout) {
-      clearTimeout(this.mouseLeaveDelayTimeut)
-      this.mouseLeaveDelayTimeout = null
-    }
-  },
-  mounted() {
-    if (window.chrome) {
-      this.parallax = true
-    }
-  },
-  methods: {
-    handleMouseMove(e) {
-      const target = this.$refs.card
-      if (!target) {
-        // Bugfix for vue routing bug. Event sent after component destruction.
-        return
-      }
-      if (!this.parallax) {
-        return
-      }
-      const offset = this.getOffset(this.$refs.card)
-      this.offsetLeft = offset.left
-      this.offsetTop = offset.top
-      this.mouseX = e.pageX - this.offsetLeft - target.offsetWidth / 2
-      this.mouseY = e.pageY - this.offsetTop - target.offsetHeight / 2
-    },
-    handleMouseEnter() {
-      if (!this.parallax) return
-      clearTimeout(this.mouseLeaveDelayTimeout)
-      this.mouseLeaveDelayTimeout = null
-    },
-    handleMouseLeave() {
-      if (!this.parallax) return
-      this.mouseLeaveDelayTimeout = setTimeout(() => {
-        this.mouseX = null
-        this.mouseY = null
-        this.mouseLeaveDelayTimeout = null
-      }, 200)
-    },
-    getOffset(el) {
-      let _x = 0
-      let _y = 0
-      while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-        _x += el.offsetLeft - el.scrollLeft
-        _y += el.offsetTop - el.scrollTop
-        el = el.offsetParent
-      }
-      return { top: _y, left: _x }
-    }
   },
 }
 </script>
