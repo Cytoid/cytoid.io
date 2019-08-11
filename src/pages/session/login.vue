@@ -82,7 +82,7 @@
     <div>
       <h2>New to Cytoid?</h2>
       <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
-      <nuxt-link to="./signup">
+      <nuxt-link to="./signup" replace>
         <a-button
           class="card-button"
           type="primary"
@@ -118,7 +118,7 @@ export default {
           .then((user) => {
             this.loading = false
             this.$message.info('Welcome, ' + (user.name || user.uid))
-            this.$router.replace('/')
+            this.$router.go(-1)
             global.window.gtag('event', 'login', {
               event_category: 'auth',
               value: user.uid || 'nouid'

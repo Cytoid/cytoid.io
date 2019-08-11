@@ -7,9 +7,9 @@
       difficulty-badge.ele3(v-for="chart in value.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
     .card-bottom
       .info-text
-        p.artist(v-text="value.metadata && value.metadata.artist")
+        p.artist(v-text="value.metadata.artist && value.metadata.artist.name")
         h1.title(v-text="value.title")
-        p.title-localized(v-if="value.metadata && value.metadata.title_localized" v-text="value.metadata && value.metadata.title_localized")
+        p.title-localized(v-if="value.metadata.title_localized" v-text="value.metadata.title_localized")
         nuxt-link.profile-link(
           v-if="value.owner"
           :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"

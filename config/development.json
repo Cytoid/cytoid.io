@@ -6,7 +6,7 @@
   "apiURLClient": "/api",
   "imageURL": "https://images.cytoid.io",
   "cmsURL": "https://cms.cytoid.io",
-  "webURL": "https://staging.cytoid.io",
+  "webURL": "http://localhost:8080",
   "captchaKey": "6Le6KqsUAAAAANemJwIe18ld-0kKSQn9aqR4-ltM",
   "analyticsCode": "UA-127631599-1"
 }

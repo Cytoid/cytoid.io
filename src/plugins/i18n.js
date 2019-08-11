@@ -14,10 +14,10 @@ export default function ({ app, store, req, res }) {
     if (store.state.locale) {
       app.i18n.locale = store.state.locale
     } else if (Cookies.get('locale')) {
-      store.state.commit('setLocale', Cookies.get('locale'))
+      store.commit('setLocale', Cookies.get('locale'))
     } else {
       const locale = pickLanguage(window.navigator.userLanguage || window.navigator.language)
-      store.state.commit('setLocale', locale)
+      store.commit('setLocale', locale)
     }
   } else if (req) {
     const cookieLocale = req.ctx.cookies.get('locale', { signed: false })
