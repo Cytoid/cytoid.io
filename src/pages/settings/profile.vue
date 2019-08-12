@@ -2,17 +2,7 @@
 a-form(layout="horizontal" @submit.prevent="submit")
   a-form-item(label="Header Image" :label-col="{ span: 20, sm: 5 }")
     captcha(invisible badge="bottomleft")
-    a-upload-dragger.header-uploader(
-      name="header"
-      :showUploadList="false"
-      :customRequest="upload"
-      @change="headerUploaded"
-      :style="headerURL && { '--bg-url': `url(\"${headerURL}\")` }"
-    )
-      p.ant-upload-drag-icon
-        a-icon(type="inbox")
-      p.ant-upload-text Profile Header Image
-      p.ant-upload-hint Click or drag the image to this area to upload
+    background-upload(@change="headerUploaded" :src="headerURL")
   no-ssr: markdown-editor(
     :configs="{ spellChecker: false }"
     v-model="form.bio"
@@ -30,9 +20,12 @@ a-form(layout="horizontal" @submit.prevent="submit")
 <script>
 import moment from 'moment'
 import UploadMixin from '@/mixins/upload'
-
+import BackgroundUpload from '@/components/BackgroundUpload.vue'
 export default {
   name: 'Profile',
+  components: {
+    BackgroundUpload,
+  },
   mixins: [
     UploadMixin('headers', 'image/*'),
   ],
@@ -93,11 +86,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-.header-uploader .ant-upload.ant-upload-drag {
-  background-size: cover;
-  background-position: center;
-  background-image: var(--bg-url);
-}
-</style>

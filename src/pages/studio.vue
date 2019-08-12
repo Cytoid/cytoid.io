@@ -9,9 +9,9 @@
           li: nuxt-link(:to="{name: 'studio-levels'}")
             font-awesome-icon(:icon="['fas', 'chart-network']" fixed-width)
             span.menu-text Levels
-          li: a
+          li: nuxt-link(:to="{name: 'studio-collections'}")
             font-awesome-icon(:icon="['fas', 'archive']" fixed-width)
-            span.menu-text Collections (WIP)
+            span.menu-text Collections
     .column.is-three-quarters: nuxt-child
 </template>
 

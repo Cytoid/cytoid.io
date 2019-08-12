@@ -10,7 +10,9 @@
 
 <script>
 import marked from 'marked'
+import { handleErrorBlock } from '../../../plugins/antd'
 import LevelCard from '@/components/level/LevelCard'
+
 export default {
   layout: 'background',
   name: 'Collection',
@@ -33,6 +35,7 @@ export default {
           value: response.data
         }
       })
+      .catch(err => handleErrorBlock(err, error))
   }
 }
 </script>
