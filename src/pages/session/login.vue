@@ -78,7 +78,17 @@
         </a-button>
       </a-form>
     </div>
-    <a-divider />
+    <div class="external-login-level">
+      <a-button class="icon-button" shape="circle">
+        <font-awesome-icon :icon="['fab', 'facebook-f']" />
+      </a-button>
+      <a-button class="icon-button" shape="circle">
+        <font-awesome-icon :icon="['fab', 'google']" />
+      </a-button>
+      <a-button class="icon-button" shape="circle">
+        <font-awesome-icon :icon="['fab', 'discord']" />
+      </a-button>
+    </div>
     <div>
       <h2>New to Cytoid?</h2>
       <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
@@ -130,7 +140,7 @@ export default {
             this.captchaToken = null
             this.form.resetFields(['password'])
             if (error.response && error.response.status === 401) {
-              this.$message.error('Username/password mismatch!')
+              this.$message.error('Username or password mismatch!')
             } else {
               this.handleErrorToast(error)
             }
@@ -140,3 +150,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.external-login-level {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+</style>
