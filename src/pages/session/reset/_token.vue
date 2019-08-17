@@ -13,7 +13,7 @@
         a-input(
           v-decorator="['passwordComfirm',{ rules: [{ validator: comparePasswords }]}]"
           type="password"
-          placeholder="Repeat Password"
+          placeholder="Password Confirm"
         )
       a-button(type="primary" html-type="submit" block :loading="loading") Submit
       captcha(theme="dark" invisible badge="bottomright")

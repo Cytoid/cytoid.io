@@ -74,6 +74,15 @@
         </a-input>
       </a-form-item>
       <a-form-item>
+        <a-input
+          v-decorator="['passwordComfirm',{ rules: [{ validator: comparePasswords }]}]"
+          type="password"
+          placeholder="Password Confirm"
+        >
+          <font-awesome-icon slot="prefix" icon="lock" />
+        </a-input>
+      </a-form-item>
+      <a-form-item>
         <a-checkbox
           v-decorator="[
             'agree_tos',
@@ -129,9 +138,12 @@ export default {
         this.loading = true
         this.$axios.post('/users', { ...values, token: this.captchaToken })
           .then((res) => {
+            const user = res.data.user
             this.loading = false
             this.$message.info('Registration succeed')
-            this.$router.push({ name: 'session-login' })
+            this.$router.go(-1)
+            this.$store.commit('setAvatar', user.avatarURL)
+            this.$store.commit('setUser', user)
             global.window.gtag('event', 'signup', {
               event_category: 'auth',
               value: values.uid
@@ -144,6 +156,13 @@ export default {
             this.captchaToken = null
           })
       })
+    },
+    comparePasswords(rule, value, cdb) {
+      if (value && value !== this.form.getFieldValue('password')) {
+        cdb('Passwords inconsistent!')
+      } else {
+        cdb()
+      }
     },
   },
 }

@@ -79,15 +79,18 @@
       </a-form>
     </div>
     <div class="external-login-level">
-      <a-button class="icon-button" shape="circle">
-        <font-awesome-icon :icon="['fab', 'facebook-f']" />
-      </a-button>
-      <a-button class="icon-button" shape="circle">
-        <font-awesome-icon :icon="['fab', 'google']" />
-      </a-button>
-      <a-button class="icon-button" shape="circle">
-        <font-awesome-icon :icon="['fab', 'discord']" />
-      </a-button>
+      <font-awesome-icon v-if="externalLoginLoading" icon="spinner" spin />
+      <template v-else>
+        <a-button class="icon-button" shape="circle" @click="signInWithProvider('facebook')">
+          <font-awesome-icon :icon="['fab', 'facebook-f']" />
+        </a-button>
+        <a-button class="icon-button" shape="circle" @click="signInWithProvider('google')">
+          <font-awesome-icon :icon="['fab', 'google']" />
+        </a-button>
+        <a-button class="icon-button" shape="circle" @click="signInWithProvider('discord')">
+          <font-awesome-icon :icon="['fab', 'discord']" />
+        </a-button>
+      </template>
     </div>
     <div>
       <h2>New to Cytoid?</h2>
@@ -111,13 +114,40 @@ export default {
   data() {
     return {
       loading: false,
+      externalLoginLoading: false,
       captchaToken: null,
+      form: this.$form.createForm(this),
     }
   },
-  beforeCreate() {
-    this.form = this.$form.createForm(this)
-  },
   methods: {
+    signInWithProvider(provider) {
+      this.externalLoginLoading = true
+      window.addEventListener('message', this.providerResponded)
+      window.open(process.env.apiURL + '/session/external/' + provider)
+    },
+    providerResponded(event) {
+      window.removeEventListener('message', this.providerResponded)
+      console.log(event.data)
+      console.log(event.origin)
+      /*
+      if (process.event.origin !== process.env.apiURL) {
+        return
+      }
+      */
+      this.externalLoginLoading = false
+      if (event.data.user) {
+        const user = event.data.user
+        this.$store.commit('setUser', user)
+        this.$store.commit('setAvatar', user.avatarURL)
+        this.$message.info('Welcome, ' + (user.name || user.uid))
+        this.$router.go(-1)
+      } else if (event.data.token && event.data.provider) {
+        this.$router.replace({
+          name: 'session-link',
+          query: { token: event.data.token, provider: event.data.provider },
+        })
+      }
+    },
     signIn() {
       this.form.validateFields((err, values) => {
         if (err) {
@@ -141,6 +171,8 @@ export default {
             this.form.resetFields(['password'])
             if (error.response && error.response.status === 401) {
               this.$message.error('Username or password mismatch!')
+            } else if (error.response && error.response.status === 404) {
+              this.$message.error('User does not exist!')
             } else {
               this.handleErrorToast(error)
             }

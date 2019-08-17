@@ -5,16 +5,16 @@
         p.menu-label General
         ul.menu-list
           li: nuxt-link(:to="{name: 'settings-account'}")
-            font-awesome-icon(icon="user-alt")
+            font-awesome-icon(icon="user-alt" fixed-width)
             | Account
           li: nuxt-link(:to="{name: 'settings-security'}")
-            font-awesome-icon(icon="lock")
+            font-awesome-icon(icon="lock" fixed-width)
             | Security
           li: nuxt-link(:to="{name: 'settings-profile'}")
-            font-awesome-icon(icon="address-card")
+            font-awesome-icon(icon="address-card" fixed-width)
             | Profile
           li: a
-            font-awesome-icon(icon="user-friends")
+            font-awesome-icon(icon="user-friends" fixed-width)
             | Friends
     .column: nuxt
 </template>

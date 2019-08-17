@@ -26,6 +26,7 @@ if (config.dev) {
     host: require('config').apiURLServer,
     match: routeRegex,
     jar: true, // send cookies
+    followRedirect: false,
     map: (path) => {
       const test = routeRegex.exec(path)
       return test ? test[1] : path
