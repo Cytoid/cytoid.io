@@ -18,6 +18,7 @@ const keyMappings = {
   maxWidth: 'max-w',
   minHeight: 'min-h',
   minWidth: 'min-w',
+  brightness: 'bri',
 }
 
 const ImageURL = new URL(process.env.imageURL)
