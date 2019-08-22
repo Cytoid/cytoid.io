@@ -33,6 +33,7 @@ export default function ({ store, $axios, error }) {
     Card,
     Divider,
     Upload,
+    Upload.Dragger,
     Select,
     Select.Option,
     Row, Col,

@@ -28,12 +28,10 @@
             div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
             div(style="position: relative; z-index: 2; margin: 12px;")
               p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Cytoid News
-              div(v-for="post in posts" :key="post.slug")
-                nuxt-link(:to="{ name: 'posts-id', params: { id: post.slug } }")
-                  post-card.post-card(:post="post")
+              post-card.post-card(v-for="post in posts" :key="post.slug" :post="post")
               div(v-show="false")
                 nuxt-link(:to="{ name: 'posts' }")
-                  a-button(class="card-button" style="width: 100%;")
+                  a-button.card-button(style="width: 100%;")
                     font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                     span View previous news
         a-col(:xs="24" :md="10" :lg="8")
@@ -64,7 +62,7 @@
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
           a-spin(:spinning="loadingTweet" style="min-height: 128px;")
             p(v-show="loadTweetFailed") Cannot fetch latest tweet.
-            Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId" :key="latestTweetId" :options="{ theme: 'dark' }")
+            Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId.toString()" :key="latestTweetId" :options="{ theme: 'dark' }")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") New comments
           a-spin(:spinning="loadingComments" style="min-height: 128px;")
             p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
@@ -227,7 +225,7 @@ export default {
       console.log(err)
     })
     this.$axios.get('/integrations/discord').then((response) => {
-      this.onlineDiscordMembersCount = response.data.members.length
+      this.onlineDiscordMembersCount = response.data
     }).catch((err) => {
       console.log(err)
     })
