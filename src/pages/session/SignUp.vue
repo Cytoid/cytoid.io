@@ -17,7 +17,9 @@
 <template>
   <div>
     <nuxt-link to="./login">
-      <a-button type="primary" shape="circle" icon="left" size="large" />
+      <a-button type="primary" shape="circle" size="large">
+        <font-awesome-icon icon="chevron-left" />
+      </a-button>
     </nuxt-link>
     <h2 v-t="'title'" style="margin-top: 1rem;" />
     <a-form

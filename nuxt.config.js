@@ -1,3 +1,4 @@
+const path = require('path')
 const config = require('config')
 const pkg = require('./package')
 
@@ -124,7 +125,9 @@ module.exports = {
   */
   build: {
     extractCSS: true,
-    analyze: false,
+    analyze: {
+      analyzerMode: 'static'
+    },
     publicPath: config.get('staticURL'),
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].app.js',
@@ -140,6 +143,8 @@ module.exports = {
       ]
     },
     extend(config, ctx) {
+      config.resolve.alias = config.resolve.alias || {}
+      config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './src/plugins/antd-icons.js')
       ctx.loaders.less.javascriptEnabled = true
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

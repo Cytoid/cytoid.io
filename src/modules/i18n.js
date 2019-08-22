@@ -1,5 +1,5 @@
-const i18nExtensions = require('vue-i18n-extensions')
 const { join } = require('path')
+const i18nExtensions = require('vue-i18n-extensions')
 
 module.exports = function () {
   this.extendBuild((config) => {

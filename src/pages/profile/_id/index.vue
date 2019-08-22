@@ -157,20 +157,24 @@ export default {
       })
       .then(profile => Promise.all([
         Promise.resolve(profile),
-        $axios.get('/levels', { params: {
-          owner: profile.user.uid,
-          featured: true,
-          limit: 6,
-          sort: 'creation_date',
-          order: 'desc',
-        } }).then(res => res.data),
-        $axios.get('/levels', { params: {
-          owner: profile.user.uid,
-          limit: 6,
-          featured: false,
-          sort: 'creation_date',
-          order: 'desc',
-        } }).then(res => res.data),
+        $axios.get('/levels', {
+          params: {
+            owner: profile.user.uid,
+            featured: true,
+            limit: 6,
+            sort: 'creation_date',
+            order: 'desc',
+          }
+        }).then(res => res.data),
+        $axios.get('/levels', {
+          params: {
+            owner: profile.user.uid,
+            limit: 6,
+            featured: false,
+            sort: 'creation_date',
+            order: 'desc',
+          }
+        }).then(res => res.data),
       ]))
       .then(([profile, featuredLevels, levels]) => ({ profile, featuredLevels, levels }))
       .catch(err => handleErrorBlock(err, error))

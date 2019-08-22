@@ -1,5 +1,13 @@
 import Vue from 'vue'
-import Antd from 'ant-design-vue/lib'
+import {
+  Button, Card, Divider, Upload, Select,
+  Row, Col, Spin, Table, Tag,
+  Pagination, Rate, Radio,
+  Input, InputNumber, Form,
+  Popover, AutoComplete,
+  Menu, Dropdown, Tooltip, Badge,
+  message
+} from 'ant-design-vue'
 import Avatar from '@/components/Avatar'
 
 function getMessage(err) {
@@ -20,7 +28,36 @@ export function handleErrorBlock(err, handler) {
 }
 
 export default function ({ store, $axios, error }) {
-  Vue.use(Antd)
+  [
+    Button,
+    Card,
+    Divider,
+    Upload,
+    Select,
+    Select.Option,
+    Row, Col,
+    Spin,
+    Table,
+    Tag,
+    Pagination,
+    Rate,
+    Radio.Group,
+    Radio.Button,
+    Input,
+    InputNumber,
+    Form,
+    Form.Item,
+    Popover,
+    Menu,
+    Menu.Item,
+    AutoComplete,
+    Dropdown,
+    Badge,
+    Tooltip,
+  ].forEach(comp => Vue.component(comp.name, comp))
+
+  Vue.prototype.$message = message
+
   Vue.component('avatar', Avatar)
 
   // Global error handlers

@@ -133,7 +133,7 @@ export default {
           return
         }
         this.loading = true
-        this.$axios.put(`/users/`, {
+        this.$axios.put('/users/', {
           token: this.$route.query.token,
           provider: this.provider,
           uid: values.username,

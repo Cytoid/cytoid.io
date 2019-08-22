@@ -35,8 +35,8 @@ if (config.dev) {
 } else {
   // Old site redirects
   const router = require('koa-route')
-  app.use(router.get('/browse', ctx => ctx.redirect('/levels')));
-  app.use(router.get('/browse/:name', (ctx, name) => ctx.redirect('/levels/' + name)));
+  app.use(router.get('/browse', ctx => ctx.redirect('/levels')))
+  app.use(router.get('/browse/:name', (ctx, name) => ctx.redirect('/levels/' + name)))
 }
 
 function getNuxtInstance() {
@@ -62,7 +62,7 @@ getNuxtInstance()
       ctx.status = 200
       ctx.respond = false // Mark request as handled for Koa
       ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
-      nuxt.render(ctx.req, ctx.res);
+      nuxt.render(ctx.req, ctx.res)
     })
 
     const {
