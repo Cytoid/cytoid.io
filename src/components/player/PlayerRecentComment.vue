@@ -11,11 +11,10 @@
           avatar(:size="24" fixed :src="comment.author.avatar.large.cache" style="margin-right: 8px;")
           span(v-text="comment.author.name")
       div(style="display: flex; margin-left: auto;")
-        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(comment.createdAt).fromNow()")
+        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="$dateFromNow(comment.createdAt)")
 </template>
 
 <script>
-import moment from 'moment'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
@@ -28,11 +27,6 @@ export default {
       required: true,
     }
   },
-  methods: {
-    readableDate(date) {
-      return moment(date)
-    }
-  }
 }
 </script>
 

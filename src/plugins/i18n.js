@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
-import { pickLanguage } from '@/utils/i18n'
+import { formatDistanceToNow, parseISO } from 'date-fns'
+import { pickLanguage, dateLocales } from '@/utils/i18n'
 
 Vue.use(VueI18n)
 
@@ -42,4 +43,23 @@ export default function ({ app, store, req, res }) {
     }
     req.ctx.set('Content-Language', resposeLocaleCode)
   }
+
+  Vue.mixin({
+    methods: {
+      $dateFromNow(dateStr) {
+        return formatDistanceToNow(
+          parseISO(dateStr),
+          {
+            addSuffix: true,
+            locale: dateLocales[this.$i18n.locale]
+          }
+        )
+      }
+    },
+    computed: {
+      $dateLocale() {
+        return dateLocales[this.$i18n.locale]
+      },
+    }
+  })
 }

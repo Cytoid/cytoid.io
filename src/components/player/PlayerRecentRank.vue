@@ -25,11 +25,10 @@
         difficulty-badge(:value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty }" :small="true")
         score-badge(:value="rank.score" style="margin-left: 4px;")
       div(style="display: flex; margin-left: auto;")
-        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(rank.date).fromNow()")
+        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="$dateFromNow(rank.date)")
 </template>
 
 <script>
-import moment from 'moment'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
@@ -46,11 +45,6 @@ export default {
       default: () => false
     }
   },
-  methods: {
-    readableDate(date) {
-      return moment(date)
-    }
-  }
 }
 </script>
 
