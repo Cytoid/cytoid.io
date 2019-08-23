@@ -3,7 +3,7 @@ a-form(layout="horizontal" @submit.prevent="submit")
   a-form-item(label="Header Image" :label-col="{ span: 20, sm: 5 }")
     captcha(invisible badge="bottomleft")
     background-upload(@change="headerUploaded" :src="headerURL")
-  no-ssr: markdown-editor(
+  client-only: markdown-editor(
     :configs="{ spellChecker: false }"
     v-model="form.bio"
   )

@@ -6,7 +6,7 @@ import {
   Input, InputNumber, Form,
   Popover, AutoComplete,
   Menu, Dropdown, Tooltip, Badge,
-  Progress, Checkbox, List,
+  Progress, Checkbox, List, DatePicker,
   message
 } from 'ant-design-vue'
 import Avatar from '@/components/Avatar'
@@ -59,6 +59,8 @@ export default function ({ store, $axios, error }) {
     Progress,
     Checkbox,
     List,
+    List.Item,
+    DatePicker,
   ].forEach(comp => Vue.component(comp.name, comp))
 
   Vue.prototype.$message = message

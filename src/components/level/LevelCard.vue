@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import PlayButton from '@/components/level/PlayButton'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
+import PlayButton from '@/components/level/PlayButton'
 export default {
   components: {
     DifficultyBadge,

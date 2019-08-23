@@ -3,7 +3,7 @@
     a-form(:form="form" @submit.prevent="submit")
       p.heading Description
       a-form-item
-        no-ssr: markdown-editor(v-model="form.description")
+        client-only: markdown-editor(v-model="form.description")
       p.heading Tags
       a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
         tag-input(:value="form.tags" @change="form.tags=$event")

@@ -1,8 +1,8 @@
 <template>
-  <button :class="embedded ? 'play-button-embedded' : 'play-button'" @click.stop="play">
+  <button class="play-button" @click.stop="play">
     <font-awesome-icon :icon="playing ? 'pause' : 'play'" fixed-width />
     <a-progress
-      v-if="playing && !embedded"
+      v-if="playing"
       type="circle"
       :percent="progress * 100"
       :show-info="false"
@@ -80,6 +80,7 @@ export default {
   border: none;
   outline: none;
   user-select: none;
+  position: relative;
   &:hover {
      transform: scale(1.1, 1.1);
    }
@@ -96,13 +97,5 @@ export default {
   .ant-progress-circle-trail {
     stroke: transparent;
   }
-}
-.play-button-embedded {
-  background: none;
-  font-size: @play-button-size;
-  padding: 0;
-  border: none;
-  outline: none;
-  cursor: pointer;
 }
 </style>

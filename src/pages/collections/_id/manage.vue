@@ -9,7 +9,7 @@
       a-form-item(label="Brief")
         a-textarea(:rows="4" v-model="value.brief")
       a-form-item(label="Description")
-        no-ssr: markdown-editor(v-model="value.description")
+        client-only: markdown-editor(v-model="value.description")
       a-form-item(label="Cover Image")
         background-upload(:src="value.coverURL")
       a-button.is-pulled-right(

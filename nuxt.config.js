@@ -143,8 +143,10 @@ module.exports = {
       ]
     },
     extend(config, ctx) {
+      const webpack = require('webpack')
       config.resolve.alias = config.resolve.alias || {}
       config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './src/plugins/antd-icons.js')
+      config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
       ctx.loaders.less.javascriptEnabled = true
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
