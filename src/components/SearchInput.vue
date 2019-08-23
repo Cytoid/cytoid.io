@@ -14,13 +14,12 @@
     )
       font-awesome-icon(:icon="['far', 'search']")
     .fullscreen-search-overlay(v-show="overlay" @click="handleOverlay")
-      .fullscreen-search-container(v-show="overlay")
+      .fullscreen-search-container
         p.card-heading(style="color: white;") Search
         a-auto-complete.fullscreen-search-input-container(
           @search="keyPressed"
           @select="itemSelected"
           :dataSource="data"
-          v-show="overlay"
         )
           .fullscreen-search-input(slot="default")
             button.icon(@click="submit" style="outline: none;")

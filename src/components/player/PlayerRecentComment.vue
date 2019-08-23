@@ -7,10 +7,8 @@
     p(style="margin-bottom: 8px;") {{ comment.raw_message }}
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")
-        a.profile-link(
-          :href="comment.author.profileUrl"
-        )
-          avatar(:size="24" :src="comment.author.avatar.large.cache" style="margin-right: 8px;")
+        a.profile-link(:href="comment.author.profileUrl")
+          avatar(:size="24" fixed :src="comment.author.avatar.large.cache" style="margin-right: 8px;")
           span(v-text="comment.author.name")
       div(style="display: flex; margin-left: auto;")
         span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="readableDate(comment.createdAt).fromNow()")

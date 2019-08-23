@@ -53,7 +53,7 @@
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Recent ranks
           player-recent-rank(
             v-for="rank in latestRanks"
-            :key="rank.uid"
+            :key="rank.id"
             :rank="rank"
             :showPlayer="true"
             style="margin: 8px 0;"
