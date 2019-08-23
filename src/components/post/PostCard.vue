@@ -9,7 +9,7 @@
     .card-bg(:style="[cardBgTransform, cardBgImage]")
     nuxt-link.card-overlay(:to="{ name: 'posts-id', params: { id: post.slug } }")
     .card-top
-      | {{ readableDate(post.published_date) }}
+      | {{ $dateFromNow(post.published_date) }}
     .card-bottom
       .info-text
         h1.title(v-text="post.title")
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 export default {
   props: {
     post: {
@@ -106,9 +105,6 @@ export default {
       }
       return { top: _y, left: _x }
     },
-    readableDate(time) {
-      return moment.utc(time).fromNow()
-    }
   },
 }
 </script>

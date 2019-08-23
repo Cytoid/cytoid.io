@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
-import { formatDistanceToNow, parseISO } from 'date-fns'
+import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
 import { pickLanguage, dateLocales } from '@/utils/i18n'
 
-Vue.use(VueI18n)
-
 export default function ({ app, store, req, res }) {
+  Vue.use(VueI18n)
+
   app.i18n = new VueI18n({
     locale: 'en',
     fallbackLocale: 'en',
+    messages: {
+      en: require('@/locale/en/index.json'),
+      'zh-cn': require('@/locale/zh-cn/index.json'),
+      'zh-tw': require('@/locale/zh-tw/index.json'),
+    }
   })
   if (process.client) {
     if (store.state.locale) {
@@ -51,14 +56,23 @@ export default function ({ app, store, req, res }) {
           parseISO(dateStr),
           {
             addSuffix: true,
-            locale: dateLocales[this.$i18n.locale]
+            locale: this.$dateLocale
+          }
+        )
+      },
+      $dateFormatCalendar(dateStr, from = new Date()) {
+        return formatRelative(
+          parseISO(dateStr),
+          from,
+          {
+            locale: this.$dateLocale
           }
         )
       }
     },
     computed: {
       $dateLocale() {
-        return dateLocales[this.$i18n.locale]
+        return dateLocales[this.$store.state.locale]
       },
     }
   })

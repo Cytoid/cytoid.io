@@ -7,8 +7,6 @@ a-form(layout="horizontal" @submit.prevent="submit")
     :configs="{ spellChecker: false }"
     v-model="form.bio"
   )
-  a-form-item(label="Birthday" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
-    a-date-picker(v-model="birthday")
   a-button.is-pulled-right(
     :loading="submitLoading"
     size="large"
@@ -18,7 +16,6 @@ a-form(layout="horizontal" @submit.prevent="submit")
 </template>
 
 <script>
-import moment from 'moment'
 import UploadMixin from '@/mixins/upload'
 import BackgroundUpload from '@/components/BackgroundUpload.vue'
 export default {
@@ -39,10 +36,6 @@ export default {
     }
   },
   computed: {
-    birthday: {
-      get() { return this.form.birthday && moment(this.form.birthday) },
-      set(value) { this.form.birthday = value.toISOString() },
-    },
     headerURL: {
       get() { return this.$store.state.header },
       set(value) { this.$store.commit('setHeader', value) },

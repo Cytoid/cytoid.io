@@ -43,7 +43,7 @@
               a(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()")
                 a-tag {{ tag }}
           .card-heading Last updated
-          .card-secondary-text(style="margin-bottom: 0px;") {{readableDate(level.modificationDate).calendar()}}, {{ readableDate(level.modificationDate).fromNow() }}
+          .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Music
           p(class="card-em-text" style="margin-bottom: 4px;") {{ level.metadata.artist.name }}
@@ -99,7 +99,7 @@
                     :src="modIconKeyPathMap[mod.toLowerCase()]"
                     style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
                   )
-              template(v-slot:achieved="date" style="font-size: 12px;") {{ readableDate(date).fromNow() }}
+              template(v-slot:achieved="date" style="font-size: 12px;") {{ $dateFromNow(date) }}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
     .play-button-container
@@ -107,7 +107,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import marked from 'marked'
 import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
@@ -305,9 +304,6 @@ export default {
     this.loadRankings(this.rankings_pagination)
   },
   methods: {
-    readableDate(date) {
-      return moment(date)
-    },
     rate(e) {
       e *= 2
       this.$axios.post(`/levels/${this.level.uid}/ratings`, { rating: e })

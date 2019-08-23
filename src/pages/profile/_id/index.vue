@@ -15,7 +15,7 @@
         p.details.text-ele
           span
             font-awesome-icon(:icon="['far', 'calendar']")
-            | Joined {{readableDate(profile.user.registrationDate).fromNow()}}
+            | Joined {{ $dateFromNow(profile.user.registrationDate) }}
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
         a-card.bio(style="background: none; margin-bottom: 16px;")
@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import marked from 'marked'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import LevelCard from '@/components/level/LevelCard'
@@ -186,9 +185,6 @@ export default {
       }
       return '0'
     },
-    readableDate(date) {
-      return moment(date)
-    }
   },
 }
 </script>

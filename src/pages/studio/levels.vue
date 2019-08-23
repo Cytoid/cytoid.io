@@ -45,7 +45,7 @@
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         template(slot="visibility" slot-scope="text, level")
           visibility-select(:value="level.published" @change="changeVisibility(level, $event)")
-        template(v-slot:creationDate="creationDate") {{ formatDate(creationDate) }}
+        template(v-slot:creationDate="creationDate") {{$dateFormatCalendar(creationDate)}}
         template(v-slot:rating="rating")
           div(style="display: flex;")
             font-awesome-icon(:icon="['fas', 'star']" fixed-width style="margin-top: 2px; margin-right: 4px;")
@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import UploadLevel from '@/components/studio/UploadLevel'
 import VisibilityModal from '@/components/studio/VisibilityModal'
 import DeleteModal from '@/components/studio/DeleteModal'
@@ -128,9 +127,6 @@ export default {
   methods: {
     downloadURL(level) {
       return process.env.apiURL + '/levels/' + level.uid + '/package'
-    },
-    formatDate(date) {
-      return moment.utc(date).calendar()
     },
     changeVisibility(level, visibility) {
       this.$refs.visibilityModal.show(level, visibility)

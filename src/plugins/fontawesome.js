@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import { library, config } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSearch, faUser as farUser, faPuzzlePiece, faHeart as farHeart, faCog } from '@fortawesome/pro-regular-svg-icons'
+import {
+  faSearch, faUser as farUser, faPuzzlePiece,
+  faHeart as farHeart, faCog as farCog, faCalendar as farCalendar
+} from '@fortawesome/pro-regular-svg-icons'
 import {
   faAngleDoubleRight, faSignIn, faHeart, faMugHot, faUserAlt,
   faLock, faAddressCard, faUserFriends, faAnalytics, faChartNetwork, faArchive, faLink,
@@ -16,7 +19,7 @@ export default function () {
   config.autoAddCss = false
   Vue.component('font-awesome-icon', FontAwesomeIcon)
   library.add(
-    faSearch, farUser, faPuzzlePiece, farHeart, faCog,
+    faSearch, farUser, faPuzzlePiece, farHeart, farCog, farCalendar,
     faAngleDoubleRight, faSignIn, faHeart, faMugHot, faUserAlt, faLock,
     faAddressCard, faUserFriends, faAnalytics, faChartNetwork, faArchive, faLink,
     faSortAmountDown, faSortAmountUp, faDownload, faBriefcase,

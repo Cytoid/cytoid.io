@@ -12,7 +12,7 @@
               a(v-for="tag in post.tags" :key="tag" :href="'/posts?tags=' + tag.toLowerCase()")
                 a-tag {{ tag }}
           .card-heading Last updated
-          .card-secondary-text(style="margin-bottom: 0px;") {{ readableDate(post.published_date).fromNow() }}
+          .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(post.published_date)}}, {{ $dateFromNow(post.published_date) }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Cover art
           p(class="card-em-text" style="margin-bottom: 4px;") {{ post.cover_artist }}
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 
@@ -60,9 +59,6 @@ export default {
     }
   },
   methods: {
-    readableDate(date) {
-      return moment.utc(date)
-    },
     makeLink(link) {
       if (link == null) return 'about:blank'
       return (link.indexOf('://') === -1) ? 'http://' + link : link

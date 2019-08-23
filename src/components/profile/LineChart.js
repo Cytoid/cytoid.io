@@ -1,6 +1,6 @@
 import { Line } from 'vue-chartjs'
 import Chart from 'chart.js'
-import moment from 'moment'
+import { format, parse } from 'date-fns'
 
 export default {
   extends: Line,
@@ -57,7 +57,11 @@ export default {
         tooltips: {
           callbacks: {
             title: (tooltipItems, data) => {
-              return moment(tooltipItems[0].label, 'Y-w').format('YYYY/MM/DD')
+              const date = parse(tooltipItems[0].label, 'Y-w', new Date())
+              return format(date, 'YYYY wo', {
+                useAdditionalWeekYearTokens: true,
+                locale: this.$dateLocale
+              }) + ' ' + this.$t('week')
             },
             label: (tooltipItem, data) => {
               switch (this.mode) {
