@@ -34,17 +34,15 @@ export default {
   computed: {
     avatarSrc() {
       const url = new URL(this.src, process.env.webURL)
-      if (!this.size) {
-        return url.href
-      }
+      const size = this.size || 512
       if (url.host.includes('gravatar')) {
         // Served from Gravatar
-        url.searchParams.append('s', this.size)
+        url.searchParams.append('s', size)
         url.searchParams.append('d', defaultAvatarURL)
       } else if (url.host === process.env.imagesURL) {
         // Served from images.cytoid.io
-        url.searchParams.set('max-w', this.size)
-        url.searchParams.set('max-h', this.size)
+        url.searchParams.set('w', size)
+        url.searchParams.set('h', size)
       }
       return url.href
     }

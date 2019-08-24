@@ -19,3 +19,11 @@ export {
 export {
   default as InfoCircleFill
 } from '@ant-design/icons/lib/fill/InfoCircleFill'
+
+export {
+  default as StarFill
+} from '@ant-design/icons/lib/fill/StarFill'
+
+export {
+  default as StarOutline
+} from '@ant-design/icons/lib/outline/StarOutline'
