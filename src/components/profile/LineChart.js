@@ -56,7 +56,14 @@ export default {
           foreColor: '#FFFFFF',
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
+        },
+        stroke: {
+          curve: 'smooth',
+          width: 2,
+        },
+        markers: {
+          size: 3,
         },
         tooltip: {
           enabled: false

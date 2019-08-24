@@ -27,3 +27,7 @@ export {
 export {
   default as StarOutline
 } from '@ant-design/icons/lib/outline/StarOutline'
+
+export {
+  default as CloseOutline
+} from '@ant-design/icons/lib/outline/CloseOutline'

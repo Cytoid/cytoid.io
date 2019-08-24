@@ -3,6 +3,7 @@ a-card(title="User Info")
   a-form(:form="form" layout="horizontal" @submit.prevent="save" :loading="loading")
     a-form-item(label="UID" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
       a-input(
+        :disabled="!!formValidation.uid.initialValue"
         addonBefore="https://cytoid.io/profile/"
         v-decorator="['uid', formValidation.uid]"
       )

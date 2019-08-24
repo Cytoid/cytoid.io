@@ -34,7 +34,7 @@ export default {
   computed: {
     avatarSrc() {
       const url = new URL(this.src, process.env.webURL)
-      const size = this.size || 512
+      const size = this.size || 256
       if (url.host.includes('gravatar')) {
         // Served from Gravatar
         url.searchParams.append('s', size)

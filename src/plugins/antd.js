@@ -7,6 +7,7 @@ import {
   Popover, AutoComplete,
   Menu, Dropdown, Tooltip, Badge,
   Progress, Checkbox, List, DatePicker,
+  Modal,
   message
 } from 'ant-design-vue'
 import Avatar from '@/components/Avatar'
@@ -61,6 +62,7 @@ export default function ({ store, $axios, error }) {
     List,
     List.Item,
     DatePicker,
+    Modal,
   ].forEach(comp => Vue.component(comp.name, comp))
 
   Vue.prototype.$message = message

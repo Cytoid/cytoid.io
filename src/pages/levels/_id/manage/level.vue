@@ -17,40 +17,40 @@
           p.heading(style="margin-bottom: 4px;") Title
           a-form-item
             template(slot="extra") The music title in its original form and language.
-            a-input(v-decorator="formDecorator.title")
+            a-input(v-decorator="formDecorator.title" disabled)
           p.heading(style="margin-bottom: 4px;") Localized title (optional)
           a-form-item
             div(slot="extra") The music title in English. Literal translation is preferred.
-            a-input(v-decorator="formDecorator.title_localized")
+            a-input(v-decorator="formDecorator.title_localized" disabled)
           p.heading(style="margin-bottom: 4px;") Music artist name(s)
           a-form-item
             div(slot="extra") The music artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.
-            a-input(v-decorator="formDecorator.artist.name")
+            a-input(v-decorator="formDecorator.artist.name" disabled)
           p.heading(style="margin-bottom: 4px;") Localized music artist name(s)
           a-form-item
             div(slot="extra") The music artist name(s) in English. Literal translation is preferred.
-            a-input(v-decorator="formDecorator.artist.name_localized")
+            a-input(v-decorator="formDecorator.artist.name_localized" disabled)
           p.heading(style="margin-bottom: 4px;") Music source URL
           a-form-item
             div(slot="extra") The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.
-            a-input(v-decorator="formDecorator.artist.url")
+            a-input(v-decorator="formDecorator.artist.url" disabled)
           p.heading(style="margin-bottom: 4px;") Cover artist name(s)
           a-form-item
             div(slot="extra") The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.
-            a-input(v-decorator="formDecorator.illustrator.name")
+            a-input(v-decorator="formDecorator.illustrator.name" disabled)
           p.heading(style="margin-bottom: 4px;") Localized cover artist name(s)
           a-form-item
             div(slot="extra") The cover artist name(s) in English. Literal translation is preferred.
-            a-input(v-decorator="formDecorator.illustrator.localized_name")
+            a-input(v-decorator="formDecorator.illustrator.localized_name" disabled)
           p.heading(style="margin-bottom: 4px;") Cover source URL
           a-form-item
             div(slot="extra") The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used.
-            a-input(v-decorator="formDecorator.illustrator.url")
+            a-input(v-decorator="formDecorator.illustrator.url" disabled)
           // TODO: Only show respective difficulty ratings if the level has that difficulty type available
           template(v-for="chart in value.charts")
             p.heading(style="margin-bottom: 4px;") {{chart.type}} difficulty rating
             a-form-item
-              a-input-number(:min="1" :max="15" :defaultValue="chart.difficulty")
+              a-input-number(:min="1" :max="15" :defaultValue="chart.difficulty" disabled)
           div(style="font-size: 12px; color: white;")
             | Please follow the #[a(href="https://cytoid.io/posts/difficulty-v2") difficulty rating guidelines] when rating your charts.
           a-button.card-button(block style="margin-top: 24px;" disabled html-type="submit")
