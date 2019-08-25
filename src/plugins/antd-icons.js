@@ -31,3 +31,7 @@ export {
 export {
   default as CloseOutline
 } from '@ant-design/icons/lib/outline/CloseOutline'
+
+export {
+  default as PaperClipOutline
+} from '@ant-design/icons/lib/outline/PaperClipOutline'
