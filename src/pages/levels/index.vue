@@ -49,6 +49,11 @@ export default {
       pageSize: 24,
     }
   },
+  head() {
+    return {
+      title: 'Levels - Cytoid'
+    }
+  },
   computed: {
     page() {
       return parseInt(this.$route.query.page, 10) || 1

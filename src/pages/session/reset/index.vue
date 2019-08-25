@@ -32,6 +32,11 @@ export default {
       form: this.$form.createForm(this),
     }
   },
+  head() {
+    return {
+      title: 'Reset Password - Cytoid'
+    }
+  },
   methods: {
     submit() {
       this.form.validateFields((err, values) => {

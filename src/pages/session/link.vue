@@ -84,6 +84,11 @@ export default {
       loading: false,
     }
   },
+  head() {
+    return {
+      title: 'Link - Cytoid'
+    }
+  },
   computed: {
     provider() {
       return this.$route.query.provider

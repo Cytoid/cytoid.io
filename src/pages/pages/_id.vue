@@ -7,10 +7,14 @@
 
 <script>
 import { handleErrorBlock } from '@/plugins/antd'
+import { Meta } from '@/utils'
 export default {
   data: () => ({
     page: null,
   }),
+  head() {
+    return new Meta(this.page.title, this.page.content)
+  },
   asyncData({ $axios, params, error }) {
     return $axios.get(process.env.cmsURL + `/api/items/pages?filter[slug][eq]=${params.id}&fields=*.*`)
       .then((postResponse) => {

@@ -128,6 +128,11 @@ export default {
       loading: false,
     }
   },
+  head() {
+    return {
+      title: 'Sign Up - Cytoid'
+    }
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this)
   },

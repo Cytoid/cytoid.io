@@ -89,6 +89,7 @@ import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 import { handleErrorBlock } from '@/plugins/antd'
+import { Meta } from '@/utils'
 
 export default {
   components: {
@@ -107,6 +108,15 @@ export default {
     profile: null,
     chartMode: 'activity'
   }),
+  head() {
+    const name = this.profile.user.name || this.profile.user.uid
+    const meta = new Meta(name, this.profile.profile.bio)
+    meta.extend('author', name)
+    if (this.profile.profile.headerURL) {
+      meta.extend('og:image', this.profile.profile.headerURL)
+    }
+    return meta
+  },
   computed: {
     bio() {
       return marked(this.profile.profile.bio || 'There is no bio yet.')

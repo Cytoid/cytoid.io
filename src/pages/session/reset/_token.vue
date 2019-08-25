@@ -39,6 +39,11 @@ export default {
       state: 0, // 0 - nature, -1 - wrong token, 1 - success
     }
   },
+  head() {
+    return {
+      title: 'Confirm - Reset Password - Cytoid'
+    }
+  },
   methods: {
     submit() {
       this.form.validateFields((err, values) => {

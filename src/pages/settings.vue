@@ -23,7 +23,12 @@ export default {
     if (route.fullPath === '/settings') {
       redirect('/settings/account')
     }
-  }
+  },
+  head() {
+    return {
+      title: 'Settings - Cytoid'
+    }
+  },
 }
 </script>
 

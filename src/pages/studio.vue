@@ -22,7 +22,14 @@ export default {
     if (route.fullPath === '/studio') {
       redirect('/studio/levels')
     }
-  }
+  },
+  head() {
+    const user = this.$store.state.user
+    const name = user?.name || user?.uid || 'unknown'
+    return {
+      title: name + "'s Studio - Cytoid"
+    }
+  },
 }
 </script>
 
