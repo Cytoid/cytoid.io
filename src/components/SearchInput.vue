@@ -7,12 +7,12 @@
     )
       .search-input(slot="default")
         button.icon(@click="submit" style="outline: none;")
-          font-awesome-icon(:icon="['far', 'search']")
+          font-awesome-icon(:icon="['fas', 'search']")
         input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
     a-button.fullscreen-search-button(
       @click="handleSearchButton"
     )
-      font-awesome-icon(:icon="['far', 'search']")
+      font-awesome-icon(:icon="['fas', 'search']")
     .fullscreen-search-overlay(v-show="overlay" @click="handleOverlay")
       .fullscreen-search-container
         p.card-heading(style="color: white;") Search
@@ -23,7 +23,7 @@
         )
           .fullscreen-search-input(slot="default")
             button.icon(@click="submit" style="outline: none;")
-              font-awesome-icon(:icon="['far', 'search']")
+              font-awesome-icon(:icon="['fas', 'search']")
             input(type="search" autocomplete="off" v-model="searchKey" @keyup.enter.stop.prevent="submit")
 </template>
 

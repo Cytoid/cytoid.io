@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="less">
 .navbar {
   height: 3rem;
   display: flex;

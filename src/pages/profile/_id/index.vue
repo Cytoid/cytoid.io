@@ -14,7 +14,7 @@
           | {{ profile.online ? 'Online' : 'Offline' }}
         p.details.text-ele
           span
-            font-awesome-icon(:icon="['far', 'calendar']")
+            font-awesome-icon(:icon="['fas', 'calendar']")
             | Joined {{ $dateFromNow(profile.user.registrationDate) }}
     a-row(:gutter="16")
       a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")

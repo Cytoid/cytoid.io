@@ -2,6 +2,7 @@
 .player-info-avatar
   avatar.level-avatar.ele3(:src="props.avatar")
   a-progress.level-badge-progress(
+    v-show="props.exp.totalExp >= 0"
     type="dashboard"
     :percent="((props.exp.totalExp - props.exp.currentLevelExp) / (props.exp.nextLevelExp - props.exp.currentLevelExp)) * 100"
     :format="percent => ''"
@@ -9,10 +10,10 @@
     :stroke-width="3"
     :stroke-color="'hsla(226, 68%, 67%, 1)'"
   )
-  .level-badge(class="ele3")
+  .level-badge(class="ele3" v-show="props.exp.totalExp >= 0")
     .lv LV.
     .num(v-text="props.exp.currentLevel")
-  .rating-badge(class="ele3") {{ Math.floor(props.rating * 100) / 100 }} rt
+  .rating-badge(class="ele3" v-show="props.rating >= 0") {{ Math.floor(props.rating * 100) / 100 }} rt
 </template>
 
 <script>

@@ -1,19 +1,26 @@
 <template lang="pug">
 .navcard
-  avatar.navcard-avatar(:src="$store.state.avatar")
-  img.navcard-header(:src="$img(header, { height: 128 })")
+  div.navcard-avatar
+    player-info-avatar(
+      :exp="exp"
+      :avatar="$store.state.avatar"
+      :rating="rating"
+    )
+  img.navcard-header(v-if="header" :src="$img(header, { maxHeight: 1024 })")
+  div.navcard-header(v-else style="background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1))")
+  div.navcard-uid(v-text="user.uid")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
-      font-awesome-icon.icon(:icon="['far', 'user']")
+      font-awesome-icon.icon(:icon="['fas', 'user']")
       .title Profile
     nuxt-link.navcard-item(to="/studio")
-      font-awesome-icon.icon(:icon="['far', 'puzzle-piece']")
+      font-awesome-icon.icon(:icon="['fas', 'puzzle-piece']")
       .title My Content
     .navcard-item
-      font-awesome-icon.icon(:icon="['far', 'heart']")
+      font-awesome-icon.icon(:icon="['fas', 'heart']")
       .title Favorites
     nuxt-link.navcard-item(to="/settings")
-      font-awesome-icon.icon(:icon="['far', 'cog']")
+      font-awesome-icon.icon(:icon="['fas', 'cog']")
       .title Settings
   .section
     a-button(type="danger" block @click="logout") Sign Out
@@ -21,8 +28,16 @@
 
 <script>
 import { mapState } from 'vuex'
+import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 export default {
   name: 'NavCard',
+  components: { PlayerInfoAvatar },
+  data() {
+    return {
+      exp: { basicExp: -1, levelExp: -1, totalExp: -1, currentLevel: -1, nextLevelExp: -1, currentLevelExp: -1 },
+      rating: -1
+    }
+  },
   computed: {
     ...mapState(['header', 'user']),
   },
@@ -33,6 +48,16 @@ export default {
           this.$store.commit('setHeader', res.data.headerURL)
           this.$store.commit('setAvatar', res.data.user.avatarURL)
         })
+    }
+    if (this.user) {
+      Promise.all([
+        this.$axios.get(`/profile/${this.$store.state.user.id}/exp`),
+        this.$axios.get(`/profile/${this.$store.state.user.id}/rating`)
+      ]).then(([expRes, rtRes]) => {
+        console.log(expRes)
+        this.exp = expRes.data
+        this.rating = rtRes.data
+      })
     }
   },
   methods: {
@@ -45,11 +70,11 @@ export default {
 </script>
 
 <style lang="less">
-@header-height: 128px;
-@icon-size: 2rem;
-@avatar-size: 96px;
+@header-height: 292px;
+@icon-size: 24px;
+@avatar-size: 128px;
 .navcard {
-  background-color: @component-background;
+  background-color: #fff;
   width: 80vw;
   max-width: 330px;
   position: relative;
@@ -62,22 +87,25 @@ export default {
   }
   .navcard-avatar {
     position: absolute;
-    width: @avatar-size;
-    height: @avatar-size;
-    border-radius: @avatar-size / 2;
     left: calc(50% - @avatar-size / 2);
-    top: @header-height - @avatar-size / 2;
+    top: @avatar-size / 2;
+  }
+  .navcard-uid {
+    color: white;
+    text-shadow: @text-ele;
+    margin-top: -128px;
+    text-align: center;
+    font-size: 24px;
   }
   .navcard-grid {
     display: grid;
     grid-template-columns: 50% 50%;
-    padding: 16px 0;
+    padding: 28px 0 0 0;
     .navcard-item {
-      padding: 32px;
-      border-radius: 2px;
-      color: white;
+      padding: 24px;
+      color: @theme5;
       &:hover {
-        background-color: @item-hover-bg;
+        transform: scale(1.1);
       }
       .icon {
         display: block;
@@ -85,10 +113,17 @@ export default {
         margin-right: auto;
         width: @icon-size;
         height: @icon-size;
+        :before {
+          background: -webkit-gradient(linear, left top, left bottom, from(#f00), to(#333));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: initial; /* reset Font Awesome's display:inline-block */
+        }
       }
       .title {
         text-align: center;
-        margin-top: 0.5rem;
+        margin-top: 4px;
+        font-weight: bold;
       }
     }
   }

@@ -63,7 +63,7 @@ export default {
     }
 
     &:hover .recent-rank-background {
-      transform: scale(1.2, 1.2);
+      transform: scale(1.05, 1.05);
     }
   }
 
