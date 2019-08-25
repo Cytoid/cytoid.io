@@ -13,9 +13,6 @@
           li: nuxt-link(:to="{name: 'settings-profile'}")
             font-awesome-icon(icon="address-card" fixed-width)
             | Profile
-          li: a
-            font-awesome-icon(icon="user-friends" fixed-width)
-            | Friends
     .column: nuxt
 </template>
 
@@ -26,7 +23,12 @@ export default {
     if (route.fullPath === '/settings') {
       redirect('/settings/account')
     }
-  }
+  },
+  head() {
+    return {
+      title: 'Settings - Cytoid'
+    }
+  },
 }
 </script>
 

@@ -12,3 +12,27 @@ export function formatBytes(bytes) {
   }
   return bytes
 }
+
+export function Meta(title, description, verb = null) {
+  if (description.length > 100) {
+    description = description.substring(0, 100)
+  }
+  this.title = title + ' - Cytoid'
+  if (verb) {
+    this.title = verb + ' ' + this.title
+  }
+  this.meta = [
+    { hid: 'description', name: 'description', content: description },
+    { hid: 'og:description', name: 'og:description', content: description },
+    { hid: 'name', name: 'name', content: title },
+    { hid: 'og:title', name: 'og:title', content: title },
+  ]
+}
+
+Meta.prototype.extend = function (id, content) {
+  this.meta.push({
+    hid: id,
+    name: id,
+    content
+  })
+}

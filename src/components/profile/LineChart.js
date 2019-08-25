@@ -1,9 +1,6 @@
-import { Line } from 'vue-chartjs'
-import Chart from 'chart.js'
-import { format, parse } from 'date-fns'
+import { setWeek, setWeekYear } from 'date-fns'
 
 export default {
-  extends: Line,
   props: {
     data: {
       type: Array,
@@ -15,105 +12,88 @@ export default {
     }
   },
   mounted() {
-    this.renderChart(this.chartData, this.options)
+    this.ApexCharts = import('apexcharts')
+      .then(imported => imported.default)
+    this.renderChart()
   },
-  computed: {
-    options() {
-      return {
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: this.mode === 'activity',
-              precision: this.mode === 'accuracy' ? 2 : (this.mode === 'activity' ? 0 : 1),
-              callback: (value, index, values) => {
-                if (this.mode === 'accuracy') return Math.round(value * 100) + '%'
-                if (this.mode === 'rating') return value + ' rt'
-                return value
-              }
-            }
-          }],
-          xAxes: [{
-            type: 'time',
-            offset: this.mode === 'activity',
-            distribution: 'linear',
-            bounds: 'ticks',
-            time: {
-              unit: 'year',
-              displayFormats: {
-                year: 'MMM YYYY'
-              },
-              parser: 'GGGG-W', // Two digits week year, plus two digits week number
-            },
-            ticks: {
-              autoSkip: true,
-              maxTicksLimit: 3,
-              source: 'data',
-            },
-          }]
-        },
-        tooltips: {
-          callbacks: {
-            title: (tooltipItems, data) => {
-              const date = parse(tooltipItems[0].label, 'Y-w', new Date())
-              return format(date, 'YYYY wo', {
-                useAdditionalWeekYearTokens: true,
-                locale: this.$dateLocale
-              }) + ' ' + this.$t('week')
-            },
-            label: (tooltipItem, data) => {
-              switch (this.mode) {
-                case 'activity':
-                  return tooltipItem.yLabel + ' ranked plays'
-                case 'rating':
-                  return tooltipItem.yLabel.toFixed(2) + ' rt'
-                case 'accuracy':
-                  return (tooltipItem.yLabel * 100).toFixed(2) + '%'
-              }
-              return tooltipItem.yLabel
-            }
-          }
-        }
-      }
-    },
-    chartData() {
-      const keys = {
-        activity: 'count',
-        rating: 'accu_rating',
-        accuracy: 'accu_accuracy',
-      }
-      const key = keys[this.mode]
-      return {
-        labels: this.data.map(a => a.week),
-        datasets: [
-          {
-            label: this.mode,
-            backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            fontColor: 'white',
-            data: this.data.map(a => ({ y: a[key], t: a.year + '-' + a.week })),
-          }
-        ],
-      }
-    }
+  render(h) {
+    return h('div')
   },
   watch: {
     mode() {
-      this.renderChart(this.chartData, this.options)
+      this.renderChart()
     }
   },
   methods: {
-    renderChart(data, options) {
-      if (this.$data._chart) this.$data._chart.destroy()
-      this.$data._chart = new Chart(
-        this.$refs.canvas.getContext('2d'), {
-          type: this.mode === 'activity' ? 'bar' : 'line', // The only line changed
-          data: data,
-          options: options,
-          plugins: this.$data._plugins
-        }
-      )
+    async renderChart() {
+      if (this.data.length === 0) {
+        return
+      }
+      const key = {
+        activity: 'count',
+        rating: 'accu_rating',
+        accuracy: 'accu_accuracy',
+      }[this.mode]
+      const chartType = this.mode === 'activity' ? 'bar' : 'line'
+      const ApexCharts = await this.ApexCharts
+      const options = {
+        chart: {
+          type: chartType,
+          height: 192,
+          toolbar: {
+            show: false,
+          },
+          selection: {
+            enabled: false,
+          },
+          zoom: {
+            enabled: false,
+          },
+          animations: {
+            enabled: false,
+          },
+          fontFamily: 'Nunito',
+          foreColor: '#FFFFFF',
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: 'smooth',
+          width: 2,
+        },
+        markers: {
+          size: 3,
+        },
+        tooltip: {
+          enabled: false
+        },
+        series: [{
+          name: 'num',
+          data: this.data.map(a => [setWeek(setWeekYear(new Date(), a.year), a.week), a[key]])
+        }],
+        xaxis: {
+          type: 'datetime',
+          tickAmount: 6,
+        },
+        yaxis: {
+          decimalsInFloat: this.mode === 'activity' ? 0 : 2,
+        },
+        colors: ['#FFFFFF'],
+      }
+      /*
+            if (this.chart) {
+        await this.chart.updateOptions(options)
+      } else {
+        this.chart = new ApexCharts(this.$el, options)
+        await this.chart.render()
+      }
+       */
+      if (this.chart) {
+        await this.chart.destroy()
+      }
+      this.chart = new ApexCharts(this.$el, options)
+      await this.chart.render()
     }
   }
 }

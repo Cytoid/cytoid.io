@@ -17,6 +17,7 @@
 
 <script>
 import { handleErrorBlock } from '@/plugins/antd'
+import { Meta } from '@/utils'
 export default {
   layout: 'background',
   middleware: 'auth',
@@ -37,6 +38,9 @@ export default {
         return { level }
       })
       .catch(err => handleErrorBlock(err, error))
+  },
+  head() {
+    return new Meta(this.level.title, this.level.description, 'Manage')
   },
   fetch({ route, redirect }) {
     const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)

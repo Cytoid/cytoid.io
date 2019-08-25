@@ -119,6 +119,11 @@ export default {
       form: this.$form.createForm(this),
     }
   },
+  head() {
+    return {
+      title: 'Login - Cytoid'
+    }
+  },
   methods: {
     signInWithProvider(provider) {
       this.externalLoginLoading = true

@@ -113,7 +113,7 @@ import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayButton from '@/components/level/PlayButton'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
-import { formatBytes } from '@/utils'
+import { formatBytes, Meta } from '@/utils'
 import { handleErrorBlock } from '@/plugins/antd'
 
 const ModIconKeys = [
@@ -257,6 +257,12 @@ export default {
     modNames,
     modIconKeyPathMap: ModIconKeyPathMap
   }),
+  head() {
+    const meta = new Meta(this.level.title, this.level.description)
+    meta.extend('author', this.level.owner.name || this.level.owner.uid)
+    meta.extend('og:image', this.level.bundle.background)
+    return meta
+  },
   computed: {
     levelDescription() {
       return this.level.description !== null ? marked(this.level.description) : null

@@ -25,7 +25,7 @@
           p.heading Recent ranks
           player-recent-rank(
             v-for="rank in profile.recents.ranks"
-            :key="rank.uid"
+            :key="rank.id"
             :rank="rank"
           )
       a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
@@ -53,7 +53,7 @@
             a-radio-button(value="activity") Ranked plays
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
-          line-chart(:data="profile.timeseries" :mode="chartMode" :style="chartStyles", :options="chartOptions")
+          line-chart(:data="profile.timeseries" :mode="chartMode")
         a-card(
           v-if="featuredLevels.length > 0 || levels.length > 0"
           class="levels-card"
@@ -81,6 +81,7 @@
 
 <script>
 import marked from 'marked'
+import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import LevelCard from '@/components/level/LevelCard'
 import LineChart from '@/components/profile/LineChart'
@@ -88,9 +89,18 @@ import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 import { handleErrorBlock } from '@/plugins/antd'
+import { Meta } from '@/utils'
 
 export default {
-  components: { PlayerRecentRank, LineChart, DifficultyBadge, ScoreBadge, PlayerInfoAvatar, LevelCard },
+  components: {
+    PlayerRecentRank,
+    LineChart,
+    DifficultyBadge,
+    ScoreBadge,
+    PlayerInfoAvatar,
+    LevelCard,
+    Disqus,
+  },
   layout: 'background',
   data: () => ({
     levels: [],
@@ -98,53 +108,19 @@ export default {
     profile: null,
     chartMode: 'activity'
   }),
+  head() {
+    const name = this.profile.user.name || this.profile.user.uid
+    const meta = new Meta(name, this.profile.profile.bio)
+    meta.extend('author', name)
+    if (this.profile.profile.headerURL) {
+      meta.extend('og:image', this.profile.profile.headerURL)
+    }
+    return meta
+  },
   computed: {
     bio() {
       return marked(this.profile.profile.bio || 'There is no bio yet.')
     },
-    chartStyles() {
-      return {
-        position: 'relative',
-        height: '192px',
-      }
-    },
-    chartOptions() {
-      const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              fontColor: 'rgba(255, 255, 255, 0.3)',
-              fontSize: 12,
-              fontFamily: 'Nunito',
-              beginAtZero: false,
-            }
-          }],
-          xAxes: [{
-            type: 'time',
-            ticks: {
-              fontColor: 'rgba(255, 255, 255, 0.3)',
-              fontSize: 12,
-              fontFamily: 'Nunito',
-              stepSize: 1,
-            },
-            time: {
-              unit: 'week'
-            }
-          }]
-        },
-        elements: {
-          line: {
-            tension: 0
-          }
-        }
-      }
-      return options
-    }
   },
   asyncData({ $axios, params, error, store }) {
     return $axios.get(`/profile/${params.id}/full`)

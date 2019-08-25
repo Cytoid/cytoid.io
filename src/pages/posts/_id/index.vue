@@ -30,7 +30,7 @@
 <script>
 import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
-
+import { Meta } from '@/utils'
 export default {
   layout: 'background',
   components: {
@@ -44,6 +44,12 @@ export default {
       avatarURL: null
     }
   }),
+  head() {
+    const meta = new Meta(this.post.title, this.post.content)
+    meta.extend('author', this.owner.name || this.owner.uid)
+    meta.extend('og:image', this.post.cover_art.data.full_url)
+    return meta
+  },
   async asyncData({ $axios, params, store, error }) {
     const postResponse = await $axios.get(process.env.cmsURL + `/api/items/posts?filter[slug][eq]=${params.id}&fields=*.*`)
     const postData = postResponse.data.data[0]

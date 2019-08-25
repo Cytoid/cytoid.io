@@ -157,7 +157,7 @@ export default {
     return Promise.all([
       $axios.get(process.env.cmsURL + '/api/items/posts?fields=*.*'),
       $axios.get('/levels', { params: { sort: 'creation_date', order: 'desc', page: 0, limit: 0 } }),
-      $axios.get('/levels', { params: { sort: 'creation_date', order: 'desc', page: 0, limit: 1, featured: true } }),
+      $axios.get('/levels', { params: { sort: 'modification_date', order: 'desc', page: 0, limit: 1, featured: true } }),
       $axios.get('/records')
     ])
       .then(([postsResponse, totalLevelsResponse, latestFeaturedLevelResponse, latestRanksResponse]) => {
