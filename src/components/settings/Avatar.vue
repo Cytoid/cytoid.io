@@ -1,21 +1,26 @@
 <template lang="pug">
-a-card.avatar-upload(title="Avatar")
-  captcha(invisible badge="bottomleft")
-  a-upload(
-    name="avatar"
-    listType="picture-card"
-    accept="image/*"
-    :showUploadList="false"
-    :customRequest="upload"
-    @change="avatarUploaded"
-  )
-    avatar.avatar(:src="$store.state.avatar")
-  template(v-if="!usingGravatar")
-    a-button(
-      :loading="avatarDeleteLoading",
-      @click="avatarDelete"
-    ) Use Gravatar
-  span(v-else) You're using your avatar from #[a(href="https://gravatar.com/" target="_blank") Gravatar]
+div
+  div(class="card-pre-header")
+    p Avatar
+  a-card.avatar-upload
+    captcha(invisible badge="bottomleft")
+    a-upload(
+      name="avatar"
+      listType="picture-card"
+      accept="image/*"
+      :showUploadList="false"
+      :customRequest="upload"
+      @change="avatarUploaded"
+      style="margin-bottom: 16px;"
+    )
+      avatar.avatar(:src="$store.state.avatar")
+    template(v-if="!usingGravatar")
+      a-button(
+        class="card-button"
+        :loading="avatarDeleteLoading",
+        @click="avatarDelete"
+      ) Click to use Gravatar
+    span(v-else) You're using your avatar from #[a(href="https://gravatar.com/" target="_blank" style="font-weight:bold") Gravatar]!
 </template>
 
 <script>
@@ -76,9 +81,10 @@ export default {
   align-items: center;
   justify-content: space-around;
 }
+.avatar-upload .ant-upload {
+  margin: 0;
+}
 .avatar-upload .avatar {
-  width: 100%;
-  height: 100%;
   border-radius: 3px;
 }
 </style>

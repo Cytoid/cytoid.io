@@ -1,33 +1,39 @@
 <template lang="pug">
-.section
-  a-card(title="Password")
-    a-form(:form="form" @submit.prevent="submit")
-      a-form-item(label="Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
-        a-input(
-          type="password"
-          placeholder="Old Password"
-          v-decorator="['old',{ rules: [{ required: true, message: 'The old password is required' }] }]"
-        )
-      a-form-item(label="New Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
-        a-input(
-          type="password"
-          v-decorator="['new',{ rules: [{ required: true, message: 'The new password is required' }, , { min: 8, message: 'Password has to be at least 8 characters.'}] }]"
-        )
-      a-form-item(label="Password Confirm" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
-        a-input(
-          type="password"
-          v-decorator="['newConfirm',{ rules: [{ validator: comparePasswords }, { required: true, message: 'Please input your password again' }]}]"
-        )
-      a-button.card-button(html-type="submit" :loading="loading") Submit
-  a-card.external-login(title="Third-party Login")
-    a-button(
-      v-for="provider in providers"
-      :key="provider.id" :type="externals.includes(provider.id) ? 'danger' : 'default'"
-      :loading="providersLoading === provider.id"
-      @click="externals.includes(provider.id) ? unlink(provider.id) : link(provider.id)"
-    )
-      font-awesome-icon(:icon="['fab', provider.icon || provider.id]")
-      | {{provider.title}}
+div
+  div
+    div(class="card-pre-header")
+      p Password
+    a-card
+      a-form(:form="form" @submit.prevent="submit")
+        a-form-item(label="Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
+          a-input(
+            type="password"
+            placeholder="Old Password"
+            v-decorator="['old',{ rules: [{ required: true, message: 'The old password is required' }] }]"
+          )
+        a-form-item(label="New Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
+          a-input(
+            type="password"
+            v-decorator="['new',{ rules: [{ required: true, message: 'The new password is required' }, , { min: 8, message: 'Password has to be at least 8 characters.'}] }]"
+          )
+        a-form-item(label="Password Confirm" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
+          a-input(
+            type="password"
+            v-decorator="['newConfirm',{ rules: [{ validator: comparePasswords }, { required: true, message: 'Please input your password again' }]}]"
+          )
+        a-button.card-button(html-type="submit" :loading="loading") Submit
+  div(style="margin-top: 16px;")
+    div(class="card-pre-header")
+      p Third-party Sign-on
+    a-card.external-login
+      a-button(
+        v-for="provider in providers"
+        :key="provider.id" :type="externals.includes(provider.id) ? 'danger' : 'default'"
+        :loading="providersLoading === provider.id"
+        @click="externals.includes(provider.id) ? unlink(provider.id) : link(provider.id)"
+      )
+        font-awesome-icon(:icon="['fab', provider.icon || provider.id]")
+        | {{provider.title}}
 </template>
 
 <script>
@@ -120,7 +126,6 @@ export default {
 
 <style lang="less">
 .external-login {
-  margin-top: 2rem;
   .ant-btn svg {
     margin-right: 0.5rem;
   }

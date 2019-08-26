@@ -37,6 +37,7 @@ export default {
   .navbar-item {
     color: rgba(255, 255, 255, 0.5);
     padding: 0 1rem;
+    text-shadow: @ele4;
     &:hover {
       color: rgba(255, 255, 255, 1);
     }
@@ -48,6 +49,16 @@ export default {
   .avatar-icon {
     height: 100%;
     padding: 4px;
+    transition: 0.4s @hoverEasing;
+    img {
+      box-shadow: @ele4;
+    }
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:active {
+      transform: scale(0.95);
+    }
   }
 }
 </style>

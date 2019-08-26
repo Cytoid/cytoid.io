@@ -178,7 +178,7 @@ export default {
       this.loadCommentsFailed = true
       console.log(err)
     })
-    this.$axios.get('/integrations/twitter').then((response) => {
+    this.$axios.get('/integrations/twitter', { transformResponse: [(data) => { return data }] }).then((response) => {
       this.latestTweetId = response.data
       const self = this
       function styleTweet() {

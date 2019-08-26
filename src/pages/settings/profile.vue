@@ -1,8 +1,14 @@
 <template lang="pug">
 a-form(layout="horizontal" @submit.prevent="submit")
-  a-form-item(label="Header Image" :label-col="{ span: 20, sm: 5 }")
+  div
+    div(class="card-pre-header")
+      p Cover image
+  a-form-item(label="Cover image" :label-col="{ span: 20, sm: 5 }")
     captcha(invisible badge="bottomleft")
     background-upload(@change="headerUploaded" :src="headerURL")
+  div
+    div(class="card-pre-header")
+      p Bio
   client-only: markdown-editor(
     :configs="{ spellChecker: false }"
     v-model="form.bio"

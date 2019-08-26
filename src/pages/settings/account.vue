@@ -1,6 +1,6 @@
 <template lang="pug">
-.section
-  info-panel(style="margin-bottom: 16px;")
+div
+  <!--info-panel(style="margin-bottom: 16px;")-->
   avatar-panel(style="margin-bottom: 16px;")
   emails-panel(style="margin-bottom: 16px;")
 </template>

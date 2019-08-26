@@ -1,23 +1,21 @@
 @import "~ant-design-vue/dist/antd.less";
 
 html, .scroll-container {
-  scrollbar-color: @shade5 @component-background;
-  scrollbar-width: thin;
-  &::-webkit-scrollbar {
-    background-color: @component-background;
-    opacity: 0;
-    width: 4px;
-    height: 4px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: @shade5;
-    transition: background-color 0.5s ease;
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: @shade4;
-  }
-}
-html {
   overflow-x: hidden;
+  scrollbar-color: @shade1 @shade1;
+  scrollbar-width: thin;
 }
 
+&::-webkit-scrollbar {
+  background-color: @shade1;
+  opacity: 0;
+  width: 4px;
+  height: 4px;
+}
+&::-webkit-scrollbar-thumb {
+  background-color: @shade4;
+  transition: background-color 0.5s ease;
+}
+&::-webkit-scrollbar-thumb:hover {
+  background-color: @shade5;
+}

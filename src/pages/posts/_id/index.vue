@@ -46,7 +46,7 @@ export default {
   }),
   head() {
     const meta = new Meta(this.post.title, this.post.content)
-    meta.extend('author', this.owner.name || this.owner.uid)
+    meta.extend('author', this.owner.uid)
     meta.extend('og:image', this.post.cover_art.data.full_url)
     return meta
   },

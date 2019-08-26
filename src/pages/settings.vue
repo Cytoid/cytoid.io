@@ -2,17 +2,16 @@
   .section: .container: .columns
     .column.is-one-quarter
       aside.menu
-        p.menu-label General
         ul.menu-list
           li: nuxt-link(:to="{name: 'settings-account'}")
-            font-awesome-icon(icon="user-alt" fixed-width)
-            | Account
+            font-awesome-icon(:icon="['fas', 'user-alt']" fixed-width)
+            span.menu-text Account
           li: nuxt-link(:to="{name: 'settings-security'}")
-            font-awesome-icon(icon="lock" fixed-width)
-            | Security
+            font-awesome-icon(:icon="['fas', 'lock']" fixed-width)
+            span.menu-text Security
           li: nuxt-link(:to="{name: 'settings-profile'}")
-            font-awesome-icon(icon="address-card" fixed-width)
-            | Profile
+            font-awesome-icon(:icon="['fas', 'address-card']" fixed-width)
+            span.menu-text Profile
     .column: nuxt
 </template>
 
@@ -32,8 +31,33 @@ export default {
 }
 </script>
 
-<style scoped>
-.svg-inline--fa {
-  margin-right: 1rem;
-}
+<style lang="less" scoped>
+  .menu-text {
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 8px;
+  }
+  a.is-active .menu-text {
+    font-weight: bold;
+  }
+  .menu-list {
+  li {
+    margin-bottom: 8px;
+  }
+  a {
+    padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    transition: 0.2s @hoverEasing;
+  &:hover {
+     color: rgba(255, 255, 255, 1);
+     background-color: hsla(226, 15%, 19%, 0.3);
+   }
+  }
+  a.is-active {
+    color: rgba(255, 255, 255, 1);
+    background: linear-gradient(to right, @theme4, @theme5);
+    box-shadow: @ele4;
+  }
+  }
 </style>
