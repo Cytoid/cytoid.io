@@ -1,29 +1,33 @@
 <template lang="pug">
 .navcard
+  div(v-if="header")
+    img.navcard-header(:src="$img(header, { maxHeight: 1024 })")
+    div.navcard-header(style="position: absolute; margin-top: -356px; background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1)); opacity: 0.5;")
+  div.navcard-header(v-else style="background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1))")
   div.navcard-avatar
     player-info-avatar(
       :exp="exp"
       :avatar="$store.state.avatar"
       :rating="rating"
     )
-  img.navcard-header(v-if="header" :src="$img(header, { maxHeight: 1024 })")
-  div.navcard-header(v-else style="background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1))")
-  div.navcard-uid(v-text="user.uid")
+  div.navcard-uid(v-text="user.uid" style="position: relative; z-index: 2;")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['fas', 'user']")
       .title Profile
     nuxt-link.navcard-item(to="/studio")
       font-awesome-icon.icon(:icon="['fas', 'puzzle-piece']")
-      .title My Content
-    .navcard-item
+      .title Studio
+    .navcard-item.navcard-item-disabled
       font-awesome-icon.icon(:icon="['fas', 'heart']")
       .title Favorites
     nuxt-link.navcard-item(to="/settings")
       font-awesome-icon.icon(:icon="['fas', 'cog']")
       .title Settings
   .section
-    a-button(type="danger" block @click="logout") Sign Out
+    a-button(class="card-button-light" style="width: 100%;" @click="logout")
+      font-awesome-icon(icon="sign-out" fixed-width style="margin-right: 4px;")
+      span Sign out
 </template>
 
 <script>
@@ -100,12 +104,16 @@ export default {
   .navcard-grid {
     display: grid;
     grid-template-columns: 50% 50%;
-    padding: 28px 0 0 0;
+    padding: 36px 0 0 0;
     .navcard-item {
       padding: 24px;
       color: @theme5;
+      transition: 0.4s @hoverEasing;
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
+      }
+      &:active {
+        transform: scale(0.95);
       }
       .icon {
         display: block;
@@ -125,6 +133,33 @@ export default {
         margin-top: 4px;
         font-weight: bold;
       }
+    }
+    .navcard-item-disabled {
+      color: rgba(0, 0, 0, 0.5);
+      &:hover {
+        transform: none;
+      }
+      &:active {
+        transform: none;
+      }
+    }
+  }
+  .card-button-light {
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: white !important;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    background: hsla(226, 15%, 19%, 1) !important;
+    transition: 0.2s @hoverEasing;
+    &:hover, &:active, &:focus {
+      background: hsla(226, 15%, 19%, 0.7) !important;
+      color: white !important;
+    }
+    &:disabled {
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: rgba(255, 255, 255, 0.3) !important;
     }
   }
 }

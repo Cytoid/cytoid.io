@@ -8,7 +8,7 @@
           :rating="profile.rating || 0"
         )
       .player-info-container
-        h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
+        h1.username(class="text-ele" v-text="profile.user.uid" style="font-size: 32px;")
         p.status.text-ele
           font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: profile.online }")
           | {{ profile.online ? 'Online' : 'Offline' }}
@@ -109,7 +109,7 @@ export default {
     chartMode: 'activity'
   }),
   head() {
-    const name = this.profile.user.name || this.profile.user.uid
+    const name = this.profile.user.uid
     const meta = new Meta(name, this.profile.profile.bio)
     meta.extend('author', name)
     if (this.profile.profile.headerURL) {

@@ -110,7 +110,7 @@ export default {
           })
           .then((user) => {
             this.loading = false
-            this.$message.info('Welcome, ' + (user.name || user.uid))
+            this.$message.info('Welcome, ' + (user.uid))
             this.$router.go(-1)
             global.window.gtag('event', 'login', {
               event_category: 'auth',
@@ -147,7 +147,7 @@ export default {
           .then((res) => {
             const user = res.data.user
             this.loading = false
-            this.$message.info('Welcome, ' + (user.name || user.uid))
+            this.$message.info('Welcome, ' + (user.uid))
             this.$router.go(-1)
             this.$store.commit('setAvatar', user.avatarURL)
             this.$store.commit('setUser', user)

@@ -7,7 +7,7 @@ a-card(title="User Info")
         addonBefore="https://cytoid.io/profile/"
         v-decorator="['uid', formValidation.uid]"
       )
-    a-form-item(label="Display Name" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
+    a-form-item(label="Display name" :label-col="{ span: 20, sm: 5 }" :wrapper-col="{ span: 24, sm: 19 }")
       a-input(v-decorator="['name', formValidation.name]")
     a-button(html-type="submit" type="primary").is-pulled-right Submit
 </template>

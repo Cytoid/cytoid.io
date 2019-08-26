@@ -144,7 +144,7 @@ export default {
         const user = event.data.user
         this.$store.commit('setUser', user)
         this.$store.commit('setAvatar', user.avatarURL)
-        this.$message.info('Welcome, ' + (user.name || user.uid))
+        this.$message.info('Welcome, ' + (user.uid))
         this.$router.go(-1)
       } else if (event.data.token && event.data.provider) {
         this.$router.replace({
@@ -162,7 +162,7 @@ export default {
         this.$store.dispatch('login', { ...values, token: this.captchaToken })
           .then((user) => {
             this.loading = false
-            this.$message.info('Welcome, ' + (user.name || user.uid))
+            this.$message.info('Welcome, ' + (user.uid))
             this.$router.go(-1)
             global.window.gtag('event', 'login', {
               event_category: 'auth',

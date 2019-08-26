@@ -25,7 +25,7 @@ export default {
   },
   head() {
     const user = this.$store.state.user
-    const name = user?.name || user?.uid || 'unknown'
+    const name = user?.uid || 'Unknown'
     return {
       title: name + "'s Studio - Cytoid"
     }

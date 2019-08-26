@@ -94,7 +94,7 @@ export default {
         const user = event.data.user
         this.$store.commit('setUser', user)
         this.$store.commit('setAvatar', user.avatarURL)
-        this.$message.info(`You're now logged in as ${user.name || user.uid}.`)
+        this.$message.info(`You're now logged in as ${user.uid}.`)
       } else if (event.data.token && event.data.provider) {
         this.$axios.post(`/users/${this.$store.state.user.id}/providers/${event.data.provider}`, {
           token: event.data.token
