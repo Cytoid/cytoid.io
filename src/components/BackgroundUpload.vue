@@ -3,7 +3,7 @@
     name="header"
     :showUploadList="true"
     :customRequest="parent.upload"
-    @change="listeners.change || (() => null)"
+    @change="listeners.change"
     :style="props.src && { '--bg-url': `url(\"${props.src}\")` }"
   )
     p.ant-upload-drag-icon

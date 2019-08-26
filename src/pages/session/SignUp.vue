@@ -147,7 +147,7 @@ export default {
           .then((res) => {
             const user = res.data.user
             this.loading = false
-            this.$message.info('Registration succeed')
+            this.$message.info('Registration Successful')
             this.$router.go(-1)
             this.$store.commit('setAvatar', user.avatarURL)
             this.$store.commit('setUser', user)

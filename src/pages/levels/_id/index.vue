@@ -351,6 +351,7 @@ export default {
       return formatBytes(size)
     },
     download() {
+      /*
       if (this.$store.state.user) {
         global.window.gtag('event', 'download', {
           event_category: 'levels',
@@ -366,6 +367,8 @@ export default {
         })
         this.$router.push('/session/login')
       }
+      */
+      window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
     },
     convertedDifficultyName(name) {
       return {
