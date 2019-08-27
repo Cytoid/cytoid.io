@@ -19,7 +19,7 @@ export default {
         [900000, 'A'],
         [950000, 'S'],
         [990000, 'SS'],
-        [999500, 'SSS'],
+        [999000, 'SSS'],
         [1000000, 'MAX'],
       ]
       return cutoffs.reduce((prev, [cutoff, str]) => (score >= cutoff) ? str : prev, 'F')
