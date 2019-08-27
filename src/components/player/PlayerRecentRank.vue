@@ -22,7 +22,7 @@
       nuxt-link(:to="{ name: 'levels-id', params: { id: rank.uid }}" style="margin-left: 4px;" v-text="rank.title")
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")
-        difficulty-badge(:value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty }" :small="true")
+        difficulty-badge(:value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty, notesCount: rank.notesCount }" :small="true")
         score-badge(:value="rank.score" style="margin-left: 4px;")
       div(style="display: flex; margin-left: auto;")
         span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="$dateFromNow(rank.date)")
