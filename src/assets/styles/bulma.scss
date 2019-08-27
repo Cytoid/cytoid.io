@@ -15,13 +15,25 @@ ul {
   padding: 0;
 }
 
+
 .level-card-container {
   padding-top: 16px;
   padding-bottom: 16px;
-  display: grid;
-  grid-gap: 16px 16px;
-  grid-auto-flow: row;
+  @include tablet {
+    display: grid;
+    grid-gap: 16px 16px;
+    grid-auto-flow: row;
+  }
+  @include mobile {
+    .card-wrap {
+      margin-bottom: 16px;
+      margin-top: 16px;
+    }
+  }
   &.large {
+    @include tablet-only {
+      grid-template-columns: repeat(2, auto);
+    }
     @include desktop-only {
       grid-template-columns: repeat(3, auto);
     }
@@ -33,6 +45,9 @@ ul {
     }
   }
   &.small {
+    @include tablet-only {
+      grid-template-columns: repeat(2, auto);
+    }
     @include desktop-only {
       grid-template-columns: repeat(2, auto);
     }
@@ -43,8 +58,5 @@ ul {
       grid-template-columns: repeat(3, auto);
     }
   }
-  @media screen and (min-width: 640px) and (max-width: $desktop - 1px) {
-    grid-template-columns: repeat(2, auto);
-  }
-
 }
+

@@ -269,7 +269,6 @@ export default {
     },
     rankingsHeaderGradient() {
       let style = {}
-      console.log(this.rankingsChartType)
       switch (this.rankingsChartType) {
         case 'extreme':
           style = { background: 'linear-gradient(to bottom right, #6f0000, #200122)' }

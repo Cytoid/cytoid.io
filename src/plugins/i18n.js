@@ -10,7 +10,6 @@ export default function ({ app, store, req }) {
 
   axios.get('https://www.google.com/recaptcha/api2/reload', { timeout: 2000 })
     .catch((error) => {
-      console.log(error.response.status)
       if (error.response && error.response.status === 405) {
         return
       }

@@ -60,7 +60,6 @@ export default {
           })
           .catch((error) => {
             if (error.response && error.response.status === 404) {
-              console.log('wrong code!')
               this.state = -1
             } else {
               this.handleErrorToast(error)

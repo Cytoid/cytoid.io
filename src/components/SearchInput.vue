@@ -49,11 +49,9 @@ export default {
   methods: {
     handleSearchButton() {
       this.overlay = true
-      console.log('opened')
     },
     handleOverlay() {
       this.overlay = false
-      console.log('closed')
     },
     keyPressed(key) {
       if (this.timer) {

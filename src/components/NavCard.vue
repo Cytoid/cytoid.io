@@ -58,7 +58,6 @@ export default {
         this.$axios.get(`/profile/${this.$store.state.user.id}/exp`),
         this.$axios.get(`/profile/${this.$store.state.user.id}/rating`)
       ]).then(([expRes, rtRes]) => {
-        console.log(expRes)
         this.exp = expRes.data
         this.rating = rtRes.data
       })
