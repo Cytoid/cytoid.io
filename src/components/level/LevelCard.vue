@@ -45,10 +45,11 @@ export default {
       return {
         backgroundImage: `url(${
           this.$img(this.value.bundle.background, {
-            maxWidth: 320,
-            maxHeight: 200,
+            maxWidth: 960,
+            maxHeight: 600,
             fitMode: 'crop',
             cropMode: 'entropy',
+            format: 'jpeg'
           })
         })`,
       }
