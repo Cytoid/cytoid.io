@@ -14,7 +14,7 @@
 <script>
 export default {
   layout: 'background',
-  background: require('@/assets/images/dark.png'),
+  background: require('@/assets/images/session.jpg'),
 }
 </script>
 

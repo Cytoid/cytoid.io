@@ -134,7 +134,7 @@ export default {
     Tweet
   },
   background: {
-    source: require('@/assets/images/sayaka.png'),
+    source: require('@/assets/images/sayaka.jpg'),
     overlayOpacity: 0.0001,
   },
   data() {
