@@ -1,9 +1,10 @@
 <template lang="pug" functional>
 footer.container.footer.has-text-centered
   ul
-    li Terms & Services
-    li Status
-    li: a(href="https://github.com/Cytoid/" target="_blank") GitHub
+    li: a(href="/legal/dmca") DMCA
+    li: a(href="/legal/terms") Terms & Services
+    li: a(href="https://github.com/Cytoid/") Status
+    li: a(href="https://github.com/Cytoid/") GitHub
     li Glory Wall
     li
       a-dropdown(:trigger="['click']")

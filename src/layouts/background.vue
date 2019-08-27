@@ -48,6 +48,7 @@ export default {
   width: 100%;
   z-index: 0;
   overflow: hidden;
+  transition: 0.4s @hoverEasing;
 }
 
 .background-image {

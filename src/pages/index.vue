@@ -49,7 +49,7 @@
             )
               | Browse all {{ totalLevels }} levels!
       a-row(:gutter="16")
-        a-col(:xs="24" :lg="8")
+        a-col(:xs="24" :md="12" :lg="8")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Recent ranks
           player-recent-rank(
             v-for="rank in latestRanks"
@@ -58,7 +58,7 @@
             :showPlayer="true"
             style="margin: 8px 0;"
           )
-        a-col(:xs="24" :lg="8")
+        a-col(:xs="24" :md="12" :lg="8")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
           a-spin(:spinning="loadingTweet" style="min-height: 128px;")
             p(v-show="loadTweetFailed") Cannot fetch latest tweet.
@@ -72,7 +72,7 @@
               :comment="comment"
               style="margin: 8px 0;"
             )
-        a-col(:xs="24" :lg="8")
+        a-col(:xs="24" :md="12" :lg="8")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Connect
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #7289DA, #7289DA); max-width: 256px;")
@@ -165,7 +165,7 @@ export default {
           posts: postsResponse.data.data,
           totalLevels: parseInt(totalLevelsResponse.headers['x-total-entries']),
           latestFeaturedLevel: latestFeaturedLevelResponse.data.length > 0 ? latestFeaturedLevelResponse.data[0] : null,
-          latestRanks: latestRanksResponse.data.slice(0, 5)
+          latestRanks: latestRanksResponse.data.slice(0, 10)
         }
       })
       .catch(err => error(err.response?.data))
