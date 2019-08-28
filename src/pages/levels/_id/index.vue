@@ -1,7 +1,12 @@
 <template lang="pug">
   .section: .container(style="margin-top: 256px;")
-    h1(class="text-ele" style="margin-bottom: 16px; line-height: 1.0;" v-text="level.metadata.title")
-    div(class="text-ele" style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;" v-text="level.metadata.artist.name")
+    h1(class="text-ele" style="margin-bottom: 16px; line-height: 1.0;" v-text="level.title")
+    div(
+      class="text-ele"
+      style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;"
+      v-if="level.metadata.artist"
+      v-text="level.metadata.artist.name"
+    )
     div(style="margin-bottom: 48px;")
       difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" class="ele3" style="margin-right: 8px;")
     div(style="margin-bottom: 32px;")
@@ -46,19 +51,19 @@
           .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Music
-          p(class="card-em-text" style="margin-bottom: 4px;") {{ level.metadata.artist.name }}
-          a(:href="makeLink(level.metadata.artist.url)")
-            a-button(v-if='level.metadata.artist.url !== null' class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
+          p(class="card-em-text" style="margin-bottom: 4px;" v-if="level.metadata.artist") {{ level.metadata.artist.name }}
+          a(v-if="level.metadata.artist && level.metadata.artist.url" :href="makeLink(level.metadata.artist.url)")
+            a-button.card-button(style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
           p(class="card-heading") Cover art
-          p(class="card-em-text" style="margin-bottom: 4px;") {{ level.metadata.illustrator.name }}
-          a(:href="makeLink(level.metadata.illustrator.url)")
-            a-button(v-if='level.metadata.illustrator.url !== null' class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
+          p(class="card-em-text" style="margin-bottom: 4px;" v-if="level.metadata.illustrator") {{ level.metadata.illustrator.name }}
+          a(v-if="level.metadata.illustrator && level.metadata.illustrator.url" :href="makeLink(level.metadata.illustrator.url)")
+            a-button.card-button(style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
           p(class="card-heading") Chart
-          p(class="card-em-text" style="margin-bottom: 16px;") {{ level.metadata.charter.name }}
+          p(class="card-em-text" style="margin-bottom: 16px;" v-if="level.metadata.charter") {{ level.metadata.charter.name }}
       a-col(:xs="24" :lg="16")
         a-card(class="ele3 rankings-card" style="margin-bottom: 16px; padding-top: 0;")
           div(class="rankings-card-header" :style="rankingsHeaderGradient" style="max-width: 384px;")
@@ -377,7 +382,6 @@ export default {
       }[name]
     },
     makeLink(link) {
-      if (link == null) return 'about:blank'
       return (link.indexOf('://') === -1) ? 'http://' + link : link
     },
   },
