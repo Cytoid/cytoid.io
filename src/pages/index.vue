@@ -250,10 +250,12 @@ export default {
     setImmediate(loadCrate)
 
     // Detect region
-    this.$axios.get('https://graph.facebook.com/feed?callback=h', { timeout: 1000 })
+    axios.get('https://www.google.com/recaptcha/api2/reload', { timeout: 2000 })
       .catch((error) => {
-        console.log(error)
-        window.alert('// 公告\n\n十分抱歉，目前 CytoidIO 暂时不支持国内 IP 进行以下操作：\n\n    * 注册及登录（游戏内可以正常登录）\n    * 上传关卡。\n\n我们会在接下来数日尽快修复上述问题，以保证国内玩家的浏览体验。在此期间，建议您使用代理访问 CytoidIO。')
+        if (error.response && error.response.status === 405) {
+          return
+        }
+        window.alert('// 公告\n\n十分抱歉，目前 CytoidIO 暂时不支持国内 IP 进行以下操作：\n\n    * 注册及登录（游戏内可以正常登录）\n    * 上传关卡。\n我们会在接下来数日尽快修复上述问题，以保证国内玩家的浏览体验。在此期间，建议您使用代理访问 CytoidIO。')
       })
   },
   destroyed() {

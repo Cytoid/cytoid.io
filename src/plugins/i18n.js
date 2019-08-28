@@ -8,14 +8,6 @@ import { pickLanguage, dateLocales } from '@/utils/i18n'
 export default function ({ app, store, req }) {
   Vue.use(VueI18n)
 
-  axios.get('https://www.google.com/recaptcha/api2/reload', { timeout: 2000 })
-    .catch((error) => {
-      if (error.response && error.response.status === 405) {
-        return
-      }
-      window.alert('// 公告\n\n十分抱歉，目前 CytoidIO 暂时不支持国内 IP 进行以下操作：\n\n    * 注册及登录（游戏内可以正常登录）\n    * 上传关卡。\n我们会在接下来数日尽快修复上述问题，以保证国内玩家的浏览体验。在此期间，建议您使用代理访问 CytoidIO。')
-    })
-
   app.i18n = new VueI18n({
     locale: 'en',
     fallbackLocale: 'en',
