@@ -10,13 +10,10 @@
     div(style="margin-bottom: 48px;")
       difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" class="ele3" style="margin-right: 8px;")
     div(style="margin-bottom: 32px;")
-      a-button.download-button.ele3(
-        type="primary"
-        size="large"
-        @click="download"
-      )
-        font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
-        span Download #[template(v-if="level.size") ({{formatSize(level.size)}})]
+      a(:download="level.uid + '.cytoidlevel'" :href="downloadURL" @click="download")
+        a-button.download-button.ele3(type="primary" size="large")
+          font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
+          span Download #[template(v-if="level.size") ({{formatSize(level.size)}})]
       nuxt-link(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
         v-if="$store.state.user && (level.owner.id === $store.state.user.id)"
@@ -288,6 +285,9 @@ export default {
           break
       }
       return style
+    },
+    downloadURL() {
+      return 'https://api.cytoid.cn/levels/' + this.level.uid + '/package'
     }
   },
   watch: {
@@ -354,16 +354,15 @@ export default {
     formatSize(size) {
       return formatBytes(size)
     },
-    download() {
-      /*
+    download(event) {
       if (this.$store.state.user) {
         global.window.gtag('event', 'download', {
           event_category: 'levels',
           event_label: 'succeed',
           value: this.level.uid
         })
-        window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
       } else {
+        event.preventDefault()
         global.window.gtag('event', 'download', {
           event_category: 'levels',
           event_label: 'rejected-login',
@@ -371,8 +370,6 @@ export default {
         })
         this.$router.push('/session/login')
       }
-      */
-      window.location.href = process.env.apiURL + '/levels/' + this.level.uid + '/package'
     },
     convertedDifficultyName(name) {
       return {
