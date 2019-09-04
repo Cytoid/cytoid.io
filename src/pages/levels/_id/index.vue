@@ -287,7 +287,7 @@ export default {
       return style
     },
     downloadURL() {
-      return 'https://api.cytoid.cn/levels/' + this.level.uid + '/package'
+      return process.env.apiURL + '/levels/' + this.level.uid + '/package'
     }
   },
   watch: {

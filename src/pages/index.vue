@@ -248,22 +248,6 @@ export default {
       })
     }
     setImmediate(loadCrate)
-
-    // Detect region
-    const detect = new Promise((resolve, reject) => {
-      const timeout = setTimeout(reject, 3000)
-      fetch('https://www.googleapis.com/storage/v1')
-        .then(() => {
-          clearTimeout(timeout)
-          resolve()
-        })
-        .catch(reject)
-    })
-
-    detect.catch((err) => {
-      console.log(err)
-      window.alert('// 公告\n\n十分抱歉，目前 CytoidIO 暂时不支持国内 IP 进行以下操作：\n\n    * 注册及登录（游戏内可以正常登录）\n    * 上传关卡。\n我们会在接下来数日尽快修复上述问题，以保证国内玩家的浏览体验。在此期间，建议您使用代理访问 CytoidIO。')
-    })
   },
   destroyed() {
     if (this.styleTweetTimer) {

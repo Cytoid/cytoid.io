@@ -10,6 +10,7 @@ export const state = () => ({
   avatar: null,
   header: null,
   locale: null,
+  country: null,
 })
 export const mutations = {
   setBackground(state, background) {
@@ -32,6 +33,9 @@ export const mutations = {
       this.app.i18n.locale = lang
     }
     Cookies.set('locale', lang, { expires: 3600 * 24 * 14 })
+  },
+  setCountry(state, country) {
+    state.country = country
   }
 }
 export const actions = {

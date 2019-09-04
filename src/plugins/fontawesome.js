@@ -8,7 +8,7 @@ import {
   faSuitcase, faLanguage, faTrash, faStar, faUser, faSpinner, faEnvelope,
   faUpload, faFileArchive, faCheckCircle, faExclamationTriangle, faEyeSlash, faGlobe,
   faPaperPlane, faChevronUp, faChevronLeft, faPlus, faPlay, faPause,
-  faPuzzlePiece, faTimes
+  faPuzzlePiece, faTimes, faChimney,
 } from '@fortawesome/pro-solid-svg-icons'
 import { faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord } from '@fortawesome/free-brands-svg-icons'
 
@@ -24,6 +24,6 @@ export default function () {
     faSuitcase, faLanguage, faTrash, faStar, faUser, faSpinner,
     faEnvelope, faUpload, faFileArchive, faCheckCircle, faExclamationTriangle, faEyeSlash, faGlobe,
     faPaperPlane, faChevronUp, faChevronLeft, faPlus, faPlay, faPause,
-    faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faTimes
+    faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faTimes, faChimney,
   )
 }

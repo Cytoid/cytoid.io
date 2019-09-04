@@ -2,8 +2,28 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
 import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
-import axios from 'axios'
 import { pickLanguage, dateLocales } from '@/utils/i18n'
+
+function countryRedirect(app, country) {
+  return import('ant-design-vue/lib/notification')
+    .then((a) => {
+      const notification = a.default
+      const t = app.i18n.t.bind(app.i18n)
+      notification.warning({
+        message: t('region_unavailable'),
+        description: h => h('p', [
+          t('region_unavailable_content'),
+          h('a', {
+            attrs: { href: 'https://cytoid.cn' },
+          }, [h('a-button', { props: { type: 'danger', block: true } }, 'Visit Cytoid.cn')])
+        ]),
+        duration: 0,
+        icon: h => h('font-awesome-icon', {
+          props: { icon: 'chimney' },
+        })
+      })
+    })
+}
 
 export default function ({ app, store, req }) {
   Vue.use(VueI18n)
@@ -25,6 +45,11 @@ export default function ({ app, store, req }) {
     } else {
       const locale = pickLanguage(window.navigator.userLanguage || window.navigator.language)
       store.commit('setLocale', locale)
+    }
+
+    console.log('Country: ' + store.state.country)
+    if (store.state.country === 'CN') {
+      countryRedirect(app, store.state.country)
     }
   } else if (req) {
     const cookieLocale = req.ctx.cookies.get('locale', { signed: false })
@@ -48,6 +73,9 @@ export default function ({ app, store, req }) {
       resposeLocaleCode += ',en'
     }
     req.ctx.set('Content-Language', resposeLocaleCode)
+
+    // Set country code
+    store.commit('setCountry', req.ctx.get('CF-IPCountry') || null)
   }
 
   Vue.mixin({
