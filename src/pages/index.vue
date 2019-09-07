@@ -162,7 +162,7 @@ export default {
     ])
       .then(([postsResponse, totalLevelsResponse, latestFeaturedLevelResponse, latestRanksResponse]) => {
         return {
-          posts: postsResponse.data.data,
+          posts: postsResponse.data.data.filter(it => it.published),
           totalLevels: parseInt(totalLevelsResponse.headers['x-total-entries']),
           latestFeaturedLevel: latestFeaturedLevelResponse.data.length > 0 ? latestFeaturedLevelResponse.data[0] : null,
           latestRanks: latestRanksResponse.data.slice(0, 10)
