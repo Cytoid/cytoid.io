@@ -17,6 +17,7 @@ export const mutations = {
     state.background.source = background?.source
     state.background.overlayOpacity = background?.overlayOpacity || 0.5
     state.background.parallaxSpeed = background?.parallaxSpeed || 0.2
+    state.background.landing = background?.landing || false
   },
   setUser(state, user) {
     state.user = user

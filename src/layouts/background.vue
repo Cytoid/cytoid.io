@@ -6,7 +6,8 @@ div
   )
     img.background-image(
       v-show="loaded"
-      :style="{filter: `brightness(${1 - this.background.overlayOpacity})` }"
+      :class="{landing: background.landing}"
+      :style="{filter: background.landing ? `none` : `brightness(${1 - this.background.overlayOpacity})` }"
       :src="background.source"
       @load="animateBackground"
     )
@@ -37,18 +38,22 @@ export default {
   methods: {
     animateBackground() {
       this.loaded = true
+      console.log(this.background)
     }
   }
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .background-container {
   position: absolute;
   width: 100%;
   z-index: 0;
   overflow: hidden;
   transition: 0.4s @hoverEasing;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .background-image {
@@ -57,6 +62,39 @@ export default {
   max-height: 100vh;
   animation: scale-down-center 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
   object-fit: cover;
+  &.landing {
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 768px) {
+  .background-image.landing {
+    min-height: unset;
+    max-height: unset;
+    width: 640px;
+    margin-left: 420px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 992px) {
+  .background-image.landing {
+    min-height: unset;
+    max-height: unset;
+    width: 740px;
+    margin-left: 460px;
+    margin-top: 60px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .background-image.landing {
+    min-height: unset;
+    max-height: unset;
+    width: 880px;
+    margin-left: 520px;
+    margin-top: 40px;
+  }
 }
 
 @keyframes scale-down-center {
@@ -69,6 +107,7 @@ export default {
     transform: scale(1);
   }
 }
+
 .background-fade-out {
   position: absolute;
   bottom: 0;
