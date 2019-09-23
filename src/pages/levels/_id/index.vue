@@ -82,9 +82,9 @@
               template(v-slot:rank="ranking") {{ '#' + ranking }}
               template(slot="owner" slot-scope="text, record")
                 .ranking-player-avatar(style="padding-right: 32px;")
-                  nuxt-link(:to="'/profile/' + (record.owner.uid)" style="display: flex; align-items: center;")
+                  nuxt-link(:to="{name: 'profile-id', params: { id: record.owner.uid || record.owner.id }}" style="display: flex; align-items: center;")
                     avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL" fixed)
-                    span.ranking-player-avatar-name(v-text="record.owner.uid")
+                    span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
               template(v-slot:score="score")
                 div(style="display: flex; align-items: center;")
                   score-badge(:value="score")
@@ -261,7 +261,7 @@ export default {
   }),
   head() {
     const meta = new Meta(this.level.title, this.level.description)
-    meta.extend('author', this.level.owner.uid)
+    meta.extend('author', this.level.owner.name || this.level.owner.uid)
     meta.extend('og:image', this.level.bundle.background)
     return meta
   },
