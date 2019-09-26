@@ -31,7 +31,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes='64x64' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,700,700i&display=swap' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400&display=swap' }
     ],
@@ -48,10 +48,9 @@ module.exports = {
   meta: {
     theme_color: 'hsla(226, 15%, 14%, 1)',
     nativeUI: true,
-    appleStatusBarStyle: 'black-translucent',
   },
   icon: {
-    iconSrc: '~assets/images/icon.png',
+    iconSrc: './src/assets/images/icon.png',
   },
 
   /*
@@ -103,6 +102,7 @@ module.exports = {
     '~modules/generate.js',
     '~modules/i18n.js'
   ],
+
   /*
   ** Axios module configuration
   */
