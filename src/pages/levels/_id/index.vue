@@ -16,7 +16,7 @@
           span Download #[template(v-if="level.size") ({{formatSize(level.size)}})]
       nuxt-link(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
-        v-if="$store.state.user && (level.owner.id === $store.state.user.id)"
+        v-if="$store.state.user && (level.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
       )
         a-button.ele3(
           type="default"
@@ -25,6 +25,9 @@
         )
           font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
           span Manage
+    .notification.is-warning(v-if="level.published === false") This level was made private by its owner. It is invisible to the users.
+    .notification.is-primary(v-if="level.published === null") This level is unlisted.
+    .notification.is-danger(v-if="level.censored") This level was censored for: {{level.censored}}
     a-row(:gutter="16")
       a-col(:xs="24" :lg="8")
         a-card(class="ele3" style="margin-bottom: 16px;")

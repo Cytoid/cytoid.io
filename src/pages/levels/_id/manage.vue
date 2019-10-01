@@ -30,7 +30,8 @@ export default {
     return $axios.get('/levels/' + params.id)
       .then((res) => {
         const level = res.data
-        if (level.owner.id !== store.state.user?.id) {
+        const user = store.state.user
+        if (level.owner.id !== user?.id && !(user?.role === 'admin' || user?.role === 'moderator')) {
           error({ statusCode: 403, message: "You don't have the permission to edit this level!" })
           return
         }

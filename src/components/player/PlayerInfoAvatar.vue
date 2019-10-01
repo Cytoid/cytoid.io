@@ -45,6 +45,7 @@ export default {
 .player-info-avatar {
   display: inline-block;
   position: relative;
+  user-select: none;
   .level-avatar {
     width: @level-size;
     height: @level-size;

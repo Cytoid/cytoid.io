@@ -1,16 +1,16 @@
 <template lang="pug">
 .navcard
-  div(v-if="header")
-    img.navcard-header(:src="$img(header, { maxHeight: 1024 })")
-    div.navcard-header(style="position: absolute; margin-top: -356px; background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1)); opacity: 0.5;")
-  div.navcard-header(v-else style="background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1))")
-  div.navcard-avatar
-    player-info-avatar(
-      :exp="exp"
-      :avatar="$store.state.avatar"
-      :rating="rating"
-    )
-  div.navcard-uid(v-text="user.uid" style="position: relative; z-index: 2;")
+  .navcard-header(:style="{'background-image': `url(${$img(header, { maxHeight: 1024 })})`}")
+    .navcard-header-mask(:style="{ opacity: header ? '.5' : null }")
+    .navcard-avatar
+      player-info-avatar(
+        :exp="exp"
+        :avatar="$store.state.avatar"
+        :rating="rating"
+      )
+    .navcard-uid(v-if="roleIcon")
+      font-awesome-icon(:icon="roleIcon")
+    .navcard-uid(v-text="user.uid || user.name")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['fas', 'user']")
@@ -44,8 +44,15 @@ export default {
   },
   computed: {
     ...mapState(['header', 'user']),
+    roleIcon() {
+      return {
+        moderator: 'user-tie',
+        admin: 'user-cog'
+      }[this.user.role]
+    }
   },
   mounted() {
+    console.log('hello? anyone?', this.user)
     if (this.user && !this.header) {
       this.$axios.get('/profile/' + this.user.id)
         .then((res) => {
@@ -73,32 +80,40 @@ export default {
 </script>
 
 <style lang="less">
-@header-height: 292px;
-@icon-size: 24px;
-@avatar-size: 128px;
 .navcard {
+  user-select: none;
   background-color: #fff;
   width: 80vw;
   max-width: 330px;
-  position: relative;
   .navcard-header {
     width: 100%;
-    height: @header-height;
-    margin-bottom: @avatar-size / 2;
-    object-fit: cover;
-    object-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 36px;
+    position: relative;
+    .navcard-header-mask {
+      right: 0;
+      bottom: 0;
+      left: 0;
+      top: 0;
+      position: absolute;
+      background: linear-gradient(to right bottom, hsla(226, 68%, 57%, 1), hsla(226, 68%, 67%, 1));
+    }
   }
   .navcard-avatar {
-    position: absolute;
-    left: calc(50% - @avatar-size / 2);
-    top: @avatar-size / 2;
+    text-align: center;
+    padding: 40px 20px;
+    z-index: 1;
+    position: relative;
   }
   .navcard-uid {
     color: white;
     text-shadow: @text-ele;
-    margin-top: -128px;
     text-align: center;
     font-size: 24px;
+    z-index: 1;
+    position: relative;
   }
   .navcard-grid {
     display: grid;
@@ -118,8 +133,8 @@ export default {
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: @icon-size;
-        height: @icon-size;
+        width: 24px;
+        height: 24px;
         :before {
           background: -webkit-gradient(linear, left top, left bottom, from(#f00), to(#333));
           -webkit-background-clip: text;

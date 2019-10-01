@@ -9,8 +9,11 @@ import {
   faUpload, faFileArchive, faCheckCircle, faExclamationTriangle, faEyeSlash, faGlobe,
   faPaperPlane, faChevronUp, faChevronLeft, faPlus, faPlay, faPause,
   faPuzzlePiece, faTimes, faChimney,
+  faUserCog, faUserTie
 } from '@fortawesome/pro-solid-svg-icons'
-import { faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord } from '@fortawesome/free-brands-svg-icons'
+import {
+  faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord,
+} from '@fortawesome/free-brands-svg-icons'
 
 export default function () {
   config.autoAddCss = false
@@ -25,5 +28,6 @@ export default function () {
     faEnvelope, faUpload, faFileArchive, faCheckCircle, faExclamationTriangle, faEyeSlash, faGlobe,
     faPaperPlane, faChevronUp, faChevronLeft, faPlus, faPlay, faPause,
     faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faTimes, faChimney,
+    faUserCog, faUserTie,
   )
 }
