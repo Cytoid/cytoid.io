@@ -1,6 +1,7 @@
 <template lang="pug">
+div
   a-card.ele3
-    a-form(:form="form" @submit.prevent="submit")
+    a-form(:form="form" @submit.prevent="submit(form)")
       p.heading Description
       a-form-item
         client-only: markdown-editor(v-model="form.description")
@@ -23,7 +24,28 @@
       )
         font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
         | Save
-
+  a-card.ele3(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
+    p.heading Censorship
+    a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
+      a-input(v-model="adminForm.censored")
+      template(slot="extra") Input anything here, and the level will be invisible to the users.
+    p.heading Category
+    a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
+      a-select(
+        mode="multiple"
+        :style="{ width: '100%' }"
+        v-model="adminForm.category"
+      )
+        a-select-option(key="featured") Featured
+    a-button.card-button(
+      block
+      :loading="loading"
+      style="margin-top: 2rem;"
+      @click="submit(adminForm)"
+      size="large"
+    )
+      font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
+      | Save
 </template>
 
 <script>
@@ -50,6 +72,10 @@ export default {
         description: this.value.description,
         published: this.value.published,
       },
+      adminForm: {
+        censored: this.value.censored,
+        category: this.value.category,
+      }
     }
   },
   computed: {
@@ -63,9 +89,12 @@ export default {
     }
   },
   methods: {
-    submit() {
+    submit(form) {
+      if (form.censored === '') {
+        form.censored = null
+      }
       this.loading = true
-      this.$axios.patch('/levels/' + this.value.uid, this.form)
+      this.$axios.patch('/levels/' + this.value.uid, form)
         .then(() => {
           this.$message.success('Level Listing Saved')
         })
