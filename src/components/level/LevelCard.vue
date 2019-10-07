@@ -47,7 +47,7 @@ export default {
           this.$img(this.value.bundle.background, {
             width: 960,
             height: 600,
-            mode: 'crop',
+            mode: 'fill',
           })
         })`,
       }

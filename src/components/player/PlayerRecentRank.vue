@@ -6,7 +6,7 @@
   )
     .recent-rank-background(
       v-if="rank.backgroundURL"
-      :style="{ 'background-image': 'url(' + $img(rank.backgroundURL, { height: 100, width: 500, mode: 'crop' }) + ')', 'background-size': 'cover' }"
+      :style="{ 'background-image': 'url(' + $img(rank.backgroundURL, { height: 100, width: 500, mode: 'fill' }) + ')', 'background-size': 'cover' }"
     )
     .recent-rank-overlay
     div(v-if="showPlayer" style="margin-bottom: 8px; width: 100%; position: relative; z-index: 2;")

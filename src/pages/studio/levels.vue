@@ -28,7 +28,7 @@
           div(style="display: flex; flex-direction: row;")
             nuxt-link.level-thumbnail(:to="{name: 'levels-id', params: { id: level.uid }}")
               img(
-                :src="$img(level.bundle.background, { width: 128, height: 80, mode: 'crop' })"
+                :src="$img(level.bundle.background, { width: 128, height: 80, mode: 'fill' })"
                 style="width: 128px; height: 80px; object-fit: cover; border-radius: 4px;"
               )
             div(style="margin-left: 8px")
