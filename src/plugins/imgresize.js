@@ -4,22 +4,13 @@ const URL = process.server ? require('url').URL : window.URL
 
 const keyMappings = {
   // https://docs.imgix.com/apis/url/size/crop
-  // top, bottom, left, right, faces, focalpointt, edges, entropy
-  cropMode: 'crop',
-
-  // https://docs.imgix.com/apis/url/size/fit
-  // clamp, clip, crop, facearea, fill, fillmax, max, min, scale
-  fitMode: 'fit',
+  // top, bottom, left, right, faces, focalpoint, edges, entropy
+  mode: 'rt',
 
   // https://docs.imgix.com/apis/url/size/h
   height: 'h',
   width: 'w',
-  maxHeight: 'max-h',
-  maxWidth: 'max-w',
-  minHeight: 'min-h',
-  minWidth: 'min-w',
-  brightness: 'bri',
-  format: 'fm'
+  format: 'format',
 }
 
 const ImageURL = new URL(process.env.imageURL)
@@ -38,6 +29,7 @@ function resize(path, options) {
       url.searchParams.append(urlKey, options[key].toString())
     }
   }
+  url.searchParams.append('g', 'sm') // default to smart gravity
   return url.href
 }
 

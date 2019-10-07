@@ -76,10 +76,8 @@ export default {
     },
     bgStyle(level) {
       const attrs = {
-        maxHeight: 54,
-        fitMode: 'crop',
-        cropMode: 'entropy',
-        brightness: -20,
+        height: 54,
+        mode: 'crop',
       }
       const url = this.$img(level.bundle.background, attrs)
       return { backgroundImage: `url(${url})` }

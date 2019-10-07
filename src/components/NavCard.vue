@@ -1,6 +1,6 @@
 <template lang="pug">
 .navcard
-  .navcard-header(:style="{'background-image': `url(${$img(header, { maxHeight: 1024 })})`}")
+  .navcard-header(:style="{'background-image': `url(${$img(header, { height: 1024 })})`}")
     .navcard-header-mask(:style="{ opacity: header ? '.5' : null }")
     .navcard-avatar
       player-info-avatar(
