@@ -46,11 +46,12 @@ export default function ({ app, store, req }) {
       const locale = pickLanguage(window.navigator.userLanguage || window.navigator.language)
       store.commit('setLocale', locale)
     }
-
+    /*
     console.log('Country: ' + store.state.country)
     if (store.state.country === 'CN') {
       countryRedirect(app, store.state.country)
     }
+    */
   } else if (req) {
     const cookieLocale = req.ctx.cookies.get('locale', { signed: false })
     if (cookieLocale) {

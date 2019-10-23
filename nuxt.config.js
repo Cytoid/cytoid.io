@@ -80,6 +80,7 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/ga' },
+    { src: '~plugins/dummy_captcha' },
     { src: '~plugins/antd' },
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
@@ -96,9 +97,6 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
-    ['nuxt-recaptcha-v2', {
-      key: config.get('captchaKey'),
-    }],
     '~modules/generate.js',
     '~modules/i18n.js'
   ],
