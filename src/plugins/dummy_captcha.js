@@ -25,6 +25,11 @@ const component = {
   },
 }
 
+function execute() {
+  return Promise.resolve('fuckccp')
+}
+
 export default function (_, inject) {
   Vue.component('captcha', component)
+  inject('captcha', execute)
 }
