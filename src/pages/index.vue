@@ -243,8 +243,8 @@ export default {
       // eslint-disable-next-line no-undef
       self.$store.crate = new Crate({
         server: '362884768498712579',
-        channel: '362884769333248001',
-        shard: 'https://disweb.deploys.io'
+        channel: '639711683568467969',
+        shard: 'https://disweb.dashflo.net'
       })
     }
     setImmediate(loadCrate)
