@@ -1,11 +1,10 @@
 <template lang="pug" functional>
 footer.container.footer.has-text-centered
   ul
-    li: a(href="/legal/dmca") DMCA
-    li: a(href="/legal/terms") Terms & Services
+    li: nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }") DMCA
+    li: nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") Terms & Services
     li: a(href="https://github.com/Cytoid/") Status
     li: a(href="https://github.com/Cytoid/") GitHub
-    li Glory Wall
     li
       a-dropdown(:trigger="['click']")
         a.ant-dropdown-link
