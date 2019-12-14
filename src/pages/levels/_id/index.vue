@@ -10,7 +10,7 @@
     div(style="margin-bottom: 48px;")
       difficulty-badge(v-for="chart in level.charts" :key="chart.id" :value="chart" class="ele3" style="margin-right: 8px;")
     div(style="margin-bottom: 32px;")
-      a(:download="level.uid + '.cytoidlevel'" :href="downloadURL" @click="download")
+      a(:href="downloadURL" @click="download")
         a-button.download-button.ele3(type="primary" size="large")
           font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
           span Download #[template(v-if="level.size") ({{formatSize(level.size)}})]
