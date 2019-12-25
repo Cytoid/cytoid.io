@@ -1,0 +1,33 @@
+User-agent: Googlebot
+Disallow: /session
+Disallow: /studio
+Disallow: /settings
+
+User-agent: Googlebot-Image
+Disallow: /session
+Disallow: /studio
+Disallow: /settings
+
+User-agent: Baiduspider-news
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /session
+Disallow: /studio
+Disallow: /settings
+
+User-agent: Baiduspider-image
+Disallow: /session
+Disallow: /studio
+Disallow: /settings
+
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: *
+Request-rate: 1/15
+Crawl-delay: 15
+Disallow: /session
+Disallow: /studio
+Disallow: /settings
