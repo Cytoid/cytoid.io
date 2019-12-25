@@ -171,8 +171,9 @@ export default {
           })
           .catch((error) => {
             this.loading = false
-            this.$captcha.reset()
-            this.captchaToken = null
+            // this.$captcha.reset()
+            // this.captchaToken = null
+            // For temp disabled captcha
             this.form.resetFields(['password'])
             if (error.response && error.response.status === 401) {
               this.$message.error('Username or password mismatch!')

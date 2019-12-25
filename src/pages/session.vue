@@ -15,6 +15,11 @@
 export default {
   layout: 'background',
   background: require('@/assets/images/session.jpg'),
+  fetch({ route, redirect }) {
+    if (route.fullPath === '/session') {
+      redirect('/session/login')
+    }
+  },
 }
 </script>
 
