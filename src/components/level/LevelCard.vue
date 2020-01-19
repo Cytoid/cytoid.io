@@ -7,16 +7,16 @@
       difficulty-badge.ele3(v-for="chart in value.charts" :key="chart.id" :value="chart" :ball="true" :name="false" style="margin-right: 4px;")
     .card-bottom
       .info-text
-        p.artist(v-text="value.metadata.artist && value.metadata.artist.name")
+        p.artist(v-text="value.metadata && value.metadata.artist && value.metadata.artist.name")
         h1.title(v-text="value.title")
-        p.title-localized(v-if="value.metadata.title_localized" v-text="value.metadata.title_localized")
+        p.title-localized(v-if="value.metadata && value.metadata.title_localized" v-text="value.metadata.title_localized")
         nuxt-link.profile-link(
           v-if="value.owner"
           :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"
         )
           avatar(:size="24" fixed :src="value.owner.avatarURL" style="margin-right: 8px;")
           span(v-text="value.owner.name || value.owner.uid")
-      play-button(:src="value.bundle.music_preview")
+      play-button(v-if="value.bundle && value.bundle.music" :src="value.bundle.music_preview")
 </template>
 
 <script>
@@ -42,15 +42,17 @@ export default {
   }),
   computed: {
     cardBgImage() {
-      return {
-        backgroundImage: `url(${
+      const styles = {}
+      if (this.value.bundle && this.value.bundle.background) {
+        styles.backgroundImage = `url(${
           this.$img(this.value.bundle.background, {
             width: 960,
             height: 600,
             mode: 'fill',
           })
-        })`,
+        })`
       }
+      return styles
     },
   },
 }

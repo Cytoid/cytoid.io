@@ -18,6 +18,7 @@
     "@fortawesome/pro-regular-svg-icons": "^5.8.2",
     "@fortawesome/pro-solid-svg-icons": "^5.8.2",
     "@fortawesome/vue-fontawesome": "^0.1.6",
+    "@nuxtjs/apollo": "^4.0.0-rc19",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "3.0.0-beta.16",
     "@nuxtjs/style-resources": "^0.1.1",

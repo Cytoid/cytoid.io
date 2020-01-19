@@ -95,6 +95,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/apollo',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '~modules/generate.js',
@@ -109,6 +110,37 @@ module.exports = {
     browserBaseURL: config.get('apiURLClient'),
     progress: true,
     credentials: true,
+  },
+  apollo: {
+    tokenName: 'cytoid:graph',
+    cookieAttributes: {
+      expires: 7,
+      path: '/',
+      domain: 'cytoid.io',
+      secure: true,
+    },
+    includeNodeModules: false,
+    authenticationType: 'Bearer',
+    defaultOptions: {
+      // See 'apollo' definition
+      // For example: default query options
+      $query: {
+        loadingKey: 'loading',
+        fetchPolicy: 'cache-and-network',
+      },
+    },
+    clientConfigs: {
+      default: {
+        httpEndpoint: config.get('apiURLServer') + '/graph',
+        browserHttpEndpoint: config.get('apiURLClient') + '/graph',
+        httpLinkOptions: {
+          credentials: 'include'
+        },
+        wsEndpoint: null,
+        persisting: true,
+        websocketsOnly: false
+      },
+    }
   },
   router: {
     linkExactActiveClass: 'is-exact-active',

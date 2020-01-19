@@ -22,7 +22,7 @@ function resize(path, options) {
   }
   const url = new URL(path, process.env.webURL)
   url.host = ImageHost
-
+  url.port = ''
   for (const key in options) {
     const urlKey = keyMappings[key]
     if (urlKey) {

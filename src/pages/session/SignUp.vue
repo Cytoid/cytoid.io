@@ -100,7 +100,10 @@
             }
           ]"
         >
-          I agree to Cytoid's <nuxt-link :to="{ name: 'legal-id', params: { id: 'terms' } }">terms of services.</nuxt-link>
+          I agree to Cytoid's&nbsp;
+          <nuxt-link :to="{ name: 'legal-id', params: { id: 'terms' } }">
+            terms of services.
+          </nuxt-link>
         </a-checkbox>
       </a-form-item>
       <captcha theme="dark" :token.sync="captchaToken" />

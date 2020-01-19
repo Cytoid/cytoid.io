@@ -77,7 +77,7 @@ export default function ({ store, $axios, error }) {
       },
       handleErrorToast(err) {
         this.$message.error(getMessage(err))
-      }
+      },
     }
   })
 }
