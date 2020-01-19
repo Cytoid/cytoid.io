@@ -35,10 +35,14 @@ export default {
       'background',
     ]),
     backgroundURL() {
-      const url = new URL(this.background.source, process.env.webURL)
-      url.host = ImageHost
-      url.port = ''
-      return url.href
+      const source = this.background.source
+      if (source.startsWith('https://') || source.startsWith('http://')) {
+        return source
+      } else {
+        const url = new URL(this.background.source, process.env.webURL)
+        url.host = ImageHost
+        return url.href
+      }
     }
   },
   watch: {
