@@ -1,7 +1,10 @@
-<template lang="pug">
-  nuxt-link.player-avatar(:to="{ name: 'profile-id', params: { id: player.uid || player.id } }")
-    avatar(:size="64" :src="player.avatarURL" fixed)
-    span(v-text="player.name || player.uid" class="player-avatar-name")
+<template functional lang="pug">
+  nuxt-link.player-avatar(
+    :class="data.staticClass"
+    :style="data.staticStyle"
+    :to="{ name: 'profile-id', params: { id: props.player.uid || props.player.id } }")
+    avatar(:size="64" :src="props.player.avatarURL" fixed)
+    span.player-avatar-name(v-text="props.player.name || props.player.uid")
 </template>
 
 <script>
@@ -15,7 +18,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .player-avatar {
   display: inline-block;
   transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);

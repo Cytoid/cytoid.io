@@ -16,13 +16,6 @@ export default {
     }
   },
   asyncData({ $axios }) {
-    return $axios.get('/collections')
-      .then((response) => {
-        const collections = response.data
-        return {
-          collections
-        }
-      })
   }
 }
 </script>

@@ -48,7 +48,7 @@
               a(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()")
                 a-tag {{ tag }}
           .card-heading Last updated
-          .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
+          .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         a-card(class="ele3" style="margin-bottom: 16px;")
           p(class="card-heading") Music
           p(class="card-em-text" style="margin-bottom: 4px;" v-if="level.metadata.artist") {{ level.metadata.artist.name }}

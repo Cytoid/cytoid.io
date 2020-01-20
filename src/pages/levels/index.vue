@@ -27,7 +27,7 @@
         a-radio-group(:value="filters.category" @change="handleFilterSelector")
           a-radio-button(value="all") All
           a-radio-button(value="featured") Featured
-    .level-card-container.large
+    .level-card-container.large(style="margin-top: 16px; margin-bottom: 16px;")
       level-card(v-for="level in levels" :key="level.id" :value="level")
     a-pagination(
       :disabled="loading"
