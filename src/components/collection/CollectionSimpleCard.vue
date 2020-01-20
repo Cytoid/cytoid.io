@@ -1,5 +1,5 @@
 <template functional lang="pug">
-.card-wrap
+.card-wrap(v-if="props.value")
   nuxt-link.card(:to="{ name: 'collections-id', params: { id: props.value.uid } }")
     .card-bg(:style="{backgroundImage: `url(${parent.$img(props.value.coverPath, { height: 500 })})`}")
     .card-content

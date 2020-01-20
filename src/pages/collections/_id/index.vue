@@ -20,8 +20,8 @@
       a-card(class="ele3" style="margin-bottom: 16px;")
         template(v-if="collection.metadata.cover")
           p.card-heading Cover art
-          p.card-em-text(style="margin-bottom: 4px;" v-text="collection.metadata.cover.artist")
-          a(v-if="collection.metadata.cover.source" :href="collection.metadata.cover.source")
+          p.card-em-text(style="margin-bottom: 4px;" v-text="collection.metadata.cover.name")
+          a(v-if="collection.metadata.cover.url" :href="collection.metadata.cover.url")
             a-button.card-button
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
@@ -65,14 +65,22 @@ const query = gql`query FetchCollection($uid: String!) {
         name
         avatarURL
       }
+      metadata {
+        title_localized
+        artist {
+          name
+        }
+      }
       bundle {
         background: backgroundImage
+        music
+        music_preview: musicPreview
       }
     }
     metadata {
       cover {
-        artist
-        source
+        name
+        url
       }
     }
   }
