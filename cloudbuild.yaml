@@ -41,3 +41,4 @@ steps:
   - 'managed'
 images:
   - gcr.io/$PROJECT_ID/ssr
+timeout: 1200s

@@ -2,7 +2,7 @@
 .container(v-if="collection")
   section.section.header-container
     h1.text-ele(v-text="collection.title")
-    h3.text-ele(v-text="collection.brief")
+    h3.text-ele(v-text="collection.slogan")
   .columns
     .column
       a-card.ele3(style="margin-bottom: 16px;")
@@ -42,7 +42,7 @@ const query = gql`query FetchCollection($uid: String!) {
     id
     uid
     title
-    brief
+    slogan
     description
     creationDate
     modificationDate

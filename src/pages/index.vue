@@ -21,8 +21,8 @@
               font-awesome-icon(:icon="['fab', 'google-play']" fixed-width style="margin-right: .5rem; font-size: 20px;")
               span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on Google Play
     .section: .container(style="margin-top: -10vh;")
-      a-row(:gutter="16")
-        a-col(:xs="24" :md="14" :lg="16")
+      .columns
+        .column.is-two-thirds-desktop.is-three-fifths-tablet
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to top left, #B06AB3, #4568DC); max-width: 256px;")
             div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
@@ -34,7 +34,13 @@
                   a-button.card-button(style="width: 100%;")
                     font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                     span View previous news
-        a-col(:xs="24" :md="10" :lg="8")
+        .column.is-one-third-desktop.is-two-fifths-tablet
+          a-card.ele3.gradient-card(v-if="data" style="margin-bottom: 16px;")
+            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #acb6e5, #86fde8); max-width: 256px;")
+            div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
+            div(style="position: relative; z-index: 2; margin: 12px;")
+              p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Featured Collection
+              collection-simple-card(:value="data.gettingStarted")
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #b91d73, #f953c6); max-width: 256px;")
             div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
@@ -48,8 +54,9 @@
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold;"
             )
               | Browse all {{ totalLevels }} levels!
-      a-row(:gutter="16")
-        a-col(:xs="24" :md="12" :lg="8")
+      collection-preview-card(v-if="data" :value="data.hitech")
+      .columns
+        .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Recent ranks
           player-recent-rank(
             v-for="rank in latestRanks"
@@ -58,7 +65,7 @@
             :showPlayer="true"
             style="margin: 8px 0;"
           )
-        a-col(:xs="24" :md="12" :lg="8")
+        .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
           a-spin(:spinning="loadingTweet" style="min-height: 128px;")
             p(v-show="loadTweetFailed") Cannot fetch latest tweet.
@@ -72,7 +79,7 @@
               :comment="comment"
               style="margin: 8px 0;"
             )
-        a-col(:xs="24" :md="12" :lg="8")
+        .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Connect
           a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
             div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #7289DA, #7289DA); max-width: 256px;")
@@ -119,10 +126,53 @@
 
 <script>
 import { Tweet } from 'vue-tweet-embed'
+import gql from 'graphql-tag'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import PlayerRecentComment from '@/components/player/PlayerRecentComment'
 import PostCard from '@/components/post/PostCard'
 import LevelCard from '@/components/level/LevelCard'
+import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
+import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
+
+const query = gql`
+query FetchHomePage {
+  gettingStarted: collection(uid: "getting-started") {
+    ...CollectionInfoFragment
+    levelCount
+  }
+  hitech: collection(uid: "hi-tech") {
+    ...CollectionInfoFragment
+    levels(limit: 5) {
+      id
+      uid
+      title
+      owner {
+        id
+        uid
+        name
+        avatarURL
+      }
+      bundle {
+        background: backgroundImage
+      }
+    }
+  }
+}
+
+fragment CollectionInfoFragment on Collection {
+  id
+  uid
+  title
+  slogan
+  coverPath
+  owner {
+    id
+    uid
+    name
+    avatarURL
+  }
+}
+`
 
 export default {
   layout: 'background',
@@ -131,11 +181,19 @@ export default {
     PlayerRecentComment,
     PostCard,
     LevelCard,
+    CollectionPreviewCard,
+    CollectionSimpleCard,
     Tweet
   },
   background: {
     source: require('@/assets/images/cryout.jpg'),
     landing: true
+  },
+  apollo: {
+    data: {
+      query,
+      update: data => data,
+    }
   },
   data() {
     return {

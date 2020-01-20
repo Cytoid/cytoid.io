@@ -108,8 +108,6 @@ p {
     right: 0;
     bottom: 0;
     z-index: 0;
-    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
-    background-blend-mode: overlay;
     cursor: default;
   }
   .card-bg {
