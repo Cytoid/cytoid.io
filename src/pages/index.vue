@@ -152,8 +152,16 @@ query FetchHomePage {
         name
         avatarURL
       }
+      metadata {
+        title_localized
+        artist {
+          name
+        }
+      }
       bundle {
         background: backgroundImage
+        music
+        music_preview: musicPreview
       }
     }
   }

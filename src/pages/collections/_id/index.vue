@@ -76,6 +76,12 @@ const query = gql`query FetchCollection($uid: String!) {
         music
         music_preview: musicPreview
       }
+      charts {
+        type
+        difficulty
+        name
+        notesCount
+      }
     }
     metadata {
       cover {
