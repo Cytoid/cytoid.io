@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    div.container.logo
+    .container.logo
       img(:src="require('@/assets/images/logo.png')")
       .slogan A community-driven touchscreen music game
       .download-button-group
@@ -367,23 +367,21 @@ export default {
   }
 </style>
 
-<style lang="less">
-  .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 70vh;
+<style scoped lang="less">
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
 
-    img {
-      max-width: 400px;
-    }
-
-    @media (min-width: 768px) {
-      align-items: start;
-    }
+  img {
+    max-width: 400px;
   }
 
+  @media (min-width: 768px) {
+    align-items: start;
+  }
   .slogan {
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
     font-size: 16px;
@@ -391,7 +389,19 @@ export default {
       margin-left: 24px;
     }
   }
+}
+.download-button-group {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  @media(min-width: 768px) {
+    flex-direction: row;
+  }
+}
+</style>
 
+<style lang="less">
   .gradient-card .ant-card-body {
     padding: 0;
   }
@@ -405,15 +415,5 @@ export default {
 
   .post-card, .level-card {
     margin-bottom: 12px;
-  }
-
-  .download-button-group {
-    margin-top: 24px;
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    @media(min-width: 768px) {
-      flex-direction: row;
-    }
   }
 </style>

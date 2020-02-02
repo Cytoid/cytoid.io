@@ -1,8 +1,6 @@
 <template lang="pug">
 .collection-dock.columns
-  nuxt-link.collection-dock-intro.column.is-one-third-desktop.is-two-fifths-tablet(
-    :to="{ name: 'collections-id', params: { id: value.uid } }"
-  )
+  .collection-dock-intro.column.is-one-third-desktop.is-two-fifths-tablet
     .collection-intro-bg(
       v-if="value.coverPath"
       :style="{ backgroundImage: `url(${$img(value.coverPath, { height: 500 })})` }")

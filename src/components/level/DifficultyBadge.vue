@@ -1,13 +1,6 @@
-<template lang="pug">
-  a-popover(placement="top" title="")
-    p(slot="content" style="margin-bottom: 0; padding: 8px 16px; color: hsla(226, 68%, 6%, 1);") {{value.notesCount}} notes
-    .difficulty-badge(:class="badgeClass")
-      span.title(v-if="!ball" v-text="value.name || convertedDifficultyName(value.type)")
-      span.level {{convertedDifficultyLevel}}
-</template>
-
 <script>
 export default {
+  functional: true,
   props: {
     value: {
       type: Object,
@@ -22,38 +15,47 @@ export default {
       default: () => false,
     }
   },
-  computed: {
-    badgeClass() {
-      return {
-        badge: !this.ball,
-        ball: this.ball,
-        small: this.small,
-        easy: this.value.type === 'easy',
-        hard: this.value.type === 'hard',
-        extreme: this.value.type === 'extreme',
-      }
-    },
-    convertedDifficultyLevel() {
-      const str = (this.small || this.ball) ? '' : 'Lv. '
-      if (this.value.difficulty <= 0) return str + '?'
-      if (this.value.difficulty >= 16) return str + '15+'
-      return str + this.value.difficulty
-    },
-  },
-  methods: {
-    convertedDifficultyName(name) {
+  render(h, context) {
+    const value = context.props.value
+    const small = context.props.small
+    const ball = context.props.ball
+
+    let str = (small || ball) ? '' : 'Lv. '
+    if (value.difficulty <= 0) str += '?'
+    if (value.difficulty >= 16) str += '15+'
+    else str += value.difficulty
+
+    const classes = {
+      badge: !ball,
+      ball: ball,
+      small: small,
+      easy: value.type === 'easy',
+      hard: value.type === 'hard',
+      extreme: value.type === 'extreme',
+      'difficulty-badge': true,
+      ...context.style,
+    }
+    function convertedDifficultyName(name) {
       return {
         easy: 'Easy',
         hard: 'Hard',
         extreme: 'EX',
       }[name]
     }
+    return (<a-popover placement="top" title="" {...context.data}>
+      <p slot="content" style="margin-bottom: 0; padding: 8px 16px; color: hsla(226, 68%, 6%, 1);">{value.notesCount} notes</p>
+      <div class={classes}>
+        {!context.props.ball && <span class="title">{value.name || convertedDifficultyName(value.type)}</span>}
+        <span class="level">{str}</span>
+      </div>
+    </a-popover>)
   },
 }
 </script>
 
 <style lang="scss">
   .difficulty-badge {
+    user-select: none;
     &.badge {
       display: inline-flex;
       align-items: center;
