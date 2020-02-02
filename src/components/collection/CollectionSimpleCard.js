@@ -12,7 +12,7 @@ export default {
     const owner = context.props.value.owner
     const slots = {
       top: () => <span class="tag is-white is-light">{context.props.value.levelCount} levels</span>,
-      bottom: () => (<div class="info">
+      bottom: () => (<div>
         <h2 class="subtitle">{context.props.value.slogan}</h2>
         <h1 class="title">{context.props.value.title}</h1>
         {owner &&

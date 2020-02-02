@@ -28,7 +28,7 @@
             div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
             div(style="position: relative; z-index: 2; margin: 12px;")
               p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Cytoid News
-              post-card.post-card(v-for="post in posts" :key="post.slug" :post="post")
+              post-card.post-card(v-for="post in posts" :key="post.slug" :value="post")
               div(v-show="false")
                 nuxt-link(:to="{ name: 'posts' }")
                   a-button.card-button(style="width: 100%;")
@@ -399,6 +399,13 @@ export default {
     flex-direction: row;
   }
 }
+.post-card {
+  margin-bottom: 12px;
+  padding-top: 37.5%;
+  @media(min-width: 1024px) {
+    padding-top: 22.5%;
+  }
+}
 </style>
 
 <style lang="less">
@@ -411,9 +418,5 @@ export default {
     width: 100%;
     height: 100%;
     border-radius: 4px;
-  }
-
-  .post-card, .level-card {
-    margin-bottom: 12px;
   }
 </style>

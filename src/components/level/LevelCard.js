@@ -24,7 +24,7 @@ export default {
           ball={true}
           name={false} />
       )),
-      bottom: () => (<div class="info">
+      bottom: () => (<div>
         {artist && <h2 class="subtitle">{artist}</h2>}
         {value.title && <h1 class="title">{value.title}</h1>}
         {titleLocalized && <p class="title">{titleLocalized}</p>}
@@ -43,8 +43,8 @@ export default {
     }
     return (
       <ContentCard
-        image={context.parent.$img(context.props.value.bundle.background, { width: 960, height: 600, mode: 'fill' })}
-        to={{ name: 'levels-id', params: { id: context.props.value.uid } }}
+        image={context.parent.$img(value.bundle.background, { width: 960, height: 600, mode: 'fill' })}
+        to={{ name: 'levels-id', params: { id: value.uid } }}
         scopedSlots={slots}>
       </ContentCard>
     )

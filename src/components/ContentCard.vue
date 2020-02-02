@@ -1,17 +1,6 @@
-<template functional lang="pug">
-  .a-card-wrap(ref="card")
-    .a-card
-      .card-bg(:style="{ backgroundImage: `url(${props.image})`}")
-      nuxt-link.card-overlay(v-if="props.to" :to="props.to")
-      .card-top
-        slot(name="top")
-      .card-bottom
-        slot(name="bottom").text
-        slot(name="action").action
-</template>
-
 <script>
 export default {
+  functional: true,
   props: {
     image: {
       type: String,
@@ -22,22 +11,47 @@ export default {
       required: false,
       default: null,
     }
+  },
+  render(h, context) {
+    const infoText = context.scopedSlots.bottom && context.scopedSlots.bottom()
+    if (infoText) {
+      for (const item of infoText) {
+        if (!item.data) item.data = {}
+        if (!item.data.class) item.data.class = 'info'
+        else if (Array.isArray(item.data.class)) item.data.class.push('info')
+        else item.data.class.info = true
+      }
+    }
+
+    return (<div class="content-card-wrap" {...context.data}>
+      <div class="content-card">
+        <div class="content-card-bg" style={{ backgroundImage: `url(${context.props.image})` }} />
+        {context.props.to && <nuxt-link class="content-card-overlay" to={context.props.to} />}
+        <div class="content-card-top">
+          { context.scopedSlots.top && context.scopedSlots.top() }
+        </div>
+        <div class="content-card-bottom">
+          { infoText }
+          { context.scopedSlots.action && context.scopedSlots.action() }
+        </div>
+      </div>
+    </div>)
   }
 }
 </script>
 
 <style lang="less">
 @card-background-gutter: 1rem;
-.a-card-wrap {
+.content-card-wrap {
   position: relative;
   width: 100%;
   padding-top: 62.5%;
   &:hover {
-    .a-card {
+    .content-card {
       transition: 0.4s @hoverEasing, box-shadow 0.4s @hoverEasing;
       box-shadow: @ele3;
     }
-    .card-bg {
+    .content-card-bg {
       transition: 0.4s @hoverEasing, opacity 0.4s @hoverEasing;
       transform: scale(1.02, 1.02);
       border-radius: 4px;
@@ -45,7 +59,7 @@ export default {
     }
   }
 }
-.a-card {
+.content-card {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -60,7 +74,7 @@ export default {
     transform: scale(0.98, 0.98);
   }
   padding: 16px;
-  .card-overlay {
+  .content-card-overlay {
     content: "";
     position: absolute;
     top: 0;
@@ -70,7 +84,7 @@ export default {
     z-index: 1;
     cursor: default;
   }
-  .card-bg {
+  .content-card-bg {
     opacity: 0.5;
     position: absolute;
     top: -@card-background-gutter;
@@ -92,11 +106,11 @@ export default {
     z-index: 2;
     position: relative;
   }
-  .card-top {
+  .content-card-top {
     color: white;
     position: relative;
   }
-  .card-bottom {
+  .content-card-bottom {
     position: relative;
     flex-grow: 1;
     display: flex;
