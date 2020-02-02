@@ -75,6 +75,17 @@
               a-button(class="card-button" style="width: 100%;")
                 font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                 span View all {{profile.user.levelsCount}}
+
+        a-card.profile-card-container(v-if="profile.user.collections.length > 0" style="margin-top: 24px;")
+          p.heading(style="margin-bottom: 16px;") Collections
+          .level-card-container.small.regular-levels-container(v-if="profile.user.levels.length > 0")
+            collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
+          a(
+            style="margin-top: 16px; display: block;"
+          )
+            a-button(class="card-button" style="width: 100%;")
+              font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
+              span View all {{profile.user.collectionsCount}}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'profile/' + profile.user.uid" :url="'https://cytoid.io/profile/' + profile.user.uid")
 </template>
@@ -85,6 +96,7 @@ import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import gql from 'graphql-tag'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import LevelCard from '@/components/level/LevelCard'
+import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
 import LineChart from '@/components/profile/LineChart'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
@@ -125,12 +137,16 @@ query FetchProfilePage($uid: String!) {
       name
       registrationDate
       avatarURL
-      collections(first: 2) {
+      collections(first: 3) {
         id
         uid
+        coverPath
         title
+        slogan
+        levelCount
         creationDate
       }
+      collectionsCount
       online
       levelsCount(category: "!featured")
       featuredLevelsCount: levelsCount(category: "featured")
@@ -170,6 +186,7 @@ export default {
     ScoreBadge,
     PlayerInfoAvatar,
     LevelCard,
+    CollectionSimpleCard,
     Disqus,
   },
   layout: 'background',
@@ -198,7 +215,9 @@ export default {
       variables: { uid: params.id }
     }).then(({ data }) => data && data.profile)
       .catch(err => handleErrorBlock(err, error))
-    console.log(profile)
+    if (!profile) {
+      return error({ statusCode: 404, message: 'Profile not found' })
+    }
     store.commit('setBackground', { source: profile.headerPath })
     const recentRanks = await $axios.get(`/profile/${profile.user.id}/ranks`)
       .then(res => res.data)
@@ -305,6 +324,13 @@ export default {
   .levels-card {
     .ant-card-body {
       padding: 0;
+    }
+  }
+  .profile-card-container {
+    .ant-card-body {
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-bottom: 16px;
     }
   }
 </style>
