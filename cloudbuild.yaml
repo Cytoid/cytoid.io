@@ -32,7 +32,7 @@ steps:
   - 'beta'
   - 'run'
   - 'deploy'
-  - 'ssr'
+  - 'ssr-staging'
   - '--image'
   - 'gcr.io/$PROJECT_ID/ssr'
   - '--region'
