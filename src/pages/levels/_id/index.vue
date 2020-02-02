@@ -28,8 +28,8 @@
     .notification.is-warning(v-if="level.published === false") This level was made private by its owner. It is invisible to the users.
     .notification.is-primary(v-if="level.published === null") This level is unlisted.
     .notification.is-danger(v-if="level.censored") This level was censored for: {{level.censored}}
-    a-row(:gutter="16")
-      a-col(:xs="24" :lg="8")
+    .columns
+      .column.is-one-third
         a-card(class="ele3" style="margin-bottom: 16px;")
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           div(class="level-description" style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
@@ -64,7 +64,7 @@
               span Source
           p(class="card-heading") Chart
           p(class="card-em-text" style="margin-bottom: 16px;" v-if="level.metadata.charter") {{ level.metadata.charter.name }}
-      a-col(:xs="24" :lg="16")
+      .column.is-two-thirds
         a-card(class="ele3 rankings-card" style="margin-bottom: 16px; padding-top: 0;")
           div(class="rankings-card-header" :style="rankingsHeaderGradient" style="max-width: 384px;")
           div(class="rankings-card-header" style="background: radial-gradient(ellipse farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 384px); z-index: 1")

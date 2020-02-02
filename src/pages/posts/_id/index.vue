@@ -2,8 +2,8 @@
   .section: .container(style="margin-top: 256px;")
     h1(class="text-ele" style="margin-bottom: 16px; line-height: 1.0;" v-text="post.title")
     div(class="text-ele" style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;" v-text="post.description")
-    a-row(:gutter="16")
-      a-col(:xs="24" :lg="8")
+    .columns
+      .column.is-one-third
         a-card(class="ele3" style="margin-bottom: 16px;")
           player-avatar(style="margin-bottom: 16px;" :player="owner")
           template(v-if="post.tags.length > 0")
@@ -20,7 +20,7 @@
             a-button(class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 4px; padding-left: 12px; padding-right: 14px;")
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
-      a-col(:xs="24" :lg="16")
+      .column.is-two-thirds
         a-card
           div(v-html="post.content")
         div(style="margin: 12px;")

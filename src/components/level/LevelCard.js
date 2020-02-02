@@ -2,10 +2,6 @@ import ContentCard from '../ContentCard'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayButton from '@/components/level/PlayButton'
 export default {
-  components: {
-    DifficultyBadge,
-    PlayButton,
-  },
   props: {
     value: {
       type: Object,

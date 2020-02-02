@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <a-row type="flex" justify="space-around" align="middle">
-      <a-col :xs="{span: 0}" :lg="{span: 8}" />
-      <a-col :xs="{span: 24}" :lg="{span: 16}" style="padding: 24px; max-width: 400px">
-        <a-card :bordered="false" class="ele2 session-card" style="width: 100%;">
-          <nuxt-child style="position:relative;z-index:1;padding:24px;" />
-        </a-card>
-      </a-col>
-    </a-row>
+  <div class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-half is-offset-half is-one-third-desktop is-one-quarter-widescreen is-offset-two-thirds-desktop is-offset-three-quarters-widescreen">
+          <a-card :bordered="false" class="ele2 session-card" style="width: 100%;">
+            <nuxt-child style="position:relative;z-index:1;padding:24px;" />
+          </a-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

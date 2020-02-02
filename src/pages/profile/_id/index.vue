@@ -16,8 +16,8 @@
           span
             font-awesome-icon(:icon="['fas', 'calendar']")
             | Joined {{ $dateFromNow(profile.user.registrationDate) }}
-    a-row(:gutter="16")
-      a-col(:xs="{ span: 24 }" :lg="{ span: 8 }" :xl="{ span: 7 }")
+    .columns
+      .column.is-one-quarter-widescreen.is-two-fifths
         a-card.bio(style="background: none; margin-bottom: 16px;")
           p.heading Bio
           div(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
@@ -28,28 +28,28 @@
             :key="rank.id"
             :rank="rank"
           )
-      a-col(:xs="{ span: 24 }" :lg="{ span: 16 }" :xl="{ span: 17 }")
+      .column.is-three-quarters-widescreen.is-three-fifths
         a-card.statistics-card(class="ele3" style="margin-bottom: 16px;")
-          a-row
-            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
+          .columns.is-multiline
+            .column.is-one-third
               p.card-heading Total ranked plays
               p.card-em-text(v-text="profile.activity.totalRankedPlays")
-            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
+            .column.is-one-third
               p.card-heading Total cleared notes
               p.card-em-text(v-text="commaSeparated(profile.activity.clearedNotes)")
-            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
+            .column.is-one-third
               p.card-heading Highest max combo
               p.card-em-text(v-text="commaSeparated(profile.activity.maxCombo)")
-            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
+            .column.is-one-third
               p.card-heading Average ranked accuracy
               p.card-em-text(v-text="(profile.activity.averageRankedAccuracy * 100).toFixed(2) + '%'")
-            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
+            .column.is-one-third
               p.card-heading Total ranked score
               p.card-em-text(v-text="commaSeparated(profile.activity.totalRankedScore)")
-            a-col(:xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 8 }")
+            .column.is-one-third
               p.card-heading Total play time
               p.card-em-text(v-text="profile.activity.totalPlayTime")
-          a-radio-group(size="small" v-model="chartMode" style="margin-bottom: 16px;")
+          a-radio-group(v-if="profile.timeseries" size="small" v-model="chartMode" style="margin-bottom: 16px;")
             a-radio-button(value="activity") Ranked plays
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
