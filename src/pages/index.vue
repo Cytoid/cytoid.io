@@ -121,7 +121,6 @@
                 a-button(class="card-button" style="width: 100%;")
                   font-awesome-icon(icon="mug-hot" fixed-width style="margin-right: 4px;")
                   span 请作者喝咖啡
-    script(src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer)
 </template>
 
 <script>
@@ -295,33 +294,11 @@ export default {
     }).catch((err) => {
       console.log(err)
     })
-    const self = this
-    function loadCrate() {
-      if (self.$store.crate != null) {
-        self.$store.crate.show()
-        return
-      }
-      if (typeof Crate !== 'function') {
-        // Try again!
-        setTimeout(loadCrate, 100)
-        return
-      }
-      // eslint-disable-next-line no-undef
-      self.$store.crate = new Crate({
-        server: '362884768498712579',
-        channel: '639711683568467969',
-        shard: 'https://disweb.dashflo.net'
-      })
-    }
-    setImmediate(loadCrate)
   },
   destroyed() {
     if (this.styleTweetTimer) {
       clearTimeout(this.styleTweetTimer)
       this.styleTweetTimer = null
-    }
-    if (this.$store.crate) {
-      this.$store.crate.hide()
     }
   }
 }

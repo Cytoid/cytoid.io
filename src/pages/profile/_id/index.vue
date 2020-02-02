@@ -215,7 +215,7 @@ export default {
       variables: { uid: params.id }
     }).then(({ data }) => data && data.profile)
       .catch(err => handleErrorBlock(err, error))
-    if (!profile) {
+    if (!profile || !profile.user) {
       return error({ statusCode: 404, message: 'Profile not found' })
     }
     store.commit('setBackground', { source: profile.headerPath })
