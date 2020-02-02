@@ -22,7 +22,7 @@ export default {
 
     let str = (small || ball) ? '' : 'Lv. '
     if (value.difficulty <= 0) str += '?'
-    if (value.difficulty >= 16) str += '15+'
+    else if (value.difficulty >= 16) str += '15+'
     else str += value.difficulty
 
     const classes = {
