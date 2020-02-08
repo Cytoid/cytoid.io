@@ -130,9 +130,3 @@ export default {
   },
 }
 </script>
-
-<style lang="less" scoped>
-  .ant-card {
-    margin-bottom: 16px;
-  }
-</style>

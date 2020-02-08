@@ -23,30 +23,21 @@
     .section: .container(style="margin-top: -10vh;")
       .columns
         .column.is-two-thirds-desktop.is-three-fifths-tablet
-          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
-            div(class="gradient-card-header" style="background: linear-gradient(to top left, #B06AB3, #4568DC); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
-            div(style="position: relative; z-index: 2; margin: 12px;")
-              p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Cytoid News
-              post-card.post-card(v-for="post in posts" :key="post.slug" :value="post")
-              div(v-show="false")
-                nuxt-link(:to="{ name: 'posts' }")
-                  a-button.card-button(style="width: 100%;")
-                    font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                    span View previous news
+          #posts.box.is-gradient
+            p.card-heading Cytoid News
+            post-card.post-card(v-for="post in posts" :key="post.slug" :value="post")
+            div(v-if="false")
+              nuxt-link(:to="{ name: 'posts' }")
+                a-button.card-button(style="width: 100%;")
+                  font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
+                  span View previous news
         .column.is-one-third-desktop.is-two-fifths-tablet
-          a-card.ele3.gradient-card(v-if="data" style="margin-bottom: 16px;")
-            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #acb6e5, #86fde8); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
-            div(style="position: relative; z-index: 2; margin: 12px;")
-              p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Featured Collection
-              collection-simple-card(:value="data.gettingStarted")
-          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
-            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #b91d73, #f953c6); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(circle farthest-corner at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
-            div(style="position: relative; z-index: 2; margin: 12px;")
-              p.card-heading(style="color: white; margin: 12px; padding-top: 12px;") Latest featured level
-              level-card.level-card(v-if="latestFeaturedLevel" :value="latestFeaturedLevel")
+          #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")
+            p.card-heading Featured Collection
+            collection-simple-card(:value="data.gettingStarted")
+          #index-featured-level.box.is-gradient(v-if="latestFeaturedLevel")
+            p.card-heading Latest featured level
+            level-card.level-card(:value="latestFeaturedLevel")
           nuxt-link(:to="{ name: 'levels' }")
             a-button.browse-button.ele3(
               type="primary"
@@ -81,46 +72,37 @@
             )
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;") Connect
-          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
-            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #7289DA, #7289DA); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
-            div(style="position: relative; z-index: 2; margin: 32px 32px 24px 32px;")
-              img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
-              p(v-show="onlineDiscordMembersCount > 0" style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);")
-                | {{ onlineDiscordMembersCount }} members online
-              p(style="margin-top: 8px")
-                | Join our Discord community for charting help, weekly tournaments,
-                |
-                span(style="text-decoration: line-through;") memes
-                |
-                | and more!
-              a(href="https://discord.gg/cytoid")
-                a-button(class="card-button" style="width: 100%;")
-                  font-awesome-icon(icon="sign-in" fixed-width style="margin-right: 4px;")
-                  span Join the community!
-          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
-            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, #F96854, #F96854); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
-            div(style="position: relative; z-index: 2; margin: 20px 32px 24px 32px;")
-              img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
-              p(style="margin-top: 24px").
-                Cytoid is #[strong 100% free] and #[strong open-source].
-                However, keeping the game servers running costs #[em $$$]. Maybe you can...
-              a(href="https://www.patreon.com/tigerhix")
-                a-button.card-button(style="width: 100%;")
-                  font-awesome-icon(icon="heart" fixed-width style="margin-right: 4px;")
-                  | Become a patron!
-          a-card(class="ele3 gradient-card" style="margin-bottom: 16px;")
-            div(class="gradient-card-header" style="background: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1)); max-width: 256px;")
-            div(class="gradient-card-header" style="background: radial-gradient(100% 160px at 0 0, transparent, hsla(226, 15%, 19%, 1) 256px); z-index: 1")
-            div(style="position: relative; z-index: 2; margin: 32px 32px 24px 32px;")
-              img(:src="require('@/assets/images/afdian.png')" style="width: 110px;")
-              p(style="margin-top: 24px")
-                | Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑...
-              a(href="https://afdian.net/@tigerhix")
-                a-button(class="card-button" style="width: 100%;")
-                  font-awesome-icon(icon="mug-hot" fixed-width style="margin-right: 4px;")
-                  span 请作者喝咖啡
+          #discord.box.is-gradient
+            img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
+            p(v-show="onlineDiscordMembersCount > 0" style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);")
+              | {{ onlineDiscordMembersCount }} members online
+            p(style="margin-top: 8px")
+              | Join our Discord community for charting help, weekly tournaments,
+              |
+              span(style="text-decoration: line-through;") memes
+              |
+              | and more!
+            a(href="https://discord.gg/cytoid")
+              a-button(class="card-button" style="width: 100%;")
+                font-awesome-icon(icon="sign-in" fixed-width style="margin-right: 4px;")
+                span Join the community!
+          #patron.box.is-gradient
+            img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
+            p(style="margin-top: 24px").
+              Cytoid is #[strong 100% free] and #[strong open-source].
+              However, keeping the game servers running costs #[em $$$]. Maybe you can...
+            a(href="https://www.patreon.com/tigerhix")
+              a-button.card-button(style="width: 100%;")
+                font-awesome-icon(icon="heart" fixed-width style="margin-right: 4px;")
+                | Become a patron!
+          #afdian.box.is-gradient
+            img(:src="require('@/assets/images/afdian.png')" style="width: 110px;")
+            p(style="margin-top: 24px")
+              | Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑...
+            a(href="https://afdian.net/@tigerhix")
+              a-button(class="card-button" style="width: 100%;")
+                font-awesome-icon(icon="mug-hot" fixed-width style="margin-right: 4px;")
+                span 请作者喝咖啡
 </template>
 
 <script>
@@ -399,24 +381,44 @@ export default {
     flex-direction: row;
   }
 }
+</style>
+
+<style lang="scss" scoped>
+.box {
+  .card-heading {
+    color: white;
+    margin: .75rem;
+  }
+  &#index-featured-collection {
+    --box-background-gradient: linear-gradient(to right bottom, #acb6e5, #86fde8);
+    padding: .75rem;
+  }
+  &#index-featured-level {
+    --box-background-gradient: linear-gradient(to right bottom, #b91d73, #f953c6);
+    padding: .75rem;
+  }
+  &#discord {
+    --box-background-gradient: linear-gradient(to right bottom, #7289DA, #7289DA);
+  }
+  &#patron {
+    --box-background-gradient: linear-gradient(to right bottom, #F96854, #F96854);
+  }
+  &#afdian {
+    --box-background-gradient: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1));
+  }
+  &#posts {
+    --box-background-gradient: linear-gradient(to top left, #B06AB3, #4568DC);
+    padding: .75rem;
+  }
+}
+
 .post-card {
-  margin-bottom: 12px;
   padding-top: 37.5%;
   @media(min-width: 1024px) {
     padding-top: 22.5%;
   }
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
 }
-</style>
-
-<style lang="less">
-  .gradient-card .ant-card-body {
-    padding: 0;
-  }
-
-  .gradient-card .gradient-card-header {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-  }
 </style>

@@ -25,9 +25,8 @@ ul {
     grid-auto-flow: row;
   }
   @include mobile {
-    .content-card-wrap {
+    .content-card-wrap:not(:last-child) {
       margin-bottom: 16px;
-      margin-top: 16px;
     }
   }
   &.large {
@@ -60,3 +59,8 @@ ul {
   }
 }
 
+.box {
+  &.is-gradient {
+    background: radial-gradient(circle farthest-corner at 0 0, transparent, $box-background-color 256px), var(--box-background-gradient, linear-gradient(to right bottom, #acb6e5, #86fde8));
+  }
+}

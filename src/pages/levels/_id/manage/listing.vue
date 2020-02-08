@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  a-card.ele3
+  .box
     a-form(:form="form" @submit.prevent="submit(form)")
       p.heading Description
       a-form-item
@@ -24,7 +24,7 @@ div
       )
         font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
         | Save
-  a-card.ele3(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
+  .box(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
     p.heading Censorship
     a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
       a-input(v-model="adminForm.censored")
@@ -108,9 +108,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less" scoped>
-  .ant-card {
-    margin-bottom: 16px;
-  }
-</style>
