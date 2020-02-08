@@ -9,7 +9,7 @@
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Metadata
     div
-      a-card.ele3
+      .box
         a-form(:form="form")
           p.heading(style="margin-bottom: 4px;") ID
           a-form-item

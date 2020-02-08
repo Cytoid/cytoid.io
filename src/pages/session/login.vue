@@ -95,7 +95,7 @@
     <div>
       <h2>New to Cytoid?</h2>
       <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
-      <nuxt-link to="./signup" replace>
+      <nuxt-link :to="{ name: 'session-signup' }" replace>
         <a-button
           class="card-button"
           type="primary"

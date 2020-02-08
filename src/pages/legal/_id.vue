@@ -1,7 +1,7 @@
 <template lang="pug">
   .section: .container(style="margin-top: 256px;")
     h1(class="text-ele" style="margin-bottom: 16px; line-height: 1.0;" v-text="page.title")
-    a-card
+    .box
       .page-content(v-html="page.content")
 </template>
 

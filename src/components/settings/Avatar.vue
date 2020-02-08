@@ -2,7 +2,7 @@
 div
   div(class="card-pre-header")
     p Avatar
-  a-card.avatar-upload
+  .box.avatar-upload
     captcha(invisible badge="bottomleft")
     a-upload(
       name="avatar"
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style>
-.avatar-upload .ant-card-body {
+.avatar-upload {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -13,7 +13,7 @@
     captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
-    a-card.studio-levels-card.ele2
+    .box.studio-levels-card
       a-table(
         class="studio-levels-table"
         :columns="columns"
@@ -220,9 +220,6 @@ export default {
 </style>
 
 <style lang="less">
-.studio-levels-card .ant-card-body {
-  padding: 24px 16px;
-}
 .studio-levels-table .ant-table-thead > tr > th, .studio-levels-table .ant-table-tbody > tr > td {
   padding: 8px;
 }

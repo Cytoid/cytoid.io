@@ -18,10 +18,10 @@
             | Joined {{ $dateFromNow(profile.user.registrationDate) }}
     .columns
       .column.is-one-quarter-widescreen.is-two-fifths
-        a-card.bio(style="background: none; margin-bottom: 16px;")
+        .bio
           p.heading Bio
-          div(class="text-ele" style="margin-bottom: -1rem;" v-html="bio")
-        a-card(style="background: none; margin-bottom: 16px;")
+          .text-ele(v-html="bio")
+        div
           p.heading Recent ranks
           player-recent-rank(
             v-for="rank in recentRanks"
@@ -29,7 +29,7 @@
             :rank="rank"
           )
       .column.is-three-quarters-widescreen.is-three-fifths
-        a-card.statistics-card(class="ele3" style="margin-bottom: 16px;")
+        .box.statistics-card
           .columns.is-multiline
             .column.is-one-third
               p.card-heading Total ranked plays
@@ -54,29 +54,24 @@
             a-radio-button(value="rating") Rating
             a-radio-button(value="accuracy") Average Accuracy
           line-chart(v-if="profile.timeseries" :data="profile.timeseries" :mode="chartMode")
-        a-card(
-          v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)"
-          class="levels-card"
-        )
-          p.heading(style="position: absolute; margin-left: 24px; margin-top: 24px; z-index: 1;") Uploaded levels
-          div(v-if="profile.user.featuredLevels.length > 0" :class="{ 'levels-card-has-featured ele3': profile.user.featuredLevels.length > 0 }")
-            div(style="position: absolute; bottom: 0px; background: linear-gradient(to bottom, transparent, hsla(226, 15%, 19%, 15%)); width: 100%; height: 48px;")
-            .level-card-container.small.featured-levels-container(style="padding: 56px 16px 0 16px;")
+        .box.levels-box(v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)")
+          .levels-box-container.has-featured(v-if="profile.user.featuredLevels.length > 0")
+            p.heading Uploaded Levels
+            .level-card-container.small
               level-card(v-for="level in profile.user.featuredLevels" :key="level.id" :value="level")
-            div(style="padding: 16px;")
-              nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
-                a-button(class="card-button" style="width: 100%;")
-                  font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                  span View all {{profile.user.featuredLevelsCount}} featured
-          .level-card-container.small.regular-levels-container(v-if="profile.user.levels.length > 0" :style="profile.user.featuredLevels.length > 0 ? 'padding: 16px 16px 0 16px;' : 'padding: 56px 16px 0 16px;'")
-            level-card(v-for="level in profile.user.levels" :key="level.id" :value="level")
-          div(style="padding: 16px;")
+            nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
+              a-button(class="card-button" style="width: 100%;")
+                font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
+                span View all {{profile.user.featuredLevelsCount}} featured
+          .levels-box-container(v-if="profile.user.levels.length > 0")
+            .level-card-container.small
+              level-card(v-for="level in profile.user.levels" :key="level.id" :value="level")
             nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
               a-button(class="card-button" style="width: 100%;")
                 font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                 span View all {{profile.user.levelsCount}}
 
-        a-card.profile-card-container(v-if="profile.user.collections.length > 0" style="margin-top: 24px;")
+        .box(v-if="profile.user.collections.length > 0")
           p.heading(style="margin-bottom: 16px;") Collections
           .level-card-container.small.regular-levels-container(v-if="profile.user.levels.length > 0")
             collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
@@ -312,25 +307,34 @@ export default {
   }
 </style>
 
-<style lang="less">
-  .bio img {
-    max-width: 100%;
-  }
-  .levels-card-has-featured {
-    position: relative;
-    background-image: linear-gradient(to right bottom, #b91d73, #f953c6);
-    border-radius: 4px;
-  }
-  .levels-card {
-    .ant-card-body {
-      padding: 0;
+<style lang="scss">
+  .bio {
+    img {
+      max-width: 100%;
     }
   }
-  .profile-card-container {
-    .ant-card-body {
-      padding-left: 16px;
-      padding-right: 16px;
-      padding-bottom: 16px;
+  .levels-box-container {
+    border-radius: $box-radius;
+    padding: $box-padding;
+    &.has-featured {
+      position: relative;
+      background-image: linear-gradient(to right bottom, #b91d73, #f953c6);
     }
+    .level-card-container {
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: linear-gradient(transparent, rgba(41, 45, 56, 0.15));
+    }
+  }
+  .levels-box {
+    padding: 0;
   }
 </style>

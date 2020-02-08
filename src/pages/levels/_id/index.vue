@@ -30,7 +30,7 @@
     .notification.is-danger(v-if="level.censored") This level was censored for: {{level.censored}}
     .columns
       .column.is-one-third
-        a-card(class="ele3" style="margin-bottom: 16px;")
+        .box
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           div(class="level-description" style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
           p(class="card-heading") Rating
@@ -49,7 +49,7 @@
                 a-tag {{ tag }}
           .card-heading Last updated
           .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
-        a-card(class="ele3" style="margin-bottom: 16px;")
+        .box
           p(class="card-heading") Music
           p(class="card-em-text" style="margin-bottom: 4px;" v-if="level.metadata.artist") {{ level.metadata.artist.name }}
           a(v-if="level.metadata.artist && level.metadata.artist.url" :href="makeLink(level.metadata.artist.url)")

@@ -21,6 +21,9 @@ $shade3: hsla(226, 15%, 19%, 1);
 $shade4: hsla(226, 15%, 38%, 1);
 $shade5: hsla(226, 15%, 55%, 1);
 
+$box-background-color: $shade3;
+$box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
+$box-padding: 1.5rem 2rem;
 
 $text: $white-ter;
 $text-invert: findColorInvert($text);

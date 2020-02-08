@@ -1,8 +1,8 @@
 <template lang="pug">
   div
-    a-card Plays & Downloads
-    a-card Most played levels
-    a-card Latest comments
+    .box Plays & Downloads
+    .box Most played levels
+    .box Latest comments
 </template>
 
 <style lang="less" scoped>

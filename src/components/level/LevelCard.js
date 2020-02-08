@@ -15,15 +15,20 @@ export default {
     const artist = value.metadata && value.metadata.artist && value.metadata.artist.name
     const titleLocalized = value.metadata && value.metadata.title_localized
     const slots = {
-      top: () => value.charts && value.charts.map(chart => (
-        <DifficultyBadge
-          class="ele3 control"
-          style={{ 'margin-right': '4px' }}
-          key={chart.id}
-          value={chart}
-          ball={true}
-          name={false} />
-      )),
+      top: () => (
+        <div>
+          {
+            value.charts && value.charts.map(chart =>
+              <DifficultyBadge
+                class="ele3 control"
+                style={{ 'margin-right': '4px' }}
+                key={chart.id}
+                value={chart}
+                ball={true}
+                name={false} />
+            )
+          }
+        </div>),
       bottom: () => (<div>
         {artist && <h2 class="subtitle">{artist}</h2>}
         {value.title && <h1 class="title">{value.title}</h1>}

@@ -16,11 +16,6 @@
 
 <template>
   <div>
-    <nuxt-link to="./login">
-      <a-button type="primary" shape="circle" size="large">
-        <font-awesome-icon icon="chevron-left" />
-      </a-button>
-    </nuxt-link>
     <h2 v-t="'title'" style="margin-top: 1rem;" />
     <a-form
       :form="form"
@@ -120,6 +115,20 @@
         </a-button>
       </a-form-item>
     </a-form>
+    <div>
+      <h2>Already registered?</h2>
+      <p>Log in to enjoy your privilege as a Cytoid community member!</p>
+      <nuxt-link :to="{ name: 'session-login' }" replace>
+        <a-button
+          class="card-button"
+          type="primary"
+          html-type="submit"
+          block
+        >
+          Log In
+        </a-button>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 

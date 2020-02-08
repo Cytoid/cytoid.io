@@ -3,7 +3,7 @@ div
   div
     div(class="card-pre-header")
       p Password
-    a-card
+    .box
       a-form(:form="form" @submit.prevent="submit")
         a-form-item(label="Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
           a-input(
@@ -25,7 +25,7 @@ div
   div(style="margin-top: 16px;")
     div(class="card-pre-header")
       p Third-party Sign-on
-    a-card.external-login
+    .box.external-login
       a-button(
         v-for="provider in providers"
         :key="provider.id" :type="externals.includes(provider.id) ? 'danger' : 'default'"

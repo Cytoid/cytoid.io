@@ -1,5 +1,6 @@
 <template lang="pug">
-
+  .box
+    .span Hello
 </template>
 
 <script>

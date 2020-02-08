@@ -2,7 +2,7 @@
 div
   div(class="card-pre-header")
     p Emails
-  a-card
+  .box
     a-list(
       bordered
       :dataSource="emails"

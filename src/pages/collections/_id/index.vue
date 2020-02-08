@@ -5,7 +5,7 @@
     h3.text-ele(v-text="collection.slogan")
   .columns
     .column
-      a-card.ele3(style="margin-bottom: 16px;")
+      .box
         player-avatar(style="margin-bottom: 16px;" :player="collection.owner")
         .content(v-html="formattedDescriptions")
         template(v-if="collection.tags.length > 0")
@@ -17,8 +17,7 @@
         .card-secondary-text(style="margin-bottom: 1rem;") {{$dateFormatCalendar(collection.creationDate)}}, {{ $dateFromNow(collection.creationDate) }}
         .card-heading Last updated
         .card-secondary-text {{$dateFormatCalendar(collection.modificationDate)}}, {{ $dateFromNow(collection.modificationDate) }}
-      a-card(class="ele3" style="margin-bottom: 16px;")
-        template(v-if="collection.metadata.cover")
+      .box(v-if="collection.metadata.cover")
           p.card-heading Cover art
           p.card-em-text(style="margin-bottom: 4px;" v-text="collection.metadata.cover.name")
           a(v-if="collection.metadata.cover.url" :href="collection.metadata.cover.url")

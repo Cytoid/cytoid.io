@@ -1,8 +1,8 @@
 <template lang="pug">
   div
-    a-card Plays & Downloads
-    a-card Rankings
-    a-card Comments
+    .box Plays & Downloads
+    .box Rankings
+    .box Comments
 </template>
 
 <script>

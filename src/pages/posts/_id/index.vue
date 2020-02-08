@@ -4,7 +4,7 @@
     div(class="text-ele" style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;" v-text="post.description")
     .columns
       .column.is-one-third
-        a-card(class="ele3" style="margin-bottom: 16px;")
+        .box
           player-avatar(style="margin-bottom: 16px;" :player="owner")
           template(v-if="post.tags.length > 0")
             .card-heading Tags
@@ -13,7 +13,7 @@
                 a-tag {{ tag }}
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(post.published_date)}}, {{ $dateFromNow(post.published_date) }}
-        a-card(class="ele3" style="margin-bottom: 16px;")
+        .box
           p(class="card-heading") Cover art
           p(class="card-em-text" style="margin-bottom: 4px;") {{ post.cover_artist }}
           a(:href="makeLink(post.cover_artist_url)")
@@ -21,7 +21,7 @@
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
       .column.is-two-thirds
-        a-card
+        .box
           div(v-html="post.content")
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'posts/' + post.slug" :url="'https://cytoid.io/posts/' + post.slug")
