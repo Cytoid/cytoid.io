@@ -82,6 +82,7 @@ module.exports = {
     { src: '~plugins/ga' },
     { src: '~plugins/dummy_captcha' },
     { src: '~plugins/antd' },
+    { src: '~plugins/buefy' },
     { src: '~plugins/parallax' },
     { src: '~plugins/fontawesome' },
     { src: '~plugins/imgresize' },

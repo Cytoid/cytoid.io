@@ -1,0 +1,44 @@
+export default {
+  name: 'TagInput',
+  props: {
+    value: {
+      type: Array,
+      required: true,
+    }
+  },
+  render(h) {
+    return h('b-taginput', {
+      props: {
+        autocomplete: true,
+        allowNew: true,
+        openOnFocus: true,
+        value: this.value,
+        data: this.tagsCandidates,
+        placeholder: 'Add a tag...',
+      },
+      on: {
+        typing: this.typing,
+      }
+    })
+  },
+  data() {
+    return {
+      tagsCandidates: [],
+    }
+  },
+  methods: {
+    typing(keyword) {
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = null
+      }
+      this.timer = setTimeout(this.search.bind(this, keyword), 500)
+    },
+    search(keyword) {
+      this.$axios.get('/tags', { params: { search: keyword } })
+        .then((res) => {
+          this.tagsCandidates = res.data
+        })
+    }
+  },
+}

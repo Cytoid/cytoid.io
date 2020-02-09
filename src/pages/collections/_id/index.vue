@@ -10,9 +10,8 @@
         .content(v-html="formattedDescriptions")
         template(v-if="collection.tags.length > 0")
           .card-heading Tags
-          div(style="margin-bottom: 16px;")
-            a(v-for="tag in collection.tags" :key="tag")
-              a-tag {{ tag }}
+          .tags(style="margin-bottom: 16px;")
+            .tag(v-for="tag in collection.tags" :key="tag" v-text="tag")
         .card-heading Created on
         .card-secondary-text(style="margin-bottom: 1rem;") {{$dateFormatCalendar(collection.creationDate)}}, {{ $dateFromNow(collection.creationDate) }}
         .card-heading Last updated

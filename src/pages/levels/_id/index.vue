@@ -43,9 +43,8 @@
             span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
           template(v-if="level.tags.length > 0")
             .card-heading Tags
-            div(style="margin-bottom: 16px;")
-              a(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()")
-                a-tag {{ tag }}
+            .tags
+              a.tag(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()" v-text="tag")
           .card-heading Last updated
           .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         .box

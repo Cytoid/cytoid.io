@@ -15,19 +15,25 @@ $colors: (
   "danger": ($danger, $danger-invert),
 );
 
-$shade1: hsla(226, 68%, 6%, 1);
-$shade2: hsla(226, 15%, 14%, 1);
-$shade3: hsla(226, 15%, 19%, 1);
-$shade4: hsla(226, 15%, 38%, 1);
-$shade5: hsla(226, 15%, 55%, 1);
+$family-sans-serif: "Nunito", "M PLUS Rounded 1c", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
-$box-background-color: $shade3;
+$grey-darker:  hsl(226, 68%, 6%);
+$grey-dark:    hsl(226, 15%, 14%);
+$grey:         hsl(226, 15%, 19%);
+$grey-light:   hsl(226, 15%, 38%);
+$grey-lighter: hsl(226, 15%, 55%);
+
+$white-ter:    hsl(0, 0%, 71%);
+$white-bis:    hsl(0, 0%, 86%);
+$white:        hsl(0, 0%, 100%);
+
+$box-background-color: $grey;
 $box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
 $box-padding: 1.5rem 2rem;
 
 $text: $white-ter;
 $text-invert: findColorInvert($text);
-$text-light: $grey-lighter;
+$text-light: $white-bis;
 $text-strong: $white;
 
 $background: $grey-dark;
@@ -37,3 +43,32 @@ $footer-background-color: transparent;
 $section-padding: 16px;
 $section-padding-medium: 48px;
 $section-padding-large: 96px;
+
+$link: $white-ter;
+
+$label-color: $white-ter;
+.label {
+  text-transform: uppercase;
+  font-size: 12px !important;
+}
+
+$input-color: $white-bis;
+$input-background-color: $grey-darker;
+
+$input-border-color: $grey-darker;
+$input-hover-border-color: $grey-light;
+$input-focus-border-color: $grey-lighter;
+
+$input-disabled-color: $white-ter;
+$input-disabled-background-color:  $grey-dark;
+$input-disabled-border-color: $grey;
+
+$dropdown-content-background-color: $grey;
+$dropdown-content-arrow: $link;
+
+$dropdown-item-color: $white-ter;
+$dropdown-item-hover-color: $white-bis;
+$dropdown-item-hover-background-color: $grey-dark;
+$dropdown-item-active-color: $white;
+$dropdown-item-active-background-color: $link;
+

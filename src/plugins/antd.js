@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import {
-  Button, Card, Divider, Upload, Select,
-  Row, Col, Spin, Table, Tag,
+  Button, Divider, Upload, Select,
+  Row, Col, Spin, Table,
   Pagination, Rate, Radio,
   Input, InputNumber, Form,
   Popover, AutoComplete,
@@ -32,7 +32,6 @@ export function handleErrorBlock(err, handler) {
 export default function ({ store, $axios, error }) {
   [
     Button,
-    Card,
     Divider,
     Upload,
     Upload.Dragger,
@@ -41,7 +40,6 @@ export default function ({ store, $axios, error }) {
     Row, Col,
     Spin,
     Table,
-    Tag,
     Pagination,
     Rate,
     Radio.Group,

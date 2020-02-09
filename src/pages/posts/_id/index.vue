@@ -8,9 +8,8 @@
           player-avatar(style="margin-bottom: 16px;" :player="owner")
           template(v-if="post.tags.length > 0")
             .card-heading Tags
-            div(style="margin-bottom: 16px;")
-              a(v-for="tag in post.tags" :key="tag" :href="'/posts?tags=' + tag.toLowerCase()")
-                a-tag {{ tag }}
+            .tags
+              .tag(v-for="tag in post.tags" :key="tag" v-text="tag")
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(post.published_date)}}, {{ $dateFromNow(post.published_date) }}
         .box

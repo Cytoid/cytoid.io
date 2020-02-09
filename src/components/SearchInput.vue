@@ -15,7 +15,7 @@
       font-awesome-icon(:icon="['fas', 'search']")
     .fullscreen-search-overlay(v-show="overlay" @click="handleOverlay")
       .fullscreen-search-container
-        a-card(class="ele3 gradient-card fullscreen-search-card" style="margin-bottom: 16px;" @click.stop="handleSearchButton")
+        .fullscreen-search-card(@click.stop="handleSearchButton")
           button.close-button(@click.stop="handleOverlay")
             font-awesome-icon(:icon="['fas', 'times']")
           p.card-heading(style="color: hsla(226, 68%, 77%, 1);") Search
@@ -195,7 +195,8 @@ $theme: hsla(226, 68%, 77%, 1);
   pointer-events: all;
 }
 .fullscreen-search-card {
-  padding: 16px;
+  padding: 2rem;
+  border-radius: $radius;
   background: white;
   color: $theme;
 }
