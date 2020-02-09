@@ -1,6 +1,6 @@
 <template lang="pug">
 .section: .container
-  form.box(v-if="collection")
+  form.box(v-if="collection" @submit.prevent="save")
     b-field(label="Title")
       b-input(v-model="collection.title")
     b-field(label="Slogan")
@@ -21,6 +21,7 @@
         field="title")
         template(v-slot:default="slotProps")
           span {{slotProps.option.uid}}({{slotProps.option.title}})
+    b-button(native-type="submit" :loading="loading") Save
 </template>
 
 <script>
@@ -39,6 +40,9 @@ const query = gql`query FetchCollection($uid: String!) {
     tags
     state
     coverPath
+    owner {
+      id
+    }
     levels {
       id
       uid
@@ -63,6 +67,7 @@ export default {
     return {
       collection: null,
       levelUidCandidates: [],
+      loading: false,
     }
   },
   async asyncData({ app, params, error, store }) {
@@ -73,6 +78,11 @@ export default {
       .catch(err => handleErrorBlock(err, error))
     if (!collection) {
       return error({ statusCode: 404, message: 'Collection not found' })
+    }
+    const user = store.state.user
+    if (collection.owner.id !== user?.id && !(user?.role === 'admin' || user?.role === 'moderator')) {
+      error({ statusCode: 403, message: "You don't have the permission to edit this collection!" })
+      return
     }
     store.commit('setBackground', { source: collection.coverPath })
     return { collection }
@@ -90,7 +100,37 @@ export default {
         .then((res) => {
           this.levelUidCandidates = res.data
         })
-    }
+    },
+    save() {
+      this.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation StudioUpdateCollection($id: ID!, $data: CollectionInput!) {
+          updateCollection(id: $id, input: $data) {
+            id
+          }
+        }`,
+        variables: {
+          id: this.collection.id,
+          data: {
+            uid: this.collection.uid,
+            title: this.collection.title,
+            slogan: this.collection.slogan,
+            description: this.collection.description,
+            levels: this.collection.levels.map(l => l.id),
+            tags: this.collection.tags,
+          },
+        },
+      })
+        .then(() => {
+          this.$message.success('Collection Saved')
+        })
+        .catch((error) => {
+          this.handleErrorToast(error)
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
   }
 }
 </script>

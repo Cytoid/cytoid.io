@@ -72,3 +72,25 @@ $dropdown-item-hover-background-color: $grey-dark;
 $dropdown-item-active-color: $white;
 $dropdown-item-active-background-color: $link;
 
+$easing: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+$button-background-color: $grey;
+$button-border-color: $grey;
+$button-hover-border-color: $grey-light;
+.box {
+  .button {
+    background: rgb(63, 66, 78);
+    color: $white-bis;
+    border: none;
+    text-transform: uppercase;
+    transition: 0.2s $easing;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 16px 12px;
+    &:hover {
+      background: rgb(106, 108, 116);
+      color: $white;
+      transform: translateY(1px);
+    }
+  }
+}

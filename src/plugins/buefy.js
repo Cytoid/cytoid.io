@@ -9,6 +9,7 @@ import {
   Upload,
   Icon,
   Progress,
+  Button,
 } from 'buefy'
 
 export default function () {
@@ -22,5 +23,6 @@ export default function () {
     Upload,
     Icon,
     Progress,
+    Button,
   ].forEach(Vue.use.bind(Vue))
 }

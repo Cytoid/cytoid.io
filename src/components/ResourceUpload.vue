@@ -100,6 +100,9 @@ export default {
                 }
               )
             })
+            .then(() => {
+              this.$emit('input', res.data.path)
+            })
         })
         .catch((error) => {
           const message = error.response?.data?.message || error.message

@@ -18,6 +18,9 @@ export default {
       },
       on: {
         typing: this.typing,
+        input: (val) => {
+          this.$emit('input', val)
+        }
       }
     })
   },

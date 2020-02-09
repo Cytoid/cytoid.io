@@ -3,7 +3,17 @@
   section.section.header-container
     h1.text-ele(v-text="collection.title")
     h3.text-ele(v-text="collection.slogan")
-  .columns
+  section.section
+    nuxt-link.button(
+      :to="{ name: 'collections-id-manage', params: { id: collection.uid } }"
+      v-if="$store.state.user && (collection.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
+    )
+      font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
+      | Manage
+  section.section
+    .notification.is-warning(v-if="collection.state === 'PRIVATE'") This collection was made private by its owner. It is invisible to other users.
+    .notification.is-primary(v-else-if="collection.state === 'UNLISTED'") This collection is unlisted.
+  section.section.columns
     .column
       .box
         player-avatar(style="margin-bottom: 16px;" :player="collection.owner")

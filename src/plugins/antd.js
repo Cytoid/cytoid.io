@@ -5,7 +5,7 @@ import {
   Pagination, Rate, Radio,
   Input, InputNumber, Form,
   Popover, AutoComplete,
-  Menu, Dropdown, Tooltip, Badge,
+  Menu, Dropdown, Tooltip,
   Progress, Checkbox, List, DatePicker,
   Modal,
   message
@@ -53,7 +53,6 @@ export default function ({ store, $axios, error }) {
     Menu.Item,
     AutoComplete,
     Dropdown,
-    Badge,
     Tooltip,
     Progress,
     Checkbox,
