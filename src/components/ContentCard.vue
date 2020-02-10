@@ -4,7 +4,8 @@ export default {
   props: {
     image: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
     to: {
       type: Object,
@@ -25,7 +26,7 @@ export default {
 
     return (<div class="content-card-wrap" {...context.data}>
       <div class="content-card">
-        <div class="content-card-bg" style={{ backgroundImage: `url(${context.props.image})` }} />
+        {context.props.image && <div class="content-card-bg" style={{ backgroundImage: `url(${context.props.image})` }} />}
         {context.props.to && <nuxt-link class="content-card-overlay" to={context.props.to} />}
         <div class="content-card-top">
           { context.scopedSlots.top && context.scopedSlots.top() }

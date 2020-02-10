@@ -71,9 +71,9 @@
                 font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
                 span View all {{profile.user.levelsCount}}
 
-        .box(v-if="profile.user.collections.length > 0")
+        .box(v-if="profile && profile.user && profile.user.collections && profile.user.collections.length > 0")
           p.heading(style="margin-bottom: 16px;") Collections
-          .level-card-container.small.regular-levels-container(v-if="profile.user.levels.length > 0")
+          .level-card-container.small.regular-levels-container
             collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
           a(
             style="margin-top: 16px; display: block;"
