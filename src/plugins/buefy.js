@@ -1,28 +1,9 @@
 import Vue from 'vue'
-import {
-  Input,
-  Tag,
-  Taginput,
-  Field,
-  Autocomplete,
-  Dropdown,
-  Upload,
-  Icon,
-  Progress,
-  Button,
-} from 'buefy'
+import Buefy from 'buefy'
 
 export default function () {
-  [
-    Input,
-    Tag,
-    Taginput,
-    Field,
-    Autocomplete,
-    Dropdown,
-    Upload,
-    Icon,
-    Progress,
-    Button,
-  ].forEach(Vue.use.bind(Vue))
+  Vue.use(Buefy, {
+    defaultIconPack: 'fas',
+    defaultIconComponent: 'font-awesome-icon'
+  })
 }

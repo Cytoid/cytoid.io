@@ -5,7 +5,7 @@
     :accept="accept"
     :disabled="state !== null")
     captcha(invisible badge="bottomleft")
-    .wrapper(:style="background && styles")
+    .wrapper(:style="background && value && styles")
       section.section
         content.has-text-centered
           p
