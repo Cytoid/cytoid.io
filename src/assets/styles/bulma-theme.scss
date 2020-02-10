@@ -75,6 +75,11 @@ $dropdown-item-active-background-color: $link;
 
 $easing: cubic-bezier(0.215, 0.61, 0.355, 1);
 
+$button-color: $text;
+$button-hover-color: $text-light;
+$button-active-border-color: $grey-lighter;
+$button-active-color: $text-strong;
+
 $button-background-color: $grey;
 $button-border-color: $grey;
 $button-hover-border-color: $grey-light;

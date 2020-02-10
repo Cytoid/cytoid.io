@@ -35,6 +35,13 @@
           #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")
             p.card-heading Featured Collection
             collection-simple-card(:value="data.gettingStarted")
+          nuxt-link(:to="{ name: 'collections' }")
+            a-button.browse-button.ele3(
+              type="primary"
+              size="large"
+              style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold; margin-bottom: 1.5rem;"
+            )
+              | Browse all {{ data && data.collectionsCount }} collections!
           #index-featured-level.box.is-gradient(v-if="latestFeaturedLevel")
             p.card-heading Latest featured level
             level-card.level-card(:value="latestFeaturedLevel")
@@ -117,6 +124,7 @@ import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
 
 const query = gql`
 query FetchHomePage {
+  collectionsCount
   gettingStarted: collection(uid: "getting-started") {
     ...CollectionInfoFragment
     levelCount
@@ -288,7 +296,7 @@ export default {
 
 <style lang="less" scoped>
   .download-button.ant-btn-primary {
-    background: linear-gradient(to right, @theme4, @theme6);
+    background: linear-gradient(to right, @theme4, @theme6) !important;
     border: none;
     background-size: 200% 100%;
     margin-bottom: 16px;
@@ -297,20 +305,20 @@ export default {
     }
 
     &:hover {
-      background: linear-gradient(to right, @theme4, @theme6);
+      background: linear-gradient(to right, @theme4, @theme6) !important;
       background-size: 200% 100%;
-      transform: scale(0.98, 0.98);
+      transform: scale(0.98, 0.98) !important;
     }
 
     &:active, &:focus {
-      background: linear-gradient(to right, @theme4, @theme6);
+      background: linear-gradient(to right, @theme4, @theme6) !important;
       background-size: 200% 100%;
       box-shadow: @ele3;
-      transform: scale(0.95, 0.95);
+      transform: scale(0.95, 0.95) !important;
     }
   }
   .browse-button.ant-btn-primary {
-    background: linear-gradient(270deg, #21d4fd, #b721ff);
+    background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
     background-size: 400% 400%;
 
     -webkit-animation: flow 25s ease infinite;
@@ -334,16 +342,16 @@ export default {
     }
 
     &:hover {
-      background: linear-gradient(270deg, #21d4fd, #b721ff);
+      background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
       background-size: 400% 400%;
-      transform: scale(0.98, 0.98);
+      transform: scale(0.98, 0.98) !important;
     }
 
     &:active, &:focus {
-      box-shadow: @ele3;
-      background: linear-gradient(270deg, #21d4fd, #b721ff);
-      background-size: 400% 400%;
-      transform: scale(0.95, 0.95);
+      box-shadow: @ele3 !important;
+      background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
+      background-size: 400% 400% !important;
+      transform: scale(0.95, 0.95) !important;
     }
 
   }
