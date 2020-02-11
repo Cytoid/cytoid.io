@@ -7,7 +7,7 @@ div
         client-only: markdown-editor(v-model="form.description")
       p.heading Tags
       a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
-        tag-input(:value="form.tags" @change="form.tags=$event")
+        tag-input(v-model="form.tags")
       p.heading Visibility
       a-form-item(
         :label-col="{ span: 5 }"

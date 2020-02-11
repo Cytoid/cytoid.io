@@ -334,7 +334,7 @@ export default {
       background: linear-gradient(transparent, rgba(41, 45, 56, 0.15));
     }
   }
-  .levels-box {
-    padding: 0;
+  .box.levels-box {
+    padding: 0 !important;
   }
 </style>

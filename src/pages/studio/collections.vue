@@ -53,7 +53,7 @@ export default {
     }
   },
   async asyncData({ app, error }) {
-    const collections = await app.apolloProvider.defaultClient.query({
+    let collections = await app.apolloProvider.defaultClient.query({
       query: gql`query FetchUserCollections {
         my {
           collections {
@@ -69,10 +69,10 @@ export default {
         }
       }`,
       variables: { }
-    }).then(({ data }) => data && data.my.collections)
+    }).then(({ data }) => data && data.my && data.my.collections)
       .catch(err => handleErrorBlock(err, error))
     if (!collections) {
-      return error({ statusCode: 404, message: 'Collections not found' })
+      collections = []
     }
     return { collections }
   },
