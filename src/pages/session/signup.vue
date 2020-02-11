@@ -171,7 +171,7 @@ export default {
           .catch((error) => {
             this.handleErrorToast(error)
             this.loading = false
-            this.$captcha.reset()
+            // this.$captcha.reset()
             this.captchaToken = null
           })
       })

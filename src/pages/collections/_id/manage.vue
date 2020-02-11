@@ -116,8 +116,9 @@ export default {
             title: this.collection.title,
             slogan: this.collection.slogan,
             description: this.collection.description,
-            levels: this.collection.levels.map(l => l.id),
+            levelIds: this.collection.levels.map(l => l.id),
             tags: this.collection.tags,
+            coverPath: this.collection.coverPath,
           },
         },
       })

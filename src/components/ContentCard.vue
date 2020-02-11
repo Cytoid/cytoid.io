@@ -103,7 +103,7 @@ export default {
 
   display: flex;
   flex-direction: column;
-  .control {
+  .content-card-control {
     z-index: 2;
     position: relative;
   }

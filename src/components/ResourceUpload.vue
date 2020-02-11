@@ -110,7 +110,7 @@ export default {
         })
         .then(() => {
           this.state = null
-          this.$captcha.reset()
+          // this.$captcha.reset()
         })
     }
   }

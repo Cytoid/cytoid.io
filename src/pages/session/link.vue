@@ -122,7 +122,7 @@ export default {
             if (error.response && error.response.status === 401) {
               this.$message.error('Username or password mismatch!')
               this.form.resetFields(['password'])
-              this.$captcha.reset()
+              // this.$captcha.reset()
               this.captchaToken = null
             } else if (error.response && error.response.status === 404) {
               this.createNew = true

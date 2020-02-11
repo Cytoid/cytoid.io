@@ -37,9 +37,9 @@ const uploadMixin = (type, contentType) => ({
           option.onError(error, message)
           this.$message.error(message)
         })
-        .then(() => {
-          this.$captcha.reset()
-        })
+        // .then(() => {
+        //   this.$captcha.reset()
+        // })
 
       return {
         abort: source.cancel

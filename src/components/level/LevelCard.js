@@ -20,7 +20,7 @@ export default {
           {
             value.charts && value.charts.map(chart =>
               <DifficultyBadge
-                class="ele3 control"
+                class="ele3 content-card-control"
                 style={{ 'margin-right': '4px' }}
                 key={chart.id}
                 value={chart}
@@ -44,7 +44,7 @@ export default {
       </div>),
       action: () => value.bundle &&
         value.bundle.music_preview &&
-        <PlayButton class="control" src={value.bundle.music_preview}/>
+        <PlayButton class="content-card-control" src={value.bundle.music_preview}/>
     }
     return (
       <ContentCard
