@@ -15,6 +15,7 @@ export default {
         value: this.value,
         data: this.tagsCandidates,
         placeholder: 'Add a tag...',
+        icon: 'plus',
       },
       on: {
         typing: this.typing,

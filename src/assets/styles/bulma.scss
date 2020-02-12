@@ -12,6 +12,7 @@
 @import "~bulma/sass/elements/notification";
 @import "~bulma/sass/elements/box";
 @import "~bulma/sass/elements/table";
+@import "~bulma/sass/elements/icon";
 @import "~bulma/sass/components/level";
 @import "~bulma/sass/elements/image";
 @import "~bulma/sass/elements/other";
@@ -27,9 +28,11 @@
 @import "~buefy/src/scss/utils/_all";
 @import "~buefy/src/scss/components/_dropdown";
 @import "~buefy/src/scss/components/_autocomplete";
+@import "~buefy/src/scss/components/_form";
 @import "~buefy/src/scss/components/_tag";
 @import "~buefy/src/scss/components/_taginput";
 @import "~buefy/src/scss/components/_upload";
+@import "~buefy/src/scss/components/_switch";
 
 // reset
 ul {

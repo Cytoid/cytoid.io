@@ -1,19 +1,12 @@
 <template lang="pug">
 div
   .box
-    a-form(:form="form" @submit.prevent="submit(form)")
-      p.heading Description
-      a-form-item
+    form(:form="form" @submit.prevent="submit(form)")
+      b-field(label="Description")
         client-only: markdown-editor(v-model="form.description")
-      p.heading Tags
-      a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
+      b-field(label="Tags")
         tag-input(v-model="form.tags")
-      p.heading Visibility
-      a-form-item(
-        :label-col="{ span: 5 }"
-        :wrapper-col="{ span: 19 }"
-        :help="visibilityText"
-      )
+      b-field(label="Visibility" :message="visibilityText")
         visibility-select(:value="form.published" bordered @change="form.published=$event")
       a-button.card-button(
         block
@@ -24,19 +17,20 @@ div
       )
         font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
         | Save
-  .box(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
-    p.heading Censorship
-    a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
-      a-input(v-model="adminForm.censored")
-      template(slot="extra") Input anything here, and the level will be invisible to the users.
-    p.heading Category
-    a-form-item(:label-col="{ span: 5 }" :wrapper-col="{ span: 19 }")
-      a-select(
-        mode="multiple"
-        :style="{ width: '100%' }"
+  form.box(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
+    b-field(grouped)
+      b-field(label="Censored")
+        b-switch(v-model="censored" type="is-danger") Remove from Public
+      b-field(label="Reason" expanded message="One word to summerize why this level is not suitable for public viewing")
+        b-input(v-model="adminForm.censored" expanded :disabled="!censored")
+    b-field(label="Category")
+      b-taginput(
         v-model="adminForm.category"
-      )
-        a-select-option(key="featured") Featured
+        :data="['featured']"
+        autocomplete
+        open-on-focus
+        icon="tag"
+        placeholder="Adding an administrative category...")
     a-button.card-button(
       block
       :loading="loading"
@@ -86,6 +80,10 @@ export default {
         'This level will only be visible through the URL.',
         'This level will be visible to everybody.'
       ][index]
+    },
+    censored: {
+      get() { return this.adminForm.censored !== null },
+      set(val) { this.adminForm.censored = val ? '' : null },
     }
   },
   methods: {

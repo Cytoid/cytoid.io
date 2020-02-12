@@ -64,6 +64,9 @@ $input-disabled-color: $white-ter;
 $input-disabled-background-color:  $grey-dark;
 $input-disabled-border-color: $grey;
 
+$input-icon-active-color: $input-color;
+$input-icon-color: $grey-light;
+
 $dropdown-content-background-color: $grey;
 $dropdown-content-arrow: $link;
 
@@ -107,3 +110,8 @@ $table-background-color: $grey;
 $table-head-cell-color: $white-ter;
 $table-cell-border: 1px solid $white-ter;
 $table-row-hover-background-color: $grey-light;
+
+$icon-dimensions: 1rem;
+$icon-dimensions-small: 0.75rem;
+$icon-dimensions-medium: 2rem;
+$icon-dimensions-large: 3rem;
