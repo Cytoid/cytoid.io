@@ -1,0 +1,20 @@
+{
+  "avatar_title": "",
+  "avatar_use_gravatar_btn": "",
+  "avatar_using_gravatar": "",
+  "gravatar": "",
+  "email_title": "",
+  "email_verify": "",
+  "email_make_primary": "",
+  "email_delete": "",
+  "email_add": "",
+  "email_add_btn": "",
+  "email_valid": "",
+  "email_required": "",
+  "profile_header_title": "",
+  "profile_bio_title": "",
+  "security_password_title": "",
+  "security_password_field_label": "",
+  "security_new_password_field_label": "",
+  "security_password_confirm_field_label": ""
+}
