@@ -1,19 +1,19 @@
 {
-  "slogan": "A community-driven touchscreen music game",
+  "slogan": "一款著重社群協力運作的手機音樂遊戲",
   "download_appstore": "在 App Store 立即下載",
   "download_googleplay": "在 Google Play 立即下載",
   "news_title": "近期公告",
   "news_previous": "檢視過往公告",
   "featured_collection_title": "推薦選集",
-  "collection_all_btn": "Browse all {count} collections!",
+  "collection_all_btn": "截止目前共建立了 {count} 個選集",
   "featured_level_title": "最新推薦關卡",
-  "level_all_btn": "Browse all {count} levels!",
-  "recent_ranks_title": "Recent ranks",
+  "level_all_btn": "截止目前共上傳了 {count} 個關卡",
+  "recent_ranks_title": "全站近期遊玩紀錄",
   "latest_tweet_title": "近期推文",
-  "new_comments_title": "New comments",
+  "new_comments_title": "全站近期評論",
   "connect_title": "連結",
-  "connect_discord_subtitle": "{count} members online",
-  "connect_discord_content": "Join our Discord community for charting help, weekly tournaments, memes, and more!",
-  "connect_discord_btn": "Join the community!",
-  "connect_patreon_content": "Cytoid is 100% free and open-source. However, keeping the game servers running costs $$$. Maybe you can..."
+  "connect_discord_subtitle": "{count} 位上線中",
+  "connect_discord_content": "有聽說過我們的官方 Discord 伺服器嗎？如果你不知道，現在讓你聽聽。趕快動動小手加入 GO GO GO！",
+  "connect_discord_btn": "官方邀請連結",
+  "connect_patreon_content": "Cytoid是一款完全免費且開源的音樂遊戲。為了讓玩家保有最好的遊戲體驗，維護伺服器的費用勢必會是一項重擔。想要慰勞或是支持辛苦的開發者的話，不妨考慮在Patreon上資助吧！"
 }
