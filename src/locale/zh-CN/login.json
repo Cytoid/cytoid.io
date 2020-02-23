@@ -1,7 +1,7 @@
 {
-  "title": "已经有 Cytoid 账号了吗？",
-  "subtitle": "在下方登录吧。",
-  "username_field_placeholder": "玩家 ID / 电子邮箱地址",
+  "title": "已有 Cytoid 账号？",
+  "subtitle": "请在此登录。",
+  "username_field_placeholder": "Cytoid ID / 邮箱地址",
   "username_field_error_required": "请输入你的玩家ID或电子邮箱地址",
   "password_field_placeholder": "密码",
   "password_field_error_required": "请输入密码",
