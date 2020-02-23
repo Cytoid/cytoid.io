@@ -1,13 +1,16 @@
 {
-  "avatar_title": "Avatar",
-  "avatar_use_gravatar_btn": "Click to use Gravatar",
+  "account_menu": "Account",
+  "security_menu": "Security",
+  "profile_menu": "Profile",
+  "avatar_title": "頭像",
+  "avatar_use_gravatar_btn": "點擊使用 Gravatar",
   "avatar_using_gravatar": "You're using your avatar from {0}!",
   "gravatar": "Gravatar",
-  "email_title": "Email",
+  "email_title": "電子郵箱",
   "email_verify": "Verify",
   "email_make_primary": "Make Primary",
-  "email_delete": "Delete",
-  "email_add": "Add email address",
+  "email_delete": "刪除",
+  "email_add": "新增電子郵箱地址",
   "email_add_btn": "Add",
   "email_valid": "This is not a valid email.",
   "email_required": "An email address is required.",
@@ -16,5 +19,6 @@
   "security_password_title": "Password",
   "security_password_field_label": "Password",
   "security_new_password_field_label": "New Password",
-  "security_password_confirm_field_label": "Password Confirm"
+  "security_password_confirm_field_label": "Password Confirm",
+  "security_third_party_title": "Third-party Sign-on"
 }

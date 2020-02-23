@@ -1,4 +1,18 @@
 {
   "title": "注册",
-  "password_requirement": "您的玩家ID只能包含小写字母、数字、下划线（_）、连字符（-），且长度为3到16个字符。"
+  "id_requirement": "您的玩家ID只能包含小写字母、数字、下划线（_）、连字符（-），且长度为3到16个字符。",
+  "password_requirement": "3-16 个小写字符、数字、下划线（_）或连字符（-）",
+  "email_field_error_required": "需要一个邮箱地址。",
+  "email_field_error_invalid": "输入了一个无效的邮箱地址。",
+  "id_placeholder": "玩家 ID",
+  "email_placeholder": "邮箱地址",
+  "password_field_error_required": "请输入密码。",
+  "password_field_error_invalid": "密码必须包含至少 8 个字符。",
+  "password_field_placeholder": "密码",
+  "password_confirm_field_placeholder": "确认密码",
+  "tos_field_error_required": "您必须同意我们的服务条款。",
+  "tos_field_title": "我同意 Cytoid 的 {0}。",
+  "join_btn": "加入社区",
+  "existing_user_title": "已经注册了吗？",
+  "existing_user_content": "登录来享受您作为 Cytoid 社区成员的特权吧！"
 }

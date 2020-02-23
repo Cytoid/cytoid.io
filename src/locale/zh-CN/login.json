@@ -1,4 +1,12 @@
 {
   "title": "已经有 Cytoid 账号了吗？",
-  "subtitle": "在下方登录吧。"
+  "subtitle": "在下方登录吧。",
+  "username_field_placeholder": "玩家 ID / 电子邮箱地址",
+  "username_field_error_required": "请输入你的玩家ID或电子邮箱地址",
+  "password_field_placeholder": "密码",
+  "password_field_error_required": "请输入密码",
+  "remember_me_checkbox_title": "记住密码",
+  "forgot_password_link_title": "忘记密码",
+  "new_user_welcome_title": "新用户？",
+  "new_user_welcome_content": "注册以解锁 Cytoid 的多人游戏功能。这仅需要不到 30 秒！"
 }
