@@ -1,5 +1,5 @@
 {
-  "title": "已有 Cytoid 账号？",
+  "title": "已有 Cytoid 帐号？",
   "subtitle": "请在此登录。",
   "username_field_placeholder": "Cytoid ID / 邮箱地址",
   "username_field_error_required": "请输入您的 Cytoid ID 或邮箱地址。",
@@ -7,6 +7,6 @@
   "password_field_error_required": "请输入您的密码。",
   "remember_me_checkbox_title": "下次自动登录",
   "forgot_password_link_title": "忘记密码",
-  "new_user_welcome_title": "还没有 Cytoid 账号？",
+  "new_user_welcome_title": "还没有 Cytoid 帐号？",
   "new_user_welcome_content": "注册以访问 Cytoid 所有的多人游戏功能。只需要 30 秒时间！"
 }
