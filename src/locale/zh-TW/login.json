@@ -8,5 +8,8 @@
   "remember_me_checkbox_title": "記住登入狀態",
   "forgot_password_link_title": "忘記密碼了嗎？",
   "new_user_welcome_title": "欸不是你還沒註冊？",
-  "new_user_welcome_content": "動動手指填一下就能免錢盡情無限遊玩 Cytoid 了，坐而言不如起而行，還不趕快動作？"
+  "new_user_welcome_content": "動動手指填一下就能免錢盡情無限遊玩 Cytoid 了，坐而言不如起而行，還不趕快動作？",
+  "login_snack_bar": "Welcome back, {name}",
+  "login_password_error": "Username or password mismatch!",
+  "login_username_error": "User does not exist!"
 }
