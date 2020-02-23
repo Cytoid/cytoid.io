@@ -1,19 +1,19 @@
 {
   "week": "周",
   "region_unavailable": "Cytoid.io 在中国可能无法正常工作",
-  "region_unavailable_content": "国际版网站需要的一些关键组件，包括谷歌验证码，谷歌云存储，推特，Discord等，可能会无法正常加载。为了最佳的用户体验，请访问中国大陆地区官网。",
+  "region_unavailable_content": "国际版网站需要的一些关键组件，包括谷歌验证码，谷歌云存储，推特，Discord 等，可能会无法正常加载。为了最佳的用户体验，请访问中国大陆地区官网。",
   "tos": "服务条款",
   "community_guidelines": "社区准则",
-  "dmca": "DCMA",
+  "dmca": "DMCA",
   "status": "服务状态",
   "language": "语言",
   "submit_btn": "提交",
   "save_btn": "保存",
-  "profile": "个人资料",
+  "profile": "资料",
   "studio": "工作室",
   "favorites": "收藏夹",
   "settings": "设置",
-  "signout_btn": "登出",
+  "signout_btn": "退出账号",
   "signup_btn": "注册",
   "more_btn": "更多",
   "nav_home": "首页",
@@ -23,5 +23,5 @@
   "delete_btn": "删除",
   "collection_card_levels_count_tag": "{count} 个关卡",
   "file_upload_default_title": "上传文件",
-  "file_upload_default_subtitle": "点击或把文件拖到这里来上传"
+  "file_upload_default_subtitle": "点击或拖动文件到此区域上传"
 }
