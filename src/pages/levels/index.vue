@@ -1,5 +1,6 @@
 <i18n locale="en" src="@/locale/en/levels.json" />
 <i18n locale="zh-cn" src="@/locale/zh-CN/levels.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/levels.json" />
 
 <template lang="pug">
 .section

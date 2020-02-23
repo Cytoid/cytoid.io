@@ -1,3 +1,7 @@
+<i18n locale="en" src="@/locale/en/collection_details.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/collection_details.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/collection_details.json" />
+
 <template lang="pug">
 .container(v-if="collection")
   section.section.header-container
@@ -9,25 +13,25 @@
       v-if="$store.state.user && (collection.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
     )
       font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
-      | Manage
+      span(v-t="'manage_btn'")
   section.section
-    .notification.is-warning(v-if="collection.state === 'PRIVATE'") This collection was made private by its owner. It is invisible to other users.
-    .notification.is-primary(v-else-if="collection.state === 'UNLISTED'") This collection is unlisted.
+    .notification.is-warning(v-if="collection.state === 'PRIVATE'" v-t="'message_private'")
+    .notification.is-primary(v-else-if="collection.state === 'UNLISTED'" v-t="'message_unlisted'")
   section.section.columns
     .column
       .box
         player-avatar(style="margin-bottom: 16px;" :player="collection.owner")
         .content(v-html="formattedDescriptions")
         template(v-if="collection.tags.length > 0")
-          .card-heading Tags
+          .card-heading(v-t="'tags_title'")
           .tags(style="margin-bottom: 16px;")
             .tag(v-for="tag in collection.tags" :key="tag" v-text="tag")
-        .card-heading Created on
+        .card-heading(v-t="'creation_date_title'")
         .card-secondary-text(style="margin-bottom: 1rem;") {{$dateFormatCalendar(collection.creationDate)}}, {{ $dateFromNow(collection.creationDate) }}
-        .card-heading Last updated
+        .card-heading(v-t="'modification_date_title'")
         .card-secondary-text {{$dateFormatCalendar(collection.modificationDate)}}, {{ $dateFromNow(collection.modificationDate) }}
       .box(v-if="collection.metadata.cover")
-          p.card-heading Cover art
+          p.card-heading(v-t="'metadata_cover_art_title'")
           p.card-em-text(style="margin-bottom: 4px;" v-text="collection.metadata.cover.name")
           a(v-if="collection.metadata.cover.url" :href="collection.metadata.cover.url")
             a-button.card-button

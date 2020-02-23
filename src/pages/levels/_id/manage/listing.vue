@@ -1,12 +1,16 @@
+<i18n locale="en" src="@/locale/en/level_details.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/level_details.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/level_details.json" />
+
 <template lang="pug">
 div
   .box
     form(:form="form" @submit.prevent="submit(form)")
-      b-field(label="Description")
+      b-field(:label="$t('manage.description_field')")
         client-only: markdown-editor(v-model="form.description")
-      b-field(label="Tags")
+      b-field(:label="$t('manage.tags_field')")
         tag-input(v-model="form.tags")
-      b-field(label="Visibility" :message="visibilityText")
+      b-field(:label="$t('manage.visibility_field')")
         visibility-select(:value="form.published" bordered @change="form.published=$event")
       a-button.card-button(
         block
@@ -16,21 +20,21 @@ div
         size="large"
       )
         font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
-        | Save
+        span(v-t="'save_btn'")
   form.box(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
     b-field(grouped)
-      b-field(label="Censored")
-        b-switch(v-model="censored" type="is-danger") Remove from Public
-      b-field(label="Reason" expanded message="One word to summarize why this level is not suitable for public viewing")
+      b-field(:label="$t('manage.admin.censorship_title')")
+        b-switch(v-model="censored" type="is-danger") {{$t('manage.admin.censorship_checkbox_title')}}
+      b-field(label="Reason" expanded :message="$t('manage.admin.censorship_reason_hint')")
         b-input(v-model="adminForm.censored" expanded :disabled="!censored")
-    b-field(label="Category")
+    b-field(:label="$t('manage.admin.category_title')")
       b-taginput(
         v-model="adminForm.category"
         :data="['featured']"
         autocomplete
         open-on-focus
         icon="tag"
-        placeholder="Adding an administrative category...")
+        :placeholder="$t('manage.admin.category_placeholder')")
     a-button.card-button(
       block
       :loading="loading"
@@ -39,7 +43,7 @@ div
       size="large"
     )
       font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
-      | Save
+      span(v-t="'save_btn'")
 </template>
 
 <script>
@@ -73,14 +77,6 @@ export default {
     }
   },
   computed: {
-    visibilityText() {
-      const index = [false, null, true].indexOf(this.form.published)
-      return [
-        'This level will be visible to nobody but you.',
-        'This level will only be visible through the URL.',
-        'This level will be visible to everybody.'
-      ][index]
-    },
     censored: {
       get() { return this.adminForm.censored !== null },
       set(val) { this.adminForm.censored = val ? '' : null },

@@ -1,5 +1,6 @@
 <i18n locale="en" src="@/locale/en/settings.json" />
 <i18n locale="zh-cn" src="@/locale/zh-CN/settings.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/settings.json" />
 
 <template lang="pug">
 div

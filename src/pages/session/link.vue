@@ -1,5 +1,7 @@
 <i18n locale="en" src="@/locale/en/link.json">
 <i18n locale="zh-cn" src="@/locale/zh-CN/link.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/link.json" />
+
 <template>
   <div>
     <h2 v-t="{ path: 'title', args: { provider } }" />

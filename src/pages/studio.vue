@@ -1,5 +1,6 @@
 <i18n locale="en" src="@/locale/en/studio.json" />
 <i18n locale="zh-cn" src="@/locale/zh-CN/studio.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/studio.json" />
 
 <template lang="pug">
   .section: .container: .columns

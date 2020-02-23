@@ -1,50 +1,54 @@
+<i18n locale="en" src="@/locale/en/level_details.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/level_details.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/level_details.json" />
+
 <template lang="pug">
   div
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
-      p Replace
+      p(v-t="'manage.replace_title'")
     upload-level(slot="header" accept=".cytoidlevel"  :level="value")
-      template(slot="text") Click or drag a Cytoid level to this area
-      template(slot="hint") Your level must have the same ID as the current one.
+      template(slot="text") {{$t('manage.replace_upload_title')}}
+      template(slot="hint") {{$t('manage.replace_upload_subtitle')}}
     captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
-      p Metadata
+      p(v-t="'manage.metadata.title'")
     div
       .box
         a-form(:form="form")
-          p.heading(style="margin-bottom: 4px;") ID
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.id_field'")
           a-form-item
             a-input(:value="value.uid" disabled)
-          p.heading(style="margin-bottom: 4px;") Title
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.title_field'")
           a-form-item
-            template(slot="extra") The music title in its original form and language.
+            template(slot="extra") {{$t('manage.metadata.title_hint')}}
             a-input(v-decorator="formDecorator.title" disabled)
-          p.heading(style="margin-bottom: 4px;") Localized title (optional)
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.localized_title_field'")
           a-form-item
-            div(slot="extra") The music title in English. Literal translation is preferred.
+            div(slot="extra" v-t="'manage.metadata.localized_title_hint'")
             a-input(v-decorator="formDecorator.title_localized" disabled)
-          p.heading(style="margin-bottom: 4px;") Music artist name(s)
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.artist_field'")
           a-form-item
-            div(slot="extra") The music artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.
+            div(slot="extra" v-t="'manage.metadata.artist_hint'")
             a-input(v-decorator="formDecorator.artist.name" disabled)
-          p.heading(style="margin-bottom: 4px;") Localized music artist name(s)
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.localized_artist_field'")
           a-form-item
-            div(slot="extra") The music artist name(s) in English. Literal translation is preferred.
+            div(slot="extra" v-t="'manage.metadata.localized_artist_hint'")
             a-input(v-decorator="formDecorator.artist.name_localized" disabled)
-          p.heading(style="margin-bottom: 4px;") Music source URL
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.music_url_field'")
           a-form-item
-            div(slot="extra") The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.
+            div(slot="extra" v-t="'manage.metadata.music_url_hint'")
             a-input(v-decorator="formDecorator.artist.url" disabled)
-          p.heading(style="margin-bottom: 4px;") Cover artist name(s)
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.cover_art_field'")
           a-form-item
-            div(slot="extra") The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.
+            div(slot="extra" v-t="'manage.metadata.cover_art_hint'")
             a-input(v-decorator="formDecorator.illustrator.name" disabled)
-          p.heading(style="margin-bottom: 4px;") Localized cover artist name(s)
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.cover_art_localized_field'")
           a-form-item
-            div(slot="extra") The cover artist name(s) in English. Literal translation is preferred.
+            div(slot="extra" v-t="'manage.metadata.cover_art_localized_hint'")
             a-input(v-decorator="formDecorator.illustrator.localized_name" disabled)
-          p.heading(style="margin-bottom: 4px;") Cover source URL
+          p.heading(style="margin-bottom: 4px;" v-t="'manage.metadata.cover_art_url_field'")
           a-form-item
-            div(slot="extra") The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used.
+            div(slot="extra" v-t="'manage.metadata.cover_art_url_hint'")
             a-input(v-decorator="formDecorator.illustrator.url" disabled)
           // TODO: Only show respective difficulty ratings if the level has that difficulty type available
           template(v-for="chart in value.charts")
@@ -55,7 +59,7 @@
             | Please follow the #[a(href="https://cytoid.io/posts/difficulty-v2") difficulty rating guidelines] when rating your charts.
           a-button.card-button(block style="margin-top: 24px;" disabled html-type="submit")
             font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
-            span Save
+            span(v-t="'save_btn'")
 </template>
 
 <script>

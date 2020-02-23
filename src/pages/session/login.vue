@@ -127,7 +127,7 @@ export default {
         const user = event.data.user
         this.$store.commit('setUser', user)
         this.$store.commit('setAvatar', user.avatarURL)
-        this.$message.info('Welcome, ' + (user.uid))
+        this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
         this.$router.go(-1)
       } else if (event.data.token && event.data.provider) {
         this.$router.replace({
@@ -145,7 +145,7 @@ export default {
         this.$store.dispatch('login', { ...values, token: this.captchaToken })
           .then((user) => {
             this.loading = false
-            this.$message.info('Welcome, ' + (user.uid))
+            this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
             this.$router.go(-1)
             global.window.gtag('event', 'login', {
               event_category: 'auth',
@@ -159,9 +159,9 @@ export default {
             // For temp disabled captcha
             this.form.resetFields(['password'])
             if (error.response && error.response.status === 401) {
-              this.$message.error('Username or password mismatch!')
+              this.$message.error(this.$t('login_password_error'))
             } else if (error.response && error.response.status === 404) {
-              this.$message.error('User does not exist!')
+              this.$message.error(this.$t('login_username_error'))
             } else {
               this.handleErrorToast(error)
             }

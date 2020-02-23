@@ -1,5 +1,6 @@
 <i18n locale="en" src="@/locale/en/profile.json" />
 <i18n locale="zh-cn" src="@/locale/zh-CN/profile.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/profile.json" />
 
 <template lang="pug">
   .section: .container(style="margin-top: 256px;")
