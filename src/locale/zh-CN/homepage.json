@@ -1,5 +1,5 @@
 {
-  "slogan": "一个由社区驱动的触屏音游",
+  "slogan": "一个由社区驱动的移动端音游",
   "download_appstore": "前往 App Store 下载",
   "download_googleplay": "前往 Google Play 商店下载",
   "news_title": "Cytoid 新闻",
@@ -13,7 +13,7 @@
   "new_comments_title": "最新评论",
   "connect_title": "连接",
   "connect_discord_subtitle": "共有 {count} 个成员在线",
-  "connect_discord_content": "",
+  "connect_discord_content": "想得到制谱的帮助、参加每周竞赛、玩梗就来加入我们的 Discord 社区吧！",
   "connect_discord_btn": "加入我们的 Discord 社区！",
   "connect_patreon_content": "Cytoid 是完全免费开源的，但是呢，这游戏的服务器挺耗钱的，为了保持这游戏正常运营，你可以考虑......"
 }
