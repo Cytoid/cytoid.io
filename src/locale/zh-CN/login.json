@@ -8,5 +8,8 @@
   "remember_me_checkbox_title": "下次自动登录",
   "forgot_password_link_title": "忘记密码",
   "new_user_welcome_title": "还没有 Cytoid 帐号？",
-  "new_user_welcome_content": "注册以访问 Cytoid 所有的多人游戏功能。只需要 30 秒时间！"
+  "new_user_welcome_content": "注册以访问 Cytoid 所有的多人游戏功能。只需要 30 秒时间！",
+  "login_snack_bar": "Welcome back, {name}",
+  "login_password_error": "Username or password mismatch!",
+  "login_username_error": "User does not exist!"
 }
