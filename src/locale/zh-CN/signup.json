@@ -1,4 +1,4 @@
 {
-  "title": "",
-  "password_requirement": ""
+  "title": "注册",
+  "password_requirement": "您的玩家ID只能包含小写字母、数字、下划线（_）、连字符（-），且长度为3到16个字符。"
 }
