@@ -1,8 +1,10 @@
+<i18n locale="en" src="@/locale/en/homepage.json" />
+
 <template lang="pug">
   div
     .container.logo
       img(:src="require('@/assets/images/logo.png')")
-      .slogan A community-driven touchscreen music game
+      .slogan(v-t="'slogan'")
       .download-button-group
         a(href="https://itunes.apple.com/us/app/cytoid/id1266582726" target="_blank")
           a-button.download-button.ele3(
@@ -11,7 +13,7 @@
           )
             div(style="display: flex; align-content: center; padding-top: 2px;")
               font-awesome-icon(:icon="['fab', 'app-store']" fixed-width style="margin-right: .5rem; font-size: 20px;")
-              span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on App Store
+              span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; " v-t="'download_appstore'")
         a(href="https://play.google.com/store/apps/details?id=me.tigerhix.cytoid" target="_blank")
           a-button.download-button.ele3(
             type="primary"
@@ -19,43 +21,43 @@
           )
             div(style="display: flex; align-content: center; padding-top: 2px;")
               font-awesome-icon(:icon="['fab', 'google-play']" fixed-width style="margin-right: .5rem; font-size: 20px;")
-              span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; ") Download on Google Play
+              span.card-heading(style="color: white; margin-bottom: 0; text-align: center; margin-top: 2px; " v-t="'download_googleplay'")
     .section: .container(style="margin-top: -10vh;")
       .columns
         .column.is-two-thirds-desktop.is-three-fifths-tablet
           #posts.box.is-gradient
-            p.card-heading Cytoid News
+            p.card-heading(v-t="'news_title'")
             post-card.post-card(v-for="post in posts" :key="post.slug" :value="post")
             div(v-if="false")
               nuxt-link(:to="{ name: 'posts' }")
                 a-button.card-button(style="width: 100%;")
                   font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                  span View previous news
+                  span(v-t="'news_previous'")
         .column.is-one-third-desktop.is-two-fifths-tablet
           #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")
-            p.card-heading Featured Collection
+            p.card-heading(v-t="'featured_collection_title'")
             collection-simple-card(:value="data.gettingStarted")
           nuxt-link(:to="{ name: 'collections' }")
             a-button.browse-button.ele3(
               type="primary"
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold; margin-bottom: 1.5rem;"
+              v-t="{ path: 'collection_all_btn', args: { count: (data && data.collectionsCount) || 0 } }"
             )
-              | Browse all {{ data && data.collectionsCount }} collections!
           #index-featured-level.box.is-gradient(v-if="latestFeaturedLevel")
-            p.card-heading Latest featured level
+            p.card-heading(v-t="'featured_level_title'")
             level-card.level-card(:value="latestFeaturedLevel")
           nuxt-link(:to="{ name: 'levels' }")
             a-button.browse-button.ele3(
               type="primary"
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold;"
+              v-t="{ path: 'level_all_btn', args: { count: totalLevels } }"
             )
-              | Browse all {{ totalLevels }} levels!
       collection-preview-card(v-if="data" :value="data.hitech")
       .columns
         .column.is-one-third-desktop.is-half-tablet
-          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Recent ranks
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'recent_ranks_title'")
           player-recent-rank(
             v-for="rank in latestRanks"
             :key="rank.id"
@@ -64,11 +66,11 @@
             style="margin: 8px 0;"
           )
         .column.is-one-third-desktop.is-half-tablet
-          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Latest tweet
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'latest_tweet_title'")
           a-spin(:spinning="loadingTweet" style="min-height: 128px;")
             p(v-show="loadTweetFailed") Cannot fetch latest tweet.
             Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId.toString()" :key="latestTweetId" :options="{ theme: 'dark' }")
-          p.heading(style="padding-top: 24px; margin-bottom: 12px;") New comments
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'new_comments_title'")
           a-spin(:spinning="loadingComments" style="min-height: 128px;")
             p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
             player-recent-comment(
@@ -78,26 +80,22 @@
               style="margin: 8px 0;"
             )
         .column.is-one-third-desktop.is-half-tablet
-          p.heading(style="padding-top: 24px; margin-bottom: 12px;") Connect
+          p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'connect_title'")
           #discord.box.is-gradient
             img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
-            p(v-show="onlineDiscordMembersCount > 0" style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);")
-              | {{ onlineDiscordMembersCount }} members online
-            p(style="margin-top: 8px")
-              | Join our Discord community for charting help, weekly tournaments,
-              |
-              span(style="text-decoration: line-through;") memes
-              |
-              | and more!
+            p(
+              v-show="onlineDiscordMembersCount > 0"
+              style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);"
+              v-t="{path: 'connect_discord_subtitle', args: { count: onlineDiscordMembersCount}}"
+            )
+            p(style="margin-top: 8px" v-t="'connect_discord_content'")
             a(href="https://discord.gg/cytoid")
               a-button(class="card-button" style="width: 100%;")
                 font-awesome-icon(icon="sign-in" fixed-width style="margin-right: 4px;")
-                span Join the community!
+                span(v-t="'connect_discord_btn'")
           #patron.box.is-gradient
             img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
-            p(style="margin-top: 24px").
-              Cytoid is #[strong 100% free] and #[strong open-source].
-              However, keeping the game servers running costs #[em $$$]. Maybe you can...
+            p(style="margin-top: 24px" v-t="'connect_patreon_content'")
             a(href="https://www.patreon.com/tigerhix")
               a-button.card-button(style="width: 100%;")
                 font-awesome-icon(icon="heart" fixed-width style="margin-right: 4px;")

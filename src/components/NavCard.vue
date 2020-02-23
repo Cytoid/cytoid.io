@@ -14,20 +14,20 @@
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['fas', 'user']")
-      .title Profile
+      .title(v-t="'profile'")
     nuxt-link.navcard-item(to="/studio")
       font-awesome-icon.icon(:icon="['fas', 'puzzle-piece']")
-      .title Studio
+      .title(v-t="'studio'")
     .navcard-item.navcard-item-disabled
       font-awesome-icon.icon(:icon="['fas', 'heart']")
-      .title Favorites
+      .title(v-t="'favorites'")
     nuxt-link.navcard-item(to="/settings")
       font-awesome-icon.icon(:icon="['fas', 'cog']")
-      .title Settings
+      .title(v-t="'settings'")
   .section
     a-button(class="card-button-light" style="width: 100%;" @click="logout")
       font-awesome-icon(icon="sign-out" fixed-width style="margin-right: 4px;")
-      span Sign out
+      span(v-t="'signout_btn'")
 </template>
 
 <script>

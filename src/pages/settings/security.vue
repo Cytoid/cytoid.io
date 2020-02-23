@@ -1,27 +1,28 @@
+<i18n locale="en" src="@/locale/en/settings.json" />
+
 <template lang="pug">
 div
   div
     div(class="card-pre-header")
-      p Password
+      p(v-t="'security_password_title'")
     .box
       a-form(:form="form" @submit.prevent="submit")
-        a-form-item(label="Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
+        a-form-item(:label="$t('security_password_field_label')" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
           a-input(
             type="password"
-            placeholder="Old Password"
             v-decorator="['old',{ rules: [{ required: true, message: 'The old password is required' }] }]"
           )
-        a-form-item(label="New Password" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
+        a-form-item(:label="$t('security_new_password_field_label')" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
           a-input(
             type="password"
             v-decorator="['new',{ rules: [{ required: true, message: 'The new password is required' }, , { min: 8, message: 'Password has to be at least 8 characters.'}] }]"
           )
-        a-form-item(label="Password Confirm" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
+        a-form-item(:label="$t('security_password_confirm_field_label')" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
           a-input(
             type="password"
             v-decorator="['newConfirm',{ rules: [{ validator: comparePasswords }, { required: true, message: 'Please input your password again' }]}]"
           )
-        a-button.card-button(html-type="submit" :loading="loading") Submit
+        a-button.card-button(html-type="submit" :loading="loading" v-t="'submit_btn'")
   div(style="margin-top: 16px;")
     div(class="card-pre-header")
       p Third-party Sign-on

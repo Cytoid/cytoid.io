@@ -31,6 +31,7 @@ export default function ({ app, store, req }) {
   app.i18n = new VueI18n({
     locale: 'en',
     fallbackLocale: 'en',
+    silentTranslationWarn: process.env.NODE_ENV === 'production',
     messages: {
       en: require('@/locale/en/index.json'),
       'zh-cn': require('@/locale/zh-cn/index.json'),

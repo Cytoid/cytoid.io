@@ -1,14 +1,16 @@
+<i18n locale="en" src="@/locale/en/settings.json" />
+
 <template lang="pug">
 a-form(layout="horizontal" @submit.prevent="submit")
   div
     div(class="card-pre-header")
-      p Cover image
+      p(v-t="'profile_header_title'")
   a-form-item(label="Cover image" :label-col="{ span: 20, sm: 5 }")
     captcha(invisible badge="bottomleft")
     background-upload(@change="headerUploaded" :src="headerURL")
   div
     div(class="card-pre-header")
-      p Bio
+      p(v-t="'profile_bio_title'")
   client-only: markdown-editor(
     :configs="{ spellChecker: false }"
     v-model="form.bio"
@@ -18,7 +20,8 @@ a-form(layout="horizontal" @submit.prevent="submit")
     size="large"
     html-type="submit"
     type="primary"
-  ) Submit
+    v-t="'save_btn'"
+  )
 </template>
 
 <script>

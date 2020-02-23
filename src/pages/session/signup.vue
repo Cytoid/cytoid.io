@@ -1,18 +1,6 @@
-<i18n locale="en">
-{
-  "title": "Sign Up"
-}
-</i18n>
-<i18n locale="zh-cn">
-{
-  "title": "注册"
-}
-</i18n>
-<i18n locale="zh-tw">
-{
-  "title": "註冊"
-}
-</i18n>
+<i18n locale="en" src="@/locale/en/signup.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/signup.json"/>
+<i18n locale="zh-tw" src="@/locale/zh-TW/signup.json" />
 
 <template>
   <div>
@@ -22,10 +10,7 @@
       @submit.prevent="signUp"
     >
       <a-form-item>
-        <div slot="extra">
-          Your player ID must be in between 3 and 16 characters and contain only <b>lowercase letters</b>, numbers,
-          underscores, and hyphens.
-        </div>
+        <div slot="extra" v-t="'password_requirement'" />
         <a-input
           v-decorator="[
             'uid',

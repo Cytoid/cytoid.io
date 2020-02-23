@@ -21,7 +21,7 @@ div
     b-field(grouped)
       b-field(label="Censored")
         b-switch(v-model="censored" type="is-danger") Remove from Public
-      b-field(label="Reason" expanded message="One word to summerize why this level is not suitable for public viewing")
+      b-field(label="Reason" expanded message="One word to summarize why this level is not suitable for public viewing")
         b-input(v-model="adminForm.censored" expanded :disabled="!censored")
     b-field(label="Category")
       b-taginput(
