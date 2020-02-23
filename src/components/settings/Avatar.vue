@@ -1,7 +1,9 @@
+<i18n locale="en" src="@/locale/en/settings.json" />
+
 <template lang="pug">
 div
   div(class="card-pre-header")
-    p Avatar
+    p(v-t="'avatar_title'")
   .box.avatar-upload
     captcha(invisible badge="bottomleft")
     a-upload(
@@ -19,8 +21,9 @@ div
         class="card-button"
         :loading="avatarDeleteLoading",
         @click="avatarDelete"
-      ) Click to use Gravatar
-    span(v-else) You're using your avatar from #[a(href="https://gravatar.com/" target="_blank" style="font-weight:bold") Gravatar]!
+        v-t="'avatar_use_gravatar_btn'")
+    i18n(path="avatar_using_gravatar" tag="span" v-else)
+      a(href="https://gravatar.com/" target="_blank" style="font-weight:bold" v-t="'gravatar'")
 </template>
 
 <script>
@@ -74,7 +77,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .avatar-upload {
   display: flex;
   flex-direction: column;

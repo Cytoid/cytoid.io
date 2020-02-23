@@ -1,16 +1,5 @@
-<i18n locale="en">
-{
-  "title": "Link your {provider} account",
-  "subtitle": "Please input your Cytoid credentials. Account will be created if the ID you provided does not exist."
-}
-</i18n>
-<i18n locale="zh-cn">
-{
-  "title": "连接你的 {provider} 账号",
-  "subtitle": "请输入你的Cytoid账号。如果账号不存在，我们会为你创建一个新的账号。"
-}
-</i18n>
-
+<i18n locale="en" src="@/locale/en/link.json">
+<i18n locale="zh-cn" src="@/locale/zh-CN/link.json" />
 <template>
   <div>
     <h2 v-t="{ path: 'title', args: { provider } }" />

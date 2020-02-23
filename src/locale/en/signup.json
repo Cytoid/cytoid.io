@@ -1,0 +1,4 @@
+{
+  "title": "Sign Up",
+  "password_requirement": "Your player ID must be in between 3 and 16 characters and contain only lowercase letters, numbers, underscores, and hyphens."
+}

@@ -1,3 +1,5 @@
+<i18n locale="en" src="@/locale/en/level_details.json" />
+
 <template lang="pug">
   .section: .container(style="margin-top: 256px;")
     h1.text-ele(style="margin-bottom: 16px; line-height: 1.0;" v-text="level.title")
@@ -12,7 +14,7 @@
       a(:href="downloadURL" @click="download")
         a-button.download-button.ele3(type="primary" size="large")
           font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
-          span Download #[template(v-if="level.size") ({{formatSize(level.size)}})]
+          span(v-t="{ path: 'download_btn', args: { size: formatSize(level.size) }}")
       nuxt-link(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
         v-if="$store.state.user && (level.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
@@ -23,16 +25,16 @@
           :style="{ 'margin-left': '1rem' }"
         )
           font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
-          span Manage
-    .notification.is-warning(v-if="level.published === false") This level was made private by its owner. It is invisible to the users.
-    .notification.is-primary(v-if="level.published === null") This level is unlisted.
-    .notification.is-danger(v-if="level.censored") This level was censored for: {{level.censored}}
+          span(v-t="'manage_btn'")
+    .notification.is-warning(v-if="level.published === false" v-t="'message_private'")
+    .notification.is-primary(v-if="level.published === null" v-t="'message_unlisted'")
+    .notification.is-danger(v-if="level.censored" v-t="{ path: 'message_censored', args: { reason: level.censored } }")
     .columns
       .column.is-one-third
         .box
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           .level-description(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
-          p.card-heading Rating
+          p.card-heading(v-t="'details_card_rating_title'")
           div(style="margin-bottom: 16px;")
             a-rate(
               :default-value="(ratings.rating || ratings.average) * 0.5"
@@ -42,19 +44,19 @@
             )
             span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
           template(v-if="level.tags.length > 0")
-            .card-heading Tags
+            .card-heading(v-t="'details_card_tags_title'")
             .tags
               a.tag(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()" v-text="tag")
-          .card-heading Last updated
+          .card-heading(v-t="'details_card_last_updated_title'")
           .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         .box
-          p.card-heading Music
+          p.card-heading(v-t="'credits_card_music_title'")
           p.card-em-text(style="margin-bottom: 4px;" v-if="level.metadata.artist") {{ level.metadata.artist.name }}
           a(v-if="level.metadata.artist && level.metadata.artist.url" :href="makeLink(level.metadata.artist.url)")
             a-button.card-button(style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
               font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
               span Source
-          p.card-heading Cover art
+          p.card-heading(v-t="'credits_card_cover_art_title'")
           p.card-em-text(style="margin-bottom: 4px;" v-if="level.metadata.illustrator") {{ level.metadata.illustrator.name }}
           a(v-if="level.metadata.illustrator && level.metadata.illustrator.url" :href="makeLink(level.metadata.illustrator.url)")
             a-button.card-button(style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
@@ -64,7 +66,7 @@
           p.card-em-text(style="margin-bottom: 16px;" v-if="level.metadata.charter") {{ level.metadata.charter.name }}
       .column.is-two-thirds
         .box.rankings-card.is-gradient(:style="rankingsHeaderGradient")
-          p.card-heading Difficulty
+          p.card-heading(v-t="'difficulty_card_title'")
           a-radio-group(v-model="rankingsChartType")
             a-radio-button(v-for="chart in level.charts.slice().reverse()" :value="chart.type" :key="chart.id") {{ chart.name || convertedDifficultyName(chart.type) }}
           a-table.rankings-table(

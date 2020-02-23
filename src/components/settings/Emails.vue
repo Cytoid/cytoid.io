@@ -1,7 +1,9 @@
+<i18n locale="en" src="@/locale/en/settings.json" />
+
 <template lang="pug">
 div
   div(class="card-pre-header")
-    p Emails
+    p(v-t="'email_title'")
   .box
     a-list(
       bordered
@@ -13,17 +15,17 @@ div
         .list-buttons
           a-button(v-if="!item.verified" @click="verify(item.address)")
             font-awesome-icon(icon="envelope").icon
-            | Verify
+            span(v-t="'email_verify'")
           a-button(v-if="!item.primary && item.verified" @click="makePrimary(item)")
             font-awesome-icon(icon="chevron-up").icon
-            | Make Primary
+            span(v-t="'email_make_primary'")
           a-button(type="danger" @click="removeEmail(item.address, index)")
             font-awesome-icon(icon="trash").icon
-            | Delete
+            span(v-t="'email_delete'")
     a-form(layout="inline" @submit.prevent="addEmail" :form="newEmailForm" hideRequiredMark)
-      a-form-item(label="Add email address")
+      a-form-item(:label="$t('email_add')")
         a-input(
-          v-decorator="['email', { rules: [{ required: true, message: 'An email address is required.' },{ type: 'email', message: 'This is not a valid email' }]}]"
+          v-decorator="['email', { rules: [{ required: true, message: $t('email_required') },{ type: 'email', message: $t('email_valid') }]}]"
           html-type="envelope"
           placeholder="example@cytoid.io"
         )
@@ -31,7 +33,7 @@ div
       a-form-item
         a-button(html-type="submit" :disabled="loading")
           font-awesome-icon(icon="plus" style="margin-right: 0.5rem;")
-          | Add
+          span(v-t="'email_add_btn'")
 </template>
 
 <script>

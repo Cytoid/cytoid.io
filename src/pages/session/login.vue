@@ -1,21 +1,6 @@
-<i18n locale="en">
-{
-  "title": "Already have a Cytoid account?",
-  "subtitle": "Please sign in below."
-}
-</i18n>
-<i18n locale="zh-cn">
-{
-  "title": "已有Cytoid账号？",
-  "subtitle": "请在下方登录"
-}
-</i18n>
-<i18n locale="zh-tw">
-{
-  "title": "已有Cytoid賬號？",
-  "subtitle": "請在下方登錄"
-}
-</i18n>
+<i18n locale="en" src="@/locale/en/login.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/login.json" />
+<i18n locale="zh-tw" src="@/locale/zh-TW/login.json" />
 
 <template>
   <div>
