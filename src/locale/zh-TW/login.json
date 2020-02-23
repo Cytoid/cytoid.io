@@ -1,8 +1,8 @@
 {
-  "title": "註冊過 Cytoid 了嗎？",
+  "title": "Already have a Cytoid ID?",
   "subtitle": "有的話就直接在下方填一填登入吧。",
-  "username_field_placeholder": "使用者名稱／電郵地址",
-  "username_field_error_required": "請在此輸入使用者名稱或電郵地址。",
+  "username_field_placeholder": "Cytoid ID / Email address",
+  "username_field_error_required": "Please input your Cytoid ID or email address.",
   "password_field_placeholder": "密碼",
   "password_field_error_required": "請在此輸入密碼。",
   "remember_me_checkbox_title": "記住登入狀態",
