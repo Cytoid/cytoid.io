@@ -1,20 +1,22 @@
+<i18n locale="en" src="@/locale/en/studio.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/studio.json" />
+
 <template lang="pug">
   a-modal(
-    :title="'Delete ' + level.title"
+    :title="$t('level_delete_confirm_title', { name: level.title })"
     v-model="modalVisible"
     v-if="level && modalVisible"
     :closable="false"
   )
-    p.
-      Are you sure that you want to delete #[b(v-text="level.title")] ({{level.uid}})?
-      All records related to this level will be purged from our database,
-      including {{level.plays}} playing records.
-      Players will see a reduction on their statistics as well.
-    p Please input the uid of the level #[b(v-text="level.uid" style="color: red;")] to proceed.
+    i18n(path="level_delete_confirm_content1" tag="p")
+      b(v-text="level.title") ({{level.uid}})
+    p(v-t="{ path: 'level_delete_confirm_content2', args: { count: level.plays }}")
+    i18n(path="level_delete_confirm_content3" tag="p")
+      b(v-text="level.uid" style="color: red;")
     action-confirm(
       slot="footer"
       :value="level.uid"
-      button-title="Delete"
+      :button-title="$t('delete_btn')"
       button-type="danger"
       @click="submit"
       :loading="loading"

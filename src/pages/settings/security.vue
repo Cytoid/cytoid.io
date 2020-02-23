@@ -26,7 +26,7 @@ div
         a-button.card-button(html-type="submit" :loading="loading" v-t="'submit_btn'")
   div(style="margin-top: 16px;")
     div(class="card-pre-header")
-      p Third-party Sign-on
+      p(v-t="'security_third_party_title'")
     .box.external-login
       a-button(
         v-for="provider in providers"

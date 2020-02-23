@@ -15,9 +15,9 @@
           <a-input
             v-decorator="[
               'username',
-              { rules: [{ required: true, message: 'Please input your player ID or email address.' }] }
+              { rules: [{ required: true, message: $t('username_field_error_required') }] }
             ]"
-            placeholder="Player ID / Email address"
+            :placeholder="$t('username_field_placeholder')"
           >
             <font-awesome-icon slot="prefix" icon="user" />
           </a-input>
@@ -26,10 +26,10 @@
           <a-input
             v-decorator="[
               'password',
-              { rules: [{ required: true, message: 'Please input your password.' }] }
+              { rules: [{ required: true, message: $t('password_field_error_required') }] }
             ]"
             type="password"
-            placeholder="Password"
+            :placeholder="$t('password_field_placeholder')"
           >
             <font-awesome-icon slot="prefix" icon="lock" />
           </a-input>
@@ -44,23 +44,22 @@
               }
             ]"
           >
-            Remember me
+            {{ $t('remember_me_checkbox_title') }}
           </a-checkbox>
           <nuxt-link to="/session/reset" class="is-pulled-right">
-            Forgot password
+            <small v-t="'forgot_password_link_title'" />
           </nuxt-link>
         </a-form-item>
         <captcha theme="dark" :token.sync="captchaToken" style="margin-bottom: 1rem;" />
         <a-button
+          v-t="'login_btn'"
           class="card-button"
           type="primary"
           html-type="submit"
           :loading="loading"
           :disabled="!captchaToken"
           block
-        >
-          Sign in
-        </a-button>
+        />
       </a-form>
     </div>
     <div class="external-login-level">
@@ -78,17 +77,16 @@
       </template>
     </div>
     <div>
-      <h2>New to Cytoid?</h2>
-      <p>Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!</p>
+      <h2 v-t="'new_user_welcome_title'" />
+      <p v-t="'new_user_welcome_content'" />
       <nuxt-link :to="{ name: 'session-signup' }" replace>
         <a-button
+          v-t="'signup_btn'"
           class="card-button"
           type="primary"
           html-type="submit"
           block
-        >
-          Sign up
-        </a-button>
+        />
       </nuxt-link>
     </div>
   </div>

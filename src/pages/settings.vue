@@ -1,3 +1,6 @@
+<i18n locale="en" src="@/locale/en/settings.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/settings.json" />
+
 <template lang="pug">
   .section: .container: .columns
     .column.is-one-quarter
@@ -5,13 +8,13 @@
         ul.menu-list
           li: nuxt-link(:to="{name: 'settings-account'}")
             font-awesome-icon(:icon="['fas', 'user-alt']" fixed-width)
-            span.menu-text Account
+            span.menu-text(v-t="'account_menu'")
           li: nuxt-link(:to="{name: 'settings-security'}")
             font-awesome-icon(:icon="['fas', 'lock']" fixed-width)
-            span.menu-text Security
+            span.menu-text(v-t="'security_menu'")
           li: nuxt-link(:to="{name: 'settings-profile'}")
             font-awesome-icon(:icon="['fas', 'address-card']" fixed-width)
-            span.menu-text Profile
+            span.menu-text(v-t="'profile_menu'")
     .column: nuxt
 </template>
 
@@ -25,7 +28,7 @@ export default {
   },
   head() {
     return {
-      title: 'Settings - Cytoid'
+      title: this.$t('settings') + ' - Cytoid'
     }
   },
 }

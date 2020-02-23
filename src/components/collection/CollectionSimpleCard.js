@@ -11,7 +11,7 @@ export default {
   render(h, context) {
     const owner = context.props.value.owner
     const slots = {
-      top: () => <span class="tag is-white is-light">{context.props.value.levelCount} levels</span>,
+      top: () => <span class="tag is-white is-light">{context.parent.$t('collection_card_levels_count_tag', { count: context.props.value.levelCount }) }</span>,
       bottom: () => (<div>
         <h2 class="subtitle">{context.props.value.slogan}</h2>
         <h1 class="title">{context.props.value.title}</h1>

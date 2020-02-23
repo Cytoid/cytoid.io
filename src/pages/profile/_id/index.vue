@@ -1,3 +1,6 @@
+<i18n locale="en" src="@/locale/en/profile.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/profile.json" />
+
 <template lang="pug">
   .section: .container(style="margin-top: 256px;")
     .header-container
@@ -11,18 +14,18 @@
         h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
         p.status.text-ele
           font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: profile.user.online }")
-          | {{ profile.user.online ? 'Online' : 'Offline' }}
+          | {{ $t(profile.user.online ? 'online' : 'offline') }}
         p.details.text-ele
           span
             font-awesome-icon(:icon="['fas', 'calendar']")
-            | Joined {{ $dateFromNow(profile.user.registrationDate) }}
+            span(v-t="{ path: 'join_date', args: { date: $dateFromNow(profile.user.registrationDate) } }")
     .columns
       .column.is-one-quarter-widescreen.is-two-fifths
         .bio
-          p.heading Bio
+          p.heading(v-t="'bio_title'")
           .text-ele(v-html="bio")
         div
-          p.heading Recent ranks
+          p.heading(v-t="'recent_ranks_title'")
           player-recent-rank(
             v-for="rank in recentRanks"
             :key="rank.id"
@@ -32,47 +35,47 @@
         .box.statistics-card
           .columns.is-multiline
             .column.is-one-third
-              p.card-heading Total ranked plays
+              p.card-heading(v-t="'total_ranked_plays'")
               p.card-em-text(v-text="profile.activity.totalRankedPlays")
             .column.is-one-third
-              p.card-heading Total cleared notes
+              p.card-heading(v-t="'total_cleared_notes'")
               p.card-em-text(v-text="commaSeparated(profile.activity.clearedNotes)")
             .column.is-one-third
-              p.card-heading Highest max combo
+              p.card-heading(v-t="'highest_max_combo'")
               p.card-em-text(v-text="commaSeparated(profile.activity.maxCombo)")
             .column.is-one-third
-              p.card-heading Average ranked accuracy
+              p.card-heading(v-t="'avg_ranked_accuracy'")
               p.card-em-text(v-text="(profile.activity.averageRankedAccuracy * 100).toFixed(2) + '%'")
             .column.is-one-third
-              p.card-heading Total ranked score
+              p.card-heading(v-t="'total_ranked_score'")
               p.card-em-text(v-text="commaSeparated(profile.activity.totalRankedScore)")
             .column.is-one-third
-              p.card-heading Total play time
+              p.card-heading(v-t="'total_play_time'")
               p.card-em-text(v-text="profile.activity.totalPlayTime")
           a-radio-group(v-if="profile.timeseries" size="small" v-model="chartMode" style="margin-bottom: 16px;")
-            a-radio-button(value="activity") Ranked plays
-            a-radio-button(value="rating") Rating
-            a-radio-button(value="accuracy") Average Accuracy
+            a-radio-button(value="activity" v-t="'chart_radio_ranked_plays'")
+            a-radio-button(value="rating" v-t="'chart_radio_rating'")
+            a-radio-button(value="accuracy" v-t="'chart_radio_avg_accuracy'")
           line-chart(v-if="profile.timeseries" :data="profile.timeseries" :mode="chartMode")
         .box.levels-box(v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)")
           .levels-box-container.has-featured(v-if="profile.user.featuredLevels.length > 0")
-            p.heading Uploaded Levels
+            p.heading(v-t="'levels_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.featuredLevels" :key="level.id" :value="level")
             nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
               a-button(class="card-button" style="width: 100%;")
                 font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                span View all {{profile.user.featuredLevelsCount}} featured
+                span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
           .levels-box-container(v-if="profile.user.levels.length > 0")
             .level-card-container.small
               level-card(v-for="level in profile.user.levels" :key="level.id" :value="level")
             nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
               a-button(class="card-button" style="width: 100%;")
                 font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                span View all {{profile.user.levelsCount}}
+                span(v-t="{ path: 'levels_all_btn', args: { count: profile.user.levelsCount }}")
 
         .box(v-if="profile && profile.user && profile.user.collections && profile.user.collections.length > 0")
-          p.heading(style="margin-bottom: 16px;") Collections
+          p.heading(style="margin-bottom: 16px;" v-t="'collections_title'")
           .level-card-container.small.regular-levels-container
             collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
           a(
@@ -80,7 +83,7 @@
           )
             a-button(class="card-button" style="width: 100%;")
               font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-              span View all {{profile.user.collectionsCount}}
+              span(v-t="{ path: 'collections_all_btn', args: { count: profile.user.collectionsCount }}")
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'profile/' + profile.user.uid" :url="'https://cytoid.io/profile/' + profile.user.uid")
 </template>

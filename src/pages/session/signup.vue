@@ -10,17 +10,17 @@
       @submit.prevent="signUp"
     >
       <a-form-item>
-        <div slot="extra" v-t="'password_requirement'" />
+        <div slot="extra" v-t="'id_requirement'" />
         <a-input
           v-decorator="[
             'uid',
             { rules: [{
               required: true,
               pattern: '^[a-z0-9_-]{3,16}$',
-              message: '3-16 lowercase letters, numbers, _ or -',
+              message: $t('password_requirement'),
             }] }
           ]"
-          placeholder="Player ID"
+          :placeholder="$t('id_placeholder')"
         >
           <font-awesome-icon slot="prefix" icon="user" />
         </a-input>
@@ -30,12 +30,12 @@
           v-decorator="[
             'email',
             { rules: [
-              { required: true, message: 'An email address is required.' },
-              { type: 'email', message: 'The input is not a valid email' },
+              { required: true, message: $t('email_field_error_required') },
+              { type: 'email', message: $t('email_field_error_invalid') },
             ] }
           ]"
           html-type="email"
-          placeholder="Email address"
+          :placeholder="$t('email_placeholder')"
         >
           <font-awesome-icon slot="prefix" icon="envelope" />
         </a-input>
@@ -45,12 +45,12 @@
           v-decorator="[
             'password',
             { rules: [
-              { required: true, message: 'Please input a password.' },
-              { min: 8, message: 'Password has to contain at least 8 characters.'},
+              { required: true, message: $t('password_field_error_required') },
+              { min: 8, message: $t('password_field_error_invalid')},
             ] }
           ]"
           type="password"
-          placeholder="Password"
+          :placeholder="$t('password_field_placeholder')"
         >
           <font-awesome-icon slot="prefix" icon="lock" />
         </a-input>
@@ -59,7 +59,7 @@
         <a-input
           v-decorator="['passwordComfirm',{ rules: [{ validator: comparePasswords }]}]"
           type="password"
-          placeholder="Password Confirm"
+          :placeholder="$t('password_confirm_field_placeholder')"
         >
           <font-awesome-icon slot="prefix" icon="lock" />
         </a-input>
@@ -75,43 +75,40 @@
                 required: true,
                 transform: value => (value || undefined),
                 type: 'boolean',
-                message: 'You must agree to our terms of services.'
+                message: $t('tos_field_error_required')
               }],
             }
           ]"
         >
-          I agree to Cytoid's&nbsp;
-          <nuxt-link :to="{ name: 'legal-id', params: { id: 'terms' } }">
-            terms of services.
-          </nuxt-link>
+          <i18n path="tos_field_title">
+            <nuxt-link v-t="'tos'" :to="{ name: 'legal-id', params: { id: 'terms' } }" />
+          </i18n>
         </a-checkbox>
       </a-form-item>
       <captcha theme="dark" :token.sync="captchaToken" />
       <a-form-item>
         <a-button
+          v-t="'join_btn'"
           class="card-button"
           type="primary"
           html-type="submit"
           block
           :loading="loading"
           :disabled="!captchaToken"
-        >
-          Join the community
-        </a-button>
+        />
       </a-form-item>
     </a-form>
     <div>
-      <h2>Already registered?</h2>
-      <p>Log in to enjoy your privilege as a Cytoid community member!</p>
+      <h2 v-t="'existing_user_title'" />
+      <p v-t="'existing_user_content'" />
       <nuxt-link :to="{ name: 'session-login' }" replace>
         <a-button
+          v-t="'login_btn'"
           class="card-button"
           type="primary"
           html-type="submit"
           block
-        >
-          Log In
-        </a-button>
+        />
       </nuxt-link>
     </div>
   </div>

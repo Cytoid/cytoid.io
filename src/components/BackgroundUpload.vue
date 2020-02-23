@@ -8,8 +8,8 @@
   )
     p.ant-upload-drag-icon
       font-awesome-icon(icon="upload" size="3x")
-    p.ant-upload-text(v-text="props.title")
-    p.ant-upload-hint(v-text="props.hint")
+    p.ant-upload-text(v-text="props.title || parent.$t('file_upload_default_title')")
+    p.ant-upload-hint(v-text="props.hint || parent.$t('file_upload_default_subtitle')")
 </template>
 
 <script>
@@ -18,11 +18,11 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'File Upload',
+      default: null,
     },
     hint: {
       type: String,
-      default: 'Click or drag the file to this area to upload',
+      default: null,
     },
     src: {
       type: String,

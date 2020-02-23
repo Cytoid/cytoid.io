@@ -23,7 +23,7 @@
         .collection-dock-more-card
           font-awesome-icon(icon="plus").collection-dock-more-card-icon
           nuxt-link(:to="{ name: 'collections-id', params: { id: value.uid } }")
-            a-button.card-button More
+            a-button.card-button(v-t="'more_btn'")
 </template>
 
 <script>

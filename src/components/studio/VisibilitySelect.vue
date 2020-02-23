@@ -1,3 +1,6 @@
+<i18n locale="en" src="@/locale/en/studio.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/studio.json" />
+
 <template lang="pug">
 a-select(
   :value="[false, null, true].indexOf(this.value)"
@@ -5,12 +8,12 @@ a-select(
   :class="{ 'is-no-border': !bordered }"
 )
   a-select-option(
-    v-for="(mode, index) of ['Private', 'Unlisted', 'Public']"
+    v-for="(mode, index) of ['visibility_status_private', 'visibility_status_unlisted', 'visibility_status_public']"
     :key="index"
     :value="index"
   )
     font-awesome-icon(:icon="['lock', 'eye-slash', 'globe'][index]" fixed-width style="margin-right: 4px;")
-    | {{mode}}
+    span(v-t="mode")
 </template>
 
 <script>

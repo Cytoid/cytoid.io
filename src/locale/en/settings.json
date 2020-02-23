@@ -1,4 +1,7 @@
 {
+  "account_menu": "Account",
+  "security_menu": "Security",
+  "profile_menu": "Profile",
   "avatar_title": "Avatar",
   "avatar_use_gravatar_btn": "Click to use Gravatar",
   "avatar_using_gravatar": "You're using your avatar from {0}!",
@@ -16,5 +19,6 @@
   "security_password_title": "Password",
   "security_password_field_label": "Password",
   "security_new_password_field_label": "New Password",
-  "security_password_confirm_field_label": "Password Confirm"
+  "security_password_confirm_field_label": "Password Confirm",
+  "security_third_party_title": "Third-party Sign-on"
 }

@@ -1,3 +1,6 @@
+<i18n locale="en" src="@/locale/en/studio.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/studio.json" />
+
 <template lang="pug">
   .section: .container: .columns
     .column.is-one-quarter
@@ -5,13 +8,13 @@
         ul.menu-list
           li: nuxt-link(:to="{name: 'studio-analytics'}")
             font-awesome-icon(:icon="['fas', 'analytics']" fixed-width)
-            span.menu-text Analytics
+            span.menu-text(v-t="'menu_analytics'")
           li: nuxt-link(:to="{name: 'studio-levels'}")
             font-awesome-icon(:icon="['fas', 'chart-network']" fixed-width)
-            span.menu-text Levels
+            span.menu-text(v-t="'menu_levels'")
           li: nuxt-link(:to="{name: 'studio-collections'}")
             font-awesome-icon(:icon="['fas', 'archive']" fixed-width)
-            span.menu-text Collections
+            span.menu-text(v-t="'menu_collections'")
     .column.is-three-quarters: nuxt-child
 </template>
 

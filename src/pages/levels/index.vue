@@ -1,21 +1,24 @@
+<i18n locale="en" src="@/locale/en/levels.json" />
+<i18n locale="zh-cn" src="@/locale/zh-CN/levels.json" />
+
 <template lang="pug">
 .section
   .container
     div(style="display: flex; flex-direction: row;")
       div(style="margin-left: 4px; margin-right: 24px;")
-        p(class="card-heading") Sort
+        p(class="card-heading" v-t="'sort_select_title'")
         a-select(
           :value="filters.sort"
           style="width: 192px; top: -1px;"
           :disabled="loading"
           @change="handleSortSelector"
         )
-          a-select-option(value="creation_date") Uploaded date
-          a-select-option(value="modification_date") Modified date
-          a-select-option(value="difficulty") Difficulty
-          a-select-option(value="duration") Duration
-          a-select-option(value="downloads") Downloads
-          a-select-option(value="rating") Rating
+          a-select-option(value="creation_date") {{$t('sort_select_upload_date')}}
+          a-select-option(value="modification_date") {{$t('sort_select_modification_date')}}
+          a-select-option(value="difficulty") {{$t('sort_select_difficulty')}}
+          a-select-option(value="duration") {{$t('sort_select_duration')}}
+          a-select-option(value="downloads") {{$t('sort_select_downloads')}}
+          a-select-option(value="rating") {{$t('sort_select_rating')}}
         a-button(
           :disabled="loading"
           style="margin-left: 8px;"
@@ -23,10 +26,10 @@
         )
           font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-amount-up' : 'sort-amount-down'")
       div.category-selector
-        p(class="card-heading") Category
+        p(class="card-heading" v-t="'category_select_title'")
         a-radio-group(:value="filters.category" @change="handleFilterSelector")
-          a-radio-button(value="all") All
-          a-radio-button(value="featured") Featured
+          a-radio-button(value="all" v-t="'category_select_item_all'")
+          a-radio-button(value="featured" v-t="'category_select_item_featured'")
     .level-card-container.large(style="margin-top: 16px; margin-bottom: 16px;")
       level-card(v-for="level in levels" :key="level.id" :value="level")
     a-pagination(
