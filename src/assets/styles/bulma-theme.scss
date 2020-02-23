@@ -115,3 +115,23 @@ $icon-dimensions: 1rem;
 $icon-dimensions-small: 0.75rem;
 $icon-dimensions-medium: 2rem;
 $icon-dimensions-large: 3rem;
+
+$pagination-color: $text;
+$pagination-border-color: $white-ter;
+$pagination-hover-color: $text-strong;
+$pagination-hover-border-color: $white;
+$pagination-active-color: $grey-light;
+$pagination-active-border-color: $grey-light;
+$pagination-focus-color: $grey-lighter;
+$pagination-focus-border-color: $grey-lighter;
+
+$pagination-disabled-color: $grey-dark;
+$pagination-disabled-background-color: $grey-light;
+$pagination-disabled-border-color: $grey-light;
+
+$pagination-current-color: $grey-darker;
+$pagination-current-background-color: $white;
+$pagination-current-border-color: $white;
+
+$input-hover-color: $text-strong;
+$input-disabled-color: $grey-light;

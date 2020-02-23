@@ -25,22 +25,27 @@
           @click="handleOrderButton"
         )
           font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-amount-up' : 'sort-amount-down'")
-      div.category-selector
-        p(class="card-heading" v-t="'category_select_title'")
-        a-radio-group(:value="filters.category" @change="handleFilterSelector")
-          a-radio-button(value="all" v-t="'category_select_item_all'")
-          a-radio-button(value="featured" v-t="'category_select_item_featured'")
+      b-field(:label="$t('category_select_title')")
+        .field.has-addons
+          b-radio-button(
+            size="is-small"
+            type="is-white"
+            :value="filters.category"
+            @input="handleFilterSelector"
+            native-value="all") {{$t('category_select_item_all')}}
+          b-radio-button(
+            size="is-small"
+            type="is-white"
+            :value="filters.category"
+            @input="handleFilterSelector"
+            native-value="featured") {{$t('category_select_item_featured')}}
     .level-card-container.large(style="margin-top: 16px; margin-bottom: 16px;")
       level-card(v-for="level in levels" :key="level.id" :value="level")
-    a-pagination(
-      :disabled="loading"
-      :current="page"
-      @change="handlePagination"
+    b-pagination(
       :total="totalEntries"
-      :page-size="pageSize"
-      show-quick-jumper
-      :show-total="(total, range) => `${total} levels (${range})`"
-    )
+      :per-page="pageSize"
+      :current="page"
+      @change="handlePagination")
 </template>
 
 <script>
@@ -128,36 +133,16 @@ export default {
       this.updateRoute({ sort: value })
     },
     handleFilterSelector(value) {
-      this.updateRoute({ category: value.target.value })
+      console.log(value)
+      this.updateRoute({ category: value })
     }
   }
 }
 </script>
 
-<style lang="less">
-  .category-selector .ant-radio-button-wrapper {
-    border: none !important;
-    box-shadow: none !important;
-    background: none;
-    padding-left: 0;
-    font-weight: normal;
-    color: white;
-    opacity: 0.3;
-    transition: .4s @hoverEasing;
-  }
-  .category-selector .ant-radio-button-wrapper-checked {
-    border: none !important;
-    box-shadow: none !important;
-    background: none;
-    font-weight: bold;
-    opacity: 1;
-  }
-  .category-selector .ant-radio-button-wrapper::before {
-    background: none !important;
-    left: 0;
-  }
-  .category-selector .ant-radio-button-wrapper-checked::before {
-    background: none !important;
-    left: 0;
-  }
+<style>
+.category-radio-container {
+  display: flex;
+  flex-direction: row;
+}
 </style>

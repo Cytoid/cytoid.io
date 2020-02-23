@@ -1,6 +1,7 @@
-import ContentCard from '../ContentCard'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayButton from '@/components/level/PlayButton'
+import ContentCard from '../ContentCard'
+
 export default {
   props: {
     value: {

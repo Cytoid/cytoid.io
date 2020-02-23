@@ -26,10 +26,10 @@
 
 <script>
 import gql from 'graphql-tag'
-import { handleErrorBlock } from '../../../plugins/antd'
 import ResourceUpload from '@/components/ResourceUpload'
 import TagInput from '@/components/TagInput'
 import VisibilitySelect from '@/components/studio/VisibilitySelect'
+import { handleErrorBlock } from '../../../plugins/antd'
 const query = gql`query FetchCollection($uid: String!) {
   collection(uid: $uid) {
     id
