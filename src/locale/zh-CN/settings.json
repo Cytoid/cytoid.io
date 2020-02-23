@@ -1,4 +1,7 @@
 {
+  "account_menu": "Account",
+  "security_menu": "Security",
+  "profile_menu": "Profile",
   "avatar_title": "头像",
   "avatar_use_gravatar_btn": "点击使用 Gravatar",
   "avatar_using_gravatar": "您正在使用来自 {0} 的头像！",
@@ -16,5 +19,6 @@
   "security_password_title": "密码",
   "security_password_field_label": "密码",
   "security_new_password_field_label": "新密码",
-  "security_password_confirm_field_label": "确认密码"
+  "security_password_confirm_field_label": "确认密码",
+  "security_third_party_title": "Third-party Sign-on"
 }
