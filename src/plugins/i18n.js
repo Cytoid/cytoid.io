@@ -34,8 +34,8 @@ export default function ({ app, store, req }) {
     silentTranslationWarn: process.env.NODE_ENV === 'production',
     messages: {
       en: require('@/locale/en/index.json'),
-      'zh-cn': require('@/locale/zh-cn/index.json'),
-      'zh-tw': require('@/locale/zh-tw/index.json'),
+      'zh-cn': require('@/locale/zh-CN/index.json'),
+      'zh-tw': require('@/locale/zh-TW/index.json'),
     }
   })
   if (process.client) {
