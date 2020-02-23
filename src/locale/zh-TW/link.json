@@ -1,4 +1,4 @@
 {
-  "title": "Link your {provider} account",
-  "subtitle": "Please input your Cytoid credentials. Account will be created if the ID you provided does not exist."
+  "title": "連結 {provider} 帳戶",
+  "subtitle": "請輸入帳戶相關資訊以確保為本人操作，若輸入的使用者不存在將會自動建立一個新帳戶，請務必填妥。"
 }
