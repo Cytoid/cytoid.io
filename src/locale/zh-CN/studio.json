@@ -19,7 +19,7 @@
   "visibility_status_unlisted": "未上架",
   "visibility_status_public": "公开",
   "visibility_status_private": "仅个人可见",
-  "visibility_action_unlist": "Unlist",
+  "visibility_action_unlist": "取消上架",
   "visibility_action_publish": "发布",
   "visibility_action_private": "设为仅个人可见"
 }
