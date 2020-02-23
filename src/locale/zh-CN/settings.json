@@ -1,7 +1,7 @@
 {
-  "account_menu": "Account",
-  "security_menu": "Security",
-  "profile_menu": "Profile",
+  "account_menu": "帐户",
+  "security_menu": "安全",
+  "profile_menu": "个人资料",
   "avatar_title": "头像",
   "avatar_use_gravatar_btn": "点击使用 Gravatar",
   "avatar_using_gravatar": "您正在使用来自 {0} 的头像！",
@@ -16,9 +16,9 @@
   "email_required": "需要一个邮箱地址。",
   "profile_header_title": "封面图片",
   "profile_bio_title": "简介",
-  "security_password_title": "密码",
-  "security_password_field_label": "密码",
+  "security_password_title": "修改密码",
+  "security_password_field_label": "旧密码",
   "security_new_password_field_label": "新密码",
   "security_password_confirm_field_label": "确认密码",
-  "security_third_party_title": "Third-party Sign-on"
+  "security_third_party_title": "第三方登录"
 }
