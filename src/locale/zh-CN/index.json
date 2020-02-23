@@ -1,5 +1,20 @@
 {
   "week": "周",
   "region_unavailable": "Cytoid.io 在中国可能无法正常工作",
-  "region_unavailable_content": "国际版网站需要的一些关键组件，包括谷歌验证码，谷歌云存储，推特，Discord等，可能会无法正常加载。为了最佳的用户体验，请访问中国大陆地区官网。"
+  "region_unavailable_content": "国际版网站需要的一些关键组件，包括谷歌验证码，谷歌云存储，推特，Discord等，可能会无法正常加载。为了最佳的用户体验，请访问中国大陆地区官网。",
+  "tos": "Terms & Services",
+  "dmca": "DMCA",
+  "status": "Status",
+  "language": "Language",
+  "submit_btn": "Submit",
+  "save_btn": "Save",
+  "profile": "Profile",
+  "studio": "Studio",
+  "favorites": "Favorites",
+  "settings": "Settings",
+  "signout_btn": "Sign Out",
+  "nav_home": "Home",
+  "nav_levels": "Levels",
+  "nav_wiki": "Wiki",
+  "login_btn": "Login"
 }
