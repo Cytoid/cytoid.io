@@ -1,4 +1,12 @@
 {
   "title": "已经有 Cytoid 账号了吗？",
-  "subtitle": "在下方登录吧。"
+  "subtitle": "在下方登录吧。",
+  "username_field_placeholder": "Player ID / Email address",
+  "username_field_error_required": "Please input your player ID or email address.",
+  "password_field_placeholder": "Password",
+  "password_field_error_required": "Please input your password.",
+  "remember_me_checkbox_title": "Remember Me",
+  "forgot_password_link_title": "Forgot my Password",
+  "new_user_welcome_title": "New to Cytoid?",
+  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!"
 }
