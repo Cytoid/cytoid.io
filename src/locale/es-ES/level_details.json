@@ -1,0 +1,13 @@
+{
+  "download_btn": "Download ({size})",
+  "manage_btn": "Manage",
+  "message_private": "This level was made private by its owner. It is invisible to other users.",
+  "message_unlisted": "This level is unlisted.",
+  "message_censored": "This level was censored for: {reason}",
+  "details_card_rating_title": "Rating",
+  "details_card_tags_title": "Tags",
+  "details_card_last_updated_title": "Last updated",
+  "credits_card_music_title": "Music",
+  "credits_card_cover_art_title": "Cover art",
+  "difficulty_card_title": "Difficulty"
+}
