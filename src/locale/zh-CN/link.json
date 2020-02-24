@@ -1,4 +1,4 @@
 {
   "title": "链接到 {provider} 帐户",
-  "subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
+  "subtitle": "请输入您的 Cytoid 登录信息。如果您提供的 ID 不存在，我们会为您创建一个新帐号。"
 }
