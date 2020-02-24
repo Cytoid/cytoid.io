@@ -43,7 +43,7 @@
       "censorship_reason_field": "原因",
       "censorship_reason_hint": "用一个英文词语来描述为什么该关卡不适于公开",
       "category_title": "类别",
-      "category_placeholder": "正在添加一个管理类别..."
+      "category_placeholder": "添加一个管理类别..."
     }
   }
 }
