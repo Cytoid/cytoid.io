@@ -1,15 +1,15 @@
 {
-  "title": "Already have a Cytoid ID?",
-  "subtitle": "Please sign in below.",
-  "username_field_placeholder": "Cytoid ID / Email address",
-  "username_field_error_required": "Please input your Cytoid ID or email address.",
-  "password_field_placeholder": "Password",
-  "password_field_error_required": "Please input your password.",
-  "remember_me_checkbox_title": "Remember Me",
-  "forgot_password_link_title": "Forgot my Password",
-  "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
-  "login_snack_bar": "Welcome back, {name}",
-  "login_password_error": "Username or password mismatch!",
-  "login_username_error": "User does not exist!"
+  "title": "Já tem um Cytoid ID?",
+  "subtitle": "Por favor, realize o login abaixo.",
+  "username_field_placeholder": "Cytoid ID / Endereço de e-mail",
+  "username_field_error_required": "Por favor, insira seu Cytoid ID ou endereço de e-mail.",
+  "password_field_placeholder": "Senha",
+  "password_field_error_required": "Por favor, insira sua senha.",
+  "remember_me_checkbox_title": "Lembre-me",
+  "forgot_password_link_title": "Esqueci minha senha",
+  "new_user_welcome_title": "Novo no Cytoid?",
+  "new_user_welcome_content": "Inscreva-se para ter acesso a todos os recursos de multiplayer do Cytoid. Leva menos de 30 segundos!",
+  "login_snack_bar": "Bem-vindo de volta, {name}",
+  "login_password_error": "Nome de usuário ou senha inválidos!",
+  "login_username_error": "Esse usuário não existe!"
 }
