@@ -10,9 +10,9 @@
   "password_field_error_invalid": "密碼最少必須有 8 個字元。",
   "password_field_placeholder": "密碼",
   "password_confirm_field_placeholder": "確認密碼",
-  "tos_field_error_required": "請務必勾選以上選項否則無法繼續。",
+  "tos_field_error_required": "You must agree to our terms of services.",
   "tos_field_title": "勾選即表示同意 Cytoid {0}中的內容。",
   "join_btn": "確認建立",
-  "existing_user_title": "早就註冊過了？",
+  "existing_user_title": "Already registered?",
   "existing_user_content": "那還愣在這邊幹嘛？除非是閒得發慌吧，沒有的話就趕快去登入了啦！"
 }
