@@ -3,7 +3,7 @@
   "manage_btn": "Manage",
   "message_private": "This level was made private by its owner. It is invisible to other users.",
   "message_unlisted": "This level is unlisted.",
-  "message_censored": "此關卡因為涉及「{reason}」，違反相關規範而執行隱蔽處置。",
+  "message_censored": "This level was censored for: {reason}",
   "details_card_rating_title": "評分",
   "details_card_tags_title": "標記",
   "details_card_last_updated_title": "Last updated",
