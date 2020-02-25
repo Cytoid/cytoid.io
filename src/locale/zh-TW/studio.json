@@ -1,5 +1,5 @@
 {
-  "menu_analytics": "資料分析",
+  "menu_analytics": "Analytics",
   "menu_levels": "關卡管理",
   "menu_collections": "選集管理",
   "level_delete_confirm_title": "進行刪除「{name}」",
@@ -10,7 +10,7 @@
   "level_visibility_unlisted_title": "即使不公開顯示，知道關卡連結的人還是可以檢視。",
   "level_visibility_private_title": "只有其所屬帳戶可以檢視此關卡。",
   "level_visibility_public_content": "此關卡將會在個人檔案中展示也能夠透過搜尋功能找到。這邊建議在儲存變更之前先詳讀我們的{0}跟{1}，並請知悉該行為可能涉及的版權相關問題。",
-  "level_visibility_unlisted_content": "此關卡將不會在個人檔案中展示也同時無法被搜尋得到，不過若有在公開選集中出現的話依舊是可見的。",
+  "level_visibility_unlisted_content": "{0} will no longer appear to viewers who visit the level listing or your profile. It will also disappear from the search results. However, it will stay visible in a public collection that contains this level.",
   "level_visibility_private_content": "此關卡將從個人檔案中取消展示也同時無法透過搜尋功能找到，即便有在公開選集中出現其他用戶也不會有檢視的權限。僅其所屬帳戶有權限檢視與下載。",
   "level_visibility_content": "請在儲存變更之前於下方輸入此關卡的識別碼（{0}）。",
   "level_visibility_title_private": "將「{title}」設為私人",
