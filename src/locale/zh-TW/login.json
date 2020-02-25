@@ -7,7 +7,7 @@
   "password_field_error_required": "請在此輸入密碼。",
   "remember_me_checkbox_title": "記住登入狀態",
   "forgot_password_link_title": "忘記密碼了嗎？",
-  "new_user_welcome_title": "欸不是你還沒註冊？",
+  "new_user_welcome_title": "New to Cytoid?",
   "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
   "login_snack_bar": "Welcome back, {name}",
   "login_password_error": "Username or password mismatch!",
