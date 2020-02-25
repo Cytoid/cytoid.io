@@ -1,7 +1,7 @@
 {
   "title": "建立帳戶",
   "id_requirement": "Your Cytoid ID must be in between 3 and 16 characters and contain only lowercase letters, numbers, underscores, and hyphens.",
-  "password_requirement": "請好好閱讀下方使用者名稱的取名條件。",
+  "password_requirement": "3-16 lowercase letters, numbers, _ or -",
   "email_field_error_required": "請在此輸入電郵地址。",
   "email_field_error_invalid": "此電郵地址的格式不正確。",
   "id_placeholder": "Cytoid ID",
