@@ -14,8 +14,8 @@
   "chart_radio_rating": "Rating 起伏分析",
   "chart_radio_avg_accuracy": "Average Accuracy",
   "levels_title": "已上傳的關卡",
-  "levels_featured_all_btn": "檢視共 {count} 個推薦關卡",
+  "levels_featured_all_btn": "View all {count} featured",
   "levels_all_btn": "View all {count}",
   "collections_title": "已建立的選集",
-  "collections_all_btn": "檢視共 {count} 個選集"
+  "collections_all_btn": "View all {count}"
 }
