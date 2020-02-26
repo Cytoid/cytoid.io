@@ -1,4 +1,4 @@
 {
-  "title": "Link your {provider} account",
-  "subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
+  "title": "เชื่อมต่อกับบัญชี {provider}",
+  "subtitle": "กรุณาใส่ Cytoid ID และรหัสผ่านของคุณ บัญชีผู้ใช้จากข้อมูลนั้นจะถูกสร้างขึ้นหากไม่มีผู้ใช้ Cytoid ID นั้น"
 }
