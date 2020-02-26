@@ -10,7 +10,7 @@
   "submit_btn": "確認變更",
   "save_btn": "儲存變更",
   "profile": "個人檔案",
-  "studio": "關卡管理",
+  "studio": "後台管理",
   "favorites": "我的最愛",
   "settings": "帳戶設定",
   "signout_btn": "登出",
@@ -21,7 +21,7 @@
   "nav_wiki": "社群維基",
   "login_btn": "登入",
   "delete_btn": "確認刪除",
-  "collection_card_levels_count_tag": "{count} 個結果",
+  "collection_card_levels_count_tag": "{count} 個關卡",
   "file_upload_default_title": "選擇檔案",
-  "file_upload_default_subtitle": "可以把檔案拖放到這邊上傳"
+  "file_upload_default_subtitle": "可以把圖片拖放至此上傳。"
 }
