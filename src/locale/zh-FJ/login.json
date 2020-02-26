@@ -1,15 +1,15 @@
 {
-  "title": "已经有 Cytoid 账户了吗？",
-  "subtitle": "请在此登录。",
-  "username_field_placeholder": "Cytoid ID / 邮箱地址",
-  "username_field_error_required": "请输入您的 Cytoid ID 或邮箱地址。",
-  "password_field_placeholder": "密码",
-  "password_field_error_required": "请输入您的密码。",
-  "remember_me_checkbox_title": "下次自动登录",
-  "forgot_password_link_title": "忘记密码",
-  "new_user_welcome_title": "还没有 Cytoid 帐号？",
-  "new_user_welcome_content": "注册以访问 Cytoid 所有的多人游戏功能。只需要 30 秒时间！",
-  "login_snack_bar": "欢迎回来，{name}",
-  "login_password_error": "用户名或密码错误",
-  "login_username_error": "该用户不存在"
+  "title": "已经有我会怒拆额！！！了吗？",
+  "subtitle": "请在下面阿格王朔",
+  "username_field_placeholder": "我会怒拆额！！！",
+  "username_field_error_required": "多日你娃路军哥",
+  "password_field_placeholder": "工信部了！！！",
+  "password_field_error_required": "请怒拆工信部",
+  "remember_me_checkbox_title": "宗龙图个",
+  "forgot_password_link_title": "忘了工信部？",
+  "new_user_welcome_title": "新阿格王朔？",
+  "new_user_welcome_content": "大括号不换行的跟换行的打，变量名首字母大写的跟不大写的打，私有域前面加下划线的跟不加下划线的打",
+  "login_snack_bar": "啊wee！{name}",
+  "login_password_error": "你号的骨灰扬了",
+  "login_username_error": "我新乐你阿妈"
 }
