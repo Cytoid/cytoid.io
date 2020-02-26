@@ -1,15 +1,15 @@
 {
-  "title": "Already have a Cytoid ID?",
-  "subtitle": "Please sign in below.",
-  "username_field_placeholder": "Cytoid ID / Email address",
-  "username_field_error_required": "Please input your Cytoid ID or email address.",
-  "password_field_placeholder": "Password",
-  "password_field_error_required": "Please input your password.",
-  "remember_me_checkbox_title": "Remember Me",
-  "forgot_password_link_title": "Forgot my Password",
-  "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
-  "login_snack_bar": "Welcome back, {name}",
-  "login_password_error": "Username or password mismatch!",
-  "login_username_error": "User does not exist!"
+  "title": "มี Cytoid ID แล้ว?",
+  "subtitle": "เข้าสู่ระบบที่นี่",
+  "username_field_placeholder": "Cytoid ID / ที่อยู่อีเมลล์",
+  "username_field_error_required": "กรุณาใส่ Cytoid ID หรือที่อยู่อีเมลล์ของคุณ",
+  "password_field_placeholder": "รหัสผ่าน",
+  "password_field_error_required": "กรุณาใส่รหัสผ่านของคุณ",
+  "remember_me_checkbox_title": "จำฉันได้ไหม?",
+  "forgot_password_link_title": "ลืมรหัสผ่าน?",
+  "new_user_welcome_title": "เด็กใหม่เหรอ?",
+  "new_user_welcome_content": "ใช้เวลาสั้นๆในการลงทะเบียนเพื่อใช้งานระบบผู้เล่นหลายคนของ Cytoid.",
+  "login_snack_bar": "ยินดีต้อนรับคุณ {name}",
+  "login_password_error": "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
+  "login_username_error": "ไม่มีชื่อผู้ใช้นี้"
 }
