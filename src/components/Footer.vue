@@ -16,7 +16,7 @@ footer.container.footer.has-text-centered
           :selectedKeys="[parent.$store.state.locale]"
           @select="({ key }) => parent.$store.commit('setLocale', key)"
         )
-          a-menu-item(v-for="code in Object.keys(props.languages)" :key="code") {{props.languages[code]}}
+          a-menu-item(v-for="code in props.languages" :key="code") {{parent.$t('self', code)}}
   p.
     #[strong Cytoid] built by
     #[strong Tiger Tang] and #[strong Zhixing Zhang].
@@ -24,12 +24,12 @@ footer.container.footer.has-text-centered
 </template>
 
 <script>
-import { supportedLanguages } from '@/utils/i18n'
+import { supportedLanguages } from '@/plugins/i18n'
 export default {
   props: {
     languages: {
       required: false,
-      type: Object,
+      type: Array,
       default: () => supportedLanguages
     }
   }

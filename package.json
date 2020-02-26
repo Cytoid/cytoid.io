@@ -46,6 +46,7 @@
     "vue-tweet-embed": "^2.3.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@fortawesome/fontawesome-pro": "^5.8.2",
     "@kazupon/vue-i18n-loader": "^0.4.1",

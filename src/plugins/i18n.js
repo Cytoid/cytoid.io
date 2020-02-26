@@ -2,8 +2,10 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
 import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
-import { pickLanguage, dateLocales } from '@/utils/i18n'
-
+import { pick } from 'accept-language-parser'
+import { enUS, zhCN, zhTW, ptBR } from 'date-fns/locale'
+import locales from '@/locale'
+/*
 function countryRedirect(app, country) {
   return import('ant-design-vue/lib/notification')
     .then((a) => {
@@ -24,19 +26,33 @@ function countryRedirect(app, country) {
       })
     })
 }
+*/
 
+export const supportedLanguages = ['en', 'zh-CN', 'zh-TW']
+
+export const dateLocales = Object.freeze({
+  en: enUS,
+  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  'zh-FJ': zhCN,
+  'pt-BR': ptBR,
+})
+
+export function pickLanguage(headerStr) {
+  return pick(supportedLanguages, headerStr)
+}
 export default function ({ app, store, req }) {
   Vue.use(VueI18n)
 
   app.i18n = new VueI18n({
     locale: 'en',
     fallbackLocale: 'en',
-    silentTranslationWarn: process.env.NODE_ENV === 'production',
-    messages: {
-      en: require('@/locale/en/index.json'),
-      'zh-cn': require('@/locale/zh-CN/index.json'),
-      'zh-tw': require('@/locale/zh-TW/index.json'),
-    }
+    silentTranslationWarn: true,
+    sync: true,
+    messages: supportedLanguages.reduce((result, item) => {
+      result[item] = locales[item].default
+      return result
+    }, {})
   })
   if (process.client) {
     if (store.state.locale) {
@@ -79,32 +95,38 @@ export default function ({ app, store, req }) {
     // Set country code
     store.commit('setCountry', req.ctx.get('CF-IPCountry') || null)
   }
-
-  Vue.mixin({
-    methods: {
-      $dateFromNow(dateStr) {
-        return formatDistanceToNow(
-          parseISO(dateStr),
-          {
-            addSuffix: true,
-            locale: this.$dateLocale
-          }
-        )
-      },
-      $dateFormatCalendar(dateStr, from = new Date()) {
-        return formatRelative(
-          parseISO(dateStr),
-          from,
-          {
-            locale: this.$dateLocale
-          }
-        )
-      }
-    },
-    computed: {
-      $dateLocale() {
-        return dateLocales[this.$store.state.locale]
-      },
-    }
-  })
 }
+
+Vue.mixin({
+  beforeCreate() {
+    const key = this.$options.i18n && this.$options.i18n.key
+    if (!key) {
+      return
+    }
+    const componentLocales = {}
+    for (const lang in locales) {
+      componentLocales[lang] = locales[lang][key]
+    }
+    this.$options.i18n.messages = componentLocales
+  },
+  methods: {
+    $dateFromNow(dateStr) {
+      return formatDistanceToNow(
+        parseISO(dateStr),
+        {
+          addSuffix: true,
+          locale: dateLocales[this.$store.state.locale]
+        }
+      )
+    },
+    $dateFormatCalendar(dateStr, from = new Date()) {
+      return formatRelative(
+        parseISO(dateStr),
+        from,
+        {
+          locale: dateLocales[this.$store.state.locale]
+        }
+      )
+    }
+  }
+})

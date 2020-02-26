@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/collection_details.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/collection_details.json" />
-<i18n locale="zh-tw" src="@/locale/zh-TW/collection_details.json" />
-
 <template lang="pug">
 .container(v-if="collection")
   section.section.header-container
@@ -131,6 +127,9 @@ export default {
     }
     store.commit('setBackground', { source: collection.coverPath })
     return { collection }
+  },
+  i18n: {
+    key: 'collection_details'
   }
 }
 </script>

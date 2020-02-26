@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/login.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/login.json" />
-<i18n locale="zh-tw" src="@/locale/zh-TW/login.json" />
-
 <template>
   <div>
     <div>
@@ -169,6 +165,9 @@ export default {
       })
     },
   },
+  i18n: {
+    key: 'login'
+  }
 }
 </script>
 

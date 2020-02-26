@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/settings.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/settings.json" />
-<i18n locale="zh-tw" src="@/locale/zh-TW/settings.json" />
-
 <template lang="pug">
 a-form(layout="horizontal" @submit.prevent="submit")
   div
@@ -87,6 +83,9 @@ export default {
           this.submitLoading = false
         })
     },
+  },
+  i18n: {
+    key: 'settings'
   }
 }
 </script>

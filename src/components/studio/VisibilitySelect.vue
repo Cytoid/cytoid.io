@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/studio.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/studio.json" />
-<i18n locale="zh-tw" src="@/locale/zh-TW/studio.json" />
-
 <template lang="pug">
 a-select(
   :value="[false, null, true].indexOf(this.value)"
@@ -34,6 +30,9 @@ export default {
     change(num) {
       this.$emit('change', [false, null, true][num])
     }
+  },
+  i18n: {
+    key: 'studio'
   }
 }
 </script>

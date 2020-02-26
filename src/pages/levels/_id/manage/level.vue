@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/level_details.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/level_details.json" />
-<i18n locale="zh-tw" src="@/locale/zh-TW/level_details.json" />
-
 <template lang="pug">
   div
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
@@ -132,5 +128,8 @@ export default {
       formDecorator: formDecorator,
     }
   },
+  i18n: {
+    key: 'level_details'
+  }
 }
 </script>

@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/homepage.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/homepage.json" />
-<i18n locale="zh-tw" src="@/locale/zh-TW/homepage.json" />
-
 <template lang="pug">
   div
     .container.logo
@@ -290,6 +286,9 @@ export default {
       clearTimeout(this.styleTweetTimer)
       this.styleTweetTimer = null
     }
+  },
+  i18n: {
+    key: 'homepage'
   }
 }
 </script>

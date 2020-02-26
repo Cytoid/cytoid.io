@@ -1,6 +1,3 @@
-<i18n locale="en" src="@/locale/en/studio.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/studio.json" />
-
 <template lang="pug">
   a-modal(
     :title="$t('level_delete_confirm_title', { name: level.title })"
@@ -42,5 +39,8 @@ export default {
       this.$emit('change', this.level)
     },
   },
+  i18n: {
+    key: 'studio'
+  }
 }
 </script>

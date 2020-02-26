@@ -1,7 +1,3 @@
-<i18n locale="en" src="@/locale/en/signup.json" />
-<i18n locale="zh-cn" src="@/locale/zh-CN/signup.json"/>
-<i18n locale="zh-tw" src="@/locale/zh-TW/signup.json" />
-
 <template>
   <div>
     <h2 v-t="'title'" style="margin-top: 1rem;" />
@@ -166,5 +162,8 @@ export default {
       }
     },
   },
+  i18n: {
+    key: 'signup'
+  }
 }
 </script>
