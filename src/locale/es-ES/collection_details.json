@@ -1,9 +1,9 @@
 {
-  "manage_btn": "Manage",
-  "message_unlisted": "This collection is unlisted.",
-  "message_private": "This collection was made private by its owner. It is invisible to other users.",
-  "tags_title": "Tags",
-  "creation_date_title": "Created on",
-  "modification_date_title": "Last updated",
-  "metadata_cover_art_title": "Cover art"
+  "manage_btn": "Administrar",
+  "message_unlisted": "Esta colección no está en la lista.",
+  "message_private": "Esta colección fue hecha privada por su propietario. Es invisible para otros usuarios.",
+  "tags_title": "Etiquetas",
+  "creation_date_title": "Creado en",
+  "modification_date_title": "Última actualización",
+  "metadata_cover_art_title": "Artista de portada"
 }
