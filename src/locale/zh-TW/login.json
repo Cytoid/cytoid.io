@@ -10,6 +10,6 @@
   "new_user_welcome_title": "欸不是你還沒有帳戶？",
   "new_user_welcome_content": "動動手指填一下就能免錢盡情無限遊玩 Cytoid 了，坐而言不如起而行，還不趕快動起來？",
   "login_snack_bar": "又見面啦，{name}！",
-  "login_password_error": "Username or password mismatch!",
-  "login_username_error": "該帳戶不在名單內！"
+  "login_password_error": "Cytoid ID 或密碼不正確。",
+  "login_username_error": "該 Cytoid ID 不存在！"
 }
