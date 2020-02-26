@@ -1,0 +1,49 @@
+{
+  "download_btn": "Tải về ({size})",
+  "manage_btn": "Quản lý",
+  "message_private": "Bài này đã bị đặt ở mức \"riêng tư\" bởi chủ sở hữu thế nên bài này không thể được nhìn thấy bởi người khác.",
+  "message_unlisted": "This level is unlisted.",
+  "message_censored": "Bài này đã bị che giấu vì lý do: {reason}",
+  "details_card_rating_title": "Đánh giá",
+  "details_card_tags_title": "Nhãn",
+  "details_card_last_updated_title": "Lần cuối được cập nhật",
+  "credits_card_music_title": "Nhạc",
+  "credits_card_cover_art_title": "Ảnh bìa",
+  "difficulty_card_title": "Độ khó",
+  "manage": {
+    "replace_title": "Thay thế",
+    "replace_upload_title": "Nhấp hoặc kéo một màn Cytoid vào khu vực này",
+    "replace_upload_subtitle": "Màn của bạn phải có ID y hệt so với màn hiện tại.",
+    "description_field": "Mô tả",
+    "tags_field": "Từ khoá",
+    "visibility_field": "Mức hiển thị",
+    "metadata": {
+      "title": "Metadata",
+      "id_field": "ID",
+      "title_field": "Tiêu đề",
+      "title_hint": "Tên bài hát ở dạng ngôn ngữ và phông nguyên bản.",
+      "localized_title_field": "Localized title",
+      "localized_title_hint": "The music title in English. Literal translation is preferred. Optional.",
+      "artist_field": "Music artist name(s)",
+      "artist_hint": "The music artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "localized_artist_field": "Localized music artist name(s)",
+      "localized_artist_hint": "The music artist name(s) in English. Literal translation is preferred.",
+      "music_url_field": "Music source URL",
+      "music_url_hint": "The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.",
+      "cover_art_field": "Cover artist name(s)",
+      "cover_art_hint": "The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "cover_art_localized_field": " Localized cover artist name(s)",
+      "cover_art_localized_hint": "The cover artist name(s) in English. Literal translation is preferred.",
+      "cover_art_url_field": "Cover source URL",
+      "cover_art_url_hint": "The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used."
+    },
+    "admin": {
+      "censorship_title": "Censorship",
+      "censorship_checkbox_title": "Remove from Public",
+      "censorship_reason_field": "Reason",
+      "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
+      "category_title": "Category",
+      "category_placeholder": "Adding an administrative category..."
+    }
+  }
+}
