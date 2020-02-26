@@ -28,7 +28,7 @@ function countryRedirect(app, country) {
 }
 */
 
-export const supportedLanguages = ['en', 'zh-CN', 'zh-TW']
+export const supportedLanguages = ['en', 'zh-CN', 'zh-TW', 'zh-FJ', 'pt-BR']
 
 export const dateLocales = Object.freeze({
   en: enUS,
