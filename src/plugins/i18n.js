@@ -34,7 +34,7 @@ export const supportedLanguages = [
   'zh-TW',
   'zh-FJ',
   'pt-BR',
-  // 'vi-VN',
+  'vi-VN',
   'th-TH',
 ]
 

@@ -1,8 +1,8 @@
 {
-  "account_menu": "Account",
-  "security_menu": "Security",
-  "profile_menu": "Profile",
-  "avatar_title": "Avatar",
+  "account_menu": "Tài khoản",
+  "security_menu": "Bảo mật",
+  "profile_menu": "Hồ sơ cá nhân",
+  "avatar_title": "Ảnh đại diện",
   "avatar_use_gravatar_btn": "Click to use Gravatar",
   "avatar_using_gravatar": "You're using your avatar from {0}!",
   "gravatar": "Gravatar",
