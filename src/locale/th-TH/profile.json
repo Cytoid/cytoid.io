@@ -14,7 +14,7 @@
   "chart_radio_rating": "เรท",
   "chart_radio_avg_accuracy": "ความแม่นยำโดยเฉลี่ย",
   "levels_title": "เลเวลที่อัพโหลดแล้ว",
-  "levels_featured_all_btn": "View all {count} featured",
+  "levels_featured_all_btn": "ดูเลเวลที่แนะนำทั้งหมด {count} เลเวล",
   "levels_all_btn": "ดูเลเวลทั้งหมด {count} เลเวล",
   "collections_title": "คอลเลกชัน",
   "collections_all_btn": "ดูคอลเลกชันทั้งหมด {count} คอลเลกชัน"
