@@ -23,6 +23,6 @@
   "login_btn": "เข้าสู่ระบบ",
   "delete_btn": "ลบ",
   "collection_card_levels_count_tag": "{count} เลเวล",
-  "file_upload_default_title": "อัพโหลดไฟล์",
-  "file_upload_default_subtitle": "คลิกหรือลากไฟล์มายังที่นี่เพื่ออัพโหลด"
+  "file_upload_default_title": "อัปโหลดไฟล์",
+  "file_upload_default_subtitle": "คลิกหรือลากไฟล์มาที่นี่เพื่ออัปโหลด"
 }
