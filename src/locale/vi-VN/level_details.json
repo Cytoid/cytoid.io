@@ -22,7 +22,7 @@
       "id_field": "ID",
       "title_field": "Tiêu đề",
       "title_hint": "Tên bài hát ở dạng ngôn ngữ và phông nguyên bản.",
-      "localized_title_field": "Localized title",
+      "localized_title_field": "Tên bài hát (dịch về tiếng anh)",
       "localized_title_hint": "The music title in English. Literal translation is preferred. Optional.",
       "artist_field": "Tên nghệ sĩ(s)",
       "artist_hint": "The music artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
