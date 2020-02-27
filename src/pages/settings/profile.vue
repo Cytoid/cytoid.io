@@ -18,8 +18,7 @@ a-form(layout="horizontal" @submit.prevent="submit")
     size="large"
     html-type="submit"
     type="primary"
-    v-t="'save_btn'"
-  )
+  ) {{$t('save_btn')}}
 </template>
 
 <script>

@@ -40,8 +40,7 @@
               type="primary"
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold; margin-bottom: 1.5rem;"
-              v-t="{ path: 'collection_all_btn', args: { count: (data && data.collectionsCount) || 0 } }"
-            )
+            ) {{$t('collection_all_btn', { count: (data && data.collectionsCount) })}}
           #index-featured-level.box.is-gradient(v-if="latestFeaturedLevel")
             p.card-heading(v-t="'featured_level_title'")
             level-card.level-card(:value="latestFeaturedLevel")
@@ -50,8 +49,7 @@
               type="primary"
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold;"
-              v-t="{ path: 'level_all_btn', args: { count: totalLevels } }"
-            )
+            ) {{$t('level_all_btn', { count: totalLevels })}}
       collection-preview-card(v-if="data" :value="data.hitech")
       .columns
         .column.is-one-third-desktop.is-half-tablet

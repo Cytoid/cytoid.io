@@ -8,8 +8,8 @@ a-modal(
   template(v-if="value === 2")
     p(v-t="'level_visibility_public_title'")
     i18n(path="level_visibility_public_content" tag="p")
-      nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }" v-t="'tos'")
-      nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }" v-t="'dmca'")
+      nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{$t('tos')}}
+      nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }") {{$t('dmca')}}
   template(v-if="value === 1")
     p(v-t="'level_visibility_unlisted_title'")
     i18n(path="level_visibility_unlisted_content" tag="p")

@@ -20,7 +20,7 @@ div
             type="password"
             v-decorator="['newConfirm',{ rules: [{ validator: comparePasswords }, { required: true, message: 'Please input your password again' }]}]"
           )
-        a-button.card-button(html-type="submit" :loading="loading" v-t="'submit_btn'")
+        a-button.card-button(html-type="submit" :loading="loading") {{$t('submit_btn')}}
   div(style="margin-top: 16px;")
     div(class="card-pre-header")
       p(v-t="'security_third_party_title'")

@@ -48,14 +48,15 @@
         </a-form-item>
         <captcha theme="dark" :token.sync="captchaToken" style="margin-bottom: 1rem;" />
         <a-button
-          v-t="'login_btn'"
           class="card-button"
           type="primary"
           html-type="submit"
           :loading="loading"
           :disabled="!captchaToken"
           block
-        />
+        >
+          {{ $t('login_btn') }}
+        </a-button>
       </a-form>
     </div>
     <div class="external-login-level">

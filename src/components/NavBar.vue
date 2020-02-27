@@ -1,11 +1,11 @@
 <template lang="pug">
 header.navbar.light.container(role="navigation")
-  nuxt-link.navbar-item(:to="{ name: 'index' }" exact v-t="'nav_home'")
-  nuxt-link.navbar-item(:to="{ name: 'levels' }" v-t="'nav_levels'")
+  nuxt-link.navbar-item(:to="{ name: 'index' }" exact) {{$t('nav_home')}}
+  nuxt-link.navbar-item(:to="{ name: 'levels' }") {{$t('nav_levels')}}
   a.navbar-item(href='https://sites.google.com/site/cytoidcommunity' target="_blank" v-t="'nav_wiki'")
   client-only
     search.left
-    nuxt-link(v-if="!$store.state.user" to="/session/login"): a-button(type="primary" v-t="'login_btn'")
+    nuxt-link(v-if="!$store.state.user" to="/session/login"): a-button(type="primary") {{$t('login_btn')}}
     a-popover.navbar-popover(v-else placement="bottomRight" trigger="click")
       a.avatar-icon: avatar(:src="$store.state.avatar")
       nav-card(slot="content")

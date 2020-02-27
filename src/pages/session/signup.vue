@@ -84,14 +84,15 @@
       <captcha theme="dark" :token.sync="captchaToken" />
       <a-form-item>
         <a-button
-          v-t="'join_btn'"
           class="card-button"
           type="primary"
           html-type="submit"
           block
           :loading="loading"
           :disabled="!captchaToken"
-        />
+        >
+          {{ $t('join_btn') }}
+        </a-button>
       </a-form-item>
     </a-form>
     <div>
