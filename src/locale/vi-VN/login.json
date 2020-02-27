@@ -1,8 +1,8 @@
 {
-  "title": "Already have a Cytoid ID?",
-  "subtitle": "Please sign in below.",
+  "title": "Bạn đã có tài khoản Cytoid?",
+  "subtitle": "Vui lòng đăng nhập phía dưới",
   "username_field_placeholder": "Cytoid ID / Email address",
-  "username_field_error_required": "Please input your Cytoid ID or email address.",
+  "username_field_error_required": "Vui lòng điền tài khoản Cytoid hoặc địa chỉ Email của bạn",
   "password_field_placeholder": "Password",
   "password_field_error_required": "Please input your password.",
   "remember_me_checkbox_title": "Remember Me",
