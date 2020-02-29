@@ -14,7 +14,7 @@
   "studio": "Studio",
   "favorites": "Yêu thích",
   "settings": "Cài đặt",
-  "signout_btn": "Thoát đăng nhập",
+  "signout_btn": "Đăng Xuất",
   "signup_btn": "Đăng ký",
   "more_btn": "Thêm",
   "nav_home": "Trang chủ",
@@ -22,7 +22,7 @@
   "nav_wiki": "Wiki",
   "login_btn": "Đăng nhập",
   "delete_btn": "Xoá",
-  "collection_card_levels_count_tag": "{count} bài",
+  "collection_card_levels_count_tag": "{count} màn chơi",
   "file_upload_default_title": "Tải Lên Tập Tin",
   "file_upload_default_subtitle": "Nhấp hoặc kéo tập tin vào khu vực này để đăng lên"
 }

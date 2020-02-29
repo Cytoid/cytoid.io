@@ -1,11 +1,11 @@
 {
   "sort_select_title": "การจัดเรียง",
-  "sort_select_upload_date": "วันที่อัพโหลด",
+  "sort_select_upload_date": "วันที่อัปโหลด",
   "sort_select_modification_date": "วันที่แก้ไข",
   "sort_select_difficulty": "ระดับความยาก",
   "sort_select_duration": "ความยาวของเพลง",
   "sort_select_downloads": "จำนวนผู้ดาวน์โหลด",
-  "sort_select_rating": "คะแนน",
+  "sort_select_rating": "เรตติ้ง",
   "category_select_title": "หมวดหมู่",
   "category_select_item_all": "ทั้งหมด",
   "category_select_item_featured": "แนะนำ"
