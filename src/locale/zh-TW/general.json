@@ -24,5 +24,5 @@
   "delete_btn": "確認刪除",
   "collection_card_levels_count_tag": "{count} 個關卡",
   "file_upload_default_title": "選擇檔案",
-  "file_upload_default_subtitle": "可以把圖片拖放至此上傳。"
+  "file_upload_default_subtitle": "Click or drag the file to this area to upload"
 }
