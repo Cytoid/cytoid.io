@@ -52,6 +52,7 @@
     "@kazupon/vue-i18n-loader": "^0.4.1",
     "@nuxtjs/eslint-config": "^0.0.1",
     "babel-eslint": "^8.2.1",
+    "cos-nodejs-sdk-v5": "^2.5.20",
     "eslint": "^5.0.1",
     "eslint-config-standard": ">=12.0.0",
     "eslint-loader": "^2.0.0",
