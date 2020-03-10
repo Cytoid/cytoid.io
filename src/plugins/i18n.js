@@ -3,7 +3,7 @@ import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
 import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
 import { pick } from 'accept-language-parser'
-import { enUS, zhCN, zhTW, ptBR, th, vi } from 'date-fns/locale'
+import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id } from 'date-fns/locale'
 import locales from '@/locale'
 /*
 function countryRedirect(app, country) {
@@ -36,6 +36,9 @@ export const supportedLanguages = [
   'pt-BR',
   'vi-VN',
   'th-TH',
+  'ja-JP',
+  'es-ES',
+  'id-ID',
 ]
 
 export const dateLocales = Object.freeze({
@@ -46,6 +49,9 @@ export const dateLocales = Object.freeze({
   'pt-BR': ptBR,
   'th-TH': th,
   'vi-VN': vi,
+  'es-ES': es,
+  'ja-JP': ja,
+  'id-ID': id,
 })
 
 export function pickLanguage(headerStr) {
