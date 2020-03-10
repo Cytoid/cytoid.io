@@ -1,15 +1,15 @@
 {
-  "title": "Already have a Cytoid ID?",
-  "subtitle": "Please sign in below.",
-  "username_field_placeholder": "Cytoid ID / Email address",
-  "username_field_error_required": "Please input your Cytoid ID or email address.",
-  "password_field_placeholder": "Password",
-  "password_field_error_required": "Please input your password.",
-  "remember_me_checkbox_title": "Remember Me",
-  "forgot_password_link_title": "Forgot my Password",
+  "title": "CytoidIDを既にお持ちですか？",
+  "subtitle": "下の項目を入力してログインしてください。",
+  "username_field_placeholder": "CytoidID / メールアドレス",
+  "username_field_error_required": "CytoidID または メールアドレス を入力してください。",
+  "password_field_placeholder": "パスワード",
+  "password_field_error_required": "パスワードを入力してください。",
+  "remember_me_checkbox_title": "入力情報を保存する",
+  "forgot_password_link_title": "パスワードをお忘れですか？",
   "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
-  "login_snack_bar": "Welcome back, {name}",
-  "login_password_error": "Username or password mismatch!",
-  "login_username_error": "User does not exist!"
+  "new_user_welcome_content": "サインアップをすると、Cytoidのすべてのオンラインコンテンツにアクセスができます。\n登録は30秒とかかりません！",
+  "login_snack_bar": "おかりなさい、 {name} ！",
+  "login_password_error": "CytoidIDかパスワードが間違っています！",
+  "login_username_error": "そのCytoidIDは正しくありません！"
 }
