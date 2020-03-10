@@ -1,15 +1,15 @@
 {
-  "title": "Already have a Cytoid ID?",
-  "subtitle": "Please sign in below.",
-  "username_field_placeholder": "Cytoid ID / Email address",
-  "username_field_error_required": "Please input your Cytoid ID or email address.",
-  "password_field_placeholder": "Password",
-  "password_field_error_required": "Please input your password.",
-  "remember_me_checkbox_title": "Remember Me",
-  "forgot_password_link_title": "Forgot my Password",
-  "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
-  "login_snack_bar": "Welcome back, {name}",
-  "login_password_error": "Username or password mismatch!",
-  "login_username_error": "User does not exist!"
+  "title": "¿Ya tienes una Cytoid ID?",
+  "subtitle": "Por favor inicie sesión abajo.",
+  "username_field_placeholder": "Cytoid ID / Correo electrónico",
+  "username_field_error_required": "Por favor ingrese su Cytoid ID o correo electrónico.",
+  "password_field_placeholder": "Contraseña",
+  "password_field_error_required": "Por favor ingrese su contraseña.",
+  "remember_me_checkbox_title": "Recuérdame",
+  "forgot_password_link_title": "Olvidé mi Contraseña",
+  "new_user_welcome_title": "¿Nuevo en Cytoid?",
+  "new_user_welcome_content": "Registrate para acceder todos las características multijugador de Cytoid. ¡Toma menos de 30 segundos!",
+  "login_snack_bar": "Bienvenido de nuevo, {name}",
+  "login_password_error": "¡Nombre de usuario o contraseña incorrectas!",
+  "login_username_error": "¡El usuario existe!"
 }

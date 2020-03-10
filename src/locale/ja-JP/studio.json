@@ -1,9 +1,9 @@
 {
-  "menu_analytics": "Analytics",
+  "menu_analytics": "統計情報",
   "menu_levels": "Levels",
-  "menu_collections": "Collections",
-  "level_delete_confirm_title": "Delete {name}",
-  "level_delete_confirm_content1": "Are you sure that you want to delete {0}?",
+  "menu_collections": "コレクション",
+  "level_delete_confirm_title": "{name} を削除する",
+  "level_delete_confirm_content1": "本当に {0} を削除してもよろしいですか？",
   "level_delete_confirm_content2": "All records related to this level will be purged from our database, including {count} playing records. Players will see a reduction on their statistics as well.",
   "level_delete_confirm_content3": "Please input the uid of the level {0} to proceed.",
   "level_visibility_public_title": "This level will be visible to everybody.",
