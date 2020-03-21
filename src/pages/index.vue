@@ -50,7 +50,7 @@
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold;"
             ) {{$t('level_all_btn', { count: totalLevels })}}
-      collection-preview-card(v-if="data" :value="data.hitech")
+      collection-preview-card(v-if="data && data.hitech" :value="data.hitech")
       .columns
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'recent_ranks_title'")
@@ -133,7 +133,9 @@ query FetchHomePage {
         id
         uid
         name
-        avatarURL
+        avatar {
+          small
+        }
       }
       metadata {
         title_localized
@@ -142,9 +144,11 @@ query FetchHomePage {
         }
       }
       bundle {
-        background: backgroundImage
+        backgroundImage {
+          thumbnail
+        }
         music
-        music_preview: musicPreview
+        musicPreview
       }
     }
   }
@@ -155,12 +159,16 @@ fragment CollectionInfoFragment on Collection {
   uid
   title
   slogan
-  coverPath
+  cover {
+    thumbnail
+  }
   owner {
     id
     uid
     name
-    avatarURL
+    avatar {
+      small
+    }
   }
 }
 `

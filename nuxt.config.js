@@ -132,8 +132,8 @@ module.exports = {
     },
     clientConfigs: {
       default: {
-        httpEndpoint: config.get('apiURLServer') + '/graph',
-        browserHttpEndpoint: config.get('apiURLClient') + '/graph',
+        httpEndpoint: config.get('serviceURLServer') + '/graphql',
+        browserHttpEndpoint: config.get('serviceURLClient') + '/graphql',
         httpLinkOptions: {
           credentials: 'include'
         },

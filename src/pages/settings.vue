@@ -12,6 +12,9 @@
           li: nuxt-link(:to="{name: 'settings-profile'}")
             font-awesome-icon(:icon="['fas', 'address-card']" fixed-width)
             span.menu-text(v-t="'profile_menu'")
+          li: nuxt-link(:to="{name: 'settings-posts'}")
+            font-awesome-icon(:icon="['fas', 'file-alt']" fixed-width)
+            span.menu-text(v-t="'profile_post'")
     .column: nuxt
 </template>
 

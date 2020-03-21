@@ -3,6 +3,8 @@
   "assetURL": "https://assets.cytoid.io",
   "staticURL": "https://static.cytoid.io",
   "apiURLServer": "http://localhost:3000",
+  "serviceURLServer": "http://localhost:4000",
+  "serviceURLClient": "http://localhost:4000",
   "apiURLClient": "/api",
   "imageURL": "https://images.cytoid.io",
   "cmsURL": "https://cms.cytoid.io",

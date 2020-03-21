@@ -3,6 +3,8 @@
   "staticURL": "https://static.cytoid.io",
   "apiURLServer": "http://api.cytoid.appspot.com",
   "apiURLClient": "https://api.cytoid.io",
+  "serviceURLServer": "http://service",
+  "serviceURLClient": "https://service.cytoid.io",
   "imageURL": "https://images.cytoid.io",
   "cmsURL": "https://cms.cytoid.io",
   "webURL": "https://cytoid.io",

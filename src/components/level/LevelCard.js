@@ -49,7 +49,7 @@ export default {
     }
     return (
       <ContentCard
-        image={context.parent.$img(value.bundle.background, { width: 960, height: 600, mode: 'fill' })}
+        image={value.bundle.backgroundImage?.thumbnail || context.parent.$img(value.bundle.background, { width: 960, height: 600, mode: 'fill' })}
         to={{ name: 'levels-id', params: { id: value.uid } }}
         scopedSlots={slots}>
       </ContentCard>

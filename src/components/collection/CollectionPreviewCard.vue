@@ -2,8 +2,8 @@
 .collection-dock.columns
   .collection-dock-intro.column.is-one-third-desktop.is-two-fifths-tablet
     .collection-intro-bg(
-      v-if="value.coverPath"
-      :style="{ backgroundImage: `url(${$img(value.coverPath, { height: 500 })})` }")
+      v-if="value.cover"
+      :style="{ backgroundImage: `url(${value.cover && value.cover.thumbnail})` }")
     .collection-intro-content
       .content
         h1.collection-title(v-text="value.title")
