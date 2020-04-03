@@ -12,6 +12,10 @@
           li: nuxt-link(:to="{name: 'studio-collections'}")
             font-awesome-icon(:icon="['fas', 'archive']" fixed-width)
             span.menu-text(v-t="'menu_collections'")
+          li(v-if="$store.state.user && ($store.state.user.role === 'moderator' || $store.state.user.role === 'admin')")
+            nuxt-link(:to="{name: 'studio-posts'}")
+              font-awesome-icon(:icon="['fas', 'file-alt']" fixed-width)
+              span.menu-text(v-t="'menu_posts'")
     .column.is-three-quarters: nuxt-child
 </template>
 

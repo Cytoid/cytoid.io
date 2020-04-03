@@ -1,42 +1,37 @@
-<template lang="pug">
+<template lang="pug" functional>
   div(
     class="recent-rank ele3"
-    :class="Number(rank.rank) === 1 ? 'gold' : (Number(rank.rank) === 2 ? 'silver' : (Number(rank.rank) === 3 ? 'bronze' : ''))"
+    :class="['gold', 'silver', 'bronze'][props.value.rank]"
     style="position: relative; margin-top: 8px;"
   )
     .recent-rank-background(
-      v-if="rank.backgroundURL"
-      :style="{ 'background-image': 'url(' + $img(rank.backgroundURL, { height: 100, width: 500, mode: 'fill' }) + ')', 'background-size': 'cover' }"
+      v-if="props.value.chart.level.bundle.backgroundImage.stripe"
+      :style="{ 'background-image': 'url(' + props.value.chart.level.bundle.backgroundImage.stripe + ')', 'background-size': 'cover' }"
     )
     .recent-rank-overlay
-    div(v-if="showPlayer" style="margin-bottom: 8px; width: 100%; position: relative; z-index: 2;")
+    div(v-if="props.showPlayer" style="margin-bottom: 8px; width: 100%; position: relative; z-index: 2;")
       nuxt-link.profile-link(
-        :to="{name: 'profile-id', params: { id: rank.owner.uid || rank.owner.id }}"
+        :to="{name: 'profile-id', params: { id: props.value.owner.uid || props.value.owner.id }}"
       )
-        avatar(:size="24" fixed :src="rank.owner.avatarURL" style="margin-right: 8px;")
-        span(v-text="rank.owner.name || rank.owner.uid")
+        avatar(:size="24" fixed :source="props.value.owner.avatar.small" style="margin-right: 8px;")
+        span(v-text="props.value.owner.name || props.value.owner.uid")
     div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
       span(
-        :style="{ 'font-weight': Number(rank.rank) <= 3 ? 'bold' : 'normal' }"
-      ) {{ '#' + rank.rank }}
-      nuxt-link(:to="{ name: 'levels-id', params: { id: rank.uid }}" style="margin-left: 4px;" v-text="rank.title")
+        :style="{ 'font-weight': (props.value.rank !== null) && (props.value.rank <= 3) ? 'bold' : 'normal' }"
+      ) {{ '#' + props.value.rank }}
+      nuxt-link(:to="{ name: 'levels-id', params: { id: props.value.chart.level.uid }}" style="margin-left: 4px;" v-text="props.value.chart.level.title")
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")
-        difficulty-badge(:value="{ type: rank.type, name: rank.name, difficulty: rank.difficulty, notesCount: rank.notesCount }" :small="true")
-        score-badge(:value="rank.score" style="margin-left: 4px;")
+        difficulty-badge(:value="props.value.chart" :small="true")
+        score-badge(:value="props.value.score" style="margin-left: 4px;")
       div(style="display: flex; margin-left: auto;")
-        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="$dateFromNow(rank.date)")
+        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="parent.$dateFromNow(props.value.date)")
 </template>
 
 <script>
-import ScoreBadge from '@/components/level/ScoreBadge'
-import DifficultyBadge from '@/components/level/DifficultyBadge'
 export default {
-  components: {
-    ScoreBadge, DifficultyBadge
-  },
   props: {
-    rank: {
+    value: {
       type: Object,
       required: true,
     },

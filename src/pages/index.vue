@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(v-if="data")
     .container.logo
       img(:src="require('@/assets/images/logo.png')")
       .slogan(v-t="'slogan'")
@@ -41,48 +41,45 @@
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold; margin-bottom: 1.5rem;"
             ) {{$t('collection_all_btn', { count: (data && data.collectionsCount) })}}
-          #index-featured-level.box.is-gradient(v-if="latestFeaturedLevel")
+          #index-featured-level.box.is-gradient(v-if="data.latestFeaturedLevels && data.latestFeaturedLevels[0]")
             p.card-heading(v-t="'featured_level_title'")
-            level-card.level-card(:value="latestFeaturedLevel")
+            level-card.level-card(:value="data.latestFeaturedLevels[0]")
           nuxt-link(:to="{ name: 'levels' }")
             a-button.browse-button.ele3(
               type="primary"
               size="large"
               style="width: 100%; color: white; font-size: 12px; text-transform: uppercase; font-weight: bold;"
-            ) {{$t('level_all_btn', { count: totalLevels })}}
+            ) {{$t('level_all_btn', { count: data.levelsCount })}}
       collection-preview-card(v-if="data && data.hitech" :value="data.hitech")
       .columns
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'recent_ranks_title'")
           player-recent-rank(
-            v-for="rank in latestRanks"
-            :key="rank.id"
-            :rank="rank"
+            v-if="data.recentRecords"
+            v-for="record in data.recentRecords"
+            :key="record.id"
+            :value="record"
             :showPlayer="true"
             style="margin: 8px 0;"
           )
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'latest_tweet_title'")
-          a-spin(:spinning="loadingTweet" style="min-height: 128px;")
-            p(v-show="loadTweetFailed") Cannot fetch latest tweet.
-            Tweet(v-show="!loadingTweet && !loadTweetFailed" :id="latestTweetId.toString()" :key="latestTweetId" :options="{ theme: 'dark' }")
+          Tweet(v-if="data.recentTweet" v-show="!loadingTweet" :id="data.recentTweet" :key="data.recentTweet" :options="{ theme: 'dark' }")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'new_comments_title'")
-          a-spin(:spinning="loadingComments" style="min-height: 128px;")
-            p(v-show="loadCommentsFailed") Cannot fetch Disqus comments.
-            player-recent-comment(
-              v-for="comment in latestComments"
-              :key="comment.uid"
-              :comment="comment"
-              style="margin: 8px 0;"
-            )
+          player-recent-comment(
+            v-for="comment in data.disqus"
+            :key="comment.uid"
+            :comment="comment"
+            style="margin: 8px 0;"
+          )
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'connect_title'")
           #discord.box.is-gradient
             img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
             p(
-              v-show="onlineDiscordMembersCount > 0"
+              v-show="data.discordOnlineCount > 0"
               style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);"
-              v-t="{path: 'connect_discord_subtitle', args: { count: onlineDiscordMembersCount}}"
+              v-t="{path: 'connect_discord_subtitle', args: { count: data.discordOnlineCount }}"
             )
             p(style="margin-top: 8px" v-t="'connect_discord_content'")
             a(href="https://discord.gg/cytoid")
@@ -115,9 +112,14 @@ import PostCard from '@/components/post/PostCard'
 import LevelCard from '@/components/level/LevelCard'
 import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
 import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
+import ScoreBadge from '@/components/level/ScoreBadge'
+import DifficultyBadge from '@/components/level/DifficultyBadge'
 
 const query = gql`
 query FetchHomePage {
+  disqus
+  recentTweet
+  discordOnlineCount
   collectionsCount
   gettingStarted: collection(uid: "getting-started") {
     ...CollectionInfoFragment
@@ -126,34 +128,71 @@ query FetchHomePage {
   hitech: collection(uid: "hi-tech") {
     ...CollectionInfoFragment
     levels(limit: 5) {
-      id
-      uid
-      title
-      owner {
-        id
-        uid
-        name
-        avatar {
-          small
-        }
-      }
-      metadata {
-        title_localized
-        artist {
-          name
-        }
-      }
-      bundle {
-        backgroundImage {
-          thumbnail
-        }
-        music
-        musicPreview
-      }
+      ...LevelCardFragment
     }
   }
+  latestFeaturedLevels: levels(category: "featured", limit:1, sort: CREATION_DATE, order:DESC) {
+    ...LevelCardFragment
+  }
+  levelsCount
+  recentRecords(ranked:true, limit:10) {
+    id
+    date
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
+    }
+    chart {
+      id
+      difficulty
+      name
+      type
+      notesCount
+      level {
+        uid
+        title
+        bundle {
+          backgroundImage {
+           stripe
+          }
+        }
+      }
+    }
+    score
+    accuracy
+    rank
+  }
 }
-
+fragment LevelCardFragment on Level {
+  id
+  uid
+  title
+  owner {
+    id
+    uid
+    name
+    avatar {
+      small
+    }
+  }
+  metadata {
+    title_localized
+    artist {
+      name
+    }
+  }
+  bundle {
+    backgroundImage {
+      thumbnail
+    }
+    music
+    musicPreview
+  }
+}
 fragment CollectionInfoFragment on Collection {
   id
   uid
@@ -182,6 +221,8 @@ export default {
     LevelCard,
     CollectionPreviewCard,
     CollectionSimpleCard,
+    ScoreBadge,
+    DifficultyBadge,
     Tweet
   },
   background: {
@@ -197,95 +238,60 @@ export default {
   data() {
     return {
       posts: [],
-      totalLevels: 0,
-      latestFeaturedLevel: null,
-      latestRanks: [],
-      latestComments: [],
-      latestTweetId: 'tweet-does-not-exist',
-      onlineDiscordMembersCount: -1,
-      loadingComments: true,
-      loadCommentsFailed: false,
-      loadingTweet: true,
-      loadTweetFailed: false,
-      styleTweetTimer: null,
+      loadingTweet: false,
     }
   },
   asyncData({ $axios, error }) {
     return Promise.all([
       $axios.get(process.env.cmsURL + '/api/items/posts?fields=*.*&sort=-created_on'),
-      $axios.get('/levels', { params: { sort: 'creation_date', order: 'desc', page: 0, limit: 0 } }),
-      $axios.get('/levels', { params: { sort: 'creation_date', order: 'desc', page: 0, limit: 1, featured: true } }),
-      $axios.get('/records')
     ])
-      .then(([postsResponse, totalLevelsResponse, latestFeaturedLevelResponse, latestRanksResponse]) => {
+      .then(([postsResponse]) => {
         return {
           posts: postsResponse.data.data.filter(it => it.published),
-          totalLevels: parseInt(totalLevelsResponse.headers['x-total-entries']),
-          latestFeaturedLevel: latestFeaturedLevelResponse.data.length > 0 ? latestFeaturedLevelResponse.data[0] : null,
-          latestRanks: latestRanksResponse.data.slice(0, 10)
         }
       })
       .catch(err => error(err.response?.data))
   },
   mounted() {
-    this.$axios.get('/integrations/disqus').then((response) => {
-      this.latestComments = response.data.response
-      this.loadingComments = false
-    }).catch((err) => {
-      this.loadCommentsFailed = true
-      console.log(err)
-    })
-    this.$axios.get('/integrations/twitter', { transformResponse: [(data) => { return data }] }).then((response) => {
-      this.latestTweetId = response.data
-      const self = this
-      function styleTweet() {
-        const widget = document.querySelector('[id^="twitter-widget-"]')
-        if (widget == null) {
-          // Try next time!
-          self.styleTweetTimer = setTimeout(styleTweet, 200)
-          return
-        }
-        const style = document.createElement('style')
-        style.innerHTML = `
-          .EmbeddedTweet {
-            border: none !important;
-            background: hsla(226, 15%, 19%, 1) !important;
-            box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
-          }
-          .CallToAction {
-            border: none !important;
-          }
-          .CallToAction-icon .Icon {
-            display: none !important;
-          }
-          .CallToAction-text {
-            margin-left: -2px !important;
-            color: rgba(255, 255, 255, 0.8) !important;
-            transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1) !important;
-          }
-          .CallToAction-text:hover {
-            color: white !important;
-          }
-        `
-        style.type = 'text/css'
-        if (widget.contentDocument) {
-          widget.contentDocument.head.appendChild(style)
-        } else {
-          widget.shadowRoot.insertBefore(style, widget.shadowRoot.childNodes[0])
-        }
-
-        self.loadingTweet = false
+    function styleTweet() {
+      const widget = document.querySelector('[id^="twitter-widget-"]')
+      if (widget == null) {
+        // Try next time!
+        this.styleTweetTimer = setTimeout(styleTweet, 200)
+        return
       }
-      this.styleTweetTimer = setTimeout(styleTweet, 200)
-    }).catch((err) => {
-      this.loadTweetFailed = true
-      console.log(err)
-    })
-    this.$axios.get('/integrations/discord').then((response) => {
-      this.onlineDiscordMembersCount = response.data
-    }).catch((err) => {
-      console.log(err)
-    })
+      const style = document.createElement('style')
+      style.innerHTML = `
+        .EmbeddedTweet {
+          border: none !important;
+          background: hsla(226, 15%, 19%, 1) !important;
+          box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
+        }
+        .CallToAction {
+          border: none !important;
+        }
+        .CallToAction-icon .Icon {
+          display: none !important;
+        }
+        .CallToAction-text {
+          margin-left: -2px !important;
+          color: rgba(255, 255, 255, 0.8) !important;
+          transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        }
+        .CallToAction-text:hover {
+          color: white !important;
+        }
+      `
+      style.type = 'text/css'
+      if (widget.contentDocument) {
+        widget.contentDocument.head.appendChild(style)
+      } else {
+        widget.shadowRoot.insertBefore(style, widget.shadowRoot.childNodes[0])
+      }
+
+      this.loadingTweet = false
+    }
+    this.styleTweetTimer = setTimeout(styleTweet.bind(this), 200)
   },
   destroyed() {
     if (this.styleTweetTimer) {

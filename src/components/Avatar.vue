@@ -21,6 +21,10 @@ export default {
       type: String,
       default: defaultAvatarURL,
     },
+    source: {
+      type: String,
+      default: null,
+    },
     fixed: {
       type: Boolean,
       default: false,
@@ -33,6 +37,9 @@ export default {
   },
   computed: {
     avatarSrc() {
+      if (this.source) {
+        return this.source
+      }
       const url = new URL(this.src, process.env.webURL)
       const size = this.size || 256
       if (url.host.includes('gravatar')) {
