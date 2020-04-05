@@ -36,6 +36,7 @@
 @import "~buefy/src/scss/components/_switch";
 @import "~buefy/src/scss/components/_pagination";
 @import "~buefy/src/scss/components/_radio";
+@import "~buefy/src/scss/components/_rate";
 
 // reset
 ul {
@@ -88,5 +89,8 @@ ul {
 .box {
   &.is-gradient {
     background: radial-gradient(circle farthest-corner at 0 0, transparent, $box-background-color 256px), var(--box-background-gradient, linear-gradient(to right bottom, #acb6e5, #86fde8));
+  }
+  .box-section {
+    margin-bottom: 1rem;
   }
 }

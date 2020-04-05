@@ -1,5 +1,5 @@
 <template lang="pug">
-  .section: .container(style="margin-top: 256px;")
+  .section: .container(v-if="level" style="margin-top: 256px;")
     h1.text-ele(style="margin-bottom: 16px; line-height: 1.0;" v-text="level.title")
     .text-ele(
       style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;"
@@ -24,8 +24,8 @@
         )
           font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
           span(v-t="'manage_btn'")
-    .notification.is-warning(v-if="level.published === false" v-t="'message_private'")
-    .notification.is-primary(v-if="level.published === null" v-t="'message_unlisted'")
+    .notification.is-warning(v-if="level.state === 'PRIVATE'" v-t="'message_private'")
+    .notification.is-primary(v-if="level.state === 'UNLISTED'" v-t="'message_unlisted'")
     .notification.is-danger(v-if="level.censored" v-t="{ path: 'message_censored', args: { reason: level.censored } }")
     .columns
       .column.is-one-third
@@ -33,36 +33,21 @@
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           .level-description(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
           p.card-heading(v-t="'details_card_rating_title'")
-          div(style="margin-bottom: 16px;")
-            a-rate(
-              :default-value="(ratings.rating || ratings.average) * 0.5"
-              allow-half
-              :disabled="!$store.state.user"
-              @change="rate"
-            )
-            span.card-secondary-text {{ (Math.floor(ratings.average * 0.5 * 100) / 100).toFixed(2) }} ({{ ratings.total }})
+          b-rate(
+            icon-pack="fas"
+            :value="(level.rating.rating || level.rating.average) * 0.5"
+            :disabled="!$store.state.user"
+            @change="rate"
+            :custom-text="`${(Math.floor(level.rating.average * 0.5 * 100) / 100).toFixed(2)} (${level.rating.total})`"
+          )
           template(v-if="level.tags.length > 0")
             .card-heading(v-t="'details_card_tags_title'")
             .tags
               a.tag(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()" v-text="tag")
           .card-heading(v-t="'details_card_last_updated_title'")
           .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
-        .box
-          p.card-heading(v-t="'credits_card_music_title'")
-          p.card-em-text(style="margin-bottom: 4px;" v-if="level.metadata.artist") {{ level.metadata.artist.name }}
-          a(v-if="level.metadata.artist && level.metadata.artist.url" :href="makeLink(level.metadata.artist.url)")
-            a-button.card-button(style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
-              font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
-              span Source
-          p.card-heading(v-t="'credits_card_cover_art_title'")
-          p.card-em-text(style="margin-bottom: 4px;" v-if="level.metadata.illustrator") {{ level.metadata.illustrator.name }}
-          a(v-if="level.metadata.illustrator && level.metadata.illustrator.url" :href="makeLink(level.metadata.illustrator.url)")
-            a-button.card-button(style="width: fit-content; margin-top: -2px; margin-bottom: 20px; padding-left: 12px; padding-right: 14px;")
-              font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
-              span Source
-          p.card-heading Chart
-          p.card-em-text(style="margin-bottom: 16px;" v-if="level.metadata.charter") {{ level.metadata.charter.name }}
-      .column.is-two-thirds
+        meta-box(:metadata="level.metadata")
+      .column.is-two-thirds(v-if="false")
         .box.rankings-card.is-gradient(:style="rankingsHeaderGradient")
           p.card-heading(v-t="'difficulty_card_title'")
           a-radio-group(v-model="rankingsChartType")
@@ -103,7 +88,7 @@
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
     .play-button-container
-      play-button(:src="level.bundle.music_preview")
+      play-button(:src="level.bundle.musicPreview")
 </template>
 
 <script>
@@ -114,7 +99,9 @@ import PlayButton from '@/components/level/PlayButton'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import { formatBytes, Meta } from '@/utils'
+import gql from 'graphql-tag'
 import { handleErrorBlock } from '@/plugins/antd'
+import MetaBox from '@/components/MetaBox'
 
 const ModIconKeys = [
   'ap',
@@ -233,6 +220,65 @@ const modNames = {
   flipx: 'Flip X',
   flipy: 'Flip Y'
 }
+const query = gql`query FetchLevel($uid: String!){
+  level(uid: $uid) {
+    id
+    uid
+    description
+    state
+    censored
+    size
+    tags
+    creationDate
+    modificationDate
+    owner {
+      id
+      uid
+      name
+      avatar { large }
+    }
+    charts {
+      difficulty
+      type
+      name
+      notesCount
+    }
+    metadata {
+      artist {
+        name
+        localized_name
+        url
+      }
+      illustrator {
+        name
+        localized_name
+        url
+      }
+      charter {
+        name
+        localized_name
+        url
+      }
+      storyboarder {
+        name
+        localized_name
+        url
+      }
+    }
+    rating {
+      average
+      total
+      distribution
+      rating
+    }
+    bundle {
+      musicPreview
+      backgroundImage {
+        original
+      }
+    }
+  }
+}`
 export default {
   layout: 'background',
   components: {
@@ -241,10 +287,10 @@ export default {
     DifficultyBadge,
     PlayButton,
     Disqus,
+    MetaBox,
   },
   data: () => ({
     level: null,
-    ratings: null,
     rankings: [],
     rankings_pagination: {
       current: 1,
@@ -257,12 +303,6 @@ export default {
     modNames,
     modIconKeyPathMap: ModIconKeyPathMap
   }),
-  head() {
-    const meta = new Meta(this.level.title, this.level.description)
-    meta.extend('author', this.level.owner.name || this.level.owner.uid)
-    meta.extend('og:image', this.level.bundle.background)
-    return meta
-  },
   computed: {
     levelDescription() {
       return this.level.description !== null ? marked(this.level.description) : null
@@ -280,28 +320,25 @@ export default {
       return process.env.apiURL + '/levels/' + this.level.uid + '/package'
     }
   },
-  watch: {
-    rankingsChartType() {
-      this.loadRankings(this.rankings_pagination)
+  async asyncData({ app, params, error, store }) {
+    const level = await app.apolloProvider.defaultClient.query({
+      query,
+      variables: { uid: params.id }
+    }).then(({ data }) => data?.level)
+      .catch(err => handleErrorBlock(err, error))
+    if (!level) {
+      return error({ statusCode: 404, message: 'Level not found' })
+    }
+    store.commit('setBackground', { source: level.bundle?.backgroundImage?.original })
+    return {
+      level,
     }
   },
-  asyncData({ $axios, params, store, error }) {
-    return Promise.all([
-      $axios.get('/levels/' + params.id),
-      $axios.get(`/levels/${params.id}/ratings`),
-    ])
-      .then(([levelResponse, ratingResponse]) => {
-        store.commit('setBackground', { source: levelResponse.data.bundle.background })
-        return {
-          level: levelResponse.data,
-          ratings: ratingResponse.data,
-          rankingsChartType: levelResponse.data.charts[levelResponse.data.charts.length - 1].type
-        }
-      })
-      .catch(err => handleErrorBlock(err, error))
-  },
-  mounted() {
-    this.loadRankings(this.rankings_pagination)
+  head() {
+    const meta = new Meta(this.level?.title || 'Level', this.level?.description || '')
+    meta.extend('author', this.level?.owner?.name || this.level?.owner?.uid)
+    meta.extend('og:image', this.level?.bundle?.background)
+    return meta
   },
   methods: {
     rate(e) {
@@ -310,20 +347,6 @@ export default {
         .then((response) => {
           this.ratings = response.data
         })
-    },
-    loadRankings(pagination) {
-      this.rankings_loading = true
-      this.$axios.get(`/levels/${this.level.uid}/charts/${this.rankingsChartType}/ranking`, {
-        params: {
-          limit: pagination.pageSize,
-          page: pagination.current - 1,
-        },
-      }).then((res) => {
-        this.rankings_pagination.total = parseInt(res.headers['x-total-entries'])
-        this.rankings_pagination.current = parseInt(res.headers['x-current-page']) + 1
-        this.rankings_loading = false
-        this.rankings = res.data
-      })
     },
     rowClass(record) {
       let classes = 'row-score'
