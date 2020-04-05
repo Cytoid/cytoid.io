@@ -2,7 +2,7 @@
   "secret": "keyboard cat",
   "assetURL": "https://assets.cytoid.io",
   "staticURL": "https://static.cytoid.io",
-  "apiURLServer": "http://localhost:3000",
+  "apiURLServer": "http://localhost:4000",
   "serviceURLServer": "http://localhost:4000",
   "serviceURLClient": "http://localhost:4000",
   "apiURLClient": "/api",
@@ -10,5 +10,6 @@
   "cmsURL": "https://cms.cytoid.io",
   "webURL": "http://localhost:8080",
   "captchaKey": "6Le6KqsUAAAAANemJwIe18ld-0kKSQn9aqR4-ltM",
-  "analyticsCode": "UA-127631599-1"
+  "analyticsCode": "UA-127631599-1",
+  "redis": "redis://localhost:6379"
 }

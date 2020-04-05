@@ -117,8 +117,7 @@ module.exports = {
     cookieAttributes: {
       expires: 7,
       path: '/',
-      domain: 'cytoid.io',
-      secure: true,
+      secure: false,
     },
     includeNodeModules: false,
     authenticationType: 'Bearer',

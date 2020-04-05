@@ -224,6 +224,7 @@ const query = gql`query FetchLevel($uid: String!){
   level(uid: $uid) {
     id
     uid
+    title
     description
     state
     censored
@@ -341,11 +342,24 @@ export default {
     return meta
   },
   methods: {
-    rate(e) {
-      e *= 2
-      this.$axios.post(`/levels/${this.level.uid}/ratings`, { rating: e })
-        .then((response) => {
-          this.ratings = response.data
+    rate(rating) {
+      rating *= 2
+      this.$apollo.mutate({
+        mutation: gql`mutation LevelRate($uid: String!, $rating: Int) {
+          rateLevel(id: $uid, rating: $rating) {
+            average
+            total
+            distribution
+            rating
+          }
+        }`,
+        variables: {
+          uid: this.level.uid,
+          rating,
+        },
+      })
+        .then((res) => {
+          this.level.rating = res.data.rateLevel
         })
     },
     rowClass(record) {

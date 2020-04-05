@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie'
-
 export const state = () => ({
   background: {
     source: null,
@@ -33,7 +31,6 @@ export const mutations = {
     if (this.app.i18n) {
       this.app.i18n.locale = lang
     }
-    Cookies.set('locale', lang, { expires: 3600 * 24 * 14 })
   },
   setCountry(state, country) {
     state.country = country
@@ -43,7 +40,7 @@ export const actions = {
   nuxtServerInit({ dispatch, commit, state }, { $axios, error, req, app }) {
     if (req) {
       // Read cookies success
-      const user = req.ctx.session?.passport?.user
+      const user = req.session?.passport?.user
       commit('setUser', user)
       if (user) {
         commit('setAvatar', `${process.env.apiURL}/users/${user.id}/avatar`)

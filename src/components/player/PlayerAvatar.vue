@@ -3,7 +3,7 @@
     :class="data.staticClass"
     :style="data.staticStyle"
     :to="{ name: 'profile-id', params: { id: props.player.uid || props.player.id } }")
-    avatar(:size="64" :src="props.player.avatarURL" fixed)
+    avatar(:size="64" :source="props.player.avatar.large" fixed)
     span.player-avatar-name(v-text="props.player.name || props.player.uid")
 </template>
 

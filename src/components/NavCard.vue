@@ -52,7 +52,6 @@ export default {
     }
   },
   mounted() {
-    console.log('hello? anyone?', this.user)
     if (this.user && !this.header) {
       this.$axios.get('/profile/' + this.user.id)
         .then((res) => {
