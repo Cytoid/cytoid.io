@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss">
 .badge-score {
+  display: inline;
   height: 20px;
   line-height: 20px;
   min-width: unset;

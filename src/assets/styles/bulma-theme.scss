@@ -87,7 +87,7 @@ $button-background-color: $grey;
 $button-border-color: $grey;
 $button-hover-border-color: $grey-light;
 .box {
-  .button {
+  .button:not(.radio) {
     background: rgb(63, 66, 78);
     color: $white-bis;
     border: none;
@@ -106,10 +106,16 @@ $button-hover-border-color: $grey-light;
 
 
 $table-color: $white-bis;
-$table-background-color: $grey;
+$table-background-color: transparent;
 $table-head-cell-color: $white-ter;
-$table-cell-border: 1px solid $white-ter;
+$table-cell-border: none;
 $table-row-hover-background-color: $grey-light;
+
+.table {
+  thead {
+    text-transform: uppercase;
+  }
+}
 
 $icon-dimensions: 1rem;
 $icon-dimensions-small: 0.75rem;

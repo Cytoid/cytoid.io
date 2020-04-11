@@ -47,44 +47,52 @@
           .card-heading(v-t="'details_card_last_updated_title'")
           .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         meta-box(:metadata="level.metadata")
-      .column.is-two-thirds(v-if="false")
+      .column.is-two-thirds
         .box.rankings-card.is-gradient(:style="rankingsHeaderGradient")
-          p.card-heading(v-t="'difficulty_card_title'")
-          a-radio-group(v-model="rankingsChartType")
-            a-radio-button(v-for="chart in level.charts.slice().reverse()" :value="chart.type" :key="chart.id") {{ chart.name || convertedDifficultyName(chart.type) }}
-          a-table.rankings-table(
-            :columns="columns"
-            :row-key="record => record.id"
-            :data-source="rankings"
-            :pagination="rankings_pagination"
-            :loading="rankings_loading"
-            :scroll="{ x: true }"
-            :rowClassName="(record, index) => rowClass(record, index)"
-            @change="loadRankings"
+          b-field(:label="$t('difficulty_card_title')")
+            .field.has-addons
+              b-radio-button(
+                v-for="chart in level.charts"
+                :key="chart.id"
+                size="is-small"
+                type="is-white"
+                v-model="rankingsChartType"
+                :native-value="chart.type") {{ chart.name || convertedDifficultyName(chart.type)}}
+          b-table.leaderboard-table(
+            :data="leaderboard"
+            centered
+            scrollable
+            hoverable
+            :row-class="rowClass"
           )
-            template(v-slot:rank="ranking") {{ '#' + ranking }}
-            template(slot="owner" slot-scope="text, record")
-              .ranking-player-avatar(style="padding-right: 32px;")
-                nuxt-link(:to="{name: 'profile-id', params: { id: record.owner.uid || record.owner.id }}" style="display: flex; align-items: center;")
-                  avatar(:size="20 + Math.max(0, 4 - record.rank) * 4" :src="record.owner.avatarURL" fixed)
-                  span.ranking-player-avatar-name(v-text="record.owner.name || record.owner.uid")
-            template(v-slot:score="score")
-              div(style="display: flex; align-items: center;")
-                score-badge(:value="score")
-                span(style="margin-left: 4px;" v-text="score")
-            template(v-slot:accuracy="accuracy") {{ (Math.floor(accuracy * 100 * 100) / 100) + '%' }}
-            template(v-slot:maxcombo="maxCombo") {{ maxCombo ? (maxCombo + 'x') : 'Unknown' }}
-            template(v-slot:mods="mods")
-              span(v-if="mods.length === 0 || mods[0] === ''") N/A
-              span(v-else)
-                img(
-                  v-for="mod in mods"
-                  :key="mod"
-                  :title="modNames[mod.toLowerCase()]"
-                  :src="modIconKeyPathMap[mod.toLowerCase()]"
-                  style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
-                )
-            template(v-slot:achieved="date" style="font-size: 12px;") {{ $dateFromNow(date) }}
+            template(slot-scope="props")
+              b-table-column(field="id" label="rank") \#{{ props.index + 1 }}
+              b-table-column(field="owner" label="player")
+                nuxt-link(:to="{name: 'profile-id', params: { id: props.row.owner.uid || props.row.owner.id }}")
+                  avatar(:source="props.row.owner.avatar.small" fixed)
+                  span(v-text="props.row.owner.name || props.row.owner.uid")
+              b-table-column(field="score" label="score")
+                score-badge(:value="props.row.score")
+                span(style="margin-left: 4px;" v-text="props.row.score")
+
+              b-table-column(field="accuracy" label="acc") {{ (Math.floor(props.row.accuracy * 100 * 100) / 100) }}%
+              b-table-column(field="maxCombo" label="max combo") {{ props.row.details.maxCombo ? (props.row.details.maxCombo + 'x') : 'Unknown' }}
+              b-table-column(field="mods" label="mods")
+                span(v-if="props.row.mods.length === 0 || props.row.mods[0] === ''") N/A
+                span(v-else)
+                  img(
+                    v-for="mod in props.row.mods"
+                    :key="mod"
+                    :title="getModById(mod).title"
+                    :src="getModById(mod).src"
+                    style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
+                  )
+              b-table-column(field="perfect" label="perfect") {{ props.row.details.perfect }}
+              b-table-column(field="great" label="great") {{ props.row.details.great }}
+              b-table-column(field="good" label="good") {{ props.row.details.good }}
+              b-table-column(field="bad" label="bad") {{ props.row.details.bad }}
+              b-table-column(field="miss" label="miss") {{ props.row.details.miss }}
+              b-table-column(field="date" label="achieved") {{ $dateFromNow(props.row.date) }}
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
     .play-button-container
@@ -124,89 +132,7 @@ const ModIconKeyPathMap = {}
 for (const key of ModIconKeys) {
   ModIconKeyPathMap[key] = require(`@/assets/icons/${key}.png`)
 }
-const columns = [
-  {
-    title: 'Rank',
-    dataIndex: 'rank',
-    width: 10,
-    scopedSlots: {
-      customRender: 'rank'
-    }
-  },
-  {
-    title: 'Player',
-    dataIndex: 'owner',
-    width: 120,
-    scopedSlots: {
-      customRender: 'owner'
-    }
-  },
-  {
-    title: 'Score',
-    dataIndex: 'score',
-    width: 40,
-    scopedSlots: {
-      customRender: 'score'
-    }
-  },
-  {
-    title: 'Acc.',
-    dataIndex: 'accuracy',
-    width: 10,
-    scopedSlots: {
-      customRender: 'accuracy'
-    }
-  },
-  {
-    title: 'Max combo',
-    dataIndex: 'details.maxCombo',
-    width: 10,
-    scopedSlots: {
-      customRender: 'maxcombo'
-    }
-  },
-  {
-    title: 'Perfect',
-    dataIndex: 'details.perfect',
-    width: 10,
-  },
-  {
-    title: 'Great',
-    dataIndex: 'details.great',
-    width: 10,
-  },
-  {
-    title: 'Good',
-    dataIndex: 'details.good',
-    width: 10,
-  },
-  {
-    title: 'Bad',
-    dataIndex: 'details.bad',
-    width: 10,
-  },
-  {
-    title: 'Miss',
-    dataIndex: 'details.miss',
-    width: 10,
-  },
-  {
-    title: 'Mods',
-    dataIndex: 'mods',
-    width: 0,
-    scopedSlots: {
-      customRender: 'mods'
-    }
-  },
-  {
-    title: 'Achieved',
-    dataIndex: 'date',
-    width: 0,
-    scopedSlots: {
-      customRender: 'achieved'
-    }
-  },
-]
+// eslint-disable-next-line no-unused-vars
 const modNames = {
   hidenotes: 'Invisible',
   hidescanline: 'No Scanline',
@@ -218,7 +144,7 @@ const modNames = {
   fc: 'Full Combo',
   flipall: 'Flip All',
   flipx: 'Flip X',
-  flipy: 'Flip Y'
+  flipy: 'Flip Y',
 }
 const query = gql`query FetchLevel($uid: String!){
   level(uid: $uid) {
@@ -280,6 +206,35 @@ const query = gql`query FetchLevel($uid: String!){
     }
   }
 }`
+const rankingQuery = gql`query FetchLevelRanking($levelUid: String!, $type: String!) {
+  chart(levelUid: $levelUid, chartType: $type) {
+    id
+    leaderboard(start: 0, limit: 10) {
+      id
+      date
+      owner {
+        id
+        uid
+        name
+        avatar {
+          small
+        }
+      }
+      score
+      accuracy
+      mods
+      details {
+        perfect
+        great
+        good
+        bad
+        miss
+        maxCombo
+      }
+    }
+  }
+}
+`
 export default {
   layout: 'background',
   components: {
@@ -292,17 +247,8 @@ export default {
   },
   data: () => ({
     level: null,
-    rankings: [],
-    rankings_pagination: {
-      current: 1,
-      total: 0,
-      pageSize: 10,
-    },
-    rankings_loading: true,
+    leaderboard: null,
     rankingsChartType: null,
-    columns,
-    modNames,
-    modIconKeyPathMap: ModIconKeyPathMap
   }),
   computed: {
     levelDescription() {
@@ -331,9 +277,18 @@ export default {
       return error({ statusCode: 404, message: 'Level not found' })
     }
     store.commit('setBackground', { source: level.bundle?.backgroundImage?.original })
-    return {
+    const defaultType = (level.charts && level.charts.length > 0) ? level.charts[0].type : null
+    const result = {
       level,
+      rankingsChartType: defaultType,
     }
+    if (defaultType) {
+      result.leaderboard = await app.apolloProvider.defaultClient.query({
+        query: rankingQuery,
+        variables: { levelUid: params.id, type: defaultType },
+      }).then(a => a?.data?.chart?.leaderboard)
+    }
+    return result
   },
   head() {
     const meta = new Meta(this.level?.title || 'Level', this.level?.description || '')
@@ -362,18 +317,25 @@ export default {
           this.level.rating = res.data.rateLevel
         })
     },
-    rowClass(record) {
+    getModById(id) {
+      id = id.toLowerCase()
+      return {
+        title: modNames[id],
+        src: ModIconKeyPathMap[id],
+      }
+    },
+    rowClass(record, index) {
       let classes = 'row-score'
       if (record.score === 1000000) {
         classes += ' row-score-max'
       } else if (record.score >= 999500) {
         classes += ' row-score-sss'
       }
-      if (record.rank === 1) {
+      if (index === 0) {
         classes += ' row-score-1st'
-      } else if (record.rank === 2) {
+      } else if (index === 1) {
         classes += ' row-score-2nd'
-      } else if (record.rank === 3) {
+      } else if (index === 2) {
         classes += ' row-score-3rd'
       }
       return classes
@@ -416,167 +378,115 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .ranking-player-avatar {
-    display: flex;
-    transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .ranking-player-avatar:hover {
+.download-button.ant-btn-primary {
+  background: linear-gradient(to right, @theme4, @theme6);
+  border: none;
+  background-size: 200% 100%;
+  &:hover {
+    background: linear-gradient(to right, @theme4, @theme6);
+    background-size: 200% 100%;
     transform: scale(0.98, 0.98);
   }
-  .ranking-player-avatar:active {
+  &:active, &:focus {
+    background: linear-gradient(to right, @theme4, @theme6);
+    background-size: 200% 100%;
+    box-shadow: @ele3;
     transform: scale(0.95, 0.95);
   }
-  .ranking-player-avatar a {
-    text-decoration: none !important;
-  }
-  .ranking-player-avatar-name {
-    margin-left: 8px;
-    font-size: 14px;
-  }
-  .download-button.ant-btn-primary {
-    background: linear-gradient(to right, @theme4, @theme6);
-    border: none;
-    background-size: 200% 100%;
-    &:hover {
-      background: linear-gradient(to right, @theme4, @theme6);
-      background-size: 200% 100%;
-      transform: scale(0.98, 0.98);
-    }
-    &:active, &:focus {
-      background: linear-gradient(to right, @theme4, @theme6);
-      background-size: 200% 100%;
-      box-shadow: @ele3;
-      transform: scale(0.95, 0.95);
-    }
-  }
+}
 </style>
 
 <style lang="less">
-    .level-description a {
+.level-description a {
+  font-weight: bold;
+  color: hsla(226, 68%, 77%, 1);
+  transition: 0.2s @hoverEasing;
+  &:hover {
+    color: hsla(226, 68%, 87%, 1);
+  }
+}
+.leaderboard-table {
+  .table-wrapper {
+    overflow: scroll;
+    .table {
+      border: none !important;
+      border-collapse: collapse !important;
+      white-space: nowrap;
+    }
+  }
+  .cytoid-avatar {
+    height: 20px;
+    width: 20px;
+    margin-right: .5rem;
+  }
+  .row-score {
+    &.row-score-sss {
+      background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 100%);
       font-weight: bold;
-      color: hsla(226, 68%, 77%, 1);
-      transition: 0.2s @hoverEasing;
-      &:hover {
-        color: hsla(226, 68%, 87%, 1);
+    }
+    &.row-score-max {
+      background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+      font-weight: bold;
+    }
+
+    &.row-score-1st {
+      .cytoid-avatar {
+        height: 28px;
+        width: 28px;
+      }
+      font-size: 20px;
+    }
+
+    &.row-score-2nd {
+      .cytoid-avatar {
+        height: 24px;
+        width: 24px;
+      }
+      font-size: 18px;
+    }
+
+    &.row-score-3rd {
+      font-size: 16px;
+      .cytoid-avatar {
+        height: 22px;
+        width: 22px;
       }
     }
-    .ant-table td, .ant-table th {
-        white-space: nowrap;
-    }
-    .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-        padding: 6px 8px;
-    }
-    .row-score-sss {
-        color: white !important;
-        background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 100%);
-        a {
-            color: white !important;
-        }
-    }
-    .row-score-max {
-        color: white;
-        background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-        a {
-            color: white !important;
-        }
-    }
+
     // Tell Safari to fix their shit
     // See https://bug.webkit.org/show_bug.cgi?id=9268
     @media not all and (min-resolution: .001dpcm) {
-        @supports  (-webkit-appearance: none) {
-            .row-score-sss {
-                color: white;
-                background-image: linear-gradient(315deg, #FD7C5C 0%, #FD7C5C 100%);
-            }
-            .row-score-max {
-                color: white;
-                background-image: linear-gradient(19deg, #6C7BFE 0%, #6C7BFE 100%);
-            }
+      @supports (-webkit-appearance: none) {
+        &.row-score-sss {
+          color: white;
+          background-image: linear-gradient(315deg, #FD7C5C 0%, #FD7C5C 100%);
         }
-    }
-    .row-score-1st {
-        font-size: 20px !important;
-        .ranking-player-avatar-name {
-            font-size: 20px !important;
+
+        &.row-score-max {
+          color: white;
+          background-image: linear-gradient(19deg, #6C7BFE 0%, #6C7BFE 100%);
         }
-    }
-    .row-score-2nd {
-        font-size: 18px !important;
-        .ranking-player-avatar-name {
-            font-size: 18px !important;
-        }
-    }
-    .row-score-3rd {
-        font-size: 16px !important;
-        .ranking-player-avatar-name {
-            font-size: 16px !important;
-        }
-    }
-    .rankings-table {
-        .ant-badge {
-            margin-right: 2px;
-        }
-        table {
-            padding: 0px 24px;
-            border-collapse: separate;
-            border-spacing: 0 4px;
-        }
-        td:first-child {
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
-        }
-        td:last-child {
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
-    }
-    .box.rankings-card {
-      .ant-table-fixed {
-        padding: 0;
-      }
-      .ant-radio-button-wrapper {
-        border: none !important;
-        box-shadow: none !important;
-        background: none;
-        padding-left: 0;
-        font-weight: normal;
-        color: white;
-        opacity: 0.7;
-        transition: .4s @hoverEasing;
-      }
-      .ant-radio-button-wrapper-checked {
-        border: none !important;
-        box-shadow: none !important;
-        background: none;
-        font-weight: bold;
-        opacity: 1;
-      }
-      .ant-radio-button-wrapper::before {
-        background: none !important;
-        left: 0;
-      }
-      .ant-radio-button-wrapper-checked::before {
-        background: none !important;
-        left: 0;
       }
     }
-    @play-button-container-size: 56px;
-    .play-button-container {
-      position: fixed;
-      z-index: 64;
-      width: @play-button-container-size;
-      height: @play-button-container-size;
-      bottom: 20px;
-      right: 20px;
-      padding: 0;
-      margin: 0;
-      color: #FFF !important;
-      border-radius: 50%;
-      background-image: linear-gradient(to right, #DD2476, #FF512F) !important;
-      box-shadow: rgba(221, 36, 118, 0.3) 0px 3px 5px -1px, rgba(221, 36, 118, 0.14) 0px 6px 10px 0px, rgba(221, 36, 118, 0.12) 0px 1px 18px 0px;
-      display: flex;
-      .play-button {
-        margin: auto;
-      }
-    }
+  }
+}
+@play-button-container-size: 56px;
+.play-button-container {
+  position: fixed;
+  z-index: 64;
+  width: @play-button-container-size;
+  height: @play-button-container-size;
+  bottom: 20px;
+  right: 20px;
+  padding: 0;
+  margin: 0;
+  color: #FFF !important;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, #DD2476, #FF512F) !important;
+  box-shadow: rgba(221, 36, 118, 0.3) 0px 3px 5px -1px, rgba(221, 36, 118, 0.14) 0px 6px 10px 0px, rgba(221, 36, 118, 0.12) 0px 1px 18px 0px;
+  display: flex;
+  .play-button {
+    margin: auto;
+  }
+}
 </style>

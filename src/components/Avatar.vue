@@ -2,7 +2,7 @@
   <img
     class="cytoid-avatar"
     :src="avatarSrc"
-    :style="fixed && { height: size + 'px', width: size + 'px' }"
+    :style="fixed && size && { height: size + 'px', width: size + 'px' }"
     alt="avatar"
   >
 </template>
