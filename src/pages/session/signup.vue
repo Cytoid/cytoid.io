@@ -140,7 +140,6 @@ export default {
             this.loading = false
             this.$message.info('Registration Successful')
             this.$router.go(-1)
-            this.$store.commit('setAvatar', user.avatarURL)
             this.$store.commit('setUser', user)
             global.window.gtag('event', 'signup', {
               event_category: 'auth',

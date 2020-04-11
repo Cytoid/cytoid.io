@@ -5,8 +5,6 @@ export const state = () => ({
     parallaxSpeed: 0.2,
   },
   user: false,
-  avatar: null,
-  header: null,
   locale: null,
   country: null,
 })
@@ -19,12 +17,6 @@ export const mutations = {
   },
   setUser(state, user) {
     state.user = user
-  },
-  setAvatar(state, avatarURL) {
-    state.avatar = avatarURL
-  },
-  setHeader(state, headerURL) {
-    state.header = headerURL
   },
   setLocale(state, lang) {
     state.locale = lang
@@ -42,9 +34,6 @@ export const actions = {
       // Read cookies success
       const user = req.session?.passport?.user
       commit('setUser', user)
-      if (user) {
-        commit('setAvatar', `${process.env.apiURL}/users/${user.id}/avatar`)
-      }
     }
 
     // i18n
@@ -55,14 +44,11 @@ export const actions = {
       .then((response) => {
         const user = response.data.user
         commit('setUser', user)
-        commit('setAvatar', user.avatarURL)
         return user
       })
   },
   logout({ commit }) {
     commit('setUser', null)
-    commit('setAvatar', null)
-    commit('setHeader', null)
     return this.$axios.delete('/session')
   },
 }

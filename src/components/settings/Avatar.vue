@@ -43,10 +43,6 @@ export default {
   },
   mounted() {
     this.$axios.get('/profile/' + this.$store.state.user.id)
-      .then((res) => {
-        this.$store.commit('setHeader', res.data.headerURL)
-        this.$store.commit('setAvatar', res.data.user.avatarURL)
-      })
   },
   methods: {
     avatarUploaded({ file }) {

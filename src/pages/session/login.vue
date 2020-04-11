@@ -123,7 +123,6 @@ export default {
       if (event.data.user) {
         const user = event.data.user
         this.$store.commit('setUser', user)
-        this.$store.commit('setAvatar', user.avatarURL)
         this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
         this.$router.go(-1)
       } else if (event.data.token && event.data.provider) {

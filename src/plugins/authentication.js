@@ -8,8 +8,6 @@ export default async ({ store, $axios, error }) => {
         const data = res.data
         const user = data.user
         store.commit('setUser', user)
-        store.commit('setAvatar', user.avatarURL)
-        store.commit('setHeader', data.headerURL)
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {

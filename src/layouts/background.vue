@@ -8,7 +8,7 @@ div
       v-show="loaded"
       :class="{landing: background.landing}"
       :style="{filter: background.landing ? `none` : `brightness(${1 - this.background.overlayOpacity})` }"
-      :src="backgroundURL"
+      :src="background.source"
       @load="animateBackground"
     )
     .background-fade-out
@@ -18,10 +18,6 @@ div
 <script>
 import { mapState } from 'vuex'
 import Layout from './default'
-
-const URL = process.server ? require('url').URL : window.URL
-const ImageURL = new URL(process.env.assetURL)
-const ImageHost = ImageURL.host
 
 export default {
   components: {
@@ -34,16 +30,6 @@ export default {
     ...mapState([
       'background',
     ]),
-    backgroundURL() {
-      const source = this.background.source
-      if (source.startsWith('https://') || source.startsWith('http://')) {
-        return source
-      } else {
-        const url = new URL(this.background.source, process.env.webURL)
-        url.host = ImageHost
-        return url.href
-      }
-    }
   },
   watch: {
     'background.source'() {

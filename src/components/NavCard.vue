@@ -1,12 +1,12 @@
 <template lang="pug">
 .navcard
-  .navcard-header(:style="{'background-image': `url(${$img(header, { height: 1024 })})`}")
-    .navcard-header-mask(:style="{ opacity: header ? '.5' : null }")
+  .navcard-header(v-if="profile" :style="{'background-image': `url(${profile.header.thumbnail}`}")
+    .navcard-header-mask(:style="{ opacity: profile.header ? '.5' : null }")
     .navcard-avatar
       player-info-avatar(
-        :exp="exp"
-        :avatar="$store.state.avatar"
-        :rating="rating"
+        :exp="profile.exp"
+        :avatar="profile.user.avatar.original"
+        :rating="15"
       )
     .navcard-uid(v-if="roleIcon")
       font-awesome-icon(:icon="roleIcon")
@@ -33,15 +33,11 @@
 <script>
 import { mapState } from 'vuex'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
+import gql from 'graphql-tag'
+
 export default {
   name: 'NavCard',
   components: { PlayerInfoAvatar },
-  data() {
-    return {
-      exp: { basicExp: -1, levelExp: -1, totalExp: -1, currentLevel: -1, nextLevelExp: -1, currentLevelExp: -1 },
-      rating: -1
-    }
-  },
   computed: {
     ...mapState(['header', 'user']),
     roleIcon() {
@@ -51,22 +47,32 @@ export default {
       }[this.user.role]
     }
   },
-  mounted() {
-    if (this.user && !this.header) {
-      this.$axios.get('/profile/' + this.user.id)
-        .then((res) => {
-          this.$store.commit('setHeader', res.data.headerURL)
-          this.$store.commit('setAvatar', res.data.user.avatarURL)
-        })
-    }
-    if (this.user) {
-      Promise.all([
-        this.$axios.get(`/profile/${this.$store.state.user.id}/exp`),
-        this.$axios.get(`/profile/${this.$store.state.user.id}/rating`)
-      ]).then(([expRes, rtRes]) => {
-        this.exp = expRes.data
-        this.rating = rtRes.data
-      })
+  apollo: {
+    profile: {
+      query: gql`query FetchNavCard($id: ID!) {
+        profile(id: $id) {
+          id
+          exp {
+            totalExp
+            currentLevel
+            nextLevelExp
+          }
+          header {
+            thumbnail
+          }
+          user {
+            id
+            avatar {
+              original
+            }
+          }
+        }
+      }`,
+      variables() {
+        return {
+          id: this.$store.state.user.id
+        }
+      }
     }
   },
   methods: {

@@ -41,17 +41,10 @@ export default {
       submitLoading: false,
     }
   },
-  computed: {
-    headerURL: {
-      get() { return this.$store.state.header },
-      set(value) { this.$store.commit('setHeader', value) },
-    }
-  },
   asyncData({ $axios, store }) {
     return $axios.get('/profile/' + store.state.user.id)
       .then((response) => {
         const profile = response.data
-        store.commit('setHeader', profile.headerURL)
         return {
           form: {
             bio: profile.bio,
