@@ -35,6 +35,7 @@ div
 </template>
 
 <script>
+import gql from 'graphql-tag'
 export default {
   data() {
     return {
@@ -44,9 +45,29 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get(`/users/${this.$store.state.user.id}/emails`)
-      .then((response) => {
-        this.emails = response.data
+    this.$apollo.query({
+      query: gql`query GetUserEmails {
+        my {
+          emails {
+            address
+            verified
+          }
+          user {
+            id
+            email {
+             address
+            }
+          }
+        }
+      }`
+    })
+      .then(({ data }) => {
+        for (const email of data.my.emails) {
+          if (email.address === data.my.user.email?.address) {
+            email.primary = true
+          }
+        }
+        this.emails = data.my.emails
       })
   },
   methods: {
@@ -56,7 +77,12 @@ export default {
           return
         }
         this.loading = true
-        this.$axios.post(`/users/${this.$store.state.user.id}/emails`, values)
+        this.$apollo.mutate({
+          mutation: gql`mutation AddEmail($email: String!) {
+          addEmail(email: $email)
+        }`,
+          variables: { email: values.email }
+        })
           .then(() => {
             this.emails.push({ address: values.email, primary: false, verified: false })
           })
@@ -70,7 +96,12 @@ export default {
     },
     removeEmail(email, index) {
       this.loading = true
-      this.$axios.delete(`/users/${this.$store.state.user.id}/emails/${email}`)
+      this.$apollo.mutate({
+        mutation: gql`mutation DeleteEmail($email: String!) {
+          deleteEmail(email: $email)
+        }`,
+        variables: { email }
+      })
         .then(() => {
           this.emails.splice(index, 1)
         })
@@ -83,7 +114,12 @@ export default {
     },
     verify(email) {
       this.loading = true
-      this.$axios.post(`/users/${this.$store.state.user.id}/emails/${email}/verify`)
+      this.$apollo.mutate({
+        mutation: gql`mutation SendConfirmationEmail($email: String!) {
+          sendVerificationEmail(email: $email)
+        }`,
+        variables: { email }
+      })
         .then(() => {
           this.$message.info('Confirmation email sent')
         })
@@ -96,11 +132,17 @@ export default {
     },
     makePrimary(item) {
       this.loading = true
-      this.$axios.patch(`/users/${this.$store.state.user.id}/emails/${item.address}`, { primary: true })
+      this.$apollo.mutate({
+        mutation: gql`mutation MakeEmailPrimary($email: String!) {
+          makeEmailPrimary(email: $email)
+        }`,
+        variables: { email: item.address }
+      })
         .then(() => {
-          this.emails.forEach((email) => {
+          this.$message.info(item.address + ' is now your primary email address!')
+          for (const email of this.emails) {
             email.primary = false
-          })
+          }
           item.primary = true
         })
         .catch((error) => {

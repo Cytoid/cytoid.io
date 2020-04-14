@@ -63,6 +63,7 @@
             centered
             scrollable
             hoverable
+            paginated
             :row-class="rowClass"
           )
             template(slot-scope="props")

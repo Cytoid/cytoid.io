@@ -38,18 +38,18 @@ export default {
           <nuxt-link
             class="link"
             to={{ name: 'profile-id', params: { id: value.owner.uid || value.owner.id } }}>
-            <avatar size={24} fixed={true} src={value.owner.avatarURL}/>
+            { value.owner?.avatar?.small && <avatar size={24} fixed={true} source={value.owner?.avatar?.small}/> }
             <span>{value.owner.name || value.owner.uid}</span>
           </nuxt-link>
         }
       </div>),
-      action: () => value.bundle &&
-        value.bundle.music_preview &&
-        <PlayButton class="content-card-control" src={value.bundle.music_preview}/>
+      action: () => value.musicPreview &&
+        <PlayButton class="content-card-control" src={value.musicPreview}/>
     }
     return (
       <ContentCard
-        image={value.bundle.backgroundImage?.thumbnail || context.parent.$img(value.bundle.background, { width: 960, height: 600, mode: 'fill' })}
+        image={value.cover?.thumbnail ||
+          value.bundle?.backgroundImage?.thumbnail}
         to={{ name: 'levels-id', params: { id: value.uid } }}
         scopedSlots={slots}>
       </ContentCard>

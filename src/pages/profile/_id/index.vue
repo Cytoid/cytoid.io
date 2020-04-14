@@ -4,7 +4,7 @@
       .avatar-container
         player-info-avatar(
           :exp="profile.exp"
-          :avatar="profile.user.avatarURL"
+          :avatar="profile.user.avatar.large"
           :rating="profile.rating || 0"
         )
       .player-info-container
@@ -111,7 +111,9 @@ fragment LevelInfo on UserLevel{
     }
   }
   bundle {
-    background: backgroundImage
+    backgroundImage {
+      thumbnail
+    }
     music
     music_preview: musicPreview
   }
@@ -125,17 +127,23 @@ fragment LevelInfo on UserLevel{
 query FetchProfilePage($uid: String!) {
   profile(uid: $uid) {
     bio
-    headerPath
+    header {
+      original
+    }
     user {
       id
       uid
       name
       registrationDate
-      avatarURL
+      avatar {
+        large
+      }
       collections(first: 3) {
         id
         uid
-        coverPath
+        cover {
+          thumbnail
+        }
         title
         slogan
         levelCount
@@ -165,8 +173,8 @@ query FetchProfilePage($uid: String!) {
     }
     timeseries {
       count
-      accumulativeAccuracy
-      accumulativeRating
+      cumulativeAccuracy
+      cumulativeRating
       week
       year
     }
@@ -208,17 +216,13 @@ export default {
     const profile = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
-    }).then(({ data }) => data && data.profile)
+    }).then(res => res.data?.profile)
       .catch(err => handleErrorBlock(err, error))
     if (!profile || !profile.user) {
       return error({ statusCode: 404, message: 'Profile not found' })
     }
-    store.commit('setBackground', { source: profile.headerPath })
-    const recentRanks = await $axios.get(`/profile/${profile.user.id}/ranks`)
-      .then(res => res.data)
-      .catch(err => handleErrorBlock(err, error))
+    store.commit('setBackground', { source: profile.header?.original })
     return {
-      recentRanks,
       profile,
     }
   },
