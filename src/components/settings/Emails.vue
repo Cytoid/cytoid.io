@@ -3,34 +3,26 @@ div
   div(class="card-pre-header")
     p(v-t="'email_title'")
   .box
-    a-list(
-      bordered
-      :dataSource="emails"
-      :loading="loading"
-    ).email-list
-      a-list-item(slot="renderItem" slot-scope="item, index" style="align-items: center;")
-        | {{item.address}}
-        .list-buttons
-          a-button(v-if="!item.verified" @click="verify(item.address)")
-            font-awesome-icon(icon="envelope").icon
-            span(v-t="'email_verify'")
-          a-button(v-if="!item.primary && item.verified" @click="makePrimary(item)")
-            font-awesome-icon(icon="chevron-up").icon
-            span(v-t="'email_make_primary'")
-          a-button(type="danger" @click="removeEmail(item.address, index)")
+    .media(v-for="(email, index) in emails")
+      .media-content {{ email.address }}
+      .media-right.buttons
+        button.button(v-if="!email.verified" @click="verify(email.address)")
+          font-awesome-icon(icon="envelope").icon
+          span(v-t="'email_verify'")
+        button.button(v-if="!email.primary && email.verified" @click="makePrimary(email)")
+          font-awesome-icon(icon="chevron-up").icon
+          span(v-t="'email_make_primary'")
+        button.button.is-danger(type="danger" @click="removeEmail(email.address, index)")
             font-awesome-icon(icon="trash").icon
             span(v-t="'email_delete'")
-    a-form(layout="inline" @submit.prevent="addEmail" :form="newEmailForm" hideRequiredMark)
-      a-form-item(:label="$t('email_add')")
-        a-input(
-          v-decorator="['email', { rules: [{ required: true, message: $t('email_required') },{ type: 'email', message: $t('email_valid') }]}]"
-          html-type="envelope"
-          placeholder="example@cytoid.io"
-        )
-          font-awesome-icon(slot="prefix" icon="envelope")
-      a-form-item
-        a-button(html-type="submit" :disabled="loading")
-          font-awesome-icon(icon="plus" style="margin-right: 0.5rem;")
+    ValidationObserver(v-slot="{ invalid, handleSubmit }" tag="div" ref="emailObserver").media
+      .media-content
+        ValidationProvider(rules="email|required" v-slot="{ errors, valid }" name="Email" vid="email")
+          b-field(style="max-width: 400px;" :type="{ 'is-danger': errors[0], 'is-success': valid }" :message="errors")
+            b-input(type="email" icon="envelope" v-model="newEmail")
+      .media-right
+        b-button.is-success(:disabled="invalid" @click="handleSubmit(addEmail)" :loading="loading")
+          font-awesome-icon(icon="plus").icon
           span(v-t="'email_add_btn'")
 </template>
 
@@ -40,7 +32,7 @@ export default {
   data() {
     return {
       loading: false,
-      newEmailForm: this.$form.createForm(this),
+      newEmail: '',
       emails: [],
     }
   },
@@ -72,27 +64,35 @@ export default {
   },
   methods: {
     addEmail() {
-      this.newEmailForm.validateFields((err, values) => {
-        if (err) {
-          return
-        }
-        this.loading = true
-        this.$apollo.mutate({
-          mutation: gql`mutation AddEmail($email: String!) {
-          addEmail(email: $email)
-        }`,
-          variables: { email: values.email }
-        })
-          .then(() => {
-            this.emails.push({ address: values.email, primary: false, verified: false })
-          })
-          .catch((error) => {
-            this.handleErrorToast(error)
-          })
-          .then(() => {
-            this.loading = false
-          })
+      this.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation AddEmail($email: String!) {
+        addEmail(email: $email)
+      }`,
+        variables: { email: this.newEmail }
       })
+        .then(() => {
+          this.emails.push({ address: this.newEmail, primary: false, verified: false })
+          this.newEmail = null
+          requestAnimationFrame(() => this.$refs.emailObserver.reset())
+        })
+        .catch((error) => {
+          const errors = {
+            email: null,
+          }
+          if (error.graphQLErrors?.length > 0) {
+            errors.email = []
+            for (const err of error.graphQLErrors) {
+              if (err.message) errors.email.push(err.message)
+            }
+          } else {
+            errors.email = error.message
+          }
+          this.$refs.emailObserver.setErrors(errors)
+        })
+        .then(() => {
+          this.loading = false
+        })
     },
     removeEmail(email, index) {
       this.loading = true
@@ -158,23 +158,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-.email-list {
-  margin-bottom: 36px;
-  .ant-list-item-content {
-    align-items: center;
-    .list-buttons {
-      margin-left: auto;
-      button{
-        &:not(:last-child) {
-          margin-right: 0.5rem;
-        }
-        .icon {
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-}
-</style>

@@ -1,3 +1,11 @@
+$size-normal: 12px;
+$size-small: 8px;
+$size-medium: 14px;
+$size-large: 16px;
+
+$control-height: 32px;
+$control-line-height: 1.5;
+
 @import "~bulma/sass/utilities/_all";
 
 $primary: #4568dc;
@@ -78,32 +86,30 @@ $dropdown-item-active-background-color: $link;
 
 $easing: cubic-bezier(0.215, 0.61, 0.355, 1);
 
-$button-color: $text;
-$button-hover-color: $text-light;
-$button-active-border-color: $grey-lighter;
-$button-active-color: $text-strong;
+$button-color: $white-bis;
+$button-hover-color: $white;
+$button-focus-color: $white;
+$button-active-color: $white;
 
-$button-background-color: $grey;
-$button-border-color: $grey;
-$button-hover-border-color: $grey-light;
-.box {
-  .button:not(.radio) {
-    background: rgb(63, 66, 78);
-    color: $white-bis;
-    border: none;
-    text-transform: uppercase;
-    transition: 0.2s $easing;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 16px 12px;
-    &:hover {
-      background: rgb(106, 108, 116);
-      color: $white;
-      transform: translateY(1px);
-    }
+$button-background-color: rgb(63, 66, 78);
+
+$button-text-color: $white-ter;
+$button-text-hover-background-color: rgb(106, 108, 116);
+$button-text-hover-color: $white;
+
+
+$button-padding-vertical: 14px;
+$button-padding-horizontal: 18px;
+
+.button {
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: 0.2s $easing;
+  &:hover:not(.is-disabled):not([disabled]), &.is-hovered:not(.is-disabled):not([disabled]) {
+    transform: translateY(1px);
   }
 }
-
 
 $table-color: $white-bis;
 $table-background-color: transparent;

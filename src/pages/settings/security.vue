@@ -1,46 +1,72 @@
 <template lang="pug">
 div
-  div
-    div(class="card-pre-header")
+  .section
+    .card-pre-header
       p(v-t="'security_password_title'")
     .box
-      a-form(:form="form" @submit.prevent="submit")
-        a-form-item(:label="$t('security_password_field_label')" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
-          a-input(
-            type="password"
-            v-decorator="['old',{ rules: [{ required: true, message: 'The old password is required' }] }]"
-          )
-        a-form-item(:label="$t('security_new_password_field_label')" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
-          a-input(
-            type="password"
-            v-decorator="['new',{ rules: [{ required: true, message: 'The new password is required' }, , { min: 8, message: 'Password has to be at least 8 characters.'}] }]"
-          )
-        a-form-item(:label="$t('security_password_confirm_field_label')" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }")
-          a-input(
-            type="password"
-            v-decorator="['newConfirm',{ rules: [{ validator: comparePasswords }, { required: true, message: 'Please input your password again' }]}]"
-          )
-        a-button.card-button(html-type="submit" :loading="loading") {{$t('submit_btn')}}
-  div(style="margin-top: 16px;")
-    div(class="card-pre-header")
+      ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(submit)")
+        ValidationProvider(slim
+        rules="required"
+          v-slot="{ errors, valid }"
+          :name="$t('security_password_field_label')"
+          vid="old")
+          b-field(
+            horizontal
+            :label="$t('security_password_field_label')"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors")
+            b-input(v-model="form.old" type="password")
+        ValidationProvider(slim
+        rules="password|required"
+          v-slot="{ errors, valid }"
+          :name="$t('security_new_password_field_label')"
+          vid="new")
+          b-field(
+            horizontal
+            :label="$t('security_new_password_field_label')"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors")
+            b-input(v-model="form.new" type="password")
+        ValidationProvider(slim
+        rules="required|password_confirm:@new"
+          v-slot="{ errors, valid }"
+          :name="$t('security_password_confirm_field_label')"
+          vid="confirm")
+          b-field(
+            horizontal
+            :label="$t('security_password_confirm_field_label')"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors")
+            b-input(v-model="form.confirm" type="password")
+        b-button.is-pulled-right(native-type="submit" :loading="loading") {{$t('submit_btn')}}
+        .is-clearfix
+  .section
+    .card-pre-header
       p(v-t="'security_third_party_title'")
-    .box.external-login
-      a-button(
-        v-for="provider in providers"
-        :key="provider.id" :type="externals.includes(provider.id) ? 'danger' : 'default'"
-        :loading="providersLoading === provider.id"
-        @click="externals.includes(provider.id) ? unlink(provider.id) : link(provider.id)"
-      )
-        font-awesome-icon(:icon="['fab', provider.icon || provider.id]")
-        | {{provider.title}}
+    .box
+      .media.external-login(v-for="provider in providers" :key="provider.id")
+        .media-content
+          font-awesome-icon(:icon="['fab', provider.icon || provider.id]" size="2x" fixed-width)
+          .content
+            h3(v-text="provider.title")
+            small(v-if="externals.includes(provider.id)") Connected
+            small(v-else) Not Connected
+        .media-right
+          button.button(v-if="externals.includes(provider.id)" @click="unlink(provider.id)") Unlink
+          button.button(v-else @click="link(provider.id)") Link
 </template>
 
 <script>
+import gql from 'graphql-tag'
 export default {
   name: 'Security',
   data() {
     return {
-      form: this.$form.createForm(this),
+      form: {
+        old: '',
+        new: '',
+        confirm: '',
+      },
       loading: false,
       externals: [],
       providers: [
@@ -51,34 +77,51 @@ export default {
       providersLoading: null,
     }
   },
-  asyncData({ $axios, store }) {
-    return $axios.get(`/users/${store.state.user.id}/providers`)
-      .then(res => ({
-        externals: res.data
+  asyncData({ $axios, store, app }) {
+    return app.apolloProvider.defaultClient.query({
+      query: gql`query GetUserSecuritySettings {
+        my {
+          externals: externalAccountProviders
+        }
+      }`
+    })
+      .then(response => ({
+        externals: response.data?.my?.externals || []
       }))
   },
   methods: {
-    comparePasswords(rule, value, cdb) {
-      if (value && value !== this.form.getFieldValue('new')) {
-        cdb('Passwords inconsistent!')
-      } else {
-        cdb()
-      }
-    },
     submit() {
-      this.form.validateFields((err, values) => {
-        if (err) { return }
-        this.loading = true
-        delete values.newConfirm
-        this.$axios.patch('/session/password', values)
-          .then(() => {
-            this.$message.success('Password Changed')
-          })
-          .catch(this.handleErrorToast)
-          .then(() => {
-            this.loading = false
-          })
+      this.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation ChangePassword($old: String!, $new: String!) {
+          result: changePassword(oldPassword: $old, newPassword: $new)
+        }`,
+        variables: {
+          old: this.form.old,
+          new: this.form.new
+        }
       })
+        .then((result) => {
+          if (result?.data?.result) {
+            this.$buefy.toast.open({
+              message: 'Password Changed Successfully!',
+              position: 'is-top',
+              type: 'is-success'
+            })
+            this.form.old = ''
+            this.form.new = ''
+            this.form.confirm = ''
+            requestAnimationFrame(() => this.$refs.validator.reset())
+          } else {
+            this.$refs.validator.setErrors({
+              old: ['The old password is incorrect']
+            })
+          }
+        })
+        .catch(this.handleErrorToast)
+        .then(() => {
+          this.loading = false
+        })
     },
     link(provider) {
       this.providersLoading = provider
@@ -122,13 +165,20 @@ export default {
     key: 'settings'
   }
 }
-
 </script>
 
-<style lang="less">
-.external-login {
-  .ant-btn svg {
-    margin-right: 0.5rem;
+<style lang="scss">
+.media.external-login {
+  .media-content {
+    display: flex;
+    flex-direction: row;
+    .content {
+      margin-left: 1rem;
+      line-height: 1;
+      h3 {
+        margin-bottom: 0.25rem;
+      }
+    }
   }
 }
 </style>

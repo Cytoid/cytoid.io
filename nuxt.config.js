@@ -89,6 +89,7 @@ module.exports = {
     { src: '~plugins/imgresize' },
     { src: '~plugins/authentication', mode: 'client' },
     { src: '~plugins/nossr', mode: 'client' },
+    { src: '~plugins/veevalidate' },
   ],
 
   /*
@@ -159,6 +160,9 @@ module.exports = {
     analyze: {
       analyzerMode: 'static'
     },
+    transpile: [
+      'vee-validate'
+    ],
     publicPath: config.get('staticURL'),
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : 'js/[chunkhash].app.js',

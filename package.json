@@ -37,6 +37,7 @@
     "marked": "^0.6.0",
     "nuxt-start": "^2.8.1",
     "redis": "^3.0.2",
+    "vee-validate": "^3.2.5",
     "vue-client-only": "^2.0.0",
     "vue-disqus": "^3.0.5",
     "vue-easymde": "^0.1.6",

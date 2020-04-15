@@ -24,5 +24,9 @@
   "delete_btn": "Delete",
   "collection_card_levels_count_tag": "{count} levels",
   "file_upload_default_title": "File Upload",
-  "file_upload_default_subtitle": "Click or drag the file to this area to upload"
+  "file_upload_default_subtitle": "Click or drag the file to this area to upload",
+  "password_requirement_length": "The password needs to contain at least 9 characters",
+  "password_requirement_number": "The password needs to contain at least one number",
+  "password_requirement_letter": "The password needs to contain at least one alphabet letters",
+  "password_confirmation_mismatch": "Password confirmation does not match"
 }
