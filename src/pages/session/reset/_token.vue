@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
   data() {
     return {
@@ -53,18 +55,21 @@ export default {
         const password = values.password
         this.loading = true
         setTimeout(() => { this.loading = false }, 1000)
-        this.$captcha('reset_password_continue')
-          .then(token => this.$axios.post('/session/reset/' + this.$route.params.token, { password, token }))
-          .then(() => {
-            this.state = 1
-          })
-          .catch((error) => {
-            if (error.response && error.response.status === 404) {
-              this.state = -1
+        this.$apollo.mutate({
+          mutation: gql`mutation ChangePasswordWithToken($password: String!, $token: String!) {
+              success: changePasswordWithToken(password: $password, token: $token)
+          }`,
+          variables: { password, token: this.$route.params.token }
+        })
+          .then((res) => {
+            const success = res.data?.success
+            if (success) {
+              this.state = 1
             } else {
-              this.handleErrorToast(error)
+              this.state = -1
             }
           })
+          .catch(error => this.handleErrorToast(error))
           .then(() => {
             this.loading = false
           })

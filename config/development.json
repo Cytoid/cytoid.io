@@ -9,7 +9,7 @@
   "imageURL": "https://images.cytoid.io",
   "cmsURL": "https://cms.cytoid.io",
   "webURL": "http://localhost:8080",
-  "captchaKey": "6Le6KqsUAAAAANemJwIe18ld-0kKSQn9aqR4-ltM",
+  "captchaKey": "10000000-ffff-ffff-ffff-000000000001",
   "analyticsCode": "UA-127631599-1",
   "redis": "redis://localhost:6379"
 }

@@ -2,7 +2,7 @@
   .section
     .container
       .columns
-        .column.is-half.is-offset-half.is-one-third-desktop.is-one-quarter-widescreen.is-offset-two-thirds-desktop.is-offset-three-quarters-widescreen
+        .column.is-half.is-one-third-desktop.is-one-quarter-widescreen(style="margin-left: auto;")
           .box.session-card
             nuxt-child
 </template>

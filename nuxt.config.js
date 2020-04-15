@@ -18,7 +18,8 @@ module.exports = {
     imageURL: config.get('imageURL'),
     webURL: config.get('webURL'),
     cmsURL: config.get('cmsURL'),
-    analyticsCode: config.get('analyticsCode')
+    analyticsCode: config.get('analyticsCode'),
+    captchaKey: config.get('captchaKey'),
   },
   generate: {
     subFolders: false,
