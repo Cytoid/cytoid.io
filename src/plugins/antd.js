@@ -73,7 +73,10 @@ export default function ({ store, $axios, error }) {
         return handleErrorBlock(err, error)
       },
       handleErrorToast(err) {
-        this.$message.error(getMessage(err))
+        this.$buefy.toast.open({
+          message: getMessage(err),
+          type: 'is-danger'
+        })
       },
     }
   })

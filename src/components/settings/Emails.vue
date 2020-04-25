@@ -6,23 +6,19 @@ div
     .media(v-for="(email, index) in emails")
       .media-content {{ email.address }}
       .media-right.buttons
-        button.button(v-if="!email.verified" @click="verify(email.address)")
-          font-awesome-icon(icon="envelope").icon
+        b-button(v-if="!email.verified" @click="verify(email.address)" icon-left="envelope")
           span(v-t="'email_verify'")
-        button.button(v-if="!email.primary && email.verified" @click="makePrimary(email)")
-          font-awesome-icon(icon="chevron-up").icon
+        b-button(v-if="!email.primary && email.verified" @click="makePrimary(email)" icon-left="chevron-up")
           span(v-t="'email_make_primary'")
-        button.button.is-danger(type="danger" @click="removeEmail(email.address, index)")
-            font-awesome-icon(icon="trash").icon
-            span(v-t="'email_delete'")
+        b-button(type="is-danger" @click="removeEmail(email.address, index)" icon-left="trash")
+          span(v-t="'email_delete'")
     ValidationObserver(v-slot="{ invalid, handleSubmit }" tag="div" ref="emailObserver").media
       .media-content
         ValidationProvider(rules="email|required" v-slot="{ errors, valid }" name="Email" vid="email")
           b-field(style="max-width: 400px;" :type="{ 'is-danger': errors[0], 'is-success': valid }" :message="errors")
             b-input(type="email" icon="envelope" v-model="newEmail")
       .media-right
-        b-button.is-success(:disabled="invalid" @click="handleSubmit(addEmail)" :loading="loading")
-          font-awesome-icon(icon="plus").icon
+        b-button.is-success(:disabled="invalid" @click="handleSubmit(addEmail)" :loading="loading" icon-left="plus")
           span(v-t="'email_add_btn'")
 </template>
 

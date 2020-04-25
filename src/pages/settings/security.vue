@@ -2,39 +2,39 @@
 div
   .section
     .card-pre-header
-      p(v-t="'security_password_title'")
+      p(v-t="'password_field_label'")
     .box
       ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(submit)")
         ValidationProvider(slim
         rules="required"
           v-slot="{ errors, valid }"
-          :name="$t('security_password_field_label')"
+          :name="$t('password_field_label')"
           vid="old")
           b-field(
             horizontal
-            :label="$t('security_password_field_label')"
+            :label="$t('password_field_label')"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors")
             b-input(v-model="form.old" type="password")
         ValidationProvider(slim
         rules="password|required"
           v-slot="{ errors, valid }"
-          :name="$t('security_new_password_field_label')"
+          :name="$t('new_password_field_label')"
           vid="new")
           b-field(
             horizontal
-            :label="$t('security_new_password_field_label')"
+            :label="$t('new_password_field_label')"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors")
             b-input(v-model="form.new" type="password")
         ValidationProvider(slim
         rules="required|password_confirm:@new"
           v-slot="{ errors, valid }"
-          :name="$t('security_password_confirm_field_label')"
+          :name="$t('password_confirm_field_label')"
           vid="confirm")
           b-field(
             horizontal
-            :label="$t('security_password_confirm_field_label')"
+            :label="$t('password_confirm_field_label')"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors")
             b-input(v-model="form.confirm" type="password")
@@ -42,7 +42,7 @@ div
         .is-clearfix
   .section
     .card-pre-header
-      p(v-t="'security_third_party_title'")
+      p(v-t="'third_party_sign_on'")
     .box
       .media.external-login(v-for="provider in providers" :key="provider.id")
         .media-content
@@ -52,8 +52,8 @@ div
             small(v-if="externals.includes(provider.id)") Connected
             small(v-else) Not Connected
         .media-right
-          button.button(v-if="externals.includes(provider.id)" @click="unlink(provider.id)") Unlink
-          button.button(v-else @click="link(provider.id)") Link
+          b-button(v-if="externals.includes(provider.id)" @click="unlink(provider.id)" :loading="providersLoading === provider.id") Unlink
+          b-button(v-else @click="link(provider.id)" :loading="providersLoading === provider.id") Link
 </template>
 
 <script>
@@ -154,8 +154,15 @@ export default {
     },
     unlink(provider) {
       this.providersLoading = provider
-      return this.$axios.delete(`/users/${this.$store.state.user.id}/providers/${provider}`)
-        .then(() => {
+      return this.$apollo.mutate({
+        mutation: gql`mutation RemoveExternalAccount($provider: String!) {
+          result: removeExternalAccount(provider: $provider)
+        }`,
+        variables: {
+          provider,
+        }
+      })
+        .then((data) => {
           this.providersLoading = null
           this.externals.splice(this.externals.indexOf(provider), 1)
         })

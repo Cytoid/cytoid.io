@@ -28,5 +28,13 @@
   "password_requirement_length": "The password needs to contain at least 9 characters",
   "password_requirement_number": "The password needs to contain at least one number",
   "password_requirement_letter": "The password needs to contain at least one alphabet letters",
-  "password_confirmation_mismatch": "Password confirmation does not match"
+  "password_confirmation_mismatch": "Password confirmation does not match",
+  "username_field_label": "Username",
+  "password_field_label": "Password",
+  "email_field_label": "Email",
+  "new_password_field_label": "New Password",
+  "password_confirm_field_label": "Password Confirm",
+  "third_party_sign_on": "Third-party Sign-on",
+  "uid_length": "Must be in between {min} and {max} characters.",
+  "uid_character": "Must contain only lowercase letters, numbers, underscores, and hyphens."
 }

@@ -7,6 +7,20 @@ export default function ({ app, store, req, res }) {
   extend('email', email)
   extend('required', required)
 
+  extend('uid', {
+    validate(password) {
+      const min = 3
+      const max = 16
+      if (password.length < min || password.length > max) {
+        return i18n.t('uid_length', { min, max })
+      }
+      if (!/^[a-z0-9_-]{3,16}$/.test(password)) {
+        return i18n.t('uid_character')
+      }
+      return true
+    },
+  })
+
   extend('password', {
     validate(password) {
       if (password.length < 9) {

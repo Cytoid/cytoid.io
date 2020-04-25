@@ -1,102 +1,54 @@
-<template>
-  <div>
-    <div>
-      <h2 v-t="'title'" />
-      <p v-t="'subtitle'" />
-      <a-form
-        :form="form"
-        @submit.prevent="signIn"
-      >
-        <a-form-item>
-          <a-input
-            v-decorator="[
-              'username',
-              { rules: [{ required: true, message: $t('username_field_error_required') }] }
-            ]"
-            :placeholder="$t('username_field_placeholder')"
-          >
-            <font-awesome-icon slot="prefix" icon="user" />
-          </a-input>
-        </a-form-item>
-        <a-form-item>
-          <a-input
-            v-decorator="[
-              'password',
-              { rules: [{ required: true, message: $t('password_field_error_required') }] }
-            ]"
-            type="password"
-            :placeholder="$t('password_field_placeholder')"
-          >
-            <font-awesome-icon slot="prefix" icon="lock" />
-          </a-input>
-        </a-form-item>
-        <a-form-item>
-          <a-checkbox
-            v-decorator="[
-              'remember',
-              {
-                valuePropName: 'checked',
-                initialValue: true,
-              }
-            ]"
-          >
-            {{ $t('remember_me_checkbox_title') }}
-          </a-checkbox>
-          <nuxt-link to="/session/reset" class="is-pulled-right">
-            <small v-t="'forgot_password_link_title'" />
-          </nuxt-link>
-        </a-form-item>
-        <captcha theme="dark" :token.sync="captchaToken" style="margin-bottom: 1rem;" />
-        <a-button
-          class="card-button"
-          type="primary"
-          html-type="submit"
+<template lang="pug">
+  div
+    div
+      h2(v-t="'title'")
+      p(v-t="'subtitle'")
+      form(@submit.prevent="signIn")
+        b-field
+          b-input(v-model="form.username" :placeholder="$t('username_field_placeholder')" icon="user")
+        b-field
+          b-input(v-model="form.password" type="password" :placeholder="$t('password_field_placeholder')" icon="lock")
+        b-checkbox(v-model="form.remember") {{$t('remember_me_checkbox_title')}}
+        nuxt-link.is-pulled-right(to="/session/reset")
+          small(v-t="'forgot_password_link_title'")
+        captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
+        b-button(
+          native-type="submit"
           :loading="loading"
           :disabled="!captchaToken"
-          block
-        >
-          {{ $t('login_btn') }}
-        </a-button>
-      </a-form>
-    </div>
-    <div class="external-login-level">
-      <font-awesome-icon v-if="externalLoginLoading" icon="spinner" spin />
-      <template v-else>
-        <a-button class="icon-button" shape="circle" @click="signInWithProvider('facebook')">
-          <font-awesome-icon :icon="['fab', 'facebook-f']" />
-        </a-button>
-        <a-button class="icon-button" shape="circle" @click="signInWithProvider('google')">
-          <font-awesome-icon :icon="['fab', 'google']" />
-        </a-button>
-        <a-button class="icon-button" shape="circle" @click="signInWithProvider('discord')">
-          <font-awesome-icon :icon="['fab', 'discord']" />
-        </a-button>
-      </template>
-    </div>
-    <div>
-      <h2 v-t="'new_user_welcome_title'" />
-      <p v-t="'new_user_welcome_content'" />
-      <nuxt-link :to="{ name: 'session-signup' }" replace>
-        <a-button
-          v-t="'signup_btn'"
-          class="card-button"
-          type="primary"
-          html-type="submit"
-          block
-        />
-      </nuxt-link>
-    </div>
-  </div>
+          expanded
+          style="margin-top: 1rem;") {{ $t('login_btn') }}
+    .level.is-mobile(style="margin-top: 1rem; margin-bottom: 1rem;")
+      font-awesome-icon.level-item(v-if="externalLoginLoading" icon="spinner" spin)
+      template(v-else)
+        a.level-item(@click="signInWithProvider('facebook')")
+          font-awesome-icon(:icon="['fab', 'facebook-f']")
+        a.level-item(@click="signInWithProvider('google')")
+          font-awesome-icon(:icon="['fab', 'google']")
+        a.level-item(@click="signInWithProvider('discord')")
+          font-awesome-icon(:icon="['fab', 'discord']")
+    div
+      h2(v-t="'new_user_welcome_title'")
+      p(v-t="'new_user_welcome_content'")
+      nuxt-link.button.is-fullwidth(:to="{ name: 'session-signup' }" replace) {{$t('signup_btn')}}
 </template>
 
 <script>
+import Captcha from '@/components/Captcha'
 export default {
+  components: {
+    Captcha,
+  },
   data() {
     return {
       loading: false,
       externalLoginLoading: false,
       captchaToken: null,
-      form: this.$form.createForm(this),
+      form: {
+        username: null,
+        password: null,
+        remember: true,
+      }
     }
   },
   head() {
@@ -133,36 +85,35 @@ export default {
       }
     },
     signIn() {
-      this.form.validateFields((err, values) => {
-        if (err) {
-          return
-        }
-        this.loading = true
-        this.$store.dispatch('login', { ...values, token: this.captchaToken })
-          .then((user) => {
-            this.loading = false
-            this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
-            this.$router.go(-1)
-            global.window.gtag('event', 'login', {
-              event_category: 'auth',
-              value: user.uid || 'nouid'
+      this.loading = true
+      this.$store.dispatch('login', { ...this.form, captcha: this.captchaToken })
+        .then((user) => {
+          this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
+          this.$router.go(-1)
+          global.window.gtag('event', 'login', {
+            event_category: 'auth',
+            value: user.uid || 'nouid'
+          })
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            this.$buefy.toast.open({
+              message: this.$t('login_password_error'),
+              type: 'is-danger'
             })
-          })
-          .catch((error) => {
-            this.loading = false
-            // this.$captcha.reset()
-            // this.captchaToken = null
-            // For temp disabled captcha
-            this.form.resetFields(['password'])
-            if (error.response && error.response.status === 401) {
-              this.$message.error(this.$t('login_password_error'))
-            } else if (error.response && error.response.status === 404) {
-              this.$message.error(this.$t('login_username_error'))
-            } else {
-              this.handleErrorToast(error)
-            }
-          })
-      })
+          } else if (error.response && error.response.status === 404) {
+            this.$buefy.toast.open({
+              message: this.$t('login_username_error'),
+              type: 'is-danger'
+            })
+          } else {
+            this.handleErrorToast(error)
+          }
+        })
+        .then(() => {
+          this.loading = false
+          this.captchaToken = null
+        })
     },
   },
   i18n: {
@@ -170,12 +121,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.external-login-level {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-</style>

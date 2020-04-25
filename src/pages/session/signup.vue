@@ -1,122 +1,75 @@
-<template>
-  <div>
-    <h2 v-t="'title'" style="margin-top: 1rem;" />
-    <a-form
-      :form="form"
-      @submit.prevent="signUp"
-    >
-      <a-form-item>
-        <div slot="extra" v-t="'id_requirement'" />
-        <a-input
-          v-decorator="[
-            'uid',
-            { rules: [{
-              required: true,
-              pattern: '^[a-z0-9_-]{3,16}$',
-              message: $t('password_requirement'),
-            }] }
-          ]"
-          :placeholder="$t('id_placeholder')"
-        >
-          <font-awesome-icon slot="prefix" icon="user" />
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-input
-          v-decorator="[
-            'email',
-            { rules: [
-              { required: true, message: $t('email_field_error_required') },
-              { type: 'email', message: $t('email_field_error_invalid') },
-            ] }
-          ]"
-          html-type="email"
-          :placeholder="$t('email_placeholder')"
-        >
-          <font-awesome-icon slot="prefix" icon="envelope" />
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-input
-          v-decorator="[
-            'password',
-            { rules: [
-              { required: true, message: $t('password_field_error_required') },
-              { min: 8, message: $t('password_field_error_invalid')},
-            ] }
-          ]"
-          type="password"
-          :placeholder="$t('password_field_placeholder')"
-        >
-          <font-awesome-icon slot="prefix" icon="lock" />
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-input
-          v-decorator="['passwordComfirm',{ rules: [{ validator: comparePasswords }]}]"
-          type="password"
-          :placeholder="$t('password_confirm_field_placeholder')"
-        >
-          <font-awesome-icon slot="prefix" icon="lock" />
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-checkbox
-          v-decorator="[
-            'agree_tos',
-            {
-              valuePropName: 'checked',
-              initialValue: false,
-              rules: [{
-                required: true,
-                transform: value => (value || undefined),
-                type: 'boolean',
-                message: $t('tos_field_error_required')
-              }],
-            }
-          ]"
-        >
-          <i18n path="tos_field_title">
-            <nuxt-link v-t="'tos'" :to="{ name: 'legal-id', params: { id: 'terms' } }" />
-          </i18n>
-        </a-checkbox>
-      </a-form-item>
-      <captcha theme="dark" :token.sync="captchaToken" />
-      <a-form-item>
-        <a-button
-          class="card-button"
-          type="primary"
-          html-type="submit"
-          block
-          :loading="loading"
-          :disabled="!captchaToken"
-        >
-          {{ $t('join_btn') }}
-        </a-button>
-      </a-form-item>
-    </a-form>
-    <div>
-      <h2 v-t="'existing_user_title'" />
-      <p v-t="'existing_user_content'" />
-      <nuxt-link :to="{ name: 'session-login' }" replace>
-        <a-button
-          v-t="'login_btn'"
-          class="card-button"
-          type="primary"
-          html-type="submit"
-          block
-        />
-      </nuxt-link>
-    </div>
-  </div>
+<template lang="pug">
+  div
+    h2(v-t="'title'")
+    ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(signUp)")
+      ValidationProvider(slim
+        rules="uid|required"
+          v-slot="{ errors, valid }"
+          :name="$t('username_field_label')"
+          vid="uid")
+        b-field(
+          :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          :message="errors")
+          b-input(v-model="form.uid" icon="user" :placeholder="$t('id_placeholder')")
+      ValidationProvider(slim
+        rules="email|required"
+        v-slot="{ errors, valid }"
+        :name="$t('email_field_label')")
+        b-field(
+          :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          :message="errors")
+          b-input(v-model="form.email" icon="envelope" :placeholder="$t('email_placeholder')")
+      ValidationProvider(slim
+        rules="password|required"
+        v-slot="{ errors, valid }"
+        :name="$t('password_field_label')"
+        vid="password")
+        b-field(
+          :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          :message="errors")
+          b-input(v-model="form.password" type="password" icon="lock" :placeholder="$t('password_field_placeholder')")
+      ValidationProvider(slim
+        rules="required|password_confirm:@password"
+        v-slot="{ errors, valid }"
+        :name="$t('password_confirm_field_label')"
+        vid="confirm")
+        b-field(
+          :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          :message="errors")
+          b-input(v-model="form.confirm" type="password" icon="lock" :placeholder="$t('password_confirm_field_placeholder')")
+      ValidationProvider(slim
+        v-slot="{ errors, valid }"
+        vid="tos")
+        b-field(
+          :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          :message="errors")
+          b-checkbox(v-model="form.tos")
+            i18n(path="tos_field_title")
+              nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{ $t('tos') }}
+      captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
+      b-button(native-type="submit" expanded :loading="loading" style="margin-bottom: 1rem;" :disabled="invalid || !captchaToken") {{$t('join_btn')}}
+      h2(v-t="'existing_user_title'")
+      p(v-t="'existing_user_content'")
+      nuxt-link.button.is-fullwidth(:to="{ name: 'session-login' }" replace) {{$t('login_btn')}}
 </template>
 
 <script>
+import Captcha from '@/components/Captcha'
 export default {
+  components: {
+    Captcha,
+  },
   data() {
     return {
       captchaToken: null,
       loading: false,
+      form: {
+        uid: null,
+        email: null,
+        password: null,
+        confirm: null,
+        tos: false,
+      }
     }
   },
   head() {
@@ -124,42 +77,39 @@ export default {
       title: 'Sign Up - Cytoid'
     }
   },
-  beforeCreate() {
-    this.form = this.$form.createForm(this)
-  },
   methods: {
     signUp() {
-      this.form.validateFields((err, values) => {
-        if (err) {
-          return
-        }
-        this.loading = true
-        this.$axios.post('/users', { ...values, token: this.captchaToken })
-          .then((res) => {
-            const user = res.data.user
-            this.loading = false
-            this.$message.info('Registration Successful')
-            this.$router.go(-1)
-            this.$store.commit('setUser', user)
-            global.window.gtag('event', 'signup', {
-              event_category: 'auth',
-              value: values.uid
-            })
-          })
-          .catch((error) => {
-            this.handleErrorToast(error)
-            this.loading = false
-            // this.$captcha.reset()
-            this.captchaToken = null
-          })
-      })
-    },
-    comparePasswords(rule, value, cdb) {
-      if (value && value !== this.form.getFieldValue('password')) {
-        cdb('Passwords inconsistent!')
-      } else {
-        cdb()
+      if (!this.form.tos) {
+        this.$refs.validator.setErrors({
+          tos: [this.$t('tos_field_error_required')]
+        })
+        return
       }
+      this.loading = true
+      this.$axios.put('/session', {
+        uid: this.form.uid,
+        email: this.form.email,
+        password: this.form.password,
+        captcha: this.captchaToken
+      })
+        .then((res) => {
+          const user = res.data.user
+          this.loading = false
+          this.$buefy.toast.open({
+            message: 'Registration Successful',
+          })
+          this.$router.replace({ name: 'settings-account' })
+          this.$store.commit('setUser', user)
+          global.window.gtag('event', 'signup', {
+            event_category: 'auth',
+            value: this.form.uid
+          })
+        })
+        .catch((error) => {
+          this.handleErrorToast(error)
+          this.loading = false
+          this.captchaToken = null
+        })
     },
   },
   i18n: {

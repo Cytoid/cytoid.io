@@ -19,9 +19,8 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style>
   .session-card {
     background: linear-gradient(to top, hsla(226, 15%, 19%, 1) 66%, rgba(0,0,0,0)), linear-gradient(to left, #B06AB3, #4568DC);
-    padding: 1.5rem;
   }
 </style>

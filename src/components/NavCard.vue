@@ -1,6 +1,6 @@
 <template lang="pug">
 .navcard
-  .navcard-header(v-if="profile" :style="{'background-image': `url(${profile.header.thumbnail}`}")
+  .navcard-header(v-if="profile" :style="{'background-image': `url(${profile.header && profile.header.thumbnail}`}")
     .navcard-header-mask(:style="{ opacity: profile.header ? '.5' : null }")
     .navcard-avatar
       player-info-avatar(

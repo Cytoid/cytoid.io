@@ -1,25 +1,29 @@
 <template lang="pug">
-.section.has-text-centered
+.has-text-centered
   template(v-if="sent")
     h2 Sent
     h1: font-awesome-icon(icon="paper-plane")
     p Please check your inbox to continue
     captcha(v-model="captchaCode" size="compact")
-    a-button(@click="resend" :loading="loading" :disabled="time>0 || !captchaCode" block)
+    b-button(@click="resend" :loading="loading" :disabled="time>0 || !captchaCode" expanded)
       | Resend
       span(v-if="time>0") ({{time}})
   template(v-else)
     h2.has-text-centered Reset your password
     h1.has-text-centered 🤔
     p Enter your email address and we will send you a link to reset your password.
-    a-form(:form="form" @submit.prevent="submit")
-      a-form-item
-        a-input(
-          v-decorator="['email', {rules: [{type: 'email', message: 'The input is not a valid email'}, {required: true, message: 'please input your email address!'}]}]"
-        )
-          font-awesome-icon(icon="envelope" slot="prefix")
+    ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(submit)")
+      ValidationProvider(slim
+        rules="required|email"
+        v-slot="{ errors, valid }"
+        name="Email"
+        vid="email")
+        b-field(
+          :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          :message="errors")
+          b-input(v-model="email" icon="envelope")
       captcha(v-model="captchaCode" size="compact")
-      a-button(type="primary" html-type="submit" block :loading="loading" :disabled="!captchaCode") Send
+      b-button(native-type="submit" expanded :loading="loading" :disabled="!captchaCode") Send
 </template>
 
 <script>
@@ -36,7 +40,7 @@ export default {
       sent: null,
       time: 60,
       loading: false,
-      form: this.$form.createForm(this),
+      email: null,
     }
   },
   head() {
@@ -46,39 +50,33 @@ export default {
   },
   methods: {
     submit() {
-      this.form.validateFields((err, values) => {
-        if (err) {
-          return
+      const email = this.email
+      this.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation SendPasswordResetEmail($email: String!){
+            sendResetPasswordEmail(email: $email)
+        }`,
+        variables: {
+          email,
+          captcha: this.captchaCode
         }
-        const email = values.email
-        this.loading = true
-        setTimeout(() => { this.loading = false }, 1000)
-        this.$apollo.mutate({
-          mutation: gql`mutation SendPasswordResetEmail($email: String!){
-              sendResetPasswordEmail(email: $email)
-          }`,
-          variables: {
-            email,
-            captcha: this.captchaCode
+      })
+        .then((result) => {
+          const success = result.data.sendResetPasswordEmail
+          if (!success) {
+            this.form.setFields({
+              email: { errors: [{ message: 'The email was never registered / confirmed!' }] }
+            })
+          } else {
+            this.sent = email
+            this.startTimer()
           }
         })
-          .then((result) => {
-            const success = result.data.sendResetPasswordEmail
-            if (!success) {
-              this.form.setFields({
-                email: { errors: [{ message: 'The email was never registered / confirmed!' }] }
-              })
-            } else {
-              this.sent = email
-              this.startTimer()
-            }
-          })
-          .catch(error => this.handleErrorToast(error))
-          .then(() => {
-            this.captchaCode = null
-            this.loading = false
-          })
-      })
+        .catch(error => this.handleErrorToast(error))
+        .then(() => {
+          this.captchaCode = null
+          this.loading = false
+        })
     },
     resend() {
       this.loading = true

@@ -91,6 +91,7 @@ $button-hover-color: $white;
 $button-focus-color: $white;
 $button-active-color: $white;
 
+$button-disabled-background-color: $grey-dark;
 $button-background-color: rgb(63, 66, 78);
 
 $button-text-color: $white-ter;
@@ -152,3 +153,6 @@ $navbar-background-color: transparent;
 $navbar-item-hover-background-color: transparent;
 $navbar-item-color: $text;
 $navbar-item-active-color: $white;
+
+$checkbox-border-color: $grey-lighter;
+$checkbox-background-color: $grey-lighter;
