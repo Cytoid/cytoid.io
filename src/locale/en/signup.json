@@ -1,5 +1,6 @@
 {
   "title": "Sign Up",
+  "title_external": "Sign Up with {provider}",
   "id_requirement": "Your Cytoid ID must be in between 3 and 16 characters and contain only lowercase letters, numbers, underscores, and hyphens.",
   "password_requirement": "3-16 lowercase letters, numbers, _ or -",
   "email_field_error_required": "An email address is required.",

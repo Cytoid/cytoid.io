@@ -12,35 +12,38 @@
         b-field(
           :type="{ 'is-danger': errors[0], 'is-success': valid }"
           :message="errors")
-          b-input(v-model="form.uid" icon="user" :placeholder="$t('id_placeholder')")
+          b-input(v-model="form.username" icon="user" :placeholder="$t('id_placeholder')")
       ValidationProvider(
         slim
-        rules="password|required"
+        rules="required"
         v-slot="{ errors, valid }"
-        :name="$t('email_field_label')"
+        :name="$t('password_field_label')"
         vid="password")
         b-field(
           :type="{ 'is-danger': errors[0], 'is-success': valid }"
           :message="errors")
-          b-input(v-model="form.password" icon="lock" type="password" :placeholder="$t('email_placeholder')")
-      ValidationProvider(
-        slim
-        v-if="createNew"
-        rules="password_confirm:@password|required"
-        v-slot="{ errors, valid }"
-        :name="$t('email_field_label')"
-        vid="confirm")
-        b-field(
-          :type="{ 'is-danger': errors[0], 'is-success': valid }"
-          :message="errors")
-          p.help The player ID you specified does not exist. Repeat the password, and we shall create a new account for you.
-          b-input(v-model="form.confirm" type="password" icon="lock" :placeholder="$t('password_confirm_field_placeholder')")
-      b-button(native-type="submit" :loading="loading" :disabled="!captchaToken || invalid")
+          b-input(
+            v-model="form.password"
+            icon="lock"
+            type="password"
+            :placeholder="$t('password_field_placeholder')"
+            ref="passwordField")
+      captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
+      b-button(
+        native-type="submit"
+        :loading="loading"
+        :disabled="!captchaToken || invalid" expanded
+      ) {{ $t('login_btn') }}
 </template>
 
 <script>
+import Captcha from '@/components/Captcha'
+import gql from 'graphql-tag'
 export default {
   name: 'ExternalAccountLink',
+  components: {
+    Captcha,
+  },
   data() {
     return {
       form: {
@@ -72,14 +75,19 @@ export default {
         captcha: this.captchaToken,
       })
         .then(async (user) => {
-          await this.$axios.post(`/users/${user.id}/providers/${this.provider}`, {
-            token: this.$route.query.token
+          await this.$apollo.mutate({
+            mutation: gql`mutation LinkExternalAccount($token: String!) {
+             result: addExternalAccount(token: $token)
+            }`,
+            variables: {
+              token: this.$route.query.token
+            }
           })
           return user
         })
         .then((user) => {
           this.loading = false
-          this.$message.info('Welcome, ' + (user.uid))
+          this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
           this.$router.go(-1)
           global.window.gtag('event', 'login', {
             event_category: 'auth',
@@ -89,45 +97,28 @@ export default {
         .catch((error) => {
           this.loading = false
           if (error.response && error.response.status === 401) {
-            this.$message.error('Username or password mismatch!')
-            this.form.resetFields(['password'])
-            // this.$captcha.reset()
+            // Wrong password
+            this.$buefy.toast.open({
+              message: this.$t('login_password_error'),
+              type: 'is-danger'
+            })
+            this.form.password = null
             this.captchaToken = null
+            this.$refs.passwordField.$el.focus()
           } else if (error.response && error.response.status === 404) {
-            this.createNew = true
+            // Account does not exist.
+            this.$router.replace({
+              name: 'session-signup',
+              query: {
+                token: this.$route.query.token,
+                provider: this.$route.query.provider,
+                username: this.form.username,
+              }
+            })
           } else {
             this.handleErrorToast(error)
           }
         })
-    },
-    create() {
-      this.form.validateFields((err, values) => {
-        if (err) {
-          return
-        }
-        this.loading = true
-        this.$axios.put('/users/', {
-          token: this.$route.query.token,
-          provider: this.provider,
-          uid: values.username,
-          password: values.password,
-        })
-          .then((res) => {
-            const user = res.data.user
-            this.loading = false
-            this.$message.info('Welcome, ' + (user.uid))
-            this.$router.go(-1)
-            this.$store.commit('setUser', user)
-            global.window.gtag('event', 'signup', {
-              event_category: 'auth',
-              value: values.uid
-            })
-          })
-          .catch((error) => {
-            this.loading = false
-            this.handleErrorToast(error)
-          })
-      })
     },
   },
   i18n: {

@@ -1,6 +1,7 @@
 <template lang="pug">
   div
-    h2(v-t="'title'")
+    h2(v-if="$route.query.provider" v-t="{ path: 'title_external', args: { provider: $route.query.provider } }")
+    h2(v-else v-t="'title'")
     ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(signUp)")
       ValidationProvider(slim
         rules="uid|required"
@@ -54,6 +55,7 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
 import Captcha from '@/components/Captcha'
 export default {
   components: {
@@ -77,6 +79,11 @@ export default {
       title: 'Sign Up - Cytoid'
     }
   },
+  mounted() {
+    if (this.$route.query.username) {
+      this.form.uid = this.$route.query.username
+    }
+  },
   methods: {
     signUp() {
       if (!this.form.tos) {
@@ -94,6 +101,20 @@ export default {
       })
         .then((res) => {
           const user = res.data.user
+          if (this.$route.query.token) {
+            return this.$apollo.mutate({
+              mutation: gql`mutation LinkExternalAccount($token: String!) {
+             result: addExternalAccount(token: $token)
+            }`,
+              variables: {
+                token: this.$route.query.token
+              }
+            }).then(() => user)
+          } else {
+            return user
+          }
+        })
+        .then((user) => {
           this.loading = false
           this.$buefy.toast.open({
             message: 'Registration Successful',

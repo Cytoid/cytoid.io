@@ -130,8 +130,6 @@ export default {
     },
     providerResponded(event) {
       window.removeEventListener('message', this.providerResponded)
-      console.log(event.data)
-      console.log(event.origin)
       /*
       if (process.event.origin !== process.env.apiURL) {
         return
@@ -141,14 +139,22 @@ export default {
         this.providersLoading = null
         const user = event.data.user
         this.$store.commit('setUser', user)
-        this.$message.info(`You're now logged in as ${user.uid}.`)
+        this.$message.info(`You're now logged in as ${user.name || user.uid}.`)
       } else if (event.data.token && event.data.provider) {
-        this.$axios.post(`/users/${this.$store.state.user.id}/providers/${event.data.provider}`, {
-          token: event.data.token
+        this.$apollo.mutate({
+          mutation: gql`mutation LinkExternalAccount($token: String!) {
+             result: addExternalAccount(token: $token)
+            }`,
+          variables: {
+            token: event.data.token
+          }
         })
           .then(() => {
             this.providersLoading = null
             this.externals.push(event.data.provider)
+            this.$buefy.toast.open({
+              message: `You have linked your ${event.data.provider} account`,
+            })
           })
       }
     },
@@ -165,6 +171,10 @@ export default {
         .then((data) => {
           this.providersLoading = null
           this.externals.splice(this.externals.indexOf(provider), 1)
+          this.$buefy.toast.open({
+            message: `You have unlinked your ${provider} account`,
+            type: 'is-warning'
+          })
         })
     }
   },
