@@ -14,5 +14,7 @@
   "tos_field_title": "I agree to Cytoid's {0}.",
   "join_btn": "Join the community",
   "existing_user_title": "Already registered?",
-  "existing_user_content": "Log in to enjoy your privilege as a Cytoid community member!"
+  "existing_user_content": "Log in to enjoy your privilege as a Cytoid community member!",
+  "link_title": "Link your {provider} account",
+  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
 }

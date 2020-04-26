@@ -6,7 +6,6 @@ export homepage from './homepage.json'
 // eslint-disable-next-line camelcase
 export level_details from './level_details.json'
 export levels from './levels.json'
-export link from './link.json'
 export login from './login.json'
 export profile from './profile.json'
 export settings from './settings.json'
