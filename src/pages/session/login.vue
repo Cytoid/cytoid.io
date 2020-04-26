@@ -30,7 +30,9 @@
     div
       h2(v-t="'new_user_welcome_title'")
       p(v-t="'new_user_welcome_content'")
-      nuxt-link.button.is-fullwidth(:to="{ name: 'session-signup' }" replace) {{$t('signup_btn')}}
+      nuxt-link.button.is-fullwidth(
+        :to="{ name: 'session-signup', query: { origin: $route.query.origin} }"
+        replace) {{$t('signup_btn')}}
 </template>
 
 <script>
@@ -75,12 +77,23 @@ export default {
       if (event.data.user) {
         const user = event.data.user
         this.$store.commit('setUser', user)
-        this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
-        this.$router.go(-1)
+        this.$buefy.toast.open({
+          message: this.$t('login_snack_bar', { name: user.name || user.uid }),
+          type: 'is-info',
+        })
+        if (this.$route.query.origin) {
+          this.$router.replace(this.$route.query.origin)
+        } else {
+          this.$router.replace({ name: 'settings-account' })
+        }
       } else if (event.data.token && event.data.provider) {
         this.$router.replace({
           name: 'session-link',
-          query: { token: event.data.token, provider: event.data.provider },
+          query: {
+            token: event.data.token,
+            provider: event.data.provider,
+            origin: this.$route.query.origin || null,
+          },
         })
       }
     },
@@ -88,8 +101,15 @@ export default {
       this.loading = true
       this.$store.dispatch('login', { ...this.form, captcha: this.captchaToken })
         .then((user) => {
-          this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
-          this.$router.go(-1)
+          this.$buefy.toast.open({
+            message: this.$t('login_snack_bar', { name: user.name || user.uid }),
+            type: 'is-info',
+          })
+          if (this.$route.query.origin) {
+            this.$router.replace(this.$route.query.origin)
+          } else {
+            this.$router.replace({ name: 'settings-account' })
+          }
           global.window.gtag('event', 'login', {
             event_category: 'auth',
             value: user.uid || 'nouid'

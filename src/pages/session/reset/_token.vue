@@ -27,7 +27,7 @@
   div(v-else-if="state === 1")
     h2.has-text-centered Success!
     h1.has-text-centered: font-awesome-icon(icon="check-circle")
-    nuxt-link.button.is-fullwidth(to="/session/login") {{$t('login_btn')}}
+    nuxt-link.button.is-fullwidth(:to="{ name: 'session-login' }") {{$t('login_btn')}}
   div(v-else)
     h2.has-text-centered Oops...
     h1.has-text-centered: font-awesome-icon(icon="exclamation-triangle")

@@ -88,7 +88,11 @@ export default {
         .then((user) => {
           this.loading = false
           this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
-          this.$router.go(-1)
+          if (this.$route.query.origin) {
+            this.$router.replace(this.$route.query.origin)
+          } else {
+            this.$router.replace({ name: 'settings-account' })
+          }
           global.window.gtag('event', 'login', {
             event_category: 'auth',
             value: user.uid || 'nouid'
@@ -113,6 +117,7 @@ export default {
                 token: this.$route.query.token,
                 provider: this.$route.query.provider,
                 username: this.form.username,
+                origin: this.$route.query.origin,
               }
             })
           } else {

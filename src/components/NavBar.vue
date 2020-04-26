@@ -8,7 +8,7 @@ header.navbar(role="navigation"): .container
     client-only.navbar-end
       search.left.navbar-item
       .navbar-item(v-if="!$store.state.user")
-        nuxt-link.button(to="/session/login") {{$t('login_btn')}}
+        nuxt-link.button(:to="{ name: 'session-login' }") {{$t('login_btn')}}
       b-dropdown.popover(
         mobile-modal
         v-else

@@ -51,7 +51,7 @@
       b-button(native-type="submit" expanded :loading="loading" style="margin-bottom: 1rem;" :disabled="invalid || !captchaToken") {{$t('join_btn')}}
       h2(v-t="'existing_user_title'")
       p(v-t="'existing_user_content'")
-      nuxt-link.button.is-fullwidth(:to="{ name: 'session-login' }" replace) {{$t('login_btn')}}
+      nuxt-link.button.is-fullwidth(:to="{ name: 'session-login', query: { origin: $route.query.origin} }" replace) {{$t('login_btn')}}
 </template>
 
 <script>
@@ -119,7 +119,11 @@ export default {
           this.$buefy.toast.open({
             message: 'Registration Successful',
           })
-          this.$router.replace({ name: 'settings-account' })
+          if (this.$route.query.origin) {
+            this.$router.replace(this.$route.query.origin)
+          } else {
+            this.$router.replace({ name: 'settings-account' })
+          }
           this.$store.commit('setUser', user)
           global.window.gtag('event', 'signup', {
             event_category: 'auth',

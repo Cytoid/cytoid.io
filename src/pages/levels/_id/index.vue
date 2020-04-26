@@ -358,7 +358,7 @@ export default {
           event_label: 'rejected-login',
           value: this.level.uid
         })
-        this.$router.push('/session/login')
+        this.$router.push({ name: 'session-login', query: { origin: `/levels/${this.$route.params.id}` } })
       }
     },
     convertedDifficultyName(name) {

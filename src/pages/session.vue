@@ -13,7 +13,7 @@ export default {
   background: require('@/assets/images/session.jpg'),
   fetch({ route, redirect }) {
     if (route.fullPath === '/session') {
-      redirect('/session/login')
+      redirect({ name: 'session-login' })
     }
   },
 }
