@@ -1,29 +1,26 @@
 <template lang="pug">
-a-form(layout="horizontal" @submit.prevent="submit")
-  div
-    div(class="card-pre-header")
-      p(v-t="'profile_header_title'")
-  a-form-item(label="Cover image" :label-col="{ span: 20, sm: 5 }")
-    captcha(invisible badge="bottomleft")
+form(@submit.prevent="submit")
+  b-field(:label="$t('profile_header_title')")
     background-upload(@change="headerUploaded" :src="headerURL")
-  div
-    div(class="card-pre-header")
-      p(v-t="'profile_bio_title'")
-  client-only: markdown-editor(
-    :configs="{ spellChecker: false }"
-    v-model="form.bio"
-  )
-  a-button.is-pulled-right(
+  b-field(:label="$t('birthday')")
+    b-datepicker(icon="calendar")
+  client-only: b-field(:label="$t('profile_bio_title')")
+    markdown-editor(
+      :configs="{ spellChecker: false }"
+      v-model="form.bio"
+    )
+  b-button.is-pulled-right(
     :loading="submitLoading"
-    size="large"
-    html-type="submit"
-    type="primary"
+    native-type="submit"
   ) {{$t('save_btn')}}
+  .is-clearfix
 </template>
 
 <script>
 import UploadMixin from '@/mixins/upload'
 import BackgroundUpload from '@/components/BackgroundUpload.vue'
+import gql from 'graphql-tag'
+import { handleErrorBlock } from '../../plugins/antd'
 export default {
   name: 'Profile',
   components: {
@@ -41,17 +38,24 @@ export default {
       submitLoading: false,
     }
   },
-  asyncData({ $axios, store }) {
-    return $axios.get('/profile/' + store.state.user.id)
-      .then((response) => {
-        const profile = response.data
-        return {
-          form: {
-            bio: profile.bio,
-            birthday: profile.birthday,
-          }
+  asyncData({ store, error, app }) {
+    return app.apolloProvider.defaultClient.query({
+      query: gql`query GetSettingsProfile($id: ID!) {
+        profile(id: $id) {
+          id
+          bio
+          birthday
         }
-      })
+      }`,
+      variables: { id: store.state.user.id }
+    }).then(({ data }) => data?.profile)
+      .then(profile => ({
+        form: {
+          bio: profile?.bio,
+          birthday: profile?.birthday,
+        }
+      }))
+      .catch(err => handleErrorBlock(err, error))
   },
   methods: {
     headerUploaded({ file }) {

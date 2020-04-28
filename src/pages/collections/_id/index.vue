@@ -26,13 +26,7 @@
         .card-secondary-text(style="margin-bottom: 1rem;") {{$dateFormatCalendar(collection.creationDate)}}, {{ $dateFromNow(collection.creationDate) }}
         .card-heading(v-t="'modification_date_title'")
         .card-secondary-text {{$dateFormatCalendar(collection.modificationDate)}}, {{ $dateFromNow(collection.modificationDate) }}
-      .box(v-if="collection.metadata.cover")
-          p.card-heading(v-t="'metadata_cover_art_title'")
-          p.card-em-text(style="margin-bottom: 4px;" v-text="collection.metadata.cover.name")
-          a(v-if="collection.metadata.cover.url" :href="collection.metadata.cover.url")
-            a-button.card-button
-              font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
-              span Source
+      meta-box(:metadata="collection.metadata")
     .column.is-three-quarters
       .level-card-container.small
         level-card(v-for="level in collection.levels" :key="level.id" :value="level")
@@ -44,6 +38,7 @@ import gql from 'graphql-tag'
 import { handleErrorBlock } from '@/plugins/antd'
 import LevelCard from '@/components/level/LevelCard'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
+import MetaBox from '@/components/MetaBox'
 
 const query = gql`query FetchCollection($uid: String!) {
   collection(uid: $uid) {
@@ -56,12 +51,16 @@ const query = gql`query FetchCollection($uid: String!) {
     modificationDate
     tags
     state
-    coverPath
+    cover {
+      original
+    }
     owner {
       id
       uid
       name
-      avatarURL
+      avatar {
+        small
+      }
     }
     levels {
       id
@@ -71,7 +70,9 @@ const query = gql`query FetchCollection($uid: String!) {
         id
         uid
         name
-        avatarURL
+        avatar {
+          small
+        }
       }
       metadata {
         title_localized
@@ -80,9 +81,10 @@ const query = gql`query FetchCollection($uid: String!) {
         }
       }
       bundle {
-        background: backgroundImage
-        music
-        music_preview: musicPreview
+        backgroundImage {
+          thumbnail
+        }
+        musicPreview
       }
       charts {
         type
@@ -105,6 +107,7 @@ export default {
   components: {
     LevelCard,
     PlayerAvatar,
+    MetaBox,
   },
   data() {
     return {
@@ -125,7 +128,7 @@ export default {
     if (!collection) {
       return error({ statusCode: 404, message: 'Collection not found' })
     }
-    store.commit('setBackground', { source: collection.coverPath })
+    store.commit('setBackground', { source: collection.cover.original })
     return { collection }
   },
   i18n: {

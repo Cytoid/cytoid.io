@@ -31,7 +31,9 @@ export default {
         collections(limit: $limit, cursor: $cursor) {
           id
           uid
-          coverPath
+          cover {
+            thumbnail
+          }
           title
           slogan
           levelCount

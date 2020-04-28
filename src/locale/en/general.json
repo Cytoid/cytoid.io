@@ -22,6 +22,7 @@
   "nav_wiki": "Wiki",
   "login_btn": "Login",
   "delete_btn": "Delete",
+  "birthday":  "Birthday",
   "collection_card_levels_count_tag": "{count} levels",
   "file_upload_default_title": "File Upload",
   "file_upload_default_subtitle": "Click or drag the file to this area to upload",

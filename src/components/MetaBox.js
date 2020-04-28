@@ -4,7 +4,7 @@ export default {
     const metadata = context.props.metadata
     return (<div class="box">
       {
-        ['artist', 'illustrator', 'charter', 'storyboarder']
+        ['artist', 'illustrator', 'charter', 'storyboarder', 'cover']
           .map((key) => {
             const data = metadata[key]
             return data && <div class="box-section">
