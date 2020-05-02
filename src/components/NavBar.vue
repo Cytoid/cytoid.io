@@ -1,6 +1,9 @@
 <template lang="pug">
 header.navbar(role="navigation"): .container
-  .navbar-menu
+  .navbar-brand
+    a.navbar-burger.burger(role="button" aria-label="menu" aria-expanded="false" @click="active = !active")
+      span(aria-hidden="true" v-for="n in 3")
+  .navbar-menu(:class="{ 'is-active': active }")
     .navbar-start
       nuxt-link.navbar-item(:to="{ name: 'index' }" exact) {{$t('nav_home')}}
       nuxt-link.navbar-item(:to="{ name: 'levels' }") {{$t('nav_levels')}}
@@ -28,6 +31,11 @@ export default {
   components: {
     Search,
     NavCard,
+  },
+  data() {
+    return {
+      active: false,
+    }
   },
   computed: {
     avatarURL() {

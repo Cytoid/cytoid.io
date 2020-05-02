@@ -1,28 +1,26 @@
 <template lang="pug">
   .section: .container(v-if="level" style="margin-top: 256px;")
-    h1.text-ele(style="margin-bottom: 16px; line-height: 1.0;" v-text="level.title")
-    .text-ele(
-      style="color: rgba(255, 255, 255, 0.9); font-size: 16px; margin-bottom: 20px;"
+    captcha(size="invisible" ref="captcha")
+    h1.text-ele.is-size-1(v-text="level.title")
+    h2.text-ele.is-size-5(
+      style="color: rgba(255, 255, 255, 0.9); margin-bottom: 20px;"
       v-if="level.metadata.artist"
       v-text="level.metadata.artist.name"
     )
     div(style="margin-bottom: 48px;")
       difficulty-badge.ele3(v-for="chart in level.charts" :key="chart.id" :value="chart" style="margin-right: 8px;")
-    div(style="margin-bottom: 32px;")
-      a(:href="downloadURL" @click="download")
-        a-button.download-button.ele3(type="primary" size="large")
-          font-awesome-icon(icon="download" fixed-width style="margin-right: .5rem;")
-          span(v-t="{ path: 'download_btn', args: { size: formatSize(level.size) }}")
-      nuxt-link(
+    .buttons(style="margin-bottom: 32px;")
+      b-button(
+        size="is-large"
+        type="is-download"
+        @click="download"
+        icon-left="download"
+      ) {{ $t('download_btn', { size: formatSize(level.size)})}}
+      nuxt-link.button.is-large(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
         v-if="$store.state.user && (level.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
       )
-        a-button.ele3(
-          type="default"
-          size="large"
-          :style="{ 'margin-left': '1rem' }"
-        )
-          font-awesome-icon(icon="briefcase" fixed-width style="margin-right: .5rem;")
+          b-icon(icon="briefcase")
           span(v-t="'manage_btn'")
     .notification.is-warning(v-if="level.state === 'PRIVATE'" v-t="'message_private'")
     .notification.is-primary(v-if="level.state === 'UNLISTED'" v-t="'message_unlisted'")
@@ -32,7 +30,7 @@
         .box
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           .level-description(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
-          p.card-heading(v-t="'details_card_rating_title'")
+          p.heading(v-t="'details_card_rating_title'")
           b-rate(
             icon-pack="fas"
             :value="(level.rating.rating || level.rating.average) * 0.5"
@@ -41,10 +39,10 @@
             :custom-text="`${(Math.floor(level.rating.average * 0.5 * 100) / 100).toFixed(2)} (${level.rating.total})`"
           )
           template(v-if="level.tags.length > 0")
-            .card-heading(v-t="'details_card_tags_title'")
+            .heading(v-t="'details_card_tags_title'")
             .tags
               a.tag(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()" v-text="tag")
-          .card-heading(v-t="'details_card_last_updated_title'")
+          .heading(v-t="'details_card_last_updated_title'")
           .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         meta-box(:metadata="level.metadata")
       .column.is-two-thirds
@@ -101,6 +99,7 @@
 </template>
 
 <script>
+import Captcha from '@/components/Captcha'
 import marked from 'marked'
 import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
@@ -245,6 +244,7 @@ export default {
     PlayButton,
     Disqus,
     MetaBox,
+    Captcha,
   },
   data: () => ({
     level: null,
@@ -264,9 +264,6 @@ export default {
         }[this.rankingsChartType]
       }
     },
-    downloadURL() {
-      return process.env.apiURL + '/levels/' + this.level.uid + '/package'
-    }
   },
   async asyncData({ app, params, error, store }) {
     const level = await app.apolloProvider.defaultClient.query({
@@ -344,15 +341,19 @@ export default {
     formatSize(size) {
       return formatBytes(size)
     },
-    download(event) {
+    download() {
       if (this.$store.state.user) {
-        global.window.gtag('event', 'download', {
-          event_category: 'levels',
-          event_label: 'succeed',
-          value: this.level.uid
-        })
+        this.$refs.captcha.execute()
+          .then((code) => {
+            console.log('got code', code)
+            window.open(`${process.env.apiURL}/levels/${this.level.uid}/package?captcha=${code}`, '_blank')
+            global.window.gtag('event', 'download', {
+              event_category: 'levels',
+              event_label: 'succeed',
+              value: this.level.uid
+            })
+          })
       } else {
-        event.preventDefault()
         global.window.gtag('event', 'download', {
           event_category: 'levels',
           event_label: 'rejected-login',
@@ -378,32 +379,16 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-.download-button.ant-btn-primary {
-  background: linear-gradient(to right, @theme4, @theme6);
-  border: none;
-  background-size: 200% 100%;
-  &:hover {
-    background: linear-gradient(to right, @theme4, @theme6);
-    background-size: 200% 100%;
-    transform: scale(0.98, 0.98);
-  }
-  &:active, &:focus {
-    background: linear-gradient(to right, @theme4, @theme6);
-    background-size: 200% 100%;
-    box-shadow: @ele3;
-    transform: scale(0.95, 0.95);
-  }
-}
-</style>
-
 <style lang="less">
-.level-description a {
-  font-weight: bold;
-  color: hsla(226, 68%, 77%, 1);
-  transition: 0.2s @hoverEasing;
-  &:hover {
-    color: hsla(226, 68%, 87%, 1);
+.level-description {
+  margin-top: 1rem;
+  a {
+    font-weight: bold;
+    color: hsla(226, 68%, 77%, 1);
+    transition: 0.2s @hoverEasing;
+    &:hover {
+      color: hsla(226, 68%, 87%, 1);
+    }
   }
 }
 .leaderboard-table {

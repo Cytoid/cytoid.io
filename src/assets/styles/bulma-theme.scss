@@ -1,10 +1,15 @@
-$size-normal: 12px;
-$size-small: 8px;
-$size-medium: 14px;
-$size-large: 16px;
+$size-normal: 1rem;
+$size-small: 0.75rem;
+$size-title: 0.85rem;
+$size-medium: 1.2rem;
+$size-large: 1.3rem;
 
-$control-height: 32px;
+$body-size: 14px;
+
+$control-height: 2.25em;
 $control-line-height: 1.5;
+
+$family-sans-serif: "Nunito", "M PLUS Rounded 1c", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
 @import "~bulma/sass/utilities/_all";
 
@@ -23,17 +28,31 @@ $colors: (
   "danger": ($danger, $danger-invert),
 );
 
-$family-sans-serif: "Nunito", "M PLUS Rounded 1c", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-
 $grey-darker:  hsl(226, 68%, 6%);
 $grey-dark:    hsl(226, 15%, 14%);
 $grey:         hsl(226, 15%, 19%);
 $grey-light:   hsl(226, 15%, 38%);
 $grey-lighter: hsl(226, 15%, 55%);
 
+$theme1: hsla(226, 68%, 27%, 1);
+$theme2: hsla(226, 68%, 37%, 1);
+$theme3: hsla(226, 68%, 47%, 1);
+$theme4: hsla(226, 68%, 57%, 1);
+$theme5: hsla(226, 68%, 67%, 1);
+$theme6: hsla(226, 68%, 77%, 1);
+$theme7: hsla(226, 68%, 87%, 1);
+
+$ele1: 0 1px 3px hsla(0, 0%, 0%, .08), 0 1px 2px hsla(0, 0%, 0%, .16);
+$ele2: 0 3px 6px hsla(0, 0%, 0%, .10), 0 2px 4px hsla(0, 0%, 0%, .08);
+$ele3: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
+$ele4: 0 15px 25px hsla(0, 0%, 0%, .10), 0 5px 10px hsla(0, 0%, 0%, .20);
+$ele5: 0 20px 40px hsla(0, 0%, 0%, .15);
+
 $white-ter:    hsl(0, 0%, 71%);
 $white-bis:    hsl(0, 0%, 86%);
 $white:        hsl(0, 0%, 100%);
+
+$body-background-color: $grey-dark;
 
 $box-color: $white;
 $box-background-color: $grey;
@@ -92,23 +111,34 @@ $button-focus-color: $white;
 $button-active-color: $white;
 
 $button-disabled-background-color: $grey-dark;
-$button-background-color: rgb(63, 66, 78);
+$button-background-color: #292d38;
 
 $button-text-color: $white-ter;
 $button-text-hover-background-color: rgb(106, 108, 116);
 $button-text-hover-color: $white;
 
+$button-border-width: $control-border-width;
+$button-padding-vertical: calc(0.375em - #{$button-border-width});
+$button-padding-horizontal: 0.75em;
+$button-border-width: 0;
 
-$button-padding-vertical: 14px;
-$button-padding-horizontal: 18px;
-
-.button {
+.box .button, .button.is-box-button {
   border: none;
   text-transform: uppercase;
   font-weight: bold;
   transition: 0.2s $easing;
+  background-color: rgb(63, 66, 78);
   &:hover:not(.is-disabled):not([disabled]), &.is-hovered:not(.is-disabled):not([disabled]) {
     transform: translateY(1px);
+  }
+  span {
+    font-size: $size-title;
+  }
+  &.is-transparent {
+    background-color: hsla(0,0%,100%,.1);
+    &:hover {
+      background-color: hsla(0,0%,100%,.3);
+    }
   }
 }
 
@@ -124,10 +154,60 @@ $table-row-hover-background-color: $grey-light;
   }
 }
 
-$icon-dimensions: 1rem;
-$icon-dimensions-small: 0.75rem;
-$icon-dimensions-medium: 2rem;
-$icon-dimensions-large: 3rem;
+
+.button {
+  .icon {
+    // Otherwise the icon would be too big
+    svg.fa-2x {
+      font-size: 1em;
+    }
+  }
+  &.is-title {
+    span {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: $size-title;
+    }
+  }
+  &.is-download {
+    background-image: linear-gradient(to right, $theme4, $theme6);
+    background-size: 200% 100%;
+    color: $white;
+  }
+  &.is-browse {
+    background-image: linear-gradient(270deg, #21d4fd, #b721ff);
+    background-size: 400% 400%;
+    animation: flow 25s ease infinite;
+    color: $white;
+    @keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    &:hover {
+      transform: scale(0.98, 0.98);
+    }
+
+    &:active, &:focus {
+      box-shadow: $ele3;
+      transform: scale(0.95, 0.95);
+    }
+  }
+  &.is-large {
+    &:hover {
+      transform: scale(0.98, 0.98);
+    }
+    &:active, &:focus {
+      transform: scale(0.95, 0.95);
+    }
+  }
+}
+
+
+$icon-dimensions: $size-normal;
+$icon-dimensions-small: $size-small;
+$icon-dimensions-medium: $size-medium;
+$icon-dimensions-large: $size-large;
 
 $pagination-color: $text;
 $pagination-border-color: $white-ter;

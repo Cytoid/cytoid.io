@@ -22,6 +22,15 @@ export default {
       }
     }
   },
+  methods: {
+    execute() {
+      return new Promise((resolve, reject) => {
+        this.executeResolve = resolve
+        this.executeReject = reject
+        this.$refs.captcha.execute()
+      })
+    }
+  },
   render(h) {
     return h(
       'hcaptcha',
@@ -32,9 +41,23 @@ export default {
           theme: 'dark',
         },
         on: {
-          verify: code => this.$emit('input', code),
+          verify: (code) => {
+            if (this.executeResolve) {
+              this.executeResolve(code)
+              this.executeResolve = null
+              this.executeReject = null
+            }
+            this.$emit('input', code)
+          },
           expired: () => this.$emit('input', null),
-          error: () => this.$emit('input', null),
+          error: () => {
+            if (this.executeReject) {
+              this.executeReject(new Error('Captcha verification failed'))
+              this.executeReject = null
+              this.executeResolve = null
+            }
+            this.$emit('input', null)
+          },
         },
         ref: 'captcha'
       }
