@@ -13,8 +13,17 @@ $family-sans-serif: "Nunito", "M PLUS Rounded 1c", BlinkMacSystemFont, -apple-sy
 
 @import "~bulma/sass/utilities/_all";
 
-$primary: #4568dc;
-$link: #4568dc;
+$theme1: hsla(226, 68%, 27%, 1);
+$theme2: hsla(226, 68%, 37%, 1);
+$theme3: hsla(226, 68%, 47%, 1);
+$theme4: hsla(226, 68%, 57%, 1);
+$theme5: hsla(226, 68%, 67%, 1);
+$theme6: hsla(226, 68%, 77%, 1);
+$theme7: hsla(226, 68%, 87%, 1);
+
+$primary: $theme4;
+$info: $theme5;
+$link: $theme3;
 $primary-invert: findColorInvert($primary);
 $colors: (
   "white": ($white, $black),
@@ -33,14 +42,6 @@ $grey-dark:    hsl(226, 15%, 14%);
 $grey:         hsl(226, 15%, 19%);
 $grey-light:   hsl(226, 15%, 38%);
 $grey-lighter: hsl(226, 15%, 55%);
-
-$theme1: hsla(226, 68%, 27%, 1);
-$theme2: hsla(226, 68%, 37%, 1);
-$theme3: hsla(226, 68%, 47%, 1);
-$theme4: hsla(226, 68%, 57%, 1);
-$theme5: hsla(226, 68%, 67%, 1);
-$theme6: hsla(226, 68%, 77%, 1);
-$theme7: hsla(226, 68%, 87%, 1);
 
 $ele1: 0 1px 3px hsla(0, 0%, 0%, .08), 0 1px 2px hsla(0, 0%, 0%, .16);
 $ele2: 0 3px 6px hsla(0, 0%, 0%, .10), 0 2px 4px hsla(0, 0%, 0%, .08);
@@ -243,3 +244,21 @@ $datepicker-item-color: $white-bis;
 $datepicker-item-disabled-color: $white-ter;
 $datepicker-item-hover-color: $white;
 $datepicker-item-hover-background-color: $grey-dark;
+
+$tabs-border-bottom-color: $white-bis;
+$tabs-link-color: $white-bis;
+$tabs-link-hover-border-bottom-color: $white;
+$tabs-link-hover-color: $white;
+$tabs-link-active-border-bottom-color: $primary;
+$tabs-link-active-color: $primary;
+
+.tabs.is-toggle a {
+  background-color: hsla(0,0%,100%,.1);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+$tabs-toggle-link-border-style: none;
+$tabs-toggle-link-border-width: 0;
+$tabs-toggle-link-hover-background-color: hsla(0,0%,100%,.2);
+$tabs-toggle-link-active-background-color: hsla(0,0%,100%,.3);
+$tabs-toggle-link-active-color: $white;

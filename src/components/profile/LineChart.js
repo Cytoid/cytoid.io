@@ -31,8 +31,8 @@ export default {
       }
       const key = {
         activity: 'count',
-        rating: 'accumulativeRating',
-        accuracy: 'accumulativeAccuracy',
+        rating: 'cumulativeRating',
+        accuracy: 'cumulativeAccuracy',
       }[this.mode]
       const chartType = this.mode === 'activity' ? 'bar' : 'line'
       const ApexCharts = await this.ApexCharts

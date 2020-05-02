@@ -49,38 +49,39 @@
             .column.is-one-third
               p.card-heading(v-t="'total_play_time'")
               p.card-em-text(v-text="profile.activity.totalPlayTime")
-          a-radio-group(v-if="profile.timeseries" size="small" v-model="chartMode" style="margin-bottom: 16px;")
-            a-radio-button(value="activity" v-t="'chart_radio_ranked_plays'")
-            a-radio-button(value="rating" v-t="'chart_radio_rating'")
-            a-radio-button(value="accuracy" v-t="'chart_radio_avg_accuracy'")
+          .tabs.is-small.is-toggle: ul
+            li(
+              v-for="[title, mode] in [['chart_radio_ranked_plays', 'activity'], ['chart_radio_rating', 'rating'], ['chart_radio_avg_accuracy', 'accuracy']]"
+              :key="mode"
+              :class="{ 'is-active': chartMode === mode }"
+              @click="chartMode = mode"
+            )
+              a(v-t="title")
           line-chart(v-if="profile.timeseries" :data="profile.timeseries" :mode="chartMode")
         .box.levels-box(v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)")
           .levels-box-container.has-featured(v-if="profile.user.featuredLevels.length > 0")
             p.heading(v-t="'levels_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.featuredLevels" :key="level.id" :value="level")
-            nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
-              a-button(class="card-button" style="width: 100%;")
-                font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
+            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
+              b-icon(icon="angle-double-right")
+              span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
           .levels-box-container(v-if="profile.user.levels.length > 0")
             .level-card-container.small
               level-card(v-for="level in profile.user.levels" :key="level.id" :value="level")
-            nuxt-link(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
-              a-button(class="card-button" style="width: 100%;")
-                font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-                span(v-t="{ path: 'levels_all_btn', args: { count: profile.user.levelsCount }}")
+            nuxt-link.button.is-fullwidth(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
+              b-icon(icon="angle-double-right")
+              span(v-t="{ path: 'levels_all_btn', args: { count: profile.user.levelsCount }}")
 
         .box(v-if="profile && profile.user && profile.user.collections && profile.user.collections.length > 0")
           p.heading(style="margin-bottom: 16px;" v-t="'collections_title'")
           .level-card-container.small.regular-levels-container
             collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
-          a(
+          a.button.is-fullwidth(
             style="margin-top: 16px; display: block;"
           )
-            a-button(class="card-button" style="width: 100%;")
-              font-awesome-icon(icon="angle-double-right" fixed-width style="margin-right: 4px;")
-              span(v-t="{ path: 'collections_all_btn', args: { count: profile.user.collectionsCount }}")
+            b-icon(icon="angle-double-right")
+            span(v-t="{ path: 'collections_all_btn', args: { count: profile.user.collectionsCount }}")
         div(style="margin: 12px;")
           disqus(shortname="cytoid" :identifier="'profile/' + profile.user.uid" :url="'https://cytoid.io/profile/' + profile.user.uid")
 </template>
@@ -240,29 +241,9 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   .statistics-card {
-    background: linear-gradient(to right bottom, @theme4, @theme5);
-    .ant-radio-button-wrapper {
-      font-size: 12px;
-      font-weight: normal;
-      background: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.3);
-      border: none;
-    }
-    .ant-radio-button-wrapper-checked {
-      background: rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 1);
-      border: white;
-      box-shadow: none;
-      font-weight: bold;
-      &:hover {
-        box-shadow: none;
-      }
-    }
-    .ant-radio-button-wrapper:not(:first-child)::before {
-      background-color: unset;
-    }
+    background: linear-gradient(to right bottom, $theme4, $theme5);
   }
 
   .header-container {
@@ -270,16 +251,16 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 24px;
-    @gutter-y: 32px;
-    @gutter-x: 24px;
+    $gutter-y: 32px;
+    $gutter-x: 24px;
     .avatar-container {
       flex-shrink: 0;
       flex-grow: 1;
-      padding: @gutter-y @gutter-x;
+      padding: $gutter-y $gutter-x;
       // text-align: center;
     }
     .player-info-container {
-      padding: @gutter-y @gutter-x;
+      padding: $gutter-y $gutter-x;
       flex-grow: 9999;
       display: inline-block;
       vertical-align: middle;
@@ -330,15 +311,6 @@ export default {
     .level-card-container {
       margin-bottom: 1rem;
       margin-top: 0.5rem;
-    }
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 48px;
-      background: linear-gradient(transparent, rgba(41, 45, 56, 0.15));
     }
   }
   .box.levels-box {
