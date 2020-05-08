@@ -1,3 +1,5 @@
+// This file can only contain variable definitions!
+
 $size-normal: 1rem;
 $size-small: 0.75rem;
 $size-title: 0.85rem;
@@ -61,6 +63,7 @@ $box-color: $white;
 $box-background-color: $grey;
 $box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
 $box-padding: 1.5rem 2rem;
+$box-radius: $radius-large;
 
 $text: $white-ter;
 $text-invert: findColorInvert($text);
@@ -78,10 +81,6 @@ $section-padding-large: 96px;
 $link: $white-ter;
 
 $label-color: $white-ter;
-.label {
-  text-transform: uppercase;
-  font-size: 12px !important;
-}
 
 $input-color: $white-bis;
 $input-background-color: $grey-darker;
@@ -125,92 +124,16 @@ $button-padding-vertical: calc(0.375em - #{$button-border-width});
 $button-padding-horizontal: 0.75em;
 $button-border-width: 0;
 
-.box .button, .button.is-box-button {
-  border: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: 0.2s $easing;
-  background-color: rgb(63, 66, 78);
-  &:hover:not(.is-disabled):not([disabled]), &.is-hovered:not(.is-disabled):not([disabled]) {
-    transform: translateY(1px);
-  }
-  span {
-    font-size: $size-title;
-  }
-  &.is-transparent {
-    background-color: hsla(0,0%,100%,.1);
-    &:hover {
-      background-color: hsla(0,0%,100%,.3);
-    }
-  }
-}
-
 $table-color: $white-bis;
 $table-background-color: transparent;
 $table-head-cell-color: $white-ter;
 $table-cell-border: none;
 $table-row-hover-background-color: $grey-light;
 
-.table {
-  thead {
-    text-transform: uppercase;
-  }
-}
-
-
-.button {
-  .icon {
-    // Otherwise the icon would be too big
-    svg.fa-2x {
-      font-size: 1em;
-    }
-  }
-  &.is-title {
-    span {
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: $size-title;
-    }
-  }
-  &.is-download {
-    background-image: linear-gradient(to right, $theme4, $theme6);
-    background-size: 200% 100%;
-    color: $white;
-  }
-  &.is-browse {
-    background-image: linear-gradient(270deg, #21d4fd, #b721ff);
-    background-size: 400% 400%;
-    animation: flow 25s ease infinite;
-    color: $white;
-    @keyframes flow {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    &:hover {
-      transform: scale(0.98, 0.98);
-    }
-
-    &:active, &:focus {
-      box-shadow: $ele3;
-      transform: scale(0.95, 0.95);
-    }
-  }
-  &.is-large {
-    &:hover {
-      transform: scale(0.98, 0.98);
-    }
-    &:active, &:focus {
-      transform: scale(0.95, 0.95);
-    }
-  }
-}
-
-
-$icon-dimensions: $size-normal;
-$icon-dimensions-small: $size-small;
-$icon-dimensions-medium: $size-medium;
-$icon-dimensions-large: $size-large;
+$icon-dimensions: 1rem;
+$icon-dimensions-small: 0.75rem;
+$icon-dimensions-medium: 1rem;
+$icon-dimensions-large: 3rem;
 
 $pagination-color: $text;
 $pagination-border-color: $white-ter;
@@ -252,11 +175,6 @@ $tabs-link-hover-color: $white;
 $tabs-link-active-border-bottom-color: $primary;
 $tabs-link-active-color: $primary;
 
-.tabs.is-toggle a {
-  background-color: hsla(0,0%,100%,.1);
-  font-weight: bold;
-  text-transform: uppercase;
-}
 $tabs-toggle-link-border-style: none;
 $tabs-toggle-link-border-width: 0;
 $tabs-toggle-link-hover-background-color: hsla(0,0%,100%,.2);

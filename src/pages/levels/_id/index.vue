@@ -345,7 +345,6 @@ export default {
       if (this.$store.state.user) {
         this.$refs.captcha.execute()
           .then((code) => {
-            console.log('got code', code)
             window.open(`${process.env.apiURL}/levels/${this.level.uid}/package?captcha=${code}`, '_blank')
             global.window.gtag('event', 'download', {
               event_category: 'levels',

@@ -25,12 +25,8 @@ div
 </template>
 
 <script>
-import UploadMixin from '@/mixins/upload'
 export default {
   name: 'AvatarPanel',
-  mixins: [
-    UploadMixin('avatar', 'image/*'),
-  ],
   data() {
     return {
       avatarDeleteLoading: false,

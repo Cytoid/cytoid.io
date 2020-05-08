@@ -13,11 +13,7 @@ a-upload-dragger(
 </template>
 
 <script>
-import UploadMixin from '@/mixins/upload'
 export default {
-  mixins: [
-    UploadMixin('packages', 'application/zip'),
-  ],
   props: {
     accept: {
       type: String,

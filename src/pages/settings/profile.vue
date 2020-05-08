@@ -1,9 +1,12 @@
 <template lang="pug">
 form(@submit.prevent="submit")
   b-field(:label="$t('profile_header_title')")
-    background-upload(@change="headerUploaded" :src="headerURL")
+    upload(:background="headerURL" type="test" @upload="headerUploaded")
   b-field(:label="$t('birthday')")
-    b-datepicker(icon="calendar")
+    b-datepicker(
+      icon="calendar"
+      v-model="form.birthday"
+    )
   client-only: b-field(:label="$t('profile_bio_title')")
     markdown-editor(
       :configs="{ spellChecker: false }"
@@ -17,24 +20,22 @@ form(@submit.prevent="submit")
 </template>
 
 <script>
-import UploadMixin from '@/mixins/upload'
-import BackgroundUpload from '@/components/BackgroundUpload.vue'
 import gql from 'graphql-tag'
-import { handleErrorBlock } from '../../plugins/antd'
+import Upload from '@/components/Upload'
+import { handleErrorBlock } from '@/plugins/antd'
+import { parse } from 'date-fns'
 export default {
   name: 'Profile',
   components: {
-    BackgroundUpload,
+    Upload,
   },
-  mixins: [
-    UploadMixin('headers', 'image/*'),
-  ],
   data() {
     return {
       form: {
         bio: null,
         birthday: null,
       },
+      headerURL: null,
       submitLoading: false,
     }
   },
@@ -45,32 +46,55 @@ export default {
           id
           bio
           birthday
+          header {
+           stripe
+          }
         }
       }`,
       variables: { id: store.state.user.id }
     }).then(({ data }) => data?.profile)
-      .then(profile => ({
-        form: {
-          bio: profile?.bio,
-          birthday: profile?.birthday,
+      .then((profile) => {
+        const response = {
+          form: {
+            bio: profile?.bio,
+          },
+          headerURL: profile?.header?.stripe,
         }
-      }))
+        if (profile?.birthday) {
+          response.form.birthday = parse(profile.birthday, 'yyyy-MM-dd', new Date())
+        } else {
+          response.form.birthday = null
+        }
+        return response
+      })
       .catch(err => handleErrorBlock(err, error))
   },
   methods: {
-    headerUploaded({ file }) {
-      if (file.status !== 'done') {
-        return
-      }
-      this.$axios.get('/profile/' + this.$store.state.user.id)
-        .then((response) => {
-          this.$message.success('Profile Header Image Updated!')
-          this.headerURL = response.data.headerURL
+    headerUploaded(path) {
+      this.$apollo.mutate({
+        mutation: gql`mutation UpdateProfileHeader($path: String!) {
+          result: updateProfileHeader(path: $path) {
+            stripe
+          }
+        }`,
+        variables: { path }
+      })
+        .then((data) => {
+          this.$message.success('Profile Header Updated')
+          this.headerURL = data.data?.result?.stripe
         })
+        .catch(error => this.handleErrorToast(error))
     },
     submit() {
       this.submitLoading = true
-      this.$axios.put('/profile/' + this.$store.state.user.id, this.form)
+      this.$apollo.mutate({
+        mutation: gql`mutation UpdateProfile($input: ProfileInput) {
+          result: updateProfile(input: $input)
+        }`,
+        variables: {
+          input: this.form,
+        }
+      })
         .then(() => {
           this.$message.success('Profile Updated')
         })

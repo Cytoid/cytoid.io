@@ -72,7 +72,7 @@ module.exports = {
       '~assets/styles/theme.less',
     ],
     scss: [
-      '~assets/styles/bulma.scss',
+      '~assets/styles/bulma-theme.scss',
     ]
   },
 
