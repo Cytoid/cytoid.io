@@ -2,7 +2,7 @@
 div
   div(class="card-pre-header")
     p(v-t="'email_title'")
-  .box
+  .box(style="position: relative; overflow: hidden;")
     .media(v-for="(email, index) in emails")
       .media-content {{ email.address }}
       .media-right.buttons
@@ -18,8 +18,9 @@ div
           b-field(style="max-width: 400px;" :type="{ 'is-danger': errors[0], 'is-success': valid }" :message="errors")
             b-input(type="email" icon="envelope" v-model="newEmail")
       .media-right
-        b-button.is-success(:disabled="invalid" @click="handleSubmit(addEmail)" :loading="loading" icon-left="plus")
+        b-button.is-success(:disabled="invalid" @click="handleSubmit(addEmail)" icon-left="plus")
           span(v-t="'email_add_btn'")
+    b-loading(:active="loading" :is-full-page="false")
 </template>
 
 <script>

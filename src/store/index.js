@@ -52,3 +52,12 @@ export const actions = {
     return this.$axios.delete('/session')
   },
 }
+export const getters = {
+  avatarURL(state) {
+    return (size) => {
+      let url = `${process.env.apiURL}/users/${state.user.id}/avatar`
+      if (size) url += '?size=' + size
+      return url
+    }
+  }
+}

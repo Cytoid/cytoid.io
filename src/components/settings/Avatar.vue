@@ -1,66 +1,45 @@
 <template lang="pug">
 div
-  div(class="card-pre-header")
+  .card-pre-header
     p(v-t="'avatar_title'")
-  .box.avatar-upload
-    captcha(invisible badge="bottomleft")
-    a-upload(
-      name="avatar"
-      listType="picture-card"
-      accept="image/*"
-      :showUploadList="false"
-      :customRequest="upload"
-      @change="avatarUploaded"
-      style="margin-bottom: 16px;"
-    )
-      avatar.avatar(:src="$store.state.avatar")
-    template(v-if="!usingGravatar")
-      a-button(
-        class="card-button"
-        :loading="avatarDeleteLoading",
-        @click="avatarDelete"
-        v-t="'avatar_use_gravatar_btn'")
-    i18n(path="avatar_using_gravatar" tag="span" v-else)
-      a(href="https://gravatar.com/" target="_blank" style="font-weight:bold" v-t="'gravatar'")
+  .box
+    b-field
+      upload.avatar-upload(:background="avatarURL" type="avatar" @upload="avatarUploaded" icon)
 </template>
 
 <script>
+import gql from 'graphql-tag'
+import Upload from '@/components/Upload'
 export default {
   name: 'AvatarPanel',
+  components: {
+    Upload,
+  },
   data() {
     return {
-      avatarDeleteLoading: false,
-    }
-  },
-  computed: {
-    usingGravatar() {
-      return this.$store.state.avatar?.includes('gravatar')
+      avatarURL: null
     }
   },
   mounted() {
-    this.$axios.get('/profile/' + this.$store.state.user.id)
+    this.avatarURL = this.$store.getters.avatarURL(128)
   },
   methods: {
-    avatarUploaded({ file }) {
-      if (file.status !== 'done') {
-        return
-      }
-      return this.updateAvatar()
-        .then(() => this.$message.success('Avatar Updated!'))
-    },
-    avatarDelete() {
-      this.avatarDeleteLoading = true
-      return this.$axios.delete(`/users/${this.$store.state.user.id}/avatar`)
-        .then(() => this.updateAvatar())
-        .then(() => {
-          this.$message.success('Using your Gravatar icon now!')
-          this.avatarDeleteLoading = false
-        })
-    },
-    updateAvatar() {
-      return this.$axios.get('/users/' + this.$store.state.user.id)
-        .then((response) => {
-          this.$store.commit('setAvatar', response.data.avatarURL)
+    avatarUploaded(path) {
+      this.avatarURL = null
+      this.$apollo.mutate({
+        mutation: gql`mutation UpdateAvatar($path: String) {
+          result: setAvatar(path: $path) {
+            large
+          }
+        }`,
+        variables: { path }
+      })
+        .then((res) => {
+          this.avatarURL = res.data?.result?.large
+          this.$buefy.toast.open({
+            message: 'Avatar updated',
+            type: 'is-success'
+          })
         })
     },
   },
@@ -70,17 +49,12 @@ export default {
 }
 </script>
 
-<style scoped>
-.avatar-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-.avatar-upload .ant-upload {
-  margin: 0;
-}
-.avatar-upload .avatar {
-  border-radius: 3px;
+<style>
+.avatar-upload .bg-upload .upload-draggable {
+  height: 128px;
+  width: 128px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

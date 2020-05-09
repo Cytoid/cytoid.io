@@ -19,7 +19,7 @@ header.navbar(role="navigation"): .container
         append-to-body
         aria-role="menu"
       )
-        a.navbar-item.navbar-avatar(slot="trigger"): avatar(:source="avatarURL")
+        a.navbar-item.navbar-avatar(slot="trigger"): avatar(:source="$store.getters.avatarURL()" style="width: 24px; height: 24px;")
         b-dropdown-item(custom paddingless)
           nav-card
 </template>
@@ -37,11 +37,6 @@ export default {
       active: false,
     }
   },
-  computed: {
-    avatarURL() {
-      return `${process.env.apiURL}/users/${this.$store.state.user.id}/avatar`
-    }
-  }
 }
 </script>
 

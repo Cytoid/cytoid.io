@@ -2,7 +2,7 @@
   div
     div
       h2(v-t="'title'")
-      p(v-t="'subtitle'")
+      p(v-t="'subtitle'" style="margin-bottom: 1rem;")
       form(@submit.prevent="signIn")
         b-field
           b-input(v-model="form.username" :placeholder="$t('username_field_placeholder')" icon="user")
@@ -27,9 +27,10 @@
           font-awesome-icon(:icon="['fab', 'google']")
         a.level-item(@click="signInWithProvider('discord')")
           font-awesome-icon(:icon="['fab', 'discord']")
-    div
+    .divider OR
+    .content
       h2(v-t="'new_user_welcome_title'")
-      p(v-t="'new_user_welcome_content'")
+      p(v-t="'new_user_welcome_content'" style="margin-bottom: 1rem;")
       nuxt-link.button.is-fullwidth(
         :to="{ name: 'session-signup', query: { origin: $route.query.origin} }"
         replace) {{$t('signup_btn')}}

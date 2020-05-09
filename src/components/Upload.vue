@@ -42,7 +42,7 @@ export default {
     subtitle: {
       type: String,
       default: null,
-    }
+    },
   },
   data() {
     return {
@@ -126,23 +126,26 @@ export default {
           }}
           src={this.background}
         />}
-        <section class="section">
-          <div class="content has-text-centered">
-            <p>
-              <b-icon
-                icon="upload"
-                size="is-large">
-              </b-icon>
-            </p>
-            <h4 class="is-size-5">{this.parent || this.$t('file_upload_default_title')}</h4>
-            <p>{this.prompt || this.$t('file_upload_default_subtitle')}</p>
-          </div>
-          {this.state && [
-            <progress class="progress" max="100" value={this.progress}></progress>,
-            <small class="is-hint is-size-7">{this.loadingPrompt}</small>
-          ]}
-          {this.error && <p class="has-text-danger is-hint has-text-weight-bold">{this.error}</p>}
-        </section>
+        {
+          !this.icon && <section class="section">
+            <div class="content has-text-centered">
+              <p>
+                <b-icon
+                  icon="upload"
+                  size="is-large">
+                </b-icon>
+              </p>
+              <h4 class="is-size-5">{this.parent || this.$t('file_upload_default_title')}</h4>
+              <p>{this.prompt || this.$t('file_upload_default_subtitle')}</p>
+            </div>
+            {this.state && [
+              <progress class="progress" max="100" value={this.progress}></progress>,
+              <small class="is-hint is-size-7">{this.loadingPrompt}</small>
+            ]}
+            {this.error && <p class="has-text-danger is-hint has-text-weight-bold">{this.error}</p>}
+          </section>
+        }
+
       </b-upload>
     </div>
   }
