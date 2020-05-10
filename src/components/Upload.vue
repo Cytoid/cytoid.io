@@ -43,6 +43,10 @@ export default {
       type: String,
       default: null,
     },
+    callback: {
+      type: Boolean,
+      default: false,
+    }
   },
   data() {
     return {
@@ -93,8 +97,19 @@ export default {
         await this.$axios.put('/files/' + res.data.path, {
           token: res.data.token,
         })
-        this.state = null
-        this.$emit('upload', res.data.path)
+
+        if (this.callback) {
+          this.state = 5
+          this.$emit('upload', {
+            ...res.data,
+            callback: () => {
+              this.state = null
+            }
+          })
+        } else {
+          this.state = null
+          this.$emit('upload', res.data.path)
+        }
       } catch (e) {
         this.state = null
         this.progress = null
@@ -135,8 +150,8 @@ export default {
                   size="is-large">
                 </b-icon>
               </p>
-              <h4 class="is-size-5">{this.parent || this.$t('file_upload_default_title')}</h4>
-              <p>{this.prompt || this.$t('file_upload_default_subtitle')}</p>
+              <h4 class="is-size-5">{this.title || this.$t('file_upload_default_title')}</h4>
+              <p>{this.$slots.subtitle || this.subtitle || this.$t('file_upload_default_subtitle')}</p>
             </div>
             {this.state && [
               <progress class="progress" max="100" value={this.progress}></progress>,

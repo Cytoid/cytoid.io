@@ -180,3 +180,6 @@ $tabs-toggle-link-border-width: 0;
 $tabs-toggle-link-hover-background-color: hsla(0,0%,100%,.2);
 $tabs-toggle-link-active-background-color: hsla(0,0%,100%,.3);
 $tabs-toggle-link-active-color: $white;
+
+$hoverEasing: cubic-bezier(0.215, 0.61, 0.355, 1);
+$returnEasing: cubic-bezier(0.215, 0.61, 0.355, 1);

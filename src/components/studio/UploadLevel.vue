@@ -1,65 +1,71 @@
 <template lang="pug">
-a-upload-dragger(
-  supportServerRender
-  :accept="accept"
-  :customRequest="upload"
-  :remove="removeUploadedFile"
-  @change="uploadStatusChanged"
-).ele5
-  font-awesome-icon(:icon="['fas', 'upload']" fixed-width style="font-size: 32px; margin-top: 16px; margin-bottom: 16px;")
-  p.ant-upload-text(style="font-weight: bold;"): slot(name="text")
-  p.ant-upload-hint(style="color: rgba(255, 255, 255, 0.3);")
-    slot(name="hint")
+upload.upload-level(
+  accept=".cytoidlevel,.zip"
+  type="levels/package"
+  title="Click or drag a Cytoid level to this area"
+  callback
+  @upload="upload"
+)
+  template(slot="subtitle")
+    | Don't know how to create one? Read our
+    a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level" @click.stop)  wiki
+    | !
 </template>
 
 <script>
+import gql from 'graphql-tag'
+import Upload from '../Upload'
 export default {
-  props: {
-    accept: {
-      type: String,
-      required: true,
-    },
-    level: {
-      type: Object,
-      default: null,
-    }
+  components: {
+    Upload
   },
   data: () => ({
-    status: false,
   }),
   methods: {
-    removeUploadedFile() {
-      // TODO: request to remove the file from the server
-    },
-    uploadStatusChanged({ file }) {
-      this.status = file.status === 'done'
-      if (this.status && file.response) {
-        this.$router.push({ name: 'levels-id-manage', params: { id: file.response.uid } })
-      }
-    },
-    getUploadCallbackData() {
-      // called by mixin
-      if (this.level) {
-        return {
-          replaceUID: this.level.uid,
+    upload(data) {
+      this.$apollo.mutate({
+        mutation: gql`mutation UnpackLevel($token: String!) {
+          package: unpackLevelPackage(token: $token) {
+            id
+            uid
+            title
+          }
+        }`,
+        variables: {
+          token: data.token,
         }
-      } else {
-        return {}
-      }
+      })
+        .then((res) => {
+          const uid = res.data?.package?.uid
+          const title = res.data?.package?.title
+          this.$buefy.toast.open({
+            message: `${title} (${uid}) Uploaded`,
+            type: 'is-success'
+          })
+          if (uid) {
+            this.$router.push({ name: 'levels-id', params: { id: uid } })
+          }
+        })
+        .catch((error) => {
+          this.$buefy.toast.open({
+            message: error.message,
+            type: 'is-danger'
+          })
+        })
+        .then(data.callback)
     }
   }
 }
 </script>
 
-<style lang="less">
-.ant-upload.ant-upload-drag {
-  transition: 0.2s @hoverEasing;
-  border: none;
+<style lang="scss">
+.upload-level .upload-draggable {
+  transition: 0.2s $hoverEasing;
+  border: none !important;
   background-color: #FF3CAC;
-  background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%) !important;
   box-shadow: 0 0 0 0 hsla(226, 68%, 67%, 0.5);
   &:hover {
-    transition: 0.2s @hoverEasing;
     box-shadow: 0 0 0 2px hsla(226, 68%, 67%, 0.5);
   }
 }

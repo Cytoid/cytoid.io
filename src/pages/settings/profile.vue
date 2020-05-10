@@ -1,7 +1,7 @@
 <template lang="pug">
 form(@submit.prevent="submit")
   b-field(:label="$t('profile_header_title')")
-    upload(:background="headerURL" type="test" @upload="headerUploaded")
+    upload(:background="headerURL" type="headers" @upload="headerUploaded")
   b-field(:label="$t('birthday')")
     b-datepicker(
       icon="calendar"
