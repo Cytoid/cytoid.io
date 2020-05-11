@@ -1,7 +1,7 @@
 <template lang="pug">
 upload.upload-level(
   accept=".cytoidlevel,.zip"
-  type="levels/package"
+  type="levels/packages"
   title="Click or drag a Cytoid level to this area"
   callback
   @upload="upload"
@@ -43,7 +43,7 @@ export default {
             type: 'is-success'
           })
           if (uid) {
-            this.$router.push({ name: 'levels-id', params: { id: uid } })
+            this.$router.push({ name: 'levels-id-manage', params: { id: uid } })
           }
         })
         .catch((error) => {

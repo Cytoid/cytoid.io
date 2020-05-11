@@ -9,31 +9,29 @@
         b-input(v-model="form.title")
       b-button(native-type="submit" :loading="createNewLoading") Create
   .box
-    .card-heading My Collections
     b-table.studio-table(
       :data="collections"
-      detailed
-      hoverable
-      icon-pack="fas"
     )
+      template(slot="empty")
+        section.section
+          .content.has-text-centered
+            font-awesome-icon(icon="empty-set" size="6x")
+            h4.is-size-4(style="margin-top: 3rem;") Nothing Here
       template(v-slot:default="props")
-        b-table-column(field="uid" label="UID") {{ props.row.uid }}
-        b-table-column(field="title" label="Title") {{ props.row.title }}
+        b-table-column(label="Collection")
+          .media
+            .media-left
+              nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'collections-id', params: { id: props.row.uid }}")
+                img(v-if="props.row.cover" :src="props.row.cover.thumbnail")
+            .media-content
+              .content
+                h4(v-text="props.row.title")
+                p.is-size-7.has-text-grey ID: {{ props.row.uid }}
+              ul.action-buttons
+                li: nuxt-link(:to="{name: 'collections-id-manage', params: { id: props.row.uid }}")
+                  font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
         b-table-column(field="state" label="State") {{ props.row.state }}
         b-table-column(field="levelCount" label="Levels") {{ props.row.levelCount }}
-      template(v-slot:detail="props")
-        article.media
-          figure.media-left
-            .image.is-4by3
-              img(:src="$img(props.row.coverPath, { height: 64 })")
-          .media-content
-            .content
-              strong(v-text="props.row.title")
-              br
-              small(v-text="props.row.slogan")
-            .level.is-mobile: .level-left
-              nuxt-link.level-item(:to="{ name: 'collections-id-manage', params: { id: props.row.uid } }")
-                b-icon(icon="suitcase")
 </template>
 
 <script>
@@ -64,7 +62,9 @@ export default {
             description
             state
             levelCount
-            coverPath
+            cover {
+              thumbnail
+            }
           }
         }
       }`,

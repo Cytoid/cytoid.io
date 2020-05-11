@@ -8,45 +8,48 @@
     captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
-    .box.studio-levels-card
-      a-table(
-        class="studio-levels-table"
-        :columns="columns"
-        :row-key="level => level.id"
-        :data-source="levels"
-        :pagination="levels_pagination"
+    .box
+      b-table(
+        :data="levels"
         :loading="levels_loading"
-        :scroll="{ x: 800 }"
-        @change="handleTableChange"
       )
-        template(slot="metadata" slot-scope="text, level")
-          div(style="display: flex; flex-direction: row;")
-            nuxt-link.level-thumbnail(:to="{name: 'levels-id', params: { id: level.uid }}")
-              img(
-                :src="$img(level.bundle.background, { width: 128, height: 80, mode: 'fill' })"
-                style="width: 128px; height: 80px; object-fit: cover; border-radius: 4px;"
-              )
-            div(style="margin-left: 8px")
-              p(style="margin-left: 8px; padding-top: 8px; margin-bottom: 0;") {{ level.title }}
-                p(style="margin-left: 8px; font-size: 10px; color: rgba(255, 255, 255, 0.3);") {{ 'ID: ' + level.uid }}
-              div
-                a(:href="downloadURL(level)")
-                  a-button.icon-button
+        template(slot="empty")
+          section.section
+            .content.has-text-centered
+              font-awesome-icon(icon="empty-set" size="6x")
+              h4.is-size-4(style="margin-top: 3rem;") Nothing Here
+        template(slot-scope="props")
+          b-table-column(label="Level")
+            .media
+              .media-left
+                nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'levels-id', params: { id: props.row.uid }}")
+                  img(:src="props.row.cover.thumbnail")
+              .media-content
+                .content
+                  h4(v-text="props.row.title")
+                  p.is-size-7.has-text-grey ID: {{ props.row.uid }}
+                ul.action-buttons
+                  li: a(:href="downloadURL(props.row)")
                     font-awesome-icon(:icon="['fas', 'download']" fixed-width)
-                nuxt-link(:to="{name: 'levels-id-manage', params: { id: level.uid }}")
-                  a-button.icon-button
+                  li: nuxt-link(:to="{name: 'levels-id-manage', params: { id: props.row.uid }}")
                     font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
-                a-button.icon-button(@click="$refs.deleteModal.show(level)")
-                  font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
-        template(slot="visibility" slot-scope="text, level")
-          visibility-select(:value="level.published" @change="changeVisibility(level, $event)")
-        template(v-slot:creationDate="creationDate") {{$dateFormatCalendar(creationDate)}}
-        template(v-slot:rating="rating")
-          div(style="display: flex;")
-            font-awesome-icon(:icon="['fas', 'star']" fixed-width style="margin-top: 2px; margin-right: 4px;")
-            span(style="white-space: nowrap;") {{ rating ? (Math.floor(rating * 0.5 * 100) / 100).toFixed(2) : 'N/A' }}
-        template(v-slot:downloads="downloads") {{ downloads }}
-        template(v-slot:plays="plays") {{ plays }}
+                  li: a(@click="$refs.deleteModal.show(props.row)")
+                    font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
+          b-table-column(label="Visibility")
+            b-dropdown
+              button.button(slot="trigger")
+                | {{ props.row.state }}
+                b-icon(icon="caret-down")
+              b-dropdown-item(value="PUBLIC") Public
+              b-dropdown-item(value="PRIVATE") Private
+              b-dropdown-item(value="UNLISTED") Unlisted
+          b-table-column(label="Downloads") {{ props.row.downloads }}
+          b-table-column(label="Plays") {{ props.row.plays }}
+          b-table-column(label="Rating")
+            .content(style="white-space: nowrap;")
+              font-awesome-icon(:icon="['fas', 'star']" style="margin-right: 0.5rem;")
+              | {{ props.row.rating ? (Math.floor(props.row.rating * 0.5 * 100) / 100).toFixed(2) : 'N/A' }}
+          b-table-column(label="Date") {{ $dateFormatCalendar(props.row.creationDate) }}
 </template>
 
 <script>
@@ -62,48 +65,6 @@ export default {
     DeleteModal,
   },
   data() {
-    const columns = [
-      {
-        title: 'Level',
-        scopedSlots: {
-          customRender: 'metadata'
-        }
-      },
-      {
-        title: 'Visibility',
-        scopedSlots: {
-          customRender: 'visibility'
-        }
-      },
-      {
-        title: 'Downloads',
-        dataIndex: 'downloads',
-        scopedSlots: {
-          customRender: 'downloads'
-        }
-      },
-      {
-        title: 'Plays',
-        dataIndex: 'plays',
-        scopedSlots: {
-          customRender: 'plays'
-        }
-      },
-      {
-        title: 'Rating',
-        dataIndex: 'rating',
-        scopedSlots: {
-          customRender: 'rating'
-        }
-      },
-      {
-        title: 'Date',
-        dataIndex: 'creationDate',
-        scopedSlots: {
-          customRender: 'creationDate'
-        }
-      },
-    ]
     return {
       levels: [],
       levels_pagination: {
@@ -113,7 +74,6 @@ export default {
         current: 1,
       },
       levels_loading: false,
-      columns
     }
   },
   mounted() {
@@ -197,25 +157,14 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-.ant-list-item-extra img {
+<style lang="scss">
+.is-studio-table-thumbnail {
+  transition: 0.2s $hoverEasing;
   width: 128px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-.level-thumbnail {
-  display: flex;
-  align-items: center;
-  transition: 0.2s @hoverEasing;
+  height: 72px;
   &:hover {
-    filter: brightness(50%);
+   filter: brightness(50%);
   }
-}
-</style>
-
-<style lang="less">
-.studio-levels-table .ant-table-thead > tr > th, .studio-levels-table .ant-table-tbody > tr > td {
-  padding: 8px;
+  border-radius: $radius;
 }
 </style>
