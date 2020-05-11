@@ -1,11 +1,9 @@
 <template lang="pug">
   div
     visibility-modal(ref="visibilityModal" @change="sendVisibilityReq")
-    delete-modal(ref="deleteModal" @change="deleteLevel")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level
-    captcha(invisible badge="bottomleft")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p Manage
     .box
@@ -33,7 +31,7 @@
                     font-awesome-icon(:icon="['fas', 'download']" fixed-width)
                   li: nuxt-link(:to="{name: 'levels-id-manage', params: { id: props.row.uid }}")
                     font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
-                  li: a(@click="$refs.deleteModal.show(props.row)")
+                  li: a(@click="openDeleteModal(props.row)")
                     font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
           b-table-column(label="Visibility")
             b-dropdown
@@ -53,6 +51,7 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
 import UploadLevel from '@/components/studio/UploadLevel'
 import VisibilityModal from '@/components/studio/VisibilityModal'
 import DeleteModal from '@/components/studio/DeleteModal'
@@ -62,7 +61,6 @@ export default {
     UploadLevel,
     VisibilityModal,
     VisibilitySelect,
-    DeleteModal,
   },
   data() {
     return {
@@ -83,27 +81,47 @@ export default {
     downloadURL(level) {
       return process.env.apiURL + '/levels/' + level.uid + '/package'
     },
+    openDeleteModal(level) {
+      this.deleteModal = this.$buefy.modal.open({
+        parent: this,
+        props: { level },
+        events: {
+          submit: this.deleteLevel
+        },
+        component: DeleteModal,
+        hasModalCard: true,
+        trapFocus: true
+      })
+    },
     changeVisibility(level, visibility) {
       this.$refs.visibilityModal.show(level, visibility)
     },
-    deleteLevel(level) {
-      this.$refs.deleteModal.loading = true
-      this.$axios.delete('/levels/' + level.uid)
+    deleteLevel(modal) {
+      const level = modal.level
+      modal.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation DeleteLevel($id: ID!) {
+          deleteLevel(id: $id)
+        }`,
+        variables: {
+          id: level.id,
+        }
+      })
         .then(() => {
-          this.$message.success(level.title + ' Deleted!')
-          this.$refs.deleteModal.modalVisible = false
+          this.deleteModal.close()
+          this.deleteModal = null
+          this.$buefy.toast.open({
+            message: level.title + ' Deleted!',
+            type: 'is-warning',
+          })
           const index = this.levels.indexOf(level)
           if (index !== -1) {
             this.levels.splice(index, 1)
           }
-          global.window.gtag('event', 'delete', {
-            event_category: 'levels',
-            value: level.uid,
-          })
         })
         .catch(this.handleErrorToast)
         .then(() => {
-          this.$refs.deleteModal.loading = false
+          modal.loading = false
         })
     },
     sendVisibilityReq([level, val]) {
@@ -143,16 +161,6 @@ export default {
           window.scrollTo(0, 0)
         })
     },
-    visibility(level) {
-      const published = level.published
-      if (published === true) {
-        return 2
-      } else if (published === false) {
-        return 0
-      } else {
-        return 1
-      }
-    }
   }
 }
 </script>

@@ -89,7 +89,7 @@ export default {
             'Content-Type': file.type,
           },
           onUploadProgress: (progressEvent) => {
-            this.progress = progressEvent.loaded / progressEvent.total
+            this.progress = (progressEvent.loaded / progressEvent.total) * 100
           }
         })
         this.progress = null

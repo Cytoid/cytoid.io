@@ -1,10 +1,8 @@
 <template lang="pug">
-  a-modal(
-    :title="$t('level_delete_confirm_title', { name: level.title })"
-    v-model="modalVisible"
-    v-if="level && modalVisible"
-    :closable="false"
-  )
+.modal-card
+  header.modal-card-head
+    p.modal-card-title(v-t="{ path: 'level_delete_confirm_title', args: { name: level.title } }")
+  section.modal-card-body
     i18n(path="level_delete_confirm_content1" tag="p")
       b(v-text="level.title") ({{level.uid}})
     p(v-t="{ path: 'level_delete_confirm_content2', args: { count: level.plays }}")
@@ -14,7 +12,7 @@
       slot="footer"
       :value="level.uid"
       :button-title="$t('delete_btn')"
-      button-type="danger"
+      button-type="is-danger"
       @click="submit"
       :loading="loading"
     )
@@ -25,18 +23,18 @@ import ActionConfirm from './ActionConfirm'
 export default {
   name: 'VisibilityModal',
   components: { ActionConfirm },
+  props: {
+    level: {
+      type: Object,
+      required: true,
+    }
+  },
   data: () => ({
-    modalVisible: false,
-    level: null,
     loading: false,
   }),
   methods: {
-    show(level) {
-      this.level = level
-      this.modalVisible = true
-    },
     submit() {
-      this.$emit('change', this.level)
+      this.$emit('submit', this)
     },
   },
   i18n: {

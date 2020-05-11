@@ -1,15 +1,15 @@
 <template>
   <div class="action-confirm">
-    <a-input v-model="userInput" :placeholder="value" />
-    <a-button
-      block
+    <b-input v-model="userInput" :placeholder="value" />
+    <b-button
+      expanded
       :disabled="userInput !== value"
       :loading="loading"
       :type="buttonType"
       @click="$emit('click', $event)"
     >
       {{ buttonTitle }}
-    </a-button>
+    </b-button>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     },
     buttonType: {
       type: String,
-      default: 'primary',
+      default: 'is-primary',
     },
     value: {
       type: String,
@@ -40,9 +40,14 @@ export default {
 }
 </script>
 
-<style>
-.action-confirm .ant-input {
-  margin-bottom: 0.5rem;
-  text-align: center;
+<style lang="scss">
+.action-confirm {
+  margin-top: 1rem;
+  .control {
+    margin-bottom: 0.5rem;
+    .input {
+      text-align: center;
+    }
+  }
 }
 </style>
