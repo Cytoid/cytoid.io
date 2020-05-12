@@ -1,6 +1,5 @@
 <template lang="pug">
   div
-    visibility-modal(ref="visibilityModal" @change="sendVisibilityReq")
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p Upload
     upload-level
@@ -34,13 +33,7 @@
                   li: a(@click="openDeleteModal(props.row)")
                     font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
           b-table-column(label="Visibility")
-            b-dropdown
-              button.button(slot="trigger")
-                | {{ props.row.state }}
-                b-icon(icon="caret-down")
-              b-dropdown-item(value="PUBLIC") Public
-              b-dropdown-item(value="PRIVATE") Private
-              b-dropdown-item(value="UNLISTED") Unlisted
+            visibility-select(:value="props.row.state" @change="openChangeVisibilityModal(props.row, $event)")
           b-table-column(label="Downloads") {{ props.row.downloads }}
           b-table-column(label="Plays") {{ props.row.plays }}
           b-table-column(label="Rating")
@@ -55,12 +48,11 @@ import gql from 'graphql-tag'
 import UploadLevel from '@/components/studio/UploadLevel'
 import VisibilityModal from '@/components/studio/VisibilityModal'
 import DeleteModal from '@/components/studio/DeleteModal'
-import VisibilitySelect from '@/components/studio/VisibilitySelect'
+import VisibilitySelect from '../../components/studio/VisibilitySelect'
 export default {
   components: {
-    UploadLevel,
-    VisibilityModal,
     VisibilitySelect,
+    UploadLevel,
   },
   data() {
     return {
@@ -90,11 +82,26 @@ export default {
         },
         component: DeleteModal,
         hasModalCard: true,
-        trapFocus: true
+        trapFocus: true,
+        onCancel: () => {
+          this.deleteModal = null
+        }
       })
     },
-    changeVisibility(level, visibility) {
-      this.$refs.visibilityModal.show(level, visibility)
+    openChangeVisibilityModal(level, visibility) {
+      this.visibilityModal = this.$buefy.modal.open({
+        parent: this,
+        props: { level, value: visibility },
+        events: {
+          submit: this.setLevelVisibility
+        },
+        component: VisibilityModal,
+        hasModalCard: true,
+        trapFocus: true,
+        onCancel: () => {
+          this.visibilityModal = null
+        }
+      })
     },
     deleteLevel(modal) {
       const level = modal.level
@@ -124,19 +131,32 @@ export default {
           modal.loading = false
         })
     },
-    sendVisibilityReq([level, val]) {
-      this.$refs.visibilityModal.loading = true
-      this.$axios
-        .patch('/levels/' + level.uid, { published: val })
+    setLevelVisibility(modal) {
+      const level = modal.level
+      modal.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation UpdateLevel($id: ID!, $input: UpdateLevelInput!) {
+          updateLevel(id: $id, input: $input)
+        }`,
+        variables: {
+          id: level.id,
+          input: {
+            state: modal.value
+          }
+        }
+      })
         .then(() => {
-          level.published = val
-          this.$refs.visibilityModal.modalVisible = false
+          this.visibilityModal.close()
+          this.visibilityModal = null
+          level.state = modal.value
+          this.$buefy.toast.open({
+            message: level.title + ' visibility updated!',
+            type: 'is-success',
+          })
         })
-        .catch((error) => {
-          this.handleErrorToast(error)
-        })
+        .catch(this.handleErrorToast)
         .then(() => {
-          this.$refs.visibilityModal.loading = false
+          modal.loading = false
         })
     },
     handleTableChange(pagination, filters, sorter) {
@@ -161,6 +181,9 @@ export default {
           window.scrollTo(0, 0)
         })
     },
+  },
+  i18n: {
+    key: 'studio'
   }
 }
 </script>

@@ -1,33 +1,31 @@
 <template lang="pug">
-a-modal(
-  :title="title"
-  v-model="modalVisible"
-  v-if="level && modalVisible"
-  :closable="false"
-)
-  template(v-if="value === 2")
-    p(v-t="'level_visibility_public_title'")
-    i18n(path="level_visibility_public_content" tag="p")
-      nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{$t('tos')}}
-      nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }") {{$t('dmca')}}
-  template(v-if="value === 1")
-    p(v-t="'level_visibility_unlisted_title'")
-    i18n(path="level_visibility_unlisted_content" tag="p")
-      b(v-text="level.title")
-  template(v-if="value === 0")
-    p(v-t="'level_visibility_private_title'")
-    i18n(path="level_visibility_private_content" tag="p")
-      b(v-text="level.title")
-  i18n(path="level_visibility_content" tag="p")
-    b(v-text="level.uid" style="color: red;")
-  action-confirm(
-    slot="footer"
-    :value="level.uid"
-    :button-title="this.$t(['visibility_action_private', 'visibility_action_unlist', 'visibility_action_publish'][value])"
-    :button-type="['danger', 'dashed', 'primary'][value]"
-    @click="submit"
-    :loading="loading"
-  )
+.modal-card
+  header.modal-card-head
+    p.modal-card-title(v-text="title")
+  section.modal-card-body
+    template(v-if="value === 'PUBLIC'")
+      p(v-t="'level_visibility_public_title'")
+      i18n(path="level_visibility_public_content" tag="p")
+        nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{$t('tos')}}
+        nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }") {{$t('dmca')}}
+    template(v-else-if="value === 'UNLISTED'")
+      p(v-t="'level_visibility_unlisted_title'")
+      i18n(path="level_visibility_unlisted_content" tag="p")
+        b(v-text="level.title")
+    template(v-else-if="value === 'PRIVATE'")
+      p(v-t="'level_visibility_private_title'")
+      i18n(path="level_visibility_private_content" tag="p")
+        b(v-text="level.title")
+    i18n(path="level_visibility_content" tag="p")
+      b(v-text="level.uid" style="color: red;")
+    action-confirm(
+      slot="footer"
+      :value="level.uid"
+      :button-title="this.$t({'PRIVATE': 'visibility_action_private', 'UNLISTED': 'visibility_action_unlist', 'PUBLIC': 'visibility_action_publish'}[value])"
+      :button-type="{'PRIVATE': 'is-danger', 'UNLISTED': 'is-warning', 'PUBLIC': 'is-success'}[value]"
+      @click="submit"
+      :loading="loading"
+    )
 </template>
 
 <script>
@@ -35,30 +33,28 @@ import ActionConfirm from './ActionConfirm'
 export default {
   name: 'VisibilityModal',
   components: { ActionConfirm },
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+    level: {
+      type: Object,
+      required: true,
+    }
+  },
   data: () => ({
-    modalVisible: false,
-    level: null,
-    value: null,
     loading: false,
   }),
   computed: {
     title() {
       const title = this.level.title
-      return this.$t([
-        'level_visibility_title_private',
-        'level_visibility_title_unlisted',
-        'level_visibility_title_public'
-      ][this.value], title)
+      return this.$t('level_visibility_title_' + this.value.toLowerCase(), { title })
     },
   },
   methods: {
-    show(level, visibility) {
-      this.level = level
-      this.value = [false, null, true].indexOf(visibility)
-      this.modalVisible = true
-    },
     submit() {
-      this.$emit('change', [this.level, [false, null, true][this.value]])
+      this.$emit('submit', this)
     },
   },
   i18n: {

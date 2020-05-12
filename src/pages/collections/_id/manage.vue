@@ -28,7 +28,6 @@
 import gql from 'graphql-tag'
 import ResourceUpload from '@/components/ResourceUpload'
 import TagInput from '@/components/TagInput'
-import VisibilitySelect from '@/components/studio/VisibilitySelect'
 import { handleErrorBlock } from '../../../plugins/antd'
 const query = gql`query FetchCollection($uid: String!) {
   collection(uid: $uid) {
@@ -61,7 +60,6 @@ export default {
   components: {
     ResourceUpload,
     TagInput,
-    VisibilitySelect,
   },
   data() {
     return {
