@@ -7,8 +7,14 @@
       p Manage
     .box
       b-table(
+        paginated
+        backend-pagination
+        :total="levels_pagination.total"
+        :per-page="levels_pagination.pageSize"
+        :current-page="levels_pagination.current + 1"
         :data="levels"
         :loading="levels_loading"
+        @page-change="handlePageChange"
       )
         template(slot="empty")
           section.section
@@ -60,8 +66,7 @@ export default {
       levels_pagination: {
         pageSize: 10,
         total: 0,
-        showTotal: (total, range) => `${total} levels (${range.join('-')})`,
-        current: 1,
+        current: 0,
       },
       levels_loading: false,
     }
@@ -159,8 +164,8 @@ export default {
           modal.loading = false
         })
     },
-    handleTableChange(pagination, filters, sorter) {
-      this.levels_pagination = pagination
+    handlePageChange(page) {
+      this.levels_pagination.current = page - 1
       this.fetchLevels()
     },
     fetchLevels() {
@@ -168,7 +173,7 @@ export default {
       this.$axios.get('/levels', {
         params: {
           owner: this.$store.state.user.id,
-          page: this.levels_pagination.current - 1,
+          page: this.levels_pagination.current,
           limit: this.levels_pagination.pageSize,
           sort: 'creation_date',
           order: 'desc'
@@ -189,7 +194,7 @@ export default {
 </script>
 
 <style lang="scss">
-.is-studio-table-thumbnail {
+.is-studio-table-thumbnail img {
   transition: 0.2s $hoverEasing;
   width: 128px;
   height: 72px;
@@ -197,5 +202,6 @@ export default {
    filter: brightness(50%);
   }
   border-radius: $radius;
+  overflow: hidden;
 }
 </style>
