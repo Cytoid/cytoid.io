@@ -42,18 +42,24 @@ export default {
         extreme: 'EX',
       }[name]
     }
-    return (<a-popover placement="top" title="" {...context.data}>
+    return (<b-dropdown hoverable position="is-top-right" class="difficulty-badge-dropdown">
       <p slot="content" style="margin-bottom: 0; padding: 8px 16px; color: hsla(226, 68%, 6%, 1);">{value.notesCount} notes</p>
-      <div class={classes}>
+      <div class={classes} slot="trigger">
         {!context.props.ball && <span class="title">{value.name || convertedDifficultyName(value.type)}</span>}
         <span class="level">{str}</span>
       </div>
-    </a-popover>)
+      <b-dropdown-item custom paddingless>
+        <box>{value.notesCount} notes</box>
+      </b-dropdown-item>
+    </b-dropdown>)
   },
 }
 </script>
 
 <style lang="scss">
+  .difficulty-badge-dropdown {
+    z-index: 10;
+  }
   .difficulty-badge {
     user-select: none;
     &.badge {

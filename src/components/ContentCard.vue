@@ -41,19 +41,19 @@ export default {
 }
 </script>
 
-<style lang="less">
-@card-background-gutter: 1rem;
+<style lang="scss">
+$card-background-gutter: 1rem;
 .content-card-wrap {
   position: relative;
   width: 100%;
   padding-top: 62.5%;
   &:hover {
     .content-card {
-      transition: 0.4s @hoverEasing, box-shadow 0.4s @hoverEasing;
-      box-shadow: @ele3;
+      transition: 0.4s $hoverEasing, box-shadow 0.4s $hoverEasing;
+      box-shadow: $ele3;
     }
     .content-card-bg {
-      transition: 0.4s @hoverEasing, opacity 0.4s @hoverEasing;
+      transition: 0.4s $hoverEasing, opacity 0.4s $hoverEasing;
       transform: scale(1.02, 1.02);
       border-radius: 4px;
       opacity: 0.8;
@@ -69,8 +69,8 @@ export default {
   background-color: #333;
   overflow: hidden;
   border-radius: 4px;
-  box-shadow: @ele2; //rgba(0, 0, 0, 0.66) 0 px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
-  transition: 0.2s @returnEasing;
+  box-shadow: $ele2; //rgba(0, 0, 0, 0.66) 0 px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
+  transition: 0.2s $returnEasing;
   &:active {
     transform: scale(0.98, 0.98);
   }
@@ -88,15 +88,15 @@ export default {
   .content-card-bg {
     opacity: 0.5;
     position: absolute;
-    top: -@card-background-gutter;
-    left: -@card-background-gutter;
+    top: -$card-background-gutter;
+    left: -$card-background-gutter;
     width: 100%;
     height: 100%;
-    padding: @card-background-gutter;
+    padding: $card-background-gutter;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    transition: 0.2s @returnEasing, opacity 0.2s @returnEasing;
+    transition: 0.2s $returnEasing, opacity 0.2s $returnEasing;
     pointer-events: none;
     box-sizing: unset;
   }
@@ -129,7 +129,7 @@ export default {
         margin-left: 0;
         margin-bottom: 4px;
         line-height: 1.1;
-        text-shadow: @text-ele;
+        text-shadow: $text-ele;
         user-select: none;
       }
       h1.title {
