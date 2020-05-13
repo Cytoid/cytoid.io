@@ -1,7 +1,7 @@
 <template lang="pug">
 .section
+  .heading Create a new collection
   .box
-    .card-heading Create a new collection
     form(@submit.prevent="createNew")
       b-field(label="UID")
         b-input(v-model="form.uid")

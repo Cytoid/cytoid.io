@@ -1,7 +1,6 @@
 <template lang="pug">
-div
-  div(class="card-pre-header")
-    p(v-t="'email_title'")
+.section
+  .heading(v-t="'email_title'")
   .box(style="position: relative; overflow: hidden;")
     .media(v-for="(email, index) in emails")
       .media-content {{ email.address }}

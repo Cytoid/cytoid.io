@@ -1,52 +1,52 @@
 <template lang="pug">
   div
-    div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
-      p Upload
-    upload-level
-    div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
-      p Manage
-    .box
-      b-table(
-        paginated
-        backend-pagination
-        :total="levels_pagination.total"
-        :per-page="levels_pagination.pageSize"
-        :current-page="levels_pagination.current + 1"
-        :data="levels"
-        :loading="levels_loading"
-        @page-change="handlePageChange"
-      )
-        template(slot="empty")
-          section.section
-            .content.has-text-centered
-              font-awesome-icon(icon="empty-set" size="6x")
-              h4.is-size-4(style="margin-top: 3rem;") Nothing Here
-        template(slot-scope="props")
-          b-table-column(label="Level")
-            .media
-              .media-left
-                nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'levels-id', params: { id: props.row.uid }}")
-                  img(:src="props.row.cover.thumbnail")
-              .media-content
-                .content
-                  h4(v-text="props.row.title")
-                  p.is-size-7.has-text-grey ID: {{ props.row.uid }}
-                ul.action-buttons
-                  li: a(:href="downloadURL(props.row)")
-                    font-awesome-icon(:icon="['fas', 'download']" fixed-width)
-                  li: nuxt-link(:to="{name: 'levels-id-manage', params: { id: props.row.uid }}")
-                    font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
-                  li: a(@click="openDeleteModal(props.row)")
-                    font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
-          b-table-column(label="Visibility")
-            visibility-select(:value="props.row.state" @change="openChangeVisibilityModal(props.row, $event)")
-          b-table-column(label="Downloads") {{ props.row.downloads }}
-          b-table-column(label="Plays") {{ props.row.plays }}
-          b-table-column(label="Rating")
-            .content(style="white-space: nowrap;")
-              font-awesome-icon(:icon="['fas', 'star']" style="margin-right: 0.5rem;")
-              | {{ props.row.rating ? (Math.floor(props.row.rating * 0.5 * 100) / 100).toFixed(2) : 'N/A' }}
-          b-table-column(label="Date") {{ $dateFormatCalendar(props.row.creationDate) }}
+    .section
+      .heading Upload
+      upload-level
+    .section
+      .heading Manage
+      .box
+        b-table(
+          paginated
+          backend-pagination
+          :total="levels_pagination.total"
+          :per-page="levels_pagination.pageSize"
+          :current-page="levels_pagination.current + 1"
+          :data="levels"
+          :loading="levels_loading"
+          @page-change="handlePageChange"
+        )
+          template(slot="empty")
+            section.section
+              .content.has-text-centered
+                font-awesome-icon(icon="empty-set" size="6x")
+                h4.is-size-4(style="margin-top: 3rem;") Nothing Here
+          template(slot-scope="props")
+            b-table-column(label="Level")
+              .media
+                .media-left
+                  nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'levels-id', params: { id: props.row.uid }}")
+                    img(:src="props.row.cover.thumbnail")
+                .media-content
+                  .content
+                    h4(v-text="props.row.title")
+                    p.is-size-7.has-text-grey ID: {{ props.row.uid }}
+                  ul.action-buttons
+                    li: a(:href="downloadURL(props.row)")
+                      font-awesome-icon(:icon="['fas', 'download']" fixed-width)
+                    li: nuxt-link(:to="{name: 'levels-id-manage', params: { id: props.row.uid }}")
+                      font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
+                    li: a(@click="openDeleteModal(props.row)")
+                      font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
+            b-table-column(label="Visibility")
+              visibility-select(:value="props.row.state" @change="openChangeVisibilityModal(props.row, $event)")
+            b-table-column(label="Downloads") {{ props.row.downloads }}
+            b-table-column(label="Plays") {{ props.row.plays }}
+            b-table-column(label="Rating")
+              .content(style="white-space: nowrap;")
+                font-awesome-icon(:icon="['fas', 'star']" style="margin-right: 0.5rem;")
+                | {{ props.row.rating ? (Math.floor(props.row.rating * 0.5 * 100) / 100).toFixed(2) : 'N/A' }}
+            b-table-column(label="Date") {{ $dateFormatCalendar(props.row.creationDate) }}
 </template>
 
 <script>

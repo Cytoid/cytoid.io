@@ -1,7 +1,7 @@
 <template lang="pug">
   div
-    h2(v-if="$route.query.provider" v-t="{ path: 'title_external', args: { provider: $route.query.provider } }")
-    h2(v-else v-t="'title'")
+    h4.is-size-4(v-if="$route.query.provider" v-t="{ path: 'title_external', args: { provider: $route.query.provider } }")
+    h4.is-size-4(v-else v-t="'title'")
     ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(signUp)")
       ValidationProvider(slim
         rules="uid|required"
@@ -49,8 +49,9 @@
               nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{ $t('tos') }}
       captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
       b-button(native-type="submit" expanded :loading="loading" style="margin-bottom: 1rem;" :disabled="invalid || !captchaToken") {{$t('join_btn')}}
-      h2(v-t="'existing_user_title'")
-      p(v-t="'existing_user_content'")
+      .divider OR
+      h4.is-size-4(v-t="'existing_user_title'")
+      p(v-t="'existing_user_content'" style="margin-bottom: 1rem;")
       nuxt-link.button.is-fullwidth(:to="{ name: 'session-login', query: { origin: $route.query.origin} }" replace) {{$t('login_btn')}}
 </template>
 

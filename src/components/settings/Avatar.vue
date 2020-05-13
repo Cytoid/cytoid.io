@@ -1,7 +1,6 @@
 <template lang="pug">
-div
-  .card-pre-header
-    p(v-t="'avatar_title'")
+.section
+  .heading(v-t="'avatar_title'")
   .box
     b-field
       upload.avatar-upload(:background="avatarURL" type="avatar" @upload="avatarUploaded" icon)

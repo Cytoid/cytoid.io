@@ -25,7 +25,6 @@ $theme7: hsla(226, 68%, 87%, 1);
 
 $primary: $theme4;
 $info: $theme5;
-$link: $theme3;
 $primary-invert: findColorInvert($primary);
 $colors: (
   "white": ($white, $black),
@@ -56,6 +55,9 @@ $text-ele: 0px 2px 4px rgba(0, 0, 0, 0.2);
 $white-ter:    hsl(0, 0%, 71%);
 $white-bis:    hsl(0, 0%, 86%);
 $white:        hsl(0, 0%, 100%);
+
+$link: $white-bis;
+$link-hover: $white;
 
 $body-background-color: $grey-dark;
 $body-color: $white;

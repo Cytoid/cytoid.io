@@ -32,23 +32,23 @@
         .box.statistics-card
           .columns.is-multiline
             .column.is-one-third
-              p.card-heading(v-t="'total_ranked_plays'")
-              p.card-em-text(v-text="profile.activity.totalRankedPlays")
+              p.subtitle(v-t="'total_ranked_plays'")
+              p.statistics-card-num(v-text="profile.activity.totalRankedPlays")
             .column.is-one-third
-              p.card-heading(v-t="'total_cleared_notes'")
-              p.card-em-text(v-text="commaSeparated(profile.activity.clearedNotes)")
+              p.subtitle(v-t="'total_cleared_notes'")
+              p.statistics-card-num(v-text="commaSeparated(profile.activity.clearedNotes)")
             .column.is-one-third
-              p.card-heading(v-t="'highest_max_combo'")
-              p.card-em-text(v-text="commaSeparated(profile.activity.maxCombo)")
+              p.subtitle(v-t="'highest_max_combo'")
+              p.statistics-card-num(v-text="commaSeparated(profile.activity.maxCombo)")
             .column.is-one-third
-              p.card-heading(v-t="'avg_ranked_accuracy'")
-              p.card-em-text(v-text="(profile.activity.averageRankedAccuracy * 100).toFixed(2) + '%'")
+              p.subtitle(v-t="'avg_ranked_accuracy'")
+              p.statistics-card-num(v-text="(profile.activity.averageRankedAccuracy * 100).toFixed(2) + '%'")
             .column.is-one-third
-              p.card-heading(v-t="'total_ranked_score'")
-              p.card-em-text(v-text="commaSeparated(profile.activity.totalRankedScore)")
+              p.subtitle(v-t="'total_ranked_score'")
+              p.statistics-card-num(v-text="commaSeparated(profile.activity.totalRankedScore)")
             .column.is-one-third
-              p.card-heading(v-t="'total_play_time'")
-              p.card-em-text(v-text="profile.activity.totalPlayTime")
+              p.subtitle(v-t="'total_play_time'")
+              p.statistics-card-num(v-text="profile.activity.totalPlayTime")
           .tabs.is-small.is-toggle: ul
             li(
               v-for="[title, mode] in [['chart_radio_ranked_plays', 'activity'], ['chart_radio_rating', 'rating'], ['chart_radio_avg_accuracy', 'accuracy']]"
@@ -60,13 +60,14 @@
           line-chart(v-if="profile.timeseries" :data="profile.timeseries" :mode="chartMode")
         .box.levels-box(v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)")
           .levels-box-container.has-featured(v-if="profile.user.featuredLevels.length > 0")
-            p.heading(v-t="'levels_title'")
+            p.subtitle(v-t="'levels_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.featuredLevels" :key="level.id" :value="level")
             nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
               b-icon(icon="angle-double-right")
               span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
           .levels-box-container(v-if="profile.user.levels.length > 0")
+            p.subtitle(v-t="'levels_title'" v-if="profile.user.featuredLevels.length === 0")
             .level-card-container.small
               level-card(v-for="level in profile.user.levels" :key="level.id" :value="level")
             nuxt-link.button.is-fullwidth(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
@@ -74,7 +75,7 @@
               span(v-t="{ path: 'levels_all_btn', args: { count: profile.user.levelsCount }}")
 
         .box(v-if="profile && profile.user && profile.user.collections && profile.user.collections.length > 0")
-          p.heading(style="margin-bottom: 16px;" v-t="'collections_title'")
+          p.subtitle(style="margin-bottom: 16px;" v-t="'collections_title'")
           .level-card-container.small.regular-levels-container
             collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
           a.button.is-fullwidth(
@@ -244,6 +245,9 @@ export default {
 <style lang="scss" scoped>
   .statistics-card {
     background: linear-gradient(to right bottom, $theme4, $theme5);
+    .statistics-card-num {
+      font-size: 2rem;
+    }
   }
 
   .header-container {

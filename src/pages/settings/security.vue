@@ -1,8 +1,7 @@
 <template lang="pug">
 div
   .section
-    .card-pre-header
-      p(v-t="'password_field_label'")
+    .heading(v-t="'password_field_label'")
     .box
       ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(submit)")
         ValidationProvider(slim
@@ -41,8 +40,7 @@ div
         b-button.is-pulled-right(native-type="submit" :loading="loading") {{$t('submit_btn')}}
         .is-clearfix
   .section
-    .card-pre-header
-      p(v-t="'third_party_sign_on'")
+    .heading(v-t="'third_party_sign_on'")
     .box
       .media.external-login(v-for="provider in providers" :key="provider.id")
         .media-content

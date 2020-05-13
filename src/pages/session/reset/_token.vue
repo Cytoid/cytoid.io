@@ -1,7 +1,7 @@
 <template lang="pug">
   div(v-if="state === 0")
-    h2.has-text-centered Reset your password
-    h1.has-text-centered: font-awesome-icon(icon="file-archive")
+    h4.is-size-4.has-text-centered Reset your password
+    h1.has-text-centered.is-size-1: font-awesome-icon(icon="file-archive")
     ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(submit)")
       ValidationProvider(slim
       rules="password|required"
@@ -25,12 +25,12 @@
           b-input(v-model="form.confirm" type="password")
       b-button(native-type="submit" expanded :loading="loading") {{$t('submit_btn')}}
   div(v-else-if="state === 1")
-    h2.has-text-centered Success!
-    h1.has-text-centered: font-awesome-icon(icon="check-circle")
+    h4.is-size-4.has-text-centered Success!
+    h1.has-text-centered.is-size-1: font-awesome-icon(icon="check-circle")
     nuxt-link.button.is-fullwidth(:to="{ name: 'session-login' }") {{$t('login_btn')}}
   div(v-else)
-    h2.has-text-centered Oops...
-    h1.has-text-centered: font-awesome-icon(icon="exclamation-triangle")
+    h4.is-size-4.has-text-centered Oops...
+    h1.has-text-centered.is-size-1: font-awesome-icon(icon="exclamation-triangle")
     p This is a bit awkward, but the link expired.
     nuxt-link.button.is-fullwidth(to="/session/reset") Try Again
 </template>

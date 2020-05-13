@@ -1,16 +1,16 @@
 <template lang="pug">
 .has-text-centered
   template(v-if="sent")
-    h2 Sent
-    h1: font-awesome-icon(icon="paper-plane")
+    h4.is-size-4.has-text-centered  Sent
+    h1.is-size-1.has-text-centered: font-awesome-icon(icon="paper-plane")
     p Please check your inbox to continue
     captcha(v-model="captchaCode" size="compact")
     b-button(@click="resend" :loading="loading" :disabled="time>0 || !captchaCode" expanded)
       | Resend
       span(v-if="time>0") ({{time}})
   template(v-else)
-    h2.has-text-centered Reset your password
-    h1.has-text-centered 🤔
+    h4.is-size-4.has-text-centered Reset your password
+    h1.has-text-centered.is-size-1 🤔
     p Enter your email address and we will send you a link to reset your password.
     ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(submit)")
       ValidationProvider(slim

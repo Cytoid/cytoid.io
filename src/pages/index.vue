@@ -14,16 +14,16 @@
       .columns
         .column.is-two-thirds-desktop.is-three-fifths-tablet
           #posts.box.is-gradient
-            p.card-heading(v-t="'news_title'")
+            p.title(v-t="'news_title'")
             post-card.post-card(v-for="post in posts" :key="post.slug" :value="post")
         .column.is-one-third-desktop.is-two-fifths-tablet
           #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")
-            p.card-heading(v-t="'featured_collection_title'")
+            p.title(v-t="'featured_collection_title'")
             collection-simple-card(:value="data.gettingStarted")
           nuxt-link.button.is-browse.is-large.is-fullwidth.is-title(:to="{ name: 'collections' }" style="margin-bottom: 2rem;")
             span(v-t="{ path: 'collection_all_btn', args: { count: data && data.collectionsCount }}")
           #index-featured-level.box.is-gradient(v-if="data.latestFeaturedLevels && data.latestFeaturedLevels[0]")
-            p.card-heading(v-t="'featured_level_title'")
+            p.title(v-t="'featured_level_title'")
             level-card.level-card(:value="data.latestFeaturedLevels[0]")
           nuxt-link.button.is-browse.is-large.is-fullwidth.is-title(:to="{ name: 'levels' }" style="margin-bottom: 2rem;")
             span(v-t="{ path: 'level_all_btn', args: { count: data.levelsCount }}")
@@ -58,17 +58,17 @@
               style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);"
               v-t="{path: 'connect_discord_subtitle', args: { count: data.discordOnlineCount }}"
             )
-            p(style="margin-top: 8px" v-t="'connect_discord_content'")
+            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;" v-t="'connect_discord_content'")
             b-button(expanded href="https://discord.gg/cytoid" tag="a" icon-left="sign-in" type="is-transparent")
               span(v-t="'connect_discord_btn'")
           #patron.box.is-gradient
             img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
-            p(style="margin-top: 24px" v-t="'connect_patreon_content'")
+            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;"  v-t="'connect_patreon_content'")
             b-button(expanded href="https://www.patreon.com/tigerhix" tag="a" icon-left="heart" type="is-transparent")
               span Become a patron!
           #afdian.box.is-gradient
             img(:src="require('@/assets/images/afdian.png')" style="width: 110px;")
-            p(style="margin-top: 24px")
+            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;" )
               | Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑...
             b-button(expanded href="https://afdian.net/@tigerhix" tag="a" icon-left="mug-hot" type="is-transparent")
               span 请作者喝咖啡
@@ -364,10 +364,6 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  .card-heading {
-    color: white;
-    margin: .75rem;
-  }
   &#index-featured-collection {
     --box-background-gradient: linear-gradient(to right bottom, #acb6e5, #86fde8);
     padding: .75rem;

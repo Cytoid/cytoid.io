@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    h2(v-t="{ path: 'link_title', args: { provider } }")
+    h4.is-size-4(v-t="{ path: 'link_title', args: { provider } }")
     p(v-t="'link_subtitle'")
     ValidationObserver(v-slot="{ invalid, handleSubmit }" ref="validator" slim): form(@submit.prevent="handleSubmit(createNew ? create : link)")
       ValidationProvider(

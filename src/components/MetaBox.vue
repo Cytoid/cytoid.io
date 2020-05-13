@@ -1,15 +1,22 @@
+<script>
 export default {
   functional: true,
+  props: {
+    metadata: {
+      type: Object,
+      required: true,
+    }
+  },
   render(h, context) {
     const metadata = context.props.metadata
-    return (<div class="box">
+    return (<div class="box box-metadata">
       {
         ['artist', 'illustrator', 'charter', 'storyboarder', 'cover']
           .map((key) => {
             const data = metadata[key]
             return data && <div class="box-section">
-              <p class="heading">{key}</p>
-              <p class="card-em-text">{data.name}</p>
+              <p class="subtitle">{key}</p>
+              <p class="artist-name">{data.name}</p>
               {
                 data.localized_name && <p class="card-em-text">{data.localized_name}</p>
               }
@@ -21,10 +28,13 @@ export default {
       }
     </div>)
   },
-  props: {
-    metadata: {
-      type: Object,
-      required: true,
-    }
+}
+</script>
+
+<style lang="scss">
+.box-metadata {
+  .artist-name {
+    font-size: 2rem;
   }
 }
+</style>

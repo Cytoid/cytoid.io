@@ -1,8 +1,8 @@
 <template lang="pug">
   .section: .container(v-if="level" style="margin-top: 256px;")
     captcha(size="invisible" ref="captcha")
-    h1.text-ele.is-size-1(v-text="level.title")
-    h2.text-ele.is-size-5(
+    h1.is-size-1(v-text="level.title")
+    h5.is-size-5(
       style="color: rgba(255, 255, 255, 0.9); margin-bottom: 20px;"
       v-if="level.metadata.artist"
       v-text="level.metadata.artist.name"
