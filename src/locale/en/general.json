@@ -41,5 +41,11 @@
   "login_snack_bar": "Welcome back, {name}",
   "forgot_password_link_title": "Forgot my Password",
   "login_password_error": "Username or password mismatch!",
-  "login_username_error": "User does not exist!"
+  "login_username_error": "User does not exist!",
+  "visibility_status_unlisted": "Unlisted",
+  "visibility_status_public": "Public",
+  "visibility_status_private": "Private",
+  "visibility_action_unlist": "Unlist",
+  "visibility_action_publish": "Publish",
+  "visibility_action_private": "Make Private"
 }

@@ -9,7 +9,7 @@ export default {
     }
     const value = ctx.props.value || 'PUBLIC'
     return <b-dropdown vOn:change={ctx.listeners.change}>
-      <button class="button" slot="trigger">
+      <button class="button" slot="trigger" type="button">
         <font-awesome-icon icon={data[value].icon} style={{ 'margin-right': '0.5rem' }} />
         {ctx.parent.$t(data[value].title)}
         <font-awesome-icon icon="caret-down" style={{ 'margin-left': '0.5rem' }} />

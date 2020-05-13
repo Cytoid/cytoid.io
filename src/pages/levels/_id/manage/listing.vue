@@ -7,16 +7,14 @@ div
       b-field(:label="$t('manage.tags_field')")
         tag-input(v-model="form.tags")
       b-field(:label="$t('manage.visibility_field')")
-        visibility-select(:value="form.published" bordered @change="form.published=$event")
-      a-button.card-button(
-        block
+        visibility-select(:value="form.state" @change="form.state = $event")
+      b-button.is-pulled-right(
         :loading="loading"
-        style="margin-top: 2rem;"
-        html-type="submit"
-        size="large"
+        native-type="submit"
       )
         font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
         span(v-t="'save_btn'")
+      .is-clearfix
   form.box(v-if="$store.state.user.role === 'admin' || $store.state.user.role === 'moderator'")
     b-field(grouped)
       b-field(:label="$t('manage.admin.censorship_title')")
@@ -31,15 +29,14 @@ div
         open-on-focus
         icon="tag"
         :placeholder="$t('manage.admin.category_placeholder')")
-    a-button.card-button(
+    b-button.is-pulled-right(
       block
       :loading="loading"
-      style="margin-top: 2rem;"
       @click="submit(adminForm)"
-      size="large"
     )
       font-awesome-icon(icon="save" fixed-width style="margin-right: 4px;")
       span(v-t="'save_btn'")
+    .is-clearfix
 </template>
 
 <script>
@@ -64,7 +61,7 @@ export default {
       form: {
         tags: this.value.tags,
         description: this.value.description,
-        published: this.value.published,
+        state: this.value.state,
       },
       adminForm: {
         censored: this.value.censored,

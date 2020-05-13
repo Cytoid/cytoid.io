@@ -16,8 +16,70 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
 import { handleErrorBlock } from '@/plugins/antd'
 import { Meta } from '@/utils'
+const query = gql`query FetchLevelForEditing($uid: String!) {
+  level(uid: $uid) {
+    id
+    uid
+    title
+    description
+    state
+    censored
+    size
+    tags
+    creationDate
+    modificationDate
+    category
+    owner {
+      id
+      uid
+      name
+      avatar { large }
+    }
+    charts {
+      difficulty
+      type
+      name
+      notesCount
+    }
+    metadata {
+      artist {
+        name
+        localized_name
+        url
+      }
+      illustrator {
+        name
+        localized_name
+        url
+      }
+      charter {
+        name
+        localized_name
+        url
+      }
+      storyboarder {
+        name
+        localized_name
+        url
+      }
+    }
+    rating {
+      average
+      total
+      distribution
+      rating
+    }
+    bundle {
+      musicPreview
+      backgroundImage {
+        original
+      }
+    }
+  }
+}`
 export default {
   layout: 'background',
   middleware: 'auth',
@@ -26,19 +88,23 @@ export default {
       level: null,
     }
   },
-  asyncData({ $axios, params, store, error }) {
-    return $axios.get('/levels/' + params.id)
-      .then((res) => {
-        const level = res.data
-        const user = store.state.user
-        if (level.owner.id !== user?.id && !(user?.role === 'admin' || user?.role === 'moderator')) {
-          error({ statusCode: 403, message: "You don't have the permission to edit this level!" })
-          return
-        }
-        store.commit('setBackground', { source: level.bundle.background })
-        return { level }
-      })
+  async asyncData({ app, $axios, params, store, error }) {
+    const user = store.state.user
+    const level = await app.apolloProvider.defaultClient.query({
+      query,
+      variables: {
+        uid: params.id
+      }
+    }).then(({ data }) => data?.level)
       .catch(err => handleErrorBlock(err, error))
+    if (!level) {
+      return error({ statusCode: 404, message: 'Level not found' })
+    }
+    if (level.owner.id !== user?.id && !(user?.role === 'admin' || user?.role === 'moderator')) {
+      return error({ statusCode: 403, message: "You don't have the permission to edit this level!" })
+    }
+    store.commit('setBackground', { source: level.bundle?.backgroundImage?.original })
+    return { level }
   },
   head() {
     return new Meta(this.level.title, this.level.description, 'Manage')
