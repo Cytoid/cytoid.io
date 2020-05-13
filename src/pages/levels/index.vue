@@ -2,36 +2,31 @@
 .section
   .container
     div(style="display: flex; flex-direction: row;")
-      div(style="margin-left: 4px; margin-right: 24px;")
-        p(class="card-heading" v-t="'sort_select_title'")
-        a-select(
-          :value="filters.sort"
-          style="width: 192px; top: -1px;"
+      b-field(:label="$t('sort_select_title')" :addons="false")
+        b-dropdown(:value="filters.sort" @change="handleSortSelector" :disabled="loading")
+          button.button(slot="trigger" slot-scope="{ active }")
+            | {{sortingCriteriaTitle(filters.sort)}}
+            font-awesome-icon(:icon="active ? 'caret-up' : 'caret-down'" style="margin-left: 0.5rem;")
+          b-dropdown-item(value="creation_date") {{$t('sort_select_upload_date')}}
+          b-dropdown-item(value="modification_date") {{$t('sort_select_modification_date')}}
+          b-dropdown-item(value="difficulty") {{$t('sort_select_difficulty')}}
+          b-dropdown-item(value="duration") {{$t('sort_select_duration')}}
+          b-dropdown-item(value="downloads") {{$t('sort_select_downloads')}}
+          b-dropdown-item(value="rating") {{$t('sort_select_rating')}}
+        b-button(
           :disabled="loading"
-          @change="handleSortSelector"
-        )
-          a-select-option(value="creation_date") {{$t('sort_select_upload_date')}}
-          a-select-option(value="modification_date") {{$t('sort_select_modification_date')}}
-          a-select-option(value="difficulty") {{$t('sort_select_difficulty')}}
-          a-select-option(value="duration") {{$t('sort_select_duration')}}
-          a-select-option(value="downloads") {{$t('sort_select_downloads')}}
-          a-select-option(value="rating") {{$t('sort_select_rating')}}
-        a-button(
-          :disabled="loading"
-          style="margin-left: 8px;"
+          style="margin-left: 1rem;"
           @click="handleOrderButton"
         )
           font-awesome-icon(:icon="filters.order === 'asc' ? 'sort-amount-up' : 'sort-amount-down'")
-      b-field(:label="$t('category_select_title')")
+      b-field(:label="$t('category_select_title')" style="margin-left: 1rem;")
         .field.has-addons
           b-radio-button(
-            size="is-small"
             type="is-white"
             :value="filters.category"
             @input="handleFilterSelector"
             native-value="all") {{$t('category_select_item_all')}}
           b-radio-button(
-            size="is-small"
             type="is-white"
             :value="filters.category"
             @input="handleFilterSelector"
@@ -132,6 +127,16 @@ export default {
     handleFilterSelector(value) {
       console.log(value)
       this.updateRoute({ category: value })
+    },
+    sortingCriteriaTitle(key) {
+      switch (key) {
+        case 'creation_date': return this.$t('sort_select_upload_date')
+        case 'modification_date': return this.$t('sort_select_modification_date')
+        case 'difficulty': return this.$t('sort_select_difficulty')
+        case 'duration': return this.$t('sort_select_duration')
+        case 'downloads': return this.$t('sort_select_downloads')
+        case 'rating': return this.$t('sort_select_rating')
+      }
     }
   },
   i18n: {

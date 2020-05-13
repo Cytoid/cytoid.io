@@ -5,20 +5,12 @@
     .columns
       .column.is-one-third
         .box
-          player-avatar(style="margin-bottom: 16px;" :player="owner")
           template(v-if="post.tags.length > 0")
             .card-heading Tags
             .tags
               .tag(v-for="tag in post.tags" :key="tag" v-text="tag")
           .card-heading Last updated
           .card-secondary-text(style="margin-bottom: 0px;") {{$dateFormatCalendar(post.published_date)}}, {{ $dateFromNow(post.published_date) }}
-        .box
-          p(class="card-heading") Cover art
-          p(class="card-em-text" style="margin-bottom: 4px;") {{ post.cover_artist }}
-          a(:href="makeLink(post.cover_artist_url)")
-            a-button(class="card-button" style="width: fit-content; margin-top: -2px; margin-bottom: 4px; padding-left: 12px; padding-right: 14px;")
-              font-awesome-icon(icon="link" fixed-width style="margin-right: 4px;")
-              span Source
       .column.is-two-thirds
         .box
           div(v-html="post.content")
@@ -57,10 +49,8 @@ export default {
       return
     }
     store.commit('setBackground', { source: postData.cover_art.data.full_url })
-    const ownerResponse = await $axios.get('/users/' + postData.owner)
     return {
       post: postData,
-      owner: ownerResponse.data
     }
   },
   methods: {

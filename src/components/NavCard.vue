@@ -25,7 +25,7 @@
       font-awesome-icon.icon(:icon="['fas', 'cog']")
       .title(v-t="'settings'")
   .section
-    a-button(class="card-button-light" style="width: 100%;" @click="logout")
+    button.button.is-fullwidth(@click="logout")
       font-awesome-icon(icon="sign-out" fixed-width style="margin-right: 4px;")
       span(v-t="'signout_btn'")
 </template>

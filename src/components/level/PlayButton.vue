@@ -1,22 +1,16 @@
-<template>
-  <button class="play-button" @click.stop="play">
-    <font-awesome-icon :icon="playing ? 'pause' : 'play'" fixed-width />
-    <a-progress
-      v-if="playing"
-      type="circle"
-      :percent="progress * 100"
-      :show-info="false"
-      :width="36"
-      stroke-line-cap="square"
-      stroke-color="#fff"
-    />
-    <audio ref="audio" :src="src" preload="none" @timeupdate="playbackUpdate" @ended="playbackEnded" />
-  </button>
-</template>
-
 <script>
 import Vue from 'vue'
 export const Bus = new Vue()
+
+function draw(size, progress) {
+  const margin = size * 0.025
+  const radius = (size / 2) - margin
+  const angle = progress * 2 * Math.PI - Math.PI / 2 // breakpoint angle in unit circle
+  return `\
+  M ${size / 2},${margin}\
+  A ${radius},${radius} 0 ${progress > 0.5 ? '1' : '0'} 1 ${size / 2 + radius * Math.cos(angle)}, ${size / 2 + radius * Math.sin(angle)}\
+  `
+}
 
 export default {
   props: {
@@ -67,7 +61,16 @@ export default {
       this.$refs.audio.pause()
       this.playing = false
     }
-  }
+  },
+  render(h) {
+    return <button class="play-button" vOn:click_stop={this.play}>
+      <font-awesome-icon icon={this.playing ? 'pause' : 'play'} fixed-width />
+      {this.playing && <svg class="play-button-progress" viewBox="0 0 36 36">
+        <path class="trail" d={draw(36, this.progress)}/>
+      </svg>}
+      <audio ref="audio" src={this.src} preload="none" vOn:timeupdate={this.playbackUpdate} vOn:ended={this.playbackEnded} />
+    </button>
+  },
 }
 </script>
 
@@ -88,14 +91,18 @@ export default {
      transform: scale(0.95, 0.95);
    }
   transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  .ant-progress {
-    display: block;
+  .play-button-progress {
     position: absolute;
-    top: -7px;
+    width: 36px;
+    height: 36px;
     left: -8px;
-  }
-  .ant-progress-circle-trail {
-    stroke: transparent;
+    top: -7px;
+    path.trail {
+      stroke-width: 2px;
+      stroke-linecap: round;
+      fill-opacity: 0;
+      stroke: white;
+    }
   }
 }
 </style>

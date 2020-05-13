@@ -6,17 +6,19 @@ footer.container.footer.has-text-centered
     li: a(href="https://github.com/Cytoid/" v-t="'status'")
     li: a(href="https://github.com/Cytoid/") GitHub
     li
-      a-dropdown(:trigger="['click']")
-        a.ant-dropdown-link
+      b-dropdown(
+        :value="parent.$store.state.locale"
+        position="is-top-right"
+        @change="key => parent.$store.commit('setLocale', key)"
+      )
+        a(slot="trigger")
           font-awesome-icon(icon="language" style="margin-right: 0.5rem;")
           span(v-t="'language'")
-        a-menu(
-          selectable
-          slot="overlay"
-          :selectedKeys="[parent.$store.state.locale]"
-          @select="({ key }) => parent.$store.commit('setLocale', key)"
-        )
-          a-menu-item(v-for="code in props.languages" :key="code") {{parent.$t('self', code)}}
+        b-dropdown-item(
+          v-for="code in props.languages"
+          :key="code"
+          :value="code"
+        ) {{parent.$t('self', code)}}
   p.
     #[strong Cytoid] built by
     #[strong Tiger Tang] and #[strong Zhixing Zhang].

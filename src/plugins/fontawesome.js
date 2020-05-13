@@ -11,7 +11,7 @@ import {
   faPuzzlePiece, faTimes, faChimney,
   faUserCog, faUserTie, faFileAlt,
   faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
-  faExclamationCircle, faCheck, faCaretDown, faEmptySet,
+  faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
 } from '@fortawesome/pro-solid-svg-icons'
 import {
   faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord,
@@ -32,6 +32,6 @@ export default function () {
     faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faTimes, faChimney,
     faUserCog, faUserTie, faFileAlt,
     faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
-    faExclamationCircle, faCheck, faCaretDown, faEmptySet,
+    faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
   )
 }
