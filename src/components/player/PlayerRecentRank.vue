@@ -43,18 +43,18 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
   .recent-rank {
     position: relative;
     border-radius: 4px;
-    border-left: 4px solid @theme5;
+    border-left: 4px solid $theme5;
     margin: 8px -8px;
     padding: 12px 24px 16px;
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
     overflow: hidden;
 
     &:hover {
-      border-left: 4px solid @theme6;
+      border-left: 4px solid $theme6;
     }
 
     &:hover .recent-rank-background {
@@ -63,26 +63,26 @@ export default {
   }
 
   .recent-rank.gold {
-    border-left: 4px solid @gold-record;
+    border-left: 4px solid $gold-record;
 
     &:hover {
-      border-left: 4px solid @gold-record;
+      border-left: 4px solid $gold-record;
     }
   }
 
   .recent-rank.silver {
-    border-left: 4px solid @silver-record;
+    border-left: 4px solid $silver-record;
 
     &:hover {
-      border-left: 4px solid @silver-record;
+      border-left: 4px solid $silver-record;
     }
   }
 
   .recent-rank.bronze {
-    border-left: 4px solid @bronze-record;
+    border-left: 4px solid $bronze-record;
 
     &:hover {
-      border-left: 4px solid @bronze-record;
+      border-left: 4px solid $bronze-record;
     }
   }
 
@@ -93,11 +93,11 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
   }
 
   .recent-rank-overlay {
-    .recent-rank-background;
+    @extend .recent-rank-background;
     background-color: rgba(0, 0, 0, 0.8);
   }
 </style>

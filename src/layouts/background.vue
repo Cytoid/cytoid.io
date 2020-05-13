@@ -44,13 +44,13 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
 .background-container {
   position: absolute;
   width: 100%;
   z-index: 0;
   overflow: hidden;
-  transition: 0.4s @hoverEasing;
+  transition: 0.4s $hoverEasing;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,6 +113,6 @@ export default {
   bottom: 0;
   width: 100%;
   height: 50%;
-  background-image: linear-gradient(to top, @body-background, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to top, $body-background-color, rgba(0, 0, 0, 0));
 }
 </style>

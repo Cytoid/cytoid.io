@@ -1,15 +1,4 @@
 import Vue from 'vue'
-import {
-  Button, Divider, Upload, Select,
-  Row, Col, Spin, Table,
-  Pagination, Rate, Radio,
-  Input, InputNumber, Form,
-  Popover, AutoComplete,
-  Menu, Dropdown, Tooltip,
-  Progress, Checkbox, List, DatePicker,
-  Modal,
-  message
-} from 'ant-design-vue'
 import Avatar from '@/components/Avatar'
 
 function getMessage(err) {
@@ -30,40 +19,6 @@ export function handleErrorBlock(err, handler) {
 }
 
 export default function ({ store, $axios, error }) {
-  [
-    Button,
-    Divider,
-    Upload,
-    Upload.Dragger,
-    Select,
-    Select.Option,
-    Row, Col,
-    Spin,
-    Table,
-    Pagination,
-    Rate,
-    Radio.Group,
-    Radio.Button,
-    Input,
-    InputNumber,
-    Form,
-    Form.Item,
-    Popover,
-    Menu,
-    Menu.Item,
-    AutoComplete,
-    Dropdown,
-    Tooltip,
-    Progress,
-    Checkbox,
-    List,
-    List.Item,
-    DatePicker,
-    Modal,
-  ].forEach(comp => Vue.component(comp.name, comp))
-
-  Vue.prototype.$message = message
-
   Vue.component('avatar', Avatar)
 
   // Global error handlers

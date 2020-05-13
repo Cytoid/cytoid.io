@@ -42,9 +42,9 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
 .collection-dock {
-  background: @component-background;
+  background: $grey;
   border-radius: 6px;
   overflow: hidden;
   margin: 0;
@@ -103,7 +103,7 @@ export default {
       .collection-dock-more-card {
         width: 100%;
         height: 100%;
-        background: @shade4;
+        background: $grey-light;
         border-radius: 4px;
         display: flex;
         flex-direction: column;

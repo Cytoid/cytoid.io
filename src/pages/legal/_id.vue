@@ -29,15 +29,15 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
 .page-content blockquote {
   font-style: italic;
-  color: @shade5;
+  color: $grey-lighter;
   line-height: 0.5;
   position: relative;
   padding-left: 1.5rem;
   &:before {
-    background-color: @shade5;
+    background-color: $grey-lighter;
     content: '';
     position: absolute;
     left: 0;

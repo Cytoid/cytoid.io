@@ -378,13 +378,13 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
 .level-description {
   margin-top: 1rem;
   a {
     font-weight: bold;
     color: hsla(226, 68%, 77%, 1);
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
     &:hover {
       color: hsla(226, 68%, 87%, 1);
     }
@@ -455,12 +455,12 @@ export default {
     }
   }
 }
-@play-button-container-size: 56px;
+$play-button-container-size: 56px;
 .play-button-container {
   position: fixed;
   z-index: 64;
-  width: @play-button-container-size;
-  height: @play-button-container-size;
+  width: $play-button-container-size;
+  height: $play-button-container-size;
   bottom: 20px;
   right: 20px;
   padding: 0;

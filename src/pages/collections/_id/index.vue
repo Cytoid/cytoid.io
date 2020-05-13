@@ -137,7 +137,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .header-container {
   margin-top: 256px;
 }

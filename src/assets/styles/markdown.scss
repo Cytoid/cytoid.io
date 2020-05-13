@@ -1,0 +1,37 @@
+// Markdown editor
+.editor-toolbar {
+  padding: 0 4px;
+  border: none;
+}
+.editor-toolbar button {
+  color: #fff !important;
+}
+.editor-toolbar button.active, .editor-toolbar button:hover {
+  background: $input-background-color !important;
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+.editor-toolbar.fullscreen {
+  background: #343a40 !important;
+}
+.CodeMirror-cursor {
+  border-left: 1px solid $input-color;
+}
+.editor-preview-side {
+  color: #343a40 !important;
+  background-color: $input-background-color;
+  border: none;
+}
+.CodeMirror {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  background: $input-background-color;
+  color: $input-color;
+  transition: all 0.3s ease;
+}
+.CodeMirror:focus-within {
+  border-color: #6d8ee8;
+  box-shadow: 0 0 0 2px rgba(69, 104, 220, 0.2);
+}
+.markdown-editor {
+  line-height: initial;
+}

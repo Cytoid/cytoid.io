@@ -289,10 +289,6 @@ export default {
       }
     }
   }
-
-  .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
-    padding: 8px 0 !important;
-  }
 </style>
 
 <style lang="scss">

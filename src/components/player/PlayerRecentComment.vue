@@ -30,15 +30,15 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
   .recent-comment {
-    background: @shade3;
+    background: $grey;
     position: relative;
     border-radius: 4px;
     border-left: 4px solid rgba(255, 255, 255, 0.7);
     margin: 8px -8px;
     padding: 12px 24px 16px;
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
     overflow: hidden;
 
     &:hover {

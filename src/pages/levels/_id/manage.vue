@@ -118,7 +118,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .menu-text {
   font-size: 14px;
   font-weight: normal;
@@ -135,7 +135,7 @@ a.is-active .menu-text {
     padding: 12px 16px;
     color: rgba(255, 255, 255, 0.5);
     background-color: transparent;
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
     &:hover {
       color: rgba(255, 255, 255, 1);
       background-color: hsla(226, 15%, 19%, 0.3);
@@ -144,7 +144,7 @@ a.is-active .menu-text {
   a.is-active {
     color: rgba(255, 255, 255, 1);
     background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(209,14,134,1) 0%, rgba(234,55,59,0.76) 90.8% );
-    box-shadow: @ele4;
+    box-shadow: $ele4;
   }
 }
 </style>

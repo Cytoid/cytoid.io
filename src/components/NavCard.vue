@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
 .navcard {
   user-select: none;
   background-color: #fff;
@@ -114,7 +114,7 @@ export default {
   }
   .navcard-uid {
     color: white;
-    text-shadow: @text-ele;
+    text-shadow: $text-ele;
     text-align: center;
     font-size: 24px;
     z-index: 1;
@@ -126,8 +126,8 @@ export default {
     padding: 36px 0 0 0;
     .navcard-item {
       padding: 24px;
-      color: @theme5;
-      transition: 0.4s @hoverEasing;
+      color: $theme5;
+      transition: 0.4s $hoverEasing;
       &:hover {
         transform: scale(1.05);
       }
@@ -140,7 +140,7 @@ export default {
         margin-right: auto;
         width: 24px;
         height: 24px;
-        :before {
+        &:before {
           background: -webkit-gradient(linear, left top, left bottom, from(#f00), to(#333));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -171,7 +171,7 @@ export default {
     margin-bottom: 4px;
     text-transform: uppercase;
     background: hsla(226, 15%, 19%, 1) !important;
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
     &:hover, &:active, &:focus {
       background: hsla(226, 15%, 19%, 0.7) !important;
       color: white !important;
@@ -181,14 +181,5 @@ export default {
       color: rgba(255, 255, 255, 0.3) !important;
     }
   }
-}
-</style>
-
-<style>
-.ant-popover-inner {
-  overflow: hidden;
-}
-.ant-popover-inner-content {
-  padding: 0;
 }
 </style>

@@ -74,11 +74,11 @@ export default {
 }
 </script>
 
-<style lang="less">
-@play-button-size: 16px;
+<style lang="scss">
+$play-button-size: 16px;
 .play-button {
   background: none;
-  font-size: @play-button-size;
+  font-size: $play-button-size;
   padding: 0;
   border: none;
   outline: none;

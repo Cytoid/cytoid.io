@@ -276,7 +276,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   .browse-button.ant-btn-primary {
     background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
     background-size: 400% 400%;
@@ -308,7 +308,7 @@ export default {
     }
 
     &:active, &:focus {
-      box-shadow: @ele3 !important;
+      box-shadow: $ele3 !important;
       background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
       background-size: 400% 400% !important;
       transform: scale(0.95, 0.95) !important;

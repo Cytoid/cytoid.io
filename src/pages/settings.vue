@@ -34,16 +34,16 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-  .menu-text {
-    font-size: 14px;
-    font-weight: normal;
-    margin-left: 8px;
-  }
-  a.is-active .menu-text {
-    font-weight: bold;
-  }
-  .menu-list {
+<style lang="scss" scoped>
+.menu-text {
+  font-size: 14px;
+  font-weight: normal;
+  margin-left: 8px;
+}
+a.is-active .menu-text {
+  font-weight: bold;
+}
+.menu-list {
   li {
     margin-bottom: 8px;
   }
@@ -51,7 +51,7 @@ export default {
     padding: 12px 16px;
     color: rgba(255, 255, 255, 0.5);
     background-color: transparent;
-    transition: 0.2s @hoverEasing;
+    transition: 0.2s $hoverEasing;
   &:hover {
      color: rgba(255, 255, 255, 1);
      background-color: hsla(226, 15%, 19%, 0.3);
@@ -59,8 +59,8 @@ export default {
   }
   a.is-active {
     color: rgba(255, 255, 255, 1);
-    background: linear-gradient(to right, @theme4, @theme5);
-    box-shadow: @ele4;
+    background: linear-gradient(to right, $theme4, $theme5);
+    box-shadow: $ele4;
   }
-  }
+}
 </style>

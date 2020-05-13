@@ -58,7 +58,6 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~assets/styles/index.less',
     '~assets/styles/bulma.scss',
     '@fortawesome/fontawesome-svg-core/styles.css',
     'easymde/dist/easymde.min.css',
@@ -68,9 +67,6 @@ module.exports = {
    ** Global SCSS definitions
    */
   styleResources: {
-    less: [
-      '~assets/styles/theme.less',
-    ],
     scss: [
       '~assets/styles/bulma-theme.scss',
     ]
@@ -179,9 +175,6 @@ module.exports = {
       ]
     },
     extend(config, ctx) {
-      config.resolve.alias = config.resolve.alias || {}
-      config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './src/plugins/antd-icons.js')
-      config.resolve.alias.moment = path.resolve(__dirname, './src/plugins/moment.js')
       ctx.loaders.less.javascriptEnabled = true
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
