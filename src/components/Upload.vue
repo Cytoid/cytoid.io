@@ -150,7 +150,7 @@ export default {
                   size="is-large">
                 </b-icon>
               </p>
-              <h4 class="is-size-5">{this.title || this.$t('file_upload_default_title')}</h4>
+              <h4 class="is-size-5">{this.$slots.title || this.title || this.$t('file_upload_default_title')}</h4>
               <p>{this.$slots.subtitle || this.subtitle || this.$t('file_upload_default_subtitle')}</p>
             </div>
             {this.state && [
@@ -198,6 +198,12 @@ export default {
     .is-hint {
       display: block;
       text-align: center;
+    }
+  }
+  a {
+    text-decoration: underline;
+    &:hover {
+      font-weight: bold;
     }
   }
 }

@@ -139,7 +139,10 @@ export default {
         this.providersLoading = null
         const user = event.data.user
         this.$store.commit('setUser', user)
-        this.$message.info(`You're now logged in as ${user.name || user.uid}.`)
+        this.$buefy.toast.open({
+          message: `You're now logged in as ${user.name || user.uid}.`,
+          type: 'is-info'
+        })
       } else if (event.data.token && event.data.provider) {
         this.$apollo.mutate({
           mutation: gql`mutation LinkExternalAccount($token: String!) {

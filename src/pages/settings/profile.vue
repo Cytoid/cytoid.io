@@ -80,7 +80,10 @@ export default {
         variables: { path }
       })
         .then((data) => {
-          this.$message.success('Profile Header Updated')
+          this.$buefy.toast.open({
+            message: 'Profile Header Updated',
+            type: 'is-success',
+          })
           this.headerURL = data.data?.result?.stripe
         })
         .catch(error => this.handleErrorToast(error))
@@ -96,7 +99,10 @@ export default {
         }
       })
         .then(() => {
-          this.$message.success('Profile Updated')
+          this.$buefy.toast.open({
+            message: 'Profile Updated',
+            type: 'is-success',
+          })
         })
         .catch(error => this.handleErrorToast(error))
         .then(() => {

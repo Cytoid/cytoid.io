@@ -2,14 +2,17 @@
 upload.upload-level(
   accept=".cytoidlevel,.zip"
   type="levels/packages"
-  title="Click or drag a Cytoid level to this area"
   callback
   @upload="upload"
 )
-  template(slot="subtitle")
-    | Don't know how to create one? Read our
-    a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level" @click.stop)  wiki
-    | !
+  template(v-slot:title)
+    slot(name="text")
+      | Click or drag a Cytoid level to this area
+  template(v-slot:subtitle)
+    slot(name="hint")
+      | Don't know how to create one? Read our&nbsp;
+      a(href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level" @click.stop) wiki
+      | !
 </template>
 
 <script>
@@ -19,13 +22,18 @@ export default {
   components: {
     Upload
   },
-  data: () => ({
-  }),
+  props: {
+    level: {
+      type: Object,
+      required: false,
+      default: null,
+    }
+  },
   methods: {
     upload(data) {
       this.$apollo.mutate({
-        mutation: gql`mutation UnpackLevel($token: String!) {
-          package: unpackLevelPackage(token: $token) {
+        mutation: gql`mutation UnpackLevel($token: String!, $replace: String) {
+          package: unpackLevelPackage(token: $token, replace: $replace) {
             id
             uid
             title
@@ -33,6 +41,7 @@ export default {
         }`,
         variables: {
           token: data.token,
+          replace: this.level?.uid,
         }
       })
         .then((res) => {

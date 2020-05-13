@@ -87,7 +87,10 @@ export default {
         })
         .then((user) => {
           this.loading = false
-          this.$message.info(this.$t('login_snack_bar', { name: user.name || user.uid }))
+          this.$buefy.toast.open({
+            message: this.$t('login_snack_bar', { name: user.name || user.uid }),
+            type: 'is-info',
+          })
           if (this.$route.query.origin) {
             this.$router.replace(this.$route.query.origin)
           } else {

@@ -40,6 +40,7 @@ div
 </template>
 
 <script>
+import gql from 'graphql-tag'
 import TagInput from '@/components/TagInput'
 import VisibilitySelect from '@/components/studio/VisibilitySelect'
 export default {
@@ -81,9 +82,23 @@ export default {
         form.censored = null
       }
       this.loading = true
-      this.$axios.patch('/levels/' + this.value.uid, form)
+      this.$apollo.mutate({
+        mutation: gql`mutation UpdateLevel($id: ID!, $input: UpdateLevelInput!) {
+          updateLevel(id: $id, input: $input)
+        }`,
+        variables: {
+          id: this.value.id,
+          input: {
+            ...this.form,
+            ...this.adminForm,
+          },
+        }
+      })
         .then(() => {
-          this.$message.success('Level Listing Saved')
+          this.$buefy.toast.open({
+            message: 'Level Listing Saved',
+            type: 'is-success',
+          })
         })
         .catch((error) => {
           this.handleErrorToast(error)

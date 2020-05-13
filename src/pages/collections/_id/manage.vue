@@ -121,7 +121,10 @@ export default {
         },
       })
         .then(() => {
-          this.$message.success('Collection Saved')
+          this.$buefy.toast.open({
+            message: 'Collection Saved',
+            type: 'is-success',
+          })
         })
         .catch((error) => {
           this.handleErrorToast(error)
