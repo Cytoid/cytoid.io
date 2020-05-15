@@ -1,7 +1,7 @@
 <template lang="pug">
 .section
+  .heading Create a new Post
   .box
-    .card-heading Create a new post
     form(@submit.prevent="createNew")
       b-field(label="UID")
         b-input(v-model="form.uid")
@@ -9,37 +9,36 @@
         b-input(v-model="form.title")
       b-button(native-type="submit" :loading="createNewLoading") Create
   .box
-    .card-heading Create a new collection
-    b-table.posts-table(
+    b-table.studio-table(
       :data="posts"
-      detailed
-      hoverable
-      icon-pack="fas"
     )
+      template(slot="empty")
+        empty-placeholder
       template(v-slot:default="props")
-        b-table-column(field="uid" label="UID") {{ props.row.uid }}
-        b-table-column(field="title" label="Title") {{ props.row.title }}
+        b-table-column(label="Post")
+          .media
+            .media-left
+              nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'collections-id', params: { id: props.row.uid }}")
+                img(v-if="props.row.cover" :src="props.row.cover.thumbnail")
+            .media-content
+              .content
+                h4(v-text="props.row.title")
+                p.is-size-7.has-text-grey ID: {{ props.row.uid }}
+              ul.action-buttons
+                li: nuxt-link(:to="{ name: 'posts-id-manage', params: { id: props.row.uid } }")
+                  font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
         b-table-column(field="state" label="State") {{ props.row.state }}
-        b-table-column(field="levelCount" label="Levels") {{ props.row.levelCount }}
-      template(v-slot:detail="props")
-        article.media
-          figure.media-left
-            .image.is-4by3
-              img(:src="$img(props.row.coverPath, { height: 64 })")
-          .media-content
-            .content
-              strong(v-text="props.row.title")
-              br
-              small(v-text="props.row.slogan")
-            .level.is-mobile: .level-left
-              nuxt-link.level-item(:to="{ name: 'collections-id-manage', params: { id: props.row.uid } }")
-                b-icon(icon="suitcase")
 </template>
 
 <script>
+import EmptyPlaceholder from '@/components/EmptyPlaceholder'
 import gql from 'graphql-tag'
+import { handleErrorBlock } from '@/plugins/antd'
 export default {
   name: 'StudioPosts',
+  components: {
+    EmptyPlaceholder
+  },
   data() {
     return {
       createNewLoading: false,
@@ -49,6 +48,29 @@ export default {
         title: '',
       }
     }
+  },
+  async asyncData({ app, error }) {
+    let posts = await app.apolloProvider.defaultClient.query({
+      query: gql`query StudioGetPosts {
+        posts: getPosts(limit: 10, all: true) {
+          id
+          uid
+          title
+          slogan
+          creationDate
+          state
+          cover {
+            thumbnail
+          }
+        }
+      }`,
+      variables: { }
+    }).then(({ data }) => data?.posts)
+      .catch(err => handleErrorBlock(err, error))
+    if (!posts) {
+      posts = []
+    }
+    return { posts }
   },
   methods: {
     createNew() {
@@ -77,9 +99,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .posts-table table {
-    width: 100%;
-  }
-</style>

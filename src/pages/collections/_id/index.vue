@@ -4,7 +4,7 @@
     h1.is-size-1(v-text="collection.title")
     h5.is-size-5(v-text="collection.slogan")
   section.section
-    nuxt-link.button(
+    nuxt-link.button.is-large(
       :to="{ name: 'collections-id-manage', params: { id: collection.uid } }"
       v-if="$store.state.user && (collection.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
     )
@@ -128,7 +128,9 @@ export default {
     if (!collection) {
       return error({ statusCode: 404, message: 'Collection not found' })
     }
-    store.commit('setBackground', { source: collection.cover.original })
+    if (collection.cover) {
+      store.commit('setBackground', { source: collection.cover.original })
+    }
     return { collection }
   },
   i18n: {

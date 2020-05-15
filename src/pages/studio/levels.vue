@@ -17,10 +17,7 @@
           @page-change="handlePageChange"
         )
           template(slot="empty")
-            section.section
-              .content.has-text-centered
-                font-awesome-icon(icon="empty-set" size="6x")
-                h4.is-size-4(style="margin-top: 3rem;") Nothing Here
+            empty-placeholder
           template(slot-scope="props")
             b-table-column(label="Level")
               .media
@@ -32,8 +29,6 @@
                     h4(v-text="props.row.title")
                     p.is-size-7.has-text-grey ID: {{ props.row.uid }}
                   ul.action-buttons
-                    li: a(:href="downloadURL(props.row)")
-                      font-awesome-icon(:icon="['fas', 'download']" fixed-width)
                     li: nuxt-link(:to="{name: 'levels-id-manage', params: { id: props.row.uid }}")
                       font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                     li: a(@click="openDeleteModal(props.row)")
@@ -54,11 +49,13 @@ import gql from 'graphql-tag'
 import UploadLevel from '@/components/studio/UploadLevel'
 import VisibilityModal from '@/components/studio/VisibilityModal'
 import DeleteModal from '@/components/studio/DeleteModal'
-import VisibilitySelect from '../../components/studio/VisibilitySelect'
+import EmptyPlaceholder from '@/components/EmptyPlaceholder'
+import VisibilitySelect from '@/components/studio/VisibilitySelect'
 export default {
   components: {
     VisibilitySelect,
     UploadLevel,
+    EmptyPlaceholder,
   },
   data() {
     return {
@@ -75,9 +72,6 @@ export default {
     this.fetchLevels()
   },
   methods: {
-    downloadURL(level) {
-      return process.env.apiURL + '/levels/' + level.uid + '/package'
-    },
     openDeleteModal(level) {
       this.deleteModal = this.$buefy.modal.open({
         parent: this,
@@ -194,14 +188,16 @@ export default {
 </script>
 
 <style lang="scss">
-.is-studio-table-thumbnail img {
-  transition: 0.2s $hoverEasing;
+.is-studio-table-thumbnail {
   width: 128px;
   height: 72px;
-  &:hover {
-   filter: brightness(50%);
+  img {
+    transition: 0.2s $hoverEasing;
+    &:hover {
+      filter: brightness(50%);
+    }
+    border-radius: $radius;
+    overflow: hidden;
   }
-  border-radius: $radius;
-  overflow: hidden;
 }
 </style>

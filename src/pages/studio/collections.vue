@@ -13,10 +13,7 @@
       :data="collections"
     )
       template(slot="empty")
-        section.section
-          .content.has-text-centered
-            font-awesome-icon(icon="empty-set" size="6x")
-            h4.is-size-4(style="margin-top: 3rem;") Nothing Here
+        empty-placeholder
       template(v-slot:default="props")
         b-table-column(label="Collection")
           .media
@@ -30,16 +27,22 @@
               ul.action-buttons
                 li: nuxt-link(:to="{name: 'collections-id-manage', params: { id: props.row.uid }}")
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
+                li: a(@click="openDeleteModal(props.row)")
+                  font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         b-table-column(field="state" label="State") {{ props.row.state }}
         b-table-column(field="levelCount" label="Levels") {{ props.row.levelCount }}
 </template>
 
 <script>
+import EmptyPlaceholder from '@/components/EmptyPlaceholder'
 import gql from 'graphql-tag'
 import { handleErrorBlock } from '../../plugins/antd'
 
 export default {
   name: 'StudioCollections',
+  components: {
+    EmptyPlaceholder,
+  },
   data() {
     return {
       collections: [],
@@ -100,6 +103,39 @@ export default {
           this.createNewLoading = false
         })
     },
+    openDeleteModal(collection) {
+      this.$buefy.dialog.confirm({
+        title: 'Deleting ' + (collection.title || collection.uid),
+        message: 'Are you sure you want to delete this collection?',
+        confirmText: 'Delete Collection',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.deleteCollection(collection),
+      })
+    },
+    deleteCollection(collection) {
+      this.$apollo.mutate({
+        mutation: gql`mutation StudioDeleteCollection($id: ID!) {
+          deleteCollection(id: $id) {
+            id
+          }
+        }`,
+        variables: {
+          id: collection.id
+        },
+      })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Collection Deleted',
+            type: 'is-warning'
+          })
+          const index = this.collections.indexOf(collection)
+          if (index !== -1) {
+            this.collections.splice(index, 1)
+          }
+        })
+        .catch(this.handleErrorToast)
+    }
   }
 }
 </script>

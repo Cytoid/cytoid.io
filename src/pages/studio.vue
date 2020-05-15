@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  name: 'Studio',
   middleware: 'auth',
   fetch({ route, redirect }) {
     if (route.fullPath === '/studio') {

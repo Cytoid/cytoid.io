@@ -10,7 +10,7 @@
     b-field(label="Tags")
       tag-input(v-model="collection.tags")
     b-field(label="Cover image")
-      resource-upload(type="covers" accept="image/*" v-model="collection.coverPath" background)
+      upload(:background="collection.cover && collection.cover.thumbnail" type="covers" @upload="coverUploaded")
     b-field(label="Levels" message="Type the level UIDs here")
       b-taginput(
         v-model="collection.levels"
@@ -26,7 +26,7 @@
 
 <script>
 import gql from 'graphql-tag'
-import ResourceUpload from '@/components/ResourceUpload'
+import Upload from '@/components/Upload'
 import TagInput from '@/components/TagInput'
 import { handleErrorBlock } from '../../../plugins/antd'
 const query = gql`query FetchCollection($uid: String!) {
@@ -38,7 +38,9 @@ const query = gql`query FetchCollection($uid: String!) {
     description
     tags
     state
-    coverPath
+    cover {
+      thumbnail
+    }
     owner {
       id
     }
@@ -58,7 +60,7 @@ const query = gql`query FetchCollection($uid: String!) {
 export default {
   name: 'CollectionManagement',
   components: {
-    ResourceUpload,
+    Upload,
     TagInput,
   },
   data() {
@@ -94,9 +96,46 @@ export default {
       this.timer = setTimeout(this.searchLevels.bind(this, key), 500)
     },
     searchLevels(key) {
-      this.$axios.get('/tags/levels/', { params: { search: key } })
+      this.$axios.get('/search/level_uids', { params: { search: key } })
         .then((res) => {
           this.levelUidCandidates = res.data
+        })
+    },
+    coverUploaded(path) {
+      this.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation StudioUpdateCollectionForCover($id: ID!, $data: CollectionInput!) {
+          collection: updateCollection(id: $id, input: $data) {
+            id
+            cover {
+              thumbnail
+            }
+          }
+        }`,
+        variables: {
+          id: this.collection.id,
+          data: {
+            coverPath: path,
+          },
+        },
+      })
+        .then((res) => {
+          const thumbnailURL = res.data.collection?.cover?.thumbnail
+          if (!this.collection.cover) {
+            this.collection.cover = { thumbnail: thumbnailURL }
+          } else {
+            this.collection.cover.thumbnail = thumbnailURL
+          }
+          this.$buefy.toast.open({
+            message: 'Collection Cover Updated',
+            type: 'is-success',
+          })
+        })
+        .catch((error) => {
+          this.handleErrorToast(error)
+        })
+        .then(() => {
+          this.loading = false
         })
     },
     save() {
