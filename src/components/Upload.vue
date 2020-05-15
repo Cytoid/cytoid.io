@@ -46,6 +46,10 @@ export default {
     callback: {
       type: Boolean,
       default: false,
+    },
+    captchaFunc: {
+      type: Function,
+      default: null,
     }
   },
   data() {
@@ -76,7 +80,12 @@ export default {
     async upload(file) {
       try {
         this.state = 1
-        const captcha = await this.$refs.captcha.execute()
+        let captcha = null
+        if (this.captchaFunc) {
+          captcha = await this.captchaFunc()
+        } else {
+          captcha = await this.$refs.captcha.execute()
+        }
         this.state = 2
         const res = await this.$axios.post('/files/' + this.type, {
           filename: file.name,
@@ -123,7 +132,7 @@ export default {
   },
   render(h) {
     return <div>
-      <captcha size="invisible" ref="captcha" />
+      { this.captchaFunc && <captcha size="invisible" ref="captcha" /> }
       <b-upload
         class="bg-upload"
         drag-drop
