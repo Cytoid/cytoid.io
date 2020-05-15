@@ -18,7 +18,7 @@
         b-table-column(label="Post")
           .media
             .media-left
-              nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'collections-id', params: { id: props.row.uid }}")
+              nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'posts-id', params: { id: props.row.uid }}")
                 img(v-if="props.row.cover" :src="props.row.cover.thumbnail")
             .media-content
               .content
@@ -27,6 +27,8 @@
               ul.action-buttons
                 li: nuxt-link(:to="{ name: 'posts-id-manage', params: { id: props.row.uid } }")
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
+                li: a(@click="openDeleteModal(props.row)")
+                  font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
         b-table-column(field="state" label="State") {{ props.row.state }}
 </template>
 
@@ -77,7 +79,7 @@ export default {
       this.createNewLoading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioCreatePost($data: PostInput!) {
-          createPost(post: $data) {
+          post: createPost(post: $data) {
             id
             uid
           }
@@ -87,7 +89,8 @@ export default {
         },
       })
         .then((post) => {
-          console.log(post)
+          const uid = post.data.post.uid
+          this.$router.push({ name: 'posts-id-manage', params: { id: uid } })
         })
         .catch((error) => {
           this.handleErrorToast(error)
@@ -95,6 +98,39 @@ export default {
         .then(() => {
           this.createNewLoading = false
         })
+    },
+    openDeleteModal(post) {
+      this.$buefy.dialog.confirm({
+        title: 'Deleting ' + (post.title || post.uid),
+        message: 'Are you sure you want to delete this post?',
+        confirmText: 'Delete Post',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.deletePost(post),
+      })
+    },
+    deletePost(post) {
+      this.$apollo.mutate({
+        mutation: gql`mutation StudioDeletePost($id: ID!) {
+          deletePost(id: $id) {
+            id
+          }
+        }`,
+        variables: {
+          id: post.id
+        },
+      })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Post Deleted',
+            type: 'is-warning'
+          })
+          const index = this.posts.indexOf(post)
+          if (index !== -1) {
+            this.posts.splice(index, 1)
+          }
+        })
+        .catch(this.handleErrorToast)
     }
   }
 }

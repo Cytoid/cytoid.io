@@ -49,7 +49,7 @@ export default {
         <span class="level">{str}</span>
       </div>
       <b-dropdown-item custom paddingless>
-        <box>{value.notesCount} notes</box>
+        <div class="box">{value.notesCount} notes</div>
       </b-dropdown-item>
     </b-dropdown>)
   },

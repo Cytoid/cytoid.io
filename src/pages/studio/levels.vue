@@ -186,18 +186,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.is-studio-table-thumbnail {
-  width: 128px;
-  height: 72px;
-  img {
-    transition: 0.2s $hoverEasing;
-    &:hover {
-      filter: brightness(50%);
-    }
-    border-radius: $radius;
-    overflow: hidden;
-  }
-}
-</style>

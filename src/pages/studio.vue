@@ -72,3 +72,18 @@ a.is-active .menu-text {
   }
 }
 </style>
+
+<style lang="scss">
+  .is-studio-table-thumbnail {
+    img {
+      width: 128px;
+      height: 72px;
+      transition: 0.2s $hoverEasing;
+      &:hover {
+        filter: brightness(50%);
+      }
+      border-radius: $radius;
+      overflow: hidden;
+    }
+  }
+</style>

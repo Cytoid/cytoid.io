@@ -10,7 +10,7 @@
         client-only: markdown-editor(v-model="post.content")
       b-field(label="Cover image")
         upload(:background="post.cover && post.cover.thumbnail" type="covers" @upload="coverUploaded")
-      meta-field(label="Cover artist" :value="post.metadata.cover")
+      meta-field(label="Cover artist" :value="post.metadata.cover" @input="metaFieldInput")
       b-button(native-type="submit" :loading="loading") Save
 </template>
 
@@ -43,6 +43,7 @@ export default {
           uid
           title
           slogan
+          content
           creationDate
           state
           cover {
@@ -69,22 +70,85 @@ export default {
     return { post }
   },
   methods: {
+    metaFieldInput(str, property) {
+      if (!this.post.metadata.cover) {
+        this.post.metadata.cover = {}
+      }
+      this.post.metadata.cover[property] = str
+    },
     coverUploaded(path) {
-      this.avatarURL = null
+      this.loading = true
       this.$apollo.mutate({
-        mutation: gql`mutation UpdateCover($path: String) {
-          result: setAvatar(path: $path) {
-            large
+        mutation: gql`mutation StudioUpdatePostForCover($id: ID!, $data: PostInput!) {
+          post: updatePost(id: $id, input: $data) {
+            id
+            cover {
+              thumbnail
+            }
           }
         }`,
-        variables: { path }
+        variables: {
+          id: this.post.id,
+          data: {
+            coverPath: path,
+          },
+        },
       })
         .then((res) => {
-          this.avatarURL = res.data?.result?.large
+          const thumbnailURL = res.data.post?.cover?.thumbnail
+          if (!this.post.cover) {
+            this.post.cover = { thumbnail: thumbnailURL }
+          } else {
+            this.post.cover.thumbnail = thumbnailURL
+          }
           this.$buefy.toast.open({
-            message: 'Cover updated',
-            type: 'is-success'
+            message: 'Post Cover Updated',
+            type: 'is-success',
           })
+        })
+        .catch((error) => {
+          this.handleErrorToast(error)
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
+    save() {
+      this.loading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation StudioUpdatePost($id: ID!, $data: PostInput!) {
+          updatePost(id: $id, input: $data) {
+            id
+          }
+        }`,
+        variables: {
+          id: this.post.id,
+          data: {
+            title: this.post.title,
+            slogan: this.post.slogan,
+            content: this.post.content,
+            state: this.post.state,
+            metadata: {
+              cover: {
+                name: this.post.metadata.cover.name,
+                localized_name: this.post.metadata.cover.localized_name,
+                url: this.post.metadata.cover.url,
+              }
+            }
+          },
+        },
+      })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Post Saved',
+            type: 'is-success',
+          })
+        })
+        .catch((error) => {
+          this.handleErrorToast(error)
+        })
+        .then(() => {
+          this.loading = false
         })
     },
   }
