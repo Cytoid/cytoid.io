@@ -125,7 +125,6 @@ export default {
       this.updateRoute({ sort: value })
     },
     handleFilterSelector(value) {
-      console.log(value)
       this.updateRoute({ category: value })
     },
     sortingCriteriaTitle(key) {

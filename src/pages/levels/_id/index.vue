@@ -63,14 +63,17 @@
             hoverable
             paginated
             backend-pagination
-            :current-page="rankingsPagination.currentPage"
+            :current-page="rankingsPagination.currentPage + 1"
             :loading="rankingsLoading"
             :per-page="rankingsPagination.recordsPerPage"
-            :total="rankingsPagination.totalPages"
+            :total="rankingsPagination.total"
             :row-class="rowClass"
+            @page-change="pageChange"
           )
+            template(slot="empty")
+              empty-placeholder
             template(slot-scope="props")
-              b-table-column(field="id" label="rank") \#{{ props.index + 1 }}
+              b-table-column(field="id" label="rank") \#{{ props.index + 1 + rankingsPagination.currentPage * rankingsPagination.recordsPerPage }}
               b-table-column(field="owner" label="player")
                 nuxt-link.row-score-avatar(:to="{name: 'profile-id', params: { id: props.row.owner.uid || props.row.owner.id }}")
                   avatar(:source="props.row.owner.avatar.small" fixed)
@@ -114,6 +117,7 @@ import { formatBytes, Meta } from '@/utils'
 import gql from 'graphql-tag'
 import { handleErrorBlock } from '@/plugins/antd'
 import MetaBox from '@/components/MetaBox'
+import EmptyPlaceholder from '@/components/EmptyPlaceholder'
 
 const ModIconKeys = [
   'ap',
@@ -210,10 +214,11 @@ const query = gql`query FetchLevel($uid: String!){
     }
   }
 }`
-const rankingQuery = gql`query FetchLevelRanking($levelUid: String!, $type: String!) {
+const rankingQuery = gql`query FetchLevelRanking($levelUid: String!, $type: String!, $start: Int!) {
   chart(levelUid: $levelUid, chartType: $type) {
     id
-    leaderboard(start: 0, limit: 10) {
+    numPlayers
+    leaderboard(limit: 10, start: $start) {
       id
       date
       owner {
@@ -241,6 +246,7 @@ const rankingQuery = gql`query FetchLevelRanking($levelUid: String!, $type: Stri
 `
 export default {
   layout: 'background',
+  name: 'LevelDetails',
   components: {
     ScoreBadge,
     PlayerAvatar,
@@ -249,6 +255,7 @@ export default {
     Disqus,
     MetaBox,
     Captcha,
+    EmptyPlaceholder
   },
   data: () => ({
     level: null,
@@ -256,7 +263,7 @@ export default {
     rankingsChartType: null,
     rankingsPagination: {
       currentPage: 0,
-      totalPages: 0,
+      total: 0,
       recordsPerPage: 10,
     },
     rankingsLoading: false,
@@ -276,12 +283,9 @@ export default {
     },
   },
   watch: {
-    async rankingsChartType() {
-      this.leaderboard = await this.$apollo.query({
-        query: rankingQuery,
-        variables: { levelUid: this.$route.params.id, type: this.rankingsChartType },
-      }).then(a => a?.data?.chart?.leaderboard)
-      // Then: Reset pagination
+    rankingsChartType() {
+      this.rankingsPagination.currentPage = 0
+      this.reloadLeaderboard()
     }
   },
   async asyncData({ app, params, error, store }) {
@@ -303,10 +307,18 @@ export default {
       rankingsChartType: defaultType,
     }
     if (defaultType) {
-      result.leaderboard = await app.apolloProvider.defaultClient.query({
+      const chart = await app.apolloProvider.defaultClient.query({
         query: rankingQuery,
-        variables: { levelUid: params.id, type: defaultType },
-      }).then(a => a?.data?.chart?.leaderboard)
+        variables: { levelUid: params.id, type: defaultType, start: 0 },
+      }).then(a => a?.data?.chart)
+      if (chart?.numPlayers > 0) {
+        result.rankingsPagination = {
+          total: chart.numPlayers,
+          currentPage: 0,
+          recordsPerPage: 10,
+        }
+        result.leaderboard = chart.leaderboard
+      }
     }
     return result
   },
@@ -317,6 +329,28 @@ export default {
     return meta
   },
   methods: {
+    pageChange(pageNum) {
+      this.rankingsPagination.currentPage = pageNum - 1
+      this.reloadLeaderboard()
+    },
+    async reloadLeaderboard() {
+      this.rankingsLoading = true
+      const chart = await this.$apollo.query({
+        query: rankingQuery,
+        variables: {
+          levelUid: this.$route.params.id,
+          type: this.rankingsChartType,
+          start: this.rankingsPagination.currentPage * this.rankingsPagination.recordsPerPage
+        },
+      }).then(a => a?.data?.chart)
+      this.leaderboard = chart?.leaderboard
+      if (chart?.numPlayers > 0) {
+        this.rankingsPagination.total = chart.numPlayers
+      } else {
+        this.rankingsPagination.total = 0
+      }
+      this.rankingsLoading = false
+    },
     rate(rating) {
       rating *= 2
       this.$apollo.mutate({
@@ -351,12 +385,14 @@ export default {
       } else if (record.score >= 999500) {
         classes += ' row-score-sss'
       }
-      if (index === 0) {
-        classes += ' row-score-1st'
-      } else if (index === 1) {
-        classes += ' row-score-2nd'
-      } else if (index === 2) {
-        classes += ' row-score-3rd'
+      if (this.rankingsPagination.currentPage === 0) {
+        if (index === 0) {
+          classes += ' row-score-1st'
+        } else if (index === 1) {
+          classes += ' row-score-2nd'
+        } else if (index === 2) {
+          classes += ' row-score-3rd'
+        }
       }
       return classes
     },
