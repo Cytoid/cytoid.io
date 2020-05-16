@@ -39,7 +39,7 @@ export default {
       this.timer = setTimeout(this.search.bind(this, keyword), 500)
     },
     search(keyword) {
-      this.$axios.get('/tags', { params: { search: keyword } })
+      this.$axios.get('/search/level_tags', { params: { search: keyword } })
         .then((res) => {
           this.tagsCandidates = res.data
         })

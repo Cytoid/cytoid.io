@@ -31,9 +31,9 @@ export default {
           }
         </div>),
       bottom: () => (<div>
-        {artist && <h2 class="subtitle">{artist}</h2>}
-        {value.title && <h1 class="title">{value.title}</h1>}
-        {titleLocalized && <p class="title">{titleLocalized}</p>}
+        {artist && <h2 class="content-subtitle">{artist}</h2>}
+        {value.title && <h1 class="content-title">{value.title}</h1>}
+        {titleLocalized && <p class="content-title">{titleLocalized}</p>}
         {owner &&
           <nuxt-link
             class="link"

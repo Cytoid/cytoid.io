@@ -132,7 +132,7 @@ export default {
   },
   render(h) {
     return <div>
-      { this.captchaFunc && <captcha size="invisible" ref="captcha" /> }
+      { !this.captchaFunc && <captcha size="invisible" ref="captcha" /> }
       <b-upload
         class="bg-upload"
         drag-drop

@@ -6,8 +6,8 @@
       :style="{ backgroundImage: `url(${value.cover && value.cover.thumbnail})` }")
     .collection-intro-content
       .content
-        h1.collection-title(v-text="value.title")
-        p.collection-slogan(v-text="value.slogan")
+        h1.title(v-text="value.title")
+        p.subtitle(v-text="value.slogan")
       .card-bottom
         nuxt-link.profile-link(
           v-if="value.owner"
@@ -71,19 +71,6 @@ export default {
       height: 100%;
       .content {
         flex-grow: 1;
-        .collection-title {
-          font-size: 24px;
-          font-weight: 300;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          user-select: none;
-        }
-        .collection-slogan {
-          color: rgba(255, 255, 255, 0.7);
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          user-select: none;
-        }
       }
       .card-bottom {
         position: relative;

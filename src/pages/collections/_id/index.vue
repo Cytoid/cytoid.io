@@ -19,12 +19,12 @@
         player-avatar(style="margin-bottom: 16px;" :player="collection.owner")
         .content(v-html="formattedDescriptions" style="margin-bottom: 1rem;")
         template(v-if="collection.tags.length > 0")
-          .subtitle(v-t="'tags_title'")
+          .box-subtitle(v-t="'tags_title'")
           .tags(style="margin-bottom: 16px;")
             .tag(v-for="tag in collection.tags" :key="tag" v-text="tag")
-        .subtitle(v-t="'creation_date_title'")
+        .box-subtitle(v-t="'creation_date_title'")
         p(style="margin-bottom: 1rem;") {{$dateFormatCalendar(collection.creationDate)}}, {{ $dateFromNow(collection.creationDate) }}
-        .subtitle(v-t="'modification_date_title'")
+        .box-subtitle(v-t="'modification_date_title'")
         p {{$dateFormatCalendar(collection.modificationDate)}}, {{ $dateFromNow(collection.modificationDate) }}
       meta-box(:metadata="collection.metadata")
     .column.is-three-quarters

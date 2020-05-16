@@ -32,23 +32,23 @@
         .box.statistics-card
           .columns.is-multiline
             .column.is-one-third
-              p.subtitle(v-t="'total_ranked_plays'")
-              p.statistics-card-num(v-text="profile.activity.totalRankedPlays")
+              p.box-subtitle(v-t="'total_ranked_plays'")
+              p.title(v-text="profile.activity.totalRankedPlays")
             .column.is-one-third
-              p.subtitle(v-t="'total_cleared_notes'")
-              p.statistics-card-num(v-text="commaSeparated(profile.activity.clearedNotes)")
+              p.box-subtitle(v-t="'total_cleared_notes'")
+              p.title(v-text="commaSeparated(profile.activity.clearedNotes)")
             .column.is-one-third
-              p.subtitle(v-t="'highest_max_combo'")
-              p.statistics-card-num(v-text="commaSeparated(profile.activity.maxCombo)")
+              p.box-subtitle(v-t="'highest_max_combo'")
+              p.title(v-text="commaSeparated(profile.activity.maxCombo)")
             .column.is-one-third
-              p.subtitle(v-t="'avg_ranked_accuracy'")
-              p.statistics-card-num(v-text="(profile.activity.averageRankedAccuracy * 100).toFixed(2) + '%'")
+              p.box-subtitle(v-t="'avg_ranked_accuracy'")
+              p.title(v-text="(profile.activity.averageRankedAccuracy * 100).toFixed(2) + '%'")
             .column.is-one-third
-              p.subtitle(v-t="'total_ranked_score'")
-              p.statistics-card-num(v-text="commaSeparated(profile.activity.totalRankedScore)")
+              p.box-subtitle(v-t="'total_ranked_score'")
+              p.title(v-text="commaSeparated(profile.activity.totalRankedScore)")
             .column.is-one-third
-              p.subtitle(v-t="'total_play_time'")
-              p.statistics-card-num(v-text="profile.activity.totalPlayTime")
+              p.box-subtitle(v-t="'total_play_time'")
+              p.title(v-text="profile.activity.totalPlayTime")
           .tabs.is-small.is-toggle: ul
             li(
               v-for="[title, mode] in [['chart_radio_ranked_plays', 'activity'], ['chart_radio_rating', 'rating'], ['chart_radio_avg_accuracy', 'accuracy']]"
@@ -245,9 +245,6 @@ export default {
 <style lang="scss" scoped>
   .statistics-card {
     background: linear-gradient(to right bottom, $theme4, $theme5);
-    .statistics-card-num {
-      font-size: 2rem;
-    }
   }
 
   .header-container {

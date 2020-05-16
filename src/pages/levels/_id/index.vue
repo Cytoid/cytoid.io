@@ -30,7 +30,7 @@
         .box
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
           .level-description(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
-          p.heading(v-t="'details_card_rating_title'")
+          p.box-subtitle(v-t="'details_card_rating_title'")
           b-rate(
             icon-pack="fas"
             :value="(level.rating.rating || level.rating.average) * 0.5"
@@ -39,41 +39,45 @@
             :custom-text="`${(Math.floor(level.rating.average * 0.5 * 100) / 100).toFixed(2)} (${level.rating.total})`"
           )
           template(v-if="level.tags.length > 0")
-            .heading(v-t="'details_card_tags_title'")
+            .box-subtitle(v-t="'details_card_tags_title'")
             .tags
               a.tag(v-for="tag in level.tags" :key="tag" :href="'/levels?tags=' + tag.toLowerCase()" v-text="tag")
-          .heading(v-t="'details_card_last_updated_title'")
-          .card-secondary-text {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
+          .box-subtitle(v-t="'details_card_last_updated_title'")
+          p {{$dateFormatCalendar(level.modificationDate)}}, {{ $dateFromNow(level.modificationDate) }}
         meta-box(:metadata="level.metadata")
       .column.is-two-thirds
         .box.rankings-card.is-gradient(:style="rankingsHeaderGradient")
-          b-field(:label="$t('difficulty_card_title')")
-            .field.has-addons
-              b-radio-button(
-                v-for="chart in level.charts"
-                :key="chart.id"
-                size="is-small"
-                type="is-white"
-                v-model="rankingsChartType"
-                :native-value="chart.type") {{ chart.name || convertedDifficultyName(chart.type)}}
+          .box-subtitle(v-t="'difficulty_card_title'")
+          .tabs.is-small.is-toggle: ul
+            li(
+              v-for="chart in level.charts"
+              :key="chart.id"
+              :class="{ 'is-active': rankingsChartType === chart.type }"
+              @click="rankingsChartType = chart.type"
+            )
+              a {{ chart.name || convertedDifficultyName(chart.type)}}
           b-table.leaderboard-table(
             :data="leaderboard"
             centered
             scrollable
             hoverable
             paginated
+            backend-pagination
+            :current-page="rankingsPagination.currentPage"
+            :loading="rankingsLoading"
+            :per-page="rankingsPagination.recordsPerPage"
+            :total="rankingsPagination.totalPages"
             :row-class="rowClass"
           )
             template(slot-scope="props")
               b-table-column(field="id" label="rank") \#{{ props.index + 1 }}
               b-table-column(field="owner" label="player")
-                nuxt-link(:to="{name: 'profile-id', params: { id: props.row.owner.uid || props.row.owner.id }}")
+                nuxt-link.row-score-avatar(:to="{name: 'profile-id', params: { id: props.row.owner.uid || props.row.owner.id }}")
                   avatar(:source="props.row.owner.avatar.small" fixed)
                   span(v-text="props.row.owner.name || props.row.owner.uid")
               b-table-column(field="score" label="score")
                 score-badge(:value="props.row.score")
                 span(style="margin-left: 4px;" v-text="props.row.score")
-
               b-table-column(field="accuracy" label="acc") {{ (Math.floor(props.row.accuracy * 100 * 100) / 100) }}%
               b-table-column(field="maxCombo" label="max combo") {{ props.row.details.maxCombo ? (props.row.details.maxCombo + 'x') : 'Unknown' }}
               b-table-column(field="mods" label="mods")
@@ -250,6 +254,12 @@ export default {
     level: null,
     leaderboard: null,
     rankingsChartType: null,
+    rankingsPagination: {
+      currentPage: 0,
+      totalPages: 0,
+      recordsPerPage: 10,
+    },
+    rankingsLoading: false,
   }),
   computed: {
     levelDescription() {
@@ -264,6 +274,15 @@ export default {
         }[this.rankingsChartType]
       }
     },
+  },
+  watch: {
+    async rankingsChartType() {
+      this.leaderboard = await this.$apollo.query({
+        query: rankingQuery,
+        variables: { levelUid: this.$route.params.id, type: this.rankingsChartType },
+      }).then(a => a?.data?.chart?.leaderboard)
+      // Then: Reset pagination
+    }
   },
   async asyncData({ app, params, error, store }) {
     const level = await app.apolloProvider.defaultClient.query({
@@ -371,9 +390,6 @@ export default {
         extreme: 'Extreme',
       }[name]
     },
-    makeLink(link) {
-      return (link.indexOf('://') === -1) ? 'http://' + link : link
-    },
   },
   i18n: {
     key: 'level_details'
@@ -408,6 +424,14 @@ export default {
     margin-right: .5rem;
   }
   .row-score {
+    .row-score-avatar {
+      color: white;
+      display: flex;
+      overflow: hidden;
+      img {
+        flex-shrink: 0;
+      }
+    }
     &.row-score-sss {
       background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 100%);
       font-weight: bold;

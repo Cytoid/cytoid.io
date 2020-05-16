@@ -14,19 +14,19 @@
       .columns
         .column.is-two-thirds-desktop.is-three-fifths-tablet
           #posts.box.is-gradient
-            p.title(v-t="'news_title'")
+            p.box-title(v-t="'news_title'")
             post-card(v-for="post in data.posts" :key="post.id" :value="post")
             nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'posts' }")
               b-icon(icon="angle-double-right" size="is-small")
               | See History Posts
         .column.is-one-third-desktop.is-two-fifths-tablet
           #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")
-            p.title(v-t="'featured_collection_title'")
+            p.box-title(v-t="'featured_collection_title'")
             collection-simple-card(:value="data.gettingStarted")
           nuxt-link.button.is-browse.is-large.is-fullwidth.is-title(:to="{ name: 'collections' }" style="margin-bottom: 2rem;")
             span(v-t="{ path: 'collection_all_btn', args: { count: data && data.collectionsCount }}")
           #index-featured-level.box.is-gradient(v-if="data.latestFeaturedLevels && data.latestFeaturedLevels[0]")
-            p.title(v-t="'featured_level_title'")
+            p.box-title(v-t="'featured_level_title'")
             level-card.level-card(:value="data.latestFeaturedLevels[0]")
           nuxt-link.button.is-browse.is-large.is-fullwidth.is-title(:to="{ name: 'levels' }" style="margin-bottom: 2rem;")
             span(v-t="{ path: 'level_all_btn', args: { count: data.levelsCount }}")

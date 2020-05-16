@@ -13,6 +13,26 @@ $control-line-height: 1.5;
 
 $family-sans-serif: "Nunito", "M PLUS Rounded 1c", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
+$grey-darker:  hsl(226, 68%, 6%);
+$grey-dark:    hsl(226, 15%, 14%);
+$grey:         hsl(226, 15%, 19%);
+$grey-light:   hsl(226, 15%, 38%);
+$grey-lighter: hsl(226, 15%, 55%);
+
+$ele1: 0 1px 3px hsla(0, 0%, 0%, .08), 0 1px 2px hsla(0, 0%, 0%, .16);
+$ele2: 0 3px 6px hsla(0, 0%, 0%, .10), 0 2px 4px hsla(0, 0%, 0%, .08);
+$ele3: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
+$ele4: 0 15px 25px hsla(0, 0%, 0%, .10), 0 5px 10px hsla(0, 0%, 0%, .20);
+$ele5: 0 20px 40px hsla(0, 0%, 0%, .15);
+
+$text-ele: 0px 2px 4px rgba(0, 0, 0, 0.2);
+
+$white-ter:    hsl(0, 0%, 71%);
+$white-bis:    hsl(0, 0%, 86%);
+$white:        hsl(0, 0%, 100%);
+
+$link: white;
+
 @import "~bulma/sass/utilities/_all";
 
 $theme1: hsla(226, 68%, 27%, 1);
@@ -38,30 +58,12 @@ $colors: (
   "danger": ($danger, $danger-invert),
 );
 
-$grey-darker:  hsl(226, 68%, 6%);
-$grey-dark:    hsl(226, 15%, 14%);
-$grey:         hsl(226, 15%, 19%);
-$grey-light:   hsl(226, 15%, 38%);
-$grey-lighter: hsl(226, 15%, 55%);
-
-$ele1: 0 1px 3px hsla(0, 0%, 0%, .08), 0 1px 2px hsla(0, 0%, 0%, .16);
-$ele2: 0 3px 6px hsla(0, 0%, 0%, .10), 0 2px 4px hsla(0, 0%, 0%, .08);
-$ele3: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
-$ele4: 0 15px 25px hsla(0, 0%, 0%, .10), 0 5px 10px hsla(0, 0%, 0%, .20);
-$ele5: 0 20px 40px hsla(0, 0%, 0%, .15);
-
-$text-ele: 0px 2px 4px rgba(0, 0, 0, 0.2);
-
-$white-ter:    hsl(0, 0%, 71%);
-$white-bis:    hsl(0, 0%, 86%);
-$white:        hsl(0, 0%, 100%);
-
-$link: $white-bis;
-$link-hover: $white;
-
 $body-background-color: $grey-dark;
 $body-color: $white;
 $body-font-size: 1rem;
+
+$title-color: $white-bis;
+$subtitle-color: $white-ter;
 
 $box-color: $white;
 $box-background-color: $grey;

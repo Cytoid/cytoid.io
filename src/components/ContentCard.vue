@@ -122,7 +122,7 @@ $card-background-gutter: 1rem;
     .info {
       flex-grow: 1;
       min-width: 0; // To make the texts shrink
-      .title, .caption, .subtitle {
+      .content-title, .content-caption, .content-subtitle {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -132,18 +132,19 @@ $card-background-gutter: 1rem;
         text-shadow: $text-ele;
         user-select: none;
       }
-      h1.title {
+      h1.content-title {
         font-size: 20px;
         font-weight: 300;
       }
-      h2.subtitle {
+      h2.content-subtitle {
         color: rgba(255, 255, 255, 0.7);
         font-size: 12px;
       }
-      p.caption {
+      p.content-caption {
         color: rgba(255, 255, 255, 0.7);
       }
       .link {
+        color: $white;
         display: flex;
         user-select: none;
         z-index: 2;

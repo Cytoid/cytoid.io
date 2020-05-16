@@ -26,7 +26,7 @@
                     img(:src="props.row.cover.thumbnail")
                 .media-content
                   h4(v-text="props.row.title")
-                  p.is-size-7.has-text-grey ID: {{ props.row.uid }}
+                  p.is-size-7 ID: {{ props.row.uid }}
                   ul.action-buttons
                     li: nuxt-link(:to="{name: 'levels-id-manage', params: { id: props.row.uid }}")
                       font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)

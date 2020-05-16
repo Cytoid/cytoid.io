@@ -77,6 +77,7 @@ export default {
 <style lang="scss">
 $play-button-size: 16px;
 .play-button {
+  color: $white;
   background: none;
   font-size: $play-button-size;
   padding: 0;

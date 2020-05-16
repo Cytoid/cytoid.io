@@ -144,10 +144,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.category-radio-container {
-  display: flex;
-  flex-direction: row;
-}
-</style>

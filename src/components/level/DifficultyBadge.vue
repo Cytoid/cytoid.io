@@ -45,8 +45,8 @@ export default {
     return (<b-dropdown hoverable position="is-top-right" class="difficulty-badge-dropdown">
       <p slot="content" style="margin-bottom: 0; padding: 8px 16px; color: hsla(226, 68%, 6%, 1);">{value.notesCount} notes</p>
       <div class={classes} slot="trigger">
-        {!context.props.ball && <span class="title">{value.name || convertedDifficultyName(value.type)}</span>}
-        <span class="level">{str}</span>
+        {!context.props.ball && <span class="difficulty-badge-name">{value.name || convertedDifficultyName(value.type)}</span>}
+        <span class="difficulty-badge-level">{str}</span>
       </div>
       <b-dropdown-item custom paddingless>
         <div class="box">{value.notesCount} notes</div>
@@ -68,13 +68,13 @@ export default {
       height: 32px;
       min-width: 104px;
       border-radius: 16px;
-      .title {
+      .difficulty-badge-name {
         font-weight: 500;
         margin-left: 16px;
         margin-right: 12px;
         color: rgba(255, 255, 255, 0.9);
       }
-      .level {
+      .difficulty-badge-level {
         margin-left: auto;
         margin-right: 16px;
         color: rgba(255, 255, 255, 0.9);
@@ -86,13 +86,13 @@ export default {
       min-width: unset;
       border-radius: 10px;
       font-size: 12px;
-      .title {
+      .difficulty-badge-name {
         font-weight: unset;
         margin-left: 8px;
         margin-right: 4px;
         color: rgba(255, 255, 255, 0.9);
       }
-      .level {
+      .difficulty-badge-level {
         margin-left: unset;
         margin-right: 8px;
         color: rgba(255, 255, 255, 0.9);
@@ -105,7 +105,7 @@ export default {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      .level {
+      .difficulty-badge-level {
         margin: auto;
       }
     }

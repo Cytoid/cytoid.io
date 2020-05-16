@@ -1,55 +1,7 @@
 @import './bulma-theme';
 
-@import "~bulma/sass/base/helpers";
-@import "~bulma/sass/base/generic";
-@import "~bulma/sass/base/minireset";
-@import "~bulma/sass/elements/container";
-@import "~bulma/sass/elements/button";
-@import "~bulma/sass/grid/columns";
-@import "~bulma/sass/components/menu";
-@import "~bulma/sass/components/media";
-@import "~bulma/sass/layout/footer";
-@import "~bulma/sass/components/navbar";
-@import "~bulma/sass/layout/section";
-@import "~bulma/sass/elements/tag";
-@import "~bulma/sass/elements/notification";
-@import "~bulma/sass/elements/box";
-@import "~bulma/sass/elements/table";
-@import "~bulma/sass/elements/icon";
-@import "~bulma/sass/components/level";
-@import "~bulma/sass/components/modal";
-@import "~bulma/sass/components/pagination";
-@import "~bulma/sass/elements/image";
-@import "~bulma/sass/elements/other";
-@import "~bulma/sass/elements/content";
-@import "~bulma/sass/components/tabs";
-
-@import "~bulma/sass/form/shared";
-@import "~bulma/sass/form/input-textarea";
-@import "~bulma/sass/form/checkbox-radio";
-@import "~bulma/sass/form/select";
-@import "~bulma/sass/form/tools";
-
-@import "~bulma/sass/components/dropdown";
-
-@import "~buefy/src/scss/utils/_all";
-@import "~buefy/src/scss/components/_dropdown";
-@import "~buefy/src/scss/components/_autocomplete";
-@import "~buefy/src/scss/components/_form";
-@import "~buefy/src/scss/components/_tag";
-@import "~buefy/src/scss/components/_taginput";
-@import "~buefy/src/scss/components/_upload";
-@import "~buefy/src/scss/components/_switch";
-@import "~buefy/src/scss/components/_pagination";
-@import "~buefy/src/scss/components/_radio";
-@import "~buefy/src/scss/components/_rate";
-@import "~buefy/src/scss/components/_table";
-@import "~buefy/src/scss/components/_notices";
-@import "~buefy/src/scss/components/_checkbox";
-@import "~buefy/src/scss/components/_datepicker";
-@import "~buefy/src/scss/components/_loading";
-@import "~buefy/src/scss/components/_modal";
-@import "~buefy/src/scss/utils/_animations";
+@import "~bulma/bulma";
+@import "~buefy/src/scss/buefy";
 
 @import "./divider";
 @import "./action-buttons";
@@ -104,7 +56,7 @@
   .box-section {
     margin-bottom: 0.86rem;
   }
-  .title {
+  .box-title {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 0.9rem;
@@ -112,7 +64,7 @@
     margin-top: 1rem;
     margin-left: 1rem;
   }
-  .subtitle {
+  .box-subtitle {
     color: rgba(255, 255, 255, 0.3);
     font-weight: bold;
     text-transform: uppercase;
@@ -209,4 +161,15 @@
 
 .profile-link {
   display: flex;
+}
+
+.tabs.is-toggle li {
+  &:first-child a {
+    border-top-left-radius: $tabs-toggle-link-radius;
+    border-bottom-left-radius: $tabs-toggle-link-radius;
+  }
+  &:last-child a {
+    border-bottom-right-radius: $tabs-toggle-link-radius;
+    border-top-right-radius: $tabs-toggle-link-radius;
+  }
 }

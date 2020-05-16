@@ -13,8 +13,8 @@ export default {
     const slots = {
       top: () => <span class="tag is-white is-light">{context.parent.$t('collection_card_levels_count_tag', { count: context.props.value.levelCount }) }</span>,
       bottom: () => (<div>
-        <h2 class="subtitle">{context.props.value.slogan}</h2>
-        <h1 class="title">{context.props.value.title}</h1>
+        <h2 class="content-subtitle">{context.props.value.slogan}</h2>
+        <h1 class="content-title">{context.props.value.title}</h1>
         {owner &&
           <nuxt-link
             class="link"

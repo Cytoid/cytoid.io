@@ -14,16 +14,16 @@
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['fas', 'user']")
-      .title(v-t="'profile'")
+      .navcard-title(v-t="'profile'")
     nuxt-link.navcard-item(to="/studio")
       font-awesome-icon.icon(:icon="['fas', 'puzzle-piece']")
-      .title(v-t="'studio'")
+      .navcard-title(v-t="'studio'")
     .navcard-item.navcard-item-disabled
       font-awesome-icon.icon(:icon="['fas', 'heart']")
-      .title(v-t="'favorites'")
+      .navcard-title(v-t="'favorites'")
     nuxt-link.navcard-item(to="/settings")
       font-awesome-icon.icon(:icon="['fas', 'cog']")
-      .title(v-t="'settings'")
+      .navcard-title(v-t="'settings'")
   .section
     button.button.is-fullwidth(@click="logout")
       font-awesome-icon(icon="sign-out" fixed-width style="margin-right: 4px;")
@@ -147,7 +147,7 @@ export default {
           display: initial; /* reset Font Awesome's display:inline-block */
         }
       }
-      .title {
+      .navcard-title {
         text-align: center;
         margin-top: 4px;
         font-weight: bold;
