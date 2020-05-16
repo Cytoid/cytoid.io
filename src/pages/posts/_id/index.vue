@@ -146,7 +146,7 @@ export default {
       return null
     }
   },
-  async asyncData({ $axios, params, store, error, app }) {
+  async asyncData({ params, store, error, app }) {
     const post = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }

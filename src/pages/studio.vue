@@ -75,6 +75,8 @@ a.is-active .menu-text {
 
 <style lang="scss">
   .is-studio-table-thumbnail {
+    width: 128px;
+    height: 72px;
     img {
       width: 128px;
       height: 72px;

@@ -9,8 +9,11 @@
       client-only: markdown-editor(v-model="collection.description")
     b-field(label="Tags")
       tag-input(v-model="collection.tags")
+    b-field(label="Visibility" :addons="false")
+      visibility-select(:value="collection.state" @change="collection.state = $event")
     b-field(label="Cover image")
       upload(:background="collection.cover && collection.cover.thumbnail" type="covers" @upload="coverUploaded")
+    meta-field(label="Cover artist" :value="collection.metadata.cover" @input="metaFieldInput")
     b-field(label="Levels" message="Type the level UIDs here")
       b-taginput(
         v-model="collection.levels"
@@ -28,7 +31,9 @@
 import gql from 'graphql-tag'
 import Upload from '@/components/Upload'
 import TagInput from '@/components/TagInput'
-import { handleErrorBlock } from '../../../plugins/antd'
+import VisibilitySelect from '@/components/studio/VisibilitySelect'
+import { handleErrorBlock } from '@/plugins/antd'
+import MetaField from '@/components/MetaField'
 const query = gql`query FetchCollection($uid: String!) {
   collection(uid: $uid) {
     id
@@ -52,6 +57,7 @@ const query = gql`query FetchCollection($uid: String!) {
     metadata {
       cover {
         name
+        localized_name
         url
       }
     }
@@ -62,6 +68,8 @@ export default {
   components: {
     Upload,
     TagInput,
+    VisibilitySelect,
+    MetaField,
   },
   data() {
     return {
@@ -88,6 +96,12 @@ export default {
     return { collection }
   },
   methods: {
+    metaFieldInput(str, property) {
+      if (!this.collection.metadata.cover) {
+        this.collection.metadata.cover = {}
+      }
+      this.collection.metadata.cover[property] = str
+    },
     levelTyping(key) {
       if (this.timer) {
         clearTimeout(this.timer)
@@ -156,6 +170,14 @@ export default {
             levelIds: this.collection.levels.map(l => l.id),
             tags: this.collection.tags,
             coverPath: this.collection.coverPath,
+            state: this.collection.state,
+            metadata: {
+              cover: {
+                name: this.collection.metadata.cover.name,
+                localized_name: this.collection.metadata.cover.localized_name,
+                url: this.collection.metadata.cover.url,
+              }
+            }
           },
         },
       })

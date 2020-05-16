@@ -21,9 +21,8 @@
               nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'posts-id', params: { id: props.row.uid }}")
                 img(v-if="props.row.cover" :src="props.row.cover.thumbnail")
             .media-content
-              .content
-                h4(v-text="props.row.title")
-                p.is-size-7.has-text-grey ID: {{ props.row.uid }}
+              h4(v-text="props.row.title")
+              p.is-size-7.has-text-grey ID: {{ props.row.uid }}
               ul.action-buttons
                 li: nuxt-link(:to="{ name: 'posts-id-manage', params: { id: props.row.uid } }")
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
