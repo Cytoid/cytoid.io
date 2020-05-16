@@ -21,6 +21,7 @@
 @import "~bulma/sass/components/pagination";
 @import "~bulma/sass/elements/image";
 @import "~bulma/sass/elements/other";
+@import "~bulma/sass/elements/content";
 @import "~bulma/sass/components/tabs";
 
 @import "~bulma/sass/form/shared";
@@ -204,4 +205,8 @@
   background-color: hsla(0,0%,100%,.1);
   font-weight: bold;
   text-transform: uppercase;
+}
+
+.profile-link {
+  display: flex;
 }

@@ -15,7 +15,10 @@
         .column.is-two-thirds-desktop.is-three-fifths-tablet
           #posts.box.is-gradient
             p.title(v-t="'news_title'")
-            post-card.post-card(v-for="post in posts" :key="post.slug" :value="post")
+            post-card(v-for="post in data.posts" :key="post.id" :value="post")
+            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'posts' }")
+              b-icon(icon="angle-double-right" size="is-small")
+              | See History Posts
         .column.is-one-third-desktop.is-two-fifths-tablet
           #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")
             p.title(v-t="'featured_collection_title'")
@@ -92,6 +95,16 @@ query FetchHomePage {
   recentTweet
   discordOnlineCount
   collectionsCount
+  posts: getActivePosts(limit: 10) {
+    id
+    uid
+    title
+    slogan
+    cover {
+      stripe
+    }
+    creationDate
+  }
   gettingStarted: collection(uid: "getting-started") {
     ...CollectionInfoFragment
     levelCount
@@ -185,6 +198,7 @@ fragment CollectionInfoFragment on Collection {
 
 export default {
   layout: 'background',
+  name: 'HomePage',
   components: {
     PlayerRecentRank,
     PlayerRecentComment,
@@ -211,17 +225,6 @@ export default {
       posts: [],
       loadingTweet: false,
     }
-  },
-  asyncData({ $axios, error }) {
-    return Promise.all([
-      $axios.get(process.env.cmsURL + '/api/items/posts?fields=*.*&sort=-created_on'),
-    ])
-      .then(([postsResponse]) => {
-        return {
-          posts: postsResponse.data.data.filter(it => it.published),
-        }
-      })
-      .catch(err => error(err.response?.data))
   },
   mounted() {
     function styleTweet() {
@@ -384,16 +387,6 @@ export default {
   &#posts {
     --box-background-gradient: linear-gradient(to top left, #B06AB3, #4568DC);
     padding: .75rem;
-  }
-}
-
-.post-card {
-  padding-top: 37.5%;
-  @media(min-width: 1024px) {
-    padding-top: 22.5%;
-  }
-  &:not(:last-child) {
-    margin-bottom: 12px;
   }
 }
 </style>

@@ -274,7 +274,10 @@ export default {
     if (!level) {
       return error({ statusCode: 404, message: 'Level not found' })
     }
-    store.commit('setBackground', { source: level.bundle?.backgroundImage?.original })
+    const image = level.bundle?.backgroundImage?.original
+    if (image) {
+      store.commit('setBackground', { source: image })
+    }
     const defaultType = (level.charts && level.charts.length > 0) ? level.charts[0].type : null
     const result = {
       level,

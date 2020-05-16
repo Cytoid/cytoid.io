@@ -11,20 +11,33 @@ export default {
   render(createElement, context) {
     const post = context.props.value
     const slots = {
-      top: () => <span>{ context.parent.$dateFromNow(post.published_date) }</span>,
+      top: () => <span>{ context.parent.$dateFromNow(post.creationDate) }</span>,
       bottom: () => (<div>
-        {post.title && <h1 class="title">{post.title}</h1>}
-        {post.description && <h2 class="subtitle">{post.description}</h2>}
+        {post.title && <h1 class="is-size-4">{post.title}</h1>}
+        {post.slogan && <h2 class="is-size-6">{post.slogan}</h2>}
       </div>),
     }
     return (
       <ContentCard
+        class="post-card"
         {...context.data}
-        image={post.cover_art.data.full_url}
-        to={{ name: 'posts-id', params: { id: post.slug } }}
+        image={post.cover?.stripe}
+        to={{ name: 'posts-id', params: { id: post.uid } }}
         scopedSlots={slots}>
       </ContentCard>
     )
   }
 }
 </script>
+
+<style lang="scss">
+.post-card {
+  padding-top: 37.5%;
+  @media(min-width: 1024px) {
+    padding-top: 22.5%;
+  }
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+</style>

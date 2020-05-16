@@ -144,6 +144,7 @@ $card-background-gutter: 1rem;
         color: rgba(255, 255, 255, 0.7);
       }
       .link {
+        display: flex;
         user-select: none;
         z-index: 2;
         position: relative;
