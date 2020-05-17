@@ -31,7 +31,8 @@ $white-ter:    hsl(0, 0%, 71%);
 $white-bis:    hsl(0, 0%, 86%);
 $white:        hsl(0, 0%, 100%);
 
-$link: white;
+$link: $white-bis;
+$link-hover: $white;
 
 @import "~bulma/sass/utilities/_all";
 
@@ -64,6 +65,7 @@ $body-font-size: 1rem;
 
 $title-color: $white-bis;
 $subtitle-color: $white-ter;
+$title-weight: $weight-normal;
 
 $box-color: $white;
 $box-background-color: $grey;
@@ -83,8 +85,6 @@ $footer-background-color: transparent;
 $section-padding: 16px;
 $section-padding-medium: 48px;
 $section-padding-large: 96px;
-
-$link: $white-ter;
 
 $label-color: $white-ter;
 

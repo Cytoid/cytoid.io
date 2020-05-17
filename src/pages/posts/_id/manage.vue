@@ -13,6 +13,15 @@
         .help Public: The post is visible on both the game client and Cytoid.io
         .help Unlisted: The post is only visible on Cytoid.io "History Posts"
         .help Private: The post is not active and invisible
+      b-field(label="Access Restriction" :addons="false")
+        b-switch(
+          :value="post.epicId && post.locked"
+          type="is-danger"
+          :disabled="!post.epicId"
+          @input="post.locked = $event"
+        ) {{ post.locked ? 'Locked' : 'Unlocked' }}
+        .help(v-if="post.epicId") Based on epic {{post.epicId}}
+        .help(v-else) Requires an epic to be associated with this post.
       captcha(size="invisible" ref="captcha")
       b-field(label="Cover image")
         upload(:background="post.cover && post.cover.thumbnail" type="covers" @upload="coverUploaded" :captchaFunc="getCaptcha")
@@ -86,6 +95,8 @@ export default {
           startDate
           endDate
           state
+          locked
+          epicId
           level {
             id
             uid
@@ -238,6 +249,7 @@ export default {
             collectionId: this.collection?.id || null,
             startDate: this.post.startDate || null,
             endDate: this.post.endDate || null,
+            locked: this.post.epicId && this.post.locked,
             metadata: {
               cover: {
                 name: this.post.metadata.cover.name,

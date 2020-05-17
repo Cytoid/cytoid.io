@@ -117,7 +117,10 @@ export default {
         variables: { email }
       })
         .then(() => {
-          this.$message.info('Confirmation email sent')
+          this.$buefy.toast.open({
+            message: 'Confirmation email sent',
+            type: 'is-success'
+          })
         })
         .catch((error) => {
           this.handleErrorToast(error)
@@ -135,7 +138,10 @@ export default {
         variables: { email: item.address }
       })
         .then(() => {
-          this.$message.info(item.address + ' is now your primary email address!')
+          this.$buefy.toast.open({
+            message: item.address + ' is now your primary email address!',
+            type: 'is-success',
+          })
           for (const email of this.emails) {
             email.primary = false
           }

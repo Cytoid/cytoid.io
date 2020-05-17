@@ -17,6 +17,9 @@
             li: nuxt-link(:to="{name: 'studio-posts'}")
               font-awesome-icon(:icon="['fas', 'file-alt']" fixed-width)
               span.menu-text(v-t="'menu_posts'")
+            li: nuxt-link(:to="{name: 'studio-sudo'}")
+              font-awesome-icon(icon="exchange" fixed-width)
+              span.menu-text SUDO
     .column.is-three-quarters: nuxt-child
 </template>
 

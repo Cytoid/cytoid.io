@@ -259,7 +259,7 @@ export default {
   },
   data: () => ({
     level: null,
-    leaderboard: null,
+    leaderboard: [],
     rankingsChartType: null,
     rankingsPagination: {
       currentPage: 0,

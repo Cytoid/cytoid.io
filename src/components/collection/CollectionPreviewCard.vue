@@ -5,10 +5,10 @@
       v-if="value.cover"
       :style="{ backgroundImage: `url(${value.cover && value.cover.thumbnail})` }")
     .collection-intro-content
-      .content
+      .collection-intro-content-top
         h1.title(v-text="value.title")
         p.subtitle(v-text="value.slogan")
-      .card-bottom
+      .collection-intro-content-bottom
         nuxt-link.profile-link(
           v-if="value.owner"
           :to="{name: 'profile-id', params: { id: value.owner.uid || value.owner.id }}"
@@ -69,10 +69,10 @@ export default {
       display: flex;
       flex-direction: column;
       height: 100%;
-      .content {
+      .collection-intro-content-top {
         flex-grow: 1;
       }
-      .card-bottom {
+      .collection-intro-content-bottom {
         position: relative;
       }
     }
