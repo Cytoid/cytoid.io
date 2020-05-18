@@ -15,10 +15,5 @@
   "email_valid": "此電郵地址的格式不正確。",
   "email_required": "請完整填妥電郵地址。",
   "profile_header_title": "背景展示",
-  "profile_bio_title": "簡介",
-  "security_password_title": "密碼變更",
-  "security_password_field_label": "目前密碼",
-  "security_new_password_field_label": "新密碼",
-  "security_password_confirm_field_label": "確認新密碼",
-  "security_third_party_title": "站外帳戶連結"
+  "profile_bio_title": "簡介"
 }
