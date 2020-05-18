@@ -6,10 +6,6 @@
   "password_field_placeholder": "工信部了！！！",
   "password_field_error_required": "请怒拆工信部",
   "remember_me_checkbox_title": "宗龙图个",
-  "forgot_password_link_title": "忘了工信部？",
   "new_user_welcome_title": "新阿格王朔？",
-  "new_user_welcome_content": "大括号不换行的跟换行的打，变量名首字母大写的跟不大写的打，私有域前面加下划线的跟不加下划线的打",
-  "login_snack_bar": "啊wee！{name}",
-  "login_password_error": "你号的骨灰扬了",
-  "login_username_error": "我新乐你阿妈"
+  "new_user_welcome_content": "大括号不换行的跟换行的打，变量名首字母大写的跟不大写的打，私有域前面加下划线的跟不加下划线的打"
 }
