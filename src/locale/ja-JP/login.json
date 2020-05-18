@@ -6,10 +6,6 @@
   "password_field_placeholder": "パスワード",
   "password_field_error_required": "パスワードを入力してください。",
   "remember_me_checkbox_title": "入力情報を保存する",
-  "forgot_password_link_title": "パスワードをお忘れですか？",
   "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "サインアップをすると、Cytoidのすべてのオンラインコンテンツにアクセスができます。\n登録は30秒とかかりません！",
-  "login_snack_bar": "おかりなさい、 {name} ！",
-  "login_password_error": "CytoidIDかパスワードが間違っています！",
-  "login_username_error": "そのCytoidIDは正しくありません！"
+  "new_user_welcome_content": "サインアップをすると、Cytoidのすべてのオンラインコンテンツにアクセスができます。\n登録は30秒とかかりません！"
 }
