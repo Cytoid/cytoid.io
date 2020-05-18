@@ -1,5 +1,6 @@
 {
   "title": "建立帳戶",
+  "title_external": "Sign Up with {provider}",
   "id_requirement": "Cytoid ID 僅能使用英文小寫、數字、底線（_）與連字號（-）組成，且長度必須在 3 到 16 個字元之間。",
   "password_requirement": "請好好閱讀下方 Cytoid ID 的取名條件。",
   "email_field_error_required": "請在此輸入電郵地址。",
@@ -14,5 +15,7 @@
   "tos_field_title": "勾選即表示同意 Cytoid {0}中的內容。",
   "join_btn": "確認建立",
   "existing_user_title": "早就註冊過的話……",
-  "existing_user_content": "那還愣在這邊幹嘛？除非是閒得發慌吧，沒有的話就趕快去登入了啦！"
+  "existing_user_content": "那還愣在這邊幹嘛？除非是閒得發慌吧，沒有的話就趕快去登入了啦！",
+  "link_title": "Link your {provider} account",
+  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
 }

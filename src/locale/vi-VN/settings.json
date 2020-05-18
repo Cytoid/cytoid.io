@@ -15,10 +15,5 @@
   "email_valid": "Đây không phải là một email hợp lệ.",
   "email_required": "Cần một địa chỉ email.",
   "profile_header_title": "Ảnh bìa",
-  "profile_bio_title": "Tiểu sử",
-  "security_password_title": "Mật khẩu",
-  "security_password_field_label": "Mật khẩu",
-  "security_new_password_field_label": "Mật khẩu mới",
-  "security_password_confirm_field_label": "Nhập lại mật khẩu",
-  "security_third_party_title": "Giấy phép của bên thứ ba"
+  "profile_bio_title": "Tiểu sử"
 }

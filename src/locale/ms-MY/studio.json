@@ -2,6 +2,7 @@
   "menu_analytics": "Analytics",
   "menu_levels": "Levels",
   "menu_collections": "Collections",
+  "menu_posts": "Posts",
   "level_delete_confirm_title": "Delete {name}",
   "level_delete_confirm_content1": "Are you sure that you want to delete {0}?",
   "level_delete_confirm_content2": "All records related to this level will be purged from our database, including {count} playing records. Players will see a reduction on their statistics as well.",
@@ -15,11 +16,5 @@
   "level_visibility_content": "Please input the uid of the level {0} to proceed",
   "level_visibility_title_private": "Make {title} private",
   "level_visibility_title_unlisted": "Make {title} unlisted",
-  "level_visibility_title_public": "Make {title} public",
-  "visibility_status_unlisted": "Unlisted",
-  "visibility_status_public": "Public",
-  "visibility_status_private": "Private",
-  "visibility_action_unlist": "Unlist",
-  "visibility_action_publish": "Publish",
-  "visibility_action_private": "Make Private"
+  "level_visibility_title_public": "Make {title} public"
 }

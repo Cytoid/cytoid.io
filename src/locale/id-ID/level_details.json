@@ -1,6 +1,5 @@
 {
   "download_btn": "Unduh ({size})",
-  "manage_btn": "Mengelola",
   "message_private": "Level ini dibuat pribadi oleh pemiliknya. tidak terlihat oleh pengguna lain.",
   "message_unlisted": "Level ini tidak terdaftar.",
   "message_censored": "Level ini di sensor karna:{reason}",

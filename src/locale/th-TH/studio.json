@@ -2,6 +2,7 @@
   "menu_analytics": "การวิเคราะห์สถิติ",
   "menu_levels": "เลเวล",
   "menu_collections": "คอลเลกชัน",
+  "menu_posts": "Posts",
   "level_delete_confirm_title": "ลบ {name}",
   "level_delete_confirm_content1": "ต้องการที่จะลบ{0}？",
   "level_delete_confirm_content2": "ข้อมูลที่เกี่ยวข้องกับเลเวลนี้จะถูกลบออกฐานข้อมูลของเรา รวมไปถึงจำนวนครั้งในการเล่น ({count} ครั้ง) ผู้เล่นอื่นจะถูกลดสถิติการเล่นด้วยเช่นกัน",
@@ -15,11 +16,5 @@
   "level_visibility_content": "กรุณาใส่ uid ของเลเวล {0} เพื่อทำต่อ",
   "level_visibility_title_private": "ให้ {title} เป็นส่วนตัว",
   "level_visibility_title_unlisted": "ให้ {title} ไม่ถูกจัดอยู่ในรายการ",
-  "level_visibility_title_public": "ให้ {title} เป็นสาธาณะ",
-  "visibility_status_unlisted": "ไม่อยู่ในรายการ",
-  "visibility_status_public": "สาธารณะ",
-  "visibility_status_private": "ส่วนตัว",
-  "visibility_action_unlist": "ทำให้ไม่อยู่รายการ",
-  "visibility_action_publish": "เผยแพร่",
-  "visibility_action_private": "ทำให้เป็นส่วนตัว"
+  "level_visibility_title_public": "ให้ {title} เป็นสาธาณะ"
 }

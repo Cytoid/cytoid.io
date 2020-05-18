@@ -15,10 +15,5 @@
   "email_valid": "This is not a valid email.",
   "email_required": "An email address is required.",
   "profile_header_title": "Cover image",
-  "profile_bio_title": "Bio",
-  "security_password_title": "Password",
-  "security_password_field_label": "Password",
-  "security_new_password_field_label": "New Password",
-  "security_password_confirm_field_label": "Password Confirm",
-  "security_third_party_title": "Third-party Sign-on"
+  "profile_bio_title": "Bio"
 }

@@ -15,10 +15,5 @@
   "email_valid": "有効なメールアドレスではありません。",
   "email_required": "An email address is required.",
   "profile_header_title": "カバー画像",
-  "profile_bio_title": "自己紹介",
-  "security_password_title": "パスワード",
-  "security_password_field_label": "パスワード",
-  "security_new_password_field_label": "新しいパスワード",
-  "security_password_confirm_field_label": "パスワードの確認",
-  "security_third_party_title": "Third-party Sign-on"
+  "profile_bio_title": "自己紹介"
 }

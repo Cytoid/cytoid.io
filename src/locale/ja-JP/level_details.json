@@ -1,6 +1,5 @@
 {
   "download_btn": "ダウンロード ({size})",
-  "manage_btn": "編集",
   "message_private": "This level was made private by its owner. It is invisible to other users.",
   "message_unlisted": "This level is unlisted.",
   "message_censored": "This level was censored for: {reason}",

@@ -6,10 +6,6 @@
   "password_field_placeholder": "รหัสผ่าน",
   "password_field_error_required": "กรุณาใส่รหัสผ่านของคุณ",
   "remember_me_checkbox_title": "จดจำฉันไว้",
-  "forgot_password_link_title": "ลืมรหัสผ่าน?",
   "new_user_welcome_title": "เพิ่งเริ่มเล่น Cytoid?",
-  "new_user_welcome_content": "ลงทะเบียนเพื่อเข้าสู่ระบบมัลติเพลเยอร์ทั้งหมดของ Cytoid ใช้เวลาเพียงไม่ถึง 30 วินาที!",
-  "login_snack_bar": "ยินดีต้อนรับคุณ {name}",
-  "login_password_error": "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
-  "login_username_error": "ไม่มีชื่อผู้ใช้นี้"
+  "new_user_welcome_content": "ลงทะเบียนเพื่อเข้าสู่ระบบมัลติเพลเยอร์ทั้งหมดของ Cytoid ใช้เวลาเพียงไม่ถึง 30 วินาที!"
 }
