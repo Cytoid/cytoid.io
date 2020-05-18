@@ -1,6 +1,5 @@
 {
   "download_btn": "Tải về ({size})",
-  "manage_btn": "Quản lý",
   "message_private": "Bài này đã bị đặt ở mức \"riêng tư\" bởi chủ sở hữu thế nên bài này không thể được nhìn thấy bởi người khác.",
   "message_unlisted": "Màn chơi này chưa được xếp loại.",
   "message_censored": "Bài này đã bị che giấu vì lý do: {reason}",
