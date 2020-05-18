@@ -8,6 +8,7 @@ import * as thTH from './th-TH/index.js'
 import * as jaJP from './ja-JP/index.js'
 import * as idID from './id-ID/index.js'
 import * as esES from './es-ES/index.js'
+import * as csCZ from './cs-CZ/index.js'
 
 const locale = {
   'zh-CN': zhCN,
@@ -18,6 +19,7 @@ const locale = {
   'vi-VN': viVN,
   'th-TH': thTH,
   'ja-JP': jaJP,
+  'cs-CZ': csCZ,
   'id-ID': idID,
   'es-ES': esES,
 }

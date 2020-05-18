@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
 import { pick } from 'accept-language-parser'
-import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id } from 'date-fns/locale'
+import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs } from 'date-fns/locale'
 import locales from '@/locale'
 /*
 function countryRedirect(app, country) {
@@ -38,6 +38,7 @@ export const supportedLanguages = [
   'ja-JP',
   'es-ES',
   'id-ID',
+  'cs-CZ',
 ]
 
 export const dateLocales = Object.freeze({
@@ -51,6 +52,7 @@ export const dateLocales = Object.freeze({
   'es-ES': es,
   'ja-JP': ja,
   'id-ID': id,
+  'cs-CZ': cs,
 })
 
 export function pickLanguage(headerStr) {
