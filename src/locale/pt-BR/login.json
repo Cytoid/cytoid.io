@@ -6,10 +6,6 @@
   "password_field_placeholder": "Senha",
   "password_field_error_required": "Por favor, insira sua senha.",
   "remember_me_checkbox_title": "Lembre-me",
-  "forgot_password_link_title": "Esqueci minha senha",
   "new_user_welcome_title": "Novo no Cytoid?",
-  "new_user_welcome_content": "Inscreva-se para ter acesso a todos os recursos de multiplayer do Cytoid. Leva menos de 30 segundos!",
-  "login_snack_bar": "Bem-vindo de volta, {name}",
-  "login_password_error": "Nome de usuário ou senha inválidos!",
-  "login_username_error": "Esse usuário não existe!"
+  "new_user_welcome_content": "Inscreva-se para ter acesso a todos os recursos de multiplayer do Cytoid. Leva menos de 30 segundos!"
 }
