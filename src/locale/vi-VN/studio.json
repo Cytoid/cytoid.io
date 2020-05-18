@@ -2,6 +2,7 @@
   "menu_analytics": "Phân tích",
   "menu_levels": "Màn chơi",
   "menu_collections": "Các bộ sưu tập",
+  "menu_posts": "Posts",
   "level_delete_confirm_title": "Xoá {name}",
   "level_delete_confirm_content1": "Bạn có chắc chắn muốn xóa {0}?",
   "level_delete_confirm_content2": "Tất cả những dữ liệu liên quan đến màn chơi này sẽ bị xóa khỏi cơ sở dữ liệu của chúng tôi, bao gồm cả {count} bản ghi đang phát. Người chơi sẽ thấy giảm số liệu thống kê của họ.",
@@ -15,11 +16,5 @@
   "level_visibility_content": "Vui lòng nhập uid của màn chơi {0} để tiếp tục",
   "level_visibility_title_private": "Làm cho {title} riêng tư",
   "level_visibility_title_unlisted": "Làm cho {title} ẩn khỏi danh sách",
-  "level_visibility_title_public": "Làm cho {title} công khai",
-  "visibility_status_unlisted": "Không công khai",
-  "visibility_status_public": "Công khai",
-  "visibility_status_private": "Riêng tư",
-  "visibility_action_unlist": "Bỏ danh sách",
-  "visibility_action_publish": "Xuất bản",
-  "visibility_action_private": "Làm cho riêng tư"
+  "level_visibility_title_public": "Làm cho {title} công khai"
 }
