@@ -1,6 +1,5 @@
 {
   "download_btn": "Baixar ({size})",
-  "manage_btn": "Gerenciar",
   "message_private": "Esse nível consta como privado pelo seu proprietário. Ele é invisível para os outros usuários.",
   "message_unlisted": "Este nível consta como não-listado.",
   "message_censored": "Esse nível foi censurado por: {reason}",
