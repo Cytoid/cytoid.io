@@ -27,6 +27,7 @@ getNuxtInstance()
     // Give nuxt middleware to Koa
 
     const app = express()
+    app.set('trust proxy', 1)
     app.use(session({
       store: new RedisStore({ client: redis.createClient(conf.redis) }),
       secret: conf.secret,

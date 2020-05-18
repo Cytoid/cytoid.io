@@ -1,12 +1,11 @@
-node_modules/
-
-cloudbuild.yaml
-
+.eslintrc.js
 .gitignore
-.gitattributes
+cloudbuild.yaml
+Dockerfile
+generate-typings.mjs
+README.me
+test/
 .git/
-.gcloudignore
-
 
 /src/*
 !/src/modules
