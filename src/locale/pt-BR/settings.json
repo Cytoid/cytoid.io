@@ -15,10 +15,5 @@
   "email_valid": "Esse não é um e-mail válido.",
   "email_required": "Um endereço de e-mail é necessário.",
   "profile_header_title": "Imagem da capa",
-  "profile_bio_title": "Biografia",
-  "security_password_title": "Senha",
-  "security_password_field_label": "Senha",
-  "security_new_password_field_label": "Nova senha",
-  "security_password_confirm_field_label": "Confirmação da senha",
-  "security_third_party_title": "Entrar usando serviços externos"
+  "profile_bio_title": "Biografia"
 }
