@@ -2,6 +2,7 @@
   "menu_analytics": "資料分析",
   "menu_levels": "關卡管理",
   "menu_collections": "選集管理",
+  "menu_posts": "Posts",
   "level_delete_confirm_title": "進行刪除「{name}」",
   "level_delete_confirm_content1": "確定要刪除「{0}」嗎？",
   "level_delete_confirm_content2": "請知悉包括共 {count} 次的遊玩紀錄在內，與此相關的任何資料都會從此自伺服器抹除。此外先前曾經上傳紀錄過的帳戶也會產生遊玩統計上的影響，在刪除之前期望再三慎重考慮。",
@@ -15,11 +16,5 @@
   "level_visibility_content": "請在儲存變更之前於下方輸入該關卡的 ID（{0}）。",
   "level_visibility_title_private": "將「{title}」設為私人",
   "level_visibility_title_unlisted": "將「{title}」設為不公開",
-  "level_visibility_title_public": "將「{title}」設為公開",
-  "visibility_status_unlisted": "不公開",
-  "visibility_status_public": "公開",
-  "visibility_status_private": "私人",
-  "visibility_action_unlist": "設為不公開",
-  "visibility_action_publish": "設為公開",
-  "visibility_action_private": "設為私人"
+  "level_visibility_title_public": "將「{title}」設為公開"
 }
