@@ -15,10 +15,5 @@
   "email_valid": "La dirección de correo electrónico no es válida.",
   "email_required": "Una direccion de correo es requerida.",
   "profile_header_title": "Imagen de portada",
-  "profile_bio_title": "Biografía",
-  "security_password_title": "Contraseña",
-  "security_password_field_label": "Contraseña",
-  "security_new_password_field_label": "Nueva contraseña",
-  "security_password_confirm_field_label": "Confirmar Contraseña",
-  "security_third_party_title": "Inicio de sesión de terceros"
+  "profile_bio_title": "Biografía"
 }
