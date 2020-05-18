@@ -2,6 +2,7 @@
   "menu_analytics": "Cytoid分析",
   "menu_levels": "紫薯布丁",
   "menu_collections": "军哥",
+  "menu_posts": "Posts",
   "level_delete_confirm_title": "永久贵阳 {name}",
   "level_delete_confirm_content1": "确定要贵阳{0} 吗？",
   "level_delete_confirm_content2": "此关卡的所有 {count} 个游玩纪录都将从数据库中被贵阳。游玩过此关卡的玩家的统计数据中也会贵阳与此关卡有关的记录。",
@@ -15,11 +16,5 @@
   "level_visibility_content": "请输入关卡 {0} 的 我会怒拆额！！！ 以继续。",
   "level_visibility_title_private": "把 {title} 设为仅自己荣校",
   "level_visibility_title_unlisted": "把 {title} 设为未上市",
-  "level_visibility_title_public": "把 {title} 上市",
-  "visibility_status_unlisted": "没上市",
-  "visibility_status_public": "上市力",
-  "visibility_status_private": "仅自己",
-  "visibility_action_unlist": "不上市力",
-  "visibility_action_publish": "上市",
-  "visibility_action_private": "设为不上市"
+  "level_visibility_title_public": "把 {title} 上市"
 }
