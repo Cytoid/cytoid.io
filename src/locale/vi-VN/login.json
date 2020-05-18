@@ -6,10 +6,6 @@
   "password_field_placeholder": "Mật khẩu",
   "password_field_error_required": "Vui lòng nhập mật khẩu của bạn.",
   "remember_me_checkbox_title": "Ghi nhớ đăng nhập",
-  "forgot_password_link_title": "Quên mật khẩu",
   "new_user_welcome_title": "Mới vào Cytoid?",
-  "new_user_welcome_content": "Đăng ký để truy cập tất cả những tính năng của Cytoid. Mất khoảng 30 giây thôi!",
-  "login_snack_bar": "Chào mừng bạn trở lại, {name}",
-  "login_password_error": "Tên tài khoản hoặc mật khẩu không đúng!",
-  "login_username_error": "Tên tài khoản không tồn tại!"
+  "new_user_welcome_content": "Đăng ký để truy cập tất cả những tính năng của Cytoid. Mất khoảng 30 giây thôi!"
 }
