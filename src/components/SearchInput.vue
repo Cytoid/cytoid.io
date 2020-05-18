@@ -5,6 +5,7 @@
     :data="data"
     icon="search"
     clearable
+    @keydown.native.enter.prevent="submit"
   />
 </template>
 
@@ -13,16 +14,14 @@ export default {
   name: 'Search',
   data() {
     return {
-      data: [],
       searchKey: '',
-      overlay: false
+      data: [],
     }
   },
   methods: {
     submit() {
-      this.overlay = false
       this.$router.push({
-        name: 'levels',
+        name: 'search',
         query: { search: this.searchKey }
       })
     }

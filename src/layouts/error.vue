@@ -1,11 +1,12 @@
 <template lang="pug">
-  .section
+  .section: .container.has-text-centered
     h1(v-text="message")
     nuxt-link(to="/")
 </template>
 
 <script>
 export default {
+  name: 'ErrorLayout',
   layout: 'default',
   props: {
     error: {

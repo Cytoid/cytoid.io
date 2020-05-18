@@ -9,6 +9,7 @@
 import FooterBar from '@/components/Footer'
 import NavBar from '@/components/NavBar'
 export default {
+  name: 'DefaultLayout',
   components: {
     NavBar,
     FooterBar,

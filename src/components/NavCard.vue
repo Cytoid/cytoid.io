@@ -54,8 +54,9 @@ export default {
           id
           exp {
             totalExp
-            currentLevel
+            currentLevelExp
             nextLevelExp
+            currentLevel
           }
           header {
             thumbnail
