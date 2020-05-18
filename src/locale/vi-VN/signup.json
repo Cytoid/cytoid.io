@@ -1,5 +1,6 @@
 {
   "title": "Đăng ký",
+  "title_external": "Sign Up with {provider}",
   "id_requirement": "ID Cytoid của bạn phải có từ 3 đến 16 ký tự và chỉ chứa các chữ cái thường, số, dấu gạch dưới và dấu gạch nối.",
   "password_requirement": "3-16 kí tự, số, _ hoặc -",
   "email_field_error_required": "Địa chỉ email là bắt buộc.",
@@ -14,5 +15,7 @@
   "tos_field_title": "Tôi đồng ý {0}.",
   "join_btn": "Tham gia cộng đồng",
   "existing_user_title": "Đã đăng ký?",
-  "existing_user_content": "Đăng nhập để tận hưởng đặc quyền của bạn với tư cách là thành viên cộng đồng Cytoid!"
+  "existing_user_content": "Đăng nhập để tận hưởng đặc quyền của bạn với tư cách là thành viên cộng đồng Cytoid!",
+  "link_title": "Link your {provider} account",
+  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
 }
