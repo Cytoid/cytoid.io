@@ -36,9 +36,10 @@ getNuxtInstance()
       cookie: {
         maxAge: 86400000,
         httpOnly: true,
-        secure: false,
+        secure: !config.dev,
+        domain: config.dev ? 'localhost' : 'cytoid.io',
       },
-      name: 'cytoid:sess',
+      name: 'cyt:sess',
     }))
     app.use(nuxt.render)
 

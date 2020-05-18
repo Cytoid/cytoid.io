@@ -27,18 +27,6 @@ steps:
   - "./.nuxt/dist/client"
   # Remote Bucket
   - "gs://static.cytoid.io"
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - 'beta'
-  - 'run'
-  - 'deploy'
-  - 'ssr'
-  - '--image'
-  - 'gcr.io/$PROJECT_ID/ssr'
-  - '--region'
-  - 'us-central1'
-  - '--platform'
-  - 'managed'
 images:
   - gcr.io/$PROJECT_ID/ssr
 timeout: 1200s
