@@ -6,10 +6,6 @@
   "password_field_placeholder": "Password",
   "password_field_error_required": "Please input your password.",
   "remember_me_checkbox_title": "Remember Me",
-  "forgot_password_link_title": "Forgot my Password",
   "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
-  "login_snack_bar": "Welcome back, {name}",
-  "login_password_error": "Username or password mismatch!",
-  "login_username_error": "User does not exist!"
+  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!"
 }
