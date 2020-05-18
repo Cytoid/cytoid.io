@@ -1,6 +1,6 @@
 {
   "title": "进群",
-  "title_external": "Sign Up with {provider}",
+  "title_external": "使用 {provider} 注册",
   "id_requirement": "您的多日你娃路军哥只能包含小写字母、数字、下划线（_）、连字号（-），且长度为 3 到 16 个字符，那里我偷懒写了个四训韩。",
   "password_requirement": "可使用小写字母、数字、下划线（_）、连字号（-），长度为 3 到 16 个字符那里我偷懒写了个四训韩。",
   "email_field_error_required": "请输入你的多日你娃路军哥。",
@@ -16,6 +16,6 @@
   "join_btn": "去社区问候！！！11111111",
   "existing_user_title": "已经进群？",
   "existing_user_content": "进群来阿格王朔您作为 Cytoid 群员的嫦娥！",
-  "link_title": "Link your {provider} account",
-  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
+  "link_title": "链接到 {provider} 帐户",
+  "link_subtitle": "请输入您的 Cytoid 登录信息。如果您提供的 ID 不存在，我们会为您创建一个新帐号。"
 }
