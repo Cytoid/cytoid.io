@@ -25,6 +25,7 @@ export default {
     }
 
     return (<div class="content-card-wrap" {...context.data}>
+      { context.scopedSlots.popovers && context.scopedSlots.popovers() }
       <div class="content-card">
         {context.props.image && <div class="content-card-bg" style={{ backgroundImage: `url(${context.props.image})` }} />}
         {context.props.to && <nuxt-link class="content-card-overlay" to={context.props.to} />}

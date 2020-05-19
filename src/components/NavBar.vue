@@ -18,10 +18,11 @@ header.navbar(role="navigation"): .container
         position="is-bottom-left"
         append-to-body
         aria-role="menu"
+        @active-change="activeChange"
       )
         a.navbar-item.navbar-avatar(slot="trigger"): avatar(:source="$store.getters.avatarURL()" style="width: 24px; height: 24px;")
         b-dropdown-item(custom paddingless)
-          nav-card
+          nav-card(v-if="active")
 </template>
 
 <script>
@@ -37,6 +38,11 @@ export default {
       active: false,
     }
   },
+  methods: {
+    activeChange(active) {
+      this.active = active
+    }
+  }
 }
 </script>
 

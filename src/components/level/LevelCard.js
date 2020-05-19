@@ -16,8 +16,8 @@ export default {
     const artist = value.metadata && value.metadata.artist && value.metadata.artist.name
     const titleLocalized = value.metadata && value.metadata.title_localized
     const slots = {
-      top: () => (
-        <div>
+      popovers: () => (
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '16px' }}>
           {
             value.charts && value.charts.map(chart =>
               <DifficultyBadge

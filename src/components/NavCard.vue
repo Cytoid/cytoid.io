@@ -6,7 +6,7 @@
       player-info-avatar(
         :exp="profile.exp"
         :avatar="profile.user.avatar.original"
-        :rating="15"
+        :rating="profile.rating"
       )
     .navcard-uid(v-if="roleIcon")
       font-awesome-icon(:icon="roleIcon")
@@ -58,6 +58,7 @@ export default {
             nextLevelExp
             currentLevel
           }
+          rating
           header {
             thumbnail
           }

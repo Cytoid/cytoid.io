@@ -42,23 +42,22 @@ export default {
         extreme: 'EX',
       }[name]
     }
-    return (<b-dropdown hoverable position="is-top-right" class="difficulty-badge-dropdown">
-      <p slot="content" style="margin-bottom: 0; padding: 8px 16px; color: hsla(226, 68%, 6%, 1);">{value.notesCount} notes</p>
-      <div class={classes} slot="trigger">
+    return (<b-tooltip label={value.notesCount + ' notes'} class="difficulty-badge-tooltip">
+      <div class={classes}>
         {!context.props.ball && <span class="difficulty-badge-name">{value.name || convertedDifficultyName(value.type)}</span>}
         <span class="difficulty-badge-level">{str}</span>
       </div>
-      <b-dropdown-item custom paddingless>
-        <div class="box">{value.notesCount} notes</div>
-      </b-dropdown-item>
-    </b-dropdown>)
+    </b-tooltip>)
   },
 }
 </script>
 
 <style lang="scss">
-  .difficulty-badge-dropdown {
+  .difficulty-badge-tooltip {
     z-index: 10;
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
   }
   .difficulty-badge {
     user-select: none;
