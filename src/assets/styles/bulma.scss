@@ -173,3 +173,9 @@
     border-top-right-radius: $tabs-toggle-link-radius;
   }
 }
+
+.dropdown-content {
+  padding: 0;
+  border-radius: $radius;
+  overflow: hidden;
+}

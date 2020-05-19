@@ -70,8 +70,8 @@ $rating-badge-size: 32px;
     position: absolute;
     left: -$level-progress-padding;
     top: -$level-progress-padding;
-    right: -$level-progress-padding;
-    bottom: -$level-progress-padding;
+    width: $level-size + $level-progress-padding * 2;
+    height: $level-size + $level-progress-padding * 2;
     path.trail, path.progress {
       stroke-width: 5px;
       stroke-linecap: round;

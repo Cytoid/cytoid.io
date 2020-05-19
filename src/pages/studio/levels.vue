@@ -7,6 +7,8 @@
       .heading Manage
       .box
         b-table(
+          :mobile-cards="false"
+          scrollable
           paginated
           backend-pagination
           :total="levels_pagination.total"

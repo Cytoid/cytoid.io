@@ -10,6 +10,8 @@
       b-button(native-type="submit" :loading="createNewLoading") Create
   .box
     b-table.studio-table(
+      :mobile-cards="false"
+      scrollable
       :data="posts"
     )
       template(slot="empty")

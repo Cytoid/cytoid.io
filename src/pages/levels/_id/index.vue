@@ -58,6 +58,7 @@
               a {{ chart.name || convertedDifficultyName(chart.type)}}
           b-table.leaderboard-table(
             :data="leaderboard"
+            :mobile-cards="false"
             centered
             scrollable
             hoverable
