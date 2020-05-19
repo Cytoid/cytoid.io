@@ -19,6 +19,9 @@ export const mutations = {
     state.user = user
   },
   setLocale(state, lang) {
+    if (!lang) {
+      return
+    }
     state.locale = lang
     if (this.app.i18n) {
       this.app.i18n.locale = lang
@@ -29,14 +32,12 @@ export const mutations = {
   }
 }
 export const actions = {
-  nuxtServerInit({ dispatch, commit, state }, { $axios, error, req, app }) {
+  nuxtServerInit({ dispatch, commit, state }, { req }) {
     if (req) {
       // Read cookies success
       const user = req.session?.passport?.user
       commit('setUser', user)
     }
-
-    // i18n
   },
   login({ commit }, payload) {
     return this.$axios

@@ -76,7 +76,9 @@ export default function ({ app, store, req, res }) {
       app.i18n.locale = store.state.locale
     } else {
       const locale = pickLanguage(window.navigator.userLanguage || window.navigator.language)
-      store.commit('setLocale', locale)
+      if (locale) {
+        store.commit('setLocale', locale)
+      }
     }
     /*
     console.log('Country: ' + store.state.country)
@@ -89,8 +91,10 @@ export default function ({ app, store, req, res }) {
       store.commit('setLocale', req.session.locale)
     } else if (req.headers['accept-language']) {
       const lang = pickLanguage(req.headers['accept-language'])
-      store.commit('setLocale', lang)
-      req.session.locale = lang
+      if (lang) {
+        store.commit('setLocale', lang)
+        req.session.locale = lang
+      }
     }
     let resposeLocaleCode = store.state.locale
     if (!resposeLocaleCode) {
