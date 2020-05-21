@@ -91,7 +91,7 @@ export default {
     submit() {
       this.submitLoading = true
       this.$apollo.mutate({
-        mutation: gql`mutation UpdateProfile($input: ProfileInput) {
+        mutation: gql`mutation UpdateProfile($input: ProfileInput!) {
           result: updateProfile(input: $input)
         }`,
         variables: {
