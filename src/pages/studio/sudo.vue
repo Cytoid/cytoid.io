@@ -14,7 +14,8 @@ div
       .buttons
         b-button(@click="sendWorkerCommand()") Emit
         b-button(@click="sendWorkerCommand('level')") Emit Level
-        b-button(@click="sendWorkerCommand('user')") Emit Level
+        b-button(@click="sendWorkerCommand('user')") Emit User
+        b-button(@click="sendWorkerCommand('record')") Emit Record
 </template>
 
 <script>

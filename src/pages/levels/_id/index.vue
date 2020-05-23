@@ -13,6 +13,7 @@
       b-button(
         size="is-large"
         type="is-download"
+        :loading="downloadBtnLoading"
         @click="download"
         icon-left="download"
       ) {{ $t('download_btn', { size: formatSize(level.size)})}}
@@ -119,6 +120,7 @@ import gql from 'graphql-tag'
 import { handleErrorBlock } from '@/plugins/antd'
 import MetaBox from '@/components/MetaBox'
 import EmptyPlaceholder from '@/components/EmptyPlaceholder'
+import DownloadModal from '@/components/level/DownloadModal'
 
 const ModIconKeys = [
   'ap',
@@ -260,6 +262,7 @@ export default {
   },
   data: () => ({
     level: null,
+    downloadBtnLoading: false,
     leaderboard: [],
     rankingsChartType: null,
     rankingsPagination: {
@@ -402,9 +405,24 @@ export default {
     },
     download() {
       if (this.$store.state.user) {
+        this.downloadBtnLoading = true
         this.$refs.captcha.execute()
           .then((code) => {
-            window.open(`${process.env.apiURL}/levels/${this.level.uid}/package?captcha=${code}`, '_blank')
+            this.$axios
+              .post(`/levels/${this.level.uid}/resources`, { captcha: code })
+              .then((res) => {
+                this.downloadBtnLoading = false
+                this.$buefy.modal.open({
+                  parent: this,
+                  component: DownloadModal,
+                  hasModalCard: true,
+                  trapFocus: true,
+                  props: {
+                    level: this.level,
+                    url: res.data.package,
+                  }
+                })
+              })
             global.window.gtag('event', 'download', {
               event_category: 'levels',
               event_label: 'succeed',
