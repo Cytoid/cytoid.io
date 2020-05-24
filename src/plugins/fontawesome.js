@@ -14,6 +14,10 @@ import {
   faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
   faAlbum, faAlbumCollection, faTimesCircle, faExchange,
 } from '@fortawesome/pro-solid-svg-icons'
+
+import {
+  faHeart as faHeartLight,
+} from '@fortawesome/pro-light-svg-icons'
 import {
   faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord,
 } from '@fortawesome/free-brands-svg-icons'
@@ -34,6 +38,6 @@ export default function () {
     faUserCog, faUserTie, faFileAlt,
     faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
     faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
-    faAlbum, faAlbumCollection, faTimesCircle, faExchange,
+    faAlbum, faAlbumCollection, faTimesCircle, faExchange, faHeartLight,
   )
 }

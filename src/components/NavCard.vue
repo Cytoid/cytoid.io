@@ -15,13 +15,13 @@
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['fas', 'user']")
       .navcard-title(v-t="'profile'")
-    nuxt-link.navcard-item(to="/studio")
+    nuxt-link.navcard-item(:to="{ name: 'studio' }")
       font-awesome-icon.icon(:icon="['fas', 'puzzle-piece']")
       .navcard-title(v-t="'studio'")
-    .navcard-item.navcard-item-disabled
-      font-awesome-icon.icon(:icon="['fas', 'heart']")
-      .navcard-title(v-t="'favorites'")
-    nuxt-link.navcard-item(to="/settings")
+    nuxt-link.navcard-item(:to="{ name: 'library' }")
+      font-awesome-icon.icon(:icon="['fas', 'album-collection']")
+      .navcard-title(v-t="'library'")
+    nuxt-link.navcard-item(:to="{ name: 'settings' }")
       font-awesome-icon.icon(:icon="['fas', 'cog']")
       .navcard-title(v-t="'settings'")
   .section

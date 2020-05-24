@@ -4,7 +4,7 @@
     p.modal-card-title Download {{props.level.title}}
   .modal-card-body.has-text-centered
     a.is-large.button.is-download(:href="props.url" :download="props.level.uid + '.cytoidlevel'")
-      b-icon(icon="download")
+      b-icon(icon="download" size="is-medium")
       | Download
 </template>
 

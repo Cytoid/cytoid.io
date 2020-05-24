@@ -17,6 +17,31 @@
         @click="download"
         icon-left="download"
       ) {{ $t('download_btn', { size: formatSize(level.size)})}}
+      template(v-if="$store.state.user")
+        b-button(
+          v-if="level.owned === null"
+          size="is-large"
+          type="is-secondary"
+          :loading="addToLibraryBtnLoading"
+          @click="addToLibrary"
+          icon-pack="fal"
+          icon-left="heart"
+        ) {{ $t('favorite_verb') }}
+        b-button(
+          v-else-if="level.owned === false"
+          size="is-large"
+          type="is-danger"
+          :loading="addToLibraryBtnLoading"
+          @click="removeFromLibrary"
+          icon-left="heart"
+        ) {{ $t('favorite_pass_tense') }}
+        b-button(
+          v-else-if="level.owned === true"
+          size="is-large"
+          type="is-danger"
+          disabled
+          icon-left="album"
+        ) Owned
       nuxt-link.button.is-large(
         :to="{ name: 'levels-id-manage', params: { id: level.uid }}"
         v-if="$store.state.user && (level.owner.id === $store.state.user.id || $store.state.user.role === 'admin' || $store.state.user.role === 'moderator')"
@@ -169,6 +194,7 @@ const query = gql`query FetchLevel($uid: String!){
     tags
     creationDate
     modificationDate
+    owned
     owner {
       id
       uid
@@ -263,6 +289,7 @@ export default {
   data: () => ({
     level: null,
     downloadBtnLoading: false,
+    addToLibraryBtnLoading: false,
     leaderboard: [],
     rankingsChartType: null,
     rankingsPagination: {
@@ -333,6 +360,59 @@ export default {
     return meta
   },
   methods: {
+    addToLibrary() {
+      this.addToLibraryBtnLoading = true
+      this.$apollo.mutate({
+        mutation: gql`mutation AddToLibrary($levelId: Int!) {
+          addToLibrary(levelId: $levelId)
+        }`,
+        variables: {
+          levelId: this.level.id,
+        }
+      })
+        .then(() => {
+          this.level.owned = false
+          this.$buefy.toast.open({
+            message: 'Level added to Library',
+            type: 'is-success',
+          })
+        })
+        .catch(err => this.handleErrorToast(err))
+        .then(() => {
+          this.addToLibraryBtnLoading = false
+        })
+    },
+    removeFromLibrary() {
+      this.$buefy.dialog.confirm({
+        title: `Remove ${this.level.title} from favorites`,
+        message: `Are you sure you want to remove ${this.level.title} from your library?`,
+        confirmText: 'Remove',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => {
+          this.addToLibraryBtnLoading = true
+          this.$apollo.mutate({
+            mutation: gql`mutation RemoveFromLibrary($levelId: Int!) {
+              removeFromLibrary(levelId: $levelId)
+            }`,
+            variables: {
+              levelId: this.level.id,
+            }
+          })
+            .then(() => {
+              this.level.owned = null
+              this.$buefy.toast.open({
+                message: 'Level removed from favorites',
+                type: 'is-warning',
+              })
+            })
+            .catch(err => this.handleErrorToast(err))
+            .then(() => {
+              this.addToLibraryBtnLoading = false
+            })
+        }
+      })
+    },
     pageChange(pageNum) {
       this.rankingsPagination.currentPage = pageNum - 1
       this.reloadLeaderboard()
