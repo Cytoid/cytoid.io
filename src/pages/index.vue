@@ -17,7 +17,7 @@
             p.box-title(v-t="'news_title'")
             post-card(v-for="post in data.posts" :key="post.id" :value="post")
             nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'posts' }")
-              b-icon(icon="angle-double-right" size="is-small")
+              b-icon(icon="angle-double-right")
               | See History Posts
         .column.is-one-third-desktop.is-two-fifths-tablet
           #index-featured-collection.box.is-gradient(v-if="data && data.gettingStarted")

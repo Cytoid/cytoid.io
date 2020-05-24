@@ -30,6 +30,7 @@
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                 li: a(@click="openDeleteModal(props.row)")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
+        b-table-column(field="type" label="Type") {{ props.row.type }}
         b-table-column(field="state" label="State") {{ props.row.state }}
 </template>
 
@@ -55,8 +56,9 @@ export default {
   async asyncData({ app, error }) {
     let posts = await app.apolloProvider.defaultClient.query({
       query: gql`query StudioGetPosts {
-        posts: getPosts(limit: 10, all: true) {
+        posts: getPosts(limit: 20, all: true) {
           id
+          type
           uid
           title
           slogan

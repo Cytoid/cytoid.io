@@ -13,6 +13,12 @@
         .help Public: The post is visible on both the game client and Cytoid.io
         .help Unlisted: The post is only visible on Cytoid.io "History Posts"
         .help Private: The post is not active and invisible
+      b-field(label="Type" :addons="false")
+        b-dropdown(@change="post.type = $event")
+          b-button(slot="trigger" native-type="button" icon-right="caret-down") {{post.type}}
+          b-dropdown-item(value="POST") Post
+          b-dropdown-item(value="EVENT") Event
+          b-dropdown-item(value="PAGE") Page
       b-field(label="Access Restriction" :addons="false")
         b-switch(
           :value="post.epicId && post.locked"
@@ -88,6 +94,7 @@ export default {
       query: gql`query StudioGetPosts($uid: String!) {
         post: getPost(uid: $uid) {
           id
+          type
           uid
           title
           slogan
@@ -242,6 +249,7 @@ export default {
           id: this.post.id,
           data: {
             title: this.post.title,
+            type: this.post.type,
             slogan: this.post.slogan,
             content: this.post.content,
             state: this.post.state,

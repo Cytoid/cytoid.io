@@ -1,5 +1,5 @@
 import DifficultyBadge from '@/components/level/DifficultyBadge'
-import ContentCard from '../ContentCard'
+import ContentCard from '@/components/ContentCard'
 import PlayButton from '@/components/level/PlayButton'
 
 export default {
