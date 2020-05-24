@@ -2573,9 +2573,9 @@ anymatch@~3.1.1:
     picomatch "^2.0.4"
 
 apexcharts@^3.8.4:
-  version "3.19.0"
-  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.19.0.tgz#388265227e230c342390c47979898d5a0d4d7640"
-  integrity sha512-fzupCGVDvOoU6kEzguLAfgRgrlHynHM5fnkkyCL85tYf9U8bw1hCijs4A+kWXurC/SNytJrArBc21kA/2wuHYg==
+  version "3.19.2"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.19.2.tgz#d46113bf253e79f15e67d00721e5bb12af73914e"
+  integrity sha512-hMFLRE2Lyx4WrN9pYfQLvBDcn+HOodZrqRwc+kucxM+hcUmI2NHY4z+GI14+VcSFmD4aKiMbS3z3Q2jiBxUrcg==
   dependencies:
     svg.draggable.js "^2.2.2"
     svg.easing.js "^2.0.0"
@@ -3541,9 +3541,9 @@ browserslist@^4.0.0, browserslist@^4.11.1, browserslist@^4.6.4, browserslist@^4.
     pkg-up "^2.0.0"
 
 buefy@^0.8.10:
-  version "0.8.17"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.17.tgz#3669ec0a5d2ad33c8109f9b8b9290979f1202cc9"
-  integrity sha512-lLAnLjc8dQpGnLML+4tKpP2yUi/WAQ38ukR5qAMq7Cc9J0sbwy1kXAHarEPlOZkQFzx6c3VmHgL7/qGsupszrQ==
+  version "0.8.19"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.19.tgz#7b8e3dd8c2dfe11595084d30579ff3e750bde4d9"
+  integrity sha512-c9JOYiGGHwhmFAffjUPI6wrdo5+NpGPpw1F7dc/01lY/05EPLJVHDLGnn+DC2XnEgc2VaOM31a2URdRSx3L2vA==
   dependencies:
     bulma "0.7.5"
 
@@ -4850,9 +4850,9 @@ date-fns@^1.27.2:
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
 date-fns@^2.0.1:
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.13.0.tgz#d7b8a0a2d392e8d88a8024d0a46b980bbfdbd708"
-  integrity sha512-xm0c61mevGF7f0XpCGtDTGpzEFC/1fpLXHbmFpxZZQJuvByIK2ozm6cSYuU+nxFYOPh2EuCfzUwlTEFwKG+h5w==
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.14.0.tgz#359a87a265bb34ef2e38f93ecf63ac453f9bc7ba"
+  integrity sha512-1zD+68jhFgDIM0rF05rcwYO8cExdNqxjq4xP1QKM60Q45mnO6zaMWB4tOzrIr4M4GSLntsKeE4c9Bdl2jhL/yw==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -12555,9 +12555,9 @@ vue-i18n-extensions@^0.2.1:
   integrity sha512-xBrItI7bEwBnG7eAlnyUARP41JYYn2+ABMR8q1Yh5FM9hHCbs4XPZwG+4+FPeIZ6b5gYk4YUP//m+fWiuU9z9A==
 
 vue-i18n@^8.12.0:
-  version "8.17.4"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.17.4.tgz#d314df7a3fa0780f86cff46a02752668f89b3935"
-  integrity sha512-wpk/drIkPf6gHCtvHc8zAZ1nsWBZ+/OOJYtJxqhYD6CKT0FJAG5oypwgF9kABt30FBWhl8NEb/QY+vaaBARlFg==
+  version "8.17.7"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.17.7.tgz#d87e653e815a07f86e2c2dfe35261e6ea105c38a"
+  integrity sha512-7IQJ+72IIIxfR6Mt+X6EDmMP1i5oETFpc0FttnWKA9cgacf1DAlyho1aTItekG+AkbNs6nz4q3sYrXaPdC0irA==
 
 vue-loader@^15.9.1:
   version "15.9.1"

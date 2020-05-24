@@ -153,9 +153,11 @@ module.exports = {
   */
   build: {
     extractCSS: true,
+    /*
     analyze: {
       analyzerMode: 'static'
     },
+    */
     transpile: [
       'vee-validate'
     ],

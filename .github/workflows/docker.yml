@@ -8,6 +8,7 @@ env:
   IMAGE: ssr
   REGISTRY_HOSTNAME: gcr.io
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  NODE_ENV: production
 jobs:
   build:
     name: Build
@@ -19,7 +20,7 @@ jobs:
         with:
           node-version: '14'
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --production=false
       - name: Build API
         run: yarn build
       - name: Prune Dev Dependencies

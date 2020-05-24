@@ -82,12 +82,12 @@ import { Tweet } from 'vue-tweet-embed'
 import gql from 'graphql-tag'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import PlayerRecentComment from '@/components/player/PlayerRecentComment'
+import ScoreBadge from '@/components/level/ScoreBadge'
+import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PostCard from '@/components/post/PostCard'
 import LevelCard from '@/components/level/LevelCard'
 import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
 import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
-import ScoreBadge from '@/components/level/ScoreBadge'
-import DifficultyBadge from '@/components/level/DifficultyBadge'
 
 const query = gql`
 query FetchHomePage {
