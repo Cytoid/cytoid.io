@@ -40,17 +40,14 @@
 <script>
 import gql from 'graphql-tag'
 import { handleErrorBlock } from '@/plugins/antd'
-const query = gql`query StudioAnalytics {
-  my {
-    user {
-      id
-      uid
-      recentRecords(limit: 30) {
-        ...RecordFragment
-      }
-      bestRecords(limit: 30) {
-        ...RecordFragment
-      }
+const query = gql`query StudioAnalytics($id: ID) {
+  profile(id: $id) {
+    id
+    recentRecords(limit: 30) {
+      ...RecordFragment
+    }
+    bestRecords(limit: 30) {
+      ...RecordFragment
     }
   }
 }
@@ -84,9 +81,12 @@ export default {
   async asyncData({ params, error, app, store }) {
     const data = await app.apolloProvider.defaultClient.query({
       query,
-    }).then(({ data }) => data.my.user)
+      variables: {
+        id: store.state.user.id,
+      }
+    }).then(({ data }) => data.profile)
       .catch(err => handleErrorBlock(err, error))
-    const sortedRecents = data.recentRecords.concat().sort((a, b) => b.rating - a.rating).slice(0, 10)
+    const sortedRecents = data.recentRecords?.concat().sort((a, b) => b.rating - a.rating).slice(0, 10)
     for (const item of sortedRecents) {
       item.used = true
     }

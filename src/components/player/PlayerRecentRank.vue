@@ -16,9 +16,6 @@
         avatar(:size="24" fixed :source="props.value.owner.avatar.small" style="margin-right: 8px;")
         span(v-text="props.value.owner.name || props.value.owner.uid")
     div(style="display: flex; margin-bottom: 8px; position: relative; z-index: 2;")
-      span(
-        :style="{ 'font-weight': (props.value.rank !== null) && (props.value.rank <= 3) ? 'bold' : 'normal' }"
-      ) {{ '#' + props.value.rank }}
       nuxt-link(:to="{ name: 'levels-id', params: { id: props.value.chart.level.uid }}" style="margin-left: 4px;" v-text="props.value.chart.level.title")
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")

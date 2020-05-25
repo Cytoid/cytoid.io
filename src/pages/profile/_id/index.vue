@@ -21,12 +21,12 @@
         .bio
           p.heading(v-t="'bio_title'")
           .text-ele(v-html="bio")
-        div
+        div(style="margin-top: 1rem;")
           p.heading(v-t="'recent_ranks_title'")
           player-recent-rank(
-            v-for="rank in recentRanks"
+            v-for="rank in profile.recentRecords"
             :key="rank.id"
-            :rank="rank"
+            :value="rank"
           )
       .column.is-three-quarters-widescreen.is-three-fifths
         .box.statistics-card
@@ -157,6 +157,28 @@ query FetchProfilePage($uid: String!) {
       featuredLevels: levels(category: "featured", first: 6) { ...LevelInfo }
     }
     rating
+    recentRecords(limit: 10) {
+      id
+      date
+      chart {
+        id
+        difficulty
+        name
+        type
+        notesCount
+        level {
+          uid
+          title
+          bundle {
+            backgroundImage {
+             stripe
+            }
+          }
+        }
+      }
+      score
+      accuracy
+    }
     exp {
       totalExp
       currentLevelExp
@@ -194,7 +216,6 @@ export default {
   },
   layout: 'background',
   data: () => ({
-    recentRanks: [],
     profile: null,
     chartMode: 'activity'
   }),
