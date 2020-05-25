@@ -25,7 +25,7 @@
               .media
                 .media-left
                   nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'levels-id', params: { id: props.row.uid }}")
-                    img(:src="props.row.cover.thumbnail")
+                    img(:src="props.row.bundle && props.row.bundle.backgroundImage && props.row.bundle.backgroundImage.thumbnail")
                 .media-content
                   h4(v-text="props.row.title")
                   p.is-size-7 ID: {{ props.row.uid }}
@@ -165,20 +165,38 @@ export default {
     },
     fetchLevels() {
       this.levels_loading = true
-      this.$axios.get('/levels', {
-        params: {
-          owner: this.$store.state.user.id,
-          page: this.levels_pagination.current,
+
+      this.$apollo.query({
+        query: gql`query FetchLevelForStudio($limit: Int!, $start: Int!) {
+          my {
+            levelsCount
+            levels(start: $start, limit: $limit) {
+              id
+              uid
+              title
+              creationDate
+              bundle {
+                backgroundImage {
+                  thumbnail
+                }
+              }
+              state
+            }
+          }
+        }`,
+        variables: {
+          start: this.levels_pagination.current * this.levels_pagination.pageSize,
           limit: this.levels_pagination.pageSize,
-          sort: 'creation_date',
-          order: 'desc'
         }
       })
-        .then((res) => {
-          this.levels_pagination.total = parseInt(res.headers['x-total-entries'], 10)
-          this.levels_loading = false
-          this.levels = res.data
+        .then(({ data }) => {
+          this.levels_pagination.total = data.my.levelsCount
+          this.levels = data.my.levels
           window.scrollTo(0, 0)
+        })
+        .catch(err => this.handleErrorToast(err))
+        .then(() => {
+          this.levels_loading = false
         })
     },
   },

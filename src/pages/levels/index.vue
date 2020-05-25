@@ -43,6 +43,17 @@
 <script>
 import LevelCard from '@/components/level/LevelCard'
 
+function baseURL(query) {
+  if (query.search) {
+    return '/search/levels'
+  }
+  console.log(query.sort)
+  if (query.sort && !['creation_date', 'modification_date', 'duration', 'difficulty'].includes(query.sort)) {
+    return '/search/levels'
+  }
+
+  return '/levels'
+}
 export default {
   components: {
     LevelCard,
@@ -83,7 +94,7 @@ export default {
         }
         delete mappedFilters.category
       }
-      this.$axios.get('/levels', { params: { ...mappedFilters, page: this.page - 1, limit: this.pageSize } })
+      this.$axios.get(baseURL(mappedFilters), { params: { ...mappedFilters, page: this.page - 1, limit: this.pageSize } })
         .then((response) => {
           this.levels = response.data
           this.totalEntries = parseInt(response.headers['x-total-entries'])
@@ -100,7 +111,7 @@ export default {
     query.page = query.page || 1
     query.sort = query.sort || 'creation_date'
     query.order = query.order || 'desc'
-    return $axios.get('/levels', { params: { ...query, page: query.page - 1, limit: 24 } })
+    return $axios.get(baseURL(query), { params: { ...query, page: query.page - 1, limit: 24 } })
       .then((response) => {
         return {
           levels: response.data,

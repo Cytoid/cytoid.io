@@ -89,6 +89,7 @@ a.is-active .menu-text {
       }
       border-radius: $radius;
       overflow: hidden;
+      object-fit: cover;
     }
   }
 </style>

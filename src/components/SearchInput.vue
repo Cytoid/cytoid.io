@@ -21,7 +21,7 @@ export default {
   methods: {
     submit() {
       this.$router.push({
-        name: 'search',
+        name: 'levels',
         query: { search: this.searchKey }
       })
     }
