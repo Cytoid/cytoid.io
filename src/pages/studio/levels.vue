@@ -36,12 +36,14 @@
                       font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
             b-table-column(label="Visibility")
               visibility-select(:value="props.row.state" @change="openChangeVisibilityModal(props.row, $event)")
-            b-table-column(label="Downloads") {{ props.row.downloads }}
-            b-table-column(label="Plays") {{ props.row.plays }}
+            b-table-column(label="Downloads") {{ props.row.downloadCount }}
+            b-table-column(label="Plays") {{ props.row.playCount }}
             b-table-column(label="Rating")
               .content(style="white-space: nowrap;")
                 font-awesome-icon(:icon="['fas', 'star']" style="margin-right: 0.5rem;")
-                | {{ props.row.rating ? (Math.floor(props.row.rating * 0.5 * 100) / 100).toFixed(2) : 'N/A' }}
+                template(v-if="props.row.avgRating && props.row.ratingCount")
+                  | {{ (Math.floor(props.row.avgRating * 0.5 * 100) / 100).toFixed(2) }} ({{props.row.ratingCount}})
+                template(v-else) N/A
             b-table-column(label="Date") {{ $dateFormatCalendar(props.row.creationDate) }}
 </template>
 
@@ -165,7 +167,6 @@ export default {
     },
     fetchLevels() {
       this.levels_loading = true
-
       this.$apollo.query({
         query: gql`query FetchLevelForStudio($limit: Int!, $start: Int!) {
           my {
@@ -181,6 +182,10 @@ export default {
                 }
               }
               state
+              avgRating
+              ratingCount
+              downloadCount
+              playCount
             }
           }
         }`,
