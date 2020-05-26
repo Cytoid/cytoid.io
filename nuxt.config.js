@@ -14,7 +14,7 @@ module.exports = {
   },
   env: {
     assetURL: config.get('assetURL'),
-    apiURL: config.get('apiURLClient'),
+    apiURL: config.get('serviceURLClient'),
     imageURL: config.get('imageURL'),
     webURL: config.get('webURL'),
     cmsURL: config.get('cmsURL'),
@@ -105,8 +105,8 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: config.get('apiURLServer'),
-    browserBaseURL: config.get('apiURLClient'),
+    baseURL: config.get('serviceURLServer'),
+    browserBaseURL: config.get('serviceURLClient'),
     progress: true,
     credentials: true,
   },

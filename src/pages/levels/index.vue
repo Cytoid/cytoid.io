@@ -42,16 +42,15 @@
 
 <script>
 import LevelCard from '@/components/level/LevelCard'
+import { handleErrorBlock } from '@/plugins/antd'
 
 function baseURL(query) {
   if (query.search) {
     return '/search/levels'
   }
-  console.log(query.sort)
   if (query.sort && !['creation_date', 'modification_date', 'duration', 'difficulty'].includes(query.sort)) {
     return '/search/levels'
   }
-
   return '/levels'
 }
 export default {
@@ -103,7 +102,7 @@ export default {
         })
         .catch((error) => {
           this.loading = false
-          console.log(error)
+          this.handleErrorToast(error)
         })
     }
   },
@@ -119,7 +118,7 @@ export default {
           totalPages: parseInt(response.headers['x-total-page']),
         }
       })
-      .catch(err => error(err.response?.data))
+      .catch(err => handleErrorBlock(err, error))
   },
   methods: {
     updateRoute(query) {
