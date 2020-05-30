@@ -3,5 +3,6 @@
   "staticURL": "STATIC_URL",
   "apiURLServer": "SERVER_API_URL",
   "apiURLClient": "CLIENT_API_URL",
-  "secret": "SECRET_KEY"
+  "secret": "SECRET_KEY",
+  "redis": "REDIS_URL"
 }

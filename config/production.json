@@ -7,6 +7,5 @@
   "cmsURL": "https://cms.cytoid.io",
   "webURL": "https://cytoid.io",
   "captchaKey": "0df1ddf7-9237-4460-88fe-fa257c236213",
-  "analyticsCode": "UA-127631599-1",
-  "redis": "redis://redis:6379"
+  "analyticsCode": "UA-127631599-1"
 }
