@@ -1,8 +1,8 @@
 <template lang="pug" functional>
 footer.container.footer.has-text-centered
   ul
-    li: nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }") {{parent.$t('dmca')}}
-    li: nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{parent.$t('tos')}}
+    li: nuxt-link(:to="{ name: 'pages-id', params: { id: 'dmca' } }") {{parent.$t('dmca')}}
+    li: nuxt-link(:to="{ name: 'pages-id', params: { id: 'terms' } }") {{parent.$t('tos')}}
     li: a(href="https://github.com/Cytoid/" v-t="'status'")
     li: a(href="https://github.com/Cytoid/") GitHub
     li

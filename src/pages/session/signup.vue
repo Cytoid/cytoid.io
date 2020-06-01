@@ -46,7 +46,7 @@
           :message="errors")
           b-checkbox(v-model="form.tos")
             i18n(path="tos_field_title")
-              nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{ $t('tos') }}
+              nuxt-link(:to="{ name: 'pages-id', params: { id: 'terms' } }") {{ $t('tos') }}
       captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
       b-button(native-type="submit" expanded :loading="loading" style="margin-bottom: 1rem;" :disabled="invalid || !captchaToken") {{$t('join_btn')}}
       .divider OR

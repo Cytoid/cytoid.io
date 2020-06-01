@@ -56,7 +56,7 @@ export default {
   async asyncData({ app, error }) {
     let posts = await app.apolloProvider.defaultClient.query({
       query: gql`query StudioGetPosts {
-        posts: getPosts(limit: 20, all: true) {
+        posts: getPosts(limit: 100, all: true) {
           id
           type
           uid

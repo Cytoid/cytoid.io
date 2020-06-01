@@ -45,6 +45,7 @@ const query = gql`query GetPost($uid: String!) {
     id
     uid
     title
+    type
     slogan
     content
     state
@@ -135,7 +136,9 @@ export default {
   },
   head() {
     const meta = new Meta(this.post.title, this.post.slogan)
-    meta.extend('og:image', this.post.cover.original)
+    if (this.post.cover?.original) {
+      meta.extend('og:image', this.post.cover.original)
+    }
     return meta
   },
   computed: {
@@ -152,7 +155,7 @@ export default {
       variables: { uid: params.id }
     }).then(({ data }) => data?.post)
       .catch(err => handleErrorBlock(err, error))
-    if (!post) {
+    if (!post || (post.type !== 'POST' && post.type !== 'EVENT')) {
       return error({ statusCode: 404, message: 'Post not found' })
     }
     const image = post.cover?.original

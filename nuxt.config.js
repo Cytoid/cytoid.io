@@ -17,7 +17,6 @@ module.exports = {
     apiURL: config.get('serviceURLClient'),
     imageURL: config.get('imageURL'),
     webURL: config.get('webURL'),
-    cmsURL: config.get('cmsURL'),
     analyticsCode: config.get('analyticsCode'),
     captchaKey: config.get('captchaKey'),
   },

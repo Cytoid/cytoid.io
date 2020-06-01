@@ -6,8 +6,8 @@
     template(v-if="value === 'PUBLIC'")
       p(v-t="'level_visibility_public_title'")
       i18n(path="level_visibility_public_content" tag="p")
-        nuxt-link(:to="{ name: 'legal-id', params: { id: 'terms' } }") {{$t('tos')}}
-        nuxt-link(:to="{ name: 'legal-id', params: { id: 'dmca' } }") {{$t('dmca')}}
+        nuxt-link(:to="{ name: 'pages-id', params: { id: 'terms' } }") {{$t('tos')}}
+        nuxt-link(:to="{ name: 'pages-id', params: { id: 'dmca' } }") {{$t('dmca')}}
     template(v-else-if="value === 'UNLISTED'")
       p(v-t="'level_visibility_unlisted_title'")
       i18n(path="level_visibility_unlisted_content" tag="p")
