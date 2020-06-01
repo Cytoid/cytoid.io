@@ -1,12 +1,12 @@
 {
-  "sort_select_title": "Sort",
-  "sort_select_upload_date": "Upload date",
-  "sort_select_modification_date": "Modified date",
-  "sort_select_difficulty": "Difficulty",
-  "sort_select_duration": "Duration",
-  "sort_select_downloads": "Downloads",
-  "sort_select_rating": "Rating",
-  "category_select_title": "Category",
-  "category_select_item_all": "All",
-  "category_select_item_featured": "Featured"
+  "sort_select_title": "정렬",
+  "sort_select_upload_date": "업로드 날짜",
+  "sort_select_modification_date": "수정된 날짜",
+  "sort_select_difficulty": "난이도",
+  "sort_select_duration": "길이",
+  "sort_select_downloads": "다운로드",
+  "sort_select_rating": "평가",
+  "category_select_title": "분류",
+  "category_select_item_all": "전체",
+  "category_select_item_featured": "추천"
 }
