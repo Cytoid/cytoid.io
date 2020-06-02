@@ -28,7 +28,7 @@
         ) {{ post.locked ? 'Locked' : 'Unlocked' }}
         .help(v-if="post.epicId") Based on epic {{post.epicId}}
         .help(v-else) Requires an epic to be associated with this post.
-      captcha(size="invisible" ref="captcha")
+      captcha(ref="captcha")
       b-field(label="Cover image")
         upload(:background="post.cover && post.cover.thumbnail" type="covers" @upload="coverUploaded" :captchaFunc="getCaptcha")
       b-field(label="Logo")

@@ -4,7 +4,7 @@
     h4.is-size-4.has-text-centered  Sent
     h1.is-size-1.has-text-centered: font-awesome-icon(icon="paper-plane")
     p Please check your inbox to continue
-    captcha(v-model="captchaCode" size="compact")
+    captcha(ref="captcha")
     b-button(@click="resend" :loading="loading" :disabled="time>0 || !captchaCode" expanded)
       | Resend
       span(v-if="time>0") ({{time}})
@@ -22,8 +22,8 @@
           :type="{ 'is-danger': errors[0], 'is-success': valid }"
           :message="errors")
           b-input(v-model="email" icon="envelope")
-      captcha(v-model="captchaCode" size="compact")
-      b-button(native-type="submit" expanded :loading="loading" :disabled="!captchaCode") Send
+      captcha(ref="captcha")
+      b-button(native-type="submit" expanded :loading="loading") Send
 </template>
 
 <script>
@@ -36,7 +36,6 @@ export default {
   },
   data() {
     return {
-      captchaCode: null,
       sent: null,
       time: 60,
       loading: false,
@@ -52,15 +51,18 @@ export default {
     submit() {
       const email = this.email
       this.loading = true
-      this.$apollo.mutate({
-        mutation: gql`mutation SendPasswordResetEmail($email: String!){
-            sendResetPasswordEmail(email: $email)
-        }`,
-        variables: {
-          email,
-          captcha: this.captchaCode
-        }
-      })
+      this.$refs.captcha.execute()
+        .then((token) => {
+          return this.$apollo.mutate({
+            mutation: gql`mutation SendPasswordResetEmail($email: String!){
+              sendResetPasswordEmail(email: $email)
+          }`,
+            variables: {
+              email,
+              captcha: token
+            }
+          })
+        })
         .then((result) => {
           const success = result.data.sendResetPasswordEmail
           if (!success) {

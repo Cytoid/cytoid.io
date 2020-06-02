@@ -1,66 +1,79 @@
-import Hcaptcha from '@hcaptcha/vue-hcaptcha/src/component/vue-hcaptcha.vue'
+function CaptchaScript(cb) {
+  const script = document.createElement('script')
+  script.src = 'https://www.google.com/recaptcha/api.js'
+  if (cb) {
+    script.src += '?onload=grecaptchaOnload'
+    global.grecaptchaOnload = cb
+  }
+  script.async = true
+  script.defer = true
+  return script
+}
+
 export default {
   name: 'Captcha',
-  components: {
-    Hcaptcha,
-  },
-  props: {
-    size: {
-      type: String,
-      required: false,
-      default: 'normal', // normal, compact, invisible
-    },
-    value: {
-      type: String,
-      required: false,
-    }
-  },
-  watch: {
-    value(newValue) {
-      if (!newValue) {
-        this.$refs.captcha.reset()
+  mounted() {
+    // if not loaded, create script tag, and wait to render hcaptcha element
+    if (!global.grecaptcha) {
+      console.log('loading captcha js')
+      const script = CaptchaScript(this.renderCaptcha)
+      if (document.getElementsByTagName('head').length > 0) {
+        const container = document.getElementsByTagName('head')[0]
+        container.appendChild(script)
       }
+    } else {
+      console.log('captcha already loaded')
+      this.renderCaptcha()
     }
   },
   methods: {
-    execute() {
-      return new Promise((resolve, reject) => {
-        this.executeResolve = resolve
-        this.executeReject = reject
-        this.$refs.captcha.execute()
+    renderCaptcha() {
+      global.grecaptcha.render(this.$el, {
+        sitekey: process.env.captchaKey,
+        badge: 'bottomleft',
+        size: 'invisible',
+        callback: this.onSubmit,
+        'expired-callback': this.onExpired,
+        'error-callback': this.onError,
       })
+    },
+    execute() {
+      if (typeof global.grecaptcha === 'undefined') {
+        return Promise.reject(new Error('Captcha not loaded'))
+      }
+      global.grecaptcha.execute()
+
+      return new Promise((resolve, reject) => {
+        this.resolve = resolve
+        this.reject = reject
+      })
+    },
+    onSubmit(token) {
+      if (this.resolve) {
+        this.resolve(token)
+        this.resolve = null
+        this.reject = null
+      }
+      global.grecaptcha.reset()
+    },
+    onExpired() {
+      if (this.reject) {
+        this.reject(new Error('token expired'))
+        this.resolve = null
+        this.reject = null
+      }
+      global.grecaptcha.reset()
+    },
+    onError() {
+      if (this.reject) {
+        this.reject(new Error('Can not load reCAPTCHA'))
+        this.resolve = null
+        this.reject = null
+      }
+      global.grecaptcha.reset()
     }
   },
   render(h) {
-    return h(
-      'hcaptcha',
-      {
-        props: {
-          sitekey: process.env.captchaKey,
-          size: this.size,
-          theme: 'dark',
-        },
-        on: {
-          verify: (code) => {
-            if (this.executeResolve) {
-              this.executeResolve(code)
-              this.executeResolve = null
-              this.executeReject = null
-            }
-            this.$emit('input', code)
-          },
-          expired: () => this.$emit('input', null),
-          error: () => {
-            if (this.executeReject) {
-              this.executeReject(new Error('Captcha verification failed'))
-              this.executeReject = null
-              this.executeResolve = null
-            }
-            this.$emit('input', null)
-          },
-        },
-        ref: 'captcha'
-      }
-    )
+    return h('div')
   }
 }

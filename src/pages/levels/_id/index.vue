@@ -1,6 +1,6 @@
 <template lang="pug">
   .section: .container(v-if="level" style="margin-top: 256px;")
-    captcha(size="invisible" ref="captcha")
+    captcha(ref="captcha")
     h1.is-size-1(v-text="level.title")
     h5.is-size-5(
       style="color: rgba(255, 255, 255, 0.9); margin-bottom: 20px;"

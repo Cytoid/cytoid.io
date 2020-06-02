@@ -27,8 +27,8 @@ export default {
   },
   apollo: {
     posts: {
-      query: gql`query FetchPosts($cursor: String, $limit: Int!){
-        posts: getPosts(limit: $limit, cursor: $cursor) {
+      query: gql`query FetchPosts($skip: Int, $limit: Int!){
+        posts: getPosts(limit: $limit, skip: $skip) {
           id
           uid
           title
@@ -41,7 +41,7 @@ export default {
       }`,
       variables: {
         limit: 32,
-        cursor: null,
+        skip: null,
       },
     }
   },
@@ -51,7 +51,7 @@ export default {
       this.$apollo.queries.posts.fetchMore({
         variables: {
           limit: 32,
-          cursor: this.posts[this.posts.length - 1].id,
+          skip: this.posts.length,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           this.loading = false

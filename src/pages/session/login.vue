@@ -11,11 +11,10 @@
         b-checkbox(v-model="form.remember") {{$t('remember_me_checkbox_title')}}
         nuxt-link.is-pulled-right(to="/session/reset")
           small(v-t="'forgot_password_link_title'")
-        captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
+        captcha(ref="captcha")
         b-button(
           native-type="submit"
           :loading="loading"
-          :disabled="!captchaToken"
           expanded
           style="margin-top: 1rem;") {{ $t('login_btn') }}
     .level.is-mobile(style="margin-top: 1rem; margin-bottom: 1rem;")
@@ -46,7 +45,6 @@ export default {
     return {
       loading: false,
       externalLoginLoading: false,
-      captchaToken: null,
       form: {
         username: null,
         password: null,
@@ -100,7 +98,8 @@ export default {
     },
     signIn() {
       this.loading = true
-      this.$store.dispatch('login', { ...this.form, captcha: this.captchaToken })
+      this.$refs.captcha.execute()
+        .then(token => this.$store.dispatch('login', { ...this.form, captcha: token }))
         .then((user) => {
           this.$buefy.toast.open({
             message: this.$t('login_snack_bar', { name: user.name || user.uid }),
