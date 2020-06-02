@@ -28,11 +28,11 @@
             type="password"
             :placeholder="$t('password_field_placeholder')"
             ref="passwordField")
-      captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
+      captcha(ref="captcha")
       b-button(
         native-type="submit"
         :loading="loading"
-        :disabled="!captchaToken || invalid" expanded
+        :disabled="invalid" expanded
       ) {{ $t('login_btn') }}
 </template>
 
@@ -52,7 +52,6 @@ export default {
         confirm: null,
       },
       createNew: false,
-      captchaToken: null,
       loading: false,
     }
   },
@@ -69,11 +68,12 @@ export default {
   methods: {
     link() {
       this.loading = true
-      this.$store.dispatch('login', {
-        username: this.form.username,
-        password: this.form.password,
-        captcha: this.captchaToken,
-      })
+      this.$refs.captcha.execute()
+        .then(captcha => this.$store.dispatch('login', {
+          username: this.form.username,
+          password: this.form.password,
+          captcha,
+        }))
         .then(async (user) => {
           await this.$apollo.mutate({
             mutation: gql`mutation LinkExternalAccount($token: String!) {
@@ -110,7 +110,6 @@ export default {
               type: 'is-danger'
             })
             this.form.password = null
-            this.captchaToken = null
             this.$refs.passwordField.$el.focus()
           } else if (error.response && error.response.status === 404) {
             // Account does not exist.

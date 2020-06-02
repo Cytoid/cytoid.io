@@ -47,8 +47,8 @@
           b-checkbox(v-model="form.tos")
             i18n(path="tos_field_title")
               nuxt-link(:to="{ name: 'pages-id', params: { id: 'terms' } }") {{ $t('tos') }}
-      captcha.has-text-centered(v-model="captchaToken" size="compact" style="margin-top: 1rem; ")
-      b-button(native-type="submit" expanded :loading="loading" style="margin-bottom: 1rem;" :disabled="invalid || !captchaToken") {{$t('join_btn')}}
+      captcha(ref="captcha")
+      b-button(native-type="submit" expanded :loading="loading" style="margin-bottom: 1rem;" :disabled="invalid") {{$t('join_btn')}}
       .divider OR
       h4.is-size-4(v-t="'existing_user_title'")
       p(v-t="'existing_user_content'" style="margin-bottom: 1rem;")
@@ -64,7 +64,6 @@ export default {
   },
   data() {
     return {
-      captchaToken: null,
       loading: false,
       form: {
         uid: null,
@@ -94,12 +93,13 @@ export default {
         return
       }
       this.loading = true
-      this.$axios.put('/session', {
-        uid: this.form.uid,
-        email: this.form.email,
-        password: this.form.password,
-        captcha: this.captchaToken
-      })
+      this.$refs.captcha.execute()
+        .then(captcha => this.$axios.put('/session', {
+          uid: this.form.uid,
+          email: this.form.email,
+          password: this.form.password,
+          captcha,
+        }))
         .then((res) => {
           const user = res.data.user
           if (this.$route.query.token) {
@@ -134,7 +134,6 @@ export default {
         .catch((error) => {
           this.handleErrorToast(error)
           this.loading = false
-          this.captchaToken = null
         })
     },
   },
