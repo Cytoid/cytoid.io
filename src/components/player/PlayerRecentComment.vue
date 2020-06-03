@@ -2,11 +2,16 @@
   .recent-comment.ele3(
     style="position: relative; margin-top: 8px; padding: 12px 16px;"
   )
-    nuxt-link.content(
-      :to="{ name: { profile: 'profile-id', level: 'levels-id', post: 'posts-id', collection: 'collections-id'}[props.comment.category], params: { id: props.comment.key } }"
-      style="margin-bottom: 0.5rem; display: block; max-height: 3em; overflow: hidden;"
-      )
-      | {{ props.comment.content }}
+    nuxt-link(
+      v-if="props.comment.metadata && props.comment.metadata.path && props.comment.metadata.title"
+      :to="props.comment.metadata.path" style="padding-bottom: 4px; font-size: 12px;"
+      v-text="props.comment.metadata.title")
+    span(
+      style="padding-bottom: 4px; font-size: 12px;"
+      v-else-if="props.comment.metadata && props.comment.metadata.title"
+      v-text="props.comment.metadata.title"
+    )
+    p.content(style="margin-bottom: 0.5rem; max-height: 3em; overflow: hidden;" v-text="props.comment.content")
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")
         nuxt-link.profile-link(:to="{ name: 'profile-id', params: { id: props.comment.owner.uid } }" v-if="props.comment.owner")

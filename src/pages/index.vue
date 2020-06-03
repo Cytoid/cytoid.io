@@ -1,5 +1,7 @@
 <template lang="pug">
-  div(v-if="data")
+div
+  b-loading(is-full-page :active="!data")
+  template(v-if="data")
     .container.logo
       img(:src="require('@/assets/images/logo.png')")
       .slogan(v-t="'slogan'")
