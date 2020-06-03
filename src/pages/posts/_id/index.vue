@@ -26,10 +26,12 @@
       .column.is-two-thirds
         .box
           .content(v-html="content")
+        captcha(ref="captcha")
         thread(category="post" :thread="post.uid")
 </template>
 
 <script>
+import Captcha from '@/components/Captcha'
 import gql from 'graphql-tag'
 import marked from 'marked'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
@@ -122,6 +124,7 @@ fragment CollectionInfoFragment on Collection {
 export default {
   layout: 'background',
   components: {
+    Captcha,
     MetaBox,
     PlayerAvatar,
     Thread,

@@ -82,11 +82,13 @@
             b-icon(icon="angle-double-right")
             span(v-t="{ path: 'collections_all_btn', args: { count: profile.user.collectionsCount }}")
         div(style="margin: 12px;")
+          captcha(ref="captcha")
           thread(category="profile" :thread="profile.user.id")
 </template>
 
 <script>
 import marked from 'marked'
+import Captcha from '@/components/Captcha'
 import Thread from '@/components/comments/Thread'
 import gql from 'graphql-tag'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
@@ -213,6 +215,7 @@ export default {
     LevelCard,
     CollectionSimpleCard,
     Thread,
+    Captcha,
   },
   layout: 'background',
   data: () => ({

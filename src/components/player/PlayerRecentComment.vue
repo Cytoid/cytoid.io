@@ -11,7 +11,7 @@
       div(style="display: flex; font-size: 12px;")
         nuxt-link.profile-link(:to="{ name: 'profile-id', params: { id: props.comment.owner.uid } }" v-if="props.comment.owner")
           avatar(:size="24" fixed :src="props.comment.owner.avatar && props.comment.owner.avatar.small" style="margin-right: 8px;")
-          span(v-text="props.comment.author.name")
+          span(v-text="props.comment.owner.name || props.comment.owner.uid")
         .profile-link(v-else)
           avatar(:size="24" fixed style="margin-right: 8px;")
           span(v-if="props.comment.metadata && props.comment.metadata.disqusUser") Disqus user {{props.comment.metadata.disqusUser.name}}

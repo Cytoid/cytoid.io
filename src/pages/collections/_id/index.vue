@@ -30,6 +30,9 @@
     .column.is-three-quarters
       .level-card-container.small
         level-card(v-for="level in collection.levels" :key="level.id" :value="level")
+      div(style="margin: 12px;")
+        captcha(ref="captcha")
+        thread(category="collection" :thread="collection.uid")
 </template>
 
 <script>
@@ -39,6 +42,8 @@ import { handleErrorBlock } from '@/plugins/antd'
 import LevelCard from '@/components/level/LevelCard'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import MetaBox from '@/components/MetaBox'
+import Captcha from '@/components/Captcha'
+import Thread from '@/components/comments/Thread'
 
 const query = gql`query FetchCollection($uid: String!) {
   collection(uid: $uid) {
@@ -108,6 +113,8 @@ export default {
     LevelCard,
     PlayerAvatar,
     MetaBox,
+    Thread,
+    Captcha,
   },
   data() {
     return {
