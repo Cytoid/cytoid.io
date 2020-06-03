@@ -26,20 +26,19 @@
       .column.is-two-thirds
         .box
           .content(v-html="content")
-        div(style="margin: 12px;")
-          disqus(shortname="cytoid" :identifier="'posts/' + post.uid" :url="'https://cytoid.io/posts/' + post.uid")
+        thread(category="post" :thread="post.uid")
 </template>
 
 <script>
 import gql from 'graphql-tag'
 import marked from 'marked'
-import Disqus from 'vue-disqus/src/vue-disqus.vue'
 import PlayerAvatar from '@/components/player/PlayerAvatar'
 import { Meta } from '@/utils'
 import { handleErrorBlock } from '@/plugins/antd'
 import MetaBox from '@/components/MetaBox'
 import LevelCard from '@/components/level/LevelCard'
 import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
+import Thread from '@/components/comments/Thread'
 const query = gql`query GetPost($uid: String!) {
   post: getPost(uid: $uid) {
     id
@@ -125,7 +124,7 @@ export default {
   components: {
     MetaBox,
     PlayerAvatar,
-    Disqus,
+    Thread,
     LevelCard,
     CollectionPreviewCard,
   },

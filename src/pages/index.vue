@@ -47,8 +47,8 @@
           Tweet(v-if="data.recentTweet" v-show="!loadingTweet" :id="data.recentTweet" :key="data.recentTweet" :options="{ theme: 'dark' }")
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'new_comments_title'")
           player-recent-comment(
-            v-for="comment in data.disqus"
-            :key="comment.uid"
+            v-for="comment in data.comments"
+            :key="comment.id"
             :comment="comment"
             style="margin: 8px 0;"
           )
@@ -91,10 +91,25 @@ import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
 
 const query = gql`
 query FetchHomePage {
-  disqus
   recentTweet
   discordOnlineCount
   collectionsCount
+  comments: recentComments(limit: 5) {
+    id
+    category
+    key
+    content
+    date
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
+    }
+    metadata
+  }
   posts: getActivePosts(limit: 10) {
     id
     uid

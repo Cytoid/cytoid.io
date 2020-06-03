@@ -12,7 +12,8 @@ import {
   faUserCog, faUserTie, faFileAlt,
   faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
   faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
-  faAlbum, faAlbumCollection, faTimesCircle, faExchange,
+  faAlbum, faAlbumCollection, faTimesCircle, faExchange, faReply, faChevronDown,
+  faUserSecret,
 } from '@fortawesome/pro-solid-svg-icons'
 
 import {
@@ -38,6 +39,7 @@ export default function () {
     faUserCog, faUserTie, faFileAlt,
     faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
     faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
-    faAlbum, faAlbumCollection, faTimesCircle, faExchange, faHeartLight,
+    faAlbum, faAlbumCollection, faTimesCircle, faExchange, faHeartLight, faReply, faChevronDown,
+    faUserSecret,
   )
 }

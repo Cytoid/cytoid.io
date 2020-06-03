@@ -126,8 +126,7 @@
               b-table-column(field="bad" label="bad") {{ props.row.details.bad }}
               b-table-column(field="miss" label="miss") {{ props.row.details.miss }}
               b-table-column(field="date" label="achieved") {{ $dateFromNow(props.row.date) }}
-        div(style="margin: 12px;")
-          disqus(shortname="cytoid" :identifier="'browse/' + level.uid" :url="'https://cytoid.io/levels/' + level.uid")
+        thread(category="level" :thread="level.uid")
     .play-button-container
       play-button(:src="level.bundle.musicPreview")
 </template>
@@ -135,7 +134,7 @@
 <script>
 import Captcha from '@/components/Captcha'
 import marked from 'marked'
-import Disqus from 'vue-disqus/src/vue-disqus.vue'
+import Thread from '@/components/comments/Thread'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import PlayButton from '@/components/level/PlayButton'
@@ -281,7 +280,7 @@ export default {
     PlayerAvatar,
     DifficultyBadge,
     PlayButton,
-    Disqus,
+    Thread,
     MetaBox,
     Captcha,
     EmptyPlaceholder

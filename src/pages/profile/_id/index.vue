@@ -82,12 +82,12 @@
             b-icon(icon="angle-double-right")
             span(v-t="{ path: 'collections_all_btn', args: { count: profile.user.collectionsCount }}")
         div(style="margin: 12px;")
-          disqus(shortname="cytoid" :identifier="'profile/' + profile.user.uid" :url="'https://cytoid.io/profile/' + profile.user.uid")
+          thread(category="profile" :thread="profile.user.id")
 </template>
 
 <script>
 import marked from 'marked'
-import Disqus from 'vue-disqus/src/vue-disqus.vue'
+import Thread from '@/components/comments/Thread'
 import gql from 'graphql-tag'
 import PlayerRecentRank from '@/components/player/PlayerRecentRank'
 import ScoreBadge from '@/components/level/ScoreBadge'
@@ -212,7 +212,7 @@ export default {
     PlayerInfoAvatar,
     LevelCard,
     CollectionSimpleCard,
-    Disqus,
+    Thread,
   },
   layout: 'background',
   data: () => ({

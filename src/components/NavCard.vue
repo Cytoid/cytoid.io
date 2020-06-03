@@ -10,7 +10,7 @@
       )
     .navcard-uid(v-if="roleIcon")
       font-awesome-icon(:icon="roleIcon")
-    .navcard-uid(v-text="user.uid || user.name")
+    .navcard-uid(v-text="user.name || user.uid")
   .navcard-grid
     nuxt-link.navcard-item(:to="{ name: 'profile-id', params: { id: $store.state.user.uid || $store.state.user.id } }")
       font-awesome-icon.icon(:icon="['fas', 'user']")

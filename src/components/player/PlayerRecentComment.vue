@@ -1,17 +1,23 @@
-<template lang="pug">
-  div(
-    class="recent-comment ele3"
+<template lang="pug" functional>
+  .recent-comment.ele3(
     style="position: relative; margin-top: 8px; padding: 12px 16px;"
   )
-    a(:href="comment.url" style="padding-bottom: 4px; font-size: 12px;" v-text="comment.thread.clean_title")
-    p(style="margin-bottom: 8px;") {{ comment.raw_message }}
+    nuxt-link.content(
+      :to="{ name: { profile: 'profile-id', level: 'levels-id', post: 'posts-id', collection: 'collections-id'}[props.comment.category], params: { id: props.comment.key } }"
+      style="margin-bottom: 0.5rem; display: block; max-height: 3em; overflow: hidden;"
+      )
+      | {{ props.comment.content }}
     div(style="display: flex; position: relative; z-index: 2;")
       div(style="display: flex; font-size: 12px;")
-        a.profile-link(:href="comment.author.profileUrl")
-          avatar(:size="24" fixed :src="comment.author.avatar.large.cache" style="margin-right: 8px;")
-          span(v-text="comment.author.name")
+        nuxt-link.profile-link(:to="{ name: 'profile-id', params: { id: props.comment.owner.uid } }" v-if="props.comment.owner")
+          avatar(:size="24" fixed :src="props.comment.owner.avatar && props.comment.owner.avatar.small" style="margin-right: 8px;")
+          span(v-text="props.comment.author.name")
+        .profile-link(v-else)
+          avatar(:size="24" fixed style="margin-right: 8px;")
+          span(v-if="props.comment.metadata && props.comment.metadata.disqusUser") Disqus user {{props.comment.metadata.disqusUser.name}}
+          span(v-else) Anonymous
       div(style="display: flex; margin-left: auto;")
-        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="$dateFromNow(comment.createdAt)")
+        span.card-secondary-text(style="font-size: 12px; padding-top: 1px;" v-text="parent.$dateFromNow(props.comment.date)")
 </template>
 
 <script>
