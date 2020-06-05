@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     .section: .container
-      post-card.post-card(v-for="post in posts" :key="post.id" :value="post")
+      post-card(v-for="post in posts" :key="post.id" :value="post")
     .section: .container
       b-button.is-block(
         :loading="loading"

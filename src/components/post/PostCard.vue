@@ -32,9 +32,9 @@ export default {
 
 <style lang="scss">
 .post-card {
-  padding-top: 37.5%;
+  padding-top: 37.5% !important;
   @media(min-width: 1024px) {
-    padding-top: 22.5%;
+    padding-top: 22.5% !important;
   }
   &:not(:last-child) {
     margin-bottom: 12px;
