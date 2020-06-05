@@ -70,7 +70,6 @@ export default {
         this.resolve = null
         this.reject = null
       }
-      global.grecaptcha.reset()
     }
   },
   render(h) {
