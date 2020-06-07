@@ -66,8 +66,9 @@ export default {
         .then((result) => {
           const success = result.data.sendResetPasswordEmail
           if (!success) {
-            this.form.setFields({
-              email: { errors: [{ message: 'The email was never registered / confirmed!' }] }
+            this.$buefy.toast.open({
+              message: 'The email was never registered / confirmed!',
+              type: 'is-danger',
             })
           } else {
             this.sent = email

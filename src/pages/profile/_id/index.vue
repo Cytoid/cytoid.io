@@ -18,9 +18,12 @@
             span(v-t="{ path: 'join_date', args: { date: $dateFromNow(profile.user.registrationDate) } }")
     .columns
       .column.is-one-quarter-widescreen.is-two-fifths
-        .bio
+        .bio(style="margin-top: 1rem;")
           p.heading(v-t="'bio_title'")
-          .text-ele(v-html="bio")
+          .content(v-html="bio")
+        div(style="margin-top: 1rem;" v-if="profile.badges && profile.badges.length > 0")
+          p.heading(style="margin-bottom: 1rem;") Badges
+          badge-stripe(v-for="badge in profile.badges" :key="badge.uid" :value="badge")
         div(style="margin-top: 1rem;")
           p.heading(v-t="'recent_ranks_title'")
           player-recent-rank(
@@ -73,7 +76,6 @@
             nuxt-link.button.is-fullwidth(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
               b-icon(icon="angle-double-right")
               span(v-t="{ path: 'levels_all_btn', args: { count: profile.user.levelsCount }}")
-
         .box(v-if="profile && profile.user && profile.user.collections && profile.user.collections.length > 0")
           p.subtitle(style="margin-bottom: 16px;" v-t="'collections_title'")
           .level-card-container.small.regular-levels-container
@@ -88,6 +90,7 @@
 
 <script>
 import marked from 'marked'
+import BadgeStripe from '@/components/player/BadgeStripe'
 import Captcha from '@/components/Captcha'
 import Thread from '@/components/comments/Thread'
 import gql from 'graphql-tag'
@@ -159,6 +162,12 @@ query FetchProfilePage($uid: String!) {
       featuredLevels: levels(category: "featured", first: 6) { ...LevelInfo }
     }
     rating
+    badges {
+      uid
+      title
+      description
+      metadata
+    }
     recentRecords(limit: 10) {
       id
       date
@@ -216,11 +225,12 @@ export default {
     CollectionSimpleCard,
     Thread,
     Captcha,
+    BadgeStripe,
   },
   layout: 'background',
   data: () => ({
     profile: null,
-    chartMode: 'activity'
+    chartMode: 'activity',
   }),
   head() {
     const name = this.profile.user.name || this.profile.user.uid

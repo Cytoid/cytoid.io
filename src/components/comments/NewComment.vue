@@ -12,7 +12,6 @@
       avatar(fixed :size="64")
     .media-content
       .box.has-text-centered.has-background-grey-darker
-        font-awesome-icon(size="3x")
         nuxt-link.button(:to="{ name: 'session-login'}" v-t="'login_btn'")
 </template>
 
