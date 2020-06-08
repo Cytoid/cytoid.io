@@ -20,7 +20,7 @@ import {
   faHeart as faHeartLight,
 } from '@fortawesome/pro-light-svg-icons'
 import {
-  faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord,
+  faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faPatreon,
 } from '@fortawesome/free-brands-svg-icons'
 
 export default function () {
@@ -35,7 +35,8 @@ export default function () {
     faSuitcase, faLanguage, faTrash, faStar, faUser, faSpinner,
     faEnvelope, faUpload, faFileArchive, faCheckCircle, faExclamationTriangle, faEyeSlash, faGlobe,
     faPaperPlane, faChevronUp, faChevronLeft, faPlus, faMinus, faPlay, faPause,
-    faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faTimes, faChimney,
+    faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faPatreon,
+    faTimes, faChimney,
     faUserCog, faUserTie, faFileAlt,
     faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
     faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,

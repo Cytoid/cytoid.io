@@ -70,7 +70,8 @@ export default {
       providers: [
         { id: 'facebook', icon: 'facebook-f', title: 'Facebook' },
         { id: 'google', title: 'Google' },
-        { id: 'discord', title: 'Discord' }
+        { id: 'discord', title: 'Discord' },
+        { id: 'patreon', title: 'Patreon' }
       ],
       providersLoading: null,
     }
@@ -151,12 +152,20 @@ export default {
           }
         })
           .then(() => {
-            this.providersLoading = null
             this.externals.push(event.data.provider)
             this.$buefy.toast.open({
-              message: `You have linked your ${event.data.provider} account`,
-            })
+              message: `You have linked your ${event.data.provider} account
           })
+          .catch(err => this.handleErrorToast(err))
+          .finally(() => {
+            this.providersLoading = null
+          })
+      } else {
+        this.providersLoading = null
+        this.$buefy.toast.open({
+          message: 'Incomplete information returned from OAuth service',
+          type: 'is-danger'
+        })
       }
     },
     unlink(provider) {
