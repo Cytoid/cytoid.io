@@ -154,7 +154,8 @@ export default {
           .then(() => {
             this.externals.push(event.data.provider)
             this.$buefy.toast.open({
-              message: `You have linked your ${event.data.provider} account
+              message: `You have linked your ${event.data.provider} account`,
+            })
           })
           .catch(err => this.handleErrorToast(err))
           .finally(() => {
