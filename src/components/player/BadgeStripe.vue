@@ -1,3 +1,4 @@
+<script>
 import {
   faUserRobot, faStar, faStars, faUserTie,
   faBaby, faSearch, faUserHeadset, faUserCrown,
@@ -70,7 +71,7 @@ export default {
     }
     return (<div class="media">
       <div class="media-left">
-        {icon && <font-awesome-icon icon={icon} size="3x" fixed-width/>}
+        {icon && <font-awesome-icon icon={icon} size="3x" fixed-width class={['profile-badge', iconPath.class]} pulse={iconPath.pulse} spin={iconPath.spin}/>}
       </div>
       <div class="media-content">
         <h4 class="title is-size-4">{props.value.title}</h4>
@@ -79,3 +80,45 @@ export default {
     </div>)
   }
 }
+</script>
+
+<style lang="scss">
+.profile-badge {
+  &.is-orange {
+    --fa-secondary-color: #{$orange};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-yellow {
+    --fa-secondary-color: #{$yellow};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-green {
+    --fa-secondary-color: #{$green};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-turquoise {
+    --fa-secondary-color: #{$turquoise};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-cyan {
+    --fa-secondary-color: #{$cyan};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-blue {
+    --fa-secondary-color: #{$blue};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-purple {
+    --fa-secondary-color: #{$purple};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-red {
+    --fa-secondary-color: #{$red};
+    --fa-secondary-opacity: 1;
+  }
+  &.is-primary {
+    --fa-secondary-color: #{$primary};
+    --fa-secondary-opacity: 1;
+  }
+}
+</style>

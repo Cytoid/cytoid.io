@@ -8,10 +8,7 @@ form(@submit.prevent="submit")
       v-model="form.birthday"
     )
   client-only: b-field(:label="$t('profile_bio_title')")
-    markdown-editor(
-      :configs="{ spellChecker: false }"
-      v-model="form.bio"
-    )
+    markdown-editor(v-model="form.bio")
   b-button.is-pulled-right(
     :loading="submitLoading"
     native-type="submit"
