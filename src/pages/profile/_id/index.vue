@@ -10,8 +10,9 @@
       .player-info-container
         h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
         p.status.text-ele
-          font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: profile.user.online }")
-          | {{ $t(profile.user.online ? 'online' : 'offline') }}
+          font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: online }")
+          template(v-if="profile.user.lastSeen") Last seen {{ $dateFromNow(profile.user.lastSeen) }}
+          span(v-else v-t="'offline'")
         p.details.text-ele
           span
             font-awesome-icon(:icon="['fas', 'calendar']")
@@ -103,6 +104,7 @@ import LineChart from '@/components/profile/LineChart'
 import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 import { handleErrorBlock } from '@/plugins/antd'
 import { Meta } from '@/utils'
+import { parseISO, addMinutes, isFuture } from 'date-fns'
 
 const query = gql`
 fragment LevelInfo on UserLevel{
@@ -155,7 +157,7 @@ query FetchProfilePage($uid: String!) {
         creationDate
       }
       collectionsCount
-      online
+      lastSeen
       levelsCount(category: "!featured")
       featuredLevelsCount: levelsCount(category: "featured")
       levels(category: "!featured", first: 6) { ...LevelInfo }
@@ -245,6 +247,14 @@ export default {
     bio() {
       return marked(this.profile.bio || 'There is no bio yet.')
     },
+    online() {
+      if (!this.profile.user.lastSeen) {
+        return false
+      }
+      const date = parseISO(this.profile.user.lastSeen)
+      const dateInFuture = addMinutes(date, 15)
+      return isFuture(dateInFuture) // If last seen date + 15 min is in the future, then we're online
+    }
   },
   async asyncData({ app, $axios, params, error, store }) {
     const profile = await app.apolloProvider.defaultClient.query({
