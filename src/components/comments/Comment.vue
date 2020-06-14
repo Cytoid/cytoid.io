@@ -5,11 +5,10 @@
         avatar(:source="value.owner.avatarURL || (value.owner.avatar && value.owner.avatar.small)" fixed :size="32")
       avatar(v-else fixed :size="32")
     .media-content
-      .content
-        strong(v-if="value.owner" v-text="value.owner.name || value.owner.uid")
-        strong(v-if="value.metadata && value.metadata.disqusUser") Disqus User {{value.metadata.disqusUser.name}}
-        small.has-text-light.date(v-text="$dateFormatCalendar(value.date)")
-        div(v-text="value.content")
+      strong(v-if="value.owner" v-text="value.owner.name || value.owner.uid")
+      strong(v-if="value.metadata && value.metadata.disqusUser") Disqus User {{value.metadata.disqusUser.name}}
+      small.has-text-light.date(v-text="$dateFormatCalendar(value.date)")
+      .content(v-html="content")
       .level.is-mobile.comment-action-buttons
         .level-left
           a.level-item(@click="addReply" v-if="$store.state.user")
@@ -35,6 +34,7 @@
 </template>
 
 <script>
+import marked from 'marked'
 import Vue from 'vue'
 import CommentSkeleton from './CommentSkeleton'
 import NewComment from './NewComment'
@@ -65,6 +65,11 @@ export default {
       loaded: false,
       replies: [],
       reply: false,
+    }
+  },
+  computed: {
+    content() {
+      return marked(this.value.content)
     }
   },
   mounted() {

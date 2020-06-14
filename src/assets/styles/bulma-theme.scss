@@ -44,6 +44,8 @@ $theme5: hsla(226, 68%, 67%, 1);
 $theme6: hsla(226, 68%, 77%, 1);
 $theme7: hsla(226, 68%, 87%, 1);
 
+$hr-background-color: $grey-lighter;
+
 $primary: $theme4;
 $info: $theme5;
 $primary-invert: findColorInvert($primary);

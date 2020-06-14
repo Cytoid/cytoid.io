@@ -178,3 +178,10 @@
   border-radius: $radius;
   overflow: hidden;
 }
+
+.content a {
+  color: $theme6;
+  &:hover {
+    color: $theme7;
+  }
+}

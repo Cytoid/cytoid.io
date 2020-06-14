@@ -55,7 +55,7 @@
       .column.is-one-third
         .box
           player-avatar(style="margin-bottom: 16px;" :player="level.owner")
-          .level-description(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
+          .content(style="overflow: auto;" v-if="levelDescription" v-html="levelDescription")
           p.box-subtitle(v-t="'details_card_rating_title'")
           b-rate(
             icon-pack="fas"
@@ -532,17 +532,6 @@ export default {
 </script>
 
 <style lang="scss">
-.level-description {
-  margin-top: 1rem;
-  a {
-    font-weight: bold;
-    color: hsla(226, 68%, 77%, 1);
-    transition: 0.2s $hoverEasing;
-    &:hover {
-      color: hsla(226, 68%, 87%, 1);
-    }
-  }
-}
 .leaderboard-table {
   .table-wrapper {
     overflow: scroll;
