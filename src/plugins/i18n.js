@@ -4,28 +4,6 @@ import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
 import { pick } from 'accept-language-parser'
 import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs } from 'date-fns/locale'
 import locales from '@/locale'
-/*
-function countryRedirect(app, country) {
-  return import('ant-design-vue/lib/notification')
-    .then((a) => {
-      const notification = a.default
-      const t = app.i18n.t.bind(app.i18n)
-      notification.warning({
-        message: t('region_unavailable'),
-        description: h => h('p', [
-          t('region_unavailable_content'),
-          h('a', {
-            attrs: { href: 'https://cytoid.cn' },
-          }, [h('a-button', { props: { type: 'danger', block: true } }, 'Visit Cytoid.cn')])
-        ]),
-        duration: 0,
-        icon: h => h('font-awesome-icon', {
-          props: { icon: 'chimney' },
-        })
-      })
-    })
-}
-*/
 
 export const supportedLanguages = [
   'en',
@@ -80,12 +58,7 @@ export default function ({ app, store, req, res }) {
         store.commit('setLocale', locale)
       }
     }
-    /*
     console.log('Country: ' + store.state.country)
-    if (store.state.country === 'CN') {
-      countryRedirect(app, store.state.country)
-    }
-    */
   } else if (req) {
     if (req.session.locale) {
       store.commit('setLocale', req.session.locale)

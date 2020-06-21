@@ -77,11 +77,10 @@ module.exports = {
   plugins: [
     { src: '~plugins/ga' },
     { src: '~plugins/dummy_captcha' },
+    { src: '~plugins/fontawesome' },
     { src: '~plugins/antd' },
     { src: '~plugins/buefy' },
     { src: '~plugins/parallax' },
-    { src: '~plugins/fontawesome' },
-    { src: '~plugins/imgresize' },
     { src: '~plugins/authentication', mode: 'client' },
     { src: '~plugins/nossr', mode: 'client' },
     { src: '~plugins/veevalidate' },
