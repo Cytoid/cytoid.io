@@ -15,6 +15,7 @@
   "favorites": "收藏夹",
   "favorite_verb": "Favorite",
   "favorite_pass_tense": "Favorited",
+  "owned_levels": "Owned Levels",
   "library": "Library",
   "settings": "设置",
   "signout_btn": "退出帐号",
@@ -51,5 +52,10 @@
   "visibility_status_private": "仅自己",
   "visibility_action_unlist": "非公开",
   "visibility_action_publish": "发布",
-  "visibility_action_private": "设为仅自己可见"
+  "visibility_action_private": "设为仅自己可见",
+  "captcha_not_loaded": "Captcha not loaded",
+  "comment_reply": "Reply",
+  "comment_see_replies": "See {count} replies",
+  "comment_hide_replies": "Hide {count} replies",
+  "comment_post": "Post Comment"
 }
