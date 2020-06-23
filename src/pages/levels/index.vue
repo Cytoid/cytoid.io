@@ -7,6 +7,7 @@
           button.button(slot="trigger" slot-scope="{ active }")
             | {{sortingCriteriaTitle(filters.sort)}}
             font-awesome-icon(:icon="active ? 'caret-up' : 'caret-down'" style="margin-left: 0.5rem;")
+          b-dropdown-item(value="relevance" v-if="$route.query.search") {{$t('sort_select_relevance')}}
           b-dropdown-item(value="creation_date") {{$t('sort_select_upload_date')}}
           b-dropdown-item(value="modification_date") {{$t('sort_select_modification_date')}}
           b-dropdown-item(value="difficulty") {{$t('sort_select_difficulty')}}
@@ -77,7 +78,9 @@ export default {
     },
     filters() {
       const filters = Object.assign({}, this.$route.query)
-      filters.sort = filters.sort || 'creation_date'
+      if (!filters.sort) {
+        filters.sort = this.$route.query.search ? 'relevance' : 'creation_date'
+      }
       filters.order = filters.order || 'desc'
       filters.category = filters.category || 'all'
       return filters
@@ -86,12 +89,15 @@ export default {
   watch: {
     '$route'() {
       this.loading = true
-      const mappedFilters = JSON.parse(JSON.stringify(this.filters))
+      const mappedFilters = Object.assign({}, this.filters)
       if (mappedFilters.category) {
         if (mappedFilters.category === 'featured') {
           mappedFilters.featured = true
         }
         delete mappedFilters.category
+      }
+      if (mappedFilters.sort === 'relevance') {
+        mappedFilters.sort = undefined
       }
       this.$axios.get(baseURL(mappedFilters), { params: { ...mappedFilters, page: this.page - 1, limit: this.pageSize } })
         .then((response) => {
@@ -108,7 +114,11 @@ export default {
   },
   asyncData({ $axios, query, error }) {
     query.page = query.page || 1
-    query.sort = query.sort || 'creation_date'
+    if (!query.sort) {
+      if (!query.search) query.sort = 'creation_date'
+    } else if (query.sort === 'relevance') {
+      query.sort = undefined
+    }
     query.order = query.order || 'desc'
     return $axios.get(baseURL(query), { params: { ...query, page: query.page - 1, limit: 24 } })
       .then((response) => {
@@ -145,6 +155,7 @@ export default {
         case 'duration': return this.$t('sort_select_duration')
         case 'downloads': return this.$t('sort_select_downloads')
         case 'rating': return this.$t('sort_select_rating')
+        case 'relevance': return this.$t('sort_select_relevance')
       }
     }
   },

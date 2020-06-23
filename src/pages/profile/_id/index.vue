@@ -10,8 +10,8 @@
       .player-info-container
         h1.username(class="text-ele" v-text="profile.user.name || profile.user.uid" style="font-size: 32px;")
         p.status.text-ele
-          font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online: online }")
-          template(v-if="profile.user.lastSeen") Last seen {{ $dateFromNow(profile.user.lastSeen) }}
+          font-awesome-icon.status-icon(:icon="['fas', 'circle']" :class="{ online }")
+          span(v-if="profile.user.lastSeen" v-t="{ path: 'last_seen_date', args: { date: $dateFromNow(profile.user.lastSeen) }}")
           span(v-else v-t="'offline'")
         p.details.text-ele
           span
@@ -23,7 +23,7 @@
           p.heading(v-t="'bio_title'")
           .content(v-html="bio")
         div(style="margin-top: 1rem;" v-if="profile.badges && profile.badges.length > 0")
-          p.heading(style="margin-bottom: 1rem;") Badges
+          p.heading(style="margin-bottom: 1rem;" v-t="'badges_title'")
           badge-stripe(v-for="badge in profile.badges" :key="badge.uid" :value="badge")
         div(style="margin-top: 1rem;")
           p.heading(v-t="'recent_ranks_title'")

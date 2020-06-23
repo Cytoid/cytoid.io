@@ -5,7 +5,7 @@
     .media-content
       b-field
         b-input(type="textarea" v-model="content")
-      b-button.is-primary.is-pulled-right(@click="postComment" :loading="loading" :disabled="!(content && content.length > 5)") Post Comment
+      b-button.is-primary.is-pulled-right(@click="postComment" :loading="loading" :disabled="!(content && content.length > 5)") {{$t('comment_post')}}
       .is-clearfix
   article.media(v-else)
     figure.media-left

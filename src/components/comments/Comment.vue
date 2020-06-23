@@ -13,13 +13,13 @@
         .level-left
           a.level-item(@click="addReply" v-if="$store.state.user")
             font-awesome-icon.icon(icon="reply")
-            | Reply
+            span(v-t="'comment_reply'")
           a.level-item(v-if="value.count > 0 && !expanded" @click="expand")
             font-awesome-icon.icon(icon="chevron-down")
-            | See {{value.count}} replies
+            span(v-t="{ path: 'comment_see_replies', args: { count: value.count } }")
           a.level-item(v-if="value.count > 0 && expanded" @click="expanded=false")
             font-awesome-icon.icon(icon="chevron-up")
-            | Hide {{value.count}} replies
+            span(v-t="{ path: 'comment_hide_replies', args: { count: value.count } }")
       new-comment(v-if="reply" :parent="value.id" :category="category" :thread="thread" @created="created")
       template(v-if="expanded")
         template(v-if="!loaded")

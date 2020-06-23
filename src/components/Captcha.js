@@ -39,7 +39,7 @@ export default {
     },
     execute() {
       if (typeof global.grecaptcha === 'undefined') {
-        return Promise.reject(new Error('Captcha not loaded'))
+        return Promise.reject(new Error(this.$t('captcha_not_loaded')))
       }
       global.grecaptcha.execute()
 

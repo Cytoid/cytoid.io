@@ -8,7 +8,7 @@
         @click="loadMore"
         :style="{ width: '100%' }"
         v-if="hasMore"
-      ) Load More
+      ) {{$t('more_btn')}}
 </template>
 
 <script>

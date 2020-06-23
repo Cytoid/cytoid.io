@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   .section: .container
-    .heading Owned Levels
+    .heading(v-t="'owned_levels'")
     .level-card-container.large
       level-card(v-for="level in grantedLevels" :key="level.id" :value="level")
   .section: .container
