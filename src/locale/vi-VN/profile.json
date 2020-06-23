@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "Xem tất cả {count} bài nổi bật",
   "levels_all_btn": "Xem tất cả {count}",
   "collections_title": "Các bộ sưu tập",
-  "collections_all_btn": "Xem tất cả {count}"
+  "collections_all_btn": "Xem tất cả {count}",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
