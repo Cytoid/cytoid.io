@@ -15,6 +15,7 @@
   "favorites": "Favorit",
   "favorite_verb": "Favorite",
   "favorite_pass_tense": "Favorited",
+  "owned_levels": "Owned Levels",
   "library": "Library",
   "settings": "Pengaturan",
   "signout_btn": "Keluar",
@@ -51,5 +52,10 @@
   "visibility_status_private": "Private",
   "visibility_action_unlist": "Unlist",
   "visibility_action_publish": "Publish",
-  "visibility_action_private": "Make Private"
+  "visibility_action_private": "Make Private",
+  "captcha_not_loaded": "Captcha not loaded",
+  "comment_reply": "Reply",
+  "comment_see_replies": "See {count} replies",
+  "comment_hide_replies": "Hide {count} replies",
+  "comment_post": "Post Comment"
 }
