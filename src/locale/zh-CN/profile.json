@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "查看所有 {count} 个精选关卡",
   "levels_all_btn": "查看所有 {count} 个关卡",
   "collections_title": "合集",
-  "collections_all_btn": "查看所有 {count} 个合集"
+  "collections_all_btn": "查看所有 {count} 个合集",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
