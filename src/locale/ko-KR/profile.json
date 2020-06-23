@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "추천받은 {count} 개의 레벨 보기",
   "levels_all_btn": "{count} 개의 레벨 모두 보기",
   "collections_title": "컬렉션",
-  "collections_all_btn": "{count} 개의 컬렉션 모두 보기"
+  "collections_all_btn": "{count} 개의 컬렉션 모두 보기",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
