@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "查看所有 {count} 个2分钟最速手术室传说",
   "levels_all_btn": "查看所有 {count} 个紫薯布丁",
   "collections_title": "军哥",
-  "collections_all_btn": "查看所有 {count} 个紫薯布丁"
+  "collections_all_btn": "查看所有 {count} 个紫薯布丁",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
