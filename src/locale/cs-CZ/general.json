@@ -15,6 +15,7 @@
   "favorites": "Oblíbené",
   "favorite_verb": "Přidat do oblíbených",
   "favorite_pass_tense": "V oblíbených",
+  "owned_levels": "Owned Levels",
   "library": "Knihovna",
   "settings": "Nastavení",
   "signout_btn": "Odhlásit",
@@ -51,5 +52,10 @@
   "visibility_status_private": "Soukromá",
   "visibility_action_unlist": "Odebrat z databáze úrovní",
   "visibility_action_publish": "Publikovat",
-  "visibility_action_private": "Nastavit jako soukromou"
+  "visibility_action_private": "Nastavit jako soukromou",
+  "captcha_not_loaded": "Captcha not loaded",
+  "comment_reply": "Reply",
+  "comment_see_replies": "See {count} replies",
+  "comment_hide_replies": "Hide {count} replies",
+  "comment_post": "Post Comment"
 }
