@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "Zobrazit všech {count} doporučených",
   "levels_all_btn": "Zobrazit všech {count}",
   "collections_title": "Kolekce",
-  "collections_all_btn": "Zobrazit všech {count}"
+  "collections_all_btn": "Zobrazit všech {count}",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
