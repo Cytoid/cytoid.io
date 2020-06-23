@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "Ver todos los {count} destacados",
   "levels_all_btn": "Ver todos los {count}",
   "collections_title": "Colecciones",
-  "collections_all_btn": "Ver todos los {count}"
+  "collections_all_btn": "Ver todos los {count}",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
