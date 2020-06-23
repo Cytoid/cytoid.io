@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "{count} 個のおすすめ譜面を見る",
   "levels_all_btn": "{count} 個の譜面を見る",
   "collections_title": "コレクション",
-  "collections_all_btn": "{count} このコレクションを見る"
+  "collections_all_btn": "{count} このコレクションを見る",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }
