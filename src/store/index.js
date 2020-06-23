@@ -26,6 +26,9 @@ export const mutations = {
     if (this.app.i18n) {
       this.app.i18n.locale = lang
     }
+    if (global.document) {
+      global.document.cookie = 'locale=' + lang
+    }
   },
   setCountry(state, country) {
     state.country = country

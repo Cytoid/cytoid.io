@@ -2,6 +2,7 @@ const conf = require('config')
 const express = require('express')
 const redis = require('redis')
 const session = require('express-session')
+const cookieParser = require('cookie-parser')
 const RedisStore = require('connect-redis')(session)
 const config = require('./nuxt.config.js')
 
@@ -28,18 +29,20 @@ getNuxtInstance()
 
     const app = express()
     app.set('trust proxy', 1)
+    const cookieOptions = {
+      maxAge: 86400000,
+      httpOnly: true,
+      secure: !config.dev,
+      domain: config.dev ? 'localhost' : 'cytoid.io',
+    }
+    app.use(cookieParser(conf.secret, cookieOptions))
     app.use(session({
       store: new RedisStore({ client: redis.createClient(conf.redis) }),
       secret: conf.secret,
       resave: false,
       rolling: false,
       saveUninitialized: false,
-      cookie: {
-        maxAge: 86400000,
-        httpOnly: true,
-        secure: !config.dev,
-        domain: config.dev ? 'localhost' : 'cytoid.io',
-      },
+      cookie: cookieOptions,
       name: 'cyt:sess',
     }))
     app.use(nuxt.render)

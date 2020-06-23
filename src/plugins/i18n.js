@@ -60,13 +60,12 @@ export default function ({ app, store, req, res }) {
     }
     console.log('Country: ' + store.state.country)
   } else if (req) {
-    if (req.session.locale) {
-      store.commit('setLocale', req.session.locale)
+    if (req.cookies.locale) {
+      store.commit('setLocale', req.cookies.locale)
     } else if (req.headers['accept-language']) {
       const lang = pickLanguage(req.headers['accept-language'])
       if (lang) {
         store.commit('setLocale', lang)
-        req.session.locale = lang
       }
     }
     let resposeLocaleCode = store.state.locale
