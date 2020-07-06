@@ -47,6 +47,7 @@
   "forgot_password_link_title": "Zapomněl(a) jsem heslo",
   "login_password_error": "Uživatelské jméno nebo heslo nesouhlasí!",
   "login_username_error": "Uživatel neexistuje!",
+  "login_inactive_error": "This user is not active!",
   "visibility_status_unlisted": "Nezapsaná",
   "visibility_status_public": "Veřejná",
   "visibility_status_private": "Soukromá",
