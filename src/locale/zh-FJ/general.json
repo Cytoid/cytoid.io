@@ -47,6 +47,7 @@
   "forgot_password_link_title": "忘了工信部？",
   "login_password_error": "你号的骨灰扬了",
   "login_username_error": "我新乐你阿妈",
+  "login_inactive_error": "This user is not active!",
   "visibility_status_unlisted": "没上市",
   "visibility_status_public": "上市力",
   "visibility_status_private": "不上市",
