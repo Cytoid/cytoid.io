@@ -3,6 +3,7 @@
   "menu_levels": "เลเวล",
   "menu_collections": "คอลเลกชัน",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "ลบ {name}",
   "level_delete_confirm_content1": "ต้องการที่จะลบ{0}？",
   "level_delete_confirm_content2": "ข้อมูลที่เกี่ยวข้องกับเลเวลนี้จะถูกลบออกฐานข้อมูลของเรา รวมไปถึงจำนวนครั้งในการเล่น ({count} ครั้ง) ผู้เล่นอื่นจะถูกลดสถิติการเล่นด้วยเช่นกัน",
