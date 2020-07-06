@@ -3,6 +3,7 @@
   "menu_levels": "Níveis",
   "menu_collections": "Coleções",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "Deletar {name}",
   "level_delete_confirm_content1": "Tem certeza que quer deletar {0}?",
   "level_delete_confirm_content2": "Todos os registros relacionados com este nível serão removidos da nossa database, incluindo os {count} registros referentes às vezes jogadas. Os jogadores também verão uma redução nas suas estatísticas.",
