@@ -3,6 +3,7 @@
   "menu_levels": "關卡管理",
   "menu_collections": "選集管理",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "進行刪除「{name}」",
   "level_delete_confirm_content1": "確定要刪除「{0}」嗎？",
   "level_delete_confirm_content2": "請知悉包括共 {count} 次的遊玩紀錄在內，與此相關的任何資料都會從此自伺服器抹除。此外先前曾經上傳紀錄過的帳戶也會產生遊玩統計上的影響，在刪除之前期望再三慎重考慮。",
