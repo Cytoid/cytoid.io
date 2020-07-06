@@ -47,6 +47,7 @@
   "forgot_password_link_title": "Forgot my Password",
   "login_password_error": "Username or password mismatch!",
   "login_username_error": "User does not exist!",
+  "login_inactive_error": "This user is not active!",
   "visibility_status_unlisted": "Unlisted",
   "visibility_status_public": "Public",
   "visibility_status_private": "Private",
