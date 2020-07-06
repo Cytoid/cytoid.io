@@ -1,53 +1,5 @@
 <script>
-import {
-  faUserRobot, faStar, faStars, faUserTie,
-  faBaby, faSearch, faUserHeadset, faUserCrown,
-  faAward, faMedal, faTrophy, faSchool, faGraduationCap,
-  faDiploma, faDiceOne, faDiceTwo, faDiceThree, faBalanceScale,
-  faDice, faHeart, faEquals, faMehRollingEyes, faFan, faQuestion,
-  faFillDrip, faCertificate, faStamp, faStarShooting, faLemon,
-} from '@fortawesome/pro-duotone-svg-icons'
-import {
-  faPatreon, faHackerrank
-} from '@fortawesome/free-brands-svg-icons'
-
-const icons = {
-  fad: {
-    'user-robot': faUserRobot,
-    star: faStar,
-    stars: faStars,
-    'user-tie': faUserTie,
-    baby: faBaby,
-    search: faSearch,
-    'user-headset': faUserHeadset,
-    'user-crown': faUserCrown,
-    award: faAward,
-    medal: faMedal,
-    trophy: faTrophy,
-    school: faSchool,
-    'graduation-cap': faGraduationCap,
-    diploma: faDiploma,
-    'dice-one': faDiceOne,
-    'dice-two': faDiceTwo,
-    'dice-three': faDiceThree,
-    'balance-scale': faBalanceScale,
-    dice: faDice,
-    heart: faHeart,
-    equals: faEquals,
-    'meh-rolling-eyes': faMehRollingEyes,
-    fan: faFan,
-    question: faQuestion,
-    'fill-drip': faFillDrip,
-    certificate: faCertificate,
-    stamp: faStamp,
-    'star-shooting': faStarShooting,
-    lemon: faLemon,
-  },
-  fab: {
-    patreon: faPatreon,
-    hackerrank: faHackerrank,
-  }
-}
+import FontAwesomeDyn from '../FontAwesomeDyn'
 export default {
   name: 'BadgeStripe',
   functional: true,
@@ -59,19 +11,9 @@ export default {
   },
   render(h, { props }) {
     const iconPath = props.value.metadata?.fontawesome
-    let icon = null
-    if (iconPath) {
-      const iconPack = icons[iconPath.pack]
-      if (iconPack) {
-        icon = iconPack[iconPath.icon]
-      }
-      if (!icon) {
-        console.error(`${iconPath.pack}:${iconPath.icon} Not Found`)
-      }
-    }
-    return (<div class="media">
+    return (<div class="media badge-stripe">
       <div class="media-left">
-        {icon && <font-awesome-icon icon={icon} size="3x" fixed-width class={['profile-badge', iconPath.class]} pulse={iconPath.pulse} spin={iconPath.spin}/>}
+        {iconPath && <FontAwesomeDyn icon={iconPath} class={[iconPath.class]} pulse={iconPath.pulse} spin={iconPath.spin} />}
       </div>
       <div class="media-content">
         <h4 class="title is-size-4">{props.value.title}</h4>
@@ -83,42 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
-.profile-badge {
-  &.is-orange {
-    --fa-secondary-color: #{$orange};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-yellow {
-    --fa-secondary-color: #{$yellow};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-green {
-    --fa-secondary-color: #{$green};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-turquoise {
-    --fa-secondary-color: #{$turquoise};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-cyan {
-    --fa-secondary-color: #{$cyan};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-blue {
-    --fa-secondary-color: #{$blue};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-purple {
-    --fa-secondary-color: #{$purple};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-red {
-    --fa-secondary-color: #{$red};
-    --fa-secondary-opacity: 1;
-  }
-  &.is-primary {
-    --fa-secondary-color: #{$primary};
-    --fa-secondary-opacity: 1;
-  }
+.badge-stripe .fa-dyn {
+  width: 3rem;
+  height: 3rem;
 }
 </style>

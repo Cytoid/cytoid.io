@@ -105,6 +105,7 @@ import PlayerInfoAvatar from '@/components/player/PlayerInfoAvatar'
 import { handleErrorBlock } from '@/plugins/antd'
 import { Meta } from '@/utils'
 import { parseISO, addMinutes, isFuture } from 'date-fns'
+import { loadFontAwesomeSvg } from '@/components/FontAwesomeDyn'
 
 const query = gql`
 fragment LevelInfo on UserLevel{
@@ -266,6 +267,18 @@ export default {
       return error({ statusCode: 404, message: 'Profile not found' })
     }
     store.commit('setBackground', { source: profile.header?.original })
+    const badgePromises = profile.badges.map((badge) => {
+      const icon = badge.metadata?.fontawesome?.icon
+      const pack = badge.metadata?.fontawesome?.pack || 'fas'
+      if (icon) {
+        return loadFontAwesomeSvg(pack, icon)
+          .then((svg) => {
+            badge.metadata.fontawesome.svg = svg
+          })
+      }
+      return null
+    }).filter(a => a)
+    await Promise.all(badgePromises)
     return {
       profile,
     }

@@ -21,7 +21,9 @@ footer.container.footer.has-text-centered
         ) {{parent.$t('self', code)}}
   p.
     #[strong Cytoid] built by
-    #[strong Tiger Tang] and #[strong Zhixing Zhang].
+    #[nuxt-link(:to="{name: 'profile-id', params:{ id: 'tigerhix' }}"): strong TigerHix]
+    and
+    #[nuxt-link(:to="{name: 'profile-id', params:{ id: 'neo' }}"): strong Neo].
     All rights reserved.
 </template>
 
