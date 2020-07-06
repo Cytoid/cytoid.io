@@ -126,6 +126,11 @@ export default {
               message: this.$t('login_username_error'),
               type: 'is-danger'
             })
+          } else if (error.response && error.response.status === 403) {
+            this.$buefy.toast.open({
+              message: this.$t('login_inactive_error'),
+              type: 'is-warning'
+            })
           } else {
             this.handleErrorToast(error)
           }

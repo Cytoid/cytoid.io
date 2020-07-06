@@ -3,6 +3,7 @@
   "menu_levels": "Levels",
   "menu_collections": "Collections",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "Delete {name}",
   "level_delete_confirm_content1": "Are you sure that you want to delete {0}?",
   "level_delete_confirm_content2": "All records related to this level will be purged from our database, including {count} playing records. Players will see a reduction on their statistics as well.",
