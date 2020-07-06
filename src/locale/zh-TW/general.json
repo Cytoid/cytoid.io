@@ -47,6 +47,7 @@
   "forgot_password_link_title": "忘記密碼了嗎？",
   "login_password_error": "Cytoid ID 或密碼不正確。",
   "login_username_error": "該 Cytoid ID 不存在！",
+  "login_inactive_error": "This user is not active!",
   "visibility_status_unlisted": "不公開",
   "visibility_status_public": "公開",
   "visibility_status_private": "私人",
