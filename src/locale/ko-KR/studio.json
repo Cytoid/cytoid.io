@@ -3,6 +3,7 @@
   "menu_levels": "레벨",
   "menu_collections": "컬렉션",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "{name} 삭제",
   "level_delete_confirm_content1": "{0}을 (를) 삭제 하시겠습니까?",
   "level_delete_confirm_content2": "All records related to this level will be purged from our database, including {count} playing records. Players will see a reduction on their statistics as well.",
