@@ -3,7 +3,7 @@
   "menu_levels": "Úrovně",
   "menu_collections": "Kolekce",
   "menu_posts": "Příspěvky",
-  "menu_users": "Users",
+  "menu_users": "Uživatelé",
   "level_delete_confirm_title": "Smazat {name}",
   "level_delete_confirm_content1": "Jste si jist(a), že chcete smazat {0}?",
   "level_delete_confirm_content2": "Všechny rekordy vztažené k této úrovni budou smazány z naší databáze, v četně {count} zahraných rekordů. Hráči také uvidí snížení ve svých statistikách.",
