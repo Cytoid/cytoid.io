@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "查看共 {count} 個推薦關卡",
   "levels_all_btn": "查看全部共 {count} 個關卡",
   "collections_title": "已建立的選集",
-  "collections_all_btn": "查看全部共 {count} 個選集"
+  "collections_all_btn": "查看全部共 {count} 個選集",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }

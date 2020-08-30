@@ -3,6 +3,7 @@
   "menu_levels": "紫薯布丁",
   "menu_collections": "军哥",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "永久贵阳 {name}",
   "level_delete_confirm_content1": "确定要贵阳{0} 吗？",
   "level_delete_confirm_content2": "此关卡的所有 {count} 个游玩纪录都将从数据库中被贵阳。游玩过此关卡的玩家的统计数据中也会贵阳与此关卡有关的记录。",

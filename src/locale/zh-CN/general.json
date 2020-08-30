@@ -15,6 +15,7 @@
   "favorites": "收藏夹",
   "favorite_verb": "Favorite",
   "favorite_pass_tense": "Favorited",
+  "owned_levels": "Owned Levels",
   "library": "Library",
   "settings": "设置",
   "signout_btn": "退出帐号",
@@ -46,10 +47,16 @@
   "forgot_password_link_title": "忘记密码",
   "login_password_error": "用户名或密码错误",
   "login_username_error": "该用户不存在",
+  "login_inactive_error": "This user is not active!",
   "visibility_status_unlisted": "非公开",
   "visibility_status_public": "公开",
   "visibility_status_private": "仅自己",
   "visibility_action_unlist": "非公开",
   "visibility_action_publish": "发布",
-  "visibility_action_private": "设为仅自己可见"
+  "visibility_action_private": "设为仅自己可见",
+  "captcha_not_loaded": "Captcha not loaded",
+  "comment_reply": "Reply",
+  "comment_see_replies": "See {count} replies",
+  "comment_hide_replies": "Hide {count} replies",
+  "comment_post": "Post Comment"
 }

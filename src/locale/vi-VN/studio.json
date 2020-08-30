@@ -3,6 +3,7 @@
   "menu_levels": "Màn chơi",
   "menu_collections": "Các bộ sưu tập",
   "menu_posts": "Posts",
+  "menu_users": "Users",
   "level_delete_confirm_title": "Xoá {name}",
   "level_delete_confirm_content1": "Bạn có chắc chắn muốn xóa {0}?",
   "level_delete_confirm_content2": "Tất cả những dữ liệu liên quan đến màn chơi này sẽ bị xóa khỏi cơ sở dữ liệu của chúng tôi, bao gồm cả {count} bản ghi đang phát. Người chơi sẽ thấy giảm số liệu thống kê của họ.",

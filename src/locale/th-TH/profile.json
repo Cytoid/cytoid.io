@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "ดูเลเวลที่แนะนำทั้ง {count} เลเวล",
   "levels_all_btn": "ดูทั้งหมด ({count})",
   "collections_title": "คอลเลกชัน",
-  "collections_all_btn": "ดูทั้งหมด ({count})"
+  "collections_all_btn": "ดูทั้งหมด ({count})",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
 }

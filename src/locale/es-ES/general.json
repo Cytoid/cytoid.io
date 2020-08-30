@@ -15,6 +15,7 @@
   "favorites": "Favoritos",
   "favorite_verb": "Favorite",
   "favorite_pass_tense": "Favorited",
+  "owned_levels": "Owned Levels",
   "library": "Library",
   "settings": "Ajustes",
   "signout_btn": "Cerrar Sesión",
@@ -46,10 +47,16 @@
   "forgot_password_link_title": "Olvidé mi contraseña",
   "login_password_error": "¡Nombre de usuario o contraseña no coinciden!",
   "login_username_error": "¡El usuario no existe!",
+  "login_inactive_error": "This user is not active!",
   "visibility_status_unlisted": "Sin listar",
   "visibility_status_public": "Público",
   "visibility_status_private": "Privado",
   "visibility_action_unlist": "Unlist",
   "visibility_action_publish": "Publish",
-  "visibility_action_private": "Make Private"
+  "visibility_action_private": "Make Private",
+  "captcha_not_loaded": "Captcha not loaded",
+  "comment_reply": "Reply",
+  "comment_see_replies": "See {count} replies",
+  "comment_hide_replies": "Hide {count} replies",
+  "comment_post": "Post Comment"
 }

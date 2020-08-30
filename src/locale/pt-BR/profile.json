@@ -17,5 +17,7 @@
   "levels_featured_all_btn": "Ver todos os {count} níveis em destaque",
   "levels_all_btn": "Ver todos {count}",
   "collections_title": "Coleções",
-  "collections_all_btn": "Ver tudo {count}"
+  "collections_all_btn": "Ver tudo {count}",
+  "badges_title": "Insígnias",
+  "last_seen_date": "Visto por último {date}"
 }
