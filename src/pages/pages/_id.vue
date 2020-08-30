@@ -66,7 +66,7 @@ export default {
 .page-content blockquote {
   font-style: italic;
   color: $grey-lighter;
-  line-height: 0.5;
+  line-height: 1.5;
   position: relative;
   padding-left: 1.5rem;
   &:before {
