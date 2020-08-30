@@ -15,8 +15,8 @@ export default {
       [700000, 'C'],
       [800000, 'B'],
       [900000, 'A'],
-      [950000, 'S'],
-      [990000, 'SS'],
+      [990000, 'S'],
+      [995000, 'SS'],
       [999000, 'SSS'],
       [1000000, 'MAX'],
     ].reduce((prev, [cutoff, str]) => (context.props.value >= cutoff) ? str : prev, 'F')
