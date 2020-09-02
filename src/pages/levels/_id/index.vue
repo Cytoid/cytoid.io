@@ -99,33 +99,32 @@
           )
             template(slot="empty")
               empty-placeholder
-            template(slot-scope="props")
-              b-table-column(field="id" label="rank") \#{{ props.index + 1 + rankingsPagination.currentPage * rankingsPagination.recordsPerPage }}
-              b-table-column(field="owner" label="player")
-                nuxt-link.row-score-avatar(:to="{name: 'profile-id', params: { id: props.row.owner.uid || props.row.owner.id }}")
-                  avatar(:source="props.row.owner.avatar.small" fixed)
-                  span(v-text="props.row.owner.name || props.row.owner.uid")
-              b-table-column(field="score" label="score")
-                score-badge(:value="props.row.score")
-                span(style="margin-left: 4px;" v-text="props.row.score")
-              b-table-column(field="accuracy" label="acc") {{ (Math.floor(props.row.accuracy * 100 * 100) / 100) }}%
-              b-table-column(field="maxCombo" label="max combo") {{ props.row.details.maxCombo ? (props.row.details.maxCombo + 'x') : 'Unknown' }}
-              b-table-column(field="mods" label="mods")
-                span(v-if="props.row.mods.length === 0 || props.row.mods[0] === ''") N/A
-                span(v-else)
-                  img(
-                    v-for="mod in props.row.mods"
-                    :key="mod"
-                    :title="getModById(mod).title"
-                    :src="getModById(mod).src"
-                    style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
-                  )
-              b-table-column(field="perfect" label="perfect") {{ props.row.details.perfect }}
-              b-table-column(field="great" label="great") {{ props.row.details.great }}
-              b-table-column(field="good" label="good") {{ props.row.details.good }}
-              b-table-column(field="bad" label="bad") {{ props.row.details.bad }}
-              b-table-column(field="miss" label="miss") {{ props.row.details.miss }}
-              b-table-column(field="date" label="achieved") {{ $dateFromNow(props.row.date) }}
+            b-table-column(v-slot="props" field="id" label="rank") \#{{ props.index + 1 + rankingsPagination.currentPage * rankingsPagination.recordsPerPage }}
+            b-table-column(v-slot="props" field="owner" label="player")
+              nuxt-link.row-score-avatar(:to="{name: 'profile-id', params: { id: props.row.owner.uid || props.row.owner.id }}")
+                avatar(:source="props.row.owner.avatar.small" fixed)
+                span(v-text="props.row.owner.name || props.row.owner.uid")
+            b-table-column(v-slot="props" field="score" label="score")
+              score-badge(:value="props.row.score")
+              span(style="margin-left: 4px;" v-text="props.row.score")
+            b-table-column(v-slot="props" field="accuracy" label="acc") {{ (Math.floor(props.row.accuracy * 100 * 100) / 100) }}%
+            b-table-column(v-slot="props" field="maxCombo" label="max combo") {{ props.row.details.maxCombo ? (props.row.details.maxCombo + 'x') : 'Unknown' }}
+            b-table-column(v-slot="props" field="mods" label="mods")
+              span(v-if="props.row.mods.length === 0 || props.row.mods[0] === ''") N/A
+              span(v-else)
+                img(
+                  v-for="mod in props.row.mods"
+                  :key="mod"
+                  :title="getModById(mod).title"
+                  :src="getModById(mod).src"
+                  style="height: 20px; padding-bottom: 2px; max-width: unset; margin-right: 4px;"
+                )
+            b-table-column(v-slot="props" field="perfect" label="perfect") {{ props.row.details.perfect }}
+            b-table-column(v-slot="props" field="great" label="great") {{ props.row.details.great }}
+            b-table-column(v-slot="props" field="good" label="good") {{ props.row.details.good }}
+            b-table-column(v-slot="props" field="bad" label="bad") {{ props.row.details.bad }}
+            b-table-column(v-slot="props" field="miss" label="miss") {{ props.row.details.miss }}
+            b-table-column(v-slot="props" field="date" label="achieved") {{ $dateFromNow(props.row.date) }}
         thread(category="level" :thread="level.uid")
     .play-button-container
       play-button(:src="level.bundle.musicPreview")

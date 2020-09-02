@@ -16,8 +16,8 @@
     )
       template(slot="empty")
         empty-placeholder
-      template(v-slot:default="props")
-        b-table-column(label="Post")
+      template
+        b-table-column(v-slot="props" label="Post")
           .media
             .media-left
               nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'posts-id', params: { id: props.row.uid }}")
@@ -30,8 +30,8 @@
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                 li: a(@click="openDeleteModal(props.row)")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
-        b-table-column(field="type" label="Type") {{ props.row.type }}
-        b-table-column(field="state" label="State") {{ props.row.state }}
+        b-table-column(v-slot="props" field="type" label="Type") {{ props.row.type }}
+        b-table-column(v-slot="props" field="state" label="State") {{ props.row.state }}
 </template>
 
 <script>

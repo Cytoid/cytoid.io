@@ -11,15 +11,15 @@
           paginated
           :per-page="10"
         )
-          template(slot-scope="props")
-            b-table-column(label="Level")
+          template
+            b-table-column(v-slot="props" label="Level")
               nuxt-link(:to="{ name: 'levels-id', params: {id: props.row.chart.level.uid } }")
                 p(v-text="props.row.chart.level.title")
                 small(v-text="props.row.chart.level.uid")
-            b-table-column(label="Date") {{ $dateFormatCalendar(props.row.date) }}
-            b-table-column(label="Accuracy" numeric) {{props.row.accuracy.toFixed(2) }}
-            b-table-column(label="Difficulty" numeric subheading="Average:") {{props.row.chart.difficulty }}
-            b-table-column(label="Record Rating" numeric :subheading="(isRecentRecords ? recentRecordsAverage : bestRecordsAverage).toFixed(2)" )
+            b-table-column(v-slot="props" label="Date") {{ $dateFormatCalendar(props.row.date) }}
+            b-table-column(v-slot="props" label="Accuracy" numeric) {{props.row.accuracy.toFixed(2) }}
+            b-table-column(v-slot="props" label="Difficulty" numeric subheading="Average:") {{props.row.chart.difficulty }}
+            b-table-column(v-slot="props" label="Record Rating" numeric :subheading="(isRecentRecords ? recentRecordsAverage : bestRecordsAverage).toFixed(2)" )
               font-awesome-icon(v-if="props.row.used" icon="check-circle" style="margin-right: 0.5rem;")
               | {{ props.row.rating.toFixed(2) }}
           template(slot="footer")

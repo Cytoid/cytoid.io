@@ -20,8 +20,8 @@
         )
           template(slot="empty")
             empty-placeholder
-          template(slot-scope="props")
-            b-table-column(label="Level")
+          template
+            b-table-column(v-slot="props" label="Level")
               .media
                 .media-left
                   nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'levels-id', params: { id: props.row.uid }}")
@@ -34,17 +34,17 @@
                       font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                     li: a(@click="openDeleteModal(props.row)")
                       font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
-            b-table-column(label="Visibility")
+            b-table-column(v-slot="props" label="Visibility")
               visibility-select(:value="props.row.state" @change="openChangeVisibilityModal(props.row, $event)")
-            b-table-column(label="Downloads") {{ props.row.downloadCount }}
-            b-table-column(label="Plays") {{ props.row.playCount }}
-            b-table-column(label="Rating")
+            b-table-column(v-slot="props" label="Downloads") {{ props.row.downloadCount }}
+            b-table-column(v-slot="props" label="Plays") {{ props.row.playCount }}
+            b-table-column(v-slot="props" label="Rating")
               .content(style="white-space: nowrap;")
                 font-awesome-icon(:icon="['fas', 'star']" style="margin-right: 0.5rem;")
                 template(v-if="props.row.avgRating && props.row.ratingCount")
                   | {{ (Math.floor(props.row.avgRating * 0.5 * 100) / 100).toFixed(2) }} ({{props.row.ratingCount}})
                 template(v-else) N/A
-            b-table-column(label="Date") {{ $dateFormatCalendar(props.row.creationDate) }}
+            b-table-column(v-slot="props" label="Date") {{ $dateFormatCalendar(props.row.creationDate) }}
 </template>
 
 <script>

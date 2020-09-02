@@ -14,8 +14,8 @@
     )
       template(slot="empty")
         empty-placeholder
-      template(v-slot:default="props")
-        b-table-column(label="Collection")
+      template
+        b-table-column(v-slot="props" label="Collection")
           .media
             .media-left
               nuxt-link.image.is-studio-table-thumbnail(:to="{name: 'collections-id', params: { id: props.row.uid }}")
@@ -28,8 +28,8 @@
                   font-awesome-icon(:icon="['fas', 'suitcase']" fixed-width)
                 li: a(@click="openDeleteModal(props.row)")
                   font-awesome-icon(:icon="['fas', 'trash']" fixed-width)
-        b-table-column(field="state" label="State") {{ props.row.state }}
-        b-table-column(field="levelCount" label="Levels") {{ props.row.levelCount }}
+        b-table-column(v-slot="props" field="state" label="State") {{ props.row.state }}
+        b-table-column(v-slot="props" field="levelCount" label="Levels") {{ props.row.levelCount }}
 </template>
 
 <script>
