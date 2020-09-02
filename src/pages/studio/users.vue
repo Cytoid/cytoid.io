@@ -40,7 +40,7 @@
 import gql from 'graphql-tag'
 export default {
   name: 'StudioUsers',
-  data() {
+  data () {
     return {
       id: null,
       uid: null,
@@ -49,7 +49,7 @@ export default {
     }
   },
   methods: {
-    lookup(type) {
+    lookup (type) {
       this.$apollo.query({
         query: gql`query StudioLookupUser($uid: String, $id: ID) {
           user(id: $id, uid: $uid) {
@@ -86,7 +86,7 @@ export default {
           }
         })
     },
-    setActive(active) {
+    setActive (active) {
       if (!this.user) {
         return
       }
@@ -100,7 +100,7 @@ export default {
         }
       })
     },
-    grantUserBadge() {
+    grantUserBadge () {
       this.$apollo.mutate({
         mutation: gql`mutation StudioGrantUserBadge($id: ID!, $badge: String!) {
           grantUserBadge(id: $id, badge: $badge)
@@ -112,7 +112,7 @@ export default {
       })
         .catch(err => this.handleErrorToast(err))
     },
-    banUser() {
+    banUser () {
       this.$buefy.dialog.confirm({
         title: `Nuke ${this.user.name || this.user.uid}'s account?`,
         message: 'This is going to delete all his playing records, make the user inactive, and give the user a cheater badge.',

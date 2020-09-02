@@ -45,7 +45,7 @@
 import LevelCard from '@/components/level/LevelCard'
 import { handleErrorBlock } from '@/plugins/antd'
 
-function baseURL(query) {
+function baseURL (query) {
   if (query.search) {
     return '/search/levels'
   }
@@ -58,7 +58,25 @@ export default {
   components: {
     LevelCard,
   },
-  data() {
+  asyncData ({ $axios, query, error }) {
+    query.page = query.page || 1
+    if (!query.sort) {
+      if (!query.search) { query.sort = 'creation_date' }
+    } else if (query.sort === 'relevance') {
+      query.sort = undefined
+    }
+    query.order = query.order || 'desc'
+    return $axios.get(baseURL(query), { params: { ...query, page: query.page - 1, limit: 24 } })
+      .then((response) => {
+        return {
+          levels: response.data,
+          totalEntries: parseInt(response.headers['x-total-entries']),
+          totalPages: parseInt(response.headers['x-total-page']),
+        }
+      })
+      .catch(err => handleErrorBlock(err, error))
+  },
+  data () {
     return {
       loading: false,
       levels: [],
@@ -67,16 +85,11 @@ export default {
       pageSize: 24,
     }
   },
-  head() {
-    return {
-      title: 'Levels - Cytoid'
-    }
-  },
   computed: {
-    page() {
+    page () {
       return parseInt(this.$route.query.page, 10) || 1
     },
-    filters() {
+    filters () {
       const filters = Object.assign({}, this.$route.query)
       if (!filters.sort) {
         filters.sort = this.$route.query.search ? 'relevance' : 'creation_date'
@@ -87,7 +100,7 @@ export default {
     }
   },
   watch: {
-    '$route'() {
+    '$route' () {
       this.loading = true
       const mappedFilters = Object.assign({}, this.filters)
       if (mappedFilters.category) {
@@ -112,42 +125,24 @@ export default {
         })
     }
   },
-  asyncData({ $axios, query, error }) {
-    query.page = query.page || 1
-    if (!query.sort) {
-      if (!query.search) query.sort = 'creation_date'
-    } else if (query.sort === 'relevance') {
-      query.sort = undefined
-    }
-    query.order = query.order || 'desc'
-    return $axios.get(baseURL(query), { params: { ...query, page: query.page - 1, limit: 24 } })
-      .then((response) => {
-        return {
-          levels: response.data,
-          totalEntries: parseInt(response.headers['x-total-entries']),
-          totalPages: parseInt(response.headers['x-total-page']),
-        }
-      })
-      .catch(err => handleErrorBlock(err, error))
-  },
   methods: {
-    updateRoute(query) {
+    updateRoute (query) {
       window.scrollTo(0, 0)
       this.$router.replace({ query: { ...this.filters, ...query } })
     },
-    handlePagination(current) {
+    handlePagination (current) {
       this.updateRoute({ ...this.filters, page: current })
     },
-    handleOrderButton() {
+    handleOrderButton () {
       this.updateRoute({ order: this.filters.order === 'asc' ? 'desc' : 'asc' })
     },
-    handleSortSelector(value) {
+    handleSortSelector (value) {
       this.updateRoute({ sort: value })
     },
-    handleFilterSelector(value) {
+    handleFilterSelector (value) {
       this.updateRoute({ category: value })
     },
-    sortingCriteriaTitle(key) {
+    sortingCriteriaTitle (key) {
       switch (key) {
         case 'creation_date': return this.$t('sort_select_upload_date')
         case 'modification_date': return this.$t('sort_select_modification_date')
@@ -157,6 +152,11 @@ export default {
         case 'rating': return this.$t('sort_select_rating')
         case 'relevance': return this.$t('sort_select_relevance')
       }
+    }
+  },
+  head () {
+    return {
+      title: 'Levels - Cytoid'
     }
   },
   i18n: {

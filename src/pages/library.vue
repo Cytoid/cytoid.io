@@ -55,13 +55,7 @@ export default {
   components: {
     LevelCard,
   },
-  data() {
-    return {
-      levels: [],
-      grantedLevels: [],
-    }
-  },
-  async asyncData({ params, error, app, store }) {
+  async asyncData ({ params, error, app, store }) {
     return await app.apolloProvider.defaultClient.query({
       query,
     }).then(({ data }) => ({
@@ -69,6 +63,12 @@ export default {
       grantedLevels: data?.my?.grantedLevels,
     }))
       .catch(err => handleErrorBlock(err, error))
+  },
+  data () {
+    return {
+      levels: [],
+      grantedLevels: [],
+    }
   }
 }
 </script>

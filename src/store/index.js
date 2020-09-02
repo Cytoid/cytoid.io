@@ -9,16 +9,16 @@ export const state = () => ({
   country: null,
 })
 export const mutations = {
-  setBackground(state, background) {
+  setBackground (state, background) {
     state.background.source = background?.source
     state.background.overlayOpacity = background?.overlayOpacity || 0.5
     state.background.parallaxSpeed = background?.parallaxSpeed || 0.2
     state.background.landing = background?.landing || false
   },
-  setUser(state, user) {
+  setUser (state, user) {
     state.user = user
   },
-  setLocale(state, lang) {
+  setLocale (state, lang) {
     if (!lang) {
       return
     }
@@ -30,19 +30,19 @@ export const mutations = {
       global.document.cookie = 'locale=' + lang
     }
   },
-  setCountry(state, country) {
+  setCountry (state, country) {
     state.country = country
   }
 }
 export const actions = {
-  nuxtServerInit({ dispatch, commit, state }, { req }) {
+  nuxtServerInit ({ dispatch, commit, state }, { req }) {
     if (req) {
       // Read cookies success
       const user = req.session?.passport?.user
       commit('setUser', user)
     }
   },
-  login({ commit }, payload) {
+  login ({ commit }, payload) {
     return this.$axios
       .post('/session', payload, { withCredentials: true })
       .then((response) => {
@@ -51,16 +51,16 @@ export const actions = {
         return user
       })
   },
-  logout({ commit }) {
+  logout ({ commit }) {
     commit('setUser', null)
     return this.$axios.delete('/session')
   },
 }
 export const getters = {
-  avatarURL(state) {
+  avatarURL (state) {
     return (size) => {
       let url = `${process.env.apiURL}/users/${state.user.id}/avatar`
-      if (size) url += '?size=' + size
+      if (size) { url += '?size=' + size }
       return url
     }
   }

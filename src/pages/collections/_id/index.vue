@@ -116,17 +116,7 @@ export default {
     Thread,
     Captcha,
   },
-  data() {
-    return {
-      collection: null
-    }
-  },
-  computed: {
-    formattedDescriptions() {
-      return marked(this.collection.description)
-    },
-  },
-  async asyncData({ params, error, app, store }) {
+  async asyncData ({ params, error, app, store }) {
     const collection = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
@@ -139,6 +129,16 @@ export default {
       store.commit('setBackground', { source: collection.cover.original })
     }
     return { collection }
+  },
+  data () {
+    return {
+      collection: null
+    }
+  },
+  computed: {
+    formattedDescriptions () {
+      return marked(this.collection.description)
+    },
   },
   i18n: {
     key: 'collection_details'

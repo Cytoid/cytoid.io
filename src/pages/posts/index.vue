@@ -19,7 +19,7 @@ export default {
   components: {
     PostCard,
   },
-  data() {
+  data () {
     return {
       loading: false,
       hasMore: true,
@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    loadMore() {
+    loadMore () {
       this.loading = true
       this.$apollo.queries.posts.fetchMore({
         variables: {

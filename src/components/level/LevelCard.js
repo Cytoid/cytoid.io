@@ -10,7 +10,7 @@ export default {
     },
   },
   functional: true,
-  render(h, context) {
+  render (h, context) {
     const value = context.props.value
     const owner = value.owner
     const artist = value.metadata && value.metadata.artist && value.metadata.artist.name

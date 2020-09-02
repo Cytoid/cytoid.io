@@ -30,7 +30,7 @@ export default {
     }
   },
   methods: {
-    upload(data) {
+    upload (data) {
       this.$apollo.mutate({
         mutation: gql`mutation UnpackLevel($token: String!, $replace: String) {
           package: unpackLevelPackage(token: $token, replace: $replace) {

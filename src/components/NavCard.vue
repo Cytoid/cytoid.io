@@ -40,7 +40,7 @@ export default {
   components: { PlayerInfoAvatar },
   computed: {
     ...mapState(['header', 'user']),
-    roleIcon() {
+    roleIcon () {
       return {
         moderator: 'user-tie',
         admin: 'user-cog'
@@ -70,7 +70,7 @@ export default {
           }
         }
       }`,
-      variables() {
+      variables () {
         return {
           id: this.$store.state.user.id
         }
@@ -78,7 +78,7 @@ export default {
     }
   },
   methods: {
-    logout() {
+    logout () {
       this.$store.dispatch('logout')
         .then(() => this.$router.push('/'))
     }

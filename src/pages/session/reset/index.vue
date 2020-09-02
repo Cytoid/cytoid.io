@@ -34,7 +34,7 @@ export default {
   components: {
     Captcha,
   },
-  data() {
+  data () {
     return {
       sent: null,
       time: 60,
@@ -42,13 +42,8 @@ export default {
       email: null,
     }
   },
-  head() {
-    return {
-      title: 'Reset Password - Cytoid'
-    }
-  },
   methods: {
-    submit() {
+    submit () {
       const email = this.email
       this.loading = true
       this.$refs.captcha.execute()
@@ -81,7 +76,7 @@ export default {
           this.loading = false
         })
     },
-    resend() {
+    resend () {
       this.loading = true
       setTimeout(() => { this.loading = false }, 1000)
       this.$apollo.mutate({
@@ -103,7 +98,7 @@ export default {
           this.loading = false
         })
     },
-    startTimer() {
+    startTimer () {
       this.time = 60
       const timer = setInterval(() => {
         this.time -= 1
@@ -111,6 +106,11 @@ export default {
           clearInterval(timer)
         }
       }, 1000)
+    }
+  },
+  head () {
+    return {
+      title: 'Reset Password - Cytoid'
     }
   }
 }

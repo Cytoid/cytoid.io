@@ -71,14 +71,7 @@ export default {
     VisibilitySelect,
     MetaField,
   },
-  data() {
-    return {
-      collection: null,
-      levelUidCandidates: [],
-      loading: false,
-    }
-  },
-  async asyncData({ app, params, error, store }) {
+  async asyncData ({ app, params, error, store }) {
     const collection = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
@@ -95,27 +88,34 @@ export default {
     store.commit('setBackground', { source: collection.coverPath })
     return { collection }
   },
+  data () {
+    return {
+      collection: null,
+      levelUidCandidates: [],
+      loading: false,
+    }
+  },
   methods: {
-    metaFieldInput(str, property) {
+    metaFieldInput (str, property) {
       if (!this.collection.metadata.cover) {
         this.collection.metadata.cover = {}
       }
       this.collection.metadata.cover[property] = str
     },
-    levelTyping(key) {
+    levelTyping (key) {
       if (this.timer) {
         clearTimeout(this.timer)
         this.timer = null
       }
       this.timer = setTimeout(this.searchLevels.bind(this, key), 500)
     },
-    searchLevels(key) {
+    searchLevels (key) {
       this.$axios.get('/search/level_uids', { params: { search: key } })
         .then((res) => {
           this.levelUidCandidates = res.data
         })
     },
-    coverUploaded(path) {
+    coverUploaded (path) {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioUpdateCollectionForCover($id: ID!, $data: CollectionInput!) {
@@ -152,7 +152,7 @@ export default {
           this.loading = false
         })
     },
-    save() {
+    save () {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioUpdateCollection($id: ID!, $data: CollectionInput!) {

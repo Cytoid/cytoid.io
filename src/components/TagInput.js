@@ -6,7 +6,7 @@ export default {
       required: true,
     }
   },
-  render(h) {
+  render (h) {
     return h('b-taginput', {
       props: {
         autocomplete: true,
@@ -25,20 +25,20 @@ export default {
       }
     })
   },
-  data() {
+  data () {
     return {
       tagsCandidates: [],
     }
   },
   methods: {
-    typing(keyword) {
+    typing (keyword) {
       if (this.timer) {
         clearTimeout(this.timer)
         this.timer = null
       }
       this.timer = setTimeout(this.search.bind(this, keyword), 500)
     },
-    search(keyword) {
+    search (keyword) {
       this.$axios.get('/search/level_tags', { params: { search: keyword } })
         .then((res) => {
           this.tagsCandidates = res.data

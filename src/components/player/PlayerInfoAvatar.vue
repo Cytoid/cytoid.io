@@ -1,5 +1,5 @@
 <script>
-function draw(size, progress) {
+function draw (size, progress) {
   const margin = size * 0.025
   const radius = (size / 2) - margin
   const angle = Math.PI * (1 / 4)
@@ -27,7 +27,7 @@ export default {
       required: true,
     }
   },
-  render(h, { props }) {
+  render (h, { props }) {
     const exp = props.exp
     const progress = (exp.totalExp - exp.currentLevelExp) / (exp.nextLevelExp - exp.currentLevelExp)
     return (

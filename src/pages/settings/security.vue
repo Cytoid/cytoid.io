@@ -58,7 +58,19 @@ div
 import gql from 'graphql-tag'
 export default {
   name: 'Security',
-  data() {
+  asyncData ({ $axios, store, app }) {
+    return app.apolloProvider.defaultClient.query({
+      query: gql`query GetUserSecuritySettings {
+        my {
+          externals: externalAccountProviders
+        }
+      }`
+    })
+      .then(response => ({
+        externals: response.data?.my?.externals || []
+      }))
+  },
+  data () {
     return {
       form: {
         old: '',
@@ -76,20 +88,8 @@ export default {
       providersLoading: null,
     }
   },
-  asyncData({ $axios, store, app }) {
-    return app.apolloProvider.defaultClient.query({
-      query: gql`query GetUserSecuritySettings {
-        my {
-          externals: externalAccountProviders
-        }
-      }`
-    })
-      .then(response => ({
-        externals: response.data?.my?.externals || []
-      }))
-  },
   methods: {
-    submit() {
+    submit () {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation ChangePassword($old: String!, $new: String!) {
@@ -122,12 +122,12 @@ export default {
           this.loading = false
         })
     },
-    link(provider) {
+    link (provider) {
       this.providersLoading = provider
       window.open(process.env.apiURL + '/session/external/' + provider)
       window.addEventListener('message', this.providerResponded)
     },
-    providerResponded(event) {
+    providerResponded (event) {
       window.removeEventListener('message', this.providerResponded)
       /*
       if (process.event.origin !== process.env.apiURL) {
@@ -169,7 +169,7 @@ export default {
         })
       }
     },
-    unlink(provider) {
+    unlink (provider) {
       this.providersLoading = provider
       return this.$apollo.mutate({
         mutation: gql`mutation RemoveExternalAccount($provider: String!) {

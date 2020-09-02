@@ -43,17 +43,7 @@ export default {
   components: {
     EmptyPlaceholder
   },
-  data() {
-    return {
-      createNewLoading: false,
-      posts: [],
-      form: {
-        uid: '',
-        title: '',
-      }
-    }
-  },
-  async asyncData({ app, error }) {
+  async asyncData ({ app, error }) {
     let posts = await app.apolloProvider.defaultClient.query({
       query: gql`query StudioGetPosts {
         posts: getPosts(limit: 100, all: true) {
@@ -77,8 +67,18 @@ export default {
     }
     return { posts }
   },
+  data () {
+    return {
+      createNewLoading: false,
+      posts: [],
+      form: {
+        uid: '',
+        title: '',
+      }
+    }
+  },
   methods: {
-    createNew() {
+    createNew () {
       this.createNewLoading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioCreatePost($data: PostInput!) {
@@ -102,7 +102,7 @@ export default {
           this.createNewLoading = false
         })
     },
-    openDeleteModal(post) {
+    openDeleteModal (post) {
       this.$buefy.dialog.confirm({
         title: 'Deleting ' + (post.title || post.uid),
         message: 'Are you sure you want to delete this post?',
@@ -112,7 +112,7 @@ export default {
         onConfirm: () => this.deletePost(post),
       })
     },
-    deletePost(post) {
+    deletePost (post) {
       this.$apollo.mutate({
         mutation: gql`mutation StudioDeletePost($id: ID!) {
           deletePost(id: $id) {

@@ -26,17 +26,7 @@ export default {
   components: {
     Upload,
   },
-  data() {
-    return {
-      form: {
-        bio: null,
-        birthday: null,
-      },
-      headerURL: null,
-      submitLoading: false,
-    }
-  },
-  asyncData({ store, error, app }) {
+  asyncData ({ store, error, app }) {
     return app.apolloProvider.defaultClient.query({
       query: gql`query GetSettingsProfile($id: ID!) {
         profile(id: $id) {
@@ -66,8 +56,18 @@ export default {
       })
       .catch(err => handleErrorBlock(err, error))
   },
+  data () {
+    return {
+      form: {
+        bio: null,
+        birthday: null,
+      },
+      headerURL: null,
+      submitLoading: false,
+    }
+  },
   methods: {
-    headerUploaded(path) {
+    headerUploaded (path) {
       this.$apollo.mutate({
         mutation: gql`mutation UpdateProfileHeader($path: String!) {
           result: updateProfileHeader(path: $path) {
@@ -85,7 +85,7 @@ export default {
         })
         .catch(error => this.handleErrorToast(error))
     },
-    submit() {
+    submit () {
       this.submitLoading = true
       this.$apollo.mutate({
         mutation: gql`mutation UpdateProfile($input: ProfileInput!) {

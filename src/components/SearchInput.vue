@@ -12,14 +12,14 @@
 <script>
 export default {
   name: 'Search',
-  data() {
+  data () {
     return {
       searchKey: '',
       data: [],
     }
   },
   methods: {
-    submit() {
+    submit () {
       this.$router.push({
         name: 'levels',
         query: { search: this.searchKey }

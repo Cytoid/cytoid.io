@@ -8,7 +8,7 @@ const config = require('./nuxt.config.js')
 
 config.dev = !(process.env.NODE_ENV === 'production')
 
-async function getNuxtInstance() {
+async function getNuxtInstance () {
   if (config.dev) {
     const { Nuxt, Builder } = require('nuxt')
     const nuxt = new Nuxt(config)

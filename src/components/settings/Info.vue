@@ -5,13 +5,13 @@
 <script>
 export default {
   name: 'Info',
-  data() {
+  data () {
     return {
       loading: false,
     }
   },
   methods: {
-    save() {
+    save () {
     },
   },
 }

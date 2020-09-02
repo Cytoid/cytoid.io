@@ -14,16 +14,16 @@ export default {
   components: {
     Upload,
   },
-  data() {
+  data () {
     return {
       avatarURL: null
     }
   },
-  mounted() {
+  mounted () {
     this.avatarURL = this.$store.getters.avatarURL(128)
   },
   methods: {
-    avatarUploaded(path) {
+    avatarUploaded (path) {
       this.avatarURL = null
       this.$apollo.mutate({
         mutation: gql`mutation UpdateAvatar($path: String) {

@@ -1,10 +1,10 @@
-const path = require('path')
 const config = require('config')
 const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
   srcDir: 'src',
+  telemetry: false,
   dir: {
     static: '../public',
   },
@@ -173,7 +173,7 @@ module.exports = {
         '@babel/plugin-proposal-optional-chaining',
         '@babel/plugin-proposal-export-default-from',
       ],
-      presets({ isServer }) {
+      presets ({ isServer }) {
         return [
           [
             require.resolve('@nuxt/babel-preset-app'),
@@ -186,7 +186,7 @@ module.exports = {
         ]
       }
     },
-    extend(config, ctx) {
+    extend (config, ctx) {
       const urlLoaderRule = config.module.rules.find(rule => rule.use && rule.use.find(u => u.loader === 'url-loader'))
       urlLoaderRule.test = /\.(png|jpe?g|gif|webp)$/i
       config.module.rules.push({

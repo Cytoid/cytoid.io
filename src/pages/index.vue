@@ -237,14 +237,14 @@ export default {
       update: data => data,
     }
   },
-  data() {
+  data () {
     return {
       posts: [],
       loadingTweet: false,
     }
   },
-  mounted() {
-    function styleTweet() {
+  mounted () {
+    function styleTweet () {
       const widget = document.querySelector('[id^="twitter-widget-"]')
       if (widget == null) {
         // Try next time!
@@ -284,7 +284,7 @@ export default {
     }
     this.styleTweetTimer = setTimeout(styleTweet.bind(this), 200)
   },
-  destroyed() {
+  destroyed () {
     if (this.styleTweetTimer) {
       clearTimeout(this.styleTweetTimer)
       this.styleTweetTimer = null

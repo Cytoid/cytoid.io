@@ -44,7 +44,7 @@ export default {
   components: {
     Captcha,
   },
-  data() {
+  data () {
     return {
       form: {
         username: null,
@@ -55,18 +55,13 @@ export default {
       loading: false,
     }
   },
-  head() {
-    return {
-      title: 'Link - Cytoid'
-    }
-  },
   computed: {
-    provider() {
+    provider () {
       return this.$route.query.provider
     }
   },
   methods: {
-    link() {
+    link () {
       this.loading = true
       this.$refs.captcha.execute()
         .then(captcha => this.$store.dispatch('login', {
@@ -127,6 +122,11 @@ export default {
           }
         })
     },
+  },
+  head () {
+    return {
+      title: 'Link - Cytoid'
+    }
   },
   i18n: {
     key: 'signup'

@@ -52,7 +52,7 @@ export default {
       default: null,
     }
   },
-  data() {
+  data () {
     return {
       state: null,
       progress: null,
@@ -60,7 +60,7 @@ export default {
     }
   },
   computed: {
-    loadingPrompt() {
+    loadingPrompt () {
       switch (this.state) {
         case 1:
           return 'Verifying request'
@@ -77,7 +77,7 @@ export default {
     }
   },
   methods: {
-    async upload(file) {
+    async upload (file) {
       try {
         this.state = 1
         let captcha = null
@@ -130,7 +130,7 @@ export default {
       }
     }
   },
-  render(h) {
+  render (h) {
     return <div>
       { !this.captchaFunc && <captcha size="invisible" ref="captcha" /> }
       <b-upload

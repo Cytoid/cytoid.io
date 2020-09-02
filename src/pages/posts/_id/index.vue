@@ -131,27 +131,7 @@ export default {
     LevelCard,
     CollectionPreviewCard,
   },
-  data() {
-    return {
-      post: null,
-    }
-  },
-  head() {
-    const meta = new Meta(this.post.title, this.post.slogan)
-    if (this.post.cover?.original) {
-      meta.extend('og:image', this.post.cover.original)
-    }
-    return meta
-  },
-  computed: {
-    content() {
-      if (this.post.content) {
-        return marked(this.post.content)
-      }
-      return null
-    }
-  },
-  async asyncData({ params, store, error, app }) {
+  async asyncData ({ params, store, error, app }) {
     const post = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
@@ -165,6 +145,26 @@ export default {
       store.commit('setBackground', { source: image })
     }
     return { post }
+  },
+  data () {
+    return {
+      post: null,
+    }
+  },
+  computed: {
+    content () {
+      if (this.post.content) {
+        return marked(this.post.content)
+      }
+      return null
+    }
+  },
+  head () {
+    const meta = new Meta(this.post.title, this.post.slogan)
+    if (this.post.cover?.original) {
+      meta.extend('og:image', this.post.cover.original)
+    }
+    return meta
   },
 }
 </script>

@@ -68,17 +68,7 @@ fragment RecordFragment on UserRecord {
 }`
 export default {
   name: 'StudioAnalytics',
-  data() {
-    return {
-      isRecentRecords: false,
-      bestRecords: [],
-      recentRecords: [],
-      bestRecordsAverage: 0,
-      recentRecordsAverage: 0,
-      totalAverage: 0,
-    }
-  },
-  async asyncData({ params, error, app, store }) {
+  async asyncData ({ params, error, app, store }) {
     const data = await app.apolloProvider.defaultClient.query({
       query,
       variables: {
@@ -96,6 +86,16 @@ export default {
     data.recentRecordsAverage = recentRecordsSum / 10
     data.totalAverage = (bestRecordsSum + recentRecordsSum) / 40
     return data
+  },
+  data () {
+    return {
+      isRecentRecords: false,
+      bestRecords: [],
+      recentRecords: [],
+      bestRecordsAverage: 0,
+      recentRecordsAverage: 0,
+      totalAverage: 0,
+    }
   }
 }
 </script>

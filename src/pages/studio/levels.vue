@@ -60,7 +60,7 @@ export default {
     UploadLevel,
     EmptyPlaceholder,
   },
-  data() {
+  data () {
     return {
       levels: [],
       levels_pagination: {
@@ -71,11 +71,11 @@ export default {
       levels_loading: false,
     }
   },
-  mounted() {
+  mounted () {
     this.fetchLevels()
   },
   methods: {
-    openDeleteModal(level) {
+    openDeleteModal (level) {
       this.deleteModal = this.$buefy.modal.open({
         parent: this,
         props: { level },
@@ -90,7 +90,7 @@ export default {
         }
       })
     },
-    openChangeVisibilityModal(level, visibility) {
+    openChangeVisibilityModal (level, visibility) {
       this.visibilityModal = this.$buefy.modal.open({
         parent: this,
         props: { level, value: visibility },
@@ -105,7 +105,7 @@ export default {
         }
       })
     },
-    deleteLevel(modal) {
+    deleteLevel (modal) {
       const level = modal.level
       modal.loading = true
       this.$apollo.mutate({
@@ -133,7 +133,7 @@ export default {
           modal.loading = false
         })
     },
-    setLevelVisibility(modal) {
+    setLevelVisibility (modal) {
       const level = modal.level
       modal.loading = true
       this.$apollo.mutate({
@@ -161,11 +161,11 @@ export default {
           modal.loading = false
         })
     },
-    handlePageChange(page) {
+    handlePageChange (page) {
       this.levels_pagination.current = page - 1
       this.fetchLevels()
     },
-    fetchLevels() {
+    fetchLevels () {
       this.levels_loading = true
       this.$apollo.query({
         query: gql`query FetchLevelForStudio($limit: Int!, $start: Int!) {

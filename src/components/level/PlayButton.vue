@@ -2,7 +2,7 @@
 import Vue from 'vue'
 export const Bus = new Vue()
 
-function draw(size, progress) {
+function draw (size, progress) {
   const margin = size * 0.025
   const radius = (size / 2) - margin
   const angle = progress * 2 * Math.PI - Math.PI / 2 // breakpoint angle in unit circle
@@ -27,14 +27,14 @@ export default {
     playing: false,
     progress: 0,
   }),
-  mounted() {
+  mounted () {
     Bus.$on('play', this.playbackInterrupted)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     Bus.$off('play', this.playbackInterrupted)
   },
   methods: {
-    play() {
+    play () {
       if (this.playing) {
         this.playing = false
         this.$refs.audio.pause()
@@ -44,17 +44,17 @@ export default {
         Bus.$emit('play', this.src)
       }
     },
-    playbackUpdate() {
+    playbackUpdate () {
       const player = this.$refs.audio
       if (player) {
         this.progress = player.currentTime / player.duration
       }
     },
-    playbackEnded() {
+    playbackEnded () {
       this.progress = 0
       this.playing = false
     },
-    playbackInterrupted(id) {
+    playbackInterrupted (id) {
       if (id === this.src) {
         return
       }
@@ -62,7 +62,7 @@ export default {
       this.playing = false
     }
   },
-  render(h) {
+  render (h) {
     return <button class="play-button" vOn:click_stop={this.play}>
       <font-awesome-icon icon={this.playing ? 'pause' : 'play'} fixed-width />
       {this.playing && <svg class="play-button-progress" viewBox="0 0 36 36">

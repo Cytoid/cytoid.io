@@ -56,7 +56,7 @@ export default {
       required: true,
     }
   },
-  data() {
+  data () {
     return {
       loading: false,
       form: {
@@ -72,12 +72,12 @@ export default {
   },
   computed: {
     censored: {
-      get() { return this.adminForm.censored !== null },
-      set(val) { this.adminForm.censored = val ? '' : null },
+      get () { return this.adminForm.censored !== null },
+      set (val) { this.adminForm.censored = val ? '' : null },
     }
   },
   methods: {
-    submit(form) {
+    submit (form) {
       if (form.censored === '') {
         form.censored = null
       }

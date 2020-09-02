@@ -19,7 +19,7 @@ export default {
   components: {
     CollectionSimpleCard
   },
-  data() {
+  data () {
     return {
       loading: false,
       hasMore: true,
@@ -47,7 +47,7 @@ export default {
     }
   },
   methods: {
-    loadMore() {
+    loadMore () {
       this.loading = true
       this.$apollo.queries.collections.fetchMore({
         variables: {

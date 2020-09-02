@@ -285,40 +285,7 @@ export default {
     Captcha,
     EmptyPlaceholder
   },
-  data: () => ({
-    level: null,
-    downloadBtnLoading: false,
-    addToLibraryBtnLoading: false,
-    leaderboard: [],
-    rankingsChartType: null,
-    rankingsPagination: {
-      currentPage: 0,
-      total: 0,
-      recordsPerPage: 10,
-    },
-    rankingsLoading: false,
-  }),
-  computed: {
-    levelDescription() {
-      return this.level.description !== null ? marked(this.level.description) : null
-    },
-    rankingsHeaderGradient() {
-      return {
-        '--box-background-gradient': {
-          extreme: 'linear-gradient(to bottom right, #6f0000, #200122)',
-          easy: 'linear-gradient(to top left, #4ca2cd, #67B26F)',
-          hard: 'linear-gradient(to top left, #B06AB3, #4568DC)'
-        }[this.rankingsChartType]
-      }
-    },
-  },
-  watch: {
-    rankingsChartType() {
-      this.rankingsPagination.currentPage = 0
-      this.reloadLeaderboard()
-    }
-  },
-  async asyncData({ app, params, error, store }) {
+  async asyncData ({ app, params, error, store }) {
     const level = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
@@ -352,14 +319,41 @@ export default {
     }
     return result
   },
-  head() {
-    const meta = new Meta(this.level?.title || 'Level', this.level?.description || '')
-    meta.extend('author', this.level?.owner?.name || this.level?.owner?.uid)
-    meta.extend('og:image', this.level?.bundle?.background)
-    return meta
+  data: () => ({
+    level: null,
+    downloadBtnLoading: false,
+    addToLibraryBtnLoading: false,
+    leaderboard: [],
+    rankingsChartType: null,
+    rankingsPagination: {
+      currentPage: 0,
+      total: 0,
+      recordsPerPage: 10,
+    },
+    rankingsLoading: false,
+  }),
+  computed: {
+    levelDescription () {
+      return this.level.description !== null ? marked(this.level.description) : null
+    },
+    rankingsHeaderGradient () {
+      return {
+        '--box-background-gradient': {
+          extreme: 'linear-gradient(to bottom right, #6f0000, #200122)',
+          easy: 'linear-gradient(to top left, #4ca2cd, #67B26F)',
+          hard: 'linear-gradient(to top left, #B06AB3, #4568DC)'
+        }[this.rankingsChartType]
+      }
+    },
+  },
+  watch: {
+    rankingsChartType () {
+      this.rankingsPagination.currentPage = 0
+      this.reloadLeaderboard()
+    }
   },
   methods: {
-    addToLibrary() {
+    addToLibrary () {
       this.addToLibraryBtnLoading = true
       this.$apollo.mutate({
         mutation: gql`mutation AddToLibrary($levelId: Int!) {
@@ -381,7 +375,7 @@ export default {
           this.addToLibraryBtnLoading = false
         })
     },
-    removeFromLibrary() {
+    removeFromLibrary () {
       this.$buefy.dialog.confirm({
         title: `Remove ${this.level.title} from favorites`,
         message: `Are you sure you want to remove ${this.level.title} from your library?`,
@@ -412,11 +406,11 @@ export default {
         }
       })
     },
-    pageChange(pageNum) {
+    pageChange (pageNum) {
       this.rankingsPagination.currentPage = pageNum - 1
       this.reloadLeaderboard()
     },
-    async reloadLeaderboard() {
+    async reloadLeaderboard () {
       this.rankingsLoading = true
       const chart = await this.$apollo.query({
         query: rankingQuery,
@@ -434,7 +428,7 @@ export default {
       }
       this.rankingsLoading = false
     },
-    rate(rating) {
+    rate (rating) {
       rating *= 2
       this.$apollo.mutate({
         mutation: gql`mutation LevelRate($uid: String!, $rating: Int) {
@@ -454,14 +448,14 @@ export default {
           this.level.rating = res.data.rateLevel
         })
     },
-    getModById(id) {
+    getModById (id) {
       id = id.toLowerCase()
       return {
         title: modNames[id],
         src: ModIconKeyPathMap[id],
       }
     },
-    rowClass(record, index) {
+    rowClass (record, index) {
       let classes = 'row-score'
       if (record.score === 1000000) {
         classes += ' row-score-max'
@@ -479,10 +473,10 @@ export default {
       }
       return classes
     },
-    formatSize(size) {
+    formatSize (size) {
       return formatBytes(size)
     },
-    download() {
+    download () {
       if (this.$store.state.user) {
         this.downloadBtnLoading = true
         this.$refs.captcha.execute()
@@ -517,13 +511,19 @@ export default {
         this.$router.push({ name: 'session-login', query: { origin: `/levels/${this.$route.params.id}` } })
       }
     },
-    convertedDifficultyName(name) {
+    convertedDifficultyName (name) {
       return {
         easy: 'Easy',
         hard: 'Hard',
         extreme: 'Extreme',
       }[name]
     },
+  },
+  head () {
+    const meta = new Meta(this.level?.title || 'Level', this.level?.description || '')
+    meta.extend('author', this.level?.owner?.name || this.level?.owner?.uid)
+    meta.extend('og:image', this.level?.bundle?.background)
+    return meta
   },
   i18n: {
     key: 'level_details'

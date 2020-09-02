@@ -5,7 +5,7 @@ import marked from 'marked'
 Vue.component('markdown-editor', {
   name: 'MarkdownEditor',
   functional: true,
-  render(h, ctx) {
+  render (h, ctx) {
     return <VueSimplemde
       value={ctx.props.value}
       vOn:input={ctx.listeners.input}

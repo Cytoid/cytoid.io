@@ -33,18 +33,7 @@ const query = gql`query GetPost($uid: String!) {
 }`
 
 export default {
-  data: () => ({
-    page: null,
-  }),
-  head() {
-    return new Meta(this.page.title, this.page.content)
-  },
-  computed: {
-    htmlContent() {
-      return marked(this.page.content)
-    }
-  },
-  async asyncData({ params, store, error, app }) {
+  async asyncData ({ params, store, error, app }) {
     const page = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
@@ -58,6 +47,17 @@ export default {
       store.commit('setBackground', { source: image })
     }
     return { page }
+  },
+  data: () => ({
+    page: null,
+  }),
+  computed: {
+    htmlContent () {
+      return marked(this.page.content)
+    }
+  },
+  head () {
+    return new Meta(this.page.title, this.page.content)
   },
 }
 </script>

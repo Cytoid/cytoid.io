@@ -1,7 +1,7 @@
 export default {
   name: 'VisibilitySelect',
   functional: true,
-  render(h, ctx) {
+  render (h, ctx) {
     const data = {
       PUBLIC: { title: 'visibility_status_public', icon: 'globe' },
       PRIVATE: { title: 'visibility_status_private', icon: 'lock' },

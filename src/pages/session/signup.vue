@@ -62,7 +62,7 @@ export default {
   components: {
     Captcha,
   },
-  data() {
+  data () {
     return {
       loading: false,
       form: {
@@ -74,18 +74,13 @@ export default {
       }
     }
   },
-  head() {
-    return {
-      title: 'Sign Up - Cytoid'
-    }
-  },
-  mounted() {
+  mounted () {
     if (this.$route.query.username) {
       this.form.uid = this.$route.query.username
     }
   },
   methods: {
-    signUp() {
+    signUp () {
       if (!this.form.tos) {
         this.$refs.validator.setErrors({
           tos: [this.$t('tos_field_error_required')]
@@ -136,6 +131,11 @@ export default {
           this.loading = false
         })
     },
+  },
+  head () {
+    return {
+      title: 'Sign Up - Cytoid'
+    }
   },
   i18n: {
     key: 'signup'

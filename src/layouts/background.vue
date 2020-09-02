@@ -32,12 +32,12 @@ export default {
     ]),
   },
   watch: {
-    'background.source'() {
+    'background.source' () {
       this.loaded = false
     }
   },
   methods: {
-    animateBackground() {
+    animateBackground () {
       this.loaded = true
     }
   }

@@ -77,15 +77,7 @@ export default {
     CollectionSelect,
     Captcha,
   },
-  data() {
-    return {
-      post: null,
-      loading: false,
-      level: null,
-      collection: null,
-    }
-  },
-  async asyncData({ app, params, error, store }) {
+  async asyncData ({ app, params, error, store }) {
     const user = store.state.user
     if (!user || (user.role !== 'admin' && user.role !== 'moderator')) {
       return error({ statusCode: 403, message: "You don't have the permission to edit posts!" })
@@ -153,14 +145,22 @@ export default {
     }
     return res
   },
+  data () {
+    return {
+      post: null,
+      loading: false,
+      level: null,
+      collection: null,
+    }
+  },
   methods: {
-    metaFieldInput(str, property) {
+    metaFieldInput (str, property) {
       if (!this.post.metadata.cover) {
         this.post.metadata.cover = {}
       }
       this.post.metadata.cover[property] = str
     },
-    coverUploaded(path) {
+    coverUploaded (path) {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioUpdatePostForCover($id: ID!, $data: PostInput!) {
@@ -197,7 +197,7 @@ export default {
           this.loading = false
         })
     },
-    logoUploaded(path) {
+    logoUploaded (path) {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioUpdateLogoForCover($id: ID!, $data: PostInput!) {
@@ -234,10 +234,10 @@ export default {
           this.loading = false
         })
     },
-    getCaptcha() {
+    getCaptcha () {
       return this.$refs.captcha.execute()
     },
-    save() {
+    save () {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioUpdatePost($id: ID!, $data: PostInput!) {

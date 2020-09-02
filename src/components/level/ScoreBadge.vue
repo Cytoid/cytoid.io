@@ -8,7 +8,7 @@ export default {
       required: true
     }
   },
-  render(h, context) {
+  render (h, context) {
     const scoreGrade = [
       [0, 'F'],
       [600000, 'D'],

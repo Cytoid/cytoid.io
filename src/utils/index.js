@@ -1,4 +1,4 @@
-export function formatBytes(bytes) {
+export function formatBytes (bytes) {
   if ((bytes >> 30) & 0x3FF) {
     bytes = (bytes >>> 30) + '.' + (bytes & (3 * 0x3FF)).toString().substring(0, 2) + ' GB'
   } else if ((bytes >> 20) & 0x3FF) {
@@ -13,7 +13,7 @@ export function formatBytes(bytes) {
   return bytes
 }
 
-export function Meta(title, description, verb = null) {
+export function Meta (title, description, verb = null) {
   if (description.length > 100) {
     description = description.substring(0, 100)
   }

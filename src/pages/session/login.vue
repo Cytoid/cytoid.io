@@ -41,7 +41,7 @@ export default {
   components: {
     Captcha,
   },
-  data() {
+  data () {
     return {
       loading: false,
       externalLoginLoading: false,
@@ -52,18 +52,13 @@ export default {
       }
     }
   },
-  head() {
-    return {
-      title: 'Login - Cytoid'
-    }
-  },
   methods: {
-    signInWithProvider(provider) {
+    signInWithProvider (provider) {
       this.externalLoginLoading = true
       window.addEventListener('message', this.providerResponded)
       window.open(process.env.apiURL + '/session/external/' + provider)
     },
-    providerResponded(event) {
+    providerResponded (event) {
       window.removeEventListener('message', this.providerResponded)
       console.log(event.data)
       console.log(event.origin)
@@ -96,7 +91,7 @@ export default {
         })
       }
     },
-    signIn() {
+    signIn () {
       this.loading = true
       this.$refs.captcha.execute()
         .then(token => this.$store.dispatch('login', { ...this.form, captcha: token }))
@@ -140,6 +135,11 @@ export default {
           this.captchaToken = null
         })
     },
+  },
+  head () {
+    return {
+      title: 'Login - Cytoid'
+    }
   },
   i18n: {
     key: 'login'

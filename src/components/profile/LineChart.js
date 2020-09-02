@@ -11,21 +11,21 @@ export default {
       default: 'activity'
     }
   },
-  mounted() {
+  mounted () {
     this.ApexCharts = import('apexcharts')
       .then(imported => imported.default)
     this.renderChart()
   },
-  render(h) {
+  render (h) {
     return h('div')
   },
   watch: {
-    mode() {
+    mode () {
       this.renderChart()
     }
   },
   methods: {
-    async renderChart() {
+    async renderChart () {
       if (this.data.length === 0) {
         return
       }

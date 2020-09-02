@@ -15,14 +15,14 @@ export default {
     }
   },
   computed: {
-    message() {
+    message () {
       if (!this.error) {
         return null
       }
       return this.error.message
     }
   },
-  head() {
+  head () {
     return {
       htmlAttrs: {
         lang: this.$store.state.locale,

@@ -21,7 +21,7 @@ div
 <script>
 export default {
   name: 'Sudo',
-  data() {
+  data () {
     return {
       workerCommand: {
         command: '',
@@ -30,7 +30,7 @@ export default {
     }
   },
   methods: {
-    sendWorkerCommand(type) {
+    sendWorkerCommand (type) {
       this.$axios.post(type ? '/workers/' + type : '/workers', this.workerCommand)
         .then(() => {
           this.$buefy.toast.open({
@@ -39,7 +39,7 @@ export default {
           })
         })
     },
-    sudo() {
+    sudo () {
       this.$buefy.dialog.confirm({
         message: 'Do you want to be a superuser?',
         type: 'is-danger',

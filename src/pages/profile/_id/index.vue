@@ -231,33 +231,7 @@ export default {
     BadgeStripe,
   },
   layout: 'background',
-  data: () => ({
-    profile: null,
-    chartMode: 'activity',
-  }),
-  head() {
-    const name = this.profile.user.name || this.profile.user.uid
-    const meta = new Meta(name, this.profile.bio || '')
-    meta.extend('author', name)
-    if (this.profile.headerURL) {
-      meta.extend('og:image', this.profile.headerURL)
-    }
-    return meta
-  },
-  computed: {
-    bio() {
-      return marked(this.profile.bio || 'There is no bio yet.')
-    },
-    online() {
-      if (!this.profile.user.lastSeen) {
-        return false
-      }
-      const date = parseISO(this.profile.user.lastSeen)
-      const dateInFuture = addMinutes(date, 15)
-      return isFuture(dateInFuture) // If last seen date + 15 min is in the future, then we're online
-    }
-  },
-  async asyncData({ app, $axios, params, error, store }) {
+  async asyncData ({ app, $axios, params, error, store }) {
     const profile = await app.apolloProvider.defaultClient.query({
       query,
       variables: { uid: params.id }
@@ -283,13 +257,39 @@ export default {
       profile,
     }
   },
+  data: () => ({
+    profile: null,
+    chartMode: 'activity',
+  }),
+  computed: {
+    bio () {
+      return marked(this.profile.bio || 'There is no bio yet.')
+    },
+    online () {
+      if (!this.profile.user.lastSeen) {
+        return false
+      }
+      const date = parseISO(this.profile.user.lastSeen)
+      const dateInFuture = addMinutes(date, 15)
+      return isFuture(dateInFuture) // If last seen date + 15 min is in the future, then we're online
+    }
+  },
   methods: {
-    commaSeparated(number) {
+    commaSeparated (number) {
       if (number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       }
       return '0'
     },
+  },
+  head () {
+    const name = this.profile.user.name || this.profile.user.uid
+    const meta = new Meta(name, this.profile.bio || '')
+    meta.extend('author', name)
+    if (this.profile.headerURL) {
+      meta.extend('og:image', this.profile.headerURL)
+    }
+    return meta
   },
   i18n: {
     key: 'profile'

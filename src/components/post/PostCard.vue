@@ -8,7 +8,7 @@ export default {
       required: true
     },
   },
-  render(createElement, context) {
+  render (createElement, context) {
     const post = context.props.value
     const slots = {
       top: () => <span>{ context.parent.$dateFromNow(post.creationDate) }</span>,

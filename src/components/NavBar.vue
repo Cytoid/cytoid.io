@@ -33,13 +33,13 @@ export default {
     Search,
     NavCard,
   },
-  data() {
+  data () {
     return {
       active: false,
     }
   },
   methods: {
-    activeChange(active) {
+    activeChange (active) {
       this.active = active
     }
   }

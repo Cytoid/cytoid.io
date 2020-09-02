@@ -14,7 +14,7 @@ export default {
     NavBar,
     FooterBar,
   },
-  head() {
+  head () {
     return {
       htmlAttrs: {
         lang: this.$store.state.locale,

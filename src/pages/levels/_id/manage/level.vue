@@ -60,7 +60,7 @@ export default {
       required: true,
     }
   },
-  data() {
+  data () {
     return {
       easyDifficultyRating: 4,
       hardDifficultyRating: 6,

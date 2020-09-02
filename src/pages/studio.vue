@@ -30,12 +30,12 @@
 export default {
   name: 'Studio',
   middleware: 'auth',
-  fetch({ route, redirect }) {
+  fetch ({ route, redirect }) {
     if (route.fullPath === '/studio') {
       redirect('/studio/levels')
     }
   },
-  head() {
+  head () {
     const user = this.$store.state.user
     const name = user?.name || user?.uid || 'Unknown'
     return {

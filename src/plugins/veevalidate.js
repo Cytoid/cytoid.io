@@ -8,7 +8,7 @@ export default function ({ app, store, req, res }) {
   extend('required', required)
 
   extend('uid', {
-    validate(password) {
+    validate (password) {
       const min = 3
       const max = 16
       if (password.length < min || password.length > max) {
@@ -22,7 +22,7 @@ export default function ({ app, store, req, res }) {
   })
 
   extend('password', {
-    validate(password) {
+    validate (password) {
       if (password.length < 9) {
         return i18n.t('password_requirement_length')
       }
@@ -38,7 +38,7 @@ export default function ({ app, store, req, res }) {
 
   extend('password_confirm', {
     params: ['target'],
-    validate(value, { target }) {
+    validate (value, { target }) {
       if (value === target) {
         return true
       } else {

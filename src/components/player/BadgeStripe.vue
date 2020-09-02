@@ -9,7 +9,7 @@ export default {
       required: true,
     }
   },
-  render(h, { props }) {
+  render (h, { props }) {
     const iconPath = props.value.metadata?.fontawesome
     return (<div class="media badge-stripe">
       <div class="media-left">

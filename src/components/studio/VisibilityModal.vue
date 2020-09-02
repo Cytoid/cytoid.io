@@ -47,13 +47,13 @@ export default {
     loading: false,
   }),
   computed: {
-    title() {
+    title () {
       const title = this.level.title
       return this.$t('level_visibility_title_' + this.value.toLowerCase(), { title })
     },
   },
   methods: {
-    submit() {
+    submit () {
       this.$emit('submit', this)
     },
   },

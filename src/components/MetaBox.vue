@@ -7,7 +7,7 @@ export default {
       required: true,
     }
   },
-  render(h, context) {
+  render (h, context) {
     const metadata = context.props.metadata
     return (<div class="box box-metadata">
       {

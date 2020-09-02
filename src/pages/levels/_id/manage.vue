@@ -83,12 +83,13 @@ const query = gql`query FetchLevelForEditing($uid: String!) {
 export default {
   layout: 'background',
   middleware: 'auth',
-  data() {
-    return {
-      level: null,
+  fetch ({ route, redirect }) {
+    const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)
+    if (test) {
+      return redirect(route.fullPath + '/listing')
     }
   },
-  async asyncData({ app, $axios, params, store, error }) {
+  async asyncData ({ app, $axios, params, store, error }) {
     const user = store.state.user
     const level = await app.apolloProvider.defaultClient.query({
       query,
@@ -106,14 +107,13 @@ export default {
     store.commit('setBackground', { source: level.bundle?.backgroundImage?.original })
     return { level }
   },
-  head() {
-    return new Meta(this.level.title, this.level.description, 'Manage')
-  },
-  fetch({ route, redirect }) {
-    const test = /^\/levels\/(.+)\/manage$/.exec(route.fullPath)
-    if (test) {
-      return redirect(route.fullPath + '/listing')
+  data () {
+    return {
+      level: null,
     }
+  },
+  head () {
+    return new Meta(this.level.title, this.level.description, 'Manage')
   },
 }
 </script>

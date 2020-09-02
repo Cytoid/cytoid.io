@@ -13,14 +13,12 @@ export default {
       default: null,
     }
   },
-  render(h, context) {
+  render (h, context) {
     const infoText = context.scopedSlots.bottom && context.scopedSlots.bottom()
     if (infoText) {
       for (const item of infoText) {
-        if (!item.data) item.data = {}
-        if (!item.data.class) item.data.class = 'info'
-        else if (Array.isArray(item.data.class)) item.data.class.push('info')
-        else item.data.class.info = true
+        if (!item.data) { item.data = {} }
+        if (!item.data.class) { item.data.class = 'info' } else if (Array.isArray(item.data.class)) { item.data.class.push('info') } else { item.data.class.info = true }
       }
     }
 

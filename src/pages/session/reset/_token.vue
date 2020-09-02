@@ -39,7 +39,7 @@
 import gql from 'graphql-tag'
 
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       form: {
@@ -49,13 +49,8 @@ export default {
       state: 0, // 0 - nature, -1 - wrong token, 1 - success
     }
   },
-  head() {
-    return {
-      title: 'Confirm - Reset Password - Cytoid'
-    }
-  },
   methods: {
-    submit() {
+    submit () {
       const password = this.form.new
       this.loading = true
       setTimeout(() => { this.loading = false }, 1000)
@@ -78,6 +73,11 @@ export default {
           this.loading = false
         })
     },
+  },
+  head () {
+    return {
+      title: 'Confirm - Reset Password - Cytoid'
+    }
   },
 }
 </script>

@@ -30,13 +30,13 @@ export default {
       default: false,
     },
   },
-  data() {
+  data () {
     return {
       errored: false,
     }
   },
   computed: {
-    avatarSrc() {
+    avatarSrc () {
       if (this.source) {
         return this.source
       }

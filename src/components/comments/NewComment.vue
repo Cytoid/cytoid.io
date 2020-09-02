@@ -32,14 +32,14 @@ export default {
       default: null,
     },
   },
-  data() {
+  data () {
     return {
       loading: false,
       content: '',
     }
   },
   methods: {
-    findCaptchaElement(element) {
+    findCaptchaElement (element) {
       if (!element) {
         return element
       }
@@ -48,7 +48,7 @@ export default {
       }
       return this.findCaptchaElement(element.$parent)
     },
-    postComment() {
+    postComment () {
       this.loading = true
       const captcha = this.findCaptchaElement(this.$parent)
       console.log(captcha)

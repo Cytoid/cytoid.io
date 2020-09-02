@@ -18,12 +18,12 @@
 <script>
 export default {
   middleware: 'auth',
-  fetch({ route, redirect }) {
+  fetch ({ route, redirect }) {
     if (route.fullPath === '/settings') {
       redirect('/settings/account')
     }
   },
-  head() {
+  head () {
     return {
       title: this.$t('settings') + ' - Cytoid'
     }

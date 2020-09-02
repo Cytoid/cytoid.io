@@ -1,4 +1,4 @@
-function routeOption(route, key) {
+function routeOption (route, key) {
   for (const m of route.matched) {
     if (process.browser) {
       for (const component of Object.values(m.components)) {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 const component = {
-  render(h) {
+  render (h) {
     return h('div')
   },
   props: {
@@ -20,12 +20,12 @@ const component = {
       default: false,
     }
   },
-  mounted() {
+  mounted () {
     this.$emit('update:token', 'fuckcensorship')
   },
 }
 
-function execute() {
+function execute () {
   return Promise.resolve('fuckccp')
 }
 

@@ -29,13 +29,13 @@ export default {
       required: true,
     }
   },
-  data() {
+  data () {
     return {
       loading: true,
       comments: []
     }
   },
-  mounted() {
+  mounted () {
     this.$axios.get(`threads/${this.category}/${this.thread}`)
       .then((res) => {
         this.comments = res.data

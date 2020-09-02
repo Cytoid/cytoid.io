@@ -12,8 +12,8 @@ export default {
       required: true
     }
   },
-  render(h, { props, listeners }) {
-    function onChange(str, key) {
+  render (h, { props, listeners }) {
+    function onChange (str, key) {
       if (listeners.input) {
         listeners.input(str, key)
       }

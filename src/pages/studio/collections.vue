@@ -42,17 +42,7 @@ export default {
   components: {
     EmptyPlaceholder,
   },
-  data() {
-    return {
-      collections: [],
-      createNewLoading: false,
-      form: {
-        uid: '',
-        title: '',
-      }
-    }
-  },
-  async asyncData({ app, error }) {
+  async asyncData ({ app, error }) {
     let collections = await app.apolloProvider.defaultClient.query({
       query: gql`query FetchUserCollections {
         my {
@@ -78,8 +68,18 @@ export default {
     }
     return { collections }
   },
+  data () {
+    return {
+      collections: [],
+      createNewLoading: false,
+      form: {
+        uid: '',
+        title: '',
+      }
+    }
+  },
   methods: {
-    createNew() {
+    createNew () {
       this.createNewLoading = true
       this.$apollo.mutate({
         mutation: gql`mutation StudioCreateCollection($data: CollectionInput!) {
@@ -102,7 +102,7 @@ export default {
           this.createNewLoading = false
         })
     },
-    openDeleteModal(collection) {
+    openDeleteModal (collection) {
       this.$buefy.dialog.confirm({
         title: 'Deleting ' + (collection.title || collection.uid),
         message: 'Are you sure you want to delete this collection?',
@@ -112,7 +112,7 @@ export default {
         onConfirm: () => this.deleteCollection(collection),
       })
     },
-    deleteCollection(collection) {
+    deleteCollection (collection) {
       this.$apollo.mutate({
         mutation: gql`mutation StudioDeleteCollection($id: ID!) {
           deleteCollection(id: $id) {

@@ -1,4 +1,4 @@
-function CaptchaScript(cb) {
+function CaptchaScript (cb) {
   const script = document.createElement('script')
   script.src = 'https://www.google.com/recaptcha/api.js'
   if (cb) {
@@ -12,7 +12,7 @@ function CaptchaScript(cb) {
 
 export default {
   name: 'Captcha',
-  mounted() {
+  mounted () {
     // if not loaded, create script tag, and wait to render hcaptcha element
     if (!global.grecaptcha) {
       console.log('loading captcha js')
@@ -27,7 +27,7 @@ export default {
     }
   },
   methods: {
-    renderCaptcha() {
+    renderCaptcha () {
       global.grecaptcha.render(this.$el, {
         sitekey: process.env.captchaKey,
         badge: 'bottomleft',
@@ -37,7 +37,7 @@ export default {
         'error-callback': this.onError,
       })
     },
-    execute() {
+    execute () {
       if (typeof global.grecaptcha === 'undefined') {
         return Promise.reject(new Error(this.$t('captcha_not_loaded')))
       }
@@ -48,7 +48,7 @@ export default {
         this.reject = reject
       })
     },
-    onSubmit(token) {
+    onSubmit (token) {
       if (this.resolve) {
         this.resolve(token)
         this.resolve = null
@@ -56,7 +56,7 @@ export default {
       }
       global.grecaptcha.reset()
     },
-    onExpired() {
+    onExpired () {
       if (this.reject) {
         this.reject(new Error('token expired'))
         this.resolve = null
@@ -64,7 +64,7 @@ export default {
       }
       global.grecaptcha.reset()
     },
-    onError() {
+    onError () {
       if (this.reject) {
         this.reject(new Error('Can not load reCAPTCHA'))
         this.resolve = null
@@ -72,7 +72,7 @@ export default {
       }
     }
   },
-  render(h) {
+  render (h) {
     return h('div')
   }
 }

@@ -25,14 +25,14 @@
 <script>
 import gql from 'graphql-tag'
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       newEmail: '',
       emails: [],
     }
   },
-  mounted() {
+  mounted () {
     this.$apollo.query({
       query: gql`query GetUserEmails {
         my {
@@ -59,7 +59,7 @@ export default {
       })
   },
   methods: {
-    addEmail() {
+    addEmail () {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation AddEmail($email: String!) {
@@ -79,7 +79,7 @@ export default {
           if (error.graphQLErrors?.length > 0) {
             errors.email = []
             for (const err of error.graphQLErrors) {
-              if (err.message) errors.email.push(err.message)
+              if (err.message) { errors.email.push(err.message) }
             }
           } else {
             errors.email = error.message
@@ -90,7 +90,7 @@ export default {
           this.loading = false
         })
     },
-    removeEmail(email, index) {
+    removeEmail (email, index) {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation DeleteEmail($email: String!) {
@@ -108,7 +108,7 @@ export default {
           this.loading = false
         })
     },
-    verify(email) {
+    verify (email) {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation SendConfirmationEmail($email: String!) {
@@ -129,7 +129,7 @@ export default {
           this.loading = false
         })
     },
-    makePrimary(item) {
+    makePrimary (item) {
       this.loading = true
       this.$apollo.mutate({
         mutation: gql`mutation MakeEmailPrimary($email: String!) {

@@ -1,4 +1,4 @@
-export default function auth({ redirect, store }) {
+export default function auth ({ redirect, store }) {
   if (!store.state.user) {
     redirect({ name: 'session-login' })
   }

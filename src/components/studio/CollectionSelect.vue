@@ -28,26 +28,26 @@ export default {
       default: null,
     }
   },
-  data() {
+  data () {
     return {
       text: null,
       loading: false,
       options: [],
     }
   },
-  mounted() {
+  mounted () {
     if (this.value) {
       this.text = this.value.title + '(' + this.value.uid + ')'
     }
   },
   methods: {
-    onFocus() {
+    onFocus () {
       this.$emit('input', null)
       this.text = null
       this.options = []
       this.loadCollectionUids()
     },
-    loadCollectionUids(key) {
+    loadCollectionUids (key) {
       this.loading = true
       if (this.timer) {
         clearTimeout(this.timer)
@@ -65,7 +65,7 @@ export default {
           })
       }, 300)
     },
-    selected(option) {
+    selected (option) {
       this.$emit('input', option)
     },
   }

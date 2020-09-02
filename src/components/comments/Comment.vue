@@ -59,7 +59,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       expanded: false,
       loaded: false,
@@ -68,11 +68,11 @@ export default {
     }
   },
   computed: {
-    content() {
+    content () {
       return marked(this.value.content)
     }
   },
-  mounted() {
+  mounted () {
     EventBus.$on('reply_open', (target) => {
       if (target === this) {
         return
@@ -81,7 +81,7 @@ export default {
     })
   },
   methods: {
-    expand() {
+    expand () {
       this.expanded = true
       return this.$axios.get('/comments/' + this.value.id)
         .then((res) => {
@@ -90,13 +90,13 @@ export default {
         })
         .catch(err => this.handleErrorToast(err))
     },
-    addReply() {
+    addReply () {
       this.reply = !this.reply
       if (this.reply) {
         EventBus.$emit('reply_open', this)
       }
     },
-    created(record) {
+    created (record) {
       this.value.count += 1
       if (this.expanded) {
         this.replies.push(record)

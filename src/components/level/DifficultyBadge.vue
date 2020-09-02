@@ -15,27 +15,25 @@ export default {
       default: () => false,
     }
   },
-  render(h, context) {
+  render (h, context) {
     const value = context.props.value
     const small = context.props.small
     const ball = context.props.ball
 
     let str = (small || ball) ? '' : 'Lv. '
-    if (value.difficulty <= 0) str += '?'
-    else if (value.difficulty >= 16) str += '15+'
-    else str += value.difficulty
+    if (value.difficulty <= 0) { str += '?' } else if (value.difficulty >= 16) { str += '15+' } else { str += value.difficulty }
 
     const classes = {
       badge: !ball,
-      ball: ball,
-      small: small,
+      ball,
+      small,
       easy: value.type === 'easy',
       hard: value.type === 'hard',
       extreme: value.type === 'extreme',
       'difficulty-badge': true,
       ...context.style,
     }
-    function convertedDifficultyName(name) {
+    function convertedDifficultyName (name) {
       return {
         easy: 'Easy',
         hard: 'Hard',

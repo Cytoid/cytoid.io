@@ -33,7 +33,7 @@ export const dateLocales = Object.freeze({
   'cs-CZ': cs,
 })
 
-export function pickLanguage(headerStr) {
+export function pickLanguage (headerStr) {
   return pick(supportedLanguages, headerStr)
 }
 export default function ({ app, store, req, res }) {
@@ -83,7 +83,7 @@ export default function ({ app, store, req, res }) {
 }
 
 Vue.mixin({
-  beforeCreate() {
+  beforeCreate () {
     const key = this.$options.i18n && this.$options.i18n.key
     if (!key) {
       return
@@ -95,7 +95,7 @@ Vue.mixin({
     this.$options.i18n.messages = componentLocales
   },
   methods: {
-    $dateFromNow(dateStr) {
+    $dateFromNow (dateStr) {
       return formatDistanceToNow(
         parseISO(dateStr),
         {
@@ -104,7 +104,7 @@ Vue.mixin({
         }
       )
     },
-    $dateFormatCalendar(dateStr, from = new Date()) {
+    $dateFormatCalendar (dateStr, from = new Date()) {
       return formatRelative(
         parseISO(dateStr),
         from,

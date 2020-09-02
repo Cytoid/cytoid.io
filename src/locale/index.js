@@ -14,7 +14,7 @@ const locale = {
   'zh-CN': zhCN,
   'zh-TW': zhTW,
   'zh-FJ': zhFJ,
-  en: en,
+  en,
   'pt-BR': ptBR,
   'vi-VN': viVN,
   'th-TH': thTH,
