@@ -11,11 +11,11 @@
   "password_field_error_invalid": "Password has to contain at least 8 characters.",
   "password_field_placeholder": "密碼",
   "password_confirm_field_placeholder": "確認密碼",
-  "tos_field_error_required": "請務必勾選以上選項否則無法成功建立。",
+  "tos_field_error_required": "You must agree to our terms of services.",
   "tos_field_title": "勾選即表示同意 Cytoid {0}中的內容。",
-  "join_btn": "確認建立",
-  "existing_user_title": "早就註冊過的話……",
-  "existing_user_content": "那還愣在這邊幹嘛？除非是閒得發慌吧，沒有的話就趕快去登入了啦！",
+  "join_btn": "Join the community",
+  "existing_user_title": "Already registered?",
+  "existing_user_content": "Log in to enjoy your privilege as a Cytoid community member!",
   "link_title": "連結 {provider} 帳戶",
   "link_subtitle": "請輸入 Cytoid 帳戶相關資訊以確保為本人操作，若輸入的帳戶不存在將會自動建立一個新的，請務必填妥。"
 }
