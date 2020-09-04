@@ -17,5 +17,5 @@
   "existing_user_title": "已經有帳戶了嗎？",
   "existing_user_content": "登入即可同步遊玩資料、解鎖新的遊戲模式以及使用多元的線上功能。",
   "link_title": "連結 {provider} 帳戶",
-  "link_subtitle": "請輸入 Cytoid 帳戶相關資訊以確保為本人操作，若輸入的帳戶不存在將會自動建立一個新的，請務必填妥。"
+  "link_subtitle": "請輸入 Cytoid 帳戶相關資訊以確保為本人操作，若輸入的使用者不存在將會自動建立一個新的，請務必填妥。"
 }
