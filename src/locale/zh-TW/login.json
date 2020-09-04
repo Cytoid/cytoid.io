@@ -1,11 +1,11 @@
 {
-  "title": "歡迎回來！",
-  "subtitle": "等你很久了啊。",
-  "username_field_placeholder": "Cytoid ID／電郵地址",
-  "username_field_error_required": "請在此輸入 Cytoid ID 或電郵地址。",
+  "title": "Already have a Cytoid ID?",
+  "subtitle": "Please sign in below.",
+  "username_field_placeholder": "Cytoid ID / Email address",
+  "username_field_error_required": "Please input your Cytoid ID or email address.",
   "password_field_placeholder": "密碼",
-  "password_field_error_required": "請在此輸入密碼。",
+  "password_field_error_required": "Please input your password.",
   "remember_me_checkbox_title": "記住登入狀態",
-  "new_user_welcome_title": "欸不是你還沒有帳戶？",
-  "new_user_welcome_content": "動動手指填一下就能免錢盡情無限遊玩 Cytoid 了，坐而言不如起而行，還不趕快動起來？"
+  "new_user_welcome_title": "New to Cytoid?",
+  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!"
 }
