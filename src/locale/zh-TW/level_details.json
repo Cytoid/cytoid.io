@@ -10,14 +10,14 @@
   "credits_card_cover_art_title": "繪圖創作者",
   "difficulty_card_title": "排行榜",
   "manage": {
-    "replace_title": "更新關卡",
+    "replace_title": "Replace",
     "replace_upload_title": "選擇檔案",
     "replace_upload_subtitle": "請選擇一個關卡檔案（.cytoidlevel），注意 ID 必須相符否則不接受變更。",
     "description_field": "簡介",
     "tags_field": "標記",
     "visibility_field": "瀏覽權限",
     "metadata": {
-      "title": "關卡資訊修改",
+      "title": "Metadata",
       "id_field": "ID",
       "title_field": "樂曲標題",
       "title_hint": "請填寫樂曲的原始名稱。",
