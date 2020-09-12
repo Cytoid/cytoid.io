@@ -83,7 +83,6 @@ export default {
         { id: 'facebook', icon: 'facebook-f', title: 'Facebook' },
         { id: 'google', title: 'Google' },
         { id: 'discord', title: 'Discord' },
-        { id: 'patreon', title: 'Patreon' }
       ],
       providersLoading: null,
     }
@@ -155,6 +154,7 @@ export default {
             this.externals.push(event.data.provider)
             this.$buefy.toast.open({
               message: `You have linked your ${event.data.provider} account`,
+              type: 'is-success'
             })
           })
           .catch(err => this.handleErrorToast(err))

@@ -22,6 +22,7 @@ import {
 import {
   faAppStore, faGooglePlay, faGoogle, faFacebookF, faDiscord, faPatreon,
 } from '@fortawesome/free-brands-svg-icons'
+import { faCrown } from '@fortawesome/pro-duotone-svg-icons'
 
 export default function () {
   config.autoAddCss = false
@@ -41,6 +42,6 @@ export default function () {
     faAngleRight, faAngleLeft, faArrowDown, faArrowUp, faTag,
     faExclamationCircle, faCheck, faCaretDown, faCaretUp, faEmptySet,
     faAlbum, faAlbumCollection, faTimesCircle, faExchange, faHeartLight, faReply, faChevronDown,
-    faUserSecret, faUsersCog,
+    faUserSecret, faUsersCog, faCrown
   )
 }
