@@ -231,64 +231,20 @@ export default {
     source: require('@/assets/images/cryout.jpg'),
     landing: true
   },
-  apollo: {
-    data: {
-      query,
-      update: data => data,
-    }
-  },
   data () {
     return {
       posts: [],
       loadingTweet: false,
+      data: null,
     }
   },
   mounted () {
-    function styleTweet () {
-      const widget = document.querySelector('[id^="twitter-widget-"]')
-      if (widget == null) {
-        // Try next time!
-        this.styleTweetTimer = setTimeout(styleTweet, 200)
-        return
-      }
-      const style = document.createElement('style')
-      style.innerHTML = `
-        .EmbeddedTweet {
-          border: none !important;
-          background: hsla(226, 15%, 19%, 1) !important;
-          box-shadow: 0 10px 20px hsla(0, 0%, 0%, .10), 0 3px 6px hsla(0, 0%, 0%, .066);
-        }
-        .CallToAction {
-          border: none !important;
-        }
-        .CallToAction-icon .Icon {
-          display: none !important;
-        }
-        .CallToAction-text {
-          margin-left: -2px !important;
-          color: rgba(255, 255, 255, 0.8) !important;
-          transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1) !important;
-        }
-        .CallToAction-text:hover {
-          color: white !important;
-        }
-      `
-      style.type = 'text/css'
-      if (widget.contentDocument) {
-        widget.contentDocument.head.appendChild(style)
-      } else {
-        widget.shadowRoot.insertBefore(style, widget.shadowRoot.childNodes[0])
-      }
-
-      this.loadingTweet = false
-    }
-    this.styleTweetTimer = setTimeout(styleTweet.bind(this), 200)
-  },
-  destroyed () {
-    if (this.styleTweetTimer) {
-      clearTimeout(this.styleTweetTimer)
-      this.styleTweetTimer = null
-    }
+    this.$apollo.query({
+      query,
+    })
+      .then((res) => {
+        this.data = res.data
+      })
   },
   i18n: {
     key: 'homepage'
