@@ -3,13 +3,15 @@
   "week": "Týden",
   "region_unavailable": "Cytoid.io nemusí být k dispozici ve vašem regionu",
   "region_unavailable_content": "Některé požadované služby, včetně Google Recaptcha, Google Cloud Storage, Twitter a Discord se nemusí načíst. Pro lepší uživatelský zážitek navštivte naše optimalizované webové stránky.",
-  "tos": "Podmínky použití",
+  "tos": "Terms of Service",
   "community_guidelines": "Pravidla komunity",
-  "dmca": "DMCA",
+  "dmca": "Copyright (DMCA)",
   "status": "Stav serverů",
   "language": "Jazyk",
   "submit_btn": "Odeslat",
   "save_btn": "Uložit",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "Profil",
   "studio": "Studio",
   "favorites": "Oblíbené",
@@ -58,5 +60,8 @@
   "comment_reply": "Odpovědět",
   "comment_see_replies": "Zobrazit {count} odpovědí",
   "comment_hide_replies": "Skrýt {count} odpovědí",
-  "comment_post": "Přidat komentář"
+  "comment_post": "Přidat komentář",
+  "sponsorship": "Donation",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }

@@ -3,13 +3,15 @@
   "week": "Semana",
   "region_unavailable": "Cytoid.io pode estar indisponível na sua região",
   "region_unavailable_content": "Alguns serviços necessários, incluindo o Google Recaptcha, Google Cloud Storage, Twitter, Discord, etc. podem falhar ao carregar. Para uma melhor experiência, por favor visite o nosso site otimizado.",
-  "tos": "Termos de serviço",
+  "tos": "Terms of Service",
   "community_guidelines": "Diretrizes da Comunidade",
-  "dmca": "DMCA",
+  "dmca": "Copyright (DMCA)",
   "status": "Status do Serviço",
   "language": "Idioma",
   "submit_btn": "Enviar",
   "save_btn": "Salvar",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "Perfil",
   "studio": "Estúdio",
   "favorites": "Favoritos",
@@ -58,5 +60,8 @@
   "comment_reply": "Responder",
   "comment_see_replies": "Ver {count} respostas",
   "comment_hide_replies": "Ocultar {count} respostas",
-  "comment_post": "Publicar comentário"
+  "comment_post": "Publicar comentário",
+  "sponsorship": "Donation",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }

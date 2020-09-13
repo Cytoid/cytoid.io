@@ -3,13 +3,15 @@
   "week": "Week",
   "region_unavailable": "Cytoid.io はあなたの国では利用できません。",
   "region_unavailable_content": "Certain required services，including Google Recaptcha，Google Cloud Storage，Twitter，Discord, might fail to load. For better user experience, please visit our optimized website.",
-  "tos": "利用規約",
+  "tos": "Terms of Service",
   "community_guidelines": "コミュニティガイドライン",
-  "dmca": "DMCA",
+  "dmca": "Copyright (DMCA)",
   "status": "Status",
   "language": "言語",
   "submit_btn": "投稿",
   "save_btn": "保存",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "プロフィール",
   "studio": "Studio",
   "favorites": "お気に入り",
@@ -58,5 +60,8 @@
   "comment_reply": "Reply",
   "comment_see_replies": "See {count} replies",
   "comment_hide_replies": "Hide {count} replies",
-  "comment_post": "Post Comment"
+  "comment_post": "Post Comment",
+  "sponsorship": "Donation",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }

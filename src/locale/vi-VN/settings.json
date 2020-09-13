@@ -2,6 +2,7 @@
   "account_menu": "Tài khoản",
   "security_menu": "Bảo mật",
   "profile_menu": "Hồ sơ cá nhân",
+  "donation_menu": "Donation",
   "avatar_title": "Ảnh đại diện",
   "avatar_use_gravatar_btn": "Ấn để sử dụng Gravatar",
   "avatar_using_gravatar": "Bạn đang sử dụng hình đại diện của mình từ {0}!",
@@ -15,5 +16,15 @@
   "email_valid": "Đây không phải là một email hợp lệ.",
   "email_required": "Cần một địa chỉ email.",
   "profile_header_title": "Ảnh bìa",
-  "profile_bio_title": "Tiểu sử"
+  "profile_bio_title": "Tiểu sử",
+  "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",
+  "patreon_linked_prompt": "You have linked your Patreon account",
+  "afdian_link_prompt": "Link your Afdian account to claim your deserved benefits!",
+  "afdian_linked_prompt": "You have linked your Afdian account",
+  "afdian_login_username": "Afdian Username",
+  "afdian_login_password": "Afdian Password",
+  "afdian_login_hint": "Your login info will only be used to verify your identity. We will not save your password.",
+  "afdian_login_success_prompt": "You have linked your Afdian account!",
+  "quote_updated": "Quote updated!",
+  "quote_question_mark_button": "As a Coffee Contributor, you can submit a quote that will be displayed on Cytoid's game credits."
 }

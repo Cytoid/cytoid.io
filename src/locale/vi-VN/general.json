@@ -3,13 +3,15 @@
   "week": "Tuần",
   "region_unavailable": "Cytoid.io có thể không khả dụng ở vùng của bạn",
   "region_unavailable_content": "Một số dịch vụ cần thiết như Google, Recaptcha, Google Cloud, Twitter, Discord, có thể bị lỗi khi tải. Để có trải nghiệm người dùng tốt hơn, xin hãy sử dụng trang web của chúng tôi.",
-  "tos": "Điều khoản Dịch vụ",
+  "tos": "Terms of Service",
   "community_guidelines": "Nguyên tắc cộng đồng",
-  "dmca": "Điều khoản",
+  "dmca": "Copyright (DMCA)",
   "status": "Trạng thái",
   "language": "Ngôn ngữ",
   "submit_btn": "Gửi",
   "save_btn": "Lưu",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "Hồ sơ cá nhân",
   "studio": "Studio",
   "favorites": "Yêu thích",
@@ -58,5 +60,8 @@
   "comment_reply": "Reply",
   "comment_see_replies": "See {count} replies",
   "comment_hide_replies": "Hide {count} replies",
-  "comment_post": "Post Comment"
+  "comment_post": "Post Comment",
+  "sponsorship": "Donation",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }

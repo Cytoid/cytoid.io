@@ -1,11 +1,11 @@
 {
-  "title": "歡迎回來！",
-  "subtitle": "等你很久了啊。",
-  "username_field_placeholder": "Cytoid ID／電郵地址",
-  "username_field_error_required": "請在此輸入 Cytoid ID 或電郵地址。",
+  "title": "登入 Cytoid",
+  "subtitle": "稍微填個資料就可以迅速登入囉。",
+  "username_field_placeholder": "Cytoid ID／電子郵件",
+  "username_field_error_required": "請輸入 Cytoid ID 或者電子郵件。",
   "password_field_placeholder": "密碼",
-  "password_field_error_required": "請在此輸入密碼。",
+  "password_field_error_required": "請輸入密碼。",
   "remember_me_checkbox_title": "記住登入狀態",
-  "new_user_welcome_title": "欸不是你還沒有帳戶？",
-  "new_user_welcome_content": "動動手指填一下就能免錢盡情無限遊玩 Cytoid 了，坐而言不如起而行，還不趕快動起來？"
+  "new_user_welcome_title": "建立新帳戶",
+  "new_user_welcome_content": "只需要一個帳戶就能使用 Cytoid 多元的線上功能，填上基本資料送出就完成囉！"
 }

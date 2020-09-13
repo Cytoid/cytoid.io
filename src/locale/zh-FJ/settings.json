@@ -2,6 +2,7 @@
   "account_menu": "你号",
   "security_menu": "安全",
   "profile_menu": "grimrkeo",
+  "donation_menu": "Donation",
   "avatar_title": "鸡e句NBA",
   "avatar_use_gravatar_btn": "点击使用 Gravatar",
   "avatar_using_gravatar": "您正在使用来自 {0} 的鸡e句NBA！1！！",
@@ -15,5 +16,15 @@
   "email_valid": "多日你娃路军哥地址无效。",
   "email_required": "请输入多日你娃路军哥地址。",
   "profile_header_title": "好康的封面图像",
-  "profile_bio_title": "我是猪！！！！！！！！！1111111111111"
+  "profile_bio_title": "我是猪！！！！！！！！！1111111111111",
+  "patreon_link_prompt": "连接您的 Patreon 帐户以领取捐赠奖励！",
+  "patreon_linked_prompt": "你已经连接到你的 Patreon 账户",
+  "afdian_link_prompt": "连接您的爱发电帐户以领取捐赠奖励！",
+  "afdian_linked_prompt": "你已经连接到你的爱发电账户",
+  "afdian_login_username": "Afdian Username",
+  "afdian_login_password": "Afdian Password",
+  "afdian_login_hint": "Your login info will only be used to verify your identity. We will not save your password.",
+  "afdian_login_success_prompt": "You have linked your Afdian account!",
+  "quote_updated": "Quote updated!",
+  "quote_question_mark_button": "As a Coffee Contributor, you can submit a quote that will be displayed on Cytoid's game credits."
 }
