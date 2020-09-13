@@ -10,6 +10,8 @@
   "language": "언어",
   "submit_btn": "제출",
   "save_btn": "저장",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "프로필",
   "studio": "스튜디오",
   "favorites": "즐겨찾기",
@@ -58,5 +60,8 @@
   "comment_reply": "Reply",
   "comment_see_replies": "See {count} replies",
   "comment_hide_replies": "Hide {count} replies",
-  "comment_post": "Post Comment"
+  "comment_post": "Post Comment",
+  "sponsorship": "Sponsorship",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }
