@@ -61,7 +61,7 @@
   "comment_see_replies": "查看 {count} 条回复",
   "comment_hide_replies": "隐藏 {count} 条回复",
   "comment_post": "发布",
-  "sponsorship": "Donation",
-  "sponsor_name": "Coffee Contributor",
-  "sponsorship_quote": "Quote"
+  "sponsorship": "捐赠",
+  "sponsor_name": "咖啡捐赠者",
+  "sponsorship_quote": "留言"
 }
