@@ -59,9 +59,13 @@ export const actions = {
 export const getters = {
   avatarURL (state) {
     return (size) => {
-      let url = `${process.env.apiURL}/users/${state.user.id}/avatar`
-      if (size) { url += '?size=' + size }
-      return url
+      if (state.user) {
+        let url = `${process.env.apiURL}/users/${state.user.id}/avatar`
+        if (size) { url += '?size=' + size }
+        return url
+      } else {
+        return 'https://artifacts.cytoid.io/avatar.jpg'
+      }
     }
   }
 }

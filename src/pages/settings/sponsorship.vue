@@ -1,57 +1,93 @@
 <template lang="pug">
   div
-    .box.patreon.is-gradient(v-if="!externals.includes('patreon')")
-      img(:src="require('@/assets/images/patreon.png')" style="width: 150px; display: block; margin-bottom: 1rem;")
-      p Link your Patreon account to claim your deserved membership benefits!
-      .has-text-centered(style="margin-top: 1rem;")
-        b-button(@click="link('patreon')")
-          b-icon(icon="patreon" pack="fab")
-          | Link Patreon
-    .box.afdian.is-gradient(v-if="!externals.includes('afdian')")
-      img(:src="require('@/assets/images/afdian.png')" style="width: 110px; display: block; margin-bottom: 1rem;")
-      p Link your 爱发电 account to claim your deserved membership benefits!
-      form(style="padding: 2rem 0 1rem" @submit.prevent="afdianLogin")
-        b-field(label="爱发电用户名" horizontal)
-          b-input(v-model="afdian.username")
-        b-field(label="爱发电密码" horizontal message="您的登陆信息将仅用于验证您的身份。我们不会保存您的密码。")
-          b-input(type="password" v-model="afdian.password")
-        b-button.is-pulled-right(native-type="submit" :loading="afdianLoading") 连接
-        .is-clearfix
-    .buttons.is-pulled-right
-      b-button(type="is-danger" v-if="externals.includes('afdian')" @click="unlink('afdian')") Unlink 爱发电
-      b-button(type="is-danger" v-if="externals.includes('patreon')" @click="unlink('patreon')") Unlink Patreon
-    .is-clearfix
+    .section(v-if="membership"): .columns
+      .column.is-half.has-text-centered.is-offset-one-quarter
+        .heading Membership Tier
+        .title Coffee Contributor
+        .crowned-avatar
+          font-awesome-icon.crown-icon(:icon="['fad', 'crown']" size="4x")
+          avatar(:source="$store.getters.avatarURL()" fixed :size="128")
+        form(@submit.prevent)
+          b-field
+            template(slot="label")
+              | Quote
+              a(@click="showQuoteQuestionMark")
+                font-awesome-icon(icon="question-circle" style="margin-left: 0.25rem;")
+            b-input.has-text-centered
+          b-button(native-type="submit" size="is-small") Save
+    .columns
+      .column
+        .box.patreon.is-gradient
+          img(:src="require('@/assets/images/patreon.png')" style="width: 150px; display: block; margin-bottom: 1rem;")
+          p(v-if="!externals.includes('patreon')") Link your Patreon account to claim your deserved membership benefits!
+          p(v-else) You have linked your Patreon account
+          .has-text-centered(style="margin-top: 1rem;")
+            b-button(
+              @click="link('patreon')"
+              :disabled="externals.includes('patreon')"
+              :loading="loading==='patreon'").is-fullwidth
+              b-icon(icon="patreon" pack="fab")
+              | Link Patreon
+            b-button.is-fullwidth(
+              style="margin-top: 1rem;"
+              @click="syncMembershipStatus('patreon')"
+              :loading="loading==='patreon'"
+              v-if="externals.includes('patreon')")
+              b-icon(icon="sync")
+              | Sync Patreon Status
+      .column
+        .box.afdian.is-gradient
+          img(:src="require('@/assets/images/afdian.png')" style="width: 110px; display: block; margin-bottom: 1rem;")
+          p(v-if="!externals.includes('afdian')") Link your 爱发电 account to claim your deserved membership benefits!
+          p(v-else) You have linked your 爱发电 account
+          form(style="padding: 2rem 0 1rem" @submit.prevent="afdianLogin" v-if="!externals.includes('afdian')")
+            b-field(label="爱发电用户名")
+              b-input(v-model="afdian.username")
+            b-field(label="爱发电密码" message="您的登陆信息将仅用于验证您的身份。我们不会保存您的密码。")
+              b-input(type="password" v-model="afdian.password")
+            b-button.is-pulled-right(native-type="submit" :loading="loading === 'afdian'") 连接
+            .is-clearfix
+          b-button.is-fullwidth(style="margin-top: 1rem;" @click="syncMembershipStatus('afdian')" v-else :loading="loading==='afdian'")
+            b-icon(icon="sync")
+            | Sync 爱发电 Status
 </template>
 
 <script>
 import gql from 'graphql-tag'
 export default {
   asyncData ({ $axios, store, app }) {
-    return app.apolloProvider.defaultClient.query({
+    const membershipPromise = $axios.get('/membership')
+      .then(res => res.data)
+    const externalsPromise = app.apolloProvider.defaultClient.query({
       query: gql`query GetUserSecuritySettings {
         my {
           externals: externalAccountProviders
         }
       }`
     })
-      .then(response => ({
-        externals: response.data?.my?.externals || []
+      .then(response => (response.data?.my?.externals || []))
+
+    return Promise.all([membershipPromise, externalsPromise])
+      .then(([membership, externals]) => ({
+        membership,
+        externals
       }))
   },
   data () {
     return {
+      quote: null,
       afdian: {
         username: '',
         password: '',
       },
-      afdianLoading: false,
       externals: [],
-      patreonLoading: null,
+      loading: null,
+      membership: null,
     }
   },
   methods: {
     afdianLogin () {
-      this.afdianLoading = true
+      this.loading = 'afdian'
       this.$axios.post('/session/external/afdian', this.afdian)
         .then((res) => {
           this.$buefy.toast.open({
@@ -59,10 +95,11 @@ export default {
             type: 'is-success'
           })
           this.externals.push('afdian')
+          return this.syncMembershipStatus('afdian')
         })
         .catch(err => this.handleErrorToast(err))
         .finally(() => {
-          this.afdianLoading = false
+          this.loading = null
         })
     },
     providerResponded (event) {
@@ -73,7 +110,7 @@ export default {
       }
       */
       if (event.data.user) {
-        this.patreonLoading = null
+        this.loading = null
         const user = event.data.user
         this.$store.commit('setUser', user)
         this.$buefy.toast.open({
@@ -98,10 +135,10 @@ export default {
           })
           .catch(err => this.handleErrorToast(err))
           .finally(() => {
-            this.patreonLoading = null
+            this.loading = null
           })
       } else {
-        this.patreonLoading = null
+        this.loading = null
         this.$buefy.toast.open({
           message: 'Incomplete information returned from OAuth service',
           type: 'is-danger'
@@ -131,6 +168,26 @@ export default {
             type: 'is-warning'
           })
         })
+    },
+    syncMembershipStatus (provider) {
+      this.loading = provider
+      return this.$axios
+        .patch('/membership/' + provider)
+        .then((res) => {
+          const membership = res.data
+          this.membership = membership
+          return membership
+        })
+        .catch(err => this.handleErrorToast(err))
+        .finally(() => {
+          this.loading = null
+        })
+    },
+    showQuoteQuestionMark () {
+      this.$buefy.dialog.alert({
+        title: 'Quote',
+        message: 'As a Coffee Contributor you have the privilege to tell the world why you love Cytoid! The quote is going to show up on our <b></b>',
+      })
     }
   }
 }
@@ -143,6 +200,22 @@ export default {
   }
   &.afdian {
     --box-background-gradient: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1));
+  }
+}
+.crowned-avatar {
+  position: relative;
+  display: inline-block;
+  margin-top: 64px;
+  margin-bottom: 1rem;
+  .crown-icon {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    --fa-secondary-color: white;
+    --fa-secondary-opacity: 1;
   }
 }
 </style>
