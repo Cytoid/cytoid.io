@@ -2,6 +2,7 @@
   "account_menu": "你号",
   "security_menu": "安全",
   "profile_menu": "grimrkeo",
+  "sponsorship_menu": "Sponsorship",
   "avatar_title": "鸡e句NBA",
   "avatar_use_gravatar_btn": "点击使用 Gravatar",
   "avatar_using_gravatar": "您正在使用来自 {0} 的鸡e句NBA！1！！",
@@ -15,5 +16,9 @@
   "email_valid": "多日你娃路军哥地址无效。",
   "email_required": "请输入多日你娃路军哥地址。",
   "profile_header_title": "好康的封面图像",
-  "profile_bio_title": "我是猪！！！！！！！！！1111111111111"
+  "profile_bio_title": "我是猪！！！！！！！！！1111111111111",
+  "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",
+  "patreon_linked_prompt": "You have linked your Patreon account",
+  "afdian_link_prompt": "Link your Afdian account to claim your deserved benefits!",
+  "afdian_linked_prompt": "You have linked your Afdian account"
 }
