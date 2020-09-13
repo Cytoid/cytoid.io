@@ -2,6 +2,7 @@
   "account_menu": "Tài khoản",
   "security_menu": "Bảo mật",
   "profile_menu": "Hồ sơ cá nhân",
+  "sponsorship_menu": "Sponsorship",
   "avatar_title": "Ảnh đại diện",
   "avatar_use_gravatar_btn": "Ấn để sử dụng Gravatar",
   "avatar_using_gravatar": "Bạn đang sử dụng hình đại diện của mình từ {0}!",
@@ -15,5 +16,9 @@
   "email_valid": "Đây không phải là một email hợp lệ.",
   "email_required": "Cần một địa chỉ email.",
   "profile_header_title": "Ảnh bìa",
-  "profile_bio_title": "Tiểu sử"
+  "profile_bio_title": "Tiểu sử",
+  "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",
+  "patreon_linked_prompt": "You have linked your Patreon account",
+  "afdian_link_prompt": "Link your Afdian account to claim your deserved benefits!",
+  "afdian_linked_prompt": "You have linked your Afdian account"
 }
