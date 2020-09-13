@@ -10,8 +10,8 @@
   "language": "Fujaowee",
   "submit_btn": "aaeg[o",
   "save_btn": "sosuihi",
-  "sync_btn": "Sync",
-  "link_btn": "Link",
+  "sync_btn": "同步",
+  "link_btn": "连接",
   "profile": "群名片",
   "studio": "睡济公谱师",
   "favorites": "冒号时空阁",
@@ -61,7 +61,7 @@
   "comment_see_replies": "查看 {count} 条回复",
   "comment_hide_replies": "隐藏 {count} 条回复",
   "comment_post": "发布",
-  "sponsorship": "Sponsorship",
+  "sponsorship": "Donation",
   "sponsor_name": "Coffee Contributor",
   "sponsorship_quote": "Quote"
 }
