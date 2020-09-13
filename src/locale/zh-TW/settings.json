@@ -2,6 +2,7 @@
   "account_menu": "基本設定",
   "security_menu": "安全設定",
   "profile_menu": "檔案設定",
+  "sponsorship_menu": "Sponsorship",
   "avatar_title": "頭像",
   "avatar_use_gravatar_btn": "使用 Gravatar 服務",
   "avatar_using_gravatar": "目前的頭像與連結的 {0} 帳戶同步。",
@@ -15,5 +16,9 @@
   "email_valid": "電子郵件無效。",
   "email_required": "請完整填妥電子郵件。",
   "profile_header_title": "背景展示",
-  "profile_bio_title": "簡介"
+  "profile_bio_title": "簡介",
+  "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",
+  "patreon_linked_prompt": "You have linked your Patreon account",
+  "afdian_link_prompt": "Link your Afdian account to claim your deserved benefits!",
+  "afdian_linked_prompt": "You have linked your Afdian account"
 }
