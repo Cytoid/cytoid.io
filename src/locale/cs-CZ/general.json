@@ -10,6 +10,8 @@
   "language": "Jazyk",
   "submit_btn": "Odeslat",
   "save_btn": "Uložit",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "Profil",
   "studio": "Studio",
   "favorites": "Oblíbené",
@@ -58,5 +60,8 @@
   "comment_reply": "Odpovědět",
   "comment_see_replies": "Zobrazit {count} odpovědí",
   "comment_hide_replies": "Skrýt {count} odpovědí",
-  "comment_post": "Přidat komentář"
+  "comment_post": "Přidat komentář",
+  "sponsorship": "Sponsorship",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }
