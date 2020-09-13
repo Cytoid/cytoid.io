@@ -2,6 +2,7 @@
   "account_menu": "Account",
   "security_menu": "Security",
   "profile_menu": "Profile",
+  "sponsorship_menu": "Sponsorship",
   "avatar_title": "Avatar",
   "avatar_use_gravatar_btn": "Click to use Gravatar",
   "avatar_using_gravatar": "You're using your avatar from {0}!",
@@ -15,5 +16,9 @@
   "email_valid": "This is not a valid email.",
   "email_required": "An email address is required.",
   "profile_header_title": "Cover image",
-  "profile_bio_title": "Bio"
+  "profile_bio_title": "Bio",
+  "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",
+  "patreon_linked_prompt": "You have linked your Patreon account",
+  "afdian_link_prompt": "Link your Afdian account to claim your deserved benefits!",
+  "afdian_linked_prompt": "You have linked your Afdian account"
 }
