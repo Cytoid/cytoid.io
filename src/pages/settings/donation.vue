@@ -13,12 +13,12 @@
               span(v-t="'sponsorship_quote'")
               a(@click="showQuoteQuestionMark")
                 font-awesome-icon(icon="question-circle" style="margin-left: 0.25rem;")
-            .control: input.input.has-text-centered(type="text" v-model="quote")
+            .control: input.input.has-text-centered(type="text" v-model="quote" maxlength="40")
           b-button(native-type="submit" size="is-small" @click="updateQuote" :loading="loading==='quote'" v-t="'save_btn'")
     .columns
       .column
         .box.patreon.is-gradient
-          img(:src="require('@/assets/images/patreon.png')" style="width: 150px; display: block; margin-bottom: 1rem;")
+          img(:src="require('@/assets/images/patreon.png')" style="height: 25px; display: block; margin-bottom: 1rem;")
           p(v-if="!externals.includes('patreon')" v-t="'patreon_link_prompt'")
           p(v-else v-t="'patreon_linked_prompt'")
           .has-text-centered(style="margin-top: 1rem;")
@@ -37,7 +37,7 @@
               span(v-t="'sync_btn'")
       .column
         .box.afdian.is-gradient
-          img(:src="require('@/assets/images/afdian.png')" style="width: 110px; display: block; margin-bottom: 1rem;")
+          img(:src="require('@/assets/images/afdian.png')" style="height: 25px; display: block; margin-bottom: 1rem;")
           p(v-if="!externals.includes('afdian')" v-t="'afdian_link_prompt'")
           p(v-else v-t="'afdian_linked_prompt'")
           form(style="padding: 2rem 0 1rem" @submit.prevent="afdianLogin" v-if="!externals.includes('afdian')")
@@ -174,7 +174,7 @@ export default {
         .patch('/membership/' + provider)
         .then((res) => {
           const membership = res.data
-          this.membership = membership
+          this.membership = membership || this.membership
           return membership
         })
         .catch(err => this.handleErrorToast(err))

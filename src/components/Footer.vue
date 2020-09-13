@@ -5,6 +5,7 @@ footer.container.footer.has-text-centered
     li: nuxt-link(:to="{ name: 'pages-id', params: { id: 'terms' } }") {{parent.$t('tos')}}
     li: a(href="https://github.com/Cytoid/" v-t="'status'")
     li: a(href="https://github.com/Cytoid/") GitHub
+    li: nuxt-link(:to="{ name: 'credits' }") {{parent.$t('credits')}}
     li
       b-dropdown(
         :value="parent.$store.state.locale"
