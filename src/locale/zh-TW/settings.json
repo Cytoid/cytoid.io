@@ -2,7 +2,7 @@
   "account_menu": "基本設定",
   "security_menu": "安全設定",
   "profile_menu": "檔案設定",
-  "sponsorship_menu": "Sponsorship",
+  "donation_menu": "Donation",
   "avatar_title": "頭像",
   "avatar_use_gravatar_btn": "使用 Gravatar 服務",
   "avatar_using_gravatar": "目前的頭像與連結的 {0} 帳戶同步。",
@@ -20,5 +20,11 @@
   "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",
   "patreon_linked_prompt": "You have linked your Patreon account",
   "afdian_link_prompt": "Link your Afdian account to claim your deserved benefits!",
-  "afdian_linked_prompt": "You have linked your Afdian account"
+  "afdian_linked_prompt": "You have linked your Afdian account",
+  "afdian_login_username": "Afdian Username",
+  "afdian_login_password": "Afdian Password",
+  "afdian_login_hint": "Your login info will only be used to verify your identity. We will not save your password.",
+  "afdian_login_success_prompt": "你已经成功连接爱发电账户！",
+  "quote_updated": "Quote updated!",
+  "quote_question_mark_button": "As a Coffee Contributor, you can submit a quote that will be displayed on Cytoid's game credits."
 }
