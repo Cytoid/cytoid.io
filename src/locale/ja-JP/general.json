@@ -10,6 +10,8 @@
   "language": "言語",
   "submit_btn": "投稿",
   "save_btn": "保存",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "プロフィール",
   "studio": "Studio",
   "favorites": "お気に入り",
@@ -58,5 +60,8 @@
   "comment_reply": "Reply",
   "comment_see_replies": "See {count} replies",
   "comment_hide_replies": "Hide {count} replies",
-  "comment_post": "Post Comment"
+  "comment_post": "Post Comment",
+  "sponsorship": "Sponsorship",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }
