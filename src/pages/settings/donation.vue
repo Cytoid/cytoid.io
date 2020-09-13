@@ -41,9 +41,9 @@
           p(v-if="!externals.includes('afdian')" v-t="'afdian_link_prompt'")
           p(v-else v-t="'afdian_linked_prompt'")
           form(style="padding: 2rem 0 1rem" @submit.prevent="afdianLogin" v-if="!externals.includes('afdian')")
-            b-field(label="爱发电用户名")
+            b-field(:label="$t('afdian_login_username')")
               b-input(v-model="afdian.username")
-            b-field(label="爱发电密码" message="您的登陆信息将仅用于验证您的身份。我们不会保存您的密码。")
+            b-field(:label="$t('afdian_login_password')" :message="$t('afdian_login_hint')")
               b-input(type="password" v-model="afdian.password")
             b-button.is-pulled-right(native-type="submit" :loading="loading === 'afdian'")
               span(v-t="'link_btn'")
@@ -94,7 +94,7 @@ export default {
         .post('/membership', { quote: this.quote })
         .then(() => {
           this.$buefy.toast.open({
-            message: 'Quote updated!',
+            message: this.$t('quote_updated'),
             type: 'is-success'
           })
         })
@@ -108,7 +108,7 @@ export default {
       this.$axios.post('/session/external/afdian', this.afdian)
         .then((res) => {
           this.$buefy.toast.open({
-            message: `你已经成功链接爱发电账户 ${res.data?.name}！`,
+            message: this.$t('afdian_login_success_prompt'),
             type: 'is-success'
           })
           this.externals.push('afdian')
@@ -168,25 +168,6 @@ export default {
       window.open(process.env.apiURL + '/session/external/' + provider)
       window.addEventListener('message', this.providerResponded)
     },
-    unlink (provider) {
-      this.providersLoading = provider
-      return this.$apollo.mutate({
-        mutation: gql`mutation RemoveExternalAccount($provider: String!) {
-          result: removeExternalAccount(provider: $provider)
-        }`,
-        variables: {
-          provider,
-        }
-      })
-        .then((data) => {
-          this.providersLoading = null
-          this.externals.splice(this.externals.indexOf(provider), 1)
-          this.$buefy.toast.open({
-            message: `You have unlinked your ${provider} account`,
-            type: 'is-warning'
-          })
-        })
-    },
     syncMembershipStatus (provider) {
       this.loading = provider
       return this.$axios
@@ -204,7 +185,7 @@ export default {
     showQuoteQuestionMark () {
       this.$buefy.dialog.alert({
         title: 'Quote',
-        message: 'As a Coffee Contributor you have the privilege to tell the world why you love Cytoid! The quote is going to show up on our <b></b>',
+        message: this.$t('quote_question_mark_button'),
       })
     }
   },

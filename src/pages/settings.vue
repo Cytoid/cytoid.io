@@ -12,9 +12,9 @@
           li: nuxt-link(:to="{name: 'settings-profile'}")
             font-awesome-icon(:icon="['fas', 'address-card']" fixed-width)
             span.menu-text(v-t="'profile_menu'")
-          li: nuxt-link(:to="{name: 'settings-sponsorship'}")
+          li: nuxt-link(:to="{name: 'settings-donation'}")
             font-awesome-icon(:icon="['fad', 'crown']" fixed-width)
-            span.menu-text(v-t="'sponsorship_menu'")
+            span.menu-text(v-t="'donation_menu'")
     .column: nuxt
 </template>
 
