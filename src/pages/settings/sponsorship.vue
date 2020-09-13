@@ -13,8 +13,8 @@
               | Quote
               a(@click="showQuoteQuestionMark")
                 font-awesome-icon(icon="question-circle" style="margin-left: 0.25rem;")
-            b-input.has-text-centered
-          b-button(native-type="submit" size="is-small") Save
+            .control: input.input.has-text-centered(type="text" v-model="quote")
+          b-button(native-type="submit" size="is-small" @click="updateQuote" :loading="loading==='quote'") Save
     .columns
       .column
         .box.patreon.is-gradient
@@ -70,7 +70,8 @@ export default {
     return Promise.all([membershipPromise, externalsPromise])
       .then(([membership, externals]) => ({
         membership,
-        externals
+        externals,
+        quote: membership.quote,
       }))
   },
   data () {
@@ -86,6 +87,21 @@ export default {
     }
   },
   methods: {
+    updateQuote () {
+      this.loading = 'quote'
+      this.$axios
+        .post('/membership', { quote: this.quote })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Quote updated!',
+            type: 'is-success'
+          })
+        })
+        .catch(err => this.handleErrorToast(err))
+        .finally(() => {
+          this.loading = null
+        })
+    },
     afdianLogin () {
       this.loading = 'afdian'
       this.$axios.post('/session/external/afdian', this.afdian)
@@ -132,6 +148,7 @@ export default {
               message: `You have linked your ${event.data.provider} account`,
               type: 'is-success'
             })
+            return this.syncMembershipStatus('patreon')
           })
           .catch(err => this.handleErrorToast(err))
           .finally(() => {
@@ -217,5 +234,8 @@ export default {
     --fa-secondary-color: white;
     --fa-secondary-opacity: 1;
   }
+}
+.quote-input input {
+  text-align: center;
 }
 </style>
