@@ -10,6 +10,8 @@
   "language": "Sprache",
   "submit_btn": "Hochladen",
   "save_btn": "Speichern",
+  "sync_btn": "Sync",
+  "link_btn": "Link",
   "profile": "Profil",
   "studio": "Studio",
   "favorites": "Favoriten",
@@ -58,5 +60,8 @@
   "comment_reply": "Reply",
   "comment_see_replies": "See {count} replies",
   "comment_hide_replies": "Hide {count} replies",
-  "comment_post": "Post Comment"
+  "comment_post": "Post Comment",
+  "sponsorship": "Sponsorship",
+  "sponsor_name": "Coffee Contributor",
+  "sponsorship_quote": "Quote"
 }
