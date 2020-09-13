@@ -13,8 +13,8 @@
             font-awesome-icon(:icon="['fas', 'address-card']" fixed-width)
             span.menu-text(v-t="'profile_menu'")
           li: nuxt-link(:to="{name: 'settings-sponsorship'}")
-            font-awesome-icon(:icon="['fas', 'address-card']" fixed-width)
-            span.menu-text(v-t="'profile_sponsorship'")
+            font-awesome-icon(:icon="['fad', 'crown']" fixed-width)
+            span.menu-text(v-t="'sponsorship_menu'")
     .column: nuxt
 </template>
 

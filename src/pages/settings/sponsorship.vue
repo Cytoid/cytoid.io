@@ -2,54 +2,55 @@
   div
     .section(v-if="membership"): .columns
       .column.is-half.has-text-centered.is-offset-one-quarter
-        .heading Membership Tier
-        .title Coffee Contributor
+        .heading(v-t="'sponsorship'")
+        .title(v-t="'sponsor_name'")
         .crowned-avatar
           font-awesome-icon.crown-icon(:icon="['fad', 'crown']" size="4x")
           avatar(:source="$store.getters.avatarURL()" fixed :size="128")
         form(@submit.prevent)
           b-field
             template(slot="label")
-              | Quote
+              span(v-t="'sponsorship_quote'")
               a(@click="showQuoteQuestionMark")
                 font-awesome-icon(icon="question-circle" style="margin-left: 0.25rem;")
             .control: input.input.has-text-centered(type="text" v-model="quote")
-          b-button(native-type="submit" size="is-small" @click="updateQuote" :loading="loading==='quote'") Save
+          b-button(native-type="submit" size="is-small" @click="updateQuote" :loading="loading==='quote'" v-t="'save_btn'")
     .columns
       .column
         .box.patreon.is-gradient
           img(:src="require('@/assets/images/patreon.png')" style="width: 150px; display: block; margin-bottom: 1rem;")
-          p(v-if="!externals.includes('patreon')") Link your Patreon account to claim your deserved membership benefits!
-          p(v-else) You have linked your Patreon account
+          p(v-if="!externals.includes('patreon')" v-t="'patreon_link_prompt'")
+          p(v-else v-t="'patreon_linked_prompt'")
           .has-text-centered(style="margin-top: 1rem;")
             b-button(
               @click="link('patreon')"
               :disabled="externals.includes('patreon')"
               :loading="loading==='patreon'").is-fullwidth
               b-icon(icon="patreon" pack="fab")
-              | Link Patreon
+              span(v-t="'link_btn'")
             b-button.is-fullwidth(
               style="margin-top: 1rem;"
               @click="syncMembershipStatus('patreon')"
               :loading="loading==='patreon'"
               v-if="externals.includes('patreon')")
-              b-icon(icon="sync")
-              | Sync Patreon Status
+              font-awesome-icon(icon="sync" style="margin-right: 0.5rem;")
+              span(v-t="'sync_btn'")
       .column
         .box.afdian.is-gradient
           img(:src="require('@/assets/images/afdian.png')" style="width: 110px; display: block; margin-bottom: 1rem;")
-          p(v-if="!externals.includes('afdian')") Link your 爱发电 account to claim your deserved membership benefits!
-          p(v-else) You have linked your 爱发电 account
+          p(v-if="!externals.includes('afdian')" v-t="'afdian_link_prompt'")
+          p(v-else v-t="'afdian_linked_prompt'")
           form(style="padding: 2rem 0 1rem" @submit.prevent="afdianLogin" v-if="!externals.includes('afdian')")
             b-field(label="爱发电用户名")
               b-input(v-model="afdian.username")
             b-field(label="爱发电密码" message="您的登陆信息将仅用于验证您的身份。我们不会保存您的密码。")
               b-input(type="password" v-model="afdian.password")
-            b-button.is-pulled-right(native-type="submit" :loading="loading === 'afdian'") 连接
+            b-button.is-pulled-right(native-type="submit" :loading="loading === 'afdian'")
+              span(v-t="'link_btn'")
             .is-clearfix
           b-button.is-fullwidth(style="margin-top: 1rem;" @click="syncMembershipStatus('afdian')" v-else :loading="loading==='afdian'")
-            b-icon(icon="sync")
-            | Sync 爱发电 Status
+            font-awesome-icon(icon="sync" style="margin-right: 0.5rem;")
+            span(v-t="'sync_btn'")
 </template>
 
 <script>
@@ -206,6 +207,9 @@ export default {
         message: 'As a Coffee Contributor you have the privilege to tell the world why you love Cytoid! The quote is going to show up on our <b></b>',
       })
     }
+  },
+  i18n: {
+    key: 'settings'
   }
 }
 </script>
