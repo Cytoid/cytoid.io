@@ -2,7 +2,7 @@
   "account_menu": "帐号",
   "security_menu": "安全",
   "profile_menu": "资料",
-  "donation_menu": "Donation",
+  "donation_menu": "捐赠",
   "avatar_title": "头像",
   "avatar_use_gravatar_btn": "点击使用 Gravatar",
   "avatar_using_gravatar": "您正在使用来自 {0} 的头像！",
@@ -21,10 +21,10 @@
   "patreon_linked_prompt": "你已经连接到你的 Patreon 账户",
   "afdian_link_prompt": "连接您的爱发电帐户以领取捐赠奖励！",
   "afdian_linked_prompt": "你已经连接到你的爱发电账户",
-  "afdian_login_username": "Afdian Username",
-  "afdian_login_password": "Afdian Password",
-  "afdian_login_hint": "Your login info will only be used to verify your identity. We will not save your password.",
-  "afdian_login_success_prompt": "You have linked your Afdian account!",
-  "quote_updated": "Quote updated!",
-  "quote_question_mark_button": "As a Coffee Contributor, you can submit a quote that will be displayed on Cytoid's game credits."
+  "afdian_login_username": "爱发电用户名",
+  "afdian_login_password": "爱发电密码",
+  "afdian_login_hint": "您的登陆信息将仅用于验证您的身份。我们不会保存您的密码。",
+  "afdian_login_success_prompt": "你已经连接你的爱发电账户!",
+  "quote_updated": "你的留言已更新！",
+  "quote_question_mark_button": "作为咖啡捐助者，你会出现在 Cytoid 的制作人员名单中，并且可以留言。"
 }
