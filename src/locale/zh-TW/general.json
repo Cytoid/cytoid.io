@@ -39,7 +39,7 @@
   "password_requirement_letter": "密碼至少要使用一個英文字母。",
   "password_confirmation_mismatch": "密碼驗證失敗，請確保兩次密碼輸入皆相符。",
   "username_field_label": "Cytoid ID",
-  "password_field_label": "舊密碼",
+  "password_field_label": "Password",
   "email_field_label": "電子郵件",
   "new_password_field_label": "新密碼",
   "password_confirm_field_label": "確認密碼",
