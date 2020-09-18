@@ -1,7 +1,7 @@
 {
   "online": "上線中",
   "offline": "已離線",
-  "join_date": "於{date}加入",
+  "join_date": "Joined {date}",
   "bio_title": "簡介",
   "recent_ranks_title": "近期遊玩紀錄",
   "total_ranked_plays": "遊玩次數總計",
@@ -19,5 +19,5 @@
   "collections_title": "已建立的選輯",
   "collections_all_btn": "檢視全部（{count}）",
   "badges_title": "已獲取的徽章",
-  "last_seen_date": "最近於{date}上線"
+  "last_seen_date": "Last seen {date}"
 }
