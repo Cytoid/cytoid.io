@@ -9,6 +9,9 @@ import * as jaJP from './ja-JP/index.js'
 import * as idID from './id-ID/index.js'
 import * as esES from './es-ES/index.js'
 import * as csCZ from './cs-CZ/index.js'
+import * as koKR from './ko-KR/index.js'
+import * as deDE from './de-DE/index.js'
+import * as huHU from './hu-HU/index.js'
 
 const locale = {
   'zh-CN': zhCN,
@@ -19,8 +22,11 @@ const locale = {
   'vi-VN': viVN,
   'th-TH': thTH,
   'ja-JP': jaJP,
+  'ko-KR': koKR,
   'cs-CZ': csCZ,
   'id-ID': idID,
   'es-ES': esES,
+  'hu-HU': huHU,
+  'de-DE': deDE,
 }
 export default locale
