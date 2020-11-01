@@ -1,7 +1,7 @@
 {
   "title": "S'inscrire",
   "title_external": "S'inscrire avec {provider}",
-  "id_requirement": "Your Cytoid ID must be in between 3 and 16 characters and contain only lowercase letters, numbers, underscores, and hyphens.",
+  "id_requirement": "Votre identifiant Cytoid doit contenir entre 3 et 16 caractères et ne doit contenir que des lettres minuscules, des chiffres, des traits de soulignement et des traits d'union.",
   "password_requirement": "3 à 16 lettres minuscules, chiffres, _ ou -",
   "email_field_error_required": "Une adresse e-mail est requise.",
   "email_field_error_invalid": "Cette adresse e-mail n'est pas valide",
