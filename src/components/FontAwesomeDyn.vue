@@ -53,6 +53,7 @@ export function loadFontAwesomeSvg(pack, icon) {
 <style lang="scss">
   .fa-dyn {
     color: $theme7;
+    fill: currentColor;
     .fa-secondary, .fa-primary {
       fill: currentColor;
     }
