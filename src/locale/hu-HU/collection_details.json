@@ -1,0 +1,8 @@
+{
+  "message_unlisted": "This collection is unlisted.",
+  "message_private": "This collection was made private by its owner. It is invisible to other users.",
+  "tags_title": "Tags",
+  "creation_date_title": "Created on",
+  "modification_date_title": "Last updated",
+  "metadata_cover_art_title": "Cover art"
+}
