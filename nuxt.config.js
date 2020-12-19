@@ -2,7 +2,6 @@ const config = require('config')
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'universal',
   srcDir: 'src',
   telemetry: false,
   dir: {
