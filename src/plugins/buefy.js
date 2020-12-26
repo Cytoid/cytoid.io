@@ -19,7 +19,7 @@ export default function ({ app, store }) {
       cancelText: 'Continue Browsing',
       canCancel: true,
       onConfirm: () => {
-        window.location.replace('https://cytoid.cn')
+        window.location.replace('https://cytoid.cn' + window.location.pathname)
       }
     })
   }
