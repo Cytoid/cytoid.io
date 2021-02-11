@@ -25,7 +25,7 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "accept-language-parser": "^1.5.0",
-    "apexcharts": "^3.20.0",
+    "apexcharts": "^3.24.0",
     "buefy": "^0.9.3",
     "bulma": "^0.9.0",
     "config": "^3.3.1",
