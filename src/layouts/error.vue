@@ -2,9 +2,9 @@
 .container
   .section: .container.error-texts
     h1(v-text="'Oops! '")
-    h2(v-text="'Oh, We met an error: '+message")
+    h2(v-text="'Oh, we met an error: '+message")
     nuxt-link(to="/")
-  b-loading(is-full-page :active="!data")
+  b-loading(is-full-page :active="!data" style="display:none")
   template(v-if="data")
     .section: .container
       .columns
