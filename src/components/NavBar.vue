@@ -67,4 +67,7 @@ export default {
     }
   }
 }
+.dropdown.is-mobile-modal > .dropdown-menu {
+  max-width: 330px!important;
+}
 </style>
