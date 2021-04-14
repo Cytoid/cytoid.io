@@ -1,9 +1,11 @@
 <template lang="pug">
 .container
   .section: .container.error-texts
-    h1(v-text="'Oops! '")
-    h2(v-text="'Oh, we met an error: '+message")
+    h1(v-t="'404_title'")
+    h2(v-t="{path: 'error_content', args: { error: message }}")
     nuxt-link(to="/")
+  .section: .explanation.container.error-texts
+    p(v-t="'explanation'")
   b-loading(is-full-page :active="!data" style="display:none")
   template(v-if="data")
     .section: .container
@@ -31,7 +33,9 @@
           style="margin: 8px 0;"
         )
         .more-level-box
-          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }" style="margin-bottom: 2rem;")
+          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }")
+            span(v-t="{ path: 'featured_level_btn', args: { count: data.levelsCount }}")
+          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }")
             span(v-t="{ path: 'level_all_btn', args: { count: data.levelsCount }}")
 
 </template>
@@ -217,11 +221,11 @@ export default {
     })
       .then((res) => {
         this.data = res.data
+        console.log(res)
       })
-    // console.log(this.data)
   },
   i18n: {
-    key: 'homepage'
+    key: 'error_page'
   }
 }
 </script>
@@ -322,6 +326,9 @@ export default {
   h2 {
     font-size: 1.2rem;
   }
+}
+a.button {
+  margin: 1rem 0;
 }
 @media screen and (min-width: 769px) {
   .recent-rank-box {

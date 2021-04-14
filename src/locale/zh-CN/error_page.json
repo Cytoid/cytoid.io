@@ -1,0 +1,12 @@
+{
+  "404_title": "Oops!",
+  "error_content": "我们遇到了错误: {error}",
+  "explanation": "好吧, 可能我们正在准备这些内容, 也可能是你走错了... 不如看看下面, 可能有你想要的内容",
+  "level_all_btn": "不止这些! 我们还有 {count} 个关卡！",
+  "featured_level_btn": "不如来点优秀谱面? 我们有上百个精选关卡! ",
+  "recent_ranks_title": "最新游玩纪录",
+  "connect_title": "联系我们",
+  "connect_discord_subtitle": "{count} 位成员在线",
+  "connect_discord_content": "想学习如何制作关卡吗？想来挑战一下高手云集的每周竞赛吗？或者，只是想和我们一起刷梗？现在就加入我们的 Discord 社区吧！",
+  "connect_discord_btn": "加入 Discord 社区！"
+}
