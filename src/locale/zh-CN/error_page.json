@@ -1,5 +1,5 @@
 {
-  "404_title": "Oops!",
+  "404_title": "糟糕!",
   "error_content": "我们遇到了错误: {error}",
   "explanation": "好吧, 可能我们正在准备这些内容, 也可能是你走错了... 不如看看下面, 可能有你想要的内容",
   "level_all_btn": "不止这些! 我们还有 {count} 个关卡！",

@@ -4,8 +4,8 @@
     h1(v-t="'404_title'")
     h2(v-t="{path: 'error_content', args: { error: message }}")
     nuxt-link(to="/")
-  .section: .explanation.container.error-texts
-    p(v-t="'explanation'")
+  //- .section: .explanation.container.error-texts
+  //-   p(v-t="'explanation'")
   b-loading(is-full-page :active="!data" style="display:none")
   template(v-if="data")
     .section: .container
@@ -196,7 +196,7 @@ export default {
   computed: {
     message () {
       if (!this.error) {
-        return null
+        return 'Unknown error'
       }
       return this.error.message
     }
