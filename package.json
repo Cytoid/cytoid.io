@@ -36,7 +36,7 @@
     "express-session": "^1.17.1",
     "marked": "^1.1.0",
     "nuxt-start": "^2.14.5",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "vee-validate": "^3.3.9",
     "vue-client-only": "^2.0.0",
     "vue-easymde": "^1.2.1",
