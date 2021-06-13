@@ -49,5 +49,8 @@ export default {
     margin-right: 0.5rem;
     content: '|';
   }
+  .dropdown > .dropdown-menu > .dropdown-content > .dropdown-item {
+    padding-right: 1rem !important;
+  }
 }
 </style>
