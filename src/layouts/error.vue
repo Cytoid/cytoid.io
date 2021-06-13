@@ -1,8 +1,14 @@
 <template lang="pug">
 .container
+  .section: .sorry-img
+    img(:src="require('@/assets/images/sayakacry.png')")
   .section: .container.error-texts
     h1(v-t="'404_title'")
-    h2(v-t="{path: 'error_content', args: { error: message }}")
+    .single-line
+      p(v-t="{path: 'error_content', args: { error: message }}")
+    .multi-line
+      p(v-t="{path: 'error_content', args: { error: null }}")
+      p(v-t="message")
     nuxt-link(to="/")
   //- .section: .explanation.container.error-texts
   //-   p(v-t="'explanation'")
@@ -317,20 +323,49 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+.sorry-img {
+  float: right;
+  height: 0;
+  img {
+    height: 10rem;
+  }
+}
 .error-texts {
   align-items: start;
   padding-left: 1rem;
   h1 {
     font-size: xxx-large;
   }
-  h2 {
+  p {
     font-size: 1.2rem;
+  }
+  .multi-line {
+    display: block;
+  }
+  .single-line {
+    display: none;
   }
 }
 a.button {
   margin: 1rem 0;
 }
 @media screen and (min-width: 769px) {
+  .sorry-img {
+    float: right;
+    padding-right: 1rem;
+    height: 0;
+    img {
+      height: 10rem;
+    }
+  }
+  .error-texts {
+    .multi-line {
+      display: none;
+    }
+    .single-line {
+      display: block;
+    }
+  }
   .recent-rank-box {
     p {
       grid-column-start: 1;
@@ -346,6 +381,14 @@ a.button {
   }
 }
 @media screen and (min-width: 1024px) {
+  .sorry-img {
+    float: right;
+    padding-right: 1rem;
+    height: 0;
+    img {
+      height: 30rem;
+    }
+  }
   .recent-rank-box {
     p {
       grid-column-start: 1;
