@@ -190,6 +190,8 @@ module.exports = {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
       })
+      const urlLoaderRule = config.module.rules.find(rule => rule.use && rule.use.find(u => u.loader.includes('url-loader')))
+      urlLoaderRule.test = /\.(png|jpe?g|gif|webp)$/i
       ctx.loaders.less.javascriptEnabled = true
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
