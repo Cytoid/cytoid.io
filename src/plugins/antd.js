@@ -19,7 +19,7 @@ export function handleErrorBlock (err, handler) {
 }
 
 export default function ({ store, $axios, error }) {
-  Vue.component('avatar', Avatar)
+  Vue.component('Avatar', Avatar)
 
   // Global error handlers
   Vue.mixin({

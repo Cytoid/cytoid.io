@@ -1,5 +1,6 @@
 const config = require('config')
 const pkg = require('./package')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
   srcDir: 'src',
@@ -195,12 +196,9 @@ module.exports = {
       ctx.loaders.less.javascriptEnabled = true
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+        config.plugins.push(new ESLintPlugin({
+          // ESLint options
+        }))
       }
     }
   }

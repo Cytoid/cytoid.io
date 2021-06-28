@@ -30,6 +30,6 @@ function execute () {
 }
 
 export default function (_, inject) {
-  Vue.component('captcha', component)
+  Vue.component('Captcha', component)
   inject('captcha', execute)
 }
