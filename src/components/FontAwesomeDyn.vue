@@ -10,7 +10,6 @@ export default {
   },
   render(h, context) {
     const svg = context.props.icon.svg
-    delete context.props.icon.svg
     if (!context.data.domProps) {
       context.data.domProps = {}
     }

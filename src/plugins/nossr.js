@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueSimplemde from 'vue-easymde'
 import marked from 'marked'
 
-Vue.component('markdown-editor', {
+Vue.component('MarkdownEditor', {
   name: 'MarkdownEditor',
   functional: true,
   render (h, ctx) {
