@@ -26,7 +26,7 @@ import { faCrown } from '@fortawesome/pro-duotone-svg-icons'
 
 export default function () {
   config.autoAddCss = false
-  Vue.component('font-awesome-icon', FontAwesomeIcon)
+  Vue.component('FontAwesomeIcon', FontAwesomeIcon)
   library.add(
     faSearch, faPuzzlePiece, faCog,
     faAngleDoubleRight, faSignIn, faSignOut, faHeart, faMugHot, faUserAlt, faLock,

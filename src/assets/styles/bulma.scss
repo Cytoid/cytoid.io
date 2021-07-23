@@ -7,6 +7,12 @@
 @import "./action-buttons";
 @import "./markdown";
 
+
+.rate .is-half > svg {
+  position: absolute;
+  left: 0;
+}
+
 .level-card-container {
   @include tablet {
     display: grid;
