@@ -10,39 +10,188 @@
       p(v-t="{path: 'error_content', args: { error: null }}")
       p(v-t="message")
     nuxt-link(to="/")
-  .section
-    .container
+  //- .section: .explanation.container.error-texts
+  //-   p(v-t="'explanation'")
+  b-loading(is-full-page :active="!data" style="display:none")
+  template(v-if="data")
+    .section: .container
       .columns
         .column.is-half-desktop
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'connect_title'")
           #discord.box.is-gradient
             img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
+            p(
+              v-show="data.discordOnlineCount > 0"
+              style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);"
+              v-t="{path: 'connect_discord_subtitle', args: { count: data.discordOnlineCount }}"
+            )
             p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;" v-t="'connect_discord_content'")
             b-button(expanded href="https://discord.gg/cytoid" tag="a" icon-left="sign-in" type="is-transparent")
               span(v-t="'connect_discord_btn'")
-    .container
-      p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'donate_title'")
-      .columns
-        .column.is-half-desktop
-          #patron.box.is-gradient
-            img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
-            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;"  v-t="'connect_patreon_content'")
-            b-button(expanded href="https://www.patreon.com/tigerhix" tag="a" icon-left="heart" type="is-transparent")
-              span Become a patron!
-        .column.is-half-desktop
-          #afdian.box.is-gradient
-            img(:src="require('@/assets/images/afdian.png')" style="width: 110px;")
-            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;" )
-              | Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑...
-            b-button(expanded href="https://afdian.net/@tigerhix" tag="a" icon-left="mug-hot" type="is-transparent")
-              span 请作者喝咖啡
+      .recent-rank-box
+        p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'recent_ranks_title'")
+        player-recent-rank(
+          v-if="data.recentRecords"
+          v-for="record in data.recentRecords"
+          :key="record.id"
+          :value="record"
+          :showPlayer="true"
+          style="margin: 8px 0;"
+        )
+        .more-level-box
+          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }")
+            span(v-t="{ path: 'featured_level_btn', args: { count: data.levelsCount }}")
+          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }")
+            span(v-t="{ path: 'level_all_btn', args: { count: data.levelsCount }}")
+
 </template>
 
 <script>
+import { Tweet } from 'vue-tweet-embed'
+import gql from 'graphql-tag'
+import PlayerRecentRank from '@/components/player/PlayerRecentRank'
+import PlayerRecentComment from '@/components/player/PlayerRecentComment'
+import ScoreBadge from '@/components/level/ScoreBadge'
+import DifficultyBadge from '@/components/level/DifficultyBadge'
+import PostCard from '@/components/post/PostCard'
+import LevelCard from '@/components/level/LevelCard'
+import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
+import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
+
+const query = gql`
+query FetchHomePage {
+  recentTweet
+  discordOnlineCount
+  collectionsCount
+  comments: recentComments(limit: 5) {
+    id
+    category
+    key
+    content
+    date
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
+    }
+    metadata
+  }
+  posts: getActivePosts(limit: 10) {
+    id
+    uid
+    title
+    slogan
+    cover {
+      stripe
+    }
+    creationDate
+  }
+  gettingStarted: collection(uid: "getting-started") {
+    ...CollectionInfoFragment
+    levelCount
+  }
+  hitech: collection(uid: "hi-tech") {
+    ...CollectionInfoFragment
+    levels(limit: 5) {
+      ...LevelCardFragment
+    }
+  }
+  latestFeaturedLevels: levels(category: "featured", limit:1, sort: CREATION_DATE, order:DESC) {
+    ...LevelCardFragment
+  }
+  levelsCount
+  recentRecords(ranked:true, limit:10) {
+    id
+    date
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
+    }
+    chart {
+      id
+      difficulty
+      name
+      type
+      notesCount
+      level {
+        uid
+        title
+        bundle {
+          backgroundImage {
+           stripe
+          }
+        }
+      }
+    }
+    score
+    accuracy
+    rank
+  }
+}
+fragment LevelCardFragment on Level {
+  id
+  uid
+  title
+  owner {
+    id
+    uid
+    name
+    avatar {
+      small
+    }
+  }
+  metadata {
+    title_localized
+    artist {
+      name
+    }
+  }
+  bundle {
+    backgroundImage {
+      thumbnail
+    }
+    music
+    musicPreview
+  }
+}
+fragment CollectionInfoFragment on Collection {
+  id
+  uid
+  title
+  slogan
+  cover {
+    thumbnail
+  }
+  owner {
+    id
+    uid
+    name
+    avatar {
+      small
+    }
+  }
+}
+`
 export default {
   name: 'ErrorLayout',
   layout: 'default',
   components: {
+    PlayerRecentRank,
+    PlayerRecentComment,
+    PostCard,
+    LevelCard,
+    CollectionPreviewCard,
+    CollectionSimpleCard,
+    ScoreBadge,
+    DifficultyBadge,
+    Tweet
   },
   props: {
     error: {
@@ -57,6 +206,29 @@ export default {
       }
       return this.error.message
     }
+  },
+  head () {
+    return {
+      htmlAttrs: {
+        lang: this.$store.state.locale,
+      }
+    }
+  },
+  data () {
+    return {
+      posts: [],
+      loadingTweet: false,
+      data: null,
+    }
+  },
+  mounted () {
+    this.$apollo.query({
+      query,
+    })
+      .then((res) => {
+        this.data = res.data
+        console.log(res)
+      })
   },
   i18n: {
     key: 'error_page'
@@ -110,18 +282,44 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+  .browse-button.ant-btn-primary {
+    background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
+    background-size: 400% 400%;
 
-.box {
-  &#discord {
-    --box-background-gradient: linear-gradient(to right bottom, #7289DA, #7289DA);
+    -webkit-animation: flow 25s ease infinite;
+    -moz-animation: flow 25s ease infinite;
+    animation: flow 25s ease infinite;
+
+    @-webkit-keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @-moz-keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes flow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    &:hover {
+      background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
+      background-size: 400% 400%;
+      transform: scale(0.98, 0.98) !important;
+    }
+
+    &:active, &:focus {
+      box-shadow: $ele3 !important;
+      background: linear-gradient(270deg, #21d4fd, #b721ff) !important;
+      background-size: 400% 400% !important;
+      transform: scale(0.95, 0.95) !important;
+    }
+
   }
-  &#patron {
-    --box-background-gradient: linear-gradient(to right bottom, #F96854, #F96854);
-  }
-  &#afdian {
-    --box-background-gradient: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1));
-  }
-}
 </style>
 
 <style lang="scss" scoped>
@@ -151,7 +349,7 @@ export default {
 a.button {
   margin: 1rem 0;
 }
-@media screen and (min-width: $tablet) {
+@media screen and (min-width: 769px) {
   .sorry-img {
     float: right;
     padding-right: 1rem;
@@ -168,8 +366,21 @@ a.button {
       display: block;
     }
   }
+  .recent-rank-box {
+    p {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    .more-level-box {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-column-gap: 2rem;
+  }
 }
-@media screen and (min-width: $desktop) {
+@media screen and (min-width: 1024px) {
   .sorry-img {
     float: right;
     padding-right: 1rem;
@@ -177,6 +388,19 @@ a.button {
     img {
       height: 30rem;
     }
+  }
+  .recent-rank-box {
+    p {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    .more-level-box {
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 2rem;
   }
 }
 </style>
