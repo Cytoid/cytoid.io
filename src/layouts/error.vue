@@ -10,176 +10,177 @@
       p(v-t="{path: 'error_content', args: { error: null }}")
       p(v-t="message")
     nuxt-link(to="/")
-  //- .section: .explanation.container.error-texts
-  //-   p(v-t="'explanation'")
-  b-loading(is-full-page :active="!data" style="display:none")
-  template(v-if="data")
-    .section: .container
+  .section
+    .container
       .columns
         .column.is-half-desktop
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'connect_title'")
           #discord.box.is-gradient
             img(:src="require('@/assets/images/discord.png')" style="width: 110px;")
-            p(
-              v-show="data.discordOnlineCount > 0"
-              style="margin-top: 24px; color: rgba(255, 255, 255, 0.7);"
-              v-t="{path: 'connect_discord_subtitle', args: { count: data.discordOnlineCount }}"
-            )
             p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;" v-t="'connect_discord_content'")
             b-button(expanded href="https://discord.gg/cytoid" tag="a" icon-left="sign-in" type="is-transparent")
               span(v-t="'connect_discord_btn'")
-      .recent-rank-box
-        p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'recent_ranks_title'")
-        player-recent-rank(
-          v-if="data.recentRecords"
-          v-for="record in data.recentRecords"
-          :key="record.id"
-          :value="record"
-          :showPlayer="true"
-          style="margin: 8px 0;"
-        )
-        .more-level-box
-          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }")
-            span(v-t="{ path: 'featured_level_btn', args: { count: data.levelsCount }}")
-          nuxt-link.button.is-browse.is-large.is-fullwidth.is-fullheight.is-title(:to="{ name: 'levels' }")
-            span(v-t="{ path: 'level_all_btn', args: { count: data.levelsCount }}")
-
+    .container
+      p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'donate_title'")
+      .columns
+        .column.is-half-desktop
+          #patron.box.is-gradient
+            img(:src="require('@/assets/images/patreon.png')" style="width: 150px;")
+            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;"  v-t="'connect_patreon_content'")
+            b-button(expanded href="https://www.patreon.com/tigerhix" tag="a" icon-left="heart" type="is-transparent")
+              span Become a patron!
+      .columns
+        .column.is-half-desktop
+          #afdian.box.is-gradient
+            img(:src="require('@/assets/images/afdian.png')" style="width: 110px;")
+            p(style="margin-top: 0.5rem; margin-bottom: 0.5rem;" )
+              | Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑...
+            b-button(expanded href="https://afdian.net/@tigerhix" tag="a" icon-left="mug-hot" type="is-transparent")
+              span 请作者喝咖啡
 </template>
 
 <script>
-import { Tweet } from 'vue-tweet-embed'
-import gql from 'graphql-tag'
-import PlayerRecentRank from '@/components/player/PlayerRecentRank'
-import PlayerRecentComment from '@/components/player/PlayerRecentComment'
-import ScoreBadge from '@/components/level/ScoreBadge'
-import DifficultyBadge from '@/components/level/DifficultyBadge'
-import PostCard from '@/components/post/PostCard'
-import LevelCard from '@/components/level/LevelCard'
-import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
-import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
-
-const query = gql`
-query FetchHomePage {
-  recentTweet
-  discordOnlineCount
-  collectionsCount
-  comments: recentComments(limit: 5) {
-    id
-    category
-    key
-    content
-    date
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
-    metadata
-  }
-  posts: getActivePosts(limit: 10) {
-    id
-    uid
-    title
-    slogan
-    cover {
-      stripe
-    }
-    creationDate
-  }
-  gettingStarted: collection(uid: "getting-started") {
-    ...CollectionInfoFragment
-    levelCount
-  }
-  hitech: collection(uid: "hi-tech") {
-    ...CollectionInfoFragment
-    levels(limit: 5) {
-      ...LevelCardFragment
-    }
-  }
-  latestFeaturedLevels: levels(category: "featured", limit:1, sort: CREATION_DATE, order:DESC) {
-    ...LevelCardFragment
-  }
-  levelsCount
-  recentRecords(ranked:true, limit:10) {
-    id
-    date
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
-    chart {
-      id
-      difficulty
-      name
-      type
-      notesCount
-      level {
-        uid
-        title
-        bundle {
-          backgroundImage {
-           stripe
-          }
-        }
-      }
-    }
-    score
-    accuracy
-    rank
-  }
-}
-fragment LevelCardFragment on Level {
-  id
-  uid
-  title
-  owner {
-    id
-    uid
-    name
-    avatar {
-      small
-    }
-  }
-  metadata {
-    title_localized
-    artist {
-      name
-    }
-  }
-  bundle {
-    backgroundImage {
-      thumbnail
-    }
-    music
-    musicPreview
-  }
-}
-fragment CollectionInfoFragment on Collection {
-  id
-  uid
-  title
-  slogan
-  cover {
-    thumbnail
-  }
-  owner {
-    id
-    uid
-    name
-    avatar {
-      small
-    }
-  }
-}
-`
 export default {
+  name: 'ErrorLayout',
+  layout: 'default',
+  components: {
+  },
+  props: {
+    error: {
+      type: Object,
+      required: true,
+    }
+  },
+  computed: {
+    message () {
+      if (!this.error) {
+        return 'Unknown error'
+      }
+      return this.error.message
+    }
+  },
+  i18n: {
+    key: 'error_page'
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+
+  img {
+    max-width: 400px;
+  }
+  .buttons-container {
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+      .button {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+    @include tablet {
+      margin-left: 0.5rem;
+      .button {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  @include tablet {
+    align-items: start;
+  }
+  .slogan {
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+    font-size: $size-medium;
+    color: white;
+    @include tablet {
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+
+.box {
+  &#discord {
+    --box-background-gradient: linear-gradient(to right bottom, #7289DA, #7289DA);
+  }
+  &#patron {
+    --box-background-gradient: linear-gradient(to right bottom, #F96854, #F96854);
+  }
+  &#afdian {
+    --box-background-gradient: linear-gradient(to right bottom, hsla(260, 71%, 66%, 1), hsla(260, 71%, 66%, 1));
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+.sorry-img {
+  float: right;
+  height: 0;
+  img {
+    height: 10rem;
+  }
+}
+.error-texts {
+  align-items: start;
+  padding-left: 1rem;
+  h1 {
+    font-size: xxx-large;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+  .multi-line {
+    display: block;
+  }
+  .single-line {
+    display: none;
+  }
+}
+a.button {
+  margin: 1rem 0;
+}
+@media screen and (min-width: $tablet) {
+  .sorry-img {
+    float: right;
+    padding-right: 1rem;
+    height: 0;
+    img {
+      height: 10rem;
+    }
+  }
+  .error-texts {
+    .multi-line {
+      display: none;
+    }
+    .single-line {
+      display: block;
+    }
+  }
+}
+@media screen and (min-width: $desktop) {
+  .sorry-img {
+    float: right;
+    padding-right: 1rem;
+    height: 0;
+    img {
+      height: 30rem;
+    }
+  }
+}
+</style>
   name: 'ErrorLayout',
   layout: 'default',
   components: {
