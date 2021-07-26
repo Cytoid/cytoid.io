@@ -64,5 +64,8 @@
   "comment_post": "Đăng bình luận",
   "sponsorship": "Người ủng hộ",
   "sponsor_name": "Người ủng hộ coffee",
-  "sponsorship_quote": "Lời trích dẫn"
+  "sponsorship_quote": "Lời trích dẫn",
+  "error_page_title": "Oops",
+  "error_page_subtitle": "Looks like something went wrong! {error}",
+  "error_page_default_message": "Unknown Error"
 }
