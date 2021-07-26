@@ -64,5 +64,8 @@
   "comment_post": "Publicar Comentario",
   "sponsorship": "Donación",
   "sponsor_name": "Colaborador",
-  "sponsorship_quote": "Mensaje"
+  "sponsorship_quote": "Mensaje",
+  "error_page_title": "Oops",
+  "error_page_subtitle": "Looks like something went wrong! {error}",
+  "error_page_default_message": "Unknown Error"
 }
