@@ -11,5 +11,3 @@ export profile from './profile.json'
 export settings from './settings.json'
 export signup from './signup.json'
 export studio from './studio.json'
-// eslint-disable-next-line camelcase
-export error_page from './error_page.json'
