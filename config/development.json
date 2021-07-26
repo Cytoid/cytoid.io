@@ -1,5 +1,5 @@
 {
-  "secret": "keyboard cat",
+  "secret": "keyboardcat",
   "assetURL": "https://assets.cytoid.io",
   "staticURL": "https://static.cytoid.io",
   "serviceURLServer": "http://localhost:4000",
