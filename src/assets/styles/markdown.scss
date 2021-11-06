@@ -37,4 +37,14 @@
 .editor-preview  {
   color: $input-color !important;
   background: $input-background-color;
+  border: 1px solid $input-color;
+}
+
+.editor-toolbar.fullscreen {
+  z-index: 100;
+}
+
+.CodeMirror-fullscreen {
+  background-color: $input-background-color!important;
+  margin-bottom: 1.5rem;
 }
