@@ -25,7 +25,7 @@ jobs:
         run: yarn build
       - name: Prune Dev Dependencies
         run: npm prune --production
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - uses: google-github-actions/setup-gcloud@master
         with:
           version: '270.0.0'
           service_account_email: ${{ secrets.GCP_EMAIL }}
