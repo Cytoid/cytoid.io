@@ -7,7 +7,7 @@ header.navbar(role="navigation"): .container
     .navbar-start
       nuxt-link.navbar-item(:to="{ name: 'index' }" exact) {{$t('nav_home')}}
       nuxt-link.navbar-item(:to="{ name: 'levels' }") {{$t('nav_levels')}}
-      a.navbar-item(href='https://sites.google.com/site/cytoidcommunity' target="_blank" v-t="'nav_wiki'")
+      a.navbar-item(href='https://cytoid.wiki' target="_blank" v-t="'nav_wiki'")
     client-only.navbar-end
       search.left.navbar-item
       .navbar-item(v-if="!$store.state.user")
