@@ -18,6 +18,6 @@
   "levels_all_btn": "{count} 個の譜面を見る",
   "collections_title": "コレクション",
   "collections_all_btn": "{count} このコレクションを見る",
-  "badges_title": "Badges",
-  "last_seen_date": "Last seen {date}"
+  "badges_title": "バッジ",
+  "last_seen_date": "最終ログイン：{date}"
 }
