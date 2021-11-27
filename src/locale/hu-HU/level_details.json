@@ -28,21 +28,21 @@
       "localized_artist_field": "A zene előadójának lefordított neve(i)",
       "localized_artist_hint": "A zene előadójának angol neve(i). Lehetőség szerint szó szerinti fordítás.",
       "music_url_field": "A zene forrásának URL-je",
-      "music_url_hint": "The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.",
-      "cover_art_field": "Cover artist name(s)",
-      "cover_art_hint": "The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
-      "cover_art_localized_field": " Localized cover artist name(s)",
-      "cover_art_localized_hint": "The cover artist name(s) in English. Literal translation is preferred.",
-      "cover_art_url_field": "Cover source URL",
-      "cover_art_url_hint": "The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used."
+      "music_url_hint": "A zene az előadó(k) által megadott URL-je. Ha nincs nyilvános URL, adj meg a zene első megjelenésének (pl. anime, játék) hivatalos oldalához egy linket.",
+      "cover_art_field": "A borító készítőjének neve(i)",
+      "cover_art_hint": "A borító készítőjének neve(i) az eredeti nyelven és formában. Több név elválasztásához használj egy vesszőt szóközzel követve.",
+      "cover_art_localized_field": "A borító készítőjének lefordított neve(i)",
+      "cover_art_localized_hint": "A borító készítőjének angol neve(i). Lehetőség szerint szó szerinti fordítás.",
+      "cover_art_url_field": "A borító forrásának URL-je",
+      "cover_art_url_hint": "A borító készítők által közzétett URL-je. Ha nincs nyilvános URL, adj meg a borítót felhasználó munka (pl. játék, anime) hivatalos oldalához egy linket."
     },
     "admin": {
-      "censorship_title": "Censorship",
-      "censorship_checkbox_title": "Remove from Public",
-      "censorship_reason_field": "Reason",
-      "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
-      "category_title": "Category",
-      "category_placeholder": "Adding an administrative category..."
+      "censorship_title": "Cenzúra",
+      "censorship_checkbox_title": "Ne legyen Nyilvános",
+      "censorship_reason_field": "Indoklás",
+      "censorship_reason_hint": "Annak az oka, hogy ez a szint miért nem megfelelő nyilvános megtekintésre, egy szóban",
+      "category_title": "Kategória",
+      "category_placeholder": "Adminisztrációs kategória hozzáadása..."
     }
   }
 }
