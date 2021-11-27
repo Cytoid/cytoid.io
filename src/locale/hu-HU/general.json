@@ -1,5 +1,5 @@
 {
-  "self": "English",
+  "self": "Magyar",
   "week": "Hét",
   "region_unavailable": "Lehet, hogy a Cytoid.io nem elérhető a területeden",
   "region_unavailable_content": "Bizonyos szükséges szolgáltatások, mint a Google Recaptcha, Google Felhő Tárhely, Twitter vagy a Discord lehet, hogy nem tudnak betőlteni. Jobb felhasználói élményért kérlek látogasd meg az optimizált honlapunkat.",
@@ -28,7 +28,7 @@
   "nav_home": "Kezdőlap",
   "nav_levels": "Szintek",
   "nav_wiki": "Wiki",
-  "login_btn": "Sign In",
+  "login_btn": "Bejelentkezés",
   "delete_btn": "Törlés",
   "birthday": "Születésnap",
   "collection_card_levels_count_tag": "{count} szint",
@@ -62,10 +62,10 @@
   "comment_see_replies": "{count} válasz megjelenítése",
   "comment_hide_replies": "{count} válasz elrejtése",
   "comment_post": "Hozzászólás elküldése",
-  "sponsorship": "Donation",
+  "sponsorship": "Adományozás",
   "sponsor_name": "Kávé Együttműködő",
-  "sponsorship_quote": "Quote",
-  "error_page_title": "Oops",
-  "error_page_subtitle": "Looks like something went wrong! {error}",
-  "error_page_default_message": "Unknown Error"
+  "sponsorship_quote": "Idézet",
+  "error_page_title": "Hoppá",
+  "error_page_subtitle": "Úgy tűnik valami hiba történt! {error}",
+  "error_page_default_message": "Ismeretlen Hiba"
 }
