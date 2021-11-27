@@ -11,7 +11,7 @@
   "password_field_error_invalid": "Le mot de passe doit contenir au moins 8 caractères.",
   "password_field_placeholder": "Mot de passe",
   "password_confirm_field_placeholder": "Confirmation du mot de passe",
-  "tos_field_error_required": "You must agree to our terms of services.",
+  "tos_field_error_required": "Vous devez accepter les conditions d'utilisation.",
   "tos_field_title": "J'accepte les {0} de Cytoid.",
   "join_btn": "Rejoindre la communauté",
   "existing_user_title": "Déjà inscrit ?",
