@@ -1,13 +1,13 @@
 {
-  "sort_select_title": "Sort",
-  "sort_select_upload_date": "Upload date",
-  "sort_select_modification_date": "Modified date",
-  "sort_select_difficulty": "Difficulty",
-  "sort_select_duration": "Duration",
-  "sort_select_downloads": "Downloads",
-  "sort_select_rating": "Rating",
-  "sort_select_relevance": "Relevance",
-  "category_select_title": "Category",
-  "category_select_item_all": "All",
-  "category_select_item_featured": "Featured"
+  "sort_select_title": "Rendezés",
+  "sort_select_upload_date": "Feltöltés dátuma",
+  "sort_select_modification_date": "Módosítás dátuma",
+  "sort_select_difficulty": "Nehézség",
+  "sort_select_duration": "Hossz",
+  "sort_select_downloads": "Letöltések",
+  "sort_select_rating": "Értékelés",
+  "sort_select_relevance": "Relevancia",
+  "category_select_title": "Kategória",
+  "category_select_item_all": "Mind",
+  "category_select_item_featured": "Kiemelt"
 }
