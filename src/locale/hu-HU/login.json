@@ -1,11 +1,11 @@
 {
-  "title": "Already have a Cytoid ID?",
-  "subtitle": "Please sign in below.",
-  "username_field_placeholder": "Cytoid ID / Email address",
-  "username_field_error_required": "Please input your Cytoid ID or email address.",
-  "password_field_placeholder": "Password",
-  "password_field_error_required": "Please input your password.",
-  "remember_me_checkbox_title": "Remember Me",
-  "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!"
+  "title": "Már van Cytoid ID-d?",
+  "subtitle": "Kérlek itt jelentkezz be.",
+  "username_field_placeholder": "Cytoid ID / Email cím",
+  "username_field_error_required": "Kérlek add meg a Cytoid ID-d vagy az email címed.",
+  "password_field_placeholder": "Jelszó",
+  "password_field_error_required": "Kérlek add meg a jelszavad.",
+  "remember_me_checkbox_title": "Emlékezz Rám",
+  "new_user_welcome_title": "Nincs még fiókod?",
+  "new_user_welcome_content": "Regisztrálj, hogy hozzáférj a Cytoid többjátékos funkcióihoz. Kevesebb, mint 30 másodpercbe telik!"
 }
