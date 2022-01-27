@@ -47,13 +47,6 @@ div
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'latest_tweet_title'")
           Tweet(v-if="data.recentTweet" v-show="!loadingTweet" :id="data.recentTweet" :key="data.recentTweet" :options="{ theme: 'dark' }")
-          p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'new_comments_title'")
-          player-recent-comment(
-            v-for="comment in data.comments"
-            :key="comment.id"
-            :comment="comment"
-            style="margin: 8px 0;"
-          )
         .column.is-one-third-desktop.is-half-tablet
           p.heading(style="padding-top: 24px; margin-bottom: 12px;" v-t="'connect_title'")
           #discord.box.is-gradient
