@@ -110,12 +110,17 @@ export default {
     },
     verify (email) {
       this.loading = true
-      this.$apollo.mutate({
-        mutation: gql`mutation SendConfirmationEmail($email: String!) {
-          sendVerificationEmail(email: $email)
-        }`,
-        variables: { email }
-      })
+
+      this.$refs.captcha.execute()
+        .then((token) => this.$apollo.mutate({
+          mutation: gql`mutation SendConfirmationEmail($email: String!) {
+            sendVerificationEmail(email: $email)
+          }`,
+          variables: {
+            email,
+            captcha: token,
+          }
+        }))
         .then(() => {
           this.$buefy.toast.open({
             message: 'Confirmation email sent',
