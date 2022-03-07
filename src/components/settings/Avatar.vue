@@ -3,7 +3,7 @@
   .heading(v-t="'avatar_title'")
   .box
     b-field
-      upload.avatar-upload(:background="avatarURL" type="avatar" @upload="avatarUploaded" icon)
+      upload.avatar-upload(:background="avatarURL" type="avatar" @upload="avatarUploaded" icon :captchaFunc="captchaFunc")
 </template>
 
 <script>
@@ -13,6 +13,12 @@ export default {
   name: 'AvatarPanel',
   components: {
     Upload,
+  },
+  props: {
+    captchaFunc: {
+      type: Function,
+      default: null,
+    }
   },
   data () {
     return {

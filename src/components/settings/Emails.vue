@@ -32,6 +32,12 @@ export default {
       emails: [],
     }
   },
+  props: {
+    captchaFunc: {
+      type: Function,
+      default: null,
+    }
+  },
   mounted () {
     this.$apollo.query({
       query: gql`query GetUserEmails {
@@ -111,7 +117,7 @@ export default {
     verify (email) {
       this.loading = true
 
-      this.$refs.captcha.execute()
+      this.captchaFunc()
         .then((token) => this.$apollo.mutate({
           mutation: gql`mutation SendConfirmationEmail($email: String!) {
             sendVerificationEmail(email: $email)
