@@ -81,7 +81,7 @@
           p.subtitle(style="margin-bottom: 16px;" v-t="'collections_title'")
           .level-card-container.small.regular-levels-container
             collection-simple-card(v-for="collection in profile.user.collections" :key="collection.id" :value="collection")
-          a.button.is-fullwidth(style="margin-top: 16px;")
+          nuxt-link.button.is-fullwidth(style="margin-top: 16px;" :to="{ name: 'collections', query: { owner: profile.user.id } }")
             b-icon(icon="angle-double-right")
             span(v-t="{ path: 'collections_all_btn', args: { count: profile.user.collectionsCount }}")
         div(style="margin: 12px;")
