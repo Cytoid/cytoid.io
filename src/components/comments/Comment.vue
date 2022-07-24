@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import insane from 'insane'
 import marked from 'marked'
 import Vue from 'vue'
 import CommentSkeleton from './CommentSkeleton'
@@ -69,7 +70,7 @@ export default {
   },
   computed: {
     content () {
-      return marked(this.value.content)
+      return insane(marked(this.value.content))
     }
   },
   mounted () {

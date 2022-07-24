@@ -91,6 +91,7 @@
 
 <script>
 import marked from 'marked'
+import insane from 'insane'
 import BadgeStripe from '@/components/player/BadgeStripe'
 import Captcha from '@/components/Captcha'
 import Thread from '@/components/comments/Thread'
@@ -263,7 +264,7 @@ export default {
   }),
   computed: {
     bio () {
-      return marked(this.profile.bio || 'There is no bio yet.')
+      return insane(marked(this.profile.bio || 'There is no bio yet.'))
     },
     online () {
       if (!this.profile.user.lastSeen) {
