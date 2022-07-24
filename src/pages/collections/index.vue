@@ -5,15 +5,34 @@ div
   .section: .container
     b-button.is-block(
       :loading="loading"
-      @click="loadMore"
+      @click="loadQuery"
       :style="{ width: '100%' }"
       v-if="hasMore"
     ) Load More
 </template>
 
 <script>
+import { faTireRugged } from '@fortawesome/pro-duotone-svg-icons'
 import gql from 'graphql-tag'
 import CollectionSimpleCard from '../../components/collection/CollectionSimpleCard'
+
+const pageLimit = 32
+
+const query = gql`
+  query FetchCollections($cursor: ID, $limit: Int!, $ownerId: String){
+    collections(limit: $limit, cursor: $cursor, ownerId: $ownerId) {
+      id
+      uid
+      cover {
+        thumbnail
+      }
+      title
+      slogan
+      levelCount
+      creationDate
+    }
+  }
+`
 export default {
   name: 'CollectionList',
   components: {
@@ -23,50 +42,31 @@ export default {
     return {
       loading: false,
       hasMore: true,
-    }
-  },
-  apollo: {
-    collections: {
-      query: gql`query FetchCollections($cursor: ID, $limit: Int!){
-        collections(limit: $limit, cursor: $cursor) {
-          id
-          uid
-          cover {
-            thumbnail
-          }
-          title
-          slogan
-          levelCount
-          creationDate
-        }
-      }`,
-      variables: {
-        limit: 32,
-        cursor: null,
-      },
+      collections: []
     }
   },
   methods: {
-    loadMore () {
-      this.loading = true
-      this.$apollo.queries.collections.fetchMore({
+    loadQuery () {
+      this.loading = faTireRugged
+      this.$apollo.query({
+        query,
         variables: {
-          limit: 32,
-          cursor: this.collections[this.collections.length - 1].id,
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          this.loading = false
-          this.hasMore = fetchMoreResult.collections.length > 0
-          console.log(this.hasMore)
-          if (!this.hasMore) {
-            return previousResult
-          }
-          return {
-            collections: [...previousResult.collections, ...fetchMoreResult.collections],
-          }
-        },
+          limit: pageLimit,
+          cursor: this.collections.length > 0 ? this.collections[this.collections.length - 1].id : null,
+          ownerId: this.$route.query.owner
+        }
       })
-    },
+        .then((res) => {
+          this.loading = false
+          this.hasMore = res.data.collections.length > pageLimit
+          if (res.data.collections.length > 0) {
+            this.collections.push(...res.data.collections)
+          }
+        })
+    }
+  },
+  mounted: function() {
+    this.loadQuery()
   }
 }
 </script>
