@@ -133,6 +133,7 @@
 <script>
 import Captcha from '@/components/Captcha'
 import marked from 'marked'
+import insane from 'insane'
 import Thread from '@/components/comments/Thread'
 import ScoreBadge from '@/components/level/ScoreBadge'
 import DifficultyBadge from '@/components/level/DifficultyBadge'
@@ -333,7 +334,7 @@ export default {
   }),
   computed: {
     levelDescription () {
-      return this.level.description !== null ? marked(this.level.description) : null
+      return this.level.description !== null ? insane(marked(this.level.description)) : null
     },
     rankingsHeaderGradient () {
       return {

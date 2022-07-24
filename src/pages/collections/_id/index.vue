@@ -44,6 +44,7 @@ import PlayerAvatar from '@/components/player/PlayerAvatar'
 import MetaBox from '@/components/MetaBox'
 import Captcha from '@/components/Captcha'
 import Thread from '@/components/comments/Thread'
+import insane from 'insane'
 
 const query = gql`query FetchCollection($uid: String!) {
   collection(uid: $uid) {
@@ -137,7 +138,7 @@ export default {
   },
   computed: {
     formattedDescriptions () {
-      return marked(this.collection.description)
+      return insane(marked(this.collection.description))
     },
   },
   i18n: {
