@@ -28,7 +28,7 @@
   "nav_home": "家",
   "nav_levels": "紫薯布丁",
   "nav_wiki": "剃毛刀",
-  "login_btn": "Sign In",
+  "login_btn": "登录",
   "delete_btn": "asdfas",
   "birthday": "生日",
   "collection_card_levels_count_tag": "{count} 个紫薯布丁",
@@ -65,7 +65,7 @@
   "sponsorship": "捐赠",
   "sponsor_name": "咖啡捐赠者",
   "sponsorship_quote": "留言",
-  "error_page_title": "Oops",
-  "error_page_subtitle": "Looks like something went wrong! {error}",
-  "error_page_default_message": "Unknown Error"
+  "error_page_title": "哦唷，出错啦！",
+  "error_page_subtitle": "可能出现的错误： {error}",
+  "error_page_default_message": "发生了未知的错误"
 }
