@@ -24,7 +24,7 @@ div
     b-field(:label="$t('manage.admin.category_title')")
       b-taginput(
         v-model="adminForm.category"
-        :data="['featured']"
+        :data="['featured', 'qualified']"
         autocomplete
         open-on-focus
         icon="tag"
