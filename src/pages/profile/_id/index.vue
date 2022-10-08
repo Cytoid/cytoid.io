@@ -64,14 +64,21 @@
           line-chart(v-if="profile.timeseries" :data="profile.timeseries" :mode="chartMode")
         .box.levels-box(v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)")
           .levels-box-container.has-featured(v-if="profile.user.featuredLevels.length > 0")
-            p.subtitle(v-t="'levels_title'")
+            p.subtitle(v-t="'levels_featured_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.featuredLevels" :key="level.id" :value="level")
             nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
               b-icon(icon="angle-double-right")
               span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
+          .levels-box-container.has-qualified(v-if="profile.user.qualifiedLevels.length > 0")
+            p.subtitle(v-t="'levels_qualified_title'")
+            .level-card-container.small
+              level-card(v-for="level in profile.user.qualifiedLevels" :key="level.id" :value="level")
+            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, qualified: true } }")
+              b-icon(icon="angle-double-right")
+              span(v-t="{ path: 'levels_qualified_all_btn', args: { count: profile.user.qualifiedLevelsCount }}")
           .levels-box-container(v-if="profile.user.levels.length > 0")
-            p.subtitle(v-t="'levels_title'" v-if="profile.user.featuredLevels.length === 0")
+            p.subtitle(v-t="profile.user.featuredLevels.length + profile.user.qualifiedLevels.length === 0 ? 'levels_title' : 'levels_other_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.levels" :key="level.id" :value="level")
             nuxt-link.button.is-fullwidth(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id } }")
@@ -160,10 +167,12 @@ query FetchProfilePage($uid: String!) {
       }
       collectionsCount
       lastSeen
-      levelsCount(category: "!featured")
+      levelsCount(category: "!featured !qualified")
       featuredLevelsCount: levelsCount(category: "featured")
-      levels(category: "!featured", first: 6) { ...LevelInfo }
+      qualifiedLevelsCount: levelsCount(category: "qualified !featured")
+      levels(category: "!featured !qualified", first: 6) { ...LevelInfo }
       featuredLevels: levels(category: "featured", first: 6) { ...LevelInfo }
+      qualifiedLevels: levels(category: "qualified !featured", first: 6) { ...LevelInfo }
     }
     rating
     badges {
@@ -354,12 +363,20 @@ export default {
       max-width: 100%;
     }
   }
-  .levels-box-container {
+  .levels-box {
     border-radius: $box-radius;
+    overflow: hidden;
+  }
+  .levels-box-container {
     padding: $box-padding;
+    
     &.has-featured {
       position: relative;
       background-image: linear-gradient(to right bottom, #b91d73, #f953c6);
+    }
+    &.has-qualified {
+      position: relative;
+      background-image: linear-gradient(to right bottom, #476adc, #728ce4);
     }
     .level-card-container {
       margin-bottom: 1rem;
