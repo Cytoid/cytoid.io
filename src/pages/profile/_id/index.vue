@@ -62,7 +62,7 @@
             )
               a(v-t="title")
           line-chart(v-if="profile.timeseries" :data="profile.timeseries" :mode="chartMode")
-        .box.levels-box(v-if="(profile.user.featuredLevels.length > 0) || (profile.user.levels.length > 0)")
+        .box.levels-box(v-if="profile.user.featuredLevels.length > 0")
           .levels-box-container.has-featured(v-if="profile.user.featuredLevels.length > 0")
             p.subtitle(v-t="'levels_featured_title'")
             .level-card-container.small
@@ -70,6 +70,7 @@
             nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
               b-icon(icon="angle-double-right")
               span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
+        .box.levels-box(v-if="profile.user.levels.length > 0")
           .levels-box-container.has-qualified(v-if="profile.user.qualifiedLevels.length > 0")
             p.subtitle(v-t="'levels_qualified_title'")
             .level-card-container.small
@@ -172,7 +173,7 @@ query FetchProfilePage($uid: String!) {
       qualifiedLevelsCount: levelsCount(category: "qualified !featured")
       levels(category: "!featured !qualified", first: 6) { ...LevelInfo }
       featuredLevels: levels(category: "featured", first: 6) { ...LevelInfo }
-      qualifiedLevels: levels(category: "qualified !featured", first: 6) { ...LevelInfo }
+      qualifiedLevels: levels(category: "qualified !featured", first: 6, order: "date_modified") { ...LevelInfo }
     }
     rating
     badges {
@@ -369,14 +370,15 @@ export default {
   }
   .levels-box-container {
     padding: $box-padding;
-    
+    color: white;
     &.has-featured {
       position: relative;
       background-image: linear-gradient(to right bottom, #b91d73, #f953c6);
     }
     &.has-qualified {
       position: relative;
-      background-image: linear-gradient(to right bottom, #476adc, #728ce4);
+      --box-background-gradient: linear-gradient(to right bottom, #8d95bb, #4a9386);
+      background: radial-gradient(circle farthest-corner at 0 0, transparent, #292d38 40%), var(--box-background-gradient, linear-gradient(to right bottom, #acb6e5, #86fde8));
     }
     .level-card-container {
       margin-bottom: 1rem;

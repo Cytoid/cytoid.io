@@ -32,6 +32,7 @@ div
             level-card.level-card(:value="data.latestFeaturedLevels[0]")
           nuxt-link.button.is-browse.is-large.is-fullwidth.is-title(:to="{ name: 'levels' }" style="margin-bottom: 2rem;")
             span(v-t="{ path: 'level_all_btn', args: { count: data.levelsCount }}")
+      qualified-preview-card(v-if="data && data.qualifiedCollection" :value="data.qualifiedCollection")
       collection-preview-card(v-if="data && data.hitech" :value="data.hitech")
       .columns
         .column.is-one-third-desktop.is-half-tablet
@@ -90,6 +91,7 @@ import PostCard from '@/components/post/PostCard'
 import LevelCard from '@/components/level/LevelCard'
 import CollectionPreviewCard from '@/components/collection/CollectionPreviewCard'
 import CollectionSimpleCard from '@/components/collection/CollectionSimpleCard'
+import QualifiedPreviewCard from '@/components/QualifiedPreviewCard'
 
 const query = gql`
 query FetchHomePage {
@@ -131,6 +133,9 @@ query FetchHomePage {
     levels(limit: 5) {
       ...LevelCardFragment
     }
+  }
+  qualifiedCollection: levels(category: "qualified", limit:19, sort: MODIFICATION_DATE, order:DESC) {
+    ...LevelCardFragment
   }
   latestFeaturedLevels: levels(category: "featured", limit:1, sort: CREATION_DATE, order:DESC) {
     ...LevelCardFragment
@@ -225,7 +230,8 @@ export default {
     CollectionSimpleCard,
     ScoreBadge,
     DifficultyBadge,
-    Tweet
+    Tweet,
+    QualifiedPreviewCard
   },
   background: {
     source: require('@/assets/images/cryout.jpg'),

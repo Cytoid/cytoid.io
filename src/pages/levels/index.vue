@@ -32,6 +32,11 @@
             :value="filters.category"
             @input="handleFilterSelector"
             native-value="featured") {{$t('category_select_item_featured')}}
+          b-radio-button(
+            type="is-white"
+            :value="filters.category"
+            @input="handleFilterSelector"
+            native-value="qualified") {{$t('category_select_item_qualified')}}
     .level-card-container.large(style="margin-top: 16px; margin-bottom: 16px;")
       level-card(v-for="level in levels" :key="level.id" :value="level")
     b-pagination(
@@ -106,6 +111,9 @@ export default {
       if (mappedFilters.category) {
         if (mappedFilters.category === 'featured') {
           mappedFilters.featured = true
+        }
+        if (mappedFilters.category === 'qualified') {
+          mappedFilters.qualified = true
         }
         delete mappedFilters.category
       }
