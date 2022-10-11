@@ -67,7 +67,7 @@
             p.subtitle(v-t="'levels_featured_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.featuredLevels" :key="level.id" :value="level")
-            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, featured: true } }")
+            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, category: 'featured' } }")
               b-icon(icon="angle-double-right")
               span(v-t="{ path: 'levels_featured_all_btn', args: { count: profile.user.featuredLevelsCount }}")
         .box.levels-box(v-if="profile.user.levels.length > 0")
@@ -75,7 +75,7 @@
             p.subtitle(v-t="'levels_qualified_title'")
             .level-card-container.small
               level-card(v-for="level in profile.user.qualifiedLevels" :key="level.id" :value="level")
-            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, qualified: true } }")
+            nuxt-link.button.is-fullwidth.is-transparent(:to="{ name: 'levels', query: { owner: profile.user.uid || profile.user.id, category: 'qualified' } }")
               b-icon(icon="angle-double-right")
               span(v-t="{ path: 'levels_qualified_all_btn', args: { count: profile.user.qualifiedLevelsCount }}")
           .levels-box-container(v-if="profile.user.levels.length > 0")
@@ -168,9 +168,9 @@ query FetchProfilePage($uid: String!) {
       }
       collectionsCount
       lastSeen
-      levelsCount(category: "!featured !qualified")
+      levelsCount(category: "")
       featuredLevelsCount: levelsCount(category: "featured")
-      qualifiedLevelsCount: levelsCount(category: "qualified !featured")
+      qualifiedLevelsCount: levelsCount(category: "qualified")
       levels(category: "!featured !qualified", first: 6) { ...LevelInfo }
       featuredLevels: levels(category: "featured", first: 6) { ...LevelInfo }
       qualifiedLevels: levels(category: "qualified !featured", first: 6, order: "date_modified") { ...LevelInfo }
@@ -377,7 +377,7 @@ export default {
     }
     &.has-qualified {
       position: relative;
-      --box-background-gradient: linear-gradient(to right bottom, #8d95bb, #4a9386);
+      --box-background-gradient: linear-gradient(to right bottom, #4a9386, #8d95bb);
       background: radial-gradient(circle farthest-corner at 0 0, transparent, #292d38 40%), var(--box-background-gradient, linear-gradient(to right bottom, #acb6e5, #86fde8));
     }
     .level-card-container {
@@ -385,7 +385,12 @@ export default {
       margin-top: 0.5rem;
     }
   }
-  .box.levels-box {
-    padding: 0 !important;
+  .box {
+    &.levels-box {
+      padding: 0 !important;
+    }
+    .subtitle {
+      color: $white-bis;
+    }
   }
 </style>

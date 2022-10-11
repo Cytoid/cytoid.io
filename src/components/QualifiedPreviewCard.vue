@@ -39,12 +39,15 @@ export default {
       required: true,
     }
   },
+  i18n: {
+    key: 'homepage'
+  }
 }
 </script>
 
 <style lang="scss">
 .qualified-dock {
-  --box-background-gradient: linear-gradient(to right bottom, #8d95bb, #4a9386);
+  --box-background-gradient: linear-gradient(to right bottom, #4a9386, #8d95bb);
   background: radial-gradient(circle farthest-corner at 0 0, transparent, #292d38 40%), var(--box-background-gradient, linear-gradient(to right bottom, #acb6e5, #86fde8));
   border-radius: 6px;
   overflow: hidden;

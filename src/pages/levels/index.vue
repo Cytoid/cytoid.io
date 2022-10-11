@@ -38,7 +38,7 @@
             @input="handleFilterSelector"
             native-value="qualified") {{$t('category_select_item_qualified')}}
     .level-card-container.large(style="margin-top: 16px; margin-bottom: 16px;")
-      level-card(v-for="level in levels" :key="level.id" :value="level")
+      level-card(v-for="level in levels" :key="level.id" :value="level" :category="level.category")
     b-pagination(
       :total="totalEntries"
       :per-page="pageSize"
@@ -108,15 +108,6 @@ export default {
     '$route' () {
       this.loading = true
       const mappedFilters = Object.assign({}, this.filters)
-      if (mappedFilters.category) {
-        if (mappedFilters.category === 'featured') {
-          mappedFilters.featured = true
-        }
-        if (mappedFilters.category === 'qualified') {
-          mappedFilters.qualified = true
-        }
-        delete mappedFilters.category
-      }
       if (mappedFilters.sort === 'relevance') {
         mappedFilters.sort = undefined
       }

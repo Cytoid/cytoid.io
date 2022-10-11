@@ -1,6 +1,7 @@
 import DifficultyBadge from '@/components/level/DifficultyBadge'
 import ContentCard from '@/components/ContentCard'
 import PlayButton from '@/components/level/PlayButton'
+import CategoryBadge from '@/components/level/CategoryBadge'
 
 export default {
   props: {
@@ -8,6 +9,10 @@ export default {
       type: Object,
       required: true
     },
+    category: {
+      type: Array,
+      default: () => [],
+    }
   },
   functional: true,
   render (h, context) {
@@ -15,9 +20,11 @@ export default {
     const owner = value.owner
     const artist = value.metadata && value.metadata.artist && value.metadata.artist.name
     const titleLocalized = value.metadata && value.metadata.title_localized
+    const category = context.props.category.includes('featured') ? 'featured'
+      : context.props.category.includes('qualified') ? 'qualified' : ''
     const slots = {
-      popovers: () => (
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '16px' }}>
+      popovers: () => (<div>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '16px', display: 'inline-flex' }}>
           {
             value.charts && value.charts.map(chart =>
               <DifficultyBadge
@@ -29,7 +36,10 @@ export default {
                 name={false} />
             )
           }
-        </div>),
+          <div style={{ flex: 1 }} />
+          <CategoryBadge class={[category, 'is-top']} category={category}></CategoryBadge>
+        </div>
+      </div>),
       bottom: () => (<div>
         {artist && <h2 class="content-subtitle">{artist}</h2>}
         {value.title && <h1 class="content-title">{value.title}</h1>}
