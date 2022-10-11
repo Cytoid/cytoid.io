@@ -6,7 +6,7 @@ div
         client-only: markdown-editor(v-model="form.description")
       b-field(:label="$t('manage.tags_field')")
         tag-input(v-model="form.tags")
-      b-field(:label="$t('manage.visibility_field')")
+      b-field(:label="$t('manage.visibility_field')" :message="isQualified ? $t('manage.disqualified_visibility_warning') : null")
         visibility-select(:value="form.state" @change="form.state = $event")
       b-button.is-pulled-right(
         :loading="loading"
@@ -74,6 +74,9 @@ export default {
     censored: {
       get () { return this.adminForm.censored !== null },
       set (val) { this.adminForm.censored = val ? '' : null },
+    },
+    isQualified: function () {
+      return this.value.category.indexOf("qualified") > -1
     }
   },
   methods: {

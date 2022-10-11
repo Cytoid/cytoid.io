@@ -3,7 +3,8 @@
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-bottom: 16px;")
       p(v-t="'manage.replace_title'")
     upload-level(:level="value")
-      template(slot="text") {{$t('manage.replace_upload_title')}}
+      template(v-if="isQualified" slot="text") {{$t('manage.disqualified_replace_warning')}}
+      template(v-else slot="text") {{$t('manage.replace_upload_title')}}
       template(slot="hint") {{$t('manage.replace_upload_subtitle')}}
     div(style="color: rgba(255, 255, 255, 0.7); font-weight: bold; margin-top: 16px; margin-bottom: 16px")
       p(v-t="'manage.metadata.title'")
@@ -58,6 +59,11 @@ export default {
     value: {
       type: Object,
       required: true,
+    }
+  },
+  computed: {
+    isQualified: function () {
+      return this.value.category.indexOf("qualified") > -1
     }
   },
   data () {

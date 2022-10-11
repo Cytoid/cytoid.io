@@ -16,6 +16,8 @@
     "description_field": "Description",
     "tags_field": "Tags",
     "visibility_field": "Visibility",
+    "disqualified_visibility_warning": "Warning!!! Modifying the visibility of the level will cause the level ** TO LOSE ** its Qualified status!",
+    "disqualified_replace_warning": "Warning!!! Modifying or re-uploading the level will cause the level ** TO LOSE ** its Qualified status!",
     "metadata": {
       "title": "Metadata",
       "id_field": "ID",

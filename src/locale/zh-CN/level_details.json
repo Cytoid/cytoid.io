@@ -16,6 +16,8 @@
     "description_field": "说明",
     "tags_field": "Tag",
     "visibility_field": "可见性",
+    "disqualified_visibility_warning": "警告！！！修改谱面的可见性会导致谱面 **失去** Qualified 资格！",
+    "disqualified_replace_warning": "警告！！！修改或重新上传谱面会导致谱面 **失去** Qualified 资格！",
     "metadata": {
       "title": "详细信息",
       "id_field": "ID",

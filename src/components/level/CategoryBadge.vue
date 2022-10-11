@@ -26,6 +26,7 @@ export default {
   padding: 0 1rem;
   z-index: 10;
   user-select: none;
+  text-transform: capitalize;
 }
 .category-badge.qualified {
   background: linear-gradient(to right bottom, #4a9386, #8d95bb);
