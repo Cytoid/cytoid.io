@@ -25,11 +25,11 @@ jobs:
         run: yarn build
       - name: Prune Dev Dependencies
         run: npm prune --production
-      - uses: google-github-actions/setup-gcloud@main
+      - uses: 'google-github-actions/auth@v1'
         with:
-          version: '270.0.0'
-          service_account_email: ${{ secrets.GCP_EMAIL }}
-          service_account_key: ${{ secrets.GCP_KEY }}
+          credentials_json: ${{ secrets.GCP_KEY }}
+          service_account: ${{ secrets.GCP_EMAIL }}
+      - uses: google-github-actions/setup-gcloud@v1
       - run: |
           # Set up docker to authenticate
           # via gcloud command-line tool.
