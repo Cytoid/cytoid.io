@@ -24,7 +24,9 @@
           .content(v-html="bio")
         div(style="margin-top: 1rem;" v-if="profile.badges && profile.badges.length > 0")
           p.heading(style="margin-bottom: 1rem;" v-t="'badges_title'")
-          badge-stripe(v-for="badge in profile.badges" :key="badge.uid" :value="badge")
+          .event-badges-container(v-if="eventBadges.length > 0")
+            img(v-for="badge in eventBadges" :key="badge.uid" :src="badge.metadata.imageUrl" :alt="badge.description")
+          badge-stripe(v-for="badge in fontawesomeBadges" :key="badge.uid" :value="badge")
         div(style="margin-top: 1rem;")
           p.heading(v-t="'recent_ranks_title'")
           player-recent-rank(
@@ -273,6 +275,30 @@ export default {
       const date = parseISO(this.profile.user.lastSeen)
       const dateInFuture = addMinutes(date, 15)
       return isFuture(dateInFuture) // If last seen date + 15 min is in the future, then we're online
+    },
+    eventBadges() {
+      if (!this.profile.badges) { return [] }
+      let badges = new Map();
+      // Deduplicate badges
+      for (const badge of this.profile.badges) {
+        if (!badge.metadata?.imageUrl) {
+          continue;
+        }
+        if (badge.metadata?.overrides) {
+          for (const override of badge.metadata.overrides) {
+            badges.set(override, false);
+          }
+        }
+        if (badges.get(badge.uid) === false) {
+          continue;
+        }
+        badges.set(badge.uid, badge);
+      }
+      return Array.from(badges.values()).filter(a => a)
+    },
+    fontawesomeBadges() {
+      if (!this.profile.badges) { return [] }
+      return this.profile.badges.filter(b => b.metadata?.fontawesome)
     }
   },
   methods: {
@@ -299,6 +325,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .event-badges-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+    img {
+      border-radius: 6px;
+    }
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $grey-light;
+    margin-bottom: 1rem;
+  }
   .statistics-card {
     background: linear-gradient(to right bottom, $theme4, $theme5);
   }
