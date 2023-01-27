@@ -54,7 +54,7 @@
               p.title(v-text="commaSeparated(profile.activity.totalRankedScore)")
             .column.is-one-third
               p.box-subtitle(v-t="'total_play_time'")
-              p.title(v-text="profile.activity.totalPlayTime")
+              p.title(v-text="getTotalPlayTimeText(profile.activity.totalPlayTime)")
           .tabs.is-small.is-toggle: ul
             li(
               v-for="[title, mode] in [['chart_radio_ranked_plays', 'activity'], ['chart_radio_rating', 'rating'], ['chart_radio_avg_accuracy', 'accuracy']]"
@@ -308,6 +308,12 @@ export default {
       }
       return '0'
     },
+    getTotalPlayTimeText(time) {
+      let hours = Math.floor(time / 36000)
+      let minutes = Math.floor((time % 36000) / 600)
+      let seconds = Math.floor((time % 600) / 10)
+      return `${hours}:${minutes}:${seconds}`
+    }
   },
   head () {
     const name = this.profile.user.name || this.profile.user.uid
