@@ -2,12 +2,14 @@ import config from 'config'
 import * as dotenv from 'dotenv'
 import pkg from './package.json'
 
+dotenv.config()
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    // '@nuxtjs/apollo',
+    '@nuxtjs/apollo',
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
     'nuxt-icon',
@@ -15,22 +17,22 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
   ],
 
-  // apollo: {
-  //   clients: {
-  //     default: {
-  //       tokenName: 'cyt:sess',
-  //       cookieAttributes: {
-  //         path: '/',
-  //         secure: false,
-  //       },
-  //       httpEndpoint: config.get('graphql'),
-  //       httpLinkOptions: {
-  //         credentials: 'include'
-  //       },
-  //       websocketsOnly: false
-  //     }
-  //   },
-  // },
+  apollo: {
+    clients: {
+      default: {
+        tokenName: 'cyt:sess',
+        cookieAttributes: {
+          path: '/',
+          secure: false,
+        },
+        httpEndpoint: config.get('graphql'),
+        httpLinkOptions: {
+          credentials: 'include'
+        },
+        websocketsOnly: false
+      }
+    },
+  },
 
   i18n: {
     vueI18n: './i18n.config.ts',
@@ -38,8 +40,8 @@ export default defineNuxtConfig({
 
   
   googleFonts: {
-    download: false,
-    // overwriting: true,
+    download: false, // speed up dev by not downloading fonts
+    overwriting: false,
     families: {
       'Nunito': [300, 400, 700],
       'M PLUS Rounded 1c': [300],
@@ -61,6 +63,12 @@ export default defineNuxtConfig({
       servicesUA: process.env.SERVICES_UA ?? '',
     }
   },
+
+  typescript: {
+    tsConfig: {
+      include: ["types/**/*"],
+    } 
+  },
   
   app: {
     head: {
@@ -77,6 +85,35 @@ export default defineNuxtConfig({
         { src: 'https://www.googletagmanager.com/gtag/js?id=' + config.get('analyticsCode'), async: true },
         { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` }
       ]
+    }
+  },
+
+  // dev proxy
+  nitro: {
+    devProxy: {
+      '/services': {
+        target: config.get('serviceURLServer'),
+        changeOrigin: true,
+        prependPath: false,
+        ws: true,
+        headers: {
+          'user-agent': process.env.SERVICES_UA ?? '',
+        },
+        cookieDomainRewrite: {
+          'cytoid.io': 'localhost'
+        }
+      },
+      '/graphql': {
+        target: config.get('serviceURLServer') + '/graphql',
+        changeOrigin: true,
+        ws: true,
+        headers: {
+          'user-agent': process.env.SERVICES_UA ?? '',
+        },
+        cookieDomainRewrite: {
+          'cytoid.io': 'localhost'
+        }
+      }
     }
   },
 })
