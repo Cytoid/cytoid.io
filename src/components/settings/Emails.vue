@@ -45,22 +45,12 @@ export default {
           emails {
             address
             verified
-          }
-          user {
-            id
-            email {
-             address
-            }
+            primary
           }
         }
       }`
     })
       .then(({ data }) => {
-        for (const email of data.my.emails) {
-          if (email.address === data.my.user.email?.address) {
-            email.primary = true
-          }
-        }
         this.emails = data.my.emails
       })
   },
