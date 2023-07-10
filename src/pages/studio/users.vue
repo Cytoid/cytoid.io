@@ -20,7 +20,6 @@
             p ID: {{user.id}}
             p UID: {{user.uid}}
             p Name: {{user.name}}
-            p(v-if="user.email") Email: {{user.email.address}} ({{user.email.verified ? 'Verified' : 'Unverified'}})
             ul(v-if="user.emails")
               li(v-for="email in user.emails") {{email.address}} ({{email.verified ? 'Verified' : 'Unverified'}})
             p(v-if="user.registrationDate") Registration Date: {{$dateFormatCalendar(user.registrationDate)}}
@@ -56,10 +55,6 @@ export default {
             id
             uid
             name
-            email {
-             address
-             verified
-            }
             emails {
               address
               verified
