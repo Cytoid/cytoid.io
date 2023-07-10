@@ -1,0 +1,23 @@
+{
+  "online": "オンライン",
+  "offline": "オフライン",
+  "join_date": "{date} に登録",
+  "bio_title": "自己紹介",
+  "recent_ranks_title": "最新のランク",
+  "total_ranked_plays": "全ランクモードプレイ数",
+  "total_cleared_notes": "タップしたノーツ数",
+  "highest_max_combo": "最大コンボ数",
+  "avg_ranked_accuracy": "ランクの平均上昇率",
+  "total_ranked_score": "ランクモードスコアの合計",
+  "total_play_time": "プレイ時間",
+  "chart_radio_ranked_plays": "ランクプレイ数",
+  "chart_radio_rating": "レート",
+  "chart_radio_avg_accuracy": "平均上昇率",
+  "levels_title": "アップロードされた譜面",
+  "levels_featured_all_btn": "{count} 個のおすすめ譜面を見る",
+  "levels_all_btn": "{count} 個の譜面を見る",
+  "collections_title": "コレクション",
+  "collections_all_btn": "{count} このコレクションを見る",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
+}

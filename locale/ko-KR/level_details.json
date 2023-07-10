@@ -1,0 +1,48 @@
+{
+  "download_btn": "다운로드 ({size})",
+  "message_private": "이 레벨은 소유자가 비공개로 만들었습니다. 다른 사용자에게는 보이지 않습니다.",
+  "message_unlisted": "이 레벨은 비공개입니다.",
+  "message_censored": "이 레벨은 {reason} 로 인하여 삭제 되었습니다.",
+  "details_card_rating_title": "평점",
+  "details_card_tags_title": "태그",
+  "details_card_last_updated_title": "최근 업데이트",
+  "credits_card_music_title": "음악",
+  "credits_card_cover_art_title": "배경 사진",
+  "difficulty_card_title": "난이도",
+  "manage": {
+    "replace_title": "변경",
+    "replace_upload_title": "Cytoid 레벨을 이곳으로 옮겨주세요",
+    "replace_upload_subtitle": "현재 레벨 ID와 동일해야 합니다.",
+    "description_field": "설명글",
+    "tags_field": "태그",
+    "visibility_field": "표시여부",
+    "metadata": {
+      "title": "메타 데이터",
+      "id_field": "ID",
+      "title_field": "제목",
+      "title_hint": "음악의 제목을 원어로 적어주세요.",
+      "localized_title_field": "영문 제목",
+      "localized_title_hint": "영어로 음악의 제목을 적어주세요. 직역 하시는 걸 추천 드립니다.",
+      "artist_field": "작곡가 이름(들)",
+      "artist_hint": "The music artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "localized_artist_field": "Localized music artist name(s)",
+      "localized_artist_hint": "The music artist name(s) in English. Literal translation is preferred.",
+      "music_url_field": "Music source URL",
+      "music_url_hint": "The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.",
+      "cover_art_field": "Cover artist name(s)",
+      "cover_art_hint": "The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "cover_art_localized_field": " Localized cover artist name(s)",
+      "cover_art_localized_hint": "The cover artist name(s) in English. Literal translation is preferred.",
+      "cover_art_url_field": "Cover source URL",
+      "cover_art_url_hint": "The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used."
+    },
+    "admin": {
+      "censorship_title": "Censorship",
+      "censorship_checkbox_title": "Remove from Public",
+      "censorship_reason_field": "Reason",
+      "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
+      "category_title": "Category",
+      "category_placeholder": "Adding an administrative category..."
+    }
+  }
+}

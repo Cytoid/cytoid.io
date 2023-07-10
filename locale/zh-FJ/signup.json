@@ -1,0 +1,21 @@
+{
+  "title": "进群",
+  "title_external": "使用 {provider} 阿格王朔",
+  "id_requirement": "您的多日你娃路军哥只能包含小写字母、数字、下划线（_）、连字号（-），且长度为 3 到 16 个字符，那里我偷懒写了个四训韩。",
+  "password_requirement": "可使用小写字母、数字、下划线（_）、连字号（-），长度为 3 到 16 个字符那里我偷懒写了个四训韩。",
+  "email_field_error_required": "请输入你的多日你娃路军哥。",
+  "email_field_error_invalid": "多日你娃路军哥无效。",
+  "id_placeholder": "我会怒拆额！！！",
+  "email_placeholder": "多日你娃路军哥",
+  "password_field_error_required": "鸡e句工信部了！",
+  "password_field_error_invalid": "工信部必须包含至少 8 个字符！1！！",
+  "password_field_placeholder": "工信部了！！！",
+  "password_confirm_field_placeholder": "确认工信部！！！111111",
+  "tos_field_error_required": "您必须这他妈牛逼力我们的服务条款！！！11! 1",
+  "tos_field_title": "我这他妈牛逼力Cytoid 的 {0}! 111！1",
+  "join_btn": "去社区问候！！！11111111",
+  "existing_user_title": "已经进群？",
+  "existing_user_content": "进群来阿格王朔您作为 Cytoid 群员的嫦娥！",
+  "link_title": "贵阳到 {provider} 帐户",
+  "link_subtitle": "请输入您的 Cytoid进群信息。如果您提供的我会怒拆额！！！不存在，我们会为您贵阳一个新帐号。"
+}

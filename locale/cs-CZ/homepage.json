@@ -1,0 +1,19 @@
+{
+  "slogan": "Komunitou provozovaná hudební hra pro dotykové obrazovky",
+  "download_appstore": "Stáhnout z App Store",
+  "download_googleplay": "Stáhnout z Obchodu Play",
+  "news_title": "Cytoid novinky",
+  "news_previous": "Zobrazit předchozí zprávy",
+  "featured_collection_title": "Doporučená kolekce",
+  "collection_all_btn": "Procházet všech {count} kolekcí!",
+  "featured_level_title": "Aktuální doporučená úroveň",
+  "level_all_btn": "Procházet všech {count} úrovní!",
+  "recent_ranks_title": "Nejnovější ranky",
+  "latest_tweet_title": "Aktuální tweet",
+  "new_comments_title": "Nejnovější komentáře",
+  "connect_title": "Připojte se",
+  "connect_discord_subtitle": "{count} uživatelů online",
+  "connect_discord_content": "Připojte se k naší Discord komunitě pro pomoc s tvorbou chartů, pravidelné týdení turnaje, memy a více!",
+  "connect_discord_btn": "Připojit se ke komunitě!",
+  "connect_patreon_content": "Cytoid je 100% zdarma a open-source. Ale provozování serverů hry stojí $$$. Možná by jste mohl(a)..."
+}

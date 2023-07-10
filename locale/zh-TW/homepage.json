@@ -1,0 +1,19 @@
+{
+  "slogan": "一款著重社群協力運作的手機音樂節奏遊戲",
+  "download_appstore": "在 App Store 下載",
+  "download_googleplay": "在 Google Play 下載",
+  "news_title": "全站近期公告",
+  "news_previous": "檢視過往公告",
+  "featured_collection_title": "推薦選輯",
+  "collection_all_btn": "檢視全部選輯（{count}）",
+  "featured_level_title": "最新推薦關卡",
+  "level_all_btn": "檢視全部關卡（{count}）",
+  "recent_ranks_title": "全站近期遊玩紀錄",
+  "latest_tweet_title": "官方近期推文",
+  "new_comments_title": "全站近期留言",
+  "connect_title": "外部連結",
+  "connect_discord_subtitle": "{count} 位上線中",
+  "connect_discord_content": "在官方 Discord 伺服器中能夠學習如何製譜、參加大觸競賽之外，還有不間斷的社群玩家互動。趕快加入讓大家一起同樂吧！",
+  "connect_discord_btn": "官方邀請連結",
+  "connect_patreon_content": "Cytoid 是一款完全免費且開源的音樂節奏遊戲。為了讓玩家保有最好的遊戲體驗，維護伺服器的費用會需要大筆支出。想要慰勞或支持開發者的大家不妨考慮在 Patreon 上資助吧！"
+}

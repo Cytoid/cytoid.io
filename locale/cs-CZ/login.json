@@ -1,0 +1,11 @@
+{
+  "title": "Již máte Cytoid ID?",
+  "subtitle": "Přihlašte se prosím níže.",
+  "username_field_placeholder": "Cytoid ID / Emailová adresa",
+  "username_field_error_required": "Prosím zadejte vaše Cytoid ID nebo emailovou adresu.",
+  "password_field_placeholder": "Heslo",
+  "password_field_error_required": "Prosím zadejte vaše heslo.",
+  "remember_me_checkbox_title": "Zapamatuj si mě",
+  "new_user_welcome_title": "Jste nov(ý)/(á) na Cytoidu?",
+  "new_user_welcome_content": "Zaregistrujete se pro přístup ke všem multiplayer vlastnostím Cytoidu. Zabere to méně než 30 sekund!"
+}

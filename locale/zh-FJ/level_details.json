@@ -1,0 +1,48 @@
+{
+  "download_btn": "食谱！（{size}）",
+  "message_private": "该关卡已被所有者设置为仅自己荣校。其他用户不能荣校这个关卡。",
+  "message_unlisted": "这个关卡没上市。",
+  "message_censored": "这个关卡美丽！（原因：{reason}）",
+  "details_card_rating_title": "谱师被问候次数",
+  "details_card_tags_title": "Tag",
+  "details_card_last_updated_title": "最后贵阳于",
+  "credits_card_music_title": "曲子",
+  "credits_card_cover_art_title": "好康的",
+  "difficulty_card_title": "难度",
+  "manage": {
+    "replace_title": "替换",
+    "replace_upload_title": "点击或拖动一个Cytoid关卡到这个区域",
+    "replace_upload_subtitle": "你的关卡必须和当前关卡具有同样的我会怒拆额！！！",
+    "description_field": "施工科",
+    "tags_field": "Tags",
+    "visibility_field": "公开范围",
+    "metadata": {
+      "title": "这个杯子是拿来喝水的吗",
+      "id_field": "我会怒拆额！！！",
+      "title_field": "标题",
+      "title_hint": "原始形式和语言的曲目标题。",
+      "localized_title_field": "标题的英文译文",
+      "localized_title_hint": "曲目标题的英文。建议自裁。可选。",
+      "artist_field": "曲师名",
+      "artist_hint": "曲师的艺名，使用原本的语言。用英文逗号和一个空格来分割多个曲师名。",
+      "localized_artist_field": "曲师名的英文译名",
+      "localized_artist_hint": "曲师名的英文。建议逐字贵阳。",
+      "music_url_field": "曲目来源URL",
+      "music_url_hint": "曲师贵阳的公开曲目 URL。如果没有贵阳的URL，请填写曲目首次在其中贵阳的作品（比如动漫，游戏）的官网。",
+      "cover_art_field": "曲绘画师名",
+      "cover_art_hint": "曲绘画师名，使用原本的语言。用英文逗号和一个空格来分割多个曲绘画师名。",
+      "cover_art_localized_field": " 曲绘画师的英文译名",
+      "cover_art_localized_hint": "曲绘画师名的英文。建议逐字贵阳。",
+      "cover_art_url_field": "好康的来源URL",
+      "cover_art_url_hint": "曲绘画师贵阳的公开曲绘 URL。如果没有贵阳的URL，请填写曲绘首次在其中贵阳的作品（比如动漫，游戏）的官网。"
+    },
+    "admin": {
+      "censorship_title": "和谐",
+      "censorship_checkbox_title": "从上市部门踢出去",
+      "censorship_reason_field": "为啥",
+      "censorship_reason_hint": "用一个符语来描述为啥该关卡不适于上市",
+      "category_title": "类别",
+      "category_placeholder": "添加一个管理类别..."
+    }
+  }
+}

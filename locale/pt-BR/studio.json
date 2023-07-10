@@ -1,0 +1,21 @@
+{
+  "menu_analytics": "Analíticas",
+  "menu_levels": "Níveis",
+  "menu_collections": "Coleções",
+  "menu_posts": "Postagens",
+  "menu_users": "Usuários",
+  "level_delete_confirm_title": "Deletar {name}",
+  "level_delete_confirm_content1": "Tem certeza que quer deletar {0}?",
+  "level_delete_confirm_content2": "Todos os registros relacionados com este nível serão removidos da nossa database, incluindo os {count} registros referentes às vezes jogadas. Os jogadores também verão uma redução nas suas estatísticas.",
+  "level_delete_confirm_content3": "Por favor, insira a UID do nível {0} para prosseguir.",
+  "level_visibility_public_title": "Esse nível ficará visível para todos.",
+  "level_visibility_unlisted_title": "Esse nível só estará visível para quem tiver o link.",
+  "level_visibility_private_title": "Esse nível só ficará visível para você.",
+  "level_visibility_public_content": "O nível aparecerá nos resultados da busca e na sua página de perfil. Como resultado, por favor, esteja ciente das implicações de copyright dessa ação. Reveja nossos {0} e {1} antes de prosseguir.",
+  "level_visibility_unlisted_content": "{0} não aparecerá mais para quem visitar a lista de níveis ou seu perfil. Também desaparecerá dos resultados da busca. No entanto, permanecerá visível em uma coleção pública que contiver esse nível.",
+  "level_visibility_private_content": "{0} será removido da sua página de perfil e todos os resultados da pesquisa. Ficará em uma coleção pública se for adicionada, mas os outros jogadores não serão capazes de verificar os detalhes do nível. Somente você pode ver ou baixar o nível.",
+  "level_visibility_content": "Por favor, insira a UID do nível {0} para prosseguir",
+  "level_visibility_title_private": "Tornar {title} privado",
+  "level_visibility_title_unlisted": "Deslistar {title}",
+  "level_visibility_title_public": "Tornar {title} público"
+}

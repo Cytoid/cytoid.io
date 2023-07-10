@@ -1,0 +1,48 @@
+{
+  "download_btn": "Baixar ({size})",
+  "message_private": "Esse nível consta como privado pelo seu proprietário. Ele é invisível para os outros usuários.",
+  "message_unlisted": "Este nível consta como não-listado.",
+  "message_censored": "Esse nível foi censurado por: {reason}",
+  "details_card_rating_title": "Avaliação",
+  "details_card_tags_title": "Tags",
+  "details_card_last_updated_title": "Última Atualização",
+  "credits_card_music_title": "Música",
+  "credits_card_cover_art_title": "Arte da capa",
+  "difficulty_card_title": "Dificuldade",
+  "manage": {
+    "replace_title": "Substituir",
+    "replace_upload_title": "Clique ou arraste um nível Cytoid para essa área",
+    "replace_upload_subtitle": "Seu nível precisa ter o mesmo ID que o atual.",
+    "description_field": "Descrição",
+    "tags_field": "Tags",
+    "visibility_field": "Visibilidade",
+    "metadata": {
+      "title": "Metadados",
+      "id_field": "ID",
+      "title_field": "Título",
+      "title_hint": "O título da música está em seu idioma e forma originais.",
+      "localized_title_field": "Título localizado",
+      "localized_title_hint": "O título da música em Inglês. Tradução literal preferível. Opcional.",
+      "artist_field": "Nome do(s) artista(s) da música",
+      "artist_hint": "O(s) nome(s) do(s) artista(s) de música em sua forma e idioma originais. Use uma vírgula seguida por um espaço para separar vários nomes.",
+      "localized_artist_field": "Nome do(s) artista(s) da música localizado",
+      "localized_artist_hint": "O(s) nome(s) do(s) artista(s) em inglês. Tradução literal preferível.",
+      "music_url_field": "URL da origem da música",
+      "music_url_hint": "A URL da música postada pelo(s) artista(s). Se não há URL pública, indique o site oficial do trabalho (jogo, anime, etc.) onde a música faz sua primeira aparição.",
+      "cover_art_field": "Nome do(s) artista(s) da capa",
+      "cover_art_hint": "O(s) nome(s) do(s) artista(s) da capa em sua forma e idioma originais. Use uma vírgula seguida por um espaço para separar vários nomes.",
+      "cover_art_localized_field": " Nome do(s) artista(s) da capa localizado",
+      "cover_art_localized_hint": "O(s) nome(s) do(s) artista(s) da capa em inglês. Tradução literal preferível.",
+      "cover_art_url_field": "URL da origem da capa",
+      "cover_art_url_hint": "A URL da arte da capa postada pelo(s) artista(s). Se não há URL pública, indique o site oficial do trabalho (jogo, anime, etc.) onde a capa é usada."
+    },
+    "admin": {
+      "censorship_title": "Censura",
+      "censorship_checkbox_title": "Remover dos Públicos",
+      "censorship_reason_field": "Motivo",
+      "censorship_reason_hint": "Uma palavra pra resumir o por que deste nível não ser adequado para o público",
+      "category_title": "Categoria",
+      "category_placeholder": "Adicionando uma categoria administrativa..."
+    }
+  }
+}

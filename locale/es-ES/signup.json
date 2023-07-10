@@ -1,0 +1,21 @@
+{
+  "title": "Registrate",
+  "title_external": "Regístrate con {provider}",
+  "id_requirement": "Su Cytoid ID debe ser entre 3 a 16 caracteres y que solo contenga letra minúscula, números, guiones, y guiones bajos.",
+  "password_requirement": "3-16 letras minúsculas, números, _ o -",
+  "email_field_error_required": "Un correo electrónico es requerido.",
+  "email_field_error_invalid": "El correo electrónico no es válido",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "Correo electrónico",
+  "password_field_error_required": "Por favor introduzca una contraseña.",
+  "password_field_error_invalid": "La contraseña debe contener al menos 8 caracteres.",
+  "password_field_placeholder": "Contraseña",
+  "password_confirm_field_placeholder": "Confirmar Contraseña",
+  "tos_field_error_required": "Usted debe aceptar nuestros términos y condiciones.",
+  "tos_field_title": "Estoy de acuerdo con los {0} de Cytoid.",
+  "join_btn": "Únete a la comunidad",
+  "existing_user_title": "¿Ya está registrado?",
+  "existing_user_content": "¡Inicia sesión para disfrutar de tu privilegio como un miembro de la comunidad de Cytoid!",
+  "link_title": "Vincula tu cuenta de {provider}",
+  "link_subtitle": "Por favor ingrese su Cytoid ID y contraseña. Una cuenta va a ser creada si el Cytoid ID que usted proveyó no existe."
+}

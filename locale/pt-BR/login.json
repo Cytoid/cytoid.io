@@ -1,0 +1,11 @@
+{
+  "title": "Já tem um Cytoid ID?",
+  "subtitle": "Por favor, realize o login abaixo.",
+  "username_field_placeholder": "Cytoid ID / Endereço de e-mail",
+  "username_field_error_required": "Por favor, insira seu Cytoid ID ou endereço de e-mail.",
+  "password_field_placeholder": "Senha",
+  "password_field_error_required": "Por favor, insira sua senha.",
+  "remember_me_checkbox_title": "Lembre-me",
+  "new_user_welcome_title": "Novo no Cytoid?",
+  "new_user_welcome_content": "Inscreva-se para ter acesso a todos os recursos de multiplayer do Cytoid. Leva menos de 30 segundos!"
+}

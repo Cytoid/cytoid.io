@@ -1,0 +1,21 @@
+{
+  "slogan": "一个由社区驱动的触屏音乐游戏",
+  "download_appstore": "前往 App Store 下载",
+  "download_googleplay": "前往 Google Play 下载",
+  "news_title": "Cytoid 新闻",
+  "news_previous": "查看以前的新闻",
+  "featured_collection_title": "精选合集",
+  "collection_all_btn": "查看所有的 {count} 个合集！",
+  "featured_level_title": "最新精选关卡",
+  "level_all_btn": "查看全部 {count} 个关卡！",
+  "qualified_collection_title": "好谱上新！",
+  "qualified_collection_slogan": "这些谱面刚刚被授予 Qualified... 不来尝试一下吗？",
+  "recent_ranks_title": "最新游玩纪录",
+  "latest_tweet_title": "最新推文",
+  "new_comments_title": "最新评论",
+  "connect_title": "联系我们",
+  "connect_discord_subtitle": "{count} 位成员在线",
+  "connect_discord_content": "想学习如何制作关卡吗？想来挑战一下高手云集的每周竞赛吗？或者，只是想和我们一起刷梗？现在就加入我们的 Discord 社区吧！",
+  "connect_discord_btn": "加入 Discord 社区！",
+  "connect_patreon_content": "Cytoid 是 100% 免费并且开源的音乐游戏。不过，服务器的运营费用十分高昂。喜欢 Cytoid 的话，不妨考虑..."
+}

@@ -1,0 +1,21 @@
+{
+  "title": "회원가입",
+  "title_external": "Sign Up with {provider}",
+  "id_requirement": "3~16자 영문 대 소문자, 숫자, 허용된 특수문자 (밑줄, 하이픈) 를 사용하세요.",
+  "password_requirement": "3~16자 영문 소문자, 숫자, _ 또는 -",
+  "email_field_error_required": "이메일 주소는 필수 정보 입니다.",
+  "email_field_error_invalid": "이 이메일 주소를 다시 확인해주세요.",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "이메일 주소",
+  "password_field_error_required": "비밀번호를 입력해주세요.",
+  "password_field_error_invalid": "8자 이상이어야 합니다.",
+  "password_field_placeholder": "비밀번호",
+  "password_confirm_field_placeholder": "비밀번호 확인",
+  "tos_field_error_required": "서비스 약관에 동의하셔야 됩니다.",
+  "tos_field_title": "Cytoid의 {0}를 동의합니다.",
+  "join_btn": "가입하기",
+  "existing_user_title": "이미 계정이 있으신가요?",
+  "existing_user_content": "Cytoid 멤버로서 로그인하셔서 재밌게 게임을 즐기세요!",
+  "link_title": "Link your {provider} account",
+  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
+}

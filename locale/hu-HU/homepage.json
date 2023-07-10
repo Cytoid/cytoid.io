@@ -1,0 +1,19 @@
+{
+  "slogan": "Egy közösség vezérelt érintőképernyős zenei játék",
+  "download_appstore": "Letöltés az App Store-ból",
+  "download_googleplay": "Letöltés a Google Play-ből",
+  "news_title": "Cytoid Hírek",
+  "news_previous": "Korábbi hírek megtekintése",
+  "featured_collection_title": "Kiemelt Gyűjtemény",
+  "collection_all_btn": "Böngészd mind a {count} gyűjteményt!",
+  "featured_level_title": "Legfrissebb kiemelt szint",
+  "level_all_btn": "Böngészd mind a {count} szintet!",
+  "recent_ranks_title": "Legújabb rangok",
+  "latest_tweet_title": "Legutolsó tweet",
+  "new_comments_title": "Új megjegyzések",
+  "connect_title": "Csatlakozás",
+  "connect_discord_subtitle": "{count} tag online",
+  "connect_discord_content": "Chartolási segítségért, heti bajnokságokért, meme-ekért és még sok másért csatlakozz a Discord szerverünkhöz!",
+  "connect_discord_btn": "Csatlakozz a közösséghez!",
+  "connect_patreon_content": "A Cytoid 100%-ban ingyenes és nyílt forráskódú. A szerverek fenttartása azonban pénzbe kerü. Talán tudnál..."
+}

@@ -1,0 +1,14 @@
+{
+  "sort_select_title": "Sort",
+  "sort_select_upload_date": "Upload date",
+  "sort_select_modification_date": "Modified date",
+  "sort_select_difficulty": "Difficulty",
+  "sort_select_duration": "Duration",
+  "sort_select_downloads": "Downloads",
+  "sort_select_rating": "Rating",
+  "sort_select_relevance": "Relevance",
+  "category_select_title": "Category",
+  "category_select_item_all": "All",
+  "category_select_item_featured": "Featured",
+  "category_select_item_qualified": "Qualified"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Đăng ký",
+  "title_external": "Đăng nhập bằng {provider}",
+  "id_requirement": "ID Cytoid của bạn phải có từ 3 đến 16 ký tự và chỉ chứa các chữ cái thường, số, dấu gạch dưới và dấu gạch nối.",
+  "password_requirement": "3-16 kí tự, số, _ hoặc -",
+  "email_field_error_required": "Địa chỉ email là bắt buộc.",
+  "email_field_error_invalid": "Email không hợp lệ",
+  "id_placeholder": "Tên người dùng",
+  "email_placeholder": "Địa chỉ Email",
+  "password_field_error_required": "Vui lòng nhập mật khẩu.",
+  "password_field_error_invalid": "Mật khẩu phải chứa ít nhất 8 ký tự.",
+  "password_field_placeholder": "Mật khẩu",
+  "password_confirm_field_placeholder": "Nhập lại mật khẩu",
+  "tos_field_error_required": "Bạn phải đồng ý với các Điều khoản Dịch vụ.",
+  "tos_field_title": "Tôi đồng ý {0}.",
+  "join_btn": "Tham gia cộng đồng",
+  "existing_user_title": "Đã đăng ký?",
+  "existing_user_content": "Đăng nhập để tận hưởng đặc quyền của bạn với tư cách là thành viên cộng đồng Cytoid!",
+  "link_title": "Liên kết tài khoản {provider} của bạn",
+  "link_subtitle": "Vui lòng nhập tên người dùng Cytoid và mật khẩu của bạn để hoàn tất đăng ký."
+}

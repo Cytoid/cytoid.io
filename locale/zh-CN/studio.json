@@ -1,0 +1,21 @@
+{
+  "menu_analytics": "数据分析",
+  "menu_levels": "关卡",
+  "menu_collections": "合集",
+  "menu_posts": "公告",
+  "menu_users": "用户",
+  "level_delete_confirm_title": "删除 {name}",
+  "level_delete_confirm_content1": "确定要删除 {0} 吗？",
+  "level_delete_confirm_content2": "此关卡的所有 {count} 个游玩纪录都将从数据库中被删除。游玩过此关卡的玩家的统计数据中也会删除与此关卡有关的记录。",
+  "level_delete_confirm_content3": "请输入关卡 {0} 的 ID 以继续。",
+  "level_visibility_public_title": "此关卡将对所有玩家可见。",
+  "level_visibility_unlisted_title": "此关卡将只对拥有 URL 链接的人可见。",
+  "level_visibility_private_title": "此关卡将只有您可见。",
+  "level_visibility_public_content": "此关卡将出现在搜索结果和您的个人页面中。因此，请务必知悉此操作带来的版权问题。在您继续之前，不妨重新看看我们的 {0} 和 {1}。",
+  "level_visibility_unlisted_content": "{0} 将不再在您的个人资料显示，同时也会从关卡列表和搜索结果中消失。但是它将继续在包含此关卡的公开合集中显示。",
+  "level_visibility_private_content": "{0} 将不再在您的个人资料显示，同时也会从关卡列表和搜索结果中消失。它将继续在包含此关卡的公开合集中显示，但其他玩家无法浏览关卡的详细信息。只有您能看到或下载此关卡。",
+  "level_visibility_content": "请输入关卡 {0} 的 ID 以继续。",
+  "level_visibility_title_private": "将 {title} 设为仅自己可见",
+  "level_visibility_title_unlisted": "将 {title} 设为非公开",
+  "level_visibility_title_public": "将 {title} 设为公开"
+}

@@ -1,0 +1,19 @@
+{
+  "slogan": "A community-driven touchscreen music game",
+  "download_appstore": "Download on App Store",
+  "download_googleplay": "Download on Google Play",
+  "news_title": "Cytoidの新着情報",
+  "news_previous": "過去のニュースを見る",
+  "featured_collection_title": "おすすめコレクション",
+  "collection_all_btn": "{count} 個のコレクションをすべて見る",
+  "featured_level_title": "最新のおすすめ譜面",
+  "level_all_btn": "{count} 個の譜面をすべて見る",
+  "recent_ranks_title": "Recent ranks",
+  "latest_tweet_title": "最新のツイート",
+  "new_comments_title": "新しいコメント",
+  "connect_title": "Connect",
+  "connect_discord_subtitle": "{count} 人がオンライン",
+  "connect_discord_content": "Join our Discord community for charting help, weekly tournaments, memes, and more!",
+  "connect_discord_btn": "Join the community!",
+  "connect_patreon_content": "Cytoid is 100% free and open-source. However, keeping the game servers running costs $$$. Maybe you can..."
+}

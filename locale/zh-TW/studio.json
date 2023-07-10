@@ -1,0 +1,21 @@
+{
+  "menu_analytics": "資料分析",
+  "menu_levels": "關卡管理",
+  "menu_collections": "選輯管理",
+  "menu_posts": "公告管理",
+  "menu_users": "使用者管理",
+  "level_delete_confirm_title": "進行刪除「{name}」",
+  "level_delete_confirm_content1": "確定要刪除「{0}」嗎？",
+  "level_delete_confirm_content2": "請知悉包括共 {count} 次的遊玩紀錄在內，與此相關的任何資料都會從此自伺服器抹除。此外先前曾經上傳紀錄過的帳戶也會產生遊玩統計上的影響，在刪除之前期望再三慎重考慮。",
+  "level_delete_confirm_content3": "若已知悉以上事項，請於下方輸入該關卡的 ID（{0}）後再按下確認刪除鍵。",
+  "level_visibility_public_title": "所有人都可以瀏覽該關卡。",
+  "level_visibility_unlisted_title": "知道連結的人都可以瀏覽該關卡。",
+  "level_visibility_private_title": "只有自己可以瀏覽該關卡。",
+  "level_visibility_public_content": "該關卡將會在個人檔案中展示也能夠透過搜尋功能找到。建議在儲存變更之前先詳讀我們的{0}跟{1}，並請知悉該行為可能涉及的版權相關問題。",
+  "level_visibility_unlisted_content": "該關卡將不會在個人檔案中展示也同時無法被搜尋得到，若有在公開選輯中出現的話在其中依然可見。",
+  "level_visibility_private_content": "該關卡將從個人檔案中取消展示也同時無法透過搜尋功能找到，即便有在公開選輯中出現其他使用者也不具有瀏覽權限。只有自己可以瀏覽與下載。",
+  "level_visibility_content": "請在儲存變更之前於下方輸入該關卡的 ID（{0}）。",
+  "level_visibility_title_private": "將「{title}」設為私人",
+  "level_visibility_title_unlisted": "將「{title}」設為不公開",
+  "level_visibility_title_public": "將「{title}」設為公開"
+}

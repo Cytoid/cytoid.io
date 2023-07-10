@@ -1,0 +1,13 @@
+{
+  "sort_select_title": "Phân loại",
+  "sort_select_upload_date": "Ngày tải lên",
+  "sort_select_modification_date": "Ngày cập nhật",
+  "sort_select_difficulty": "Độ khó",
+  "sort_select_duration": "Thời lượng",
+  "sort_select_downloads": "Lượt tải về",
+  "sort_select_rating": "Đánh giá",
+  "sort_select_relevance": "Liên quan",
+  "category_select_title": "Danh mục",
+  "category_select_item_all": "Toàn bộ",
+  "category_select_item_featured": "Nổi bật"
+}

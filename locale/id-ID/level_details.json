@@ -1,0 +1,48 @@
+{
+  "download_btn": "Unduh ({size})",
+  "message_private": "Level ini dibuat pribadi oleh pemiliknya. tidak terlihat oleh pengguna lain.",
+  "message_unlisted": "Level ini tidak terdaftar.",
+  "message_censored": "Level ini di sensor karna:{reason}",
+  "details_card_rating_title": "Rating",
+  "details_card_tags_title": "Tag",
+  "details_card_last_updated_title": "Pembaruan terakhir",
+  "credits_card_music_title": "Musik",
+  "credits_card_cover_art_title": "Gambar sampul",
+  "difficulty_card_title": "Kesulitan",
+  "manage": {
+    "replace_title": "Mengantikan",
+    "replace_upload_title": "Klik atau seret level Cytoid ke area ini",
+    "replace_upload_subtitle": "Level Anda harus memiliki ID yang sama dengan yang sekarang.",
+    "description_field": "Deskripsi",
+    "tags_field": "Tag",
+    "visibility_field": "Visibilitas",
+    "metadata": {
+      "title": "Metadata",
+      "id_field": "ID",
+      "title_field": "Judul",
+      "title_hint": "Judul musik dalam bentuk dan bahasa aslinya.",
+      "localized_title_field": "Judul yang dilokalkan",
+      "localized_title_hint": "Nama artis musik dalam bahasa Inggris.",
+      "artist_field": "Nama musik artis",
+      "artist_hint": "Nama musik artis dalam bentuk dan bahasa aslinya. Gunakan koma yang diikuti oleh spasi untuk memisahkan beberapa nama.",
+      "localized_artist_field": "Nama artis musik yang dilokalkan",
+      "localized_artist_hint": "Nama artis musik dalam bahasa Inggris.",
+      "music_url_field": "Sumber musik URL",
+      "music_url_hint": "URL musik seperti yang diposting oleh artis. Jika tidak ada URL publik, tautkan ke situs web resmi karya tersebut (i.e. Game, anime) di mana musik membuat penampilan pertamanya.",
+      "cover_art_field": "Nama pembuat sampul",
+      "cover_art_hint": "Nama musik artis dalam bentuk dan bahasa aslinya. Gunakan koma yang diikuti oleh spasi untuk memisahkan beberapa nama.",
+      "cover_art_localized_field": " Nama artis sampul terlokalisasi",
+      "cover_art_localized_hint": "Nama artis sampul dalam bahasa Inggris.",
+      "cover_art_url_field": "Sumber sampul URL",
+      "cover_art_url_hint": "URL sampul seperti yang diposting oleh artis. Jika tidak ada URL publik, tautkan ke situs web resmi karya tersebut (i.e. Game, anime) di mana musik membuat penampilan pertamanya."
+    },
+    "admin": {
+      "censorship_title": "Sensor",
+      "censorship_checkbox_title": "Hapus dari tampilan umum",
+      "censorship_reason_field": "Alasan",
+      "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
+      "category_title": "Category",
+      "category_placeholder": "Adding an administrative category..."
+    }
+  }
+}

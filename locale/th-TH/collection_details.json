@@ -1,0 +1,8 @@
+{
+  "message_unlisted": "คอลเลกชันนี้ยังไม่ถูกจัดอยู่ในรายการ",
+  "message_private": "คอลเลคชันนี้ถูกตั้งค่าให้เป็นส่วนตัวซึ่งจะไม่ถูกมองเห็นโดยผู้ใช้รายอื่น",
+  "tags_title": "แท็ก",
+  "creation_date_title": "สร้างขึ้นเมื่อ",
+  "modification_date_title": "อัพเดตครั้งล่าสุดเมื่อ",
+  "metadata_cover_art_title": "ภาพปกโดย"
+}

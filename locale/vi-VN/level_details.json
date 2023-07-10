@@ -1,0 +1,48 @@
+{
+  "download_btn": "Tải về ({size})",
+  "message_private": "Bài này đã bị đặt ở mức \"riêng tư\" bởi chủ sở hữu thế nên bài này không thể được nhìn thấy bởi người khác.",
+  "message_unlisted": "Màn chơi này chưa được xếp loại.",
+  "message_censored": "Bài này đã bị che giấu vì lý do: {reason}",
+  "details_card_rating_title": "Đánh giá",
+  "details_card_tags_title": "Nhãn",
+  "details_card_last_updated_title": "Lần cuối được cập nhật",
+  "credits_card_music_title": "Nhạc",
+  "credits_card_cover_art_title": "Ảnh bìa",
+  "difficulty_card_title": "Độ khó",
+  "manage": {
+    "replace_title": "Thay thế",
+    "replace_upload_title": "Nhấp hoặc kéo một màn Cytoid vào khu vực này",
+    "replace_upload_subtitle": "Màn của bạn phải có ID y hệt so với màn hiện tại.",
+    "description_field": "Mô tả",
+    "tags_field": "Từ khoá",
+    "visibility_field": "Mức hiển thị",
+    "metadata": {
+      "title": "Siêu dữ liệu",
+      "id_field": "ID",
+      "title_field": "Tiêu đề",
+      "title_hint": "Tên bài hát ở dạng ngôn ngữ và phông nguyên bản.",
+      "localized_title_field": "Tên bài hát (dịch về tiếng anh)",
+      "localized_title_hint": "Tên bài hát sau khi được dịch về tiếng anh (Không bắt buộc)",
+      "artist_field": "Tên nghệ sĩ(s)",
+      "artist_hint": "Tên tác giả ở dạng ngôn ngữ nguyên bản. Dùng dấu phẩy (,) thêm vào dấu cách ( ) ở sau để tách riêng những tên khác nhau ra.",
+      "localized_artist_field": "Tên tác giả của bài hát (dịch về tiếng anh)",
+      "localized_artist_hint": "Tên tác giả của bài hát khi được dịch về tiếng anh.",
+      "music_url_field": "Link nguồn của bài hát",
+      "music_url_hint": "Link dẫn đến nguồn bài hát (được đăng lên bởi tác giả). Nếu không có link công khai, thì gửi link đến website chính thức nơi mà có dấu hiệu bài hát lần đầu được hình thành/phát hiện cũng được.",
+      "cover_art_field": "Tên tác giả ảnh bìa",
+      "cover_art_hint": "Tên của tác giả/hoạ sĩ của ảnh bìa được sử dụng cho bài hát ở dạng ngôn ngữ nguyên bản. Dùng dấu phẩy (,) thêm vào dấu cách ( ) ở sau để tách riêng những tên khác nhau ra.",
+      "cover_art_localized_field": "Tên tác giả/hoạ sĩ của ảnh bìa (dịch về tiếng anh)",
+      "cover_art_localized_hint": "Tên tác giả/hoạ sĩ của ảnh bìa bài hát sau khi được dịch về tiếng anh.",
+      "cover_art_url_field": "Link nguồn của ảnh bìa",
+      "cover_art_url_hint": "Link dẫn đến nguồn của ảnh bìa bài hát (được đăng lên bởi tác giả). Nếu không có link công khai, thì gửi link đến website chính thức nơi mà có dấu hiệu ảnh bìa lần đầu được hình thành/phát hiện cũng được."
+    },
+    "admin": {
+      "censorship_title": "Che giấu",
+      "censorship_checkbox_title": "Bỏ công khai",
+      "censorship_reason_field": "Lý do",
+      "censorship_reason_hint": "Một từ để mô tả tại sao màn chơi này có thể không phù hợp cho tất cả mọi người",
+      "category_title": "Danh mục",
+      "category_placeholder": "Thêm một loại danh mục quản lý hành chính..."
+    }
+  }
+}

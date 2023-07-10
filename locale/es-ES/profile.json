@@ -1,0 +1,23 @@
+{
+  "online": "En línea",
+  "offline": "Fuera de línea",
+  "join_date": "Se unió en {date}",
+  "bio_title": "Biografía",
+  "recent_ranks_title": "Rangos recientes",
+  "total_ranked_plays": "Total jugadas igualadas",
+  "total_cleared_notes": "Total de notas completadas",
+  "highest_max_combo": "Combo más alto",
+  "avg_ranked_accuracy": "Precisión promedio igualada",
+  "total_ranked_score": "Puntuación total igualada",
+  "total_play_time": "Total de tiempo jugado",
+  "chart_radio_ranked_plays": "Partidas igualadas",
+  "chart_radio_rating": "Calificación",
+  "chart_radio_avg_accuracy": "Precisión promedio",
+  "levels_title": "Niveles subidos",
+  "levels_featured_all_btn": "Ver todos los {count} destacados",
+  "levels_all_btn": "Ver todos los {count}",
+  "collections_title": "Colecciones",
+  "collections_all_btn": "Ver todos los {count}",
+  "badges_title": "Insignias",
+  "last_seen_date": "Visto {date}"
+}

@@ -1,0 +1,23 @@
+{
+  "online": "上線中",
+  "offline": "已離線",
+  "join_date": "{date}加入",
+  "bio_title": "簡介",
+  "recent_ranks_title": "近期遊玩紀錄",
+  "total_ranked_plays": "遊玩次數總計",
+  "total_cleared_notes": "清除拍點數總計",
+  "highest_max_combo": "最高連續點擊數",
+  "avg_ranked_accuracy": "平均準確度",
+  "total_ranked_score": "獲得分數總計",
+  "total_play_time": "遊玩時間總計",
+  "chart_radio_ranked_plays": "遊玩次數趨勢",
+  "chart_radio_rating": "Rating 趨勢",
+  "chart_radio_avg_accuracy": "平均準確度趨勢",
+  "levels_title": "已上傳的關卡",
+  "levels_featured_all_btn": "檢視推薦（{count}）",
+  "levels_all_btn": "檢視全部（{count}）",
+  "collections_title": "已建立的選輯",
+  "collections_all_btn": "檢視全部（{count}）",
+  "badges_title": "已獲取的徽章",
+  "last_seen_date": "{date}上線"
+}

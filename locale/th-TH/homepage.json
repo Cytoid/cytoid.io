@@ -1,0 +1,19 @@
+{
+  "slogan": "เกมเพลงของชุมชน โดยชุมชน เพื่อชุมชน",
+  "download_appstore": "ดาวน์โหลดบน App Store",
+  "download_googleplay": "ดาวน์โหลดบน Google Play",
+  "news_title": "ข่าวสาร",
+  "news_previous": "ดูข่าวสารก่อนหน้านี้",
+  "featured_collection_title": "คอลเลกชันที่แนะนำ",
+  "collection_all_btn": "ดูคอลเลกชันอื่นๆอีก {count} คอลเลกชัน!",
+  "featured_level_title": "เลเวลที่แนะนำล่าสุด",
+  "level_all_btn": "ดูเลเวลอื่นๆอีก {count} เลเวล!",
+  "recent_ranks_title": "การจัดอันดับล่าสุด",
+  "latest_tweet_title": "ทวีตล่าสุด",
+  "new_comments_title": "ความคิดเห็นใหม่",
+  "connect_title": "ชุมชนของพวกเรา",
+  "connect_discord_subtitle": "{count} คนกำลังออนไลน์อยู่",
+  "connect_discord_content": "เข้าร่วม Discord ของเราสิ! คุณสามารถขอความช่วยเหลือ เข้าร่วมกิจกรรม รับข้อมูลข่าวสาร มีม และอื่น ๆ อีกมากมาย!",
+  "connect_discord_btn": "เข้าร่วมชุมชนของเรา!",
+  "connect_patreon_content": "Cytoid เป็นเกมฟรี 100% และเป็นโอเพ่นซอร์ส แต่ว่าคุณสามารถสนับสนุนค่าบำรุงเซิร์ฟเวอร์อันมหาศาลได้ที่นี่"
+}

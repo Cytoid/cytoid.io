@@ -1,0 +1,23 @@
+{
+  "online": "Trực tuyến",
+  "offline": "Ngoại tuyến",
+  "join_date": "Đã tham gia: {date}",
+  "bio_title": "Tiểu sử",
+  "recent_ranks_title": "Xếp hạng gần đây",
+  "total_ranked_plays": "Tổng số lần chơi xếp hạng",
+  "total_cleared_notes": "Tổng số note đã chơi",
+  "highest_max_combo": "Combo cao nhất",
+  "avg_ranked_accuracy": "Độ chính xác trung bình trong chế độ xếp hạng",
+  "total_ranked_score": "Total ranked score",
+  "total_play_time": "Tổng thời gian chơi",
+  "chart_radio_ranked_plays": "Số lần chơi xếp hạng",
+  "chart_radio_rating": "Bình chọn",
+  "chart_radio_avg_accuracy": "Độ chính xác",
+  "levels_title": "Uploaded Levels",
+  "levels_featured_all_btn": "Xem tất cả {count} bài nổi bật",
+  "levels_all_btn": "Xem tất cả {count}",
+  "collections_title": "Các bộ sưu tập",
+  "collections_all_btn": "Xem tất cả {count}",
+  "badges_title": "Danh hiệu",
+  "last_seen_date": "Lần cuối hoạt động {date}"
+}

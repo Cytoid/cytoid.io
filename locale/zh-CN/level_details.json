@@ -1,0 +1,50 @@
+{
+  "download_btn": "下载（{size}）",
+  "message_private": "该关卡已被所有者设置为仅自己可见。其他用户不能看见这个关卡。",
+  "message_unlisted": "该关卡是非公开的。",
+  "message_censored": "该关卡已被下架，原因是：{reason}",
+  "details_card_rating_title": "评分",
+  "details_card_tags_title": "Tag",
+  "details_card_last_updated_title": "最后更新于",
+  "credits_card_music_title": "曲师",
+  "credits_card_cover_art_title": "曲绘",
+  "difficulty_card_title": "难度",
+  "manage": {
+    "replace_title": "替换",
+    "replace_upload_title": "点击或拖动一个Cytoid关卡到这个区域",
+    "replace_upload_subtitle": "你的关卡必须和当前关卡具有同样的ID",
+    "description_field": "说明",
+    "tags_field": "Tag",
+    "visibility_field": "可见性",
+    "disqualified_visibility_warning": "警告！！！修改谱面的可见性会导致谱面 **失去** Qualified 资格！",
+    "disqualified_replace_warning": "警告！！！修改或重新上传谱面会导致谱面 **失去** Qualified 资格！",
+    "metadata": {
+      "title": "详细信息",
+      "id_field": "ID",
+      "title_field": "标题",
+      "title_hint": "原始形式和语言的曲目标题。",
+      "localized_title_field": "标题的英文译文",
+      "localized_title_hint": "曲目标题的英文。建议逐字翻译。可选。",
+      "artist_field": "曲师名",
+      "artist_hint": "曲师的艺名，使用原本的语言。用英文逗号和一个空格来分割多个曲师名。",
+      "localized_artist_field": "曲师名的英文译名",
+      "localized_artist_hint": "曲师名的英文。建议逐字翻译。",
+      "music_url_field": "曲目来源URL",
+      "music_url_hint": "曲师发布的公开曲目 URL。如果没有公开的URL，请填写曲目首次在其中出现的作品（比如动漫，游戏）的官网。",
+      "cover_art_field": "曲绘画师名",
+      "cover_art_hint": "曲绘画师名，使用原本的语言。用英文逗号和一个空格来分割多个曲绘画师名。",
+      "cover_art_localized_field": "曲绘画师的英文译名",
+      "cover_art_localized_hint": "曲绘画师名的英文。建议逐字翻译。",
+      "cover_art_url_field": "曲绘来源URL",
+      "cover_art_url_hint": "曲绘画师发布的公开曲绘 URL。如果没有公开的URL，请填写曲绘首次在其中出现的作品（比如动漫，游戏）的官网。"
+    },
+    "admin": {
+      "censorship_title": "和谐",
+      "censorship_checkbox_title": "禁止公开查看",
+      "censorship_reason_field": "原因",
+      "censorship_reason_hint": "用一个英文词语来描述为什么该关卡不适于公开",
+      "category_title": "类别",
+      "category_placeholder": "添加一个管理类别..."
+    }
+  }
+}

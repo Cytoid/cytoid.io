@@ -1,0 +1,19 @@
+{
+  "slogan": "A community-driven touchscreen music game",
+  "download_appstore": "Télécharger sur l'App Store",
+  "download_googleplay": "Télécharger sur Google Play",
+  "news_title": "Cytoid News",
+  "news_previous": "View previous news",
+  "featured_collection_title": "Featured Collection",
+  "collection_all_btn": "Parcourir les {count} collections !",
+  "featured_level_title": "Latest featured level",
+  "level_all_btn": "Parcourir les {count} niveaux !",
+  "recent_ranks_title": "Recent ranks",
+  "latest_tweet_title": "Dernier tweet",
+  "new_comments_title": "Nouveaux commentaires",
+  "connect_title": "Connexion",
+  "connect_discord_subtitle": "{count} membres en ligne",
+  "connect_discord_content": "Rejoignez notre communauté Discord pour obtenir de l'aide, participer à des tournois hebdomadaires, partager des mèmes et plus encore !",
+  "connect_discord_btn": "Rejoindre la communauté !",
+  "connect_patreon_content": "Cytoid is 100% free and open-source. However, keeping the game servers running costs $$$. Maybe you can..."
+}

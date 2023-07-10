@@ -1,0 +1,13 @@
+{
+  "sort_select_title": "排序依據",
+  "sort_select_upload_date": "上傳日期",
+  "sort_select_modification_date": "修改日期",
+  "sort_select_difficulty": "難度",
+  "sort_select_duration": "樂曲時長",
+  "sort_select_downloads": "下載次數",
+  "sort_select_rating": "評分",
+  "sort_select_relevance": "關聯性",
+  "category_select_title": "分類選擇",
+  "category_select_item_all": "全部",
+  "category_select_item_featured": "推薦"
+}

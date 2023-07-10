@@ -1,0 +1,13 @@
+{
+  "sort_select_title": "정렬",
+  "sort_select_upload_date": "업로드 날짜",
+  "sort_select_modification_date": "수정된 날짜",
+  "sort_select_difficulty": "난이도",
+  "sort_select_duration": "길이",
+  "sort_select_downloads": "다운로드",
+  "sort_select_rating": "평가",
+  "sort_select_relevance": "Relevance",
+  "category_select_title": "분류",
+  "category_select_item_all": "전체",
+  "category_select_item_featured": "추천"
+}

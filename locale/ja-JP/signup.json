@@ -1,0 +1,21 @@
+{
+  "title": "Sign Up",
+  "title_external": "Sign Up with {provider}",
+  "id_requirement": "Your Cytoid ID must be in between 3 and 16 characters and contain only lowercase letters, numbers, underscores, and hyphens.",
+  "password_requirement": "3-16 lowercase letters, numbers, _ or -",
+  "email_field_error_required": "An email address is required.",
+  "email_field_error_invalid": "The input is not a valid email",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "Email address",
+  "password_field_error_required": "Please input a password.",
+  "password_field_error_invalid": "Password has to contain at least 8 characters.",
+  "password_field_placeholder": "Password",
+  "password_confirm_field_placeholder": "Password Confirm",
+  "tos_field_error_required": "You must agree to our terms of services.",
+  "tos_field_title": "I agree to Cytoid's {0}.",
+  "join_btn": "Join the community",
+  "existing_user_title": "Already registered?",
+  "existing_user_content": "Log in to enjoy your privilege as a Cytoid community member!",
+  "link_title": "Link your {provider} account",
+  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
+}

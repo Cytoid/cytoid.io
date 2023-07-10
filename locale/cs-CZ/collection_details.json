@@ -1,0 +1,8 @@
+{
+  "message_unlisted": "Tato kolekce není uvedena v databázi úrovní.",
+  "message_private": "Tato kolekce byla nastavena vlastníkem jako soukromá. Není viditelná pro ostatní uživatele.",
+  "tags_title": "Tagy",
+  "creation_date_title": "Vytvořeno",
+  "modification_date_title": "Naposledy aktualizováno",
+  "metadata_cover_art_title": "Obrázek alba"
+}

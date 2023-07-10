@@ -1,0 +1,48 @@
+{
+  "download_btn": "Herunterladen ({size})",
+  "message_private": "Dieses Level wurde von seinem Besitzer privat gestellt. Es ist für andere Benutzer nicht sichtbar.",
+  "message_unlisted": "Dieses Level ist nicht aufgelistet.",
+  "message_censored": "Dieses Level wurde wegen {reason} zensiert",
+  "details_card_rating_title": "Bewertung",
+  "details_card_tags_title": "Stichwörter",
+  "details_card_last_updated_title": "Zuletzt aktualisiert",
+  "credits_card_music_title": "Musik",
+  "credits_card_cover_art_title": "Hintergrundbild(Cover-Bild)",
+  "difficulty_card_title": "Schwerstufe",
+  "manage": {
+    "replace_title": "Ersetzen",
+    "replace_upload_title": "Klicke oder ziehe einen Cytoid-Level in diesen Bereich",
+    "replace_upload_subtitle": "Dein Level muss die gleiche ID wie die aktuelle haben.",
+    "description_field": "Beschreibung",
+    "tags_field": "Stichwörter",
+    "visibility_field": "Sichtbarkeit",
+    "metadata": {
+      "title": "Metadaten",
+      "id_field": "ID",
+      "title_field": "Titel",
+      "title_hint": "Der Titel der Musik in ihrer ursprünglichen Form und Sprache.",
+      "localized_title_field": "Lokalisierter Titel",
+      "localized_title_hint": "Der Titel der Musik in Deutsch. Wortwörtliche Übersetzung wird bevorzugt. Optional.",
+      "artist_field": "Name(n) des/der Musik-Interpreten",
+      "artist_hint": "Der/die Name(n) des/der Musikinterpreten in ihrer Ursprünglichen form und Sprache. Verwenden sie ein Komma gefolgt von einem Leerzeichen, um mehrere Namen zu trennen.",
+      "localized_artist_field": "Lokaliesierte(r) Name(n) des/der Musikinterpreten",
+      "localized_artist_hint": "Der/die Name(n) des/der Musikinterpreten in Deutsch. Wortwörtliche Übersetzung wird bevorzugt. Optional.",
+      "music_url_field": "URL der Musikquelle",
+      "music_url_hint": "Die URL der Musik, wie sie von dem/den Künstler(n) gepostet wurde. Wenn es keine öffentliche URL gibt, verlinken Sie auf die offizielle Website des Werkes ( z.B. Spiel, Anime), auf der die Musik als Erstes erschienen ist.",
+      "cover_art_field": "Name(n) des/der Hintergrundbildersteller(s)",
+      "cover_art_hint": "Der/die Name(n) des/der Hintergrundbildersteller(s) in ihrer ursprünglichen Form und Sprache. Verwenden Sie ein Komma gefolgt von einem Leerzeichen, um mehrere Namen zu trennen.",
+      "cover_art_localized_field": " Lokalisierte(r) Name(n) des/der Hintergrundbildersteller(s)",
+      "cover_art_localized_hint": "Der/die Name(n) des/der Musikinterpreten in Deutsch. Wortwörtliche Übersetzung wird bevorzugt. Optional.",
+      "cover_art_url_field": "URL der Hintergrundbildquelle",
+      "cover_art_url_hint": "Die URL des Hintergrundbildes, wie sie von dem/den Künstler(n) gepostet wurde. Wenn es keine öffentliche URL gibt, verlinken Sie auf die offizielle Website des Werkes ( z.B. Spiel, Anime), auf der das Hintergrundbild verwendet wird."
+    },
+    "admin": {
+      "censorship_title": "Zensur",
+      "censorship_checkbox_title": "Aus der Veröffentlichkeit entfernen.",
+      "censorship_reason_field": "Grund",
+      "censorship_reason_hint": "Ein Wort, um zusammenzufassen, warum diese Level nicht für die öffentliche Wiedergabe dafür geeignet ist",
+      "category_title": "Kategorie",
+      "category_placeholder": "Adding an administrative category..."
+    }
+  }
+}

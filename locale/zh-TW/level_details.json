@@ -1,0 +1,48 @@
+{
+  "download_btn": "下載（{size}）",
+  "message_private": "該關卡之瀏覽權限已設為私人。",
+  "message_unlisted": "該關卡之瀏覽權限已設為不公開。",
+  "message_censored": "該關卡因為涉及「{reason}」，違反相關規範而執行隱蔽處置。",
+  "details_card_rating_title": "評分",
+  "details_card_tags_title": "標記",
+  "details_card_last_updated_title": "修改日期",
+  "credits_card_music_title": "樂曲創作者",
+  "credits_card_cover_art_title": "繪圖創作者",
+  "difficulty_card_title": "難度",
+  "manage": {
+    "replace_title": "覆蓋",
+    "replace_upload_title": "選擇檔案",
+    "replace_upload_subtitle": "請選擇一個關卡檔案（.cytoidlevel），注意 ID 必須相符否則不接受變更。",
+    "description_field": "簡介",
+    "tags_field": "標記",
+    "visibility_field": "瀏覽權限",
+    "metadata": {
+      "title": "資訊修改",
+      "id_field": "ID",
+      "title_field": "樂曲標題",
+      "title_hint": "請填寫樂曲的原始名稱。",
+      "localized_title_field": "樂曲英文標題",
+      "localized_title_hint": "（選填）在樂曲名稱並非以英文起名的狀況下使用，非必要請留空。優先採用官方英文翻譯，若無則建議自行翻譯。",
+      "artist_field": "樂曲創作者名稱",
+      "artist_hint": "請填寫樂曲創作者的原始名稱，若由多位共同創作建議以半形逗號加空格區隔（, ）。",
+      "localized_artist_field": "樂曲創作者英文名稱",
+      "localized_artist_hint": "（選填）在樂曲作者名稱並非以英文起名的狀況下使用，非必要請留空。優先採用官方英文翻譯，若無則建議自行翻譯。",
+      "music_url_field": "樂曲出處連結",
+      "music_url_hint": "優先採用由樂曲創作者本人或授權發佈的官方連結，若無則填入其社群網站或是該樂曲的購買連結。",
+      "cover_art_field": "繪圖創作者名稱",
+      "cover_art_hint": "請填寫繪圖創作者的原始名稱，若由多位共同創作建議以半形逗號加空格區隔（, ）。",
+      "cover_art_localized_field": "繪圖創作者英文名稱",
+      "cover_art_localized_hint": "（選填）在繪圖創作者名稱並非以英文起名的狀況下使用，非必要請留空。優先採用官方英文翻譯，若無則建議自行翻譯。",
+      "cover_art_url_field": "繪圖出處連結",
+      "cover_art_url_hint": "優先採用由繪圖創作者本人或授權發佈的官方連結，若無則填入其社群網站或是該繪圖的購買連結。"
+    },
+    "admin": {
+      "censorship_title": "隱蔽切換",
+      "censorship_checkbox_title": "關閉／開啟",
+      "censorship_reason_field": "隱蔽原因",
+      "censorship_reason_hint": "請簡述執行隱蔽處置的理由。",
+      "category_title": "分類",
+      "category_placeholder": "加入新分類"
+    }
+  }
+}

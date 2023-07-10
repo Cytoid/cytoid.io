@@ -1,0 +1,8 @@
+{
+  "message_unlisted": "이 컬렉션은 비공개입니다.",
+  "message_private": "이 컬렉션은 소유자가 비공개로 만들었습니다. 다른 사용자에게는 보이지 않습니다.",
+  "tags_title": "태그",
+  "creation_date_title": "생성일",
+  "modification_date_title": "최근 업데이트",
+  "metadata_cover_art_title": "앨범 커버"
+}

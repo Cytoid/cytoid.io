@@ -1,0 +1,21 @@
+{
+  "menu_analytics": "Phân tích",
+  "menu_levels": "Màn chơi",
+  "menu_collections": "Các bộ sưu tập",
+  "menu_posts": "Bài viết",
+  "menu_users": "Người dùng",
+  "level_delete_confirm_title": "Xoá {name}",
+  "level_delete_confirm_content1": "Bạn có chắc chắn muốn xóa {0}?",
+  "level_delete_confirm_content2": "Tất cả những dữ liệu liên quan đến màn chơi này sẽ bị xóa khỏi cơ sở dữ liệu của chúng tôi, bao gồm cả {count} bản ghi đang phát. Người chơi sẽ thấy giảm số liệu thống kê của họ.",
+  "level_delete_confirm_content3": "Vui lòng nhập uid của màn chơi {0} để tiếp tục.",
+  "level_visibility_public_title": "Mọi người sẽ thấy màn chơi này.",
+  "level_visibility_unlisted_title": "Màn chơi chỉ hiện khi ai đó có link.",
+  "level_visibility_private_title": "Không ai thấy màn chơi này ngoài bạn.",
+  "level_visibility_public_content": "Màn chơi sẽ xuất hiện trong kết quả tìm kiếm và trong trang hồ sơ của bạn. Do đó, xin vui lòng lưu ý đến ý nghĩa bản quyền của hành động này. Sẽ rất hữu ích khi xem lại {0} và {1} của chúng tôi trước khi bạn tiến hành.",
+  "level_visibility_unlisted_content": "{0} sẽ không còn xuất hiện cho những người xem truy cập danh sách màn chơi hoặc hồ sơ của bạn. Nó cũng sẽ biến mất khỏi kết quả tìm kiếm. Tuy nhiên, nó sẽ vẫn hiển thị trong một bộ sưu tập công khai có chứa màn chơi này.",
+  "level_visibility_private_content": "{0} sẽ bị xóa khỏi trang hồ sơ của bạn và tất cả các kết quả tìm kiếm. Nó sẽ ở trong một bộ sưu tập công khai nếu nó đã được thêm, nhưng những người chơi khác sẽ không thể xem chi tiết về màn chơi. Chỉ có bạn có thể xem hoặc tải về màn chơi.",
+  "level_visibility_content": "Vui lòng nhập uid của màn chơi {0} để tiếp tục",
+  "level_visibility_title_private": "Làm cho {title} riêng tư",
+  "level_visibility_title_unlisted": "Làm cho {title} ẩn khỏi danh sách",
+  "level_visibility_title_public": "Làm cho {title} công khai"
+}

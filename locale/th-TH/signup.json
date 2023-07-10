@@ -1,0 +1,21 @@
+{
+  "title": "ลงทะเบียน",
+  "title_external": "Sign Up with {provider}",
+  "id_requirement": "Cytoid ID ของคุณต้องมีอย่างน้อย 3 ตัวอักษร และไม่เกิน 16 ตัวอักษร สามารถใช้ได้เฉพาะ ภาษาอังกฤษตัวพิมพ์เล็ก (a-z), ตัวเลขอราบิก (0-9), ขีดล่าง (_) และขีดกลาง (-) เท่านั้น",
+  "password_requirement": "3-16 ตัวอักษร ตัวเลข _ หรือ -",
+  "email_field_error_required": "กรุณากรอกที่อยู่อีเมล",
+  "email_field_error_invalid": "รูปแบบอีเมลไม่ถูกต้อง",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "ที่อยู่อีเมล",
+  "password_field_error_required": "กรุณาใส่รหัสผ่าน",
+  "password_field_error_invalid": "รหัสผ่านจำเป็นต้องมีอักขระอย่างน้อย 8 ตัว",
+  "password_field_placeholder": "รหัสผ่าน",
+  "password_confirm_field_placeholder": "ยืนยันรหัสผ่าน",
+  "tos_field_error_required": "คุณจำเป็นต้องยอมรับในข้อตกลงการให้บริการ",
+  "tos_field_title": "ฉันยอมรับ {0} ของ Cytoid",
+  "join_btn": "เข้าร่วมชุมชน",
+  "existing_user_title": "ลงทะเบียนอยู่แล้ว?",
+  "existing_user_content": "เข้าสู่ระบบเพื่อเพลิดเพลินกับสิทธิในการเป็นสมาชิกของชุมชน Cytoid",
+  "link_title": "Link your {provider} account",
+  "link_subtitle": "Please input your Cytoid ID and password. Account will be created if the Cytoid ID you provided does not exist."
+}

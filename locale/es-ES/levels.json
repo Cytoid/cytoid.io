@@ -1,0 +1,13 @@
+{
+  "sort_select_title": "Ordenar",
+  "sort_select_upload_date": "Fecha subida",
+  "sort_select_modification_date": "Fecha modificada",
+  "sort_select_difficulty": "Dificultad",
+  "sort_select_duration": "Duración",
+  "sort_select_downloads": "Descargas",
+  "sort_select_rating": "Calificación",
+  "sort_select_relevance": "Relevancia",
+  "category_select_title": "Categoría",
+  "category_select_item_all": "Todo",
+  "category_select_item_featured": "Destacado"
+}

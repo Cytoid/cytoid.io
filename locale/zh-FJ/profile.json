@@ -1,0 +1,23 @@
+{
+  "online": "在阿格王朔",
+  "offline": "不在阿格王朔",
+  "join_date": "啊wee于 {date}",
+  "bio_title": "我是猪！！！！！1111111111",
+  "recent_ranks_title": "最新铲车记录",
+  "total_ranked_plays": "总铲车次数",
+  "total_cleared_notes": "总踢数",
+  "highest_max_combo": "最高连踢数",
+  "avg_ranked_accuracy": "平均踢中",
+  "total_ranked_score": "总踢分",
+  "total_play_time": "总铲车时间",
+  "chart_radio_ranked_plays": "铲车次数",
+  "chart_radio_rating": "ptt",
+  "chart_radio_avg_accuracy": "平均踢中",
+  "levels_title": "上传的紫薯布丁",
+  "levels_featured_all_btn": "查看所有 {count} 个2分钟最速手术室传说",
+  "levels_all_btn": "查看所有 {count} 个紫薯布丁",
+  "collections_title": "军哥",
+  "collections_all_btn": "查看所有 {count} 个紫薯布丁",
+  "badges_title": "荣校",
+  "last_seen_date": "最近一次上号于 {date}"
+}

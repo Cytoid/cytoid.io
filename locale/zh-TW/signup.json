@@ -1,0 +1,21 @@
+{
+  "title": "建立新帳戶",
+  "title_external": "使用 {provider} 建立新帳戶",
+  "id_requirement": "僅能使用英文小寫、數字、底線（_）與連字號（-）組成，且長度需要在 3 到 16 個字元之間。",
+  "password_requirement": "請好好閱讀下方 Cytoid ID 的取名條件。",
+  "email_field_error_required": "請輸入電子郵件。",
+  "email_field_error_invalid": "電子郵件無效。",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "電子郵件",
+  "password_field_error_required": "請輸入密碼。",
+  "password_field_error_invalid": "長度至少要 9 個字元。",
+  "password_field_placeholder": "密碼",
+  "password_confirm_field_placeholder": "確認密碼",
+  "tos_field_error_required": "請務必勾選以上選項否則無法繼續。",
+  "tos_field_title": "勾選即表示同意 Cytoid {0}中的內容。",
+  "join_btn": "確認送出",
+  "existing_user_title": "已經有帳戶了嗎？",
+  "existing_user_content": "登入即可同步遊玩資料、解鎖新的遊戲模式以及使用多元的線上功能。",
+  "link_title": "連結 {provider} 帳戶",
+  "link_subtitle": "請輸入 Cytoid 帳戶相關資訊以確保為本人操作，若輸入的使用者不存在將會自動建立一個新的，請務必填妥。"
+}

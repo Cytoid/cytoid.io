@@ -1,0 +1,21 @@
+{
+  "title": "S'inscrire",
+  "title_external": "S'inscrire avec {provider}",
+  "id_requirement": "Votre identifiant Cytoid doit contenir entre 3 et 16 caractères et ne doit contenir que des lettres minuscules, des chiffres, des traits de soulignement et des traits d'union.",
+  "password_requirement": "3 à 16 lettres minuscules, chiffres, _ ou -",
+  "email_field_error_required": "Une adresse e-mail est requise.",
+  "email_field_error_invalid": "Cette adresse e-mail n'est pas valide",
+  "id_placeholder": "Identifiant Cytoid",
+  "email_placeholder": "Adresse e-mail",
+  "password_field_error_required": "Veuillez entrer un mot de passe.",
+  "password_field_error_invalid": "Le mot de passe doit contenir au moins 8 caractères.",
+  "password_field_placeholder": "Mot de passe",
+  "password_confirm_field_placeholder": "Confirmation du mot de passe",
+  "tos_field_error_required": "You must agree to our terms of services.",
+  "tos_field_title": "J'accepte les {0} de Cytoid.",
+  "join_btn": "Rejoindre la communauté",
+  "existing_user_title": "Déjà inscrit ?",
+  "existing_user_content": "Connectez-vous pour profiter de vos privilèges en tant que membre de la communauté Cytoid !",
+  "link_title": "Lier votre compte {provider}",
+  "link_subtitle": "Veuillez entrer votre identifiant Cytoid et votre mot de passe. Le compte sera créé si l'identifiant Cytoid que vous avez fourni n'existe pas."
+}

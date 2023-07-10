@@ -1,0 +1,23 @@
+{
+  "online": "ออนไลน์",
+  "offline": "ออฟไลน์",
+  "join_date": "เข้าร่วมเมื่อ {date}",
+  "bio_title": "ประวัติ",
+  "recent_ranks_title": "การจัดอันดับล่าสุด",
+  "total_ranked_plays": "การจัดอันดับที่เล่นไป",
+  "total_cleared_notes": "จำนวนโน้ตทั้งหมดที่เคลียร์",
+  "highest_max_combo": "Max Combo สูงสุด",
+  "avg_ranked_accuracy": "ความแม่นยำเฉลี่ย",
+  "total_ranked_score": "คะแนนรวมการเล่นจัดอันดับ",
+  "total_play_time": "ระยะเวลาที่เล่นทั้งหมด",
+  "chart_radio_ranked_plays": "จำนวนการเล่นจัดอันดับ",
+  "chart_radio_rating": "เรตติ้ง",
+  "chart_radio_avg_accuracy": "ความแม่นยำเฉลี่ย",
+  "levels_title": "เลเวลที่อัปโหลด",
+  "levels_featured_all_btn": "ดูเลเวลที่แนะนำทั้ง {count} เลเวล",
+  "levels_all_btn": "ดูทั้งหมด ({count})",
+  "collections_title": "คอลเลกชัน",
+  "collections_all_btn": "ดูทั้งหมด ({count})",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
+}

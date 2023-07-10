@@ -1,0 +1,21 @@
+{
+  "menu_analytics": "統計情報",
+  "menu_levels": "Levels",
+  "menu_collections": "コレクション",
+  "menu_posts": "Posts",
+  "menu_users": "Users",
+  "level_delete_confirm_title": "{name} を削除する",
+  "level_delete_confirm_content1": "本当に {0} を削除してもよろしいですか？",
+  "level_delete_confirm_content2": "All records related to this level will be purged from our database, including {count} playing records. Players will see a reduction on their statistics as well.",
+  "level_delete_confirm_content3": "Please input the uid of the level {0} to proceed.",
+  "level_visibility_public_title": "This level will be visible to everybody.",
+  "level_visibility_unlisted_title": "This level will only visible to anybody who has the link.",
+  "level_visibility_private_title": "This level will be only visible to you.",
+  "level_visibility_public_content": "The level will appear in search results and in your profile page. As a result, please be aware of the copyright implications of this action. It will be helpful to review our {0} and {1} before you proceed.",
+  "level_visibility_unlisted_content": "{0} will no longer appear to viewers who visit the level listing or your profile. It will also disappear from the search results. However, it will stay visible in a public collection that contains this level.",
+  "level_visibility_private_content": "{0} will be removed from your profile page and all search results. It will stay in a public collection if it's already been added, but the other players will not be able to check the details of the level. Only you can see or download the level.",
+  "level_visibility_content": "Please input the uid of the level {0} to proceed",
+  "level_visibility_title_private": "Make {title} private",
+  "level_visibility_title_unlisted": "Make {title} unlisted",
+  "level_visibility_title_public": "Make {title} public"
+}

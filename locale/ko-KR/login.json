@@ -1,0 +1,11 @@
+{
+  "title": "Cytoid ID를 이미 가지고 있습니까?",
+  "subtitle": "아래에서 로그인 하십시오.",
+  "username_field_placeholder": "Cytoid ID / 이메일 주소",
+  "username_field_error_required": "Cytoid ID 나 이메일 주소를 입력 해 주십시오.",
+  "password_field_placeholder": "비밀번호",
+  "password_field_error_required": "비밀번호를 입력해주세요",
+  "remember_me_checkbox_title": "자동 로그인",
+  "new_user_welcome_title": "Cytoid 에 새로 오셨나요?",
+  "new_user_welcome_content": "모든 Cytoid 멀티플레이어 기능을 사용할려면 가입하세요. 30초도 걸리지 않습니다!"
+}

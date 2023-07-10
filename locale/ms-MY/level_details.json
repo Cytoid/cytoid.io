@@ -1,0 +1,48 @@
+{
+  "download_btn": "Download ({size})",
+  "message_private": "This level was made private by its owner. It is invisible to other users.",
+  "message_unlisted": "This level is unlisted.",
+  "message_censored": "This level was censored for: {reason}",
+  "details_card_rating_title": "Rating",
+  "details_card_tags_title": "Tags",
+  "details_card_last_updated_title": "Last updated",
+  "credits_card_music_title": "Music",
+  "credits_card_cover_art_title": "Cover art",
+  "difficulty_card_title": "Difficulty",
+  "manage": {
+    "replace_title": "Replace",
+    "replace_upload_title": "Click or drag a Cytoid level to this area",
+    "replace_upload_subtitle": "Your level must have the same ID as the current one.",
+    "description_field": "Description",
+    "tags_field": "Tags",
+    "visibility_field": "Visibility",
+    "metadata": {
+      "title": "Metadata",
+      "id_field": "ID",
+      "title_field": "Title",
+      "title_hint": "The music title in its original form and language.",
+      "localized_title_field": "Localized title",
+      "localized_title_hint": "The music title in English. Literal translation is preferred. Optional.",
+      "artist_field": "Music artist name(s)",
+      "artist_hint": "The music artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "localized_artist_field": "Localized music artist name(s)",
+      "localized_artist_hint": "The music artist name(s) in English. Literal translation is preferred.",
+      "music_url_field": "Music source URL",
+      "music_url_hint": "The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.",
+      "cover_art_field": "Cover artist name(s)",
+      "cover_art_hint": "The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "cover_art_localized_field": " Localized cover artist name(s)",
+      "cover_art_localized_hint": "The cover artist name(s) in English. Literal translation is preferred.",
+      "cover_art_url_field": "Cover source URL",
+      "cover_art_url_hint": "The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used."
+    },
+    "admin": {
+      "censorship_title": "Censorship",
+      "censorship_checkbox_title": "Remove from Public",
+      "censorship_reason_field": "Reason",
+      "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
+      "category_title": "Category",
+      "category_placeholder": "Adding an administrative category..."
+    }
+  }
+}

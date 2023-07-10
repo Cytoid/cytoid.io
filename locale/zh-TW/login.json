@@ -1,0 +1,11 @@
+{
+  "title": "登入 Cytoid",
+  "subtitle": "快在下方迅速登入吧！",
+  "username_field_placeholder": "Cytoid ID／電子郵件",
+  "username_field_error_required": "請輸入 Cytoid ID 或者電子郵件。",
+  "password_field_placeholder": "密碼",
+  "password_field_error_required": "請輸入密碼。",
+  "remember_me_checkbox_title": "記住登入狀態",
+  "new_user_welcome_title": "建立新帳戶",
+  "new_user_welcome_content": "只需要一個帳戶就能使用 Cytoid 多元的線上功能，填上基本資料送出就完成囉！"
+}

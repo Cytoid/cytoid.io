@@ -1,0 +1,19 @@
+{
+  "slogan": "Sebuah game layar sentuh musik terdorong oleh komunitas",
+  "download_appstore": "Download dari App Store",
+  "download_googleplay": "Download di Google Play",
+  "news_title": "Berita Cytoid",
+  "news_previous": "Lihat halaman sebelumnya",
+  "featured_collection_title": "Koleksi unggulan",
+  "collection_all_btn": "Jelajahi semua {count} koleksi!",
+  "featured_level_title": "Fitur level terakhir",
+  "level_all_btn": "Jelajahi semua {count} koleksi!",
+  "recent_ranks_title": "Peringkat terbaru",
+  "latest_tweet_title": "Tweet terbaru",
+  "new_comments_title": "Komentar baru",
+  "connect_title": "Hubungkan",
+  "connect_discord_subtitle": "{count} member aktif",
+  "connect_discord_content": "Bergabunglah dengan komunitas kami untuk bantuan charting, turnamen mingguan, meme, dan banyak lagi!",
+  "connect_discord_btn": "Bergabung ke komunitas!",
+  "connect_patreon_content": "Cytoid 100% gratis dan open-source. Namun, menjaga server game tetap berjalan $$$. Mungkin kamu bisa..."
+}

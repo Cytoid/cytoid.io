@@ -1,0 +1,13 @@
+{
+  "sort_select_title": "Řadit podle",
+  "sort_select_upload_date": "Datum nahrání",
+  "sort_select_modification_date": "Datum poslední úpravy",
+  "sort_select_difficulty": "Obtížnost",
+  "sort_select_duration": "Délka",
+  "sort_select_downloads": "Počet stažení",
+  "sort_select_rating": "Hodnocení",
+  "sort_select_relevance": "Relevance",
+  "category_select_title": "Kategorie",
+  "category_select_item_all": "Všechny",
+  "category_select_item_featured": "Doporučené"
+}

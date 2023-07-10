@@ -1,0 +1,21 @@
+{
+  "title": "注册",
+  "title_external": "使用 {provider} 注册",
+  "id_requirement": "您的 Cytoid ID 只能包含小写字母、数字、下划线（_）、连字号（-），且长度为 3 到 16 个字符。",
+  "password_requirement": "可使用小写字母、数字、下划线（_）、连字号（-），长度为 3 到 16 个字符",
+  "email_field_error_required": "请输入邮箱地址。",
+  "email_field_error_invalid": "邮箱地址无效。",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "邮箱地址",
+  "password_field_error_required": "请输入密码。",
+  "password_field_error_invalid": "密码必须包含至少 8 个字符。",
+  "password_field_placeholder": "密码",
+  "password_confirm_field_placeholder": "确认密码",
+  "tos_field_error_required": "您必须同意我们的服务条款。",
+  "tos_field_title": "我同意 Cytoid 的 {0}。",
+  "join_btn": "加入社区",
+  "existing_user_title": "已经注册？",
+  "existing_user_content": "登录来享受您作为 Cytoid 社区一员的特权吧！",
+  "link_title": "链接到 {provider} 帐户",
+  "link_subtitle": "请输入您的 Cytoid 登录信息。如果您提供的 ID 不存在，我们会为您创建一个新帐号。"
+}

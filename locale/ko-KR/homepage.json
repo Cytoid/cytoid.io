@@ -1,0 +1,19 @@
+{
+  "slogan": "지역 사회 음악 게임",
+  "download_appstore": "앱 스토어에서 다운로드하기",
+  "download_googleplay": "구글 플레이에서 다운로드하기",
+  "news_title": "사이토이드 소식",
+  "news_previous": "이전 소식 보기",
+  "featured_collection_title": "featured 채보 컬렉션",
+  "collection_all_btn": "{count} 개의 채보를 둘러보세요!",
+  "featured_level_title": "최근에 추천된 채보",
+  "level_all_btn": "{count} 개의 채보를 둘러보세요!",
+  "recent_ranks_title": "최근 순위",
+  "latest_tweet_title": "최신 트윗",
+  "new_comments_title": "새 댓글",
+  "connect_title": "연결",
+  "connect_discord_subtitle": "현재 {count} 명이 온라인 입니다",
+  "connect_discord_content": "채보제작에 도움이 필요하시거나, 주간 토너먼트 등 참여하실라면 디스코드 서버로 오세요! ",
+  "connect_discord_btn": "들어가기",
+  "connect_patreon_content": "사이토이드는 무료 게임이지만, 서버를 운영하기 위해서 돈이 많이 필요하니, 도와주실수 있으시다면 정말로 감사하겠습니다!"
+}

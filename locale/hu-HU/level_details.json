@@ -1,0 +1,48 @@
+{
+  "download_btn": "Letöltés ({size})",
+  "message_private": "Ezt a szintet a tulajdonosa priváttá tette. Más játékosoknak láthatatlan.",
+  "message_unlisted": "Ez a szint rejtett.",
+  "message_censored": "Ezt a szintet a következő okból cenzúrázták: {reason}",
+  "details_card_rating_title": "Értékelés",
+  "details_card_tags_title": "Cimkék",
+  "details_card_last_updated_title": "Utoljára frissítve",
+  "credits_card_music_title": "Zene",
+  "credits_card_cover_art_title": "Borítókép",
+  "difficulty_card_title": "Nehézség",
+  "manage": {
+    "replace_title": "Csere",
+    "replace_upload_title": "Húzz erre a területre egy Cytoid szintet",
+    "replace_upload_subtitle": "A szintednek ugyanaz kell hogy legyen az azonosítója, mint a jelenleginek.",
+    "description_field": "Leírás",
+    "tags_field": "Cimkék",
+    "visibility_field": "Láthatóság",
+    "metadata": {
+      "title": "Metadata",
+      "id_field": "Azonosító",
+      "title_field": "Cím",
+      "title_hint": "A zene címe az eredeti formájában és nyelvén.",
+      "localized_title_field": "Lefordított cím",
+      "localized_title_hint": "A zene címe angolul. Lehetőség szerint szó szerinti fordítás. Nem kötelező.",
+      "artist_field": "A zene előadójának neve(i)",
+      "artist_hint": "A zene előadójának neve(i) eredeti formában és nyelven. Több név elkülönítéséhez használj vesszőt, majd utána egy szóközt.",
+      "localized_artist_field": "A zene előadójának lefordított neve(i)",
+      "localized_artist_hint": "A zene előadójának angol neve(i). Lehetőség szerint szó szerinti fordítás.",
+      "music_url_field": "A zene forrásának URL-je",
+      "music_url_hint": "The music URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the music makes its first appearance.",
+      "cover_art_field": "Cover artist name(s)",
+      "cover_art_hint": "The cover artist name(s) in their original form and language. Use a comma followed by a space to separate multiple names.",
+      "cover_art_localized_field": " Localized cover artist name(s)",
+      "cover_art_localized_hint": "The cover artist name(s) in English. Literal translation is preferred.",
+      "cover_art_url_field": "Cover source URL",
+      "cover_art_url_hint": "The cover art URL as posted by the artist(s). If there is no public URL, link to the official website of the work (i.e. game, anime) in which the cover is used."
+    },
+    "admin": {
+      "censorship_title": "Censorship",
+      "censorship_checkbox_title": "Remove from Public",
+      "censorship_reason_field": "Reason",
+      "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
+      "category_title": "Category",
+      "category_placeholder": "Adding an administrative category..."
+    }
+  }
+}

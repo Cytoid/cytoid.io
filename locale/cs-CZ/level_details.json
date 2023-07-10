@@ -1,0 +1,48 @@
+{
+  "download_btn": "Stáhnout ({size})",
+  "message_private": "Tato úroveň byla nastavena vlastníkem jako soukromá. Není viditelná pro ostatní uživatele.",
+  "message_unlisted": "Tato úroveň není uvedena v databázi úrovní.",
+  "message_censored": "Tato úroveň byla cezurována kvůli: {reason}",
+  "details_card_rating_title": "Hodnocení",
+  "details_card_tags_title": "Tagy",
+  "details_card_last_updated_title": "Naposledy aktualizováno",
+  "credits_card_music_title": "Hudba",
+  "credits_card_cover_art_title": "Obrázek alba",
+  "difficulty_card_title": "Obtížnost",
+  "manage": {
+    "replace_title": "Nahradit",
+    "replace_upload_title": "Klikněte zde nebo sem přetáhněte úroveň Cytoidu",
+    "replace_upload_subtitle": "Vaše úroveň musí mít stejné ID jako ta aktuální.",
+    "description_field": "Popis",
+    "tags_field": "Tagy",
+    "visibility_field": "Viditelnost",
+    "metadata": {
+      "title": "Metadata",
+      "id_field": "ID",
+      "title_field": "Název",
+      "title_hint": "Název skladby ve svém originálním jazyce a originální formě.",
+      "localized_title_field": "Lokalizovaný název",
+      "localized_title_hint": "Název skladby v angličtině. Literární překlad je preferován. Nepovinné.",
+      "artist_field": "Jmén(o)/(a) umělc(e)/(ú)",
+      "artist_hint": "Jmén(o)/(a) umělc(e)/(ú) ve svém původním jazyce a své originální formě. Použijte čárku následovanou mezerou k oddělení více jmen.",
+      "localized_artist_field": "Lokalizovan(é)/(á) jmén(o)/(a) umělc(e)/(ú)",
+      "localized_artist_hint": "Jmén(o)/(a) umělc(e)/(ú) v angličtině. Literární překlad je preferován.",
+      "music_url_field": "URL zdroje skladby",
+      "music_url_hint": "URL skladby tak, jak jej posíl(á)/(ají) uměl(ec)/(ci). Pokud neexistuje veřejná URL, pak odkaz na oficiální stránku díla (např. hra, anime) ve kterém se skladba poprvé objevila.",
+      "cover_art_field": "Tvůrc(e)/(i) obrázku alba",
+      "cover_art_hint": "Jmén(o)/(a) tvůrc(e)/(ů) obrázku alba ve svém původním jazyce a své originální formě. Použijte čárku následovanou mezerou k oddělení více jmen.",
+      "cover_art_localized_field": " Lokalizovan(é)/(á) jmén(o)/(a) tvůrc(e)/(ů) obrázku alba",
+      "cover_art_localized_hint": "Jmén(o)/(a) tvůrc(e)/(ů) obrázku alba v angličtině. Literární překlad je preferován.",
+      "cover_art_url_field": "URL zdroje obrázku alba",
+      "cover_art_url_hint": "URL obrázku alba tak, jak jej posíl(á)/(ají) tvůrc(e)/(i). Pokud neexistuje veřejná URL, pak odkaz na oficiální stránku díla (např. hra, anime) ve kterém byl obrázek alba poprvé použit."
+    },
+    "admin": {
+      "censorship_title": "Cenzura",
+      "censorship_checkbox_title": "Ostranit z veřejných",
+      "censorship_reason_field": "Důvod",
+      "censorship_reason_hint": "Jedno slovo ke shrnutí, proč je tato úroveň nevhodná pro veřejnost",
+      "category_title": "Kategorie",
+      "category_placeholder": "Přidat administrativní kategorie..."
+    }
+  }
+}

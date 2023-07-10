@@ -1,0 +1,11 @@
+{
+  "title": "CytoidIDを既にお持ちですか？",
+  "subtitle": "下の項目を入力してログインしてください。",
+  "username_field_placeholder": "CytoidID / メールアドレス",
+  "username_field_error_required": "CytoidID または メールアドレス を入力してください。",
+  "password_field_placeholder": "パスワード",
+  "password_field_error_required": "パスワードを入力してください。",
+  "remember_me_checkbox_title": "入力情報を保存する",
+  "new_user_welcome_title": "New to Cytoid?",
+  "new_user_welcome_content": "サインアップをすると、Cytoidのすべてのオンラインコンテンツにアクセスができます。\n登録は30秒とかかりません！"
+}

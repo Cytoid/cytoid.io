@@ -1,0 +1,23 @@
+{
+  "online": "Online",
+  "offline": "Offline",
+  "join_date": "Entrou em {date}",
+  "bio_title": "Biografia",
+  "recent_ranks_title": "Partidas ranqueadas recentes",
+  "total_ranked_plays": "Total de partidas ranqueadas",
+  "total_cleared_notes": "Total de notas acertadas",
+  "highest_max_combo": "Combo máximo mais alto",
+  "avg_ranked_accuracy": "Precisão média ranqueada",
+  "total_ranked_score": "Pontuação total ranqueada",
+  "total_play_time": "Tempo total jogado",
+  "chart_radio_ranked_plays": "Partidas ranqueadas jogadas",
+  "chart_radio_rating": "Rating",
+  "chart_radio_avg_accuracy": "Precisão média",
+  "levels_title": "Uploaded Levels",
+  "levels_featured_all_btn": "Ver todos os {count} níveis em destaque",
+  "levels_all_btn": "Ver todos {count}",
+  "collections_title": "Coleções",
+  "collections_all_btn": "Ver tudo {count}",
+  "badges_title": "Insígnias",
+  "last_seen_date": "Visto por último {date}"
+}

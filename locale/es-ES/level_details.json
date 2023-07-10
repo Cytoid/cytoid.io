@@ -1,0 +1,48 @@
+{
+  "download_btn": "Descargar ({size})",
+  "message_private": "Este nivel fue hecho privado por su dueño. Es invisible para otros usuarios.",
+  "message_unlisted": "Este nivel está sin listar.",
+  "message_censored": "Este nivel fue censurado por: {reason}",
+  "details_card_rating_title": "Calificación",
+  "details_card_tags_title": "Tags",
+  "details_card_last_updated_title": "Última actualización",
+  "credits_card_music_title": "Música",
+  "credits_card_cover_art_title": "Arte de cubierta",
+  "difficulty_card_title": "Dificultad",
+  "manage": {
+    "replace_title": "Reemplazar",
+    "replace_upload_title": "Haz clic o arrastra un nivel de Cytoid a esta área",
+    "replace_upload_subtitle": "Su nivel debe tener la misma ID que el actual.",
+    "description_field": "Descripción",
+    "tags_field": "Tags",
+    "visibility_field": "Visibilidad",
+    "metadata": {
+      "title": "Metadatos",
+      "id_field": "ID",
+      "title_field": "Título",
+      "title_hint": "El título de la canción en su forma e idioma original.",
+      "localized_title_field": "Título localizado",
+      "localized_title_hint": "El título de la canción en inglés. Una traducción literal es preferida. Opcional.",
+      "artist_field": "Nombre(es) del artista",
+      "artist_hint": "El nombre(es) del artista en su forma e idioma original. Utilice una coma seguida de un espacio para separar varios nombres.",
+      "localized_artist_field": "Nombre(es) del artista localizado",
+      "localized_artist_hint": "El nombre(es) del artista en inglés. Una traducción literal es preferida.",
+      "music_url_field": "URL de origen de música",
+      "music_url_hint": "El URL de la música tal como fue publicado por el artista(as). Si no hay una dirección URL pública, vincule al sitio web oficial de la obra (p. ej. juego anime) donde la canción hace su primera aparición.",
+      "cover_art_field": "Nombre(es) del artista de carátula",
+      "cover_art_hint": "El nombre(es) del artista del carátula en su forma e idioma original. Utilice una coma seguida de un espacio para separar varios nombres.",
+      "cover_art_localized_field": " Nombre(es) del artista de carátula localizado",
+      "cover_art_localized_hint": "El nombre(es) del artista de carátula en inglés. Una traducción literal es preferida.",
+      "cover_art_url_field": "URL fuente de la carátula",
+      "cover_art_url_hint": "El URL de la carátula como fue publicado por el artista(as). Si no hay una dirección URL pública, vincule al sitio web oficial del trabajo (p. ej. juego, anime) donde la carátula fue utilizada."
+    },
+    "admin": {
+      "censorship_title": "Censurado",
+      "censorship_checkbox_title": "Remover del público",
+      "censorship_reason_field": "Razón",
+      "censorship_reason_hint": "Una palabra que resuma porqué este nivel no es adecuado para la visualización pública",
+      "category_title": "Categoría",
+      "category_placeholder": "Agregando una categoría administrativa..."
+    }
+  }
+}

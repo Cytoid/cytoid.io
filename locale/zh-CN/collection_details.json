@@ -1,0 +1,8 @@
+{
+  "message_unlisted": "该合集是非公开的",
+  "message_private": "该合集已被所有者设置为仅自己可见。其他用户不能看见这个合集。",
+  "tags_title": "Tag",
+  "creation_date_title": "创建于",
+  "modification_date_title": "最后更新于",
+  "metadata_cover_art_title": "曲绘"
+}

@@ -1,0 +1,23 @@
+{
+  "online": "Online",
+  "offline": "Offline",
+  "join_date": "Přidal(a) se {date}",
+  "bio_title": "O mně",
+  "recent_ranks_title": "Nedávné ranky",
+  "total_ranked_plays": "Totální počet rankovaných her",
+  "total_cleared_notes": "Totální počet uznaných not",
+  "highest_max_combo": "Nejvyšší max kombo",
+  "avg_ranked_accuracy": "Průměrná rankovaná přesnost",
+  "total_ranked_score": "Totální rankované skóre",
+  "total_play_time": "Celkový čas hraní",
+  "chart_radio_ranked_plays": "Rankované hry",
+  "chart_radio_rating": "Hodnocení",
+  "chart_radio_avg_accuracy": "Průměrná přesnost",
+  "levels_title": "Nahrané úrovně",
+  "levels_featured_all_btn": "Zobrazit všech {count} doporučených",
+  "levels_all_btn": "Zobrazit všech {count}",
+  "collections_title": "Kolekce",
+  "collections_all_btn": "Zobrazit všech {count}",
+  "badges_title": "Odznaky",
+  "last_seen_date": "Naposledy viděn(a) {date}"
+}

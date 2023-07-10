@@ -1,0 +1,23 @@
+{
+  "online": "온라인",
+  "offline": "오프라인",
+  "join_date": "가입일: {date}",
+  "bio_title": "소개",
+  "recent_ranks_title": "최근 순위",
+  "total_ranked_plays": "총 랭크 모드 플레이 수",
+  "total_cleared_notes": "총 클리어 한 노트 수",
+  "highest_max_combo": "최다 콤보",
+  "avg_ranked_accuracy": "평균 랭크 모드 정확도",
+  "total_ranked_score": "총 랭크 모드 점수",
+  "total_play_time": "총 플레이 시간",
+  "chart_radio_ranked_plays": "랭크 모드 플레이 수",
+  "chart_radio_rating": "레이팅",
+  "chart_radio_avg_accuracy": "평균 정확도",
+  "levels_title": "업로드된 레벨",
+  "levels_featured_all_btn": "추천받은 {count} 개의 레벨 보기",
+  "levels_all_btn": "{count} 개의 레벨 모두 보기",
+  "collections_title": "컬렉션",
+  "collections_all_btn": "{count} 개의 컬렉션 모두 보기",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
+}

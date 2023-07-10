@@ -1,0 +1,21 @@
+{
+  "title": "Registrace",
+  "title_external": "Zaregistrovat pomocí {provider}",
+  "id_requirement": "Vaše Cytoid ID musí mít délku mezi třemi a šestnácti znaky a obsahovat pouze malá písmena, čísla, podtržítka a pomlčky.",
+  "password_requirement": "3-16 malých písmen, čísla, _ nebo -",
+  "email_field_error_required": "Je požadována emailová adresa.",
+  "email_field_error_invalid": "Toto není platná emailová adresa",
+  "id_placeholder": "Cytoid ID",
+  "email_placeholder": "Emailová adresa",
+  "password_field_error_required": "Prosím zadejte heslo.",
+  "password_field_error_invalid": "Heslo musí obsahovat minimálně 8 znaků.",
+  "password_field_placeholder": "Heslo",
+  "password_confirm_field_placeholder": "Potvrzení hesla",
+  "tos_field_error_required": "Musíte potvrdit souhlas s našimi podmínkami použití.",
+  "tos_field_title": "Souhlasím s {0} Cytoidu.",
+  "join_btn": "Připojit se ke komunitě",
+  "existing_user_title": "Jste již zaregistrován(a)?",
+  "existing_user_content": "Přihlašte se aby jste si užili privilegia člena komunity Cytoidu!",
+  "link_title": "Připojte váš {provider} účet",
+  "link_subtitle": "Prosím zadejte Cytoid ID a heslo. Účet bude vytvořen, pokud Cytoid ID které jste zadal(a) neexistuje."
+}

@@ -1,0 +1,23 @@
+{
+  "online": "En ligne",
+  "offline": "Hors ligne",
+  "join_date": "Joined {date}",
+  "bio_title": "Bio",
+  "recent_ranks_title": "Recent ranks",
+  "total_ranked_plays": "Total ranked plays",
+  "total_cleared_notes": "Total cleared notes",
+  "highest_max_combo": "Highest max combo",
+  "avg_ranked_accuracy": "Average ranked accuracy",
+  "total_ranked_score": "Total ranked score",
+  "total_play_time": "Total play time",
+  "chart_radio_ranked_plays": "Ranked plays",
+  "chart_radio_rating": "Rating",
+  "chart_radio_avg_accuracy": "Average Accuracy",
+  "levels_title": "Uploaded Levels",
+  "levels_featured_all_btn": "View all {count} featured",
+  "levels_all_btn": "View all {count}",
+  "collections_title": "Collections",
+  "collections_all_btn": "View all {count}",
+  "badges_title": "Badges",
+  "last_seen_date": "Last seen {date}"
+}

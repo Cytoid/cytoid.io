@@ -1,0 +1,21 @@
+{
+  "menu_analytics": "Analytika",
+  "menu_levels": "Úrovně",
+  "menu_collections": "Kolekce",
+  "menu_posts": "Příspěvky",
+  "menu_users": "Uživatelé",
+  "level_delete_confirm_title": "Smazat {name}",
+  "level_delete_confirm_content1": "Jste si jist(a), že chcete smazat {0}?",
+  "level_delete_confirm_content2": "Všechny rekordy vztažené k této úrovni budou smazány z naší databáze, v četně {count} zahraných rekordů. Hráči také uvidí snížení ve svých statistikách.",
+  "level_delete_confirm_content3": "Zadejte prosím uid úrovně {0} pro pokračování.",
+  "level_visibility_public_title": "Tato úroveň bude viditelná všem.",
+  "level_visibility_unlisted_title": "Tato úroveň bude viditelná pouze těm, kteří mají odkaz.",
+  "level_visibility_private_title": "Tato úroveň bude viditelná pouze vám.",
+  "level_visibility_public_content": "Úroveň se zobrazí ve výsledcích vyhledávání a na stránce vašeho profilu. V důsledku toho si prosím uvědomte důsledky této akce co se autorských práv týče. Bude užitečné zkontrolovat naše {0} a {1} před tím, než budete pokračovat.",
+  "level_visibility_unlisted_content": "{0} se již nebude zobrazovat uživatelům, kteří navštíví databázi úrovní nebo váš profil. Zmizí také z výsledků vyhledávání, ale zůstane viditelná ve veřejné sbírce, která obsahuje tuto úroveň.",
+  "level_visibility_private_content": "{0} bude odstraněna z vaší profilové stránky a všech výsledků vyhledávání. Zůstane ve veřejné sbírce, pokud již byla přidána, ale ostatní hráči nebudou moci prohlížet detaily úrovně. Pouze vy můžete vidět nebo stáhnout tuto úroveň.",
+  "level_visibility_content": "Zadejte prosím uid úrovně {0} pro pokračování",
+  "level_visibility_title_private": "Udělat {title} soukromou",
+  "level_visibility_title_unlisted": "Udělat {title} nezapsanou do databáze úrovní",
+  "level_visibility_title_public": "Udělat {title} veřejnou"
+}
