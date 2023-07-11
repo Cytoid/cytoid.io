@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 /* Fonts */
+
 html {
   font-family: Nunito,'Noto Sans', 'Noto Sans TC','M PLUS Rounded\ 1c',system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,sans-serif
   /* use Traditional Chinese as default Chinese Character */
@@ -27,6 +28,7 @@ body {
 }
 
 /* Recaptcha */
+
 #google-captcha + div {
   position: fixed !important;
   top: 0 !important;
@@ -34,6 +36,7 @@ body {
 }
 
 /* Scrollbar */
+
 ::-webkit-scrollbar {
   /* width : 12px; */
   /* height: 8px; */
@@ -49,6 +52,7 @@ body {
 }
 
 /* Cytoid */
+
 .bg-image-loading {
   @apply bg-cover bg-center;
   background-image: url('~/assets/loading.svg');
@@ -83,6 +87,15 @@ body {
   @apply text-base-content border-none;
   background: linear-gradient(to top left, #6f0000, #200122);
   order: 3;
+}
+
+/* Daisyui */
+.capsule {
+  @apply badge badge-lg py-5 px-4
+}
+
+.capsule .capsule-icon {
+
 }
 
 /* Custom Util Class */

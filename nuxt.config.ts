@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
+    'vue-recaptcha/nuxt',
   ],
 
   apollo: {
@@ -59,8 +60,10 @@ export default defineNuxtConfig({
       apiURL: config.get('serviceURLClient'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
-      captchaKey: config.get('captchaKey'),
       servicesUA: process.env.SERVICES_UA ?? '',
+      recaptcha: {
+        v2SiteKey:config.get('captchaKey')
+      }
     }
   },
 

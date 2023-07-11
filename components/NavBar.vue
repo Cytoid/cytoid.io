@@ -34,7 +34,7 @@
     <ClientOnly>
       <div v-if="!ready">
         <div class="dropdown dropdown-end">
-          <label tabindex="0" class="btn btn-sm">
+          <label tabindex="0" class="btn btn-sm btn-neutral">
             <Icon name="mdi:loading" size="18" class="animate-spin"/>
           </label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -64,7 +64,7 @@
         </Transition> -->
       </div>
       <div v-else class="flex-none px-2 sm:px-0">
-        <button class="btn btn-sm" @click="toLogin()">{{ $t('general.login_btn') }}</button>
+        <button class="btn btn-sm btn-neutral" @click="toLogin()">{{ $t('general.login_btn') }}</button>
       </div>
     </ClientOnly>
   </div>

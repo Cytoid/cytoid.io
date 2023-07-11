@@ -25,7 +25,7 @@
 
       </div>
       <div>
-        <p>Cytoid built by <a class="link link-hover">TigerHix</a> and <a class="link link-hover">Neo</a>. All rights
+        <p>Cytoid built by <a href="https://cytoid.io/profile/tigerhix" class="link link-hover">TigerHix</a> and <a href="https://cytoid.io/profile/neo" class="link link-hover">Neo</a>. All rights
           reserved.</p>
       </div>
     </div>
