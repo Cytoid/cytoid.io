@@ -1,9 +1,16 @@
 <template>
   <div>
-    <button class="btn btn-neutral">
-      {{ $t('general.nav_home') }}
+    <button class="btn btn-neutral" @click="hw()">
+      {{ $t('general.nav_home') }}: Hello World {{ count }}
     </button>
     <UserAvatarIcon />
     <UserAvatar name="name" />
   </div>
 </template>
+
+<script setup lang="ts">
+const count = ref(0)
+const hw = () => {
+  successAlert(`Hello World ${count.value++}!`)
+}
+</script>

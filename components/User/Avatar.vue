@@ -1,8 +1,10 @@
 <template>
   <DefineAvatarBody>
     <div :class="{
-      'badge border-0 badge-lg py-5 pl-0': true,
+      'badge border-0 badge-lg py-4 px-2 clickable flex': true,
       'bg-transparent': transparent,
+      'pl-0': !reverse,
+      'flex-row-reverse pr-0': reverse,
     }">
       <UserAvatarIcon :avatar="avatar" />
       <p class="px-2">
@@ -37,6 +39,10 @@ defineProps({
     default: null
   },
   transparent: {
+    type: Boolean,
+    default: false
+  },
+  reverse: {
     type: Boolean,
     default: false
   }

@@ -3,40 +3,40 @@
     <div class="my-2">
       <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <div class="card-body">
-          <h2 class="card-title">{{ $t('login.title') }}</h2>
-          <p>{{ $t('login.subtitle') }}</p>
+          <h2 class="card-title">{{ t('login.title') }}</h2>
+          <p>{{ t('login.subtitle') }}</p>
           <div class="mt-2" />
           <div class="form-control">
-            <label class="join w-full">
-              <span class="join-item bg-neutral btn">
-                <Icon name="ph:user-bold" />
+            <div class="join w-full">
+              <span class="join-item btn btn-neutral">
+                <Icon name="ph:user-bold" size="18" />
               </span>
-              <input v-model="loginForm.username" type="text" :placeholder="$t('login.username_field_placeholder')"
-                class="join-item input input-bordered flex-1" />
-            </label>
+              <input v-model="loginForm.username" type="text" :placeholder="t('login.username_field_placeholder')"
+                class="join-item input input-bordered flex-1 w-full" />
+            </div>
           </div>
           <div class="form-control">
-            <label class="join w-full">
-              <span class="join-item btn bg-neutral">
-                <Icon name="material-symbols:key" />
+            <div class="join w-full">
+              <span class="join-item btn btn-neutral">
+                <Icon name="material-symbols:key" size="18" />
               </span>
-              <input v-model="loginForm.password" type="password" :placeholder="$t('login.password_field_placeholder')"
-                class="join-item input input-bordered flex-1" />
-            </label>
+              <input v-model="loginForm.password" type="password" :placeholder="t('login.password_field_placeholder')"
+                class="join-item input input-bordered flex-1 w-full" />
+            </div>
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover ml-auto">{{ $t('general.forgot_password_link_title')
+              <a href="#" class="label-text-alt link link-hover ml-auto">{{ t('general.forgot_password_link_title')
               }}</a>
             </label>
           </div>
           <div class="form-control">
             <label class="label cursor-pointer">
-              <span class="label-text">{{ $t('login.remember_me_checkbox_title') }}</span>
+              <span class="label-text">{{ t('login.remember_me_checkbox_title') }}</span>
               <input type="checkbox" :checked="loginForm.remember" class="checkbox checkbox-primary" />
             </label>
           </div>
           <div class="form-control mt-2">
             <Captcha v-slot="{ verify }">
-              <button class="btn btn-primary" @click="loginWithPayload(verify)">{{ $t('general.login_btn') }}</button>
+              <button class="btn btn-primary" @click="loginWithPayload(verify)">{{ t('general.login_btn') }}</button>
             </Captcha>
           </div>
           <div class="flex w-full justify-around">
@@ -51,10 +51,10 @@
             </button>
           </div>
           <div class="divider">OR</div>
-          <h2 class="card-title">{{ $t('login.new_user_welcome_title') }}</h2>
-          <p>{{ $t('login.new_user_welcome_content') }}</p>
+          <h2 class="card-title">{{ t('login.new_user_welcome_title') }}</h2>
+          <p>{{ t('login.new_user_welcome_content') }}</p>
           <div class="form-control mt-2">
-            <NuxtLink class="btn btn-primary" to="/session/signup">{{ $t('general.signup_btn') }}</NuxtLink>
+            <NuxtLink class="btn btn-primary" to="/session/signup">{{ t('general.signup_btn') }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -65,6 +65,8 @@
 <script setup lang="ts">
 const router = useRouter()
 const route = useRoute()
+
+const { t } = useI18n()
 
 const { login: _loginWithPayload, user } = useAuth()
 
@@ -90,13 +92,13 @@ const loginWithPayload = async (verify: () => any) => {
   }).catch((error) => {
     const code = error.response?.status ?? 0
     if (code == 401) {
-      // errorAlert(t('general.login_password_error'))
+      errorAlert(t('general.login_password_error'))
       return
     } else if (code == 403) {
-      // warningAlert(t('general.login_inactive_error'))
+      warningAlert(t('general.login_inactive_error'))
       return
     } else if (code == 404) {
-      // errorAlert(t('general.login_username_error'))
+      errorAlert(t('general.login_username_error'))
       return
     } else {
       console.log(`Unknown error(${code}): `, error)
@@ -104,7 +106,7 @@ const loginWithPayload = async (verify: () => any) => {
   })
   // console.log(userData)
   if (userData) {
-    // successAlert(t('general.login_snack_bar', {name: userData.name || userData.uid}))
+    successAlert(t('general.login_snack_bar', {name: userData.name || userData.uid}))
     loginNext()
   }
 }
@@ -123,7 +125,7 @@ const loginWithProvider = (provider: string) => {
     window.removeEventListener('message', providerResponded)
     if (event.data.user) {
       user.value = event.data.user
-      // successAlert(t('general.login_snack_bar', {name: event.data.user.name || event.data.user.uid}))
+      successAlert(t('general.login_snack_bar', {name: event.data.user.name || event.data.user.uid}))
       loginNext()
     } else if (event.data.token && event.data.provider) {
       router.replace({

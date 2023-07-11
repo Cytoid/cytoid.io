@@ -5,7 +5,7 @@
       <NuxtPage />
     </NuxtLayout>
   </div>
-  <!-- <AlertBox /> -->
+  <AlertBox />
 </template>
 
 <script setup lang="ts">

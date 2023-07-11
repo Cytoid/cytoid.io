@@ -1,7 +1,7 @@
 <template>
   <DefineAvatarIconBody>
     <div class="avatar">
-      <div class="h-10 rounded-full">
+      <div class="h-8 rounded-full">
         <img :src="avatar" />
       </div>
     </div>

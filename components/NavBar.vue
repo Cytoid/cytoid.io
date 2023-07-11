@@ -27,10 +27,11 @@
             </ul>
           </div>
         </div>
-
         <div class="flex-1" />
       </div>
     </div>
+
+    <!-- User Profile -->
     <ClientOnly>
       <div v-if="!ready">
         <div class="dropdown dropdown-end">
@@ -42,26 +43,28 @@
           </ul>
         </div>
       </div>
-      <div v-else-if="isLogin" class="flex-none px-2 sm:px-0">
-        <!-- <div v-if="user.value.role === 'admin'" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Admin">
+      <div v-else-if="isLogin && user" class="flex-none px-2 sm:px-0">
+        <div v-if="user.role === 'admin'" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Admin">
           <button class="btn btn-circle btn-sm not-clickable btn-primary">
             <Icon name="clarity:administrator-solid" size="18"/>
           </button>
         </div>
-        <div v-else-if="user.value.role === 'moderator'" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Moderator">
+        <div v-else-if="user.role === 'moderator'" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Moderator">
           <button class="btn btn-circle btn-sm not-clickable btn-primary">
             <Icon name="pajamas:admin" size="18"/>
           </button>
         </div>
         <UserAvatar
-          :avatar="avatarURL(user.value.id)"
-          :name="user.value.name || user.value.uid" class="h-8 clickable flex-row-reverse"
+          :avatar="avatarURL(user?.id)"
+          :name="user.name || user.uid"
+          :reverse="true"
+          class="select-none"
           @click="profileDialog = !profileDialog" />
         <Transition>
           <div v-show="profileDialog" class="w-0 h-0 relative">
-            <UserProfileDialog ref="profileDialogDom" />
+            <!-- <UserProfileDialog ref="profileDialogDom" /> -->
           </div>
-        </Transition> -->
+        </Transition>
       </div>
       <div v-else class="flex-none px-2 sm:px-0">
         <button class="btn btn-sm btn-neutral" @click="toLogin()">{{ $t('general.login_btn') }}</button>
@@ -74,6 +77,8 @@
 const { logout:_logout, ready, toLogin, isLogin } = useAuth()
 const router = useRouter()
 const profileDialog = ref(false)
+
+const { user } = useAuth()
 
 const profileDialogDom = ref()
 onClickOutside(profileDialogDom, () => { profileDialog.value = false })
