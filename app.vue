@@ -12,15 +12,13 @@
 // i18n
 (async () => {
   const { init } = useLocales()
-  if (process.client) {
-    init()
-  }
+  init()
 })();
 
 // auth
 (async () => {
-  const { ready, init } = useAuth()
-  if (process.client && !ready.value) {
+  const { init } = useAuth()
+  if (process.client) {
     await wait() // Idk but the next line will always return null if I don't wait a millisecond
     const user = await init()
     if (user) {

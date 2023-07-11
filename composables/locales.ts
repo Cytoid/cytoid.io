@@ -13,7 +13,6 @@ export const useLocales = () => {
   
   const cookie = useSavedCookie('locale')
 
-  
   const _ready = useState(() => false)
   const ready = computed<boolean>(() => _ready.value)
 

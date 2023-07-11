@@ -22,6 +22,9 @@ export const useAuth = () => {
   }
 
   const init = async () => {
+    if (ready.value) {
+      return user.value
+    }
     _ready.value = false
     const response = await useServiceFetch<SessionResponse>('session')
     if (response.status.value == 'success') {
