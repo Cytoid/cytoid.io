@@ -15,38 +15,6 @@ export const useLocales = () => {
 
   const _ready = useState(() => false)
   const ready = computed<boolean>(() => _ready.value)
-
-  const init = () => {
-    if (ready.value || !process.client) {
-      return      
-    }
-    const headers = useRequestHeaders(['accept-language'])
-    const { availableLocales, setLocale, localeCookie } = useLocales()
-    if (localeCookie.value) {
-      // Something debug
-      return
-    } else {
-      // auto lang
-      const acceptLang = headers['accept-language']
-      if (acceptLang) {
-        let acceptLangs = acceptLang.split(',')
-        let acceptLangList = acceptLangs.map((lang) => {
-          let [name, langQ] = lang.split(';')
-          let q = langQ ? parseFloat(langQ.split('=')[1]) : 1
-          let langM = { name, q }
-          return langM
-        }).sort((a, b) => b.q - a.q)
-        for (let lang of acceptLangList) {
-          for (let availableLang of availableLocales) {
-            if (lang.name.toLowerCase() == availableLang.toLowerCase()) {
-              setLocale(lang.name)
-              return
-            }
-          }
-        }
-      }
-    }
-  }
   
   const setLocale = (code:string) => {
     cookie.value = code
@@ -65,6 +33,34 @@ export const useLocales = () => {
       lang: cookie.value || 'en'
     }
   })
+
+  const init = (acceptLangHeader?:string) => {
+    if (ready.value) {
+      return      
+    }
+    if (cookie.value) {
+      return
+    }
+    if (!acceptLangHeader) {
+      return
+    }
+    
+    let acceptLangs = acceptLangHeader.split(',')
+    let acceptLangList = acceptLangs.map((lang) => {
+      let [name, langQ] = lang.split(';')
+      let q = langQ ? parseFloat(langQ.split('=')[1]) : 1
+      let langM = { name, q }
+      return langM
+    }).sort((a, b) => b.q - a.q)
+    for (let lang of acceptLangList) {
+      for (let availableLang of availableLocales) {
+        if (lang.name.toLowerCase() == availableLang.toLowerCase()) {
+          setLocale(lang.name)
+          return
+        }
+      }
+    }
+  }
 
   return { availableLocales, locale, setLocale, localeCookie: cookie, init }
 }

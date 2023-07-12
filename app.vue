@@ -10,15 +10,18 @@
 
 <script setup lang="ts">
 // i18n
-(async () => {
-  const { init } = useLocales()
-  init()
+(() => {
+  if (process.server) {
+    const { init } = useLocales()
+    const headers = useRequestHeaders(['accept-language'])
+    init(headers['accept-language'] ?? '')
+  }
 })();
 
 // auth
 (async () => {
-  const { init } = useAuth()
   if (process.client) {
+    const { init } = useAuth()
     await wait() // Idk but the next line will always return null if I don't wait a millisecond
     const user = await init().catch(() => null)
     if (user) {
