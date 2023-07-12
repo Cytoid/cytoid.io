@@ -3,8 +3,6 @@
     <button class="btn btn-neutral" @click="hw()">
       {{ $t('general.nav_home') }}: Hello World {{ count }}
     </button>
-    <UserAvatarIcon />
-    <UserAvatar name="name" />
   </div>
 </template>
 

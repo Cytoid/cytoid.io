@@ -62,7 +62,7 @@
           @click="profileDialog = !profileDialog" />
         <Transition>
           <div v-show="profileDialog" class="w-0 h-0 relative">
-            <!-- <UserProfileDialog ref="profileDialogDom" /> -->
+            <UserProfileDialog ref="profileDialogDom" />
           </div>
         </Transition>
       </div>

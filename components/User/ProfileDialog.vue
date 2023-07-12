@@ -1,0 +1,106 @@
+<template>
+  <div v-if="profile" class="fixed right-4 top-12 p-2 sm:absolute sm:top-8 sm:-right-4">
+    <div class="card bg-base-100 shadow-xl w-72">
+      <div class="card w-full bg-base-100 max-h-30 shadow-xl image-full">
+        <figure><img v-if="profile.header?.thumbnail" :src="profile.header.thumbnail" /></figure>
+        <div class="card-body px-6 py-2 select-none">
+          <div class="flex w-full mt-4">
+            <div class="avatar">
+              <div class="w-16 h-16 mt-4 rounded-full">
+                <img v-if="profile.user?.avatar.original" :src="profile.user.avatar.original" />
+              </div>
+            </div>
+            <div class="flex flex-col justify-center gap-1 flex-1 pt-4 px-4 w-0">
+              <div>
+                <p class="card-title break-all">{{ user?.name || user?.uid }}</p>
+              </div>
+              <div v-if="profile.rating" class="flex gap-2">
+                <div v-if="profile.rating >= 16" class="tooltip tooltip-right" :data-tip="`rt ${profile.rating.toFixed(2)}`">
+                  <div class="badge badge-warning"><Icon name="mdi:crown" /></div>
+                </div>
+                <div v-else-if="profile.rating > 15" class="badge badge-warning">rt {{ profile.rating.toFixed(2) }}</div>
+                <div v-else-if="profile.rating > 12" class="badge badge-info">rt {{ profile.rating.toFixed(2) }}</div>
+                <div v-else class="badge badge-neutral">rt {{ profile.rating.toFixed(2) }}</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex-1" />
+          <div class="flex h-12 items-center gap-2">
+            <div class="tooltip flex-1 flex items-center" :data-tip="`${profile.exp.totalExp - profile.exp.currentLevelExp} / ${profile.exp.nextLevelExp - profile.exp.currentLevelExp}`">
+              <progress class="progress progress-primary bg-base-100/60 h-3"
+              :value="profile.exp.totalExp - profile.exp.currentLevelExp"
+              :max="profile.exp.nextLevelExp - profile.exp.currentLevelExp"></progress>
+            </div>
+            <div class="badge badge-primary">Lv. {{ profile.exp.currentLevel }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body p-4">
+        <ul class="menu bg-base-100 w-full p-0">
+          <li class="hover-bordered">
+            <NuxtLink :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }">
+              <Icon name="mdi:account" size="24" /> {{ $t('general.profile') }}
+            </NuxtLink>
+          </li>
+          <li class="hover-bordered">
+            <NuxtLink to="/studio">
+              <Icon name="carbon:media-library-filled" size="24" /> {{ $t('general.studio') }}
+            </NuxtLink>
+          </li>
+          <li class="hover-bordered">
+            <NuxtLink to="/library">
+              <Icon name="mdi:puzzle" size="24" /> {{ $t('general.library') }}
+            </NuxtLink>
+          </li>
+          <li class="hover-bordered">
+            <NuxtLink to="/settings">
+              <Icon name="ic:baseline-settings" size="24" /> {{ $t('general.settings') }}
+            </NuxtLink>
+          </li>
+        </ul>
+        <div class="card-actions justify-end pt-2">
+          <button class="btn btn-primary btn-block" @click="logout">{{ $t('general.signout_btn') }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+const { user, logout: _logout } = useAuth()
+const router = useRouter()
+
+const query = graphql(/* GraphQL */`
+  query FetchNavCard($id: ID!) {
+    profile(id: $id) {
+      id
+      exp {
+        totalExp
+        currentLevelExp
+        nextLevelExp
+        currentLevel
+      }
+      rating
+      header {
+        thumbnail
+      }
+      user {
+        id
+        avatar {
+          original
+        }
+      }
+    }
+  }
+`)
+const { data } = await useAsyncQuery(query, { id: user.value?.id })
+const profile = computed(() => data.value.profile)
+
+const logout = async () => {
+  console.log('user logout')
+  await _logout()
+  router.push({ path: '/' })
+}
+</script>

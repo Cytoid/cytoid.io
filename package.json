@@ -11,6 +11,8 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/client-preset": "^4.0.1",
     "@nuxt/devtools": "latest",
     "@nuxtjs/apollo": "^5.0.0-alpha.6",
     "@nuxtjs/google-fonts": "^3.0.1",
