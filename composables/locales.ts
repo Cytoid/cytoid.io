@@ -17,7 +17,7 @@ export const useLocales = () => {
   const ready = computed<boolean>(() => _ready.value)
 
   const init = () => {
-    if (ready.value) {
+    if (ready.value || !process.client) {
       return      
     }
     const headers = useRequestHeaders(['accept-language'])

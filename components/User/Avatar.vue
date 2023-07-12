@@ -13,7 +13,7 @@
     </div>
   </DefineAvatarBody>
 
-  <a v-if="!uid">
+  <a @click="$emit('click')" v-if="!uid">
     <AvatarBody />
   </a>
 
@@ -45,6 +45,6 @@ defineProps({
   reverse: {
     type: Boolean,
     default: false
-  }
+  },
 })
 </script>
