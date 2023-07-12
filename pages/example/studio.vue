@@ -4,4 +4,7 @@
 
 <script setup>
 const route = useRoute()
+defineCytoidPage({
+  title: 'WIP',
+})
 </script>

@@ -13,11 +13,11 @@
     </div>
   </DefineAvatarBody>
 
-  <a @click="$emit('click')" v-if="!uid">
+  <a v-if="!uid" v-bind="$attrs">
     <AvatarBody />
   </a>
 
-  <NuxtLink v-else :to="{name: 'profile-id', params: { id: uid }}">
+  <NuxtLink v-else v-bind="$attrs" :to="{name: 'profile-id', params: { id: uid }}">
     <AvatarBody />
   </NuxtLink>
 </template>

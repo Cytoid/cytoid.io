@@ -140,6 +140,10 @@ const loginWithProvider = (provider: string) => {
   }
 }
 
+defineCytoidPage({
+  title: 'Login',
+  background: '/images/session.jpg'
+})
 
 function loginNext() {
   if (route.query.origin) {

@@ -11,4 +11,6 @@ const count = ref(0)
 const hw = () => {
   successAlert(`Hello World ${count.value++}!`)
 }
+
+resetCytoidPage()
 </script>

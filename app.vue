@@ -29,4 +29,9 @@
   }
 })();
 
+useHead({
+  titleTemplate(title) {
+    return title ? `${title} - Cytoid` : 'Cytoid'
+  },
+})
 </script>
