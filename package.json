@@ -34,5 +34,8 @@
     "nuxt-icon": "^0.4.2",
     "sanitize-html": "^2.7.3",
     "vue-recaptcha": "^3.0.0-alpha.6"
+  },
+  "resolutions": {
+    "tslib": "2.5.1"
   }
 }
