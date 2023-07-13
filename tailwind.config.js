@@ -24,6 +24,7 @@ module.exports = {
           "accent": "#ffb86b",
         }
       },
-    ]
+    ],
+    logs:false,
   }
 };
