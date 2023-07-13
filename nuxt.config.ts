@@ -53,7 +53,11 @@ export default defineNuxtConfig({
   graphqlCodegen: {
     config: {
       schema: './gql/schema.graphql',
-      documents: ['./**/*.vue'],
+      documents: [
+        'components/**/*.vue',
+        'pages/**/*.vue',
+        './*.vue'
+      ],
       ignoreNoDocuments: true, // for better experience with the watcher
       generates: {
         './gql/': {
