@@ -15,8 +15,11 @@
                 <p class="card-title break-all">{{ user?.name || user?.uid }}</p>
               </div>
               <div v-if="profile.rating" class="flex gap-2">
-                <div v-if="profile.rating >= 16" class="tooltip tooltip-right" :data-tip="`rt ${profile.rating.toFixed(2)}`">
-                  <div class="badge badge-warning"><Icon name="mdi:crown" /></div>
+                <div v-if="profile.rating >= 16" class="tooltip tooltip-right"
+                  :data-tip="`rt ${profile.rating.toFixed(2)}`">
+                  <div class="badge badge-warning">
+                    <Icon name="mdi:crown" />
+                  </div>
                 </div>
                 <div v-else-if="profile.rating > 15" class="badge badge-warning">rt {{ profile.rating.toFixed(2) }}</div>
                 <div v-else-if="profile.rating > 12" class="badge badge-info">rt {{ profile.rating.toFixed(2) }}</div>
@@ -27,10 +30,11 @@
           </div>
           <div class="flex-1" />
           <div class="flex h-12 items-center gap-2">
-            <div class="tooltip flex-1 flex items-center" :data-tip="`${profile.exp.totalExp - profile.exp.currentLevelExp} / ${profile.exp.nextLevelExp - profile.exp.currentLevelExp}`">
+            <div class="tooltip flex-1 flex items-center"
+              :data-tip="`${profile.exp.totalExp - profile.exp.currentLevelExp} / ${profile.exp.nextLevelExp - profile.exp.currentLevelExp}`">
               <progress class="progress progress-primary bg-base-100/60 h-3"
-              :value="profile.exp.totalExp - profile.exp.currentLevelExp"
-              :max="profile.exp.nextLevelExp - profile.exp.currentLevelExp"></progress>
+                :value="profile.exp.totalExp - profile.exp.currentLevelExp"
+                :max="profile.exp.nextLevelExp - profile.exp.currentLevelExp"></progress>
             </div>
             <div class="badge badge-primary">Lv. {{ profile.exp.currentLevel }}</div>
           </div>
@@ -95,8 +99,8 @@ const query = graphql(/* GraphQL */`
     }
   }
 `)
-const { data } = await useAsyncQuery(query, { id: user.value?.id })
-const profile = computed(() => data.value.profile)
+const { data } = await useAsyncQuery(query, { id: user.value?.id ?? '' })
+const profile = computed(() => data.value?.profile)
 
 const logout = async () => {
   console.log('user logout')

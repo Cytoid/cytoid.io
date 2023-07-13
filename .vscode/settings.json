@@ -2,6 +2,7 @@
   "cSpell.words": [
     "antfu",
     "attributify",
+    "codegen",
     "creditmeta",
     "Cytoid",
     "cytusol",
@@ -15,6 +16,8 @@
     "kidonng",
     "leaderboard",
     "nocheck",
+    "Noto",
+    "Nunito",
     "nuxt",
     "nuxtjs",
     "ofetch",
@@ -30,12 +33,14 @@
     "teages",
     "unocss",
     "unplugin",
+    "urql",
     "Vite",
     "vitejs",
     "Vitesse",
     "vitest",
     "vueuse",
-    "websockets"
+    "websockets",
+    "wonka"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxtjs/apollo',
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
     'nuxt-icon',
@@ -17,23 +16,6 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'vue-recaptcha/nuxt',
   ],
-
-  apollo: {
-    clients: {
-      default: {
-        tokenName: 'cyt:sess',
-        cookieAttributes: {
-          path: '/',
-          secure: false,
-        },
-        httpEndpoint: config.get('graphql'),
-        httpLinkOptions: {
-          credentials: 'include'
-        },
-        websocketsOnly: false
-      }
-    },
-  },
 
   i18n: {
     vueI18n: './i18n.config.ts',
@@ -60,10 +42,27 @@ export default defineNuxtConfig({
       apiURL: config.get('serviceURLClient'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
+      graphqlURL: config.get('graphql'),
       servicesUA: process.env.SERVICES_UA ?? '',
       recaptcha: {
         v2SiteKey:config.get('captchaKey')
       }
+    }
+  },
+
+  graphqlCodegen: {
+    config: {
+      schema: './gql/schema.graphql',
+      documents: ['./**/*.vue'],
+      ignoreNoDocuments: true, // for better experience with the watcher
+      generates: {
+        './gql/': {
+          preset: 'client',
+          config: {
+            useTypeImports: true
+          }
+        }
+      },
     }
   },
 

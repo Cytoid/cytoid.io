@@ -3,9 +3,13 @@
   "version": "2.0.0",
   "description": "Cytoid is a music game where you can create, share and play your own levels! Powered by community, with many dedicated creators, Cytoid provides a huge variety of musical genres to enjoy and a diverse range of gameplay design.",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "dev:local": "cross-env NODE_APP_INSTANCE=local nuxt dev",
+    "gql": "npx cross-env NODE_ENV=production node ./cli/codegen-update.js",
+    "gql:local": "npx cross-env NODE_APP_INSTANCE=local node ./cli/codegen-update.js",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -14,7 +18,6 @@
     "@graphql-codegen/cli": "^4.0.1",
     "@graphql-codegen/client-preset": "^4.0.1",
     "@nuxt/devtools": "latest",
-    "@nuxtjs/apollo": "^5.0.0-alpha.6",
     "@nuxtjs/google-fonts": "^3.0.1",
     "@nuxtjs/i18n": "^8.0.0-beta.13",
     "@nuxtjs/tailwindcss": "^6.8.0",
@@ -23,6 +26,7 @@
     "@types/marked": "^5.0.0",
     "@types/node": "^18.16.19",
     "@types/sanitize-html": "^2.6.2",
+    "@urql/core": "^4.0.11",
     "@vueuse/nuxt": "^10.2.1",
     "config": "^3.3.9",
     "cross-env": "^7.0.3",
@@ -35,7 +39,7 @@
     "sanitize-html": "^2.7.3",
     "vue-recaptcha": "^3.0.0-alpha.6"
   },
-  "resolutions": {
-    "tslib": "2.5.1"
+  "dependencies": {
+    "graphql": "^16.7.1"
   }
 }

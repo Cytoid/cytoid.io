@@ -1,0 +1,589 @@
+directive @column(name: String, primary: Boolean, select: [String!]) on FIELD_DEFINITION
+
+directive @toOne(name: String!, field: String) on FIELD_DEFINITION
+
+directive @toMany(name: String!, field: String) on FIELD_DEFINITION
+
+directive @relation(name: String!, field: String, select: [String!]) on FIELD_DEFINITION
+
+directive @reverseRelation(name: String!) on FIELD_DEFINITION
+
+directive @raw on FIELD_DEFINITION
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Avatar {
+  original: String
+  small: String
+  large: String
+  sized(size: Int): String
+}
+
+type Badge {
+  uid: String!
+  title: String!
+  description: String
+  metadata: Object
+}
+
+type Chart {
+  id: Int!
+  name: String
+  difficulty: Int!
+  type: String!
+  notesCount: Int!
+  leaderboard(start: Int!, limit: Int!): [LeaderboardRecord!]!
+  numPlayers: Int!
+}
+
+type Collection {
+  id: ID!
+  uid: String!
+  cover: Image
+  title: String!
+  slogan: String!
+  description: String!
+  owner: User
+  levelCount: Int!
+  levels(limit: Int): [Level!]!
+  creationDate: Date!
+  modificationDate: Date!
+  tags: [String!]!
+  state: ResourceState!
+  metadata: ResourceMeta!
+}
+
+input CollectionInput {
+  uid: String
+  coverPath: String
+  title: String
+  slogan: String
+  description: String
+  levelIds: [Int!]
+  tags: [String!]
+  state: ResourceState
+  metadata: CollectionMetaInput
+}
+
+type CollectionListing {
+  id: ID!
+  uid: String!
+  cover: Image
+  title: String!
+  slogan: String!
+  description: String!
+  owner: User
+  levelCount: Int!
+  creationDate: Date!
+  modificationDate: Date!
+  tags: [String!]!
+  state: ResourceState!
+  metadata: ResourceMeta!
+}
+
+input CollectionMetaInput {
+  cover: ResourceMetaInput
+}
+
+type CollectionUserListing {
+  id: ID!
+  uid: String!
+  cover: Image
+  title: String!
+  slogan: String!
+  description: String!
+  levelCount: Int!
+  creationDate: Date!
+  modificationDate: Date!
+  tags: [String!]!
+  state: ResourceState!
+  metadata: ResourceMeta!
+}
+
+type Comment {
+  id: Int!
+  category: String!
+  key: String!
+  content: String!
+  date: Date!
+  owner: User
+  metadata: Object
+}
+
+scalar Date
+
+type Email {
+  address: String!
+  verified: Boolean!
+  primary: Boolean
+}
+
+type File {
+  path: String!
+  creationDate: Date
+}
+
+scalar FileSize
+
+enum GameplayMods {
+  FC
+  AP
+  FlipX
+  FlipY
+  FlipAll
+  Fast
+  Slow
+  Hard
+  ExHard
+  HideScanline
+  HideNotes
+}
+
+type Image {
+  original: String
+  thumbnail: String
+  cover: String
+  stripe: String
+  sized(height: Int, width: Int): String
+}
+
+type LeaderboardRecord {
+  id: Int!
+  date: Date!
+  owner: User
+  score: Int!
+  accuracy: Float!
+  mods: [GameplayMods!]!
+  details: RecordDetails!
+}
+
+type Level {
+  id: Int!
+  version: Int!
+  uid: String!
+  title: String!
+  metadata: LevelMeta!
+  duration: Float!
+  size: FileSize!
+  description: String!
+  state: ResourceState!
+  censored: String
+  tags: [String!]!
+  category: [String!]!
+  owner: User
+  creationDate: Date!
+  modificationDate: Date!
+  bundle: LevelBundle
+  charts: [Chart!]!
+  rating: Rating!
+  owned: Boolean
+}
+
+type LevelBundle {
+  music: String
+  musicPreview: String
+  backgroundImage: Image
+}
+
+type LevelMeta {
+  title_localized: String
+  artist: ResourceMetaProperty
+  illustrator: ResourceMetaProperty
+  charter: ResourceMetaProperty
+  storyboarder: ResourceMetaProperty
+}
+
+enum LevelQuerySort {
+  CREATION_DATE
+  MODIFICATION_DATE
+  DURATION
+  DOWNLOADS
+  PLAYS
+  RATING
+  DIFFICULTY
+}
+
+scalar Long
+
+type Mutation {
+  updateCollection(id: ID!, input: CollectionInput!): CollectionUserListing
+  createCollection(input: CollectionInput!): CollectionUserListing
+  deleteCollection(id: ID!): CollectionUserListing
+  evaluateEpic(id: String): String
+  rateLevel(id: String!, rating: Int): Rating!
+  unpackLevelPackage(token: String!, replace: String): UserLevel
+  deleteLevel(id: ID!): Boolean
+  updateLevel(id: ID!, input: UpdateLevelInput): Boolean
+  addToLibrary(levelId: Int!): Boolean
+  removeFromLibrary(levelId: Int!): Boolean
+  createPost(post: PostInput): Post
+  updatePost(id: ID!, input: PostInput): Post
+  deletePost(id: ID!): Post
+  addEmail(email: String!): Boolean
+  sendVerificationEmail(email: String!): Boolean
+  makeEmailPrimary(email: String!): Boolean
+  deleteEmail(email: String!): Boolean
+  sendResetPasswordEmail(email: String!): Boolean
+  changePasswordWithToken(token: String!, password: String!): Boolean
+  changePassword(oldPassword: String!, newPassword: String!): Boolean
+  removeExternalAccount(provider: String!): Boolean
+  addExternalAccount(token: String!): Boolean
+  updateProfile(input: ProfileInput!): Boolean
+  updateProfileHeader(path: String!): Image
+  setAvatar(path: String): Avatar
+  setUserActive(id: ID!, active: Boolean!): Boolean
+  banUser(id: ID!, reason: String!): Boolean
+  grantUserBadge(id: ID!, badge: String!): Boolean
+}
+
+type My {
+  collections: [CollectionUserListing!]!
+  levels(start: Int, limit: Int): [UserStudioLevel!]!
+  levelsCount: Int!
+  library(granted: Boolean): [Level!]!
+  emails: [Email!]!
+  user: User
+  externalAccountProviders: [String!]!
+}
+
+scalar Object
+
+type Post {
+  id: String!
+  type: PostType!
+  uid: String!
+  title: String
+  slogan: String
+  content: String
+  state: ResourceState!
+  creationDate: Date
+  modificationDate: Date
+  startDate: Date
+  endDate: Date
+  cover: Image
+  logo: Image
+  metadata: PostMeta
+  locked: Boolean
+}
+
+type PostDetail {
+  id: String!
+  type: PostType!
+  uid: String!
+  title: String
+  slogan: String
+  content: String
+  state: ResourceState!
+  creationDate: Date
+  modificationDate: Date
+  startDate: Date
+  endDate: Date
+  cover: Image
+  logo: Image
+  metadata: PostMeta
+  locked: Boolean
+  level: Level
+  collection: Collection
+  epicId: String
+}
+
+input PostInput {
+  type: PostType
+  uid: String
+  title: String
+  slogan: String
+  content: String
+  state: ResourceState
+  coverPath: String
+  logoPath: String
+  metadata: PostMetaInput
+  startDate: Date
+  endDate: Date
+  locked: Boolean
+  levelId: Int
+  collectionId: ID
+}
+
+type PostMeta {
+  cover: ResourceMetaProperty
+}
+
+input PostMetaInput {
+  cover: ResourceMetaInput
+}
+
+enum PostType {
+  POST
+  PAGE
+  EVENT
+}
+
+type Profile {
+  badges: [Badge!]!
+  recentRecords(limit: Int): [UserRecord!]!
+  bestRecords(limit: Int): [UserRecord!]!
+  id: ID!
+  user: User
+  birthday: Date
+  bio: String
+  header: Image
+  rating: Float!
+  exp: ProfileExp!
+  grades: ProfileGrades!
+  activity: ProfileActivity!
+  timeseries: [ProfileTimeSeries!]!
+}
+
+type ProfileActivity {
+  totalRankedPlays: Long!
+  clearedNotes: Long!
+  maxCombo: Long!
+  averageRankedAccuracy: Float!
+  totalRankedScore: Long!
+  totalPlayTime: Float!
+}
+
+type ProfileExp {
+  basicExp: Int!
+  levelExp: Int!
+  totalExp: Int!
+  currentLevel: Int!
+  nextLevelExp: Int!
+  currentLevelExp: Int!
+}
+
+type ProfileGrades {
+  MAX: Int!
+  SS: Int!
+  S: Int!
+  A: Int!
+  B: Int!
+  C: Int!
+  D: Int!
+  F: Int!
+}
+
+input ProfileInput {
+  birthday: Date
+  bio: String
+}
+
+type ProfileTimeSeries {
+  cumulativeRating: Float!
+  cumulativeAccuracy: Float!
+  week: Int!
+  year: Int!
+  accuracy: Float!
+  rating: Float!
+  count: Int!
+}
+
+type Query {
+  discordOnlineCount: Int
+  recentTweet: String
+  collectionsCount: Int!
+  collection(id: ID, uid: String): Collection
+  collections(limit: Int, cursor: ID, ownerId: String): [CollectionListing!]!
+  recentComments(limit: Int): [Comment!]!
+  level(uid: String!): Level
+  levels(order: QueryOrder, page: Int, limit: Int, sort: LevelQuerySort, category: String): [Level!]!
+  levelsCount(category: String): Int!
+  chart(levelUid: String!, chartType: String!): Chart
+  getPosts(limit: Int!, all: Boolean, skip: Int): [Post!]!
+  getActivePosts(limit: Int!, skip: Int): [Post!]!
+  getPost(uid: String!): PostDetail
+  recentRecords(limit: Int, ranked: Boolean): [Record!]!
+  searchLevels(search: String!, start: Int, limit: Int, strategy: SearchLevelSortingStrategy, order: SearchLevelOrder): [Level!]!
+  profile(id: ID, uid: String): Profile
+  user(id: ID, uid: String): User
+  my: My
+}
+
+enum QueryOrder {
+  ASC
+  DESC
+}
+
+type Rating {
+  average: Float
+  total: Int!
+  rating: Float
+  distribution: [Int!]!
+}
+
+type Record {
+  id: Int!
+  date: Date!
+  owner: User
+  chart: RecordChart
+  score: Int!
+  accuracy: Float!
+  mods: [GameplayMods!]!
+  ranked: Boolean!
+  details: RecordDetails!
+  rank: Int
+}
+
+type RecordChart {
+  id: Int!
+  name: String
+  difficulty: Int!
+  type: String!
+  notesCount: Int!
+  level: RecordLevel
+}
+
+type RecordDetails {
+  perfect: Int!
+  great: Int!
+  good: Int!
+  bad: Int!
+  miss: Int!
+  maxCombo: Int!
+}
+
+type RecordLevel {
+  id: Int!
+  version: Int!
+  uid: String!
+  title: String!
+  metadata: LevelMeta!
+  duration: Float!
+  size: FileSize!
+  description: String!
+  state: ResourceState!
+  censored: String
+  tags: [String!]!
+  category: [String!]!
+  owner: User
+  creationDate: Date!
+  modificationDate: Date!
+  bundle: LevelBundle
+}
+
+type ResourceMeta {
+  cover: ResourceMetaProperty
+}
+
+input ResourceMetaInput {
+  name: String
+  localized_name: String
+  url: String
+}
+
+type ResourceMetaProperty {
+  name: String
+  localized_name: String
+  url: String
+}
+
+enum ResourceState {
+  PRIVATE
+  PUBLIC
+  UNLISTED
+}
+
+enum Role {
+  MODERATOR
+  ADMIN
+  USER
+}
+
+enum SearchLevelOrder {
+  ASC
+  DESC
+}
+
+enum SearchLevelSortingStrategy {
+  CREATION_DATE
+  MODIFICATION_DATE
+  DURATION
+  DOWNLOADS
+  PLAYS
+  RATING
+  DIFFICULTY
+}
+
+input UpdateLevelInput {
+  state: ResourceState
+  tags: [String!]
+  description: String
+  censored: String
+  category: [String!]
+}
+
+type User {
+  collectionsCount: Int!
+  collections(first: Int): [CollectionUserListing!]!
+  levelsCount(category: String): Int!
+  levels(first: Int, category: String, sort: LevelQuerySort, order: QueryOrder): [UserLevel!]!
+  id: ID!
+  uid: String
+  name: String
+  emails: [Email!]!
+  registrationDate: Date
+  role: Role!
+  avatar: Avatar!
+  active: Boolean
+  lastSeen: Date
+  my: My
+}
+
+type UserLevel {
+  id: Int!
+  version: Int!
+  uid: String!
+  title: String!
+  metadata: LevelMeta!
+  duration: Float!
+  size: FileSize!
+  description: String!
+  state: ResourceState!
+  censored: String
+  tags: [String!]!
+  category: [String!]!
+  creationDate: Date!
+  modificationDate: Date!
+  bundle: LevelBundle
+  charts: [Chart!]!
+}
+
+type UserRecord {
+  id: Int!
+  date: Date!
+  chart: RecordChart
+  score: Int!
+  accuracy: Float!
+  mods: [GameplayMods!]!
+  ranked: Boolean!
+  details: RecordDetails!
+  rating: Float!
+}
+
+type UserStudioLevel {
+  id: Int!
+  version: Int!
+  uid: String!
+  title: String!
+  metadata: LevelMeta!
+  duration: Float!
+  size: FileSize!
+  description: String!
+  state: ResourceState!
+  censored: String
+  tags: [String!]!
+  category: [String!]!
+  creationDate: Date!
+  modificationDate: Date!
+  bundle: LevelBundle
+  charts: [Chart!]!
+  downloadCount: Float
+  playCount: Float
+  avgRating: Float
+  ratingCount: Float
+}
+
