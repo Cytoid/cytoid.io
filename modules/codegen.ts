@@ -3,6 +3,7 @@ import { generate } from "@graphql-codegen/cli";
 import consola from "consola";
 import type { Types } from "@graphql-codegen/plugin-helpers";
 import { glob } from "glob";
+import { readFile } from "fs/promises";
 
 
 // Module options TypeScript interface definition
@@ -34,7 +35,7 @@ export default defineNuxtModule<CodegenOptions>({
         await generate({
           ...config,
           silent: true,
-        }, false);
+        }, true);
         const time = Date.now() - start;
         consola.success(`GraphQL code generated in ${time}ms`);
       }
@@ -46,7 +47,14 @@ export default defineNuxtModule<CodegenOptions>({
         const files = documents.map((doc) => glob.sync(doc, {
           absolute: true,
         })).flat()
-        if (documents.some((doc) => files.includes(path))) {
+        
+        const changedFile = await readFile(path, 'utf-8')
+        if (!(changedFile.includes('graphql') || changedFile.includes('gql'))) {
+          consola.info(`GraphQL codegen skipped`)
+          return
+        }
+        
+        if (files.includes(path)) {
           consola.start(`Regenerating GraphQL code: ${path}`)
           generateCode()
         }
