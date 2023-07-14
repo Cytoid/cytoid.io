@@ -25,10 +25,9 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 const ctdApp = useCytoidPage()
-useHead({
-  title: ctdApp.value.title != '' ? ctdApp.value.title : '',
+watchEffect(() => {
+  // do some thing when ctdApp changed
 })
 </script>

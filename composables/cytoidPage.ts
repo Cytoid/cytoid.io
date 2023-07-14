@@ -4,6 +4,9 @@ export const defineCytoidPage = (data:IPageData) => {
     ...getDefault(),
     ...data
   }
+  useHead({
+    title: pageData.value.title,
+  })
 }
 
 // Should only be used in /index
@@ -26,7 +29,7 @@ function getDefault () {
 
 interface IPageData {
   background?: string
-  title: string
+  title?: string
 }
 
 interface PageData {

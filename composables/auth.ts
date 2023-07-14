@@ -44,7 +44,7 @@ export const useAuth = () => {
     })
     const userData = response.data.value?.user ?? null
     user.value = userData
-    return userData
+    return response
   }
 
   const toLogin = async (back?: string) => {

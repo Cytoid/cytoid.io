@@ -8,19 +8,19 @@
           <div class="mt-2" />
           <div class="form-control">
             <div class="join w-full">
-              <span class="join-item btn btn-neutral">
+              <label for="login-username" class="join-item btn btn-neutral">
                 <Icon name="ph:user-bold" size="18" />
-              </span>
-              <input v-model="loginForm.username" type="text" :placeholder="t('login.username_field_placeholder')"
+              </label>
+              <input id="login-username" v-model="loginForm.username" type="text" :placeholder="t('login.username_field_placeholder')"
                 class="join-item input input-bordered flex-1 w-full" />
             </div>
           </div>
           <div class="form-control">
             <div class="join w-full">
-              <span class="join-item btn btn-neutral">
+              <label for="login-password" class="join-item btn btn-neutral">
                 <Icon name="material-symbols:key" size="18" />
-              </span>
-              <input v-model="loginForm.password" type="password" :placeholder="t('login.password_field_placeholder')"
+              </label>
+              <input id="login-password" v-model="loginForm.password" type="password" :placeholder="t('login.password_field_placeholder')"
                 class="join-item input input-bordered flex-1 w-full" />
             </div>
             <label class="label">
@@ -36,17 +36,17 @@
           </div>
           <div class="form-control mt-2">
             <Captcha v-slot="{ verify }">
-              <button class="btn btn-primary" @click="loginWithPayload(verify)">{{ t('general.login_btn') }}</button>
+              <button :disabled="loading" class="btn btn-primary" @click="loginWithPayload(verify)">{{ t('general.login_btn') }}</button>
             </Captcha>
           </div>
           <div class="flex w-full justify-around">
-            <button class="btn btn-link" @click="loginWithProvider('google')">
+            <button :disabled="loading" class="btn btn-link" @click="loginWithProvider('google')">
               <Icon name="bi:google" size="20" />
             </button>
-            <button class="btn btn-link">
+            <button :disabled="loading" class="btn btn-link">
               <Icon name="bi:facebook" size="20" @click="loginWithProvider('facebook')" />
             </button>
-            <button class="btn btn-link">
+            <button :disabled="loading" class="btn btn-link">
               <Icon name="bi:discord" size="20" @click="loginWithProvider('discord')" />
             </button>
           </div>
@@ -70,13 +70,15 @@ const { t } = useI18n()
 
 const { login: _loginWithPayload, user } = useAuth()
 
+const loading = ref(false)
+
 const loginForm = {
   username: "",
   password: "",
   remember: false
 }
 
-const loginWithPayload = async (verify: () => any) => {
+const loginWithPayload = async (verify: () => Promise<string>) => {
   if (loginForm.username === '') {
     return
   }
@@ -84,13 +86,17 @@ const loginWithPayload = async (verify: () => any) => {
     return
   }
 
+  loading.value = true
+
   const captchaToken = await verify()
   // console.log(captchaToken)
-  const userData = await _loginWithPayload({
+  const response = await _loginWithPayload({
     ...loginForm,
     captcha: captchaToken
-  }).catch((error) => {
-    const code = error.response?.status ?? 0
+  })
+  if (response.error.value) {
+    const error = response.error.value
+    const code = error.statusCode
     if (code == 401) {
       errorAlert(t('general.login_password_error'))
       return
@@ -101,12 +107,14 @@ const loginWithPayload = async (verify: () => any) => {
       errorAlert(t('general.login_username_error'))
       return
     } else {
-      console.log(`Unknown error(${code}): `, error)
+      handleErrorToast(error)
     }
-  })
-  // console.log(userData)
-  if (userData) {
-    successAlert(t('general.login_snack_bar', {name: userData.name || userData.uid}))
+  }
+
+  loading.value = false
+  
+  if (user.value) {
+    successAlert(t('general.login_snack_bar', {name: user.value.name || user.value.uid}))
     loginNext()
   }
 }

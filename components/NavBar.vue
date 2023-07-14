@@ -5,8 +5,6 @@
         <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="/">{{ $t('general.nav_home') }}</NuxtLink>
         <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="/levels">{{ $t('general.nav_levels') }}</NuxtLink>
         <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="https://cytoid.wiki">{{ $t('general.nav_wiki') }}</NuxtLink>
-        <NuxtLink
-          class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary">Qualified</NuxtLink>
       </div>
 
       <div class="flex flex-1 sm:hidden">

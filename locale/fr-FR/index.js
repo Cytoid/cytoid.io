@@ -8,7 +8,7 @@ import profile from './profile.json'
 import settings from './settings.json'
 import signup from './signup.json'
 import studio from './studio.json'
-
+import link from './link.json'
 
 const locale = {
   general,
@@ -21,6 +21,7 @@ const locale = {
   settings,
   signup,
   studio,
+  link,
 }
 
 export default locale

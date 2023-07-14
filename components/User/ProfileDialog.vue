@@ -1,7 +1,7 @@
 <template>
   <div v-if="profile" class="fixed right-4 top-12 p-2 sm:absolute sm:top-8 sm:-right-4">
     <div class="card bg-base-100 shadow-xl w-72">
-      <div class="card w-full bg-base-100 max-h-30 shadow-xl image-full">
+      <div class="card w-full bg-base-100 max-h-30 shadow-xl image-full aspect-video">
         <figure><img v-if="profile.header?.thumbnail" :src="profile.header.thumbnail" /></figure>
         <div class="card-body px-6 py-2 select-none">
           <div class="flex w-full mt-4">
