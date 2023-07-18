@@ -1,5 +1,4 @@
 <template>
-  {{ route.query }}
   <LayoutSession>
     <div class="my-2">
       <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -96,7 +95,7 @@ const linkAccount = async (verify: () => Promise<string>) => {
     } else if (code == 404) {
       // Account does not exist.
       router.replace({
-        name: 'session-register',
+        name: 'session-signup',
         query: {
           token: token.value,
           provider: provider.value,

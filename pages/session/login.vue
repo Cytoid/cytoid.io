@@ -24,8 +24,7 @@
                 class="join-item input input-bordered flex-1 w-full" />
             </div>
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover ml-auto">{{ t('general.forgot_password_link_title')
-              }}</a>
+              <NuxtLink :to="{name: 'session-reset'}" class="label-text-alt link link-hover ml-auto">{{ t('general.forgot_password_link_title') }}</NuxtLink>
             </label>
           </div>
           <div class="form-control">
@@ -54,7 +53,7 @@
           <h2 class="card-title">{{ t('login.new_user_welcome_title') }}</h2>
           <p>{{ t('login.new_user_welcome_content') }}</p>
           <div class="form-control mt-2">
-            <NuxtLink class="btn btn-primary" to="/session/signup">{{ t('general.signup_btn') }}</NuxtLink>
+            <NuxtLink class="btn btn-secondary" to="/session/signup">{{ t('general.signup_btn') }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -148,11 +147,6 @@ const loginWithProvider = (provider: string) => {
   }
 }
 
-defineCytoidPage({
-  title: 'Login',
-  background: '/images/session.jpg'
-})
-
 function loginNext() {
   if (route.query.origin) {
     router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
@@ -160,4 +154,9 @@ function loginNext() {
     router.replace({ name: 'settings-account' })
   }
 }
+
+defineCytoidPage({
+  title: 'Login',
+  background: '/images/session.jpg'
+})
 </script>

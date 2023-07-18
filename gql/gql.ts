@@ -16,6 +16,8 @@ const documents = {
     "\n  query FetchNavCard($id: ID!) {\n    profile(id: $id) {\n      id\n      exp {\n        totalExp\n        currentLevelExp\n        nextLevelExp\n        currentLevel\n      }\n      rating\n      header {\n        thumbnail\n      }\n      user {\n        id\n        avatar {\n          original\n        }\n      }\n    }\n  }\n": types.FetchNavCardDocument,
     "\n  query GetPost($uid: String!) {\n    page: getPost(uid: $uid) {\n      id\n      uid\n      title\n      slogan\n      content\n      state\n      creationDate\n      modificationDate\n      startDate\n      endDate\n      cover {\n        original\n      }\n    }\n  }\n": types.GetPostDocument,
     "\n  mutation LinkExternalAccount($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n": types.LinkExternalAccountDocument,
+    "\n  mutation ChangePasswordWithToken($password: String!, $token: String!) {\n    success: changePasswordWithToken(password: $password, token: $token)\n  }\n": types.ChangePasswordWithTokenDocument,
+    "\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n": types.SendPasswordResetEmailDocument,
 };
 
 /**
@@ -44,6 +46,14 @@ export function graphql(source: "\n  query GetPost($uid: String!) {\n    page: g
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation LinkExternalAccount($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n"): (typeof documents)["\n  mutation LinkExternalAccount($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation ChangePasswordWithToken($password: String!, $token: String!) {\n    success: changePasswordWithToken(password: $password, token: $token)\n  }\n"): (typeof documents)["\n  mutation ChangePasswordWithToken($password: String!, $token: String!) {\n    success: changePasswordWithToken(password: $password, token: $token)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n"): (typeof documents)["\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

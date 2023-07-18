@@ -29,14 +29,14 @@
     - [ ] `manage`
 - [ ] `profile`
   - [ ] `[id]`
-- [ ] `session`
-  - [ ] `index`
+- [x] `session`
+  - [x] `index`
   - [x] `login`
   - [x] `link`
-  - [ ] `signUp`
-  - [ ] `reset`
-    - [ ] `[token]`
-    - [ ] `link`
+  - [x] `signUp`
+  - [x] `reset`
+    - [x] `[token]`
+    - [x] `link`
 - [ ] `settings`
   - [ ] `account`
   - [ ] `donation`
@@ -62,3 +62,8 @@ waiting design
   - [ ] `index`
   - [ ] `manage`
   - [ ] `[levelId]`
+
+
+## Something else
+
+- `global.window.gtag`
