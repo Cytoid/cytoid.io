@@ -1,6 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   WIP
 </template>
-
-<script setup lang="ts">
-</script>

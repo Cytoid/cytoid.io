@@ -1,9 +1,12 @@
-<template>
-</template>
-
 <script setup lang="ts">
 const router = useRouter()
 router.replace({
-  name: 'session-login'
+  name: 'session-login',
 })
 </script>
+
+<template>
+  <div>
+    Redirecting...
+  </div>
+</template>

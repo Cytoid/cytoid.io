@@ -1,6 +1,6 @@
 <template>
   <div class="md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
-    <div class="col-span-3" id="StudioMenu">
+    <div id="StudioMenu" class="col-span-3">
       <slot name="StudioMenu" />
     </div>
 

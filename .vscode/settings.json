@@ -42,9 +42,6 @@
     "websockets",
     "wonka"
   ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
   "files.associations": {
     "*.css": "tailwindcss"
   },
@@ -55,5 +52,24 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
   "i18n-ally.namespace": true,
-  "i18n-ally.sourceLanguage": "en"
+  "i18n-ally.sourceLanguage": "en",
+
+  "prettier.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
+  ]
+
 }

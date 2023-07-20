@@ -1,15 +1,17 @@
 // Thanks to https://github.com/gbicou/nuxt3-urql/blob/main/plugins/urql.ts but with some modifications.
-import { createClient, ssrExchange, Client, cacheExchange, fetchExchange, SSRData } from '@urql/core'
+import type { Client, SSRData } from '@urql/core'
+import { cacheExchange, createClient, fetchExchange, ssrExchange } from '@urql/core'
+
 const ssrKey = '__URQL_DATA__'
 
-export default defineNuxtPlugin(nuxt => {
+export default defineNuxtPlugin((nuxt) => {
   const { vueApp } = nuxt
-  
+
   const config = useRuntimeConfig()
   const url = config.public.graphqlURL
 
   const ssr = ssrExchange({
-    isClient: process.client
+    isClient: process.client,
   })
 
   // when app is created in browser, restore SSR state from nuxt payload
@@ -34,8 +36,8 @@ export default defineNuxtPlugin(nuxt => {
       fetchExchange,
     ],
     fetchOptions: {
-      credentials: 'include'
-    }
+      credentials: 'include',
+    },
   })
 
   nuxt.provide('urql', client)

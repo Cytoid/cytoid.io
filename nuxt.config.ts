@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts',
   },
 
-  
   googleFonts: {
     download: false, // speed up dev by not downloading fonts
     overwriting: false,
@@ -32,8 +31,8 @@ export default defineNuxtConfig({
       'Noto Sans SC': true,
       'Noto Sans TC': true,
       'Noto Sans JP': true,
-      'Noto Sans KR': true
-    }
+      'Noto Sans KR': true,
+    },
   },
 
   runtimeConfig: {
@@ -45,9 +44,9 @@ export default defineNuxtConfig({
       graphqlURL: config.get('graphql'),
       servicesUA: process.env.SERVICES_UA ?? '',
       recaptcha: {
-        v2SiteKey:config.get('captchaKey')
-      }
-    }
+        v2SiteKey: config.get('captchaKey'),
+      },
+    },
   },
 
   graphqlCodegen: {
@@ -59,35 +58,35 @@ export default defineNuxtConfig({
         './gql/': {
           preset: 'client',
           config: {
-            useTypeImports: true
-          }
-        }
+            useTypeImports: true,
+          },
+        },
       },
-    }
+    },
   },
 
   typescript: {
     tsConfig: {
-      include: ["types/**/*"],
-    } 
+      include: ['types/**/*'],
+    },
   },
-  
+
   app: {
     head: {
       title: 'Cytoid',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: pkg.description } // TODO: i18n description
+        { hid: 'description', name: 'description', content: pkg.description }, // TODO: i18n description
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes: '64x64' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes: '64x64' },
       ],
       script: [
-        { src: 'https://www.googletagmanager.com/gtag/js?id=' + config.get('analyticsCode'), async: true },
-        { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` }
-      ]
-    }
+        { src: `https://www.googletagmanager.com/gtag/js?id=${config.get('analyticsCode')}`, async: true },
+        { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` },
+      ],
+    },
   },
 
   // dev proxy
@@ -102,20 +101,20 @@ export default defineNuxtConfig({
           'user-agent': process.env.SERVICES_UA ?? '',
         },
         cookieDomainRewrite: {
-          'cytoid.io': 'localhost'
-        }
+          'cytoid.io': 'localhost',
+        },
       },
       '/graphql': {
-        target: config.get('serviceURLServer') + '/graphql',
+        target: `${config.get('serviceURLServer')}/graphql`,
         changeOrigin: true,
         ws: true,
         headers: {
           'user-agent': process.env.SERVICES_UA ?? '',
         },
         cookieDomainRewrite: {
-          'cytoid.io': 'localhost'
-        }
-      }
-    }
+          'cytoid.io': 'localhost',
+        },
+      },
+    },
   },
 })

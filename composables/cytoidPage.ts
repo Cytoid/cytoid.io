@@ -1,8 +1,8 @@
-export const defineCytoidPage = (data:IPageData) => {
+export function defineCytoidPage(data: IPageData) {
   const pageData = useState<PageData>('pageData')
   pageData.value = {
     ...getDefault(),
-    ...data
+    ...data,
   }
   useHead({
     title: pageData.value.title,
@@ -10,20 +10,20 @@ export const defineCytoidPage = (data:IPageData) => {
 }
 
 // Should only be used in /index
-export const resetCytoidPage = () => {
+export function resetCytoidPage() {
   const pageData = useState<PageData>('pageData')
   pageData.value = getDefault()
 }
 
-export const useCytoidPage = () => {
+export function useCytoidPage() {
   const pageData = useState<PageData>('pageData', getDefault)
   return pageData
 }
 
-function getDefault () {
+function getDefault() {
   return {
     background: '',
-    title: ''
+    title: '',
   }
 }
 

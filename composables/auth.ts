@@ -1,15 +1,15 @@
-import { useSavedCookie } from "./utils"
+import { useSavedCookie } from './utils'
 
-export const useAuth = () => {
-  const user : Ref<UserData | null> = useState('user')
-  const cookie = useSavedCookie<String | null>("cyt:sess")
+export function useAuth() {
+  const user: Ref<UserData | null> = useState('user')
+  const cookie = useSavedCookie<string | null>('cyt:sess')
 
   const _ready = useState(() => false)
   const ready = computed<boolean>(() => _ready.value)
   const isLogin = computed<boolean | null>(() => {
-    if (ready.value) {
-      return user.value != null
-    }
+    if (ready.value)
+      return user.value !== null
+
     return null
   })
 
@@ -17,20 +17,21 @@ export const useAuth = () => {
     user.value = null
     cookie.value = null
     return await useServiceFetch<SessionResponse>('session', {
-      method: 'DELETE'
+      method: 'DELETE',
     })
   }
 
   const init = async () => {
-    if (ready.value) {
+    if (ready.value)
       return user.value
-    }
+
     _ready.value = false
     const response = await useServiceFetch<SessionResponse>('session')
-    if (response.status.value == 'success') {
+    if (response.status.value === 'success') {
       const userData = response.data.value?.user ?? null
       user.value = userData
-    } else {
+    }
+    else {
       user.value = null
     }
     _ready.value = true
@@ -40,7 +41,7 @@ export const useAuth = () => {
   const login = async (payload: LoginPayload) => {
     const response = await useServiceFetch<SessionResponse>('session', {
       method: 'POST',
-      body: payload
+      body: payload,
     })
     const userData = response.data.value?.user ?? null
     user.value = userData
@@ -51,9 +52,12 @@ export const useAuth = () => {
     const route = useRoute()
     const router = useRouter()
     const origin = back ?? route.path
-    return await router.push({path: '/session/login', query: {
-      origin: origin != '/' ? encodeURIComponent(origin) : undefined
-    }})
+    return await router.push({
+      path: '/session/login',
+      query: {
+        origin: origin !== '/' ? encodeURIComponent(origin) : undefined,
+      },
+    })
   }
 
   return { user, login, init, logout, isLogin, ready, toLogin }

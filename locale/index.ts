@@ -28,10 +28,10 @@ const locale = {
   'es-ES': esES,
   'hu-HU': huHU,
   'de-DE': deDE,
-  zz: {
+  'zz': {
     general: {
-      "self": "Hi, tell Teages if you can see it",
-    }
-  } // Bug: vue i18n ignored the final language so it is a dirty fix
+      self: 'Hi, tell Teages if you can see it',
+    },
+  }, // Bug: vue i18n ignored the final language so it is a dirty fix
 }
 export default locale

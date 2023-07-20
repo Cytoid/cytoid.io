@@ -1,10 +1,3 @@
-<template>
-  <div>
-    <textarea v-bind="$attrs" ref="editorDom" />
-  </div>
-</template>
-
-
 <script setup lang="ts">
 import EasyMDE from 'easymde'
 import 'easymde/dist/easymde.min.css'
@@ -24,7 +17,7 @@ onMounted(() => {
   if (editorDom.value) {
     const editor = new EasyMDE({
       element: editorDom.value,
-      previewClass: "prose",
+      previewClass: 'prose',
       previewRender: useMarked,
       spellChecker: false,
       initialValue: content.value,
@@ -35,6 +28,12 @@ onMounted(() => {
   }
 })
 </script>
+
+<template>
+  <div>
+    <textarea v-bind="$attrs" ref="editorDom" />
+  </div>
+</template>
 
 <style>
 .EasyMDEContainer .CodeMirror {
@@ -162,5 +161,4 @@ onMounted(() => {
   background-color: #f9f9f9;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-
 </style>

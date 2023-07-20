@@ -1,7 +1,7 @@
 import type { UseFetchOptions } from 'nuxt/app'
 import { defu } from 'defu'
 
-export function useServiceFetch<T> (url: string, options: UseFetchOptions<T> = {}) {
+export function useServiceFetch<T>(url: string, options: UseFetchOptions<T> = {}) {
   const config = useRuntimeConfig()
   const baseURL = config.public.apiURL
   const defaults: UseFetchOptions<T> = {
@@ -17,15 +17,13 @@ export function useServiceUrl(url: string) {
   return `${baseURL}${url}`
 }
 
-export const avatarURL = (userId?: string, size?: number) => {
-  if (userId == null) {
+export function avatarURL(userId?: string, size?: number) {
+  if (userId === null)
     return 'https://artifacts.cytoid.io/avatar.jpg'
-  }
 
   let url = useServiceUrl(`/users/${userId}/avatar`)
-  if (size) {
-    url += '?size=' + size
-  }
+  if (size)
+    url += `?size=${size}`
 
   return url
 }

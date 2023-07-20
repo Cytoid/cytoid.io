@@ -1,21 +1,12 @@
-<template>
-  <slot :verify="execute" />
-  <ClientOnly>
-    <Teleport to="body">    
-      <div ref="root" />
-    </Teleport>
-  </ClientOnly>
-</template>
-
 <script setup lang="ts">
 const { root, execute: _execute, onVerify, onExpired, onError, reset } = useChallengeV2({
   options: {
     size: 'invisible',
     badge: 'bottomleft',
-  }
+  },
 })
 
-const execute = async () : Promise<string> => {
+async function execute(): Promise<string> {
   const response = await new Promise<string>((resolve, reject) => {
     reset()
     onVerify((response) => {
@@ -36,3 +27,12 @@ const execute = async () : Promise<string> => {
 }
 useRecaptchaProvider()
 </script>
+
+<template>
+  <slot :verify="execute" />
+  <ClientOnly>
+    <Teleport to="body">
+      <div ref="root" />
+    </Teleport>
+  </ClientOnly>
+</template>

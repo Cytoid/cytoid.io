@@ -1,9 +1,15 @@
 <template>
   <LayoutContent>
     <template #contentTitle>
-      <h1 class="text-5xl font-bold">Title</h1>
-      <p class="py-6">SubTitle</p>
-      <button class="btn btn-primary">Action</button>
+      <h1 class="text-5xl font-bold">
+        Title
+      </h1>
+      <p class="py-6">
+        SubTitle
+      </p>
+      <button class="btn btn-primary">
+        Action
+      </button>
     </template>
 
     <template #subContent>

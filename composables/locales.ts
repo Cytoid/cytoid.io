@@ -1,60 +1,59 @@
-import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
-//@ts-ignore
-import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs, de, hu, ko } from 'date-fns/locale/index.js'
-// ^ use this because https://github.com/date-fns/date-fns/issues/2629
+import { formatDistanceToNow, formatRelative, parseISO } from 'date-fns'
+
+// @ts-expect-error https://github.com/date-fns/date-fns/issues/2629
+import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date-fns/locale/index.js'
+
 // import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs, de, hu, ko } from 'date-fns/locale'
 // ^ TODO: back to this after https://github.com/date-fns/date-fns/pull/3099
 
-
-export const useLocales = () => {
+export function useLocales() {
   const { availableLocales, locale, setLocale: i18nSetLocale } = useI18n()
-  
+
   availableLocales.splice(availableLocales.indexOf('default'), 1)
-  
+
   const cookie = useSavedCookie('locale')
 
   const _ready = useState(() => false)
   const ready = computed<boolean>(() => _ready.value)
-  
-  const setLocale = (code:string) => {
+
+  const setLocale = (code: string) => {
     cookie.value = code
     i18nSetLocale(code)
     useHead({
-      htmlAttrs:{
-        lang: code
+      htmlAttrs: {
+        lang: code,
         // lang: code
-      }
+      },
     })
   }
-  
+
   i18nSetLocale(cookie.value || 'en')
   useHead({
-    htmlAttrs:{
-      lang: cookie.value || 'en'
-    }
+    htmlAttrs: {
+      lang: cookie.value || 'en',
+    },
   })
 
-  const init = (acceptLangHeader?:string) => {
-    if (ready.value) {
-      return      
-    }
-    if (cookie.value) {
+  const init = (acceptLangHeader?: string) => {
+    if (ready.value)
       return
-    }
-    if (!acceptLangHeader) {
+
+    if (cookie.value)
       return
-    }
-    
-    let acceptLangs = acceptLangHeader.split(',')
-    let acceptLangList = acceptLangs.map((lang) => {
-      let [name, langQ] = lang.split(';')
-      let q = langQ ? parseFloat(langQ.split('=')[1]) : 1
-      let langM = { name, q }
+
+    if (!acceptLangHeader)
+      return
+
+    const acceptLangs = acceptLangHeader.split(',')
+    const acceptLangList = acceptLangs.map((lang) => {
+      const [name, langQ] = lang.split(';')
+      const q = langQ ? Number.parseFloat(langQ.split('=')[1]) : 1
+      const langM = { name, q }
       return langM
     }).sort((a, b) => b.q - a.q)
-    for (let lang of acceptLangList) {
-      for (let availableLang of availableLocales) {
-        if (lang.name.toLowerCase() == availableLang.toLowerCase()) {
+    for (const lang of acceptLangList) {
+      for (const availableLang of availableLocales) {
+        if (lang.name.toLowerCase() === availableLang.toLowerCase()) {
           setLocale(lang.name)
           return
         }
@@ -66,7 +65,7 @@ export const useLocales = () => {
 }
 
 export const dateLocales = Object.freeze({
-  en: enUS,
+  'en': enUS,
   'zh-CN': zhCN,
   'zh-TW': zhTW,
   'zh-FJ': zhCN,
@@ -82,25 +81,25 @@ export const dateLocales = Object.freeze({
   'hu-HU': hu,
 })
 
-export function dateFromNow (dateStr:string) {
+export function dateFromNow(dateStr: string) {
   const locale = useLocales().locale.value
   return formatDistanceToNow(
     parseISO(dateStr),
     {
       addSuffix: true,
-      // @ts-ignore
-      locale: dateLocales[locale]
-    }
+      // @ts-expect-error that is codegen so ignore any
+      locale: dateLocales[locale],
+    },
   )
 }
-export function dateFormatCalendar (dateStr:string, from = new Date()) {
+export function dateFormatCalendar(dateStr: string, from = new Date()) {
   const locale = useLocales().locale.value
   return formatRelative(
     parseISO(dateStr),
     from,
     {
-      // @ts-ignore
-      locale: dateLocales[locale]
-    }
+      // @ts-expect-error that is codegen so ignore any
+      locale: dateLocales[locale],
+    },
   )
 }

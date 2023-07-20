@@ -1,20 +1,20 @@
-import { Ref } from "vue"
+import type { Ref } from 'vue'
 
-export const useAlert = () => {
-  const alerts:Ref<alertData[]> = useState(() => [])
+export function useAlert() {
+  const alerts: Ref<alertData[]> = useState(() => [])
 
-  const addAlert = (alert:alertData) => {
+  const addAlert = (alert: alertData) => {
     alerts.value.push({
       ...alert,
-      loading: useState(() => null)
+      loading: useState(() => null),
     })
   }
 
-  const addLoadingAlert = (alert:alertData) => {
+  const addLoadingAlert = (alert: alertData) => {
     const loading = useState(() => true)
     alerts.value.push({
       ...alert,
-      loading: loading
+      loading,
     })
     return () => {
       loading.value = false
@@ -24,75 +24,77 @@ export const useAlert = () => {
   return { alerts, addAlert, addLoadingAlert }
 }
 
-export const log = (msg:any, opts?:alertOptions) => {
+export function log(msg: any, opts?: alertOptions) {
   if (process.client) {
     const { addAlert } = useAlert()
     addAlert({
       message: typeof msg === 'string' ? msg : JSON.stringify(msg),
       type: 'none',
-      ...opts
+      ...opts,
     })
-  } else {
+  }
+  else {
+    // eslint-disable-next-line no-console
     console.log(msg)
   }
 }
 
-export const infoAlert = (msg:any, opts?:alertOptions) => {
+export function infoAlert(msg: any, opts?: alertOptions) {
   log(msg, {
     type: 'info',
-    ...opts
+    ...opts,
   })
 }
 
-export const successAlert = (msg:any, opts?:alertOptions) => {
+export function successAlert(msg: any, opts?: alertOptions) {
   log(msg, {
     type: 'success',
     icon: 'material-symbols:check-small-rounded',
-    ...opts
+    ...opts,
   })
 }
 
-export const warningAlert = (msg:any, opts?:alertOptions) => {
+export function warningAlert(msg: any, opts?: alertOptions) {
   log(msg, {
     type: 'warning',
-    ...opts
+    ...opts,
   })
 }
 
-export const errorAlert = (msg:any, opts?:alertOptions) => {
+export function errorAlert(msg: any, opts?: alertOptions) {
   log(msg, {
     type: 'error',
-    ...opts
+    ...opts,
   })
 }
 
-export const handleErrorToast = (error:Error) => {
+export function handleErrorToast(error: Error) {
   errorAlert(getMessage(error))
 }
 
-function getMessage (err:any) {
-  if (err.response?.status === 404) {
+function getMessage(err: any) {
+  if (err.response?.status === 404)
     return 'Resource Not Found'
-  }
-  return err.response?.data.message ||
-    err.response?.data.name ||
-    err.response?.data ||
-    err.message || 'Unknown Error'
+
+  return err.response?.data.message
+    || err.response?.data.name
+    || err.response?.data
+    || err.message || 'Unknown Error'
 }
 
 type alertType = 'info' | 'success' | 'warning' | 'error' | 'none'
 
 interface alertOptions {
-  type?: alertType,
-  icon?: string,
-  details?: string,
+  type?: alertType
+  icon?: string
+  details?: string
   loading?: Ref<boolean | null>
 }
 
 interface alertData {
-  message: string,
-  type?: alertType,
-  icon?: string,
-  details?: string,
+  message: string
+  type?: alertType
+  icon?: string
+  details?: string
   loading?: Ref<boolean | null>
 }
