@@ -7,8 +7,9 @@ export function useAuth() {
   const _ready = useState(() => false)
   const ready = computed<boolean>(() => _ready.value)
   const isLogin = computed<boolean | null>(() => {
-    if (ready.value)
+    if (ready.value) {
       return user.value !== null
+    }
 
     return null
   })
@@ -22,8 +23,9 @@ export function useAuth() {
   }
 
   const init = async () => {
-    if (ready.value)
+    if (ready.value) {
       return user.value
+    }
 
     _ready.value = false
     const response = await useServiceFetch<SessionResponse>('session')

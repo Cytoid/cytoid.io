@@ -15,11 +15,13 @@ const loginForm = {
 }
 
 async function loginWithPayload(verify: () => Promise<string>) {
-  if (loginForm.username === '')
+  if (loginForm.username === '') {
     return
+  }
 
-  if (loginForm.password === '')
+  if (loginForm.password === '') {
     return
+  }
 
   loading.value = true
 
@@ -63,8 +65,9 @@ function loginWithProvider(provider: string) {
   }
 
   function providerResponded(event: MessageEvent) {
-    if (event.origin !== 'https://services.cytoid.io')
+    if (event.origin !== 'https://services.cytoid.io') {
       return
+    }
 
     window.removeEventListener('message', providerResponded)
     if (event.data.user) {
@@ -86,10 +89,12 @@ function loginWithProvider(provider: string) {
 }
 
 function loginNext() {
-  if (route.query.origin)
+  if (route.query.origin) {
     router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
-  else
+  }
+  else {
     router.replace({ name: 'settings-account' })
+  }
 }
 
 defineCytoidPage({

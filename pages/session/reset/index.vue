@@ -13,11 +13,13 @@ const mutation = graphql(/* GraphQL */`
 `)
 
 async function sendResetRequest(verify: () => Promise<string>) {
-  if (sent.value !== '')
+  if (sent.value !== '') {
     return await resend(verify)
+  }
 
-  if (email.value === '')
+  if (email.value === '') {
     return
+  }
 
   loading.value = true
 
@@ -61,8 +63,9 @@ function startTimer() {
   time.value = 60
   const timer = setInterval(() => {
     time.value--
-    if (time.value <= 0)
+    if (time.value <= 0) {
       clearInterval(timer)
+    }
   }, 1000)
 }
 

@@ -35,8 +35,9 @@ export async function useQuery<Data = any, Variables extends AnyVariables = AnyV
 ) {
   const { client } = useUrql()
   const ans = await client.query(query, variables, context).toPromise()
-  if (ans.error)
+  if (ans.error) {
     throw new Error(ans.error.message)
+  }
 
   return ans.data
 }
@@ -48,8 +49,9 @@ export async function useMutation<Data = any, Variables extends AnyVariables = A
 ) {
   const { client } = useUrql()
   const ans = await client.mutation(query, variables, context).toPromise()
-  if (ans.error)
+  if (ans.error) {
     throw new Error(ans.error.message)
+  }
 
   return ans.data
 }

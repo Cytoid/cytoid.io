@@ -1,0 +1,3 @@
+interface levelDownloadResponse {
+  package: string
+}

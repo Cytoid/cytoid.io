@@ -23,17 +23,21 @@ const mutation = graphql(/* GraphQL */`
 `)
 
 async function linkAccount(verify: () => Promise<string>) {
-  if (linkForm.username === '')
+  if (linkForm.username === '') {
     return
+  }
 
-  if (linkForm.password === '')
+  if (linkForm.password === '') {
     return
+  }
 
-  if (!token.value)
+  if (!token.value) {
     return
+  }
 
-  if (!provider.value)
+  if (!provider.value) {
     return
+  }
 
   loading.value = true
 
@@ -80,10 +84,10 @@ async function linkAccount(verify: () => Promise<string>) {
 
       successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
       // loginNext()
-      if (route.query.origin)
+      if (route.query.origin) {
         router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
-      else
-        router.replace({ name: 'settings-account' })
+      }
+      else { router.replace({ name: 'settings-account' }) }
     }
   }
 

@@ -20,17 +20,21 @@ const status = ref(ResetStatus.Nature)
 
 const passwordVerify = computed(() => {
   const password = form.value.password
-  if (password === '')
+  if (password === '') {
     return t('signup.password_field_error_required')
+  }
 
-  if (password.length < 9)
+  if (password.length < 9) {
     return t('general.password_requirement_length')
+  }
 
-  if (!/[0-9]/.test(password))
+  if (!/[0-9]/.test(password)) {
     return t('general.password_requirement_number')
+  }
 
-  if (!/[a-zA-Z]/.test(password))
+  if (!/[a-zA-Z]/.test(password)) {
     return t('general.password_requirement_letter')
+  }
 
   return null
 })
@@ -65,10 +69,12 @@ async function submit() {
   }).catch((e) => {
     handleErrorToast(e)
   })
-  if (response?.success)
+  if (response?.success) {
     status.value = ResetStatus.Success
-  else
+  }
+  else {
     status.value = ResetStatus.WrongToken
+  }
 
   loading.value = false
 }

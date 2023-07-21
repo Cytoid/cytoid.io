@@ -35,14 +35,17 @@ export function useLocales() {
   })
 
   const init = (acceptLangHeader?: string) => {
-    if (ready.value)
+    if (ready.value) {
       return
+    }
 
-    if (cookie.value)
+    if (cookie.value) {
       return
+    }
 
-    if (!acceptLangHeader)
+    if (!acceptLangHeader) {
       return
+    }
 
     const acceptLangs = acceptLangHeader.split(',')
     const acceptLangList = acceptLangs.map((lang) => {

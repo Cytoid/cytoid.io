@@ -15,16 +15,23 @@ export function wait(sec: number = 0.001) {
 }
 
 export function formatBytes(bytes: number) {
-  if ((bytes >> 30) & 0x3FF)
-    return `${bytes >>> 30}.${(bytes & (3 * 0x3FF)).toString().substring(0, 2)} GB`
-  else if ((bytes >> 20) & 0x3FF)
-    return `${bytes >>> 20}.${(bytes & (2 * 0x3FF)).toString().substring(0, 2)} MB`
-  else if ((bytes >> 10) & 0x3FF)
-    return `${bytes >>> 10}.${(bytes & (0x3FF)).toString().substring(0, 2)} KB`
-  else if ((bytes >> 1) & 0x3FF)
-    return `${bytes >>> 1} Bytes`
-  else
-    return `${bytes} Byte`
+  if ((bytes >> 30) & 0x3FF) {
+    return `${bytes >>> 30
+      }.${(bytes & (3 * 0x3FF)).toString().substring(0, 2)} GB`
+  }
+  else if ((bytes >> 20) & 0x3FF) {
+    return `${bytes >>> 20
+      }.${(bytes & (2 * 0x3FF)).toString().substring(0, 2)} MB`
+  }
+  else if ((bytes >> 10) & 0x3FF) {
+    return `${bytes >>> 10
+      }.${(bytes & (0x3FF)).toString().substring(0, 2)} KB`
+  }
+  else if ((bytes >> 1) & 0x3FF) {
+    return `${bytes >>> 1
+      } Bytes`
+  }
+  else { return `${bytes} Byte` }
 }
 
 export class Meta {
@@ -32,12 +39,15 @@ export class Meta {
   title: string
   constructor(title: string, description: string, verb = null) {
     let markedDescription = sanitizeHtml(useMarked(description), { allowedTags: [] })
-    if (markedDescription.length > 100)
+    if (markedDescription.length > 100) {
       markedDescription = markedDescription.substring(0, 100)
+    }
 
     this.title = `${title} - Cytoid`
-    if (verb)
-      this.title = `${verb} ${this.title}`
+    if (verb) {
+      this.title = `${verb
+        } ${this.title}`
+    }
 
     this.meta = [
       { hid: 'description', name: 'description', content: markedDescription },

@@ -21,8 +21,9 @@ const form = ref({
 const tos = ref(false)
 
 // auto fill uid
-if (route.query.username)
+if (route.query.username) {
   form.value.username = route.query.username.toString()
+}
 
 const ctdIdVerify = computed(() => {
   // Cytoid ID 只能包含小写字母, 数字,下划线 (_), 连字号 (-), 且长度为 3 到 16 个字符
@@ -31,33 +32,39 @@ const ctdIdVerify = computed(() => {
     || form.value.username.length < 3
     || form.value.username.length > 16
     || !/^[a-z0-9_-]+$/.test(form.value.username)
-  )
+  ) {
     return t('signup.id_requirement')
+  }
 
   return null
 })
 
 const emailVerify = computed(() => {
   const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  if (form.value.email === '')
+  if (form.value.email === '') {
     return t('signup.email_field_error_required')
+  }
 
   return emailRegex.test(form.value.email) ? null : t('signup.email_field_error_invalid')
 })
 
 const passwordVerify = computed(() => {
   const password = form.value.password
-  if (password === '')
+  if (password === '') {
     return t('signup.password_field_error_required')
+  }
 
-  if (password.length < 9)
+  if (password.length < 9) {
     return t('general.password_requirement_length')
+  }
 
-  if (!/[0-9]/.test(password))
+  if (!/[0-9]/.test(password)) {
     return t('general.password_requirement_number')
+  }
 
-  if (!/[a-zA-Z]/.test(password))
+  if (!/[a-zA-Z]/.test(password)) {
     return t('general.password_requirement_letter')
+  }
 
   return null
 })
@@ -92,10 +99,12 @@ async function signUp(verify: () => Promise<string>) {
   })
   const { data, error } = response
   if (error.value || !data.value?.user) {
-    if (error.value?.message)
+    if (error.value?.message) {
       handleErrorToast(new Error(error.value.message))
-    else
+    }
+    else {
       handleErrorToast(error.value ?? new Error('Unknown error'))
+    }
 
     loading.value = false
     return
@@ -120,10 +129,12 @@ async function signUp(verify: () => Promise<string>) {
 }
 
 function loginNext() {
-  if (route.query.origin)
+  if (route.query.origin) {
     router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
-  else
+  }
+  else {
     router.replace({ name: 'settings-account' })
+  }
 }
 
 defineCytoidPage({

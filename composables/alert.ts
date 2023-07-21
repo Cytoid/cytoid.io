@@ -73,8 +73,9 @@ export function handleErrorToast(error: Error) {
 }
 
 function getMessage(err: any) {
-  if (err.response?.status === 404)
+  if (err.response?.status === 404) {
     return 'Resource Not Found'
+  }
 
   return err.response?.data.message
     || err.response?.data.name
