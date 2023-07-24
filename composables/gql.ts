@@ -1,3 +1,4 @@
+import { hash } from 'ohash'
 import type { AnyVariables, CombinedError, DocumentInput, OperationContext, OperationResult } from '@urql/core'
 import type { Subscription } from 'wonka'
 import { graphql as _graphql } from '~/gql'
@@ -17,7 +18,8 @@ export function useAsyncQuery<Data = any, Variables extends AnyVariables = AnyVa
   variables?: Variables,
   context?: Partial<OperationContext>,
 ) {
-  return useAsyncData(async () => useQuery(query, variables, context))
+  const key = hash({ query, variables, context })
+  return useAsyncData(key, () => useQuery(query, variables, context))
 }
 
 export function useLazyAsyncQuery<Data = any, Variables extends AnyVariables = AnyVariables>(
