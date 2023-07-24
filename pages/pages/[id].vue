@@ -23,9 +23,9 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const { data } = await useAsyncQuery(query, {
+const { data } = await useAsyncData(() => useQuery(query, {
   uid: pageId,
-})
+}))
 
 defineCytoidPage({
   title: data.value?.page?.title ?? undefined,

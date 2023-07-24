@@ -35,7 +35,13 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
       }"
     >
       <UserAvatarIcon :avatar="avatar" />
-      <p class="px-2">
+      <p
+        class="px-2"
+        :class="{
+          'pr-0': transparent && !reverse,
+          'pl-0': transparent && reverse,
+        }"
+      >
         {{ name }}
       </p>
     </div>

@@ -8,6 +8,10 @@ defineProps({
     type: String,
     default: null,
   },
+  size: {
+    type: Number,
+    default: 8,
+  },
 })
 const [DefineAvatarIconBody, AvatarIconBody] = createReusableTemplate()
 </script>
@@ -15,7 +19,7 @@ const [DefineAvatarIconBody, AvatarIconBody] = createReusableTemplate()
 <template>
   <DefineAvatarIconBody>
     <div class="avatar">
-      <div class="h-8 rounded-full">
+      <div class="rounded-full" :class="`h-${size}`">
         <img :src="avatar">
       </div>
     </div>

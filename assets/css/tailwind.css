@@ -98,6 +98,10 @@ body {
 
 }
 
+.card-subtitle {
+  @apply text-neutral-content font-bold uppercase opacity-80;
+}
+
 /* Custom Util Class */
 
 .clickable {

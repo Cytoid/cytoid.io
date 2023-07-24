@@ -25,7 +25,9 @@ const query = graphql(/* GraphQL */`
     }
   }
 `)
-const { data } = await useAsyncQuery(query, { id: user.value?.id ?? '' })
+const { data } = await useAsyncData(() => useQuery(query, {
+  id: user.value?.id ?? '',
+}))
 const profile = computed(() => data.value?.profile)
 
 async function logout() {
