@@ -56,7 +56,7 @@ export default defineNuxtModule<CodegenOptions>({
 
         if (files.includes(path)) {
           consola.start(`Regenerating GraphQL code: ${path}`)
-          generateCode()
+          await generateCode()
         }
       })
     }
