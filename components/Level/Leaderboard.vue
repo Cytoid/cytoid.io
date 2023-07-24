@@ -147,9 +147,7 @@ interface chartData {
           <tbody>
             <tr
               v-for="(rank, index) in rankData.chart.leaderboard" :key="index + realDiffRankPage * 10 - 9"
-              :class="{
-                'bg-neutral-focus': index % 2,
-              }"
+              class="even:bg-neutral-focus"
             >
               <th>#{{ index + realDiffRankPage * 10 - 9 }}</th>
               <td class="text-sm">

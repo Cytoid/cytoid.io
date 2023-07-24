@@ -223,9 +223,15 @@ function formatSize(size: number) {
 }
 
 defineCytoidPage({
-  title: 'WIP',
+  title: levelData.value?.level?.title ? `${levelData.value?.level?.title}` : 'Level',
   background: levelData.value?.level?.bundle?.backgroundImage?.original ?? undefined,
-})
+}, (() => {
+  const meta = new Meta(levelData.value?.level?.title ?? 'Level', levelData.value?.level?.description ?? '')
+  meta.extend('author', levelData.value?.level?.owner?.name ?? levelData.value?.level?.owner?.uid)
+  meta.extend('og:image', levelData.value?.level?.bundle?.backgroundImage?.original)
+
+  return meta
+})())
 </script>
 
 <template>
@@ -281,7 +287,7 @@ defineCytoidPage({
             v-if="levelData?.level?.owner?.id === user?.id || user?.role === 'admin' || user?.role === 'moderator'"
             :to="{ name: 'levels-id-manage', params: { uid: levelData?.level?.uid } }"
           >
-            <button class="btn">
+            <button class="btn btn-neutral">
               <Icon name="mdi:briefcase" size="24" class="mr-2" />
               {{ $t('general.manage_btn') }}
             </button>
@@ -327,8 +333,9 @@ defineCytoidPage({
               :key="tag"
               class="badge badge-neutral select-none mr-2 my-1"
               :href="`/levels?tags=${tag.toLowerCase()}`"
-              v-text="tag"
-            />
+            >
+              {{ tag }}
+            </NuxtLink>
           </div>
           <div v-else class="opacity-60 select-none">
             The level have no tags.
@@ -399,44 +406,9 @@ defineCytoidPage({
               <div class="rating rating-half items-center">
                 <input v-model="userRating" type="radio" name="rating-10" :value="0" class="rating-hidden">
                 <input
-                  v-model="userRating" type="radio" name="rating-10" :value="1"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-1"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="2"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-2"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="3"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-1"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="4"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-2"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="5"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-1"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="6"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-2"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="7"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-1"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="8"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-2"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="9"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-1"
-                >
-                <input
-                  v-model="userRating" type="radio" name="rating-10" :value="10"
-                  class="bg-yellow-600 mask mask-star-2 mask-half-2"
+                  v-for="i in 10" :key="i"
+                  v-model="userRating" type="radio" name="rating-10" :value="i"
+                  :class="`bg-yellow-600 mask mask-star-2 ${i % 2 ? 'mask-half-1' : 'mask-half-2'}`"
                 >
               </div>
               <div class="flex-1" />

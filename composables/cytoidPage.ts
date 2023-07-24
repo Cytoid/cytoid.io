@@ -1,4 +1,6 @@
-export function defineCytoidPage(data: IPageData) {
+import type { Meta } from './utils'
+
+export function defineCytoidPage(data: PageDataWithTitle, meta?: Meta) {
   const pageData = useState<PageData>('pageData')
   pageData.value = {
     ...getDefault(),
@@ -6,6 +8,7 @@ export function defineCytoidPage(data: IPageData) {
   }
   useHead({
     title: pageData.value.title,
+    ...meta,
   })
 }
 
@@ -23,16 +26,15 @@ export function useCytoidPage() {
 function getDefault() {
   return {
     background: '',
-    title: '',
+    title: undefined,
   }
 }
 
-interface IPageData {
+interface PageData {
   background?: string
   title?: string
 }
-
-interface PageData {
-  background: string
+interface PageDataWithTitle {
+  background?: string
   title: string
 }

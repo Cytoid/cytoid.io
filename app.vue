@@ -29,6 +29,7 @@ useHead({
     <NuxtLayout>
       <NuxtLoadingIndicator color="#9CAFEC" />
       <NuxtPage />
+      <slot />
     </NuxtLayout>
   </div>
   <AlertBox />

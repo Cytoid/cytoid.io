@@ -43,10 +43,9 @@ export class Meta {
       markedDescription = markedDescription.substring(0, 100)
     }
 
-    this.title = `${title} - Cytoid`
+    this.title = title
     if (verb) {
-      this.title = `${verb
-        } ${this.title}`
+      this.title = `${verb} ${this.title}`
     }
 
     this.meta = [
@@ -57,7 +56,10 @@ export class Meta {
     ]
   }
 
-  extend(id: string, content: string) {
+  extend(id: string, content?: string | null) {
+    if (!content) {
+      return
+    }
     this.meta.push({
       hid: id,
       name: id,
