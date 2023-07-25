@@ -29,29 +29,28 @@ async function loginWithPayload(verify: () => Promise<string>) {
   // console.log(captchaToken)
   const response = await _loginWithPayload({
     ...loginForm,
+    username: loginForm.username.toLowerCase(),
     captcha: captchaToken,
   })
+  loading.value = false
+
   if (response.error.value) {
     const error = response.error.value
     const code = error.statusCode
     if (code === 401) {
       errorAlert(t('general.login_password_error'))
-      return
     }
     else if (code === 403) {
       warningAlert(t('general.login_inactive_error'))
-      return
     }
     else if (code === 404) {
       errorAlert(t('general.login_username_error'))
-      return
     }
     else {
       handleErrorToast(error)
     }
+    return
   }
-
-  loading.value = false
 
   if (user.value) {
     successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
