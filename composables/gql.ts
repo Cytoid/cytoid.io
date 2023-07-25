@@ -7,18 +7,6 @@ export const gql = _graphql
 export const graphql = _graphql
 
 export function useUrql() {
-  const app = useNuxtApp()
-  const client = app.$urql
-
-  return { client }
-}
-
-export async function useQuery<Data = any, Variables extends AnyVariables = AnyVariables>(
-  query: DocumentInput<Data, Variables>,
-  variables?: Variables,
-  context?: Partial<OperationContext>,
-) {
-  // const { client } = useUrql()
   const config = useRuntimeConfig()
   const url = config.public.graphqlURL
 
@@ -34,6 +22,16 @@ export async function useQuery<Data = any, Variables extends AnyVariables = AnyV
       },
     }),
   })
+
+  return { client }
+}
+
+export async function useQuery<Data = any, Variables extends AnyVariables = AnyVariables>(
+  query: DocumentInput<Data, Variables>,
+  variables?: Variables,
+  context?: Partial<OperationContext>,
+) {
+  const { client } = useUrql()
   const ans = await client.query(query, variables, context).toPromise()
   if (ans.error) {
     throw new Error(ans.error.message)
