@@ -85,35 +85,32 @@ interface chartData {
         {{ $t('level_details.difficulty_card_title') }}
       </p>
       <div
-        class="tabs tabs-boxed w-fit"
-        :class="{
-          'bg-transparent': charts.length <= 1,
-        }"
+        class="tabs rounded-full w-fit bg-neutral/25 mt-2"
       >
         <a
-          v-if="charts.some(c => c.type === 'easy')"
-          class="tab"
+          v-if="charts.some(c => c.type === 'extreme')"
+          class="tab rounded-full order-1"
           :class="{
-            'tab-active': selectedDiffRank === 'easy',
+            'tab-active diff-badge-extreme': selectedDiffRank === 'extreme',
           }"
-          @click="selectedDiffRank = 'easy'"
-        >Easy</a>
+          @click="selectedDiffRank = 'extreme'"
+        >Extreme</a>
         <a
           v-if="charts.some(c => c.type === 'hard')"
-          class="tab"
+          class="tab rounded-full order-2"
           :class="{
-            'tab-active': selectedDiffRank === 'hard',
+            'tab-active diff-badge-hard': selectedDiffRank === 'hard',
           }"
           @click="selectedDiffRank = 'hard'"
         >Hard</a>
         <a
-          v-if="charts.some(c => c.type === 'extreme')"
-          class="tab"
+          v-if="charts.some(c => c.type === 'easy')"
+          class="tab rounded-full order-3"
           :class="{
-            'tab-active': selectedDiffRank === 'extreme',
+            'tab-active diff-badge-easy': selectedDiffRank === 'easy',
           }"
-          @click="selectedDiffRank = 'extreme'"
-        >Extreme</a>
+          @click="selectedDiffRank = 'easy'"
+        >Easy</a>
       </div>
 
       <!-- loading bar -->
@@ -196,6 +193,11 @@ interface chartData {
             </tr>
           </tbody>
         </table>
+        <div v-if="rankData.chart.leaderboard.length === 0" class="bg-base-200 w-full">
+          <p class="m-auto p-10 w-fit opacity-60 select-none">
+            No record yet.
+          </p>
+        </div>
       </div>
 
       <!-- Page Switch -->

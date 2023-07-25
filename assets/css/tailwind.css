@@ -72,21 +72,21 @@ body {
 }
 
 .diff-badge-easy {
-  @apply text-base-content border-none;
+  @apply text-base-content border-none text-white !important;
   background: linear-gradient(to bottom right, #4ca2cd, #67B26F);
-  order: 1;
+  order: 3;
 }
 
 .diff-badge-hard {
-  @apply text-base-content border-none;
+  @apply text-base-content border-none text-white !important;
   background: linear-gradient(to top left, #B06AB3, #4568DC);
   order: 2;
 }
 
 .diff-badge-extreme {
-  @apply text-base-content border-none;
+  @apply text-base-content border-none text-white !important;
   background: linear-gradient(to top left, #6f0000, #200122);
-  order: 3;
+  order: 1;
 }
 
 /* Daisyui */

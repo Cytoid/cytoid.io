@@ -1,21 +1,16 @@
 <script setup lang="ts">
-defineProps({
-  avatar: {
-    type: String,
-    default: 'https://artifacts.cytoid.io/avatar.jpg',
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  uid: {
-    type: String,
-    default: null,
-  },
-  reverse: {
-    type: Boolean,
-    default: false,
-  },
+withDefaults(defineProps<{
+  avatar: string
+  name?: string
+  uid?: string
+  transparent?: boolean
+  reverse?: boolean
+  size?: number
+}>(), {
+  avatar: 'https://artifacts.cytoid.io/avatar.jpg',
+  transparent: false,
+  reverse: false,
+  size: 16,
 })
 
 const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
@@ -24,17 +19,21 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
 <template>
   <DefineAvatarBody>
     <div
-      class="badge h-16 border-0 badge-lg py-4 px-2 clickable flex bg-transparent" :class="{
+      class="badge h-16 border-0 badge-lg py-4 clickable flex bg-transparent" :class="{
+        'bg-transparent': transparent,
         'pl-0': !reverse,
         'flex-row-reverse pr-0': reverse,
+        'px-2': name,
+        'px-0': !name,
       }"
     >
-      <UserAvatarIcon :avatar="avatar" :size="16" />
+      <UserAvatarIcon :avatar="avatar" :size="size" />
       <p
+        v-if="name"
         class="px-4"
         :class="{
-          'pr-0': !reverse,
-          'pl-0': reverse,
+          'pr-0': transparent && !reverse,
+          'pl-0': transparent && reverse,
         }"
       >
         {{ name }}

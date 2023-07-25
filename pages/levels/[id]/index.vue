@@ -104,9 +104,9 @@ levelData.value?.level?.charts.sort((a, b) => {
   return getOrder(a.type) - getOrder(b.type)
   function getOrder(t: string) {
     switch (t) {
-      case 'extreme': return 3
+      case 'extreme': return 1
       case 'hard': return 2
-      case 'easy': return 1
+      case 'easy': return 3
     }
     return 0
   }
@@ -437,7 +437,7 @@ defineCytoidPage({
       </div>
     </template>
 
-    <!-- {{ levelData }} -->
+    <!-- Leaderboard -->
     <LevelLeaderboard
       v-if="levelData?.level?.uid"
       :level-id="levelData?.level?.uid"
@@ -449,6 +449,13 @@ defineCytoidPage({
           notesCount: item.notesCount,
         }
       })"
+    />
+
+    <!-- Comment -->
+    <CommentThread
+      v-if="levelData?.level?.uid"
+      category="level"
+      :thread="levelData?.level?.uid"
     />
   </LayoutContent>
 </template>

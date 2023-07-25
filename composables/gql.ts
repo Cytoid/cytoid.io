@@ -1,5 +1,6 @@
 import type { AnyVariables, CombinedError, DocumentInput, OperationContext, OperationResult } from '@urql/core'
 import type { Subscription } from 'wonka'
+import { cacheExchange, createClient, fetchExchange } from '@urql/core'
 import { graphql as _graphql } from '~/gql'
 
 export const gql = _graphql
@@ -17,7 +18,22 @@ export async function useQuery<Data = any, Variables extends AnyVariables = AnyV
   variables?: Variables,
   context?: Partial<OperationContext>,
 ) {
-  const { client } = useUrql()
+  // const { client } = useUrql()
+  const config = useRuntimeConfig()
+  const url = config.public.graphqlURL
+
+  const client = createClient({
+    url,
+    exchanges: [
+      cacheExchange,
+      fetchExchange,
+    ],
+    fetchOptions: () => ({
+      headers: {
+        cookie: cookieFiLter(['cyt:sess']),
+      },
+    }),
+  })
   const ans = await client.query(query, variables, context).toPromise()
   if (ans.error) {
     throw new Error(ans.error.message)
@@ -68,4 +84,14 @@ export async function useSubscription<Data = any, Variables extends AnyVariables
   })
 
   return { result, error, unsubscribe: () => sub?.unsubscribe() }
+}
+
+function cookieFiLter(names: string[]) {
+  return names.map((name) => {
+    const cookie = useCookie(name)
+    if (cookie.value) {
+      return `${name}=${encodeURIComponent(cookie.value)}`
+    }
+    return undefined
+  }).filter(v => v !== undefined).join('; ')
 }
