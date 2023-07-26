@@ -5,10 +5,12 @@ withDefaults(defineProps<{
   uid?: string
   transparent?: boolean
   reverse?: boolean
+  size?: number
 }>(), {
   avatar: 'https://artifacts.cytoid.io/avatar.jpg',
   transparent: false,
   reverse: false,
+  size: 8,
 })
 
 const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
@@ -25,7 +27,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
         'px-0': !name,
       }"
     >
-      <UserAvatarIcon :avatar="avatar" />
+      <UserAvatarIcon :avatar="avatar" :size="size" />
       <p
         v-if="name"
         class="px-2"

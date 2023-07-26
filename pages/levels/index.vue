@@ -121,6 +121,7 @@ defineCytoidPage({
         <LevelCard
           v-for="level in levels" :key="level.id"
           :level="level"
+          class="shadow-xl h-56"
         />
       </div>
 

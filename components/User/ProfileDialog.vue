@@ -55,23 +55,7 @@ async function logout() {
                 </p>
               </div>
               <div v-if="profile.rating" class="flex gap-2">
-                <div
-                  v-if="profile.rating >= 16" class="tooltip tooltip-right"
-                  :data-tip="`rt ${profile.rating.toFixed(2)}`"
-                >
-                  <div class="badge badge-warning">
-                    <Icon name="mdi:crown" />
-                  </div>
-                </div>
-                <div v-else-if="profile.rating > 15" class="badge badge-warning">
-                  rt {{ profile.rating.toFixed(2) }}
-                </div>
-                <div v-else-if="profile.rating > 12" class="badge badge-info">
-                  rt {{ profile.rating.toFixed(2) }}
-                </div>
-                <div v-else class="badge badge-neutral">
-                  rt {{ profile.rating.toFixed(2) }}
-                </div>
+                <UserRatingBadge :rating="profile.rating" />
               </div>
             </div>
           </div>

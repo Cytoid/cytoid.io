@@ -51,8 +51,7 @@ async function sendPost() {
 <template>
   <div class="flex gap-x-4">
     <div v-if="!small">
-      <UserAuthor v-if="isLogin && user" :size="12" :avatar="avatarURL(user.id)" :uid="user.uid" />
-      <UserAvatar v-else :transparent="true" />
+      <UserAuthor :size="12" :avatar="user ? avatarURL(user.id) : undefined" :uid="user?.uid" class="h-12" />
     </div>
     <div
       class="flex-1 overflow-hidden card bg-base-100 min-h-16"

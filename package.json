@@ -37,6 +37,7 @@
     "@typescript-eslint/parser": "^6.1.0",
     "@urql/core": "^4.0.11",
     "@vueuse/nuxt": "^10.2.1",
+    "apexcharts": "^3.41.0",
     "config": "^3.3.9",
     "cross-env": "^7.0.3",
     "daisyui": "^3.2.1",
@@ -49,6 +50,7 @@
     "nuxt-icon": "^0.4.2",
     "sanitize-html": "^2.7.3",
     "typescript": "^5.1.6",
-    "vue-recaptcha": "^3.0.0-alpha.6"
+    "vue-recaptcha": "^3.0.0-alpha.6",
+    "vue3-apexcharts": "^1.4.4"
   }
 }

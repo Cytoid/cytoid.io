@@ -12,9 +12,9 @@
   - [x] `login`
   - [ ] `studio`
 - [ ] `levels`
-  - [ ] `index`
+  - [x] `index`
   - [ ] `[id]`
-    - [ ] `index`
+    - [x] `index`
     - [ ] `manage`
       - [ ] `index`
       - [ ] `analytics`

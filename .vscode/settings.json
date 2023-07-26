@@ -43,7 +43,7 @@
     "wonka"
   ],
   "files.associations": {
-    "*.css": "tailwindcss"
+    "*.css": "postcss"
   },
   "editor.formatOnSave": false,
   "i18n-ally.localesPaths": [

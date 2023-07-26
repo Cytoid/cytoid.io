@@ -71,6 +71,23 @@ body {
   order: 2;
 }
 
+.bg-featured {
+  @apply bg-gradient-to-br from-[#b91d73] to-[#f953c6]
+}
+
+.bg-qualified {  
+  @apply bg-gradient-to-br from-[#1D976C] to-[#1cb068]
+}
+
+.bg-featured\/25 {
+  @apply bg-gradient-to-br from-[#b91d7340] to-[#f953c640]
+}
+
+.bg-qualified\/25 {  
+  @apply bg-gradient-to-br from-[#1D976C40] to-[#1cb06840]
+}
+
+
 .diff-badge-easy {
   @apply text-base-content border-none text-white !important;
   background: linear-gradient(to bottom right, #4ca2cd, #67B26F);
@@ -89,6 +106,11 @@ body {
   order: 1;
 }
 
+/* Tailwind */
+.prose :where(hr):not(:where([class~="not-prose"] *)) {
+  @apply my-4
+}
+
 /* Daisyui */
 .capsule {
   @apply badge badge-lg py-5 px-4
@@ -99,7 +121,7 @@ body {
 }
 
 .card-subtitle {
-  @apply text-neutral-content font-bold uppercase opacity-80;
+  @apply font-bold uppercase opacity-80;
 }
 
 /* Custom Util Class */
