@@ -130,7 +130,7 @@ interface chartData {
       >
         <table class="table w-full">
           <thead class="bg-neutral text-neutral-content">
-            <tr>
+            <tr class="border-b-0">
               <th />
               <th>Player</th>
               <th>Score</th>
@@ -144,7 +144,7 @@ interface chartData {
           <tbody>
             <tr
               v-for="(rank, index) in rankData.chart.leaderboard" :key="index + realDiffRankPage * 10 - 9"
-              class="even:bg-neutral-focus"
+              class="even:bg-neutral-focus border-b-0"
             >
               <th>#{{ index + realDiffRankPage * 10 - 9 }}</th>
               <td class="text-sm">

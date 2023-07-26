@@ -46,8 +46,8 @@ const query = gql(/* GraphQL */`
         lastSeen
         levelsCount(category: "!featured")
         featuredLevelsCount: levelsCount(category: "featured")
-        levels(category: "!featured", first: 6) { ...LevelInfo }
-        featuredLevels: levels(category: "featured", first: 6) { ...LevelInfo }
+        levels(category: "!featured", first: 6, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
+        featuredLevels: levels(category: "featured", first: 6, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
       }
       rating
       badges {
