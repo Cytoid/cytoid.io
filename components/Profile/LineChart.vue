@@ -29,10 +29,14 @@ const series = computed(() => ([{
   data: props.data.map(a => [setWeek(setWeekYear(new Date(), a.year), a.week), a[key.value]]),
 }]))
 
+const height = computed(() => {
+  return 192
+})
+
 const options = computed(() => ({
   chart: {
     type: chartType.value,
-    height: 192,
+    height: height.value,
     toolbar: {
       show: false,
     },
@@ -90,9 +94,12 @@ interface ChartData {
       v-if="data.length > 0"
       :options="options"
       :series="series"
-      type="area"
-      height="100%"
+      :height="height"
       width="100%"
     />
+
+    <template #fallback>
+      Loading...
+    </template>
   </ClientOnly>
 </template>
