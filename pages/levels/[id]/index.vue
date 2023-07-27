@@ -332,10 +332,10 @@ defineCytoidPage({
             <NuxtLink
               v-for="tag in levelData?.level?.tags"
               :key="tag"
-              class="badge badge-neutral select-none mr-2 my-1"
+              class="badge badge-neutral select-none mr-2 my-1 max-w-full"
               :href="`/levels?tags=${tag.toLowerCase()}`"
             >
-              {{ tag }}
+              <span class="truncate" v-text="tag" />
             </NuxtLink>
           </div>
           <div v-else class="opacity-60 select-none">
