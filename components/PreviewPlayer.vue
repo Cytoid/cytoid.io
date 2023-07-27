@@ -29,7 +29,9 @@ watch(previewOrder, (val) => {
     if (val === nowPlaying.value) {
       reset()
     }
-    readyAndPlay(val)
+    else {
+      readyAndPlay(val)
+    }
     previewOrder.value = null
   }
 })
