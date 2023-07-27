@@ -27,14 +27,17 @@ function getDefault() {
   return {
     background: '',
     title: undefined,
+    preview: undefined,
   }
 }
 
 interface PageData {
   background?: string
   title?: string
+  preview?: string
 }
 interface PageDataWithTitle {
   background?: string
   title: string
+  preview?: string
 }

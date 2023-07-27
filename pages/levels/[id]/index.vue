@@ -225,6 +225,7 @@ function formatSize(size: number) {
 defineCytoidPage({
   title: levelData.value?.level?.title ? `${levelData.value?.level?.title}` : 'Level',
   background: levelData.value?.level?.bundle?.backgroundImage?.original ?? undefined,
+  preview: levelData.value?.level?.bundle?.musicPreview ?? undefined,
 }, (() => {
   const meta = new Meta(levelData.value?.level?.title ?? 'Level', levelData.value?.level?.description ?? '')
   meta.extend('author', levelData.value?.level?.owner?.name ?? levelData.value?.level?.owner?.uid)
@@ -258,7 +259,7 @@ defineCytoidPage({
         <template v-if="isLogin">
           <button
             v-if="levelData?.level?.owned === null"
-            class="btn btn-primary"
+            class="btn btn-secondary"
             :class="{
               loading: libLoading,
             }"

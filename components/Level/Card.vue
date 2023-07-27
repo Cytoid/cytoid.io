@@ -98,9 +98,7 @@ interface CoverData {
         />
       </div>
       <div class="flex-1" />
-      <a v-if="level.musicPreview" class="btn btn-circle btn-sm btn-ghost" @click.prevent.stop="">
-        <Icon name="material-symbols:play-arrow" size="24" />
-      </a>
+      <PreviewButton v-if="level.musicPreview" :preview-url="level.musicPreview" class="h-8" />
     </div>
   </BaseCard>
 </template>

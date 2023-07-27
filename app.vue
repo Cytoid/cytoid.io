@@ -33,4 +33,5 @@ useHead({
     </NuxtLayout>
   </div>
   <AlertBox />
+  <PreviewPlayer />
 </template>
