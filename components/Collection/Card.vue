@@ -40,6 +40,11 @@ interface CollectionData {
         class="h-8"
       />
     </div>
+    <div class="px-2 py-1 w-full flex flex-row">
+      <div class="badge badge-neutral">
+        {{ $t('general.collection_card_levels_count_tag', { count: collection.levelCount }) }}
+      </div>
+    </div>
     <div class="flex-1" />
 
     <div class="px-2 w-full flex flex-row">

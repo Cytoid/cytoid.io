@@ -10,16 +10,18 @@ const [defineBaseCardBody, BaseCardBody] = createReusableTemplate()
 </script>
 
 <template>
-  <div class="card min-w-84 max-h-60 bg-base-100 overflow-hidden flex flex-col">
+  <div class="card min-w-84 max-h-60 bg-base-100 flex flex-col">
     <defineBaseCardBody>
-      <div class="base-card w-full flex-1 bg-image-loading overflow-hidden">
-        <div
-          class="base-card-bg absolute h-full w-full bg-cover bg-center transition-all"
-          :style="`background-image: url('${cover}')`"
-        >
-          <div class="base-card-bg-cover bg-black/50 transition h-full w-full" />
+      <div class="base-card w-full flex-1 bg-image-loading">
+        <div class="absolute h-full w-full card overflow-hidden flex">
+          <div
+            class="base-card-bg flex-1 bg-cover bg-center transition-all"
+            :style="`background-image: url('${cover}')`"
+          >
+            <div class="base-card-bg-cover bg-black/60 transition h-full w-full" />
+          </div>
         </div>
-        <div class="absolute h-full w-full bg-black/20">
+        <div class="absolute h-full w-full">
           <div class="h-full w-full p-3 flex flex-col">
             <slot />
           </div>
@@ -37,11 +39,11 @@ const [defineBaseCardBody, BaseCardBody] = createReusableTemplate()
 </template>
 
 <style scoped>
-.base-card:hover > .base-card-bg {
+.base-card:hover .base-card-bg {
   @apply scale-105
 }
 
-.base-card:hover > .base-card-bg > .base-card-bg-cover {
-  @apply bg-black/20
+.base-card:hover .base-card-bg > .base-card-bg-cover {
+  @apply bg-black/25
 }
 </style>
