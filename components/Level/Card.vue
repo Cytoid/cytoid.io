@@ -29,13 +29,10 @@ interface LevelData {
   }
   cover: CoverData | string
   owner?: {
-    name: string
+    name?: string | null
     uid: string
     avatar: {
-      original: string
       small: string
-      medium: string
-      large: string
     }
   }
   charts: {

@@ -25,7 +25,6 @@ interface RecordData {
     } | null
   } | null
   owner?: {
-    id: string
     uid: string
     name?: string | null
     avatar?: {

@@ -13,6 +13,7 @@ withDefaults(defineProps<{
   size: 8,
 })
 
+const router = useRouter()
 const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
 </script>
 
@@ -45,7 +46,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
     <AvatarBody />
   </a>
 
-  <NuxtLink v-else v-bind="$attrs" :to="{ name: 'profile-id', params: { id: uid } }">
+  <button v-else v-bind="$attrs" @click.prevent.stop="router.push({ name: 'profile-id', params: { id: uid } })">
     <AvatarBody />
-  </NuxtLink>
+  </button>
 </template>

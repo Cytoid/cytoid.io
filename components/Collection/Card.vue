@@ -4,18 +4,15 @@ defineProps<{
 }>()
 
 interface CollectionData {
-  id: string
   uid: string
-  title: string
-  slogan: string
+  title?: string | null
+  slogan?: string | null
   levelCount: number
-  creationDate: any
   cover?: {
     __typename?: 'Image'
     thumbnail?: string | null
   } | null
   owner?: {
-    id: string
     uid: string
     name?: string | null
     avatar?: {
@@ -30,17 +27,18 @@ interface CollectionData {
     :to="{ name: 'collections-id', params: { id: collection.uid } }"
     :cover="collection.cover?.thumbnail ?? undefined"
   >
-    <div class="px-2 w-full flex flex-row">
-      <UserAvatar
-        v-if="collection.owner"
-        :avatar="collection.owner.avatar?.small ?? undefined"
-        :name="collection.owner.name || collection.owner.uid"
-        :uid="collection.owner.uid"
-        :transparent="true"
-        class="h-8"
-      />
-    </div>
-    <div class="px-2 py-1 w-full flex flex-row">
+    <div class="px-2 w-full flex flex-row items-center">
+      <div>
+        <UserAvatar
+          v-if="collection.owner"
+          :avatar="collection.owner.avatar?.small ?? undefined"
+          :name="collection.owner.name || collection.owner.uid"
+          :uid="collection.owner.uid"
+          :transparent="true"
+          class="h-8"
+        />
+      </div>
+      <div class="flex-1" />
       <div class="badge badge-neutral">
         {{ $t('general.collection_card_levels_count_tag', { count: collection.levelCount }) }}
       </div>
@@ -56,7 +54,6 @@ interface CollectionData {
           {{ collection.slogan }}
         </h2>
       </div>
-      <div />
     </div>
   </BaseCard>
 </template>

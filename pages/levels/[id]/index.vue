@@ -279,7 +279,7 @@ defineCytoidPage({
             <Icon name="material-symbols:favorite" size="24" class="mr-2" />
             {{ $t('general.favorite_pass_tense') }}
           </button>
-          <button v-else-if="levelData?.level?.owned === true" class="btn btn-success" disabled>
+          <button v-else-if="levelData?.level?.owned === true" class="btn btn-success" style="--tw-bg-opacity:0.8" disabled>
             <Icon name="material-symbols:check-circle" size="24" class="mr-2" />
             OWNED
           </button>
