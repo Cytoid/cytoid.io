@@ -88,8 +88,8 @@ interface CoverData {
       <div class="flex-1" />
       <div />
     </div>
-    <div class="w-full flex flex-row">
-      <div class="mt-2 flex items-center">
+    <div class="mt-2 w-full flex flex-row">
+      <div class="flex items-center">
         <LevelDiffBadgeSmall
           v-for="chart in level.charts" :key="chart.type"
           :type="chart.type" :difficulty="chart.difficulty" :notes-count="chart.notesCount" class="mx-1 h-8 badge-lg"
