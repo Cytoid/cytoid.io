@@ -1,6 +1,6 @@
 {
   "title": "Já tem um Cytoid ID?",
-  "subtitle": "Por favor, realize o login abaixo.",
+  "subtitle": "Please sign in below.",
   "username_field_placeholder": "Cytoid ID / Endereço de e-mail",
   "username_field_error_required": "Por favor, insira seu Cytoid ID ou endereço de e-mail.",
   "password_field_placeholder": "Senha",
