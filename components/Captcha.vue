@@ -32,7 +32,15 @@ useRecaptchaProvider()
   <slot :verify="execute" />
   <ClientOnly>
     <Teleport to="body">
-      <div ref="root" />
+      <div ref="root" class="google-captcha" />
     </Teleport>
   </ClientOnly>
 </template>
+
+<style>
+/* Recaptcha Popup */
+body > div:has(> div > iframe) {
+  position: fixed !important;
+  top: 2rem !important;
+}
+</style>
