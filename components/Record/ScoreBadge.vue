@@ -60,7 +60,7 @@ const scoreGrade = computed(() => gradeList.reduce((prev, { cutoff, grade }) => 
   </div>
 </template>
 
-<style>
+<style scoped>
 .badge-record-max {
   @apply border-transparent bg-yellow-400 text-black
 }
