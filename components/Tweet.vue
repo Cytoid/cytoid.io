@@ -4,8 +4,10 @@ defineProps<{
 }>()
 
 onMounted(() => {
-  // @ts-expect-error cdn
-  window?.twttr.widgets.load()
+  (async () => {
+    // @ts-expect-error cdn
+    window?.twttr.widgets.load()
+  })()
 })
 
 useHead({

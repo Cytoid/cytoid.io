@@ -6,14 +6,16 @@ const { isLogin } = useAuth()
   <!-- TODO: Hero lite -->
   <div v-if="isLogin && false" />
   <div v-else>
-    <div class="hero h-[50vh] w-full max-w-full max-h-[36rem] relative sm:flex">
+    <div class="hero h-[50vh] w-full max-w-md mx-auto sm:max-w-full max-h-[36rem] relative sm:flex">
       <div class="absolute -top-12 sm:top-0 sm:right-0 sm:w-1/2 opacity-50 sm:opacity-100">
         <img src="/images/cryout.webp" class="w-auto h-auto max-w-full max-h-full">
       </div>
       <div class="hero-content">
         <div>
-          <h1 class="text-5xl font-bold ">
-            <img src="/images/logo.png" class="w-full max-h-20">
+          <h1 class="text-5xl font-bold">
+            <div class="w-full max-h-20">
+              <img src="/images/logo.png" class="h-full sm:h-20 max-w-full max-h-full">
+            </div>
           </h1>
           <p class="py-6 ml-4">
             {{ $t('homepage.slogan') }}
