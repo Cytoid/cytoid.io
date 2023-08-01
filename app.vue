@@ -25,14 +25,12 @@ useHead({
 </script>
 
 <template>
-  <div class="w-screen h-screen overflow-hidden">
-    <div class="w-full h-full overflow-y-auto relative">
-      <NuxtLayout>
-        <NuxtLoadingIndicator color="#9CAFEC" />
-        <NuxtPage />
-        <slot />
-      </NuxtLayout>
-    </div>
+  <div class="w-full h-full">
+    <NuxtLayout>
+      <NuxtLoadingIndicator color="#9CAFEC" />
+      <NuxtPage />
+      <slot />
+    </NuxtLayout>
   </div>
   <AlertBox />
   <PreviewPlayer />
