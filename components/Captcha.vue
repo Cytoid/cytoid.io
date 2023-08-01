@@ -36,11 +36,3 @@ useRecaptchaProvider()
     </Teleport>
   </ClientOnly>
 </template>
-
-<style>
-/* Recaptcha Popup */
-body > div:has(> div > iframe) {
-  position: fixed !important;
-  top: 2rem !important;
-}
-</style>
