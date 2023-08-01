@@ -6,7 +6,7 @@ const { isLogin } = useAuth()
   <!-- TODO: Hero lite -->
   <div v-if="isLogin && false" />
   <div v-else>
-    <div class="hero h-[50vh] w-full max-w-md mx-auto sm:max-w-full max-h-[36rem] relative sm:flex">
+    <div class="hero h-[50vh] w-full min-h-[18rem] max-w-md mx-auto sm:max-w-full max-h-[36rem] relative sm:flex">
       <div class="absolute -top-12 sm:top-0 sm:right-0 sm:w-1/2 opacity-50 sm:opacity-100">
         <img src="/images/cryout.webp" class="w-auto h-auto max-w-full max-h-full">
       </div>
