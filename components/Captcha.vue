@@ -25,22 +25,19 @@ async function execute(): Promise<string> {
   })
   return response
 }
-useRecaptchaProvider()
+
+onMounted(() => {
+  useRecaptchaProvider()
+})
 </script>
 
 <template>
   <slot :verify="execute" />
   <ClientOnly>
     <Teleport to="body">
-      <div ref="root" class="google-captcha" />
+      <div class="google-captcha">
+        <div ref="root" />
+      </div>
     </Teleport>
   </ClientOnly>
 </template>
-
-<style>
-/* Recaptcha Popup */
-body > div:has(> div > iframe) {
-  position: fixed !important;
-  top: 2rem !important;
-}
-</style>
