@@ -2,8 +2,8 @@
 import type { RouteLocationRaw } from 'vue-router'
 
 defineProps<{
-  to?: RouteLocationRaw
-  cover?: string
+  to?: RouteLocationRaw | null
+  cover?: string | null
 }>()
 
 const [defineBaseCardBody, BaseCardBody] = createReusableTemplate()

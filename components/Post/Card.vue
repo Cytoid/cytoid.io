@@ -17,7 +17,7 @@ interface PostData {
 <template>
   <BaseCard
     :to="{ name: 'posts-id', params: { id: post.uid } }"
-    :cover="post.cover.stripe ?? undefined"
+    :cover="post.cover?.stripe ?? undefined"
     class="h-44"
   >
     <div v-if="post.creationDate" class="px-2 py-1 w-full flex flex-row items-center">

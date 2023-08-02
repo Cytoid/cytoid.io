@@ -120,7 +120,15 @@ defineCytoidPage({
       >
         <LevelCard
           v-for="level in levels" :key="level.id"
-          :level="level"
+          :level="{
+            ...level,
+            bundle: {
+              backgroundImage: {
+                thumbnail: level.cover.thumbnail,
+              },
+              musicPreview: level.musicPreview,
+            },
+          }"
           class="shadow-xl h-56"
         />
       </div>

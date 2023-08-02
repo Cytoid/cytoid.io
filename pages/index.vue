@@ -209,29 +209,7 @@ resetCytoidPage()
               v-for="level, index in latestFeaturedLevels" :key="index"
               class="h-48"
               :trim="true"
-              :level="{
-                uid: level.uid,
-                metadata: {
-                  title: level.title,
-                  title_localized: level.metadata.title_localized ?? undefined,
-                  artist: {
-                    name: level.metadata.artist?.name ?? undefined,
-                  },
-                },
-                musicPreview: level.bundle?.musicPreview ?? undefined,
-                cover: level.bundle?.backgroundImage?.thumbnail ?? '',
-                charts: level.charts.map(chart => ({
-                  ...chart,
-                  name: chart.name ?? undefined,
-                })),
-                owner: (level.owner?.uid && level.owner.avatar.small) ? {
-                  uid: level.owner.uid,
-                  name: level.owner.name ?? level.owner.uid,
-                  avatar: {
-                    small: level.owner.avatar.small,
-                  },
-                } : undefined,
-              }"
+              :level="level"
             />
           </div>
           <NuxtLink :to="{ name: 'levels' }" class="btn btn-secondary mt-4">
@@ -278,29 +256,7 @@ resetCytoidPage()
       v-for="level, index in hitechLevels" :key="index"
       class="h-48"
       :trim="true"
-      :level="{
-        uid: level.uid,
-        metadata: {
-          title: level.title,
-          title_localized: level.metadata.title_localized ?? undefined,
-          artist: {
-            name: level.metadata.artist?.name ?? undefined,
-          },
-        },
-        musicPreview: level.bundle?.musicPreview ?? undefined,
-        cover: level.bundle?.backgroundImage?.thumbnail ?? '',
-        charts: level.charts.map(chart => ({
-          ...chart,
-          name: chart.name ?? undefined,
-        })),
-        owner: (level.owner?.uid && level.owner.avatar.small) ? {
-          uid: level.owner.uid,
-          name: level.owner.name ?? level.owner.uid,
-          avatar: {
-            small: level.owner.avatar.small,
-          },
-        } : undefined,
-      }"
+      :level="level"
     />
   </ShowCase>
 

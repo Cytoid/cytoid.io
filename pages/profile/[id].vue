@@ -425,22 +425,7 @@ defineCytoidPage({
             v-for="level, index in featuredLevels" :key="index"
             class="h-48"
             :trim="true"
-            :level="{
-              uid: level.uid,
-              metadata: {
-                title: level.title,
-                title_localized: level.metadata.title_localized ?? undefined,
-                artist: {
-                  name: level.metadata.artist?.name ?? undefined,
-                },
-              },
-              musicPreview: level.bundle?.musicPreview ?? undefined,
-              cover: level.bundle?.backgroundImage?.thumbnail ?? '',
-              charts: level.charts.map(chart => ({
-                ...chart,
-                name: chart.name ?? undefined,
-              })),
-            }"
+            :level="level"
           />
         </div>
         <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, featured: 'true' } }" class="btn bg-featured mt-4">
@@ -467,22 +452,7 @@ defineCytoidPage({
             v-for="level, index in levels" :key="index"
             class="h-48"
             :trim="true"
-            :level="{
-              uid: level.uid,
-              metadata: {
-                title: level.title,
-                title_localized: level.metadata.title_localized ?? undefined,
-                artist: {
-                  name: level.metadata.artist?.name ?? undefined,
-                },
-              },
-              musicPreview: level.bundle?.musicPreview ?? undefined,
-              cover: level.bundle?.backgroundImage?.thumbnail ?? '',
-              charts: level.charts.map(chart => ({
-                ...chart,
-                name: chart.name ?? undefined,
-              })),
-            }"
+            :level="level"
           />
         </div>
         <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id } }" class="btn btn-neutral mt-4">
