@@ -92,7 +92,7 @@ export default defineNuxtConfig({
   },
 
   legacy: {
-    targets: ['defaults', 'not IE 11'],
+    targets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2'],
   },
 
   // dev proxy
