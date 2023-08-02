@@ -91,6 +91,10 @@ export default defineNuxtConfig({
     },
   },
 
+  legacy: {
+    targets: ['defaults', 'not IE 11'],
+  },
+
   // dev proxy
   nitro: {
     devProxy: {
