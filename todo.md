@@ -27,8 +27,8 @@
   - [ ] `[id]`
     - [ ] `index`
     - [ ] `manage`
-- [ ] `profile`
-  - [ ] `[id]`
+- [x] `profile`
+  - [x] `[id]`
 - [x] `session`
   - [x] `index`
   - [x] `login`
@@ -54,7 +54,7 @@
 
 single pages:
 - [x] `credits`
-- [ ] `index`
+- [x] `index`
 - [ ] `library`
 
 waiting design

@@ -27,7 +27,7 @@ useHead({
         {{ $t('homepage.latest_tweet_title') }}
       </h2>
     </div>
-    <div class="p-8 pt-0 mb-8 max-h-96 overflow-y-auto">
+    <div class="p-4 pt-0 mb-8 max-h-96 overflow-y-auto">
       <a
         class="twitter-timeline"
         data-dnt="true"

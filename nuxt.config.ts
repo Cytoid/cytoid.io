@@ -116,4 +116,8 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  vite: {
+    clearScreen: false,
+  },
 })

@@ -328,7 +328,7 @@ resetCytoidPage()
     </div>
 
     <div class="md:col-span-6 lg:col-span-8 lg:grid lg:grid-cols-8 lg:gap-4">
-      <div class="lg:col-span-4">
+      <div class="lg:col-span-4 mb-4">
         <!-- Tweets -->
         <Tweet class="mb-4" />
 
