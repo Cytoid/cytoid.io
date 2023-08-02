@@ -41,6 +41,9 @@ async function loadMore() {
   }
   loading.value = false
 }
+defineCytoidPage({
+  title: 'Posts',
+})
 </script>
 
 <template>
