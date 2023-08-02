@@ -1,27 +1,13 @@
 import type { AnyVariables, CombinedError, DocumentInput, OperationContext, OperationResult } from '@urql/core'
 import type { Subscription } from 'wonka'
-import { cacheExchange, createClient, fetchExchange } from '@urql/core'
 import { graphql as _graphql } from '~/gql'
 
 export const gql = _graphql
 export const graphql = _graphql
 
 export function useUrql() {
-  const config = useRuntimeConfig()
-  const url = config.public.graphqlURL
-
-  const client = createClient({
-    url,
-    exchanges: [
-      cacheExchange,
-      fetchExchange,
-    ],
-    fetchOptions: () => ({
-      headers: {
-        cookie: cookieFiLter(['cyt:sess']),
-      },
-    }),
-  })
+  const app = useNuxtApp()
+  const client = app.$urql
 
   return { client }
 }
