@@ -23,7 +23,7 @@
 - [x] `pages`
   - [x] `[id]`
 - [ ] `posts`
-  - [ ] `index`
+  - [x] `index`
   - [ ] `[id]`
     - [ ] `index`
     - [ ] `manage`
