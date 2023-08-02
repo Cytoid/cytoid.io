@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { addMinutes, isFuture, parseISO } from 'date-fns'
-import type { LevelInfoFragment } from 'gql/graphql'
 
 const [defineStatItem, StatItem] = createReusableTemplate<{
   title: string
@@ -189,12 +188,12 @@ const registrationDate = computed<string>(() => {
   return dateFromNow(profileData.value?.profile?.user?.registrationDate)
 })
 
-const levels = computed<LevelInfoFragment[]>(() => {
-  return (profileData.value?.profile?.user?.levels ?? []) as LevelInfoFragment[]
+const levels = computed(() => {
+  return profileData.value?.profile?.user?.levels ?? []
 })
 
-const featuredLevels = computed<LevelInfoFragment[]>(() => {
-  return (profileData.value?.profile?.user?.featuredLevels ?? []) as Array<LevelInfoFragment>
+const featuredLevels = computed(() => {
+  return profileData.value?.profile?.user?.featuredLevels ?? []
 })
 
 const collections = computed(() => {

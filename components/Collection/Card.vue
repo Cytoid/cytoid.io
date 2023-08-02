@@ -13,10 +13,10 @@ interface CollectionData {
     thumbnail?: string | null
   } | null
   owner?: {
-    uid: string
+    uid?: string | null
     name?: string | null
-    avatar?: {
-      small: string | null
+    avatar: {
+      small?: string | null
     }
   } | null
 }
@@ -32,8 +32,8 @@ interface CollectionData {
         <UserAvatar
           v-if="collection.owner"
           :avatar="collection.owner.avatar?.small ?? undefined"
-          :name="collection.owner.name || collection.owner.uid"
-          :uid="collection.owner.uid"
+          :name="collection.owner.name ?? collection.owner.uid ?? undefined"
+          :uid="collection.owner.uid ?? undefined"
           :transparent="true"
           class="h-8"
         />

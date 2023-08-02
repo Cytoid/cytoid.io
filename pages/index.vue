@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { CollectionInfoFragmentFragment, HomeLevelCardFragmentFragment } from 'gql/graphql'
-
 const query = gql(/* GraphQL */`
   query FetchHomePage {
     discordOnlineCount
@@ -129,10 +127,10 @@ const query = gql(/* GraphQL */`
 `)
 const { data } = await useAsyncData(() => useQuery(query))
 
-const gettingStartedMetaData = computed(() => data?.value?.gettingStarted as CollectionInfoFragmentFragment)
-const hitechMetaData = computed(() => data?.value?.hitech as unknown as CollectionInfoFragmentFragment)
-const hitechLevels = computed(() => data?.value?.hitech?.levels as unknown as HomeLevelCardFragmentFragment[])
-const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels as unknown as HomeLevelCardFragmentFragment[])
+const gettingStartedMetaData = computed(() => data?.value?.gettingStarted)
+const hitechMetaData = computed(() => data?.value?.hitech)
+const hitechLevels = computed(() => data?.value?.hitech?.levels)
+const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels)
 
 resetCytoidPage()
 </script>
@@ -174,16 +172,7 @@ resetCytoidPage()
             <CollectionCard
               v-if="data.gettingStarted"
               class="h-48"
-              :collection="{
-                ...gettingStartedMetaData,
-                owner: (gettingStartedMetaData.owner?.uid && gettingStartedMetaData.owner.avatar.small) ? {
-                  uid: gettingStartedMetaData.owner.uid,
-                  name: gettingStartedMetaData.owner.name ?? gettingStartedMetaData.owner.uid,
-                  avatar: {
-                    small: gettingStartedMetaData.owner.avatar.small,
-                  },
-                } : undefined,
-              }"
+              :collection="data.gettingStarted"
             />
           </div>
           <NuxtLink :to="{ name: 'collections' }" class="btn btn-secondary mt-4">
@@ -221,7 +210,7 @@ resetCytoidPage()
   </div>
 
   <ShowCase
-    v-if="data"
+    v-if="hitechMetaData"
     :cover="hitechMetaData.cover?.thumbnail"
     class="mt-4"
   >
