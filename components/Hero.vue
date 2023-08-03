@@ -8,11 +8,11 @@ const { isLogin } = useAuth()
       <div class="absolute -top-12 sm:top-0 sm:right-0 sm:w-1/2 opacity-50 sm:opacity-100">
         <img src="/images/cryout.webp" class="w-auto h-auto max-w-full max-h-full">
       </div>
-      <div class="hero-content">
-        <div>
-          <h1 class="text-5xl font-bold">
-            <div class="w-full max-h-20">
-              <div class="h-full sm:h-20 max-w-full max-h-full bg-contain bg-no-repeat bg-left-bottom" style="background-image: url(/images/logo.png);" />
+      <div class="hero-content h-full w-full">
+        <div class="h-full w-full flex flex-col sm:justify-center">
+          <h1 class="text-5xl font-bold flex-1 sm:flex-initial flex items-end">
+            <div class="w-full h-full max-h-20">
+              <div class="h-full h-16 sm:h-20 max-w-full max-h-full bg-contain bg-no-repeat bg-center sm:bg-left-bottom" style="background-image: url(/images/logo.png);" />
             </div>
           </h1>
           <p class="py-6 ml-4">
