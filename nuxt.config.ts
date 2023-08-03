@@ -85,6 +85,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes: '64x64' },
       ],
       script: [
+        { src: 'https://polyfill.io/v3/polyfill.min.js?version=3.110.1' },
         { src: `https://www.googletagmanager.com/gtag/js?id=${config.get('analyticsCode')}`, async: true },
         { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` },
       ],
@@ -92,7 +93,18 @@ export default defineNuxtConfig({
   },
 
   legacy: {
-    targets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2'],
+    targets: [
+      'last 2 versions and not dead',
+      '> 0.3%',
+      'Firefox ESR',
+      'iOS >= 13.2',
+    ],
+    polyfills: [
+      'es.object.has-own',
+    ],
+    modernPolyfills: [
+      'es.object.has-own',
+    ],
   },
 
   // dev proxy
