@@ -12,7 +12,7 @@ const { isLogin } = useAuth()
         <div>
           <h1 class="text-5xl font-bold">
             <div class="w-full max-h-20">
-              <img src="/images/logo.png" class="h-full sm:h-20 max-w-full max-h-full">
+              <div class="h-full sm:h-20 max-w-full max-h-full bg-contain bg-no-repeat bg-left-bottom" style="background-image: url(/images/logo.png);" />
             </div>
           </h1>
           <p class="py-6 ml-4">
