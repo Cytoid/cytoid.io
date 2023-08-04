@@ -208,7 +208,7 @@ defineCytoidPage({
           <div class="card-body gap-6">
             <div class="flex flex-col gap-2">
               <p class="card-subtitle">
-                Last updated
+                {{ $t('collection_details.modification_date_title') }}
               </p>
               <p>
                 {{
@@ -221,7 +221,7 @@ defineCytoidPage({
 
             <div class="flex flex-col gap-2">
               <p class="card-subtitle">
-                Created At
+                {{ $t('collection_details.creation_date_title') }}
               </p>
               <p>
                 {{
