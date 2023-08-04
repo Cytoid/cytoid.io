@@ -46,11 +46,11 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-if (!isLogin.value) {
+const { data, error } = await useAsyncData(() => useQuery(query))
+
+if (!data.value?.my) {
   toLogin('/library')
 }
-
-const { data } = await useAsyncData(() => useQuery(query))
 
 const ownedLevel = computed(() => data.value?.my?.grantedLevels ?? [])
 const lovedLevel = computed(() => data.value?.my?.levels ?? [])
