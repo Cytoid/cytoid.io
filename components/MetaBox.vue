@@ -17,7 +17,7 @@ const metaTypes = Object.keys(metadata).filter(v =>
 </script>
 
 <template>
-  <template v-for="metaType in metaTypes" :key="metaType">
+  <div v-for="metaType in metaTypes" :key="metaType" class="flex flex-col gap-2">
     <p class="card-subtitle">
       {{ metaType }}
     </p>
@@ -30,6 +30,5 @@ const metaTypes = Object.keys(metadata).filter(v =>
     <p v-if="metadata[metaType].localized_name" class="opacity-60">
       {{ metadata[metaType].localized_name }}
     </p>
-    <div class="h-2" />
-  </template>
+  </div>
 </template>

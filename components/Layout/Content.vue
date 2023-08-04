@@ -5,6 +5,9 @@
       <slot name="contentTitle" />
     </div>
   </div>
+  <div>
+    <slot name="additionContent" />
+  </div>
   <div class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
     <div id="subContent" class="col-span-5 lg:col-span-4 xl:col-span-3">
       <slot name="subContent" />

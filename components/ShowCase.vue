@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <div class="card bg-base-100 w-full md:flex md:flex-row">
-    <div class="relative card">
+    <div class="relative card md:min-w-[20rem] md:w-80">
       <div class="absolute h-full w-full card overflow-hidden flex">
         <div
           class="flex-1 bg-cover bg-center transition-all"

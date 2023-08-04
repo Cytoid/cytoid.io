@@ -301,13 +301,13 @@ defineCytoidPage({
           <span>{{ $t('level_details.message_unlisted') }}</span>
         </div>
       </div>
-      <div v-if="levelData?.level?.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
+      <div v-else-if="levelData?.level?.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
         <div>
           <Icon name="mdi:lock-outline" size="24" />
           <span>{{ $t('level_details.message_private') }}</span>
         </div>
       </div>
-      <div v-if="levelData?.level?.censored" class="alert alert-error shadow-lg mt-6">
+      <div v-else-if="levelData?.level?.censored" class="alert alert-error shadow-lg mt-6">
         <div>
           <Icon name="mdi:exclamation-thick" size="24" />
           <span>{{ $t('level_details.message_censored', { reason: levelData?.level?.censored }) }}</span>
@@ -422,18 +422,20 @@ defineCytoidPage({
         </div>
       </div>
       <div class="card w-full bg-base-100 shadow-xl mt-5">
-        <div class="card-body">
+        <div class="card-body gap-6">
           <MetaBox v-if="levelData?.level?.metadata" :metadata="levelData?.level?.metadata" />
-          <p class="card-subtitle">
-            {{ $t('level_details.details_card_last_updated_title') }}
-          </p>
-          <p>
-            {{
-              dateFormatCalendar(levelData?.level?.modificationDate)
-            }}, {{
-              dateFromNow(levelData?.level?.modificationDate)
-            }}
-          </p>
+          <div class="flex flex-col gap-2">
+            <p class="card-subtitle">
+              {{ $t('level_details.details_card_last_updated_title') }}
+            </p>
+            <p>
+              {{
+                dateFormatCalendar(levelData?.level?.modificationDate)
+              }}, {{
+                dateFromNow(levelData?.level?.modificationDate)
+              }}
+            </p>
+          </div>
         </div>
       </div>
     </template>

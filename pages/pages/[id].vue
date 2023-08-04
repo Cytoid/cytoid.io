@@ -4,7 +4,7 @@ const route = useRoute()
 const pageId = route.params.id as string
 
 const query = gql(/* GraphQL */`
-  query GetPost($uid: String!) {
+  query GetPosts($uid: String!) {
     page: getPost(uid: $uid) {
       id
       uid
@@ -28,7 +28,7 @@ const { data } = await useAsyncData(() => useQuery(query, {
 }))
 
 defineCytoidPage({
-  title: data.value?.page?.title ?? undefined,
+  title: data.value?.page?.title ?? 'Page',
 })
 </script>
 
