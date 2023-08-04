@@ -16,7 +16,7 @@ const query = gql(/* GraphQL */`
 
 const limit = 32
 
-const { data } = useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncData(() => useQuery(query, {
   limit,
   skip: null,
 }))
