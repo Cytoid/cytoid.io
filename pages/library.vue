@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const route = useRoute()
+const { isLogin, toLogin } = useAuth()
 
 const query = gql(/* GraphQL */`
   query FetchUserLibrary {
@@ -45,6 +45,10 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
+
+if (!isLogin.value) {
+  toLogin('/library')
+}
 
 const { data } = await useAsyncData(() => useQuery(query))
 
