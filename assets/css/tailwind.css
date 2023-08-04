@@ -103,6 +103,11 @@ body {
   @apply my-4
 }
 
+/* Resets */
+iframe {
+  color-scheme: light;
+}
+
 /* Daisyui */
 .capsule {
   @apply badge badge-lg py-5 px-4
