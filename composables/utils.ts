@@ -38,12 +38,14 @@ export class Meta {
   meta: { hid: string; name: string; content: string }[]
   title: string
   constructor(title: string, description: string, verb = null) {
+    const _title = `${title} - Cytoid`
+
     let markedDescription = sanitizeHtml(useMarked(description), { allowedTags: [] })
     if (markedDescription.length > 100) {
       markedDescription = markedDescription.substring(0, 100)
     }
 
-    this.title = title
+    this.title = _title
     if (verb) {
       this.title = `${verb} ${this.title}`
     }
@@ -51,8 +53,8 @@ export class Meta {
     this.meta = [
       { hid: 'description', name: 'description', content: markedDescription },
       { hid: 'og:description', name: 'og:description', content: markedDescription },
-      { hid: 'name', name: 'name', content: title },
-      { hid: 'og:title', name: 'og:title', content: title },
+      { hid: 'name', name: 'name', content: _title },
+      { hid: 'og:title', name: 'og:title', content: _title },
     ]
   }
 
