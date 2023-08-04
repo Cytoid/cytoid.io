@@ -27,9 +27,14 @@ const { data } = await useAsyncData(() => useQuery(query, {
   uid: pageId,
 }))
 
-defineCytoidPage({
-  title: data.value?.page?.title ?? 'Page',
-})
+if (data.value?.page?.title) {
+  defineCytoidPage({
+    title: data.value?.page?.title,
+  })
+}
+else {
+  resetCytoidPage()
+}
 </script>
 
 <template>
