@@ -5,8 +5,13 @@ defineProps<{
 
 onMounted(() => {
   (async () => {
-    // @ts-expect-error cdn
-    window?.twttr.widgets.load()
+    try {
+      // @ts-expect-error cdn
+      window?.twttr.widgets.load()
+    }
+    catch (error) {
+      console.error(error)
+    }
   })()
 })
 
