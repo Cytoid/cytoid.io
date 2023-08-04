@@ -10,8 +10,6 @@ export default defineNuxtPlugin((nuxt) => {
   const config = useRuntimeConfig()
   const url = config.public.graphqlURL
 
-  const tokenCookie = cookieFiLter(['cyt:sess'])
-
   const ssr = ssrExchange({
     isClient: process.client,
   })
@@ -36,12 +34,14 @@ export default defineNuxtPlugin((nuxt) => {
       cacheExchange,
       fetchExchange,
     ],
-    fetchOptions: () => ({
-      headers: {
-        cookie: tokenCookie,
-      },
-      credentials: 'omit',
-    }),
+    fetchOptions: () => {
+      const tokenCookie = cookieFiLter(['cyt:sess'])
+      return {
+        headers: {
+          cookie: tokenCookie,
+        },
+      }
+    },
   })
 
   nuxt.provide('urql', client)
