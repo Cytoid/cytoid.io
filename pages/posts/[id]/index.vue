@@ -119,12 +119,15 @@ defineCytoidPage({
       <p v-if="post.slogan" class="text-xl pt-6">
         {{ post.slogan }}
       </p>
-      <div class="flex gap-3 flex-wrap max-w-xl">
+      <div
+        v-if="user && ['admin', 'moderator'].includes(user.role)"
+        class="mt-6 flex gap-3 flex-wrap max-w-xl"
+      >
         <NuxtLink
-          v-if="user && ['admin', 'moderator'].includes(user.role)"
-          class="btn btn-primary"
+          class="btn btn-neutral"
           :to="{ name: 'posts-id-manage', params: { id: post.uid } }"
         >
+          <Icon name="mdi:briefcase" size="24" class="mr-2" />
           {{ $t('general.manage_btn') }}
         </NuxtLink>
       </div>
@@ -148,7 +151,7 @@ defineCytoidPage({
       <template
         v-if="post.collection"
       >
-        <div class="h-12" />
+        <div class="h-6" />
         <ShowCase
           :cover="post.collection.cover?.thumbnail"
           class="mt-4"
