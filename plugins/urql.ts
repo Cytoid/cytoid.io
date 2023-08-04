@@ -35,11 +35,12 @@ export default defineNuxtPlugin((nuxt) => {
       fetchExchange,
     ],
     fetchOptions: () => {
-      const cookie = process.client ? document.cookie : cookieFiLter(['cyt:sess'])
+      const tokenCookie = cookieFiLter(['cyt:sess'])
       return {
         headers: {
-          cookie,
+          cookie: tokenCookie,
         },
+        credentials: 'include',
       }
     },
   })
