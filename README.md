@@ -1,18 +1,19 @@
-# Nuxt 3 Minimal Starter
+# Cytoid
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+[![Crowdin](https://badges.crowdin.net/cytoid/localized.svg)](https://crowdin.com/project/cytoid)
+
+Cytoid is a music game where you can create, share and play your own levels!
+Powered by community, with many dedicated creators, Cytoid provides a huge
+variety of musical genres to enjoy and a diverse range of gameplay design.
+
+This is the repository for the **next version** of Cytoid.io Website. 
+The website was constructed using Vue.js, Nuxt.js.
 
 ## Setup
 
-Make sure to install the dependencies:
+Make sure you have yarn globally, then:
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
 # yarn
 yarn install
 ```
@@ -22,12 +23,6 @@ yarn install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
 # yarn
 yarn dev
 ```
@@ -37,27 +32,7 @@ yarn dev
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
 # yarn
 yarn build
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
