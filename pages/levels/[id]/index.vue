@@ -443,6 +443,7 @@ defineCytoidPage({
     <!-- Leaderboard -->
     <LevelLeaderboard
       v-if="levelData?.level?.uid"
+      class="shadow-xl"
       :level-id="levelData?.level?.uid"
       :charts="levelData.level.charts.map(item => {
         return {

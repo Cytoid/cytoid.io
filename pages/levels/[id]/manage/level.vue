@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { FetchLevelForEditingQuery } from 'gql/graphql'
+
+const props = defineProps<{
+  data: FetchLevelForEditingQuery
+}>()
 const route = useRoute()
-defineCytoidPage({
-  title: 'WIP',
-})
 </script>
 
 <template>
-  <BackToOld :url="route.path" />
+  <LevelUploader :replace="data.level?.uid" />
 </template>

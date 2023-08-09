@@ -39,6 +39,7 @@
     "@typescript-eslint/parser": "^6.1.0",
     "@urql/core": "^4.1.0",
     "@vitejs/plugin-legacy": "^4.1.1",
+    "@vueuse/components": "^10.3.0",
     "@vueuse/nuxt": "^10.2.1",
     "apexcharts": "^3.41.0",
     "config": "^3.3.9",

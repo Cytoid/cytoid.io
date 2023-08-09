@@ -16,7 +16,6 @@ export function useAuth() {
 
   const logout = async () => {
     user.value = null
-    cookie.value = null
     return await useServiceFetch<SessionResponse>('session', {
       method: 'DELETE',
     })
@@ -62,5 +61,7 @@ export function useAuth() {
     })
   }
 
-  return { user, login, init, logout, isLogin, ready, toLogin }
+  const hasAuthToken = computed(() => !!cookie.value)
+
+  return { user, login, init, logout, isLogin, ready, toLogin, hasAuthToken }
 }

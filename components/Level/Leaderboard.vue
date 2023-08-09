@@ -78,7 +78,7 @@ interface chartData {
 </script>
 
 <template>
-  <div class="card w-full bg-base-100 shadow-xl mb-5">
+  <div class="card w-full bg-base-100 mb-5">
     <div v-if="rankData" class="px-4 py-8 sm:px-8">
       <!-- Difficult Selector -->
       <p class="card-subtitle">

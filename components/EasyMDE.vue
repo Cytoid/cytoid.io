@@ -58,9 +58,14 @@ onMounted(() => {
 }
 
 .editor-toolbar {
+  @apply bg-base-200;
   border-top: 1px solid #ced4da;
   border-left: 1px solid #ced4da;
   border-right: 1px solid #ced4da;
+}
+
+.editor-preview-full {
+  @apply bg-base-100 p-4
 }
 
 .editor-toolbar.fullscreen {
