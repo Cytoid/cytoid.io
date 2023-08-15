@@ -2,21 +2,22 @@ name: Build and Publish the Docker Image
 on:
   push:
     branches:
-      - master
+      - main
 env:
   GITHUB_SHA: ${{ github.sha }}
   IMAGE: ssr
-  REGISTRY_HOSTNAME: gcr.io
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  REGISTRY_HOSTNAME: ghcr.io
   NODE_ENV: production
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - name: Install Dependencies
@@ -25,23 +26,23 @@ jobs:
         run: yarn build
       - name: Prune Dev Dependencies
         run: npm prune --production
-      - uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: ${{ secrets.GCP_KEY }}
-          service_account: ${{ secrets.GCP_EMAIL }}
-      - uses: google-github-actions/setup-gcloud@v1
-      - run: |
-          # Set up docker to authenticate
-          # via gcloud command-line tool.
-          gcloud auth configure-docker
       - name: Build Docker Image
         run: |
           docker build \
-            -t "$REGISTRY_HOSTNAME"/"$GCP_PROJECT"/"$IMAGE" \
+            -t "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" .
       - name: Publish Docker Image
         run: |
-          docker push $REGISTRY_HOSTNAME/$GCP_PROJECT/$IMAGE
-      - name: 'gcr.io/cloud-builders/gsutil'
-        run: gsutil -m -h "Cache-Control:public, max-age=604800" rsync -r -c -d ./.nuxt/dist/client gs://static.cytoid.io
+          docker push "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Publish
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: cytoid
+          directory: ./.nuxt/dist/client
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
