@@ -148,25 +148,27 @@ function stringToTags(text: string) {
         :verified="getVerified(item)"
       />
     </div>
-    <div class="w-full flex gap-2 relative">
-      <div ref="commonInputDom" class="join flex-1 flex">
-        <input
-          v-model="tmpText" class="input input-bordered join-item flex-1"
-          @keyup.enter="addTmpTextToItem"
-          @keydown.delete.ctrl="removeLastItem"
-          @click="showSuggestion = true"
-        >
-        <button class="btn btn-primary join-item" @click="addTmpTextToItem">
-          <Icon name="mdi:plus" size="24" />
-        </button>
+    <div class="w-full flex flex-col sm:flex-row gap-2">
+      <div class="flex-1 flex relative">
+        <div ref="commonInputDom" class="flex-1 join flex">
+          <input
+            v-model="tmpText" class="input input-bordered join-item flex-1"
+            @keyup.enter="addTmpTextToItem"
+            @keydown.delete.ctrl="removeLastItem"
+            @click="showSuggestion = true"
+          >
+          <button class="btn btn-primary join-item" @click="addTmpTextToItem">
+            <Icon name="mdi:plus" size="24" />
+          </button>
+        </div>
+        <BaseItemInputSuggestionBox
+          v-if="suggestion"
+          v-show="showSuggestion && suggestion.length > 0"
+          :suggestion="suggestion"
+          :select-suggestion="addItem"
+        />
       </div>
-      <BaseItemInputSuggestionBox
-        v-if="suggestion"
-        v-show="showSuggestion && suggestion.length > 0"
-        :suggestion="suggestion"
-        :select-suggestion="addItem"
-      />
-      <button v-if="allowAdvanced" class="btn btn-secondary" @click="startAdvancedMode">
+      <button v-if="allowAdvanced" class="btn btn-secondary btn-sm sm:btn-md" @click="startAdvancedMode">
         <Icon name="mdi:format-list-bulleted" size="24" />
       </button>
     </div>

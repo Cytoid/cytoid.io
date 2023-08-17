@@ -69,13 +69,3 @@ export async function useSubscription<Data = any, Variables extends AnyVariables
 
   return { result, error, unsubscribe: () => sub?.unsubscribe() }
 }
-
-function cookieFiLter(names: string[]) {
-  return names.map((name) => {
-    const cookie = useCookie(name)
-    if (cookie.value) {
-      return `${name}=${encodeURIComponent(cookie.value)}`
-    }
-    return undefined
-  }).filter(v => v !== undefined).join('; ')
-}

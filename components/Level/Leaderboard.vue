@@ -123,9 +123,11 @@ interface chartData {
       <!-- Rank -->
       <div
         v-if="rankData.chart"
-        class="overflow-x-auto rounded-lg"
+        class="rounded-lg"
         :class="{
           'opacity-50': loadingRank,
+          'overflow-x-hidden': rankData.chart.leaderboard.length === 0,
+          'overflow-x-auto': rankData.chart.leaderboard.length > 0,
         }"
       >
         <table class="table w-full">
