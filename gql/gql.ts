@@ -33,6 +33,8 @@ const documents = {
     "\n  mutation LinkExternalAccount($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n": types.LinkExternalAccountDocument,
     "\n  mutation ChangePasswordWithToken($password: String!, $token: String!) {\n    success: changePasswordWithToken(password: $password, token: $token)\n  }\n": types.ChangePasswordWithTokenDocument,
     "\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n": types.SendPasswordResetEmailDocument,
+    "\n  query FetchLevelForStudio($limit: Int!, $start: Int!) {\n    my {\n      levelsCount\n      levels(start: $start, limit: $limit) {\n        id\n        uid\n        title\n        creationDate\n        bundle {\n          backgroundImage {\n            sized(height: 90, width: 160)\n          }\n        }\n        state\n        avgRating\n        ratingCount\n        downloadCount\n        playCount\n      }\n    }\n  }\n": types.FetchLevelForStudioDocument,
+    "\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n": types.DeleteLevelDocument,
 };
 
 /**
@@ -129,6 +131,14 @@ export function graphql(source: "\n  mutation ChangePasswordWithToken($password:
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n"): (typeof documents)["\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query FetchLevelForStudio($limit: Int!, $start: Int!) {\n    my {\n      levelsCount\n      levels(start: $start, limit: $limit) {\n        id\n        uid\n        title\n        creationDate\n        bundle {\n          backgroundImage {\n            sized(height: 90, width: 160)\n          }\n        }\n        state\n        avgRating\n        ratingCount\n        downloadCount\n        playCount\n      }\n    }\n  }\n"): (typeof documents)["\n  query FetchLevelForStudio($limit: Int!, $start: Int!) {\n    my {\n      levelsCount\n      levels(start: $start, limit: $limit) {\n        id\n        uid\n        title\n        creationDate\n        bundle {\n          backgroundImage {\n            sized(height: 90, width: 160)\n          }\n        }\n        state\n        avgRating\n        ratingCount\n        downloadCount\n        playCount\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n"): (typeof documents)["\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

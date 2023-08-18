@@ -48,14 +48,28 @@ async function submit() {
   }
   isSubmitting.value = true
   try {
+    const isAdmin = ['admin', 'moderator'].includes(user.value?.role ?? '')
+
     await useMutation(mutation, {
       id: level.value.id.toString(),
       input: {
         ...form.value,
-        ...adminForm.value,
+        ...(isAdmin
+          ? adminForm.value
+          : {}
+        ),
       },
     })
     successAlert('Level Listing Saved')
+
+    // update level cache
+    level.value.state = form.value.state
+    level.value.tags = form.value.tags
+    level.value.description = form.value.description
+    if (isAdmin) {
+      level.value.censored = adminForm.value.censored
+      level.value.category = adminForm.value.category
+    }
   }
   catch (error) {
     handleErrorToast(error as Error)

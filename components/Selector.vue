@@ -4,6 +4,8 @@ import type { WritableComputedRef } from 'nuxt/dist/app/compat/vue-demi'
 const props = defineProps<{
   modelValue: T
   items: Array<SelectorItem>
+  small?: boolean
+  onChange?: (value: T) => void
 }>()
 const emit = defineEmits(['update:modelValue'])
 const selected = useVModel(props, 'modelValue', emit) as WritableComputedRef<T>
@@ -19,8 +21,32 @@ onClickOutside(box, () => {
   open.value = false
 })
 
+const ctl = ref<HTMLElement>()
+const ctlWith = ref(0)
+const ctlPos = ref(0)
+onMounted(() => {
+  const { pause, resume } = useRafFn(() => {
+    ctlWith.value = ctl.value?.offsetWidth ?? 0
+    ctlPos.value = ctl.value?.getBoundingClientRect().bottom ?? 0
+  })
+  pause()
+  watch(open, (val) => {
+    if (!val) {
+      pause()
+    }
+    else {
+      resume()
+    }
+  })
+})
+
 function change(value: T) {
-  selected.value = value
+  if (props.onChange) {
+    props.onChange(value)
+  }
+  else {
+    selected.value = value
+  }
   open.value = false
 }
 
@@ -32,9 +58,13 @@ interface SelectorItem {
 </script>
 
 <template>
-  <div class="relative z-10 flex flex-col">
+  <div class="relative flex flex-col">
     <button
-      class="btn btn-neutral"
+      ref="ctl"
+      class="btn btn-neutral flex-nowrap"
+      :class="{
+        'btn-sm': small,
+      }"
       @click="open = !open"
     >
       <template v-if="selectedItem">
@@ -43,7 +73,11 @@ interface SelectorItem {
       </template>
       <Icon name="material-symbols:arrow-drop-down" size="20" />
     </button>
-    <div v-show="open" class="absolute -bottom-2 h-0 w-full">
+    <div
+      v-if="open"
+      class="fixed z-10"
+      :style="`top: ${ctlPos}px; width: ${ctlWith}px;`"
+    >
       <div
         ref="box"
         class="join join-vertical w-full shadow-xl"
@@ -51,9 +85,10 @@ interface SelectorItem {
         <button
           v-for="item in items"
           :key="item.value"
-          class="btn btn-neutral join-item justify-start"
+          class="btn btn-neutral join-item justify-start flex-nowrap"
           :class="{
             '[:not(:hover)>&]:btn-active': item.value === selected,
+            'btn-sm': small,
           }"
           @click="change(item.value)"
         >

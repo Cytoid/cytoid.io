@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { FetchLevelForEditingQuery } from 'gql/graphql'
 
-const props = defineProps<{
+defineProps<{
   data: FetchLevelForEditingQuery
 }>()
-const route = useRoute()
 </script>
 
 <template>
-  <LevelUploader :replace="data.level?.uid" />
+  <div class="w-full flex flex-col gap-5">
+    <LevelUploader :replace="data.level?.uid" />
+  </div>
 </template>

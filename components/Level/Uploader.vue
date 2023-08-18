@@ -89,10 +89,11 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
               </p>
             </div>
           </div>
-          <div class="card-actions justify-between">
-            <button class="btn btn-ghost" :disabled="started" @click="reset()">
+          <div class="card-actions">
+            <button v-show="file" class="btn btn-ghost" :disabled="started" @click="reset()">
               Cancel
             </button>
+            <div class="flex-1" />
             <button
               class="btn"
               :class="{
@@ -111,7 +112,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
     <template
       #default="{ message, progress, error }"
     >
-      <div v-if="started" class="mt-4">
+      <div v-if="started">
         <div v-if="error" class="alert alert-error">
           <Icon name="material-symbols:error-circle-rounded-outline" size="24" />
           <span>{{ error }}</span>
@@ -138,7 +139,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
           </div>
         </div>
       </div>
-      <div v-else class="mt-4">
+      <div v-else>
         <div v-if="replace" class="alert alert-info">
           <Icon name="mdi:lightbulb-on-outline" size="24" />
           <span>
