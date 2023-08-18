@@ -69,18 +69,29 @@ interface ConfirmLevelData {
         <p>
           {{ $t('studio.level_visibility_unlisted_title') }}
         </p>
-        <p>
-          {{ $t('studio.level_visibility_unlisted_content') }}
-        </p>
+        <I18nT keypath="studio.level_visibility_public_content" tag="p">
+          <NuxtLink
+            :to="{ name: 'pages-id', params: { id: 'dmca' } }"
+            class="font-bold text-primary"
+          >
+            {{ $t('general.dmca') }}
+          </NuxtLink>
+          <NuxtLink
+            :to="{ name: 'pages-id', params: { id: 'terms' } }"
+            class="font-bold text-primary"
+          >
+            {{ $t('general.tos') }}
+          </NuxtLink>
+        </I18nT>
       </template>
 
       <template v-else-if="type === ResourceState.Private">
         <p>
           {{ $t('studio.level_visibility_private_title') }}
         </p>
-        <p>
-          {{ $t('studio.level_visibility_private_content') }}
-        </p>
+        <I18nT keypath="studio.level_visibility_private_content" tag="p">
+          <strong class="font-bold"> {{ level.title }} </strong>
+        </I18nT>
       </template>
 
       <I18nT keypath="studio.level_visibility_content" tag="p">
