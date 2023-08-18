@@ -10,6 +10,7 @@ interface MenuLink {
   title: string
   id: string
   to?: RouteLocationRaw
+  icon?: string
 }
 </script>
 
@@ -31,6 +32,7 @@ interface MenuLink {
               active: active === item.id,
             }"
           >
+            <Icon v-if="item.icon" :name="item.icon" size="20" />
             {{ item.title || item }}
           </NuxtLink>
         </li>

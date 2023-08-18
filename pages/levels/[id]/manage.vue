@@ -117,9 +117,9 @@ defineCytoidPage({
         :active="route.name as string ?? undefined"
         :context="[
           'Level Manage',
-          { title: 'Analytics', id: 'levels-id-manage-analytics', to: { name: 'levels-id-manage-analytics', params: { id: levelId } } },
-          { title: 'Edit Listing', id: 'levels-id-manage-listing', to: { name: 'levels-id-manage-listing', params: { id: levelId } } },
-          { title: 'Edit Level', id: 'levels-id-manage-level', to: { name: 'levels-id-manage-level', params: { id: levelId } } },
+          { title: 'Analytics', icon: 'ion:analytics-sharp', id: 'levels-id-manage-analytics', to: { name: 'levels-id-manage-analytics', params: { id: levelId } } },
+          { title: 'Edit Listing', icon: 'mdi:text-box-edit-outline', id: 'levels-id-manage-listing', to: { name: 'levels-id-manage-listing', params: { id: levelId } } },
+          { title: 'Edit Level', icon: 'mdi:folder-edit-outline', id: 'levels-id-manage-level', to: { name: 'levels-id-manage-level', params: { id: levelId } } },
         ]"
       />
     </template>

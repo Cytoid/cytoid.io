@@ -24,14 +24,14 @@ defineCytoidPage({
         :active="route.name as string ?? undefined"
         :context="[
           'Studio',
-          { title: $t('studio.menu_analytics'), id: 'studio-analytics', to: { name: 'studio-analytics' } },
-          { title: $t('studio.menu_levels'), id: 'studio-levels', to: { name: 'studio-levels' } },
-          { title: $t('studio.menu_collections'), id: 'studio-collections', to: { name: 'studio-collections' } },
+          { title: $t('studio.menu_analytics'), icon: 'ion:analytics-sharp', id: 'studio-analytics', to: { name: 'studio-analytics' } },
+          { title: $t('studio.menu_levels'), icon: 'mdi:folder-edit-outline', id: 'studio-levels', to: { name: 'studio-levels' } },
+          { title: $t('studio.menu_collections'), icon: 'mdi:database-edit-outline', id: 'studio-collections', to: { name: 'studio-collections' } },
           ...(['admin', 'moderator'].includes(user?.role ?? '') ? [
             'Admin',
-            { title: $t('studio.menu_posts'), id: 'studio-posts', to: { name: 'studio-posts' } },
-            { title: $t('studio.menu_users'), id: 'studio-users', to: { name: 'studio-users' } },
-            { title: 'SUDO', id: 'studio-sudo', to: { name: 'studio-sudo' } },
+            { title: $t('studio.menu_posts'), icon: 'mdi:file-document', id: 'studio-posts', to: { name: 'studio-posts' } },
+            { title: $t('studio.menu_users'), icon: 'mdi:account', id: 'studio-users', to: { name: 'studio-users' } },
+            { title: 'SUDO', icon: 'mdi:account-cog', id: 'studio-sudo', to: { name: 'studio-sudo' } },
           ] : []),
         ]"
       />
