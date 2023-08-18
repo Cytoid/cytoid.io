@@ -47,9 +47,14 @@ async function loadMore() {
   })
   const oldLength = collections.value.length
   if (newCollections?.collections && newCollections.collections.length > 0) {
-    collections.value.push(...newCollections.collections)
+    for (const collection of newCollections.collections) {
+      // if the collection is not in the list
+      if (collections.value.findIndex(c => c.id === collection.id) === -1) {
+        collections.value.push(collection)
+      }
+    }
   }
-  if (oldLength + limit > collections.value.length) {
+  if (newCollections && (oldLength + limit > collections.value.length + newCollections.collections.length)) {
     noMore.value = true
   }
   loading.value = false
