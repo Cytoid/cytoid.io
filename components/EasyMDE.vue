@@ -65,7 +65,7 @@ onMounted(() => {
 }
 
 .editor-preview-full {
-  @apply bg-base-100 p-4
+  @apply bg-base-100 p-4 max-w-none
 }
 
 .editor-toolbar.fullscreen {

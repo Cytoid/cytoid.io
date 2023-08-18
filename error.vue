@@ -21,7 +21,7 @@ defineCytoidPage({
   <Layout>
     <div class="hero h-full my-auto p-0">
       <div class="hero-content p-0 flex-col sm:flex-row-reverse">
-        <img src="/images/sayakacry.png" class="max-w-screen sm:max-w-sm w-64 rounded-lg shadow-2xl" @click="showDetail += 1">
+        <img src="/images/sayakacry.png" class="max-w-screen sm:max-w-sm w-64" @click="showDetail += 1">
         <div class="flex-1" />
         <div>
           <h1 class="text-5xl font-bold">

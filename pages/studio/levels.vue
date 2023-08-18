@@ -173,6 +173,15 @@ interface ConfirmLevelData {
         <!-- Level List -->
         <div class="overflow-x-auto">
           <table class="table w-full">
+            <!-- head -->
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Analytics</th>
+                <th>Rating</th>
+                <th>Creation Date</th>
+              </tr>
+            </thead>
             <tbody>
               <tr v-for="level in levels" :key="level.uid">
                 <!-- Level Content -->
@@ -255,6 +264,21 @@ interface ConfirmLevelData {
                     </span>
                     <span class="flex">
                       ({{ level.ratingCount ?? 0 }})
+                    </span>
+                  </div>
+                </td>
+
+                <!-- Created at -->
+                <td>
+                  <!-- Old Rating -->
+                  <div class="flex flex-col">
+                    <template v-if="level.creationDate">
+                      <span class="flex whitespace-nowrap">
+                        {{ dateFormatCalendar(level.creationDate) }}
+                      </span>
+                    </template>
+                    <span v-else class="flex">
+                      N/A
                     </span>
                   </div>
                 </td>

@@ -17,7 +17,7 @@ async function logout() {
 </script>
 
 <template>
-  <div class="navbar max-w-7xl m-auto sm:px-12">
+  <div class="navbar max-w-screen-2xl m-auto sm:px-12">
     <div class="flex flex-1 gap-0">
       <div class="hidden sm:block">
         <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="/">
@@ -58,7 +58,6 @@ async function logout() {
                   {{ $t('general.nav_wiki') }}
                 </NuxtLink>
               </li>
-              <li><NuxtLink>Qualified</NuxtLink></li>
             </ul>
           </div>
         </div>

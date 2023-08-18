@@ -10,7 +10,11 @@ export function useSafeMarked(safeMdText: string) {
 }
 
 export function useMarkedWithCleaner(mdText: string) {
-  return sanitizeHtml(useSafeMarked(mdText))
+  return sanitizeHtml(useSafeMarked(mdText), {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+      'img',
+    ]),
+  })
 }
 
 export const useMarked = useMarkedWithCleaner

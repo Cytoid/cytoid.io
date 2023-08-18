@@ -3,7 +3,7 @@ import { setWeek, setWeekYear } from 'date-fns'
 
 const props = withDefaults(defineProps<{
   data: ChartData[]
-  mode: string
+  mode: 'activity' | 'rating' | 'accuracy'
 }>(), {
   mode: 'activity',
 })
@@ -71,7 +71,17 @@ const options = computed(() => ({
     tickAmount: 6,
   },
   yaxis: {
-    decimalsInFloat: props.mode === 'activity' ? 0 : 2,
+    labels: {
+      formatter: (val: number) => {
+        if (props.mode === 'activity') {
+          return val.toFixed(0)
+        }
+        else if (props.mode === 'rating') {
+          return val.toFixed(2)
+        }
+        return `${(val * 100).toFixed(2)}%`
+      },
+    },
   },
   colors: ['#FFFFFF'],
   grid: {

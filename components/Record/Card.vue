@@ -51,7 +51,7 @@ interface RecordData {
     </div>
     <div class="flex-1" />
     <NuxtLink :to="{ name: 'levels-id', params: { id: record.chart.level?.uid } }" class="max-w-full w-fit flex flex-row">
-      <h3 class="card-title text-lg block truncate">
+      <h3 class="card-title text-lg block truncate py-1">
         {{ record.chart.level?.title }}
       </h3>
     </NuxtLink>
