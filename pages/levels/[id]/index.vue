@@ -129,6 +129,7 @@ watch(userRating, (val) => {
 
 // Download
 const downloadLink = ref('')
+const downloadCtl = ref<HTMLAnchorElement | null>(null)
 async function downloadLevel(verify: () => Promise<string>) {
   if (!isLogin.value) {
     toLogin()
@@ -150,7 +151,7 @@ async function downloadLevel(verify: () => Promise<string>) {
     }
   }
 
-  window.open(downloadLink.value)
+  downloadCtl.value?.click()
 }
 
 // rating
@@ -255,6 +256,7 @@ defineCytoidPage({
             <Icon name="material-symbols:download-sharp" size="24" class="mr-2" />
             {{ $t('level_details.download_btn', { size: formatSize(levelData?.level?.size) }) }}
           </button>
+          <a ref="downloadCtl" class="hidden" :href="downloadLink" />
         </Captcha>
         <template v-if="isLogin">
           <button
