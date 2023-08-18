@@ -16,7 +16,7 @@ const [defineBaseCardBody, BaseCardBody] = createReusableTemplate()
         <div class="absolute h-full w-full card overflow-hidden flex">
           <div
             class="base-card-bg flex-1 bg-cover bg-center transition-all"
-            :style="`background-image: url('${cover}')`"
+            :style="`background-image: url(&quot;${cover}&quot;)`"
           >
             <div class="base-card-bg-cover bg-black/60 transition h-full w-full" />
           </div>

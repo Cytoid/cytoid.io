@@ -11,7 +11,7 @@ watchEffect(() => {
     <div class="w-full h-screen sm:max-h-[100vw]">
       <img
         class="absolute w-full h-full bg-center bg-cover brightness-75"
-        :style="`background-image: url('${ctdApp.background}')`"
+        :style="`background-image: url(&quot;${ctdApp.background}&quot;)`"
       >
       <div class="absolute top-0 h-32 w-full bg-gradient-to-b from-base-100/60 to-base-100/0" />
       <div class="absolute bottom-0 h-2/3 w-full bg-gradient-to-b from-base-100/0 to-base-100" />

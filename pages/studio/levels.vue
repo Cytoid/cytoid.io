@@ -180,7 +180,7 @@ interface ConfirmLevelData {
                   <div class="flex gap-2">
                     <div
                       class="aspect-video h-12 sm:h-20 bg-cover rounded-lg"
-                      :style="`background-image: url(${level.bundle?.backgroundImage?.sized})`"
+                      :style="`background-image: url(&quot;${level.bundle?.backgroundImage?.sized}&quot;)`"
                     >
                       <NuxtLink
                         :to="{ name: 'levels-id', params: { id: level.uid } }"
