@@ -48,7 +48,7 @@ function afterPost(newPost: CommentResponse) {
             v-if="lite" :avatar="post.owner.avatar.small" :uid="post.owner.uid" :name="post.owner.name ?? post.owner.uid"
             :transparent="true"
           />
-          <NuxtLink v-else :to="`/profile/${post.owner.uid}}`">
+          <NuxtLink v-else :to="{ name: 'profile-id', params: { id: post.owner.uid } }">
             {{ post.owner.name || post.owner.uid }}
           </NuxtLink>
           <span class="pl-3 font-normal opacity-60">
