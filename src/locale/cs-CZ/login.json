@@ -1,11 +1,11 @@
 {
-  "title": "Již máte Cytoid ID?",
-  "subtitle": "Přihlašte se prosím níže.",
-  "username_field_placeholder": "Cytoid ID / Emailová adresa",
-  "username_field_error_required": "Prosím zadejte vaše Cytoid ID nebo emailovou adresu.",
-  "password_field_placeholder": "Heslo",
-  "password_field_error_required": "Prosím zadejte vaše heslo.",
-  "remember_me_checkbox_title": "Zapamatuj si mě",
-  "new_user_welcome_title": "Jste nov(ý)/(á) na Cytoidu?",
-  "new_user_welcome_content": "Zaregistrujete se pro přístup ke všem multiplayer vlastnostím Cytoidu. Zabere to méně než 30 sekund!"
+  "title": "Already have a Cytoid ID?",
+  "subtitle": "Please sign in below.",
+  "username_field_placeholder": "Cytoid ID / Email address",
+  "username_field_error_required": "Please input your Cytoid ID or email address.",
+  "password_field_placeholder": "Password",
+  "password_field_error_required": "Please input your password.",
+  "remember_me_checkbox_title": "Remember Me",
+  "new_user_welcome_title": "New to Cytoid?",
+  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!"
 }
