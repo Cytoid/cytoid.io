@@ -1,18 +1,17 @@
 <script setup lang="ts">
 const props = defineProps<{
-  replace?: string
+  userId: string
 }>()
-const router = useRouter()
 
 const file = ref<File | null>(null)
 const started = ref(false)
 
+const userOnlineAvatar = ref<string>(avatarURL(props.userId))
+
 const mutation = gql(/* GraphQL */`
-  mutation UnpackLevel($token: String!, $replace: String) {
-    package: unpackLevelPackage(token: $token, replace: $replace) {
-      id
-      uid
-      title
+  mutation UpdateAvatar($path: String) {
+    result: setAvatar(path: $path) {
+      large
     }
   }
 `)
@@ -27,30 +26,35 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
     throw new Error('Failed when posting')
   }
   const res = await useMutation(mutation, {
-    token: data.token,
-    replace: props.replace,
+    path: data.path,
   })
-  if (!res?.package) {
-    throw new Error('Failed when unpacking')
-  }
-  const uid = res.package.uid
-  const title = res.package.title
 
-  successAlert(`${title} (${uid}) Uploaded`)
-  router.push({
-    name: 'levels-id-manage-listing',
-    params: {
-      id: uid,
-    },
-  })
+  started.value = false
+  file.value = null
+
+  if (!res?.result?.large) {
+    throw new Error('Failed when updating')
+  }
+  userOnlineAvatar.value = res.result.large
+
+  successAlert('Avatar Updated')
+}
+
+function getSelectFileUrl(file: File) {
+  if (process.client) {
+    return URL.createObjectURL(file)
+  }
+  else {
+    return ''
+  }
 }
 </script>
 
 <template>
   <BaseUploader
     v-model="file"
-    type="levels/packages"
-    ".cytoidlevel,.zip"
+    type="avatar"
+    accept=".jpg, .jpeg, .png, .gif, .webp, .svg, .bmp"
     :callback="afterUpload"
   >
     <template
@@ -58,18 +62,10 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
     >
       <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
         <div
-          class="card-body card flex flex-col"
-          :class="{
-            'bg-secondary/25': replace,
-            'bg-primary/25': !replace,
-          }"
+          class="card-body card flex flex-col bg-primary/25"
         >
           <h2 class="card-subtitle">
-            {{
-              replace
-                ? $t('level_details.manage.replace_title')
-                : 'Upload'
-            }}
+            {{ $t('settings.avatar_title') }}
           </h2>
           <div
             class="flex-1 border-4 border-dashed p-6 my-2 rounded-2xl flex flex-col items-center justify-between select-none gap-2"
@@ -80,17 +76,24 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
             }"
             @click="openDialog"
           >
-            <Icon name="mdi:file-upload-outline" size="48" />
-            <div v-if="file" class="flex gap-1">
-              <Icon name="mdi:file-outline" size="20" />
-              <p>
-                {{ file.name }} ({{ formatBytes(file.size) }})
-              </p>
-            </div>
-            <div v-else>
-              <p>
-                {{ $t('level_details.manage.replace_upload_title') }}
-              </p>
+            <div class="w-full flex justify-center gap-2">
+              <div
+                class="w-[40%] max-w-[10rem] aspect-square bg-cover bg-center rounded-full"
+                :style="{
+                  'background-image': `url(${userOnlineAvatar})`,
+                }"
+              />
+              <template v-if="file">
+                <div class="flex flex-col justify-center items-center px-4">
+                  <Icon name="mdi:arrow-right" size="40" />
+                </div>
+                <div
+                  class="w-[40%] max-w-[10rem] aspect-square bg-cover bg-center rounded-full"
+                  :style="{
+                    'background-image': `url(${getSelectFileUrl(file)})`,
+                  }"
+                />
+              </template>
             </div>
           </div>
           <div class="card-actions">
@@ -99,11 +102,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
             </button>
             <div class="flex-1" />
             <button
-              class="btn"
-              :class="{
-                'btn-secondary': replace,
-                'btn-primary': !replace,
-              }"
+              class="btn btn-primary"
               :disabled="started || !file"
               @click="uploadHook(upload)"
             >
@@ -141,26 +140,6 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
           <div v-else>
             <Icon name="mdi:loading" size="24" class="animate-spin" />
           </div>
-        </div>
-      </div>
-      <div v-else>
-        <div v-if="replace" class="alert alert-info">
-          <Icon name="mdi:lightbulb-on-outline" size="24" />
-          <span>
-            {{ $t('level_details.manage.replace_upload_subtitle') }} ({{ replace }})
-          </span>
-        </div>
-        <div v-else class="alert alert-info">
-          <Icon name="mdi:lightbulb-on-outline" size="24" />
-          <span>
-            Don't know how to create one? Read our wiki
-          </span>
-          <a
-            class="btn btn-sm btn-ghost"
-            href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level" target="_blank"
-          >
-            See
-          </a>
         </div>
       </div>
     </template>

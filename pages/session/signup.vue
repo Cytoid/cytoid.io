@@ -26,7 +26,6 @@ if (route.query.username) {
 }
 
 const ctdIdVerify = computed(() => {
-  // Cytoid ID 只能包含小写字母, 数字,下划线 (_), 连字号 (-), 且长度为 3 到 16 个字符
   if (
     form.value.username === ''
     || form.value.username.length < 3

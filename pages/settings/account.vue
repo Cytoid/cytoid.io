@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const route = useRoute()
-defineCytoidPage({
-  title: 'WIP',
-})
+const { user } = useAuth()
 </script>
 
 <template>
-  <BackToOld :url="route.path" />
+  <div class="flex flex-col gap-5">
+    <UserAvatarUploader v-if="user" :user-id="user.uid" />
+    <UserEmailsManager v-if="user" :user-id="user.uid" />
+  </div>
 </template>

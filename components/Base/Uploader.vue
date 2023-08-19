@@ -15,7 +15,7 @@ const file = useVModel(props, 'modelValue', emit)
 function updateFile(f: File | null) {
   const accepts = props.accept?.split(',') ?? []
   if (accepts.length > 0) {
-    const accept = accepts.find(a => f?.name.endsWith(a))
+    const accept = accepts.find(a => f?.name.toLowerCase().endsWith(a.trim().toLowerCase()))
     if (!accept) {
       errorAlert(`Please select a file with extension ${accepts.join(', ')}`)
       return
@@ -54,7 +54,7 @@ const stateMessage = computed(() => {
     case UploadState.error:
       return error.value
   }
-  return 'Test msg: null'
+  return ''
 })
 
 const dropZoneRef = ref<HTMLDivElement>()
