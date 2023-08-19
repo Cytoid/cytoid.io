@@ -203,7 +203,7 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
               </label>
               <input
                 id="reset-mail" v-model="newEmail" type="email" :class="{
-                  'focus:input-error': emailVerify !== null,
+                  'input-error': emailVerify !== null,
                 }" class="join-item input input-bordered flex-1 w-full"
               >
             </div>

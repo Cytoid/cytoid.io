@@ -39,6 +39,10 @@ export function useAuth() {
     return user.value
   }
 
+  const updateUser = (data: UserData) => {
+    user.value = data
+  }
+
   const login = async (payload: LoginPayload) => {
     const response = await useServiceFetch<SessionResponse>('session', {
       method: 'POST',
@@ -63,5 +67,5 @@ export function useAuth() {
 
   const hasAuthToken = computed(() => !!cookie.value)
 
-  return { user, login, init, logout, isLogin, ready, toLogin, hasAuthToken }
+  return { user, login, init, logout, isLogin, ready, toLogin, hasAuthToken, updateUser }
 }

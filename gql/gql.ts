@@ -39,6 +39,9 @@ const documents = {
     "\n  mutation LinkExternalAccount($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n": types.LinkExternalAccountDocument,
     "\n  mutation ChangePasswordWithToken($password: String!, $token: String!) {\n    success: changePasswordWithToken(password: $password, token: $token)\n  }\n": types.ChangePasswordWithTokenDocument,
     "\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n": types.SendPasswordResetEmailDocument,
+    "\n  query GetUserSecuritySettings {\n    my {\n      externals: externalAccountProviders\n    }\n  }\n": types.GetUserSecuritySettingsDocument,
+    "\n  mutation ChangePassword($old: String!, $new: String!) {\n    result: changePassword(oldPassword: $old, newPassword: $new)\n  }\n": types.ChangePasswordDocument,
+    "\n  mutation RemoveExternalAccount($provider: String!) {\n    result: removeExternalAccount(provider: $provider)\n  }        \n": types.RemoveExternalAccountDocument,
     "\n  query FetchLevelForStudio($limit: Int!, $start: Int!) {\n    my {\n      levelsCount\n      levels(start: $start, limit: $limit) {\n        id\n        uid\n        title\n        creationDate\n        bundle {\n          backgroundImage {\n            sized(height: 90, width: 160)\n          }\n        }\n        state\n        avgRating\n        ratingCount\n        downloadCount\n        playCount\n      }\n    }\n  }\n": types.FetchLevelForStudioDocument,
     "\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n": types.DeleteLevelDocument,
 };
@@ -161,6 +164,18 @@ export function graphql(source: "\n  mutation ChangePasswordWithToken($password:
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n"): (typeof documents)["\n  mutation SendPasswordResetEmail($email: String!){\n    sendResetPasswordEmail(email: $email)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetUserSecuritySettings {\n    my {\n      externals: externalAccountProviders\n    }\n  }\n"): (typeof documents)["\n  query GetUserSecuritySettings {\n    my {\n      externals: externalAccountProviders\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation ChangePassword($old: String!, $new: String!) {\n    result: changePassword(oldPassword: $old, newPassword: $new)\n  }\n"): (typeof documents)["\n  mutation ChangePassword($old: String!, $new: String!) {\n    result: changePassword(oldPassword: $old, newPassword: $new)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation RemoveExternalAccount($provider: String!) {\n    result: removeExternalAccount(provider: $provider)\n  }        \n"): (typeof documents)["\n  mutation RemoveExternalAccount($provider: String!) {\n    result: removeExternalAccount(provider: $provider)\n  }        \n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
