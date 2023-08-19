@@ -273,13 +273,15 @@ defineCytoidPage({
 
     <template #subContent>
       <!-- Bio -->
-      <div v-if="profileData.profile.bio" class="card w-full bg-base-100 shadow-xl mb-5">
-        <div class="card-body">
-          <h2 class="card-subtitle">
-            {{ $t('profile.bio_title') }}
-          </h2>
-          <div class="prose prose-sm" v-html="useMarked(profileData.profile.bio)" />
-          <div class="mt-4 flex gap-2 opacity-50">
+      <div class="card w-full bg-base-100 shadow-xl mb-5">
+        <div class="card-body flex flex-col gap-4">
+          <template v-if="profileData.profile.bio">
+            <h2 class="card-subtitle">
+              {{ $t('profile.bio_title') }}
+            </h2>
+            <div class="prose prose-sm" v-html="useMarked(profileData.profile.bio)" />
+          </template>
+          <div class="flex gap-2 opacity-50">
             <Icon name="mdi:calendar-account" size="20" />
             <span class="text-sm">
               {{ $t('profile.join_date', { date: registrationDate }) }}

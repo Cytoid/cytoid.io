@@ -15,12 +15,16 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 const documents = {
     "\n  query FetchLevelRanking($levelUid: String!, $type: String!, $start: Int!) {\n    chart(levelUid: $levelUid, chartType: $type) {\n      id\n      numPlayers\n      leaderboard(limit: 10, start: $start) {\n        id\n        date\n        owner {\n          id\n          uid\n          name\n          avatar {\n            small\n          }\n        }\n        score\n        accuracy\n        mods\n        details {\n          perfect\n          great\n          good\n          bad\n          miss\n          maxCombo\n        }\n      }\n    }\n  }\n": types.FetchLevelRankingDocument,
     "\n  mutation UnpackLevel($token: String!, $replace: String) {\n    package: unpackLevelPackage(token: $token, replace: $replace) {\n      id\n      uid\n      title\n    }\n  }\n": types.UnpackLevelDocument,
+    "\n  query GetSettingsProfile($id: ID!) {\n    profile(id: $id) {\n      id\n      bio\n      birthday\n      header {\n        stripe\n      }\n    }\n  }\n": types.GetSettingsProfileDocument,
+    "\n  mutation UpdateProfile($input: ProfileInput!) {\n    result: updateProfile(input: $input)\n  }\n": types.UpdateProfileDocument,
     "\n  mutation UpdateAvatar($path: String) {\n    result: setAvatar(path: $path) {\n      large\n    }\n  }\n": types.UpdateAvatarDocument,
     "\n  query GetUserEmails {\n    my {\n      emails {\n        address\n        verified\n        primary\n      }\n    }\n  }\n": types.GetUserEmailsDocument,
     "\n  mutation AddEmail($email: String!) {\n    addEmail(email: $email)\n  }\n": types.AddEmailDocument,
     "\n  mutation DeleteEmail($email: String!) {\n    deleteEmail(email: $email)\n  }\n": types.DeleteEmailDocument,
     "\n  mutation MakeEmailPrimary($email: String!) {\n    makeEmailPrimary(email: $email)\n  }\n": types.MakeEmailPrimaryDocument,
     "\n  mutation SendConfirmationEmail($email: String!) {\n    sendVerificationEmail(email: $email)\n  }\n": types.SendConfirmationEmailDocument,
+    "\n  query GetSettingsProfileHeader($id: ID!) {\n    profile(id: $id) {\n      header {\n        stripe\n      }\n    }\n  }\n": types.GetSettingsProfileHeaderDocument,
+    "\n  mutation UpdateProfileHeader($path: String!) {\n    result: updateProfileHeader(path: $path) {\n      stripe\n    }\n  }\n": types.UpdateProfileHeaderDocument,
     "\n  query FetchNavCard($id: ID!) {\n    profile(id: $id) {\n      id\n      exp {\n        totalExp\n        currentLevelExp\n        nextLevelExp\n        currentLevel\n      }\n      rating\n      header {\n        thumbnail\n      }\n      user {\n        id\n        avatar {\n          original\n        }\n      }\n    }\n  }\n": types.FetchNavCardDocument,
     "\n  query FetchCollection($uid: String!) {\n    collection(uid: $uid) {\n      id\n      uid\n      title\n      slogan\n      description\n      creationDate\n      modificationDate\n      tags\n      state\n      cover {\n        original\n      }\n      owner {\n        id\n        uid\n        name\n        avatar {\n          large\n        }\n      }\n      levels {\n        id\n        uid\n        title\n        owner {\n          id\n          uid\n          name\n          avatar {\n            small\n          }\n        }\n        metadata {\n          title_localized\n          artist {\n            name\n          }\n        }\n        bundle {\n          backgroundImage {\n            thumbnail\n          }\n          musicPreview\n        }\n        charts {\n          type\n          difficulty\n          name\n          notesCount\n        }\n      }\n      metadata {\n        cover {\n          name\n          url\n        }\n      }\n    }\n  }\n": types.FetchCollectionDocument,
     "\n  query FetchCollections($cursor: ID, $limit: Int!, $ownerId: String){\n    collections(limit: $limit, cursor: $cursor, ownerId: $ownerId) {\n      id\n      uid\n      cover {\n        thumbnail\n      }\n      owner {\n        id\n        uid\n        name\n        avatar {\n          small\n        }\n      }\n      title\n      slogan\n      levelCount\n      creationDate\n    }\n  }\n": types.FetchCollectionsDocument,
@@ -71,6 +75,14 @@ export function graphql(source: "\n  mutation UnpackLevel($token: String!, $repl
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  query GetSettingsProfile($id: ID!) {\n    profile(id: $id) {\n      id\n      bio\n      birthday\n      header {\n        stripe\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetSettingsProfile($id: ID!) {\n    profile(id: $id) {\n      id\n      bio\n      birthday\n      header {\n        stripe\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation UpdateProfile($input: ProfileInput!) {\n    result: updateProfile(input: $input)\n  }\n"): (typeof documents)["\n  mutation UpdateProfile($input: ProfileInput!) {\n    result: updateProfile(input: $input)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation UpdateAvatar($path: String) {\n    result: setAvatar(path: $path) {\n      large\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateAvatar($path: String) {\n    result: setAvatar(path: $path) {\n      large\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -92,6 +104,14 @@ export function graphql(source: "\n  mutation MakeEmailPrimary($email: String!) 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SendConfirmationEmail($email: String!) {\n    sendVerificationEmail(email: $email)\n  }\n"): (typeof documents)["\n  mutation SendConfirmationEmail($email: String!) {\n    sendVerificationEmail(email: $email)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetSettingsProfileHeader($id: ID!) {\n    profile(id: $id) {\n      header {\n        stripe\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetSettingsProfileHeader($id: ID!) {\n    profile(id: $id) {\n      header {\n        stripe\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation UpdateProfileHeader($path: String!) {\n    result: updateProfileHeader(path: $path) {\n      stripe\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateProfileHeader($path: String!) {\n    result: updateProfileHeader(path: $path) {\n      stripe\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
