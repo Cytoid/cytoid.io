@@ -1,8 +1,8 @@
 {
-  "message_unlisted": "Bộ sưu tập này đã bị ẩn.",
-  "message_private": "Chủ sở hữu đã đặt riêng tư cho bộ sưu tập này. Không ai có thể nhìn thấy chúng.",
-  "tags_title": "Từ khoá",
-  "creation_date_title": "Tạo vào ngày",
-  "modification_date_title": "Cập nhật lần cuối ngày",
-  "metadata_cover_art_title": "Ảnh bìa"
+  "message_unlisted": "This collection is unlisted.",
+  "message_private": "This collection was made private by its owner. It is invisible to other users.",
+  "tags_title": "Tags",
+  "creation_date_title": "Created on",
+  "modification_date_title": "Last updated",
+  "metadata_cover_art_title": "Cover art"
 }
