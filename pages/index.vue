@@ -127,7 +127,6 @@ const query = gql(/* GraphQL */`
 `)
 const { data } = await useAsyncData(() => useQuery(query))
 
-const gettingStartedMetaData = computed(() => data?.value?.gettingStarted)
 const hitechMetaData = computed(() => data?.value?.hitech)
 const hitechLevels = computed(() => data?.value?.hitech?.levels)
 const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels)

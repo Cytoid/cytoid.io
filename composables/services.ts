@@ -7,6 +7,10 @@ export function useServiceFetch<T>(url: string, options: UseFetchOptions<T> = {}
   const defaults: UseFetchOptions<T> = {
     baseURL,
     credentials: 'include',
+    key: JSON.stringify({
+      url,
+      options,
+    }),
   }
   const params = defu(options, defaults)
   return useFetch(url, params)
@@ -25,8 +29,7 @@ export function avatarURL(userId?: string, size?: number) {
 
   let url = useServiceUrl(`/users/${userId}/avatar`)
   if (size) {
-    url += `?size=${size
-}`
+    url += `?size=${size}`
   }
 
   return url
