@@ -1,8 +1,8 @@
 {
-  "message_unlisted": "Tato kolekce není uvedena v databázi úrovní.",
-  "message_private": "Tato kolekce byla nastavena vlastníkem jako soukromá. Není viditelná pro ostatní uživatele.",
-  "tags_title": "Tagy",
-  "creation_date_title": "Vytvořeno",
-  "modification_date_title": "Naposledy aktualizováno",
-  "metadata_cover_art_title": "Obrázek alba"
+  "message_unlisted": "This collection is unlisted.",
+  "message_private": "This collection was made private by its owner. It is invisible to other users.",
+  "tags_title": "Tags",
+  "creation_date_title": "Created on",
+  "modification_date_title": "Last updated",
+  "metadata_cover_art_title": "Cover art"
 }
