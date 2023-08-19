@@ -1,13 +1,13 @@
 {
-  "sort_select_title": "Phân loại",
-  "sort_select_upload_date": "Ngày tải lên",
-  "sort_select_modification_date": "Ngày cập nhật",
-  "sort_select_difficulty": "Độ khó",
-  "sort_select_duration": "Thời lượng",
-  "sort_select_downloads": "Lượt tải về",
-  "sort_select_rating": "Đánh giá",
-  "sort_select_relevance": "Liên quan",
-  "category_select_title": "Danh mục",
-  "category_select_item_all": "Toàn bộ",
-  "category_select_item_featured": "Nổi bật"
+  "sort_select_title": "Sort",
+  "sort_select_upload_date": "Upload date",
+  "sort_select_modification_date": "Modified date",
+  "sort_select_difficulty": "Difficulty",
+  "sort_select_duration": "Duration",
+  "sort_select_downloads": "Downloads",
+  "sort_select_rating": "Rating",
+  "sort_select_relevance": "Relevance",
+  "category_select_title": "Category",
+  "category_select_item_all": "All",
+  "category_select_item_featured": "Featured"
 }
