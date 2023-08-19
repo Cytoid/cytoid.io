@@ -50,7 +50,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
   <BaseUploader
     v-model="file"
     type="levels/packages"
-    ".cytoidlevel,.zip"
+    accept=".cytoidlevel,.zip"
     :callback="afterUpload"
   >
     <template
