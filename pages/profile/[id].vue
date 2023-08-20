@@ -347,7 +347,7 @@ defineCytoidPage({
           <StatItem :title="$t('profile.total_ranked_plays')" :data="profileData.profile.activity.totalRankedPlays" />
           <StatItem :title="$t('profile.total_cleared_notes')" :data="commaSeparated(profileData.profile.activity.clearedNotes)" />
           <StatItem :title="$t('profile.highest_max_combo')" :data="commaSeparated(profileData.profile.activity.maxCombo)" />
-          <StatItem :title="$t('profile.avg_ranked_accuracy')" :data="`${(profileData.profile.activity.averageRankedAccuracy * 100).toFixed(2)}%`" />
+          <StatItem :title="$t('profile.avg_ranked_accuracy')" :data="`${truncateNum(profileData.profile.activity.averageRankedAccuracy * 100)}%`" />
           <StatItem :title="$t('profile.total_ranked_score')" :data="commaSeparated(profileData.profile.activity.totalRankedScore)" />
           <StatItem :title="$t('profile.total_play_time')" :data="getTotalPlayTimeText(profileData.profile.activity.totalPlayTime)" />
         </div>

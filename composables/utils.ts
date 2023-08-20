@@ -8,6 +8,10 @@ export function useSavedCookie<T = string>(name: string, _opts?: CookieOptions<T
   })
 }
 
+export function truncateNum(num: number, digits = 2) {
+  return Math.trunc(num * 10 ** digits) / 10 ** digits
+}
+
 export function wait(sec: number = 0.001) {
   return new Promise((resolve) => {
     setTimeout(resolve, sec * 1000)

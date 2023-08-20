@@ -182,7 +182,7 @@ interface Record {
             > Recent Records </a>
           </div>
           <div class="flex justify-end">
-            Average: {{ avgRating.toFixed(2) }}
+            Average: {{ truncateNum(avgRating) }}
           </div>
         </div>
 
@@ -230,8 +230,8 @@ interface Record {
                     </div>
                   </div>
                 </td>
-                <td>{{ (record.accuracy * 100).toFixed(2) }}%</td>
-                <td>{{ record.rating.toFixed(2) }}</td>
+                <td>{{ truncateNum(record.accuracy * 100) }}%</td>
+                <td>{{ truncateNum(record.rating) }}</td>
                 <td>{{ dateFormatCalendar(record.date) }}</td>
               </tr>
             </tbody>

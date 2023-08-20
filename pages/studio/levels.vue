@@ -260,7 +260,7 @@ interface ConfirmLevelData {
                       <Icon class="text-orange-300" name="material-symbols:keyboard-arrow-down-rounded" />
                     </span>
                     <span class="flex">
-                      {{ level.avgRating ? (level.avgRating / 2).toFixed(2) : 'N/A' }}
+                      {{ level.avgRating ? truncateNum(level.avgRating / 2) : 'N/A' }}
                     </span>
                     <span class="flex">
                       ({{ level.ratingCount ?? 0 }})

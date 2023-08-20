@@ -166,7 +166,7 @@ interface chartData {
                 </div>
               </td>
               <td class="font-semibold">
-                {{ (Math.floor(rank.accuracy * 10000) / 100).toFixed(2) }}%
+                {{ truncateNum(rank.accuracy) }}%
               </td>
               <td class="font-semibold">
                 {{ rank.details.maxCombo }}x

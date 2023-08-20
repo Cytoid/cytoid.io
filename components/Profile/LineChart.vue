@@ -74,12 +74,12 @@ const options = computed(() => ({
     labels: {
       formatter: (val: number) => {
         if (props.mode === 'activity') {
-          return val.toFixed(0)
+          return truncateNum(val, 0)
         }
         else if (props.mode === 'rating') {
-          return val.toFixed(2)
+          return truncateNum(val)
         }
-        return `${(val * 100).toFixed(2)}%`
+        return `${truncateNum(val * 100)}%`
       },
     },
   },

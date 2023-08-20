@@ -131,7 +131,7 @@ function getSelectFileUrl(file: File) {
             </div>
           </div>
           <div v-if="progress" class="flex gap-2">
-            {{ (progress * 100).toFixed(2) }}%
+            {{ truncateNum(progress * 100) }}%
             <div
               class="radial-progress"
               :style="`--value:${progress * 100}; --size: 1.5rem; --thickness: 0.15rem;`"
