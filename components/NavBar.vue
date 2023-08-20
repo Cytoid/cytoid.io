@@ -12,7 +12,10 @@ onClickOutside(profileDialogDom, () => {
 
 async function logout() {
   await _logout()
-  router.push({ path: '/' })
+  reloadNuxtApp({
+    path: '/',
+    persistState: false,
+  })
 }
 </script>
 

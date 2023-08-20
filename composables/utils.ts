@@ -38,7 +38,7 @@ export class Meta {
   meta: { hid: string; name: string; content: string }[]
   title: string
   constructor(title: string, description: string, verb = null) {
-    const _title = `${title} - Cytoid`
+    const _title = `${title}`
 
     let markedDescription = sanitizeHtml(useMarked(description), { allowedTags: [] })
     if (markedDescription.length > 100) {
