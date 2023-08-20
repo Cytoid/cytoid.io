@@ -132,7 +132,7 @@ iframe {
 }
 
 .btn.btn-ghost.btn-disabled, .btn.btn-ghost[disabled], .btn.btn-ghost:disabled {
-  --tw-text-opacity: 0.6;
+  --tw-text-opacity: 0.25;
   @apply bg-transparent;
 }
 

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const props = defineProps<{
+  close: () => void
+}>()
 const { user, logout: _logout } = useAuth()
 const router = useRouter()
 
@@ -81,22 +84,22 @@ async function logout() {
       <div class="card-body p-4">
         <ul class="menu bg-base-100 w-full p-0">
           <li class="hover-bordered">
-            <NuxtLink :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }">
+            <NuxtLink :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
               <Icon name="mdi:account" size="24" /> {{ $t('general.profile') }}
             </NuxtLink>
           </li>
           <li class="hover-bordered">
-            <NuxtLink to="/studio">
+            <NuxtLink to="/studio" @click="close">
               <Icon name="carbon:media-library-filled" size="24" /> {{ $t('general.studio') }}
             </NuxtLink>
           </li>
           <li class="hover-bordered">
-            <NuxtLink to="/library">
+            <NuxtLink to="/library" @click="close">
               <Icon name="mdi:puzzle" size="24" /> {{ $t('general.library') }}
             </NuxtLink>
           </li>
           <li class="hover-bordered">
-            <NuxtLink to="/settings">
+            <NuxtLink to="/settings" @click="close">
               <Icon name="ic:baseline-settings" size="24" /> {{ $t('general.settings') }}
             </NuxtLink>
           </li>

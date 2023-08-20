@@ -97,7 +97,7 @@ async function logout() {
         />
         <Transition>
           <div v-show="profileDialog" class="w-0 h-0 relative">
-            <UserProfileDialog ref="profileDialogDom" />
+            <UserProfileDialog ref="profileDialogDom" :close="() => profileDialog = !profileDialog" />
           </div>
         </Transition>
       </div>
