@@ -224,7 +224,7 @@ interface Record {
                           :name="record.chart.name ?? record.chart.type"
                           :difficulty="record.chart.difficulty"
                           :notes-count="record.chart.notesCount"
-                          class="badge-md w-auto"
+                          class="badge-md w-auto max-w-full"
                         />
                       </div>
                     </div>
