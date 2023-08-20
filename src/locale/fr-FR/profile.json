@@ -1,6 +1,6 @@
 {
-  "online": "Online",
-  "offline": "Offline",
+  "online": "En ligne",
+  "offline": "Hors ligne",
   "join_date": "Joined {date}",
   "bio_title": "Bio",
   "recent_ranks_title": "Recent ranks",
