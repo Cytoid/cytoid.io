@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 function getName(item: string) {
-  return props.nameCache?.[item] ?? item
+  return props.nameCache ? `${props.nameCache[item]} (${item})` : item
 }
 </script>
 

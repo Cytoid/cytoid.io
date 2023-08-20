@@ -62,9 +62,9 @@ function getVerified(value: string) {
 
 function getItemName(val: string) {
   if (props.verified) {
-    return props.verified[val] ?? val
+    return props.verified[val] ?? undefined
   }
-  return val
+  return undefined
 }
 
 function addItem(value: string) {
@@ -165,6 +165,7 @@ function stringToTags(text: string) {
           v-if="suggestion"
           v-show="showSuggestion && suggestion.length > 0"
           :suggestion="suggestion"
+          :name-cache="verified"
           :select-suggestion="addItem"
         />
       </div>

@@ -106,7 +106,7 @@ defineCytoidPage({
       >
         <NuxtLink
           class="btn btn-neutral"
-          :to="{ name: 'posts-id-manage', params: { id: collection.uid } }"
+          :to="{ name: 'collections-id-manage', params: { id: collection.uid } }"
         >
           <Icon name="mdi:briefcase" size="24" class="mr-2" />
           {{ $t('general.manage_btn') }}

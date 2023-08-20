@@ -131,6 +131,11 @@ iframe {
   @apply font-bold uppercase opacity-80;
 }
 
+.btn.btn-ghost.btn-disabled, .btn.btn-ghost[disabled], .btn.btn-ghost:disabled {
+  --tw-text-opacity: 0.6;
+  @apply bg-transparent;
+}
+
 /* Custom Util Class */
 
 .clickable {
