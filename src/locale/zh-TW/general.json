@@ -64,5 +64,8 @@
   "comment_post": "發佈",
   "sponsorship": "贊助",
   "sponsor_name": "贊助者",
-  "sponsorship_quote": "想說的話"
+  "sponsorship_quote": "想說的話",
+  "error_page_title": "Oops",
+  "error_page_subtitle": "Looks like something went wrong! {error}",
+  "error_page_default_message": "Unknown Error"
 }

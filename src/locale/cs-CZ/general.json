@@ -64,5 +64,8 @@
   "comment_post": "Přidat komentář",
   "sponsorship": "Příspěvek",
   "sponsor_name": "Přispívající na kávu",
-  "sponsorship_quote": "Citát"
+  "sponsorship_quote": "Citát",
+  "error_page_title": "Oops",
+  "error_page_subtitle": "Looks like something went wrong! {error}",
+  "error_page_default_message": "Unknown Error"
 }
