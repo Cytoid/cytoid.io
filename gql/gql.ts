@@ -50,6 +50,10 @@ const documents = {
     "\n  query GetUserSecuritySettings {\n    my {\n      externals: externalAccountProviders\n    }\n  }\n": types.GetUserSecuritySettingsDocument,
     "\n  mutation ChangePassword($old: String!, $new: String!) {\n    result: changePassword(oldPassword: $old, newPassword: $new)\n  }\n": types.ChangePasswordDocument,
     "\n  mutation RemoveExternalAccount($provider: String!) {\n    result: removeExternalAccount(provider: $provider)\n  }        \n": types.RemoveExternalAccountDocument,
+    "\n  query FetchCollectionsForStudio {\n    my {\n      collections {\n        id\n        uid\n        title\n        state\n        levelCount\n        cover {\n          sized(height: 90, width: 160)\n        }\n        creationDate\n      }\n    }\n  }\n": types.FetchCollectionsForStudioDocument,
+    "\n  mutation StudioCreateCollection($data: CollectionInput!) {\n    createCollection(input: $data) {\n      id\n      uid\n    }\n  }\n": types.StudioCreateCollectionDocument,
+    "\n  mutation UpdateCollectionsForStudio($id: ID!, $input: CollectionInput!) {\n    updateCollection(id: $id, input: $input) {\n      id\n    }\n  }\n": types.UpdateCollectionsForStudioDocument,
+    "\n  mutation DeleteCollections($id: ID!) {\n    deleteCollection(id: $id) {\n      id\n    }\n  }\n": types.DeleteCollectionsDocument,
     "\n  query FetchLevelForStudio($limit: Int!, $start: Int!) {\n    my {\n      levelsCount\n      levels(start: $start, limit: $limit) {\n        id\n        uid\n        title\n        creationDate\n        bundle {\n          backgroundImage {\n            sized(height: 90, width: 160)\n          }\n        }\n        state\n        avgRating\n        ratingCount\n        downloadCount\n        playCount\n      }\n    }\n  }\n": types.FetchLevelForStudioDocument,
     "\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n": types.DeleteLevelDocument,
 };
@@ -216,6 +220,22 @@ export function graphql(source: "\n  mutation ChangePassword($old: String!, $new
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation RemoveExternalAccount($provider: String!) {\n    result: removeExternalAccount(provider: $provider)\n  }        \n"): (typeof documents)["\n  mutation RemoveExternalAccount($provider: String!) {\n    result: removeExternalAccount(provider: $provider)\n  }        \n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query FetchCollectionsForStudio {\n    my {\n      collections {\n        id\n        uid\n        title\n        state\n        levelCount\n        cover {\n          sized(height: 90, width: 160)\n        }\n        creationDate\n      }\n    }\n  }\n"): (typeof documents)["\n  query FetchCollectionsForStudio {\n    my {\n      collections {\n        id\n        uid\n        title\n        state\n        levelCount\n        cover {\n          sized(height: 90, width: 160)\n        }\n        creationDate\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation StudioCreateCollection($data: CollectionInput!) {\n    createCollection(input: $data) {\n      id\n      uid\n    }\n  }\n"): (typeof documents)["\n  mutation StudioCreateCollection($data: CollectionInput!) {\n    createCollection(input: $data) {\n      id\n      uid\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation UpdateCollectionsForStudio($id: ID!, $input: CollectionInput!) {\n    updateCollection(id: $id, input: $input) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateCollectionsForStudio($id: ID!, $input: CollectionInput!) {\n    updateCollection(id: $id, input: $input) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeleteCollections($id: ID!) {\n    deleteCollection(id: $id) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteCollections($id: ID!) {\n    deleteCollection(id: $id) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

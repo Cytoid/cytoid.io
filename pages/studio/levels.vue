@@ -186,7 +186,7 @@ interface ConfirmLevelData {
               <tr v-for="level in levels" :key="level.uid">
                 <!-- Level Content -->
                 <td class="flex items-center space-x-3">
-                  <div class="flex gap-2">
+                  <div class="flex gap-4">
                     <div
                       class="aspect-video h-12 sm:h-20 bg-cover rounded-lg"
                       :style="`background-image: url(&quot;${level.bundle?.backgroundImage?.sized}&quot;)`"
