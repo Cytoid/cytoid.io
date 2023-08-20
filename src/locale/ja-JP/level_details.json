@@ -1,5 +1,5 @@
 {
-  "download_btn": "Download ({size})",
+  "download_btn": "ダウンロード ({size})",
   "message_private": "This level was made private by its owner. It is invisible to other users.",
   "message_unlisted": "This level is unlisted.",
   "message_censored": "This level was censored for: {reason}",
