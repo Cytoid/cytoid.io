@@ -81,6 +81,15 @@ async function updateQuote() {
           {{ $t('general.save_btn') }}
         </button>
       </div>
+      <div class="alert border-0 bg-secondary/25">
+        <Icon name="mdi:lightbulb-on-outline" size="24" />
+        <span>
+          {{ $t('settings.quote_question_mark_button') }}
+        </span>
+        <NuxtLink class="btn btn-ghost btn-xs" :to="{ name: 'credits' }">
+          {{ $t('general.credits') }}
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>

@@ -3,8 +3,12 @@ const { user } = useAuth()
 </script>
 
 <template>
-  <div class="flex flex-col gap-5">
-    <UserAvatarUploader v-if="user" :user-id="user.uid" />
-    <UserEmailsManager v-if="user" :user-id="user.uid" />
+  <div v-if="user" class="flex flex-col gap-5">
+    <UserAvatarUploader :user-id="user.uid" />
+    <UserEmailsManager :user-id="user.uid" />
+  </div>
+  <div v-else class="alert alert-info">
+    <Icon name="mdi:loading" size="24" class="animate-spin" />
+    <span>Loading...</span>
   </div>
 </template>

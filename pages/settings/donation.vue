@@ -14,6 +14,10 @@ const externalsPending = useAsyncData(() => useQuery(query))
 
 const { data: membership } = await membershipPending
 const { data: externals } = await externalsPending
+
+async function reloadMembershipStatus(provider: string) {
+  reloadNuxtApp()
+}
 </script>
 
 <template>
@@ -26,7 +30,7 @@ const { data: externals } = await externalsPending
       :name="user.name ?? user.uid"
       :quote="membership.quote ?? ''"
     />
-    <DonationVerifier v-else />
+    <DonationVerifier v-else :externals="externals?.my?.externals ?? []" />
   </div>
   <div v-else class="alert alert-error bg-secondary border-0">
     <Icon name="mdi:loading" size="24" class="animate-spin" />

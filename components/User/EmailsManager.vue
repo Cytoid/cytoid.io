@@ -144,20 +144,20 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
           <Icon name="mdi:alert-circle-outline" size="24" />
           <span>You have no verified email! You will not be able to access your Cytoid account if you lost your password!</span>
         </div>
-        <div class="overflow-x-hidden mb-4">
+        <div class="overflow-x-auto mb-4">
           <table class="table">
             <tbody>
               <tr
                 v-for="email in data?.my?.emails" :key="email.address"
               >
-                <td class="flex-1">
+                <td class="flex-1 pr-8">
                   <div class="flex gap-2">
                     {{ email.address }}
                     <div v-if="email.primary" class="badge badge-secondary badge-outline">
                       Primary
                     </div>
                     <div v-if="!email.verified" class="badge badge-warning badge-outline">
-                      Not verified
+                      Unverified
                     </div>
                   </div>
                 </td>

@@ -13,6 +13,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  mutation LinkExternalAccountDonation($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n": types.LinkExternalAccountDonationDocument,
     "\n  query FetchLevelRanking($levelUid: String!, $type: String!, $start: Int!) {\n    chart(levelUid: $levelUid, chartType: $type) {\n      id\n      numPlayers\n      leaderboard(limit: 10, start: $start) {\n        id\n        date\n        owner {\n          id\n          uid\n          name\n          avatar {\n            small\n          }\n        }\n        score\n        accuracy\n        mods\n        details {\n          perfect\n          great\n          good\n          bad\n          miss\n          maxCombo\n        }\n      }\n    }\n  }\n": types.FetchLevelRankingDocument,
     "\n  mutation UnpackLevel($token: String!, $replace: String) {\n    package: unpackLevelPackage(token: $token, replace: $replace) {\n      id\n      uid\n      title\n    }\n  }\n": types.UnpackLevelDocument,
     "\n  query GetSettingsProfile($id: ID!) {\n    profile(id: $id) {\n      id\n      bio\n      birthday\n      header {\n        stripe\n      }\n    }\n  }\n": types.GetSettingsProfileDocument,
@@ -64,6 +65,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation LinkExternalAccountDonation($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n"): (typeof documents)["\n  mutation LinkExternalAccountDonation($token: String!) {\n    result: addExternalAccount(token: $token)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
