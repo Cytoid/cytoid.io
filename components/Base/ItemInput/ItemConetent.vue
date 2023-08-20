@@ -36,12 +36,11 @@ function remove() {
 <template>
   <DefineItemContentBody>
     <div
-      class="badge badge-lg m-1 pr-1"
+      class="badge badge-lg m-1 pr-1 badge-neutral"
       :class="{
-        'badge-neutral': verified === undefined,
-        'badge-error': verified === false,
-        'badge-success': verified === true,
-        'badge-warning': verified === null,
+        'bg-error/25': verified === false,
+        'bg-success/25': verified === true,
+        'bg-warning/25': verified === null,
       }"
     >
       {{ stateInfo }} {{ name }}
