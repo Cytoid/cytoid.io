@@ -155,7 +155,7 @@ defineCytoidPage({
                 </NuxtLink>
               </div>
               <div v-else class="opacity-60 select-none">
-                The Collection have no tags.
+                None
               </div>
             </div>
             <div class="flex flex-col gap-2">

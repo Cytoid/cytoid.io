@@ -85,7 +85,7 @@ function reset() {
 }
 
 function openFileSelector() {
-  fileRef.value?.dispatchEvent(new PointerEvent('click'))
+  fileRef.value?.click()
 }
 function onSelected() {
   const selected = fileRef.value?.files?.[0] ?? null

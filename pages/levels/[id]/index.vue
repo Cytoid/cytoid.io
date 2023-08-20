@@ -341,7 +341,7 @@ defineCytoidPage({
             </NuxtLink>
           </div>
           <div v-else class="opacity-60 select-none">
-            The level have no tags.
+            None
           </div>
         </div>
       </div>
