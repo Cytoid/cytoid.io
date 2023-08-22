@@ -256,7 +256,7 @@ defineCytoidPage({
             <Icon name="material-symbols:download-sharp" size="24" class="mr-2" />
             {{ $t('level_details.download_btn', { size: formatSize(levelData?.level?.size) }) }}
           </button>
-          <a ref="downloadCtl" class="hidden" :href="downloadLink" />
+          <a ref="downloadCtl" class="hidden" :href="downloadLink" :download="`${levelData.level.uid}.cytoidlevel`" />
         </Captcha>
         <template v-if="isLogin">
           <button
