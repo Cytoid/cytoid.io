@@ -9,7 +9,7 @@ export function useSavedCookie<T = string>(name: string, _opts?: CookieOptions<T
 }
 
 export function truncateNum(num: number, digits = 2) {
-  return Math.trunc(num * 10 ** digits) / 10 ** digits
+  return (Math.trunc(num * 10 ** digits) / 10 ** digits).toFixed(digits)
 }
 
 export function wait(sec: number = 0.001) {
