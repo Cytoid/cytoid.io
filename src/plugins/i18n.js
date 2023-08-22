@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import { formatDistanceToNow, parseISO, formatRelative } from 'date-fns'
 import { pick } from 'accept-language-parser'
-import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs, de, hu, ko } from 'date-fns/locale'
+import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs, de, hu, ko, fr } from 'date-fns/locale'
 import locales from '@/locale'
 
 export const supportedLanguages = [
@@ -20,6 +20,7 @@ export const supportedLanguages = [
   'id-ID',
   'cs-CZ',
   'hu-HU',
+  'fr-FR'
 ]
 
 export const dateLocales = Object.freeze({
@@ -37,6 +38,7 @@ export const dateLocales = Object.freeze({
   'ko-KR': ko,
   'de-DE': de,
   'hu-HU': hu,
+  'fr-FR': fr
 })
 
 export function pickLanguage (headerStr) {

@@ -12,6 +12,8 @@ import * as csCZ from './cs-CZ/index.js'
 import * as koKR from './ko-KR/index.js'
 import * as deDE from './de-DE/index.js'
 import * as huHU from './hu-HU/index.js'
+import * as frFR from './fr-FR/index.js'
+
 
 const locale = {
   'zh-CN': zhCN,
@@ -28,5 +30,6 @@ const locale = {
   'es-ES': esES,
   'hu-HU': huHU,
   'de-DE': deDE,
+  'fr-FR': frFR,
 }
 export default locale
