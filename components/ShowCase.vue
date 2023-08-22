@@ -2,6 +2,10 @@
 defineProps<{
   cover?: string | null
 }>()
+
+const showcaseItemOuterBox = ref<HTMLDivElement | null>(null)
+const { x } = useScroll(showcaseItemOuterBox)
+const isScrolled = computed(() => x.value > 0)
 </script>
 
 <template>
@@ -25,10 +29,15 @@ defineProps<{
       </div>
     </div>
 
-    <div class="overflow-hidden mx-2">
-      <div class="overflow-x-auto">
+    <div class="overflow-hidden mx-2 relative">
+      <div ref="showcaseItemOuterBox" class="overflow-x-auto">
         <div class="showcase-items flex flex-row w-fit gap-1">
           <slot />
+        </div>
+      </div>
+      <div v-show="!isScrolled" class="absolute right-0 top-0 h-full w-24 flex items-center justify-end bg-gradient-to-r from-transparent to-gray-900/75">
+        <div class="aspect-square w-8 -rotate-90">
+          <Icon name="mdi:chevron-down" class="h-full w-full animate-bounce" />
         </div>
       </div>
     </div>
@@ -37,6 +46,6 @@ defineProps<{
 
 <style>
 .showcase-items > * {
-  @apply max-w-xs w-80 m-2
+  @apply max-w-[80%] w-80 m-2
 }
 </style>
