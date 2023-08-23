@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from '.nuxt/vue-router'
+
 defineProps<{
   cover?: string | null
+  more?: RouteLocationRaw
 }>()
 
 const showcaseItemOuterBox = ref<HTMLDivElement | null>(null)
@@ -33,6 +36,12 @@ const isScrolled = computed(() => x.value > 0)
       <div ref="showcaseItemOuterBox" class="overflow-x-auto">
         <div class="showcase-items flex flex-row w-fit gap-1">
           <slot />
+          <NuxtLink v-if="more" :to="more" class="more-btn w-20 flex flex-col gap-4 items-center justify-center">
+            <button class="btn btn-circle btn-primary">
+              <Icon name="mdi:chevron-right" size="24" />
+            </button>
+            {{ $t('general.more_btn') }}
+          </NuxtLink>
         </div>
       </div>
       <div v-show="!isScrolled" class="absolute right-0 top-0 h-full w-24 flex items-center justify-end bg-gradient-to-r from-transparent to-gray-900/75">
@@ -45,7 +54,7 @@ const isScrolled = computed(() => x.value > 0)
 </template>
 
 <style>
-.showcase-items > * {
+.showcase-items > *:not(.more-btn) {
   @apply max-w-[80%] w-80 m-2
 }
 </style>

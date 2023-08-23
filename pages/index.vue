@@ -211,13 +211,16 @@ resetCytoidPage()
   <ShowCase
     v-if="hitechMetaData"
     :cover="hitechMetaData.cover?.thumbnail"
+    :more="{ name: 'collections-id', params: { id: hitechMetaData.uid } }"
     class="mt-4"
   >
     <template #desperation>
       <div class="px-2 py-1 w-full flex flex-row items-center">
         <div class="w-full">
           <h2 class="card-title block truncate">
-            {{ hitechMetaData.title }}
+            <NuxtLink :to="{ name: 'collections-id', params: { id: hitechMetaData.uid } }">
+              {{ hitechMetaData.title }}
+            </NuxtLink>
           </h2>
           <h2 class="text-neutral-content opacity-80 truncate">
             {{ hitechMetaData.slogan }}
