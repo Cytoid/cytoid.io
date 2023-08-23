@@ -133,6 +133,7 @@ const downloadCtl = ref<HTMLAnchorElement | null>(null)
 async function downloadLevel(verify: () => Promise<string>) {
   if (!isLogin.value) {
     toLogin()
+    return
   }
 
   if (downloadLink.value === '') {
@@ -151,7 +152,9 @@ async function downloadLevel(verify: () => Promise<string>) {
     }
   }
 
-  downloadCtl.value?.click()
+  if (downloadLink.value !== '') {
+    downloadCtl.value?.click()
+  }
 }
 
 // rating
