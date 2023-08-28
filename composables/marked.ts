@@ -13,6 +13,8 @@ export function useMarkedWithCleaner(mdText: string) {
   return sanitizeHtml(useSafeMarked(mdText), {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat([
       'img',
+      'details',
+      'summary',
     ]),
   })
 }

@@ -113,6 +113,16 @@ body {
   content: none;
 }
 
+.prose :where(details):not(:where([class~="not-prose"] *)){
+  @apply collapse collapse-open
+}
+.prose :where(details > summary):not(:where([class~="not-prose"] *)){
+  @apply collapse-title select-none cursor-pointer
+}
+.prose :where(details > *:not(summary)):not(:where([class~="not-prose"] *)){
+  @apply collapse-content visible
+}
+
 /* Resets */
 iframe {
   color-scheme: light;
