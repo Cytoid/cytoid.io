@@ -16,6 +16,6 @@
   "join_btn": "加入社区",
   "existing_user_title": "已经注册？",
   "existing_user_content": "登录来享受您作为 Cytoid 社区一员的特权吧！",
-  "link_title": "链接到 {provider} 帐户",
+  "link_title": "链接到 {provider} 账户",
   "link_subtitle": "请输入您的 Cytoid 登录信息。如果您提供的 ID 不存在，我们会为您创建一个新账号。"
 }

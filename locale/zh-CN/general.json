@@ -5,7 +5,7 @@
   "region_unavailable_content": "国际版网站需要的一些关键组件，包括谷歌验证码，谷歌云存储，推特，Discord 等，可能会无法正常加载。为了最佳的用户体验，请访问中国大陆地区官网。",
   "tos": "服务条款",
   "community_guidelines": "社区准则",
-  "dmca": "版权 (DMCA)",
+  "dmca": "版权（DMCA）",
   "status": "服务状态",
   "credits": "鸣谢",
   "language": "语言",
@@ -64,5 +64,8 @@
   "comment_post": "发布",
   "sponsorship": "捐赠",
   "sponsor_name": "咖啡捐赠者",
-  "sponsorship_quote": "留言"
+  "sponsorship_quote": "留言",
+  "error_page_title": "糟糕",
+  "error_page_subtitle": "可能出现的错误： {error}",
+  "error_page_default_message": "发生了未知的错误"
 }

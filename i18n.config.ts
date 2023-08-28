@@ -1,9 +1,8 @@
 import locale from './locale'
 
-export default defineI18nConfig(() => {
-  return {
-    legacy: false,
-    locale: 'en',
-    messages: locale,
-  }
-})
+export default defineI18nConfig(() => ({
+  legacy: false,
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages: locale as any,
+}))

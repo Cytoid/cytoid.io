@@ -12,8 +12,9 @@ import csCZ from './cs-CZ/index.js'
 import koKR from './ko-KR/index.js'
 import deDE from './de-DE/index.js'
 import huHU from './hu-HU/index.js'
+import ruRU from './ru-RU/index.js'
 
-const locale = {
+const locale: LocaleContent = {
   'zh-CN': zhCN,
   'zh-TW': zhTW,
   'zh-FJ': zhFJ,
@@ -28,10 +29,17 @@ const locale = {
   'es-ES': esES,
   'hu-HU': huHU,
   'de-DE': deDE,
+  'ru-RU': ruRU,
+
+  // Bug: vue i18n ignored the final language so it is a dirty fix
   'zz': {
     general: {
       self: 'Hi, tell Teages if you can see it',
     },
-  }, // Bug: vue i18n ignored the final language so it is a dirty fix
+  },
 }
 export default locale
+
+interface LocaleContent {
+  [key: string]: string | LocaleContent
+}

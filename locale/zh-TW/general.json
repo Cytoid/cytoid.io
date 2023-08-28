@@ -5,7 +5,7 @@
   "region_unavailable_content": "如果位於中國大陸地區網域下，部分功能如 Discord、Twitter 以及 Google 相關服務可能無法順利運作。建議可以轉而瀏覽中國大陸版網站。",
   "tos": "服務條款",
   "community_guidelines": "社群規範",
-  "dmca": "著作權資訊 (DMCA)",
+  "dmca": "著作權資訊（DMCA）",
   "status": "伺服器狀態",
   "credits": "致謝名單",
   "language": "語言變更",
@@ -64,5 +64,8 @@
   "comment_post": "發佈",
   "sponsorship": "贊助",
   "sponsor_name": "贊助者",
-  "sponsorship_quote": "想說的話"
+  "sponsorship_quote": "想說的話",
+  "error_page_title": "Oops",
+  "error_page_subtitle": "Looks like something went wrong! {error}",
+  "error_page_default_message": "Unknown Error"
 }

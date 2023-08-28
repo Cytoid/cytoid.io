@@ -5,7 +5,7 @@ const error = useError()
 
 const detailDom = ref<HTMLDialogElement | null>(null)
 
-const errorMsg = computed(() => error.value?.message ?? 'Unknown Error')
+const errorMsg = computed<string | undefined>(() => error.value?.message)
 errorAlert(errorMsg.value)
 
 const showDetail = ref(0)
@@ -28,10 +28,10 @@ defineCytoidPage({
         <div class="flex-1" />
         <div>
           <h1 class="text-5xl font-bold">
-            Oops...
+            {{ $t('general.error_page_title') }}
           </h1>
           <p class="py-6">
-            {{ errorMsg }}
+            {{ $t('general.error_page_subtitle', { error: errorMsg ?? $t('general.error_page_default_message') }) }}
           </p>
           <NuxtLink class="btn btn-primary" to="/">
             {{ $t('general.nav_home') }}

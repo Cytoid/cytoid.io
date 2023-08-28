@@ -28,7 +28,7 @@
   "nav_home": "Home",
   "nav_levels": "Levels",
   "nav_wiki": "Wiki",
-  "login_btn": "Login",
+  "login_btn": "Sign In",
   "delete_btn": "Delete",
   "birthday": "Birthday",
   "collection_card_levels_count_tag": "{count} levels",
@@ -64,5 +64,8 @@
   "comment_post": "Post Comment",
   "sponsorship": "Donation",
   "sponsor_name": "Coffee Contributor",
-  "sponsorship_quote": "Quote"
+  "sponsorship_quote": "Quote",
+  "error_page_title": "Oops",
+  "error_page_subtitle": "Looks like something went wrong! {error}",
+  "error_page_default_message": "Unknown Error"
 }

@@ -5,7 +5,7 @@
   "region_unavailable_content": "啊啊阿asdfas发分啊sdf阿扥asd奋斗分房屋开饭爆炸百丈抓华康复",
   "tos": "群规",
   "community_guidelines": "符语准则",
-  "dmca": "群规 (DMCA)",
+  "dmca": "群规（DMCA）",
   "status": "贵阳状态",
   "credits": "贵阳名单",
   "language": "Fujaowee",
@@ -64,5 +64,8 @@
   "comment_post": "发布",
   "sponsorship": "捐赠",
   "sponsor_name": "咖啡捐赠者",
-  "sponsorship_quote": "留言"
+  "sponsorship_quote": "留言",
+  "error_page_title": "糟糕",
+  "error_page_subtitle": "可能出现的错误： {error}",
+  "error_page_default_message": "发生了未知的错误"
 }

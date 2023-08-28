@@ -1,5 +1,5 @@
 {
-  "download_btn": "다운로드 ({size})",
+  "download_btn": "다운로드 ({size)}",
   "message_private": "이 레벨은 소유자가 비공개로 만들었습니다. 다른 사용자에게는 보이지 않습니다.",
   "message_unlisted": "이 레벨은 비공개입니다.",
   "message_censored": "이 레벨은 {reason} 로 인하여 삭제 되었습니다.",
