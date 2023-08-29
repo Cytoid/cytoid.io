@@ -50,9 +50,9 @@ function selectAll() {
     featured: undefined,
   })
 }
-const owner = computed({
+const owner = computed<string | undefined>({
   get() {
-    return route.query.owner || ''
+    return route.query.owner?.toString() || undefined
   },
   set(newVal) {
     updateRouter({ owner: newVal })
@@ -83,7 +83,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
           <span class="ellipsis">
             Owner: {{ owner }}
           </span>
-          <button class="btn btn-circle btn-xs ml-2" @click="owner = []">
+          <button class="btn btn-circle btn-xs ml-2" @click="owner = undefined">
             <Icon name="material-symbols:close" size="16" />
           </button>
         </div>
