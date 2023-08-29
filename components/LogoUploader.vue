@@ -30,7 +30,7 @@ function getSelectFileUrl(file: File) {
 <template>
   <BaseUploader
     v-model="file"
-    type="covers"
+    type="logos"
     accept=".jpg, .jpeg, .png, .gif, .webp, .svg, .bmp"
     :callback="afterUpload"
   >
@@ -39,7 +39,7 @@ function getSelectFileUrl(file: File) {
     >
       <div class="card w-full shadow-xl overflow-hidden bg-base-100">
         <div
-          class="card-body card flex flex-col bg-primary/25"
+          class="card-body card flex flex-col bg-secondary/25"
         >
           <!-- Background -->
           <div
@@ -49,7 +49,7 @@ function getSelectFileUrl(file: File) {
             }"
           />
           <h2 class="card-subtitle">
-            Cover
+            Logo
           </h2>
           <div
             class="w-full"
@@ -89,7 +89,7 @@ function getSelectFileUrl(file: File) {
             </button>
             <div class="flex-1" />
             <button
-              class="btn btn-primary"
+              class="btn btn-secondary"
               :disabled="started || !file"
               @click="uploadHook(upload)"
             >

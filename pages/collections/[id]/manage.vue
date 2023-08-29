@@ -14,7 +14,7 @@ const mutation = gql(/* GraphQL */`
 `)
 
 const route = useRoute()
-const CollectionId = route.params.id as string
+const collectionId = route.params.id as string
 
 const { user } = useAuth()
 
@@ -56,28 +56,28 @@ const query = gql(/* GraphQL */`
 `)
 
 const { data, error } = await useAsyncData(() => useQuery(query, {
-  uid: CollectionId,
+  uid: collectionId,
 }))
 
 const hasPermission = computed(() => {
   return data.value?.collection?.owner?.id === data.value?.my?.user?.id
     || ['admin', 'moderator'].includes(user.value?.role ?? '')
 })
-if (CollectionId && !data.value?.collection) {
+if (collectionId && !data.value?.collection) {
   showError(error.value?.message ?? createError({
     statusCode: 404,
-    statusMessage: `Level not found: ${CollectionId}`,
+    statusMessage: `Collection not found: ${collectionId}`,
   }))
 }
 else if (!hasPermission) {
   showError(createError({
     statusCode: 403,
-    statusMessage: `You do not have permission to manage this collection: ${CollectionId}`,
+    statusMessage: `You do not have permission to manage this collection: ${collectionId}`,
   }))
 }
 
 if (route.name === 'collections-id-manage') {
-  navigateTo({ name: 'collections-id-manage-listing', params: { id: CollectionId } }, {
+  navigateTo({ name: 'collections-id-manage-listing', params: { id: collectionId } }, {
     replace: true,
   })
 }
@@ -144,9 +144,9 @@ defineCytoidPage({
         :active="route.name as string ?? undefined"
         :context="[
           'Collection Manage',
-          { title: 'Edit Listing', icon: 'mdi:text-box-edit-outline', id: 'collections-id-manage-listing', to: { name: 'collections-id-manage-listing', params: { id: CollectionId } } },
-          { title: 'Edit Cover', icon: 'mdi:image-edit-outline', id: 'collections-id-manage-cover', to: { name: 'collections-id-manage-cover', params: { id: CollectionId } } },
-          { title: 'Edit Levels', icon: 'mdi:folder-edit-outline', id: 'collections-id-manage-levels', to: { name: 'collections-id-manage-levels', params: { id: CollectionId } } },
+          { title: 'Edit Listing', icon: 'mdi:text-box-edit-outline', id: 'collections-id-manage-listing', to: { name: 'collections-id-manage-listing', params: { id: collectionId } } },
+          { title: 'Edit Cover', icon: 'mdi:image-edit-outline', id: 'collections-id-manage-cover', to: { name: 'collections-id-manage-cover', params: { id: collectionId } } },
+          { title: 'Edit Levels', icon: 'mdi:folder-edit-outline', id: 'collections-id-manage-levels', to: { name: 'collections-id-manage-levels', params: { id: collectionId } } },
         ]"
       />
     </template>

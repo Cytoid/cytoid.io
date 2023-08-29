@@ -11,6 +11,7 @@ interface MenuLink {
   id: string
   to?: RouteLocationRaw
   icon?: string
+  disabled?: boolean
 }
 </script>
 
@@ -28,8 +29,9 @@ interface MenuLink {
         </li>
         <li v-else>
           <NuxtLink
-            :to="item.to" :class="{
-              active: active === item.id,
+            :to="item.disabled ? undefined : item.to" :class="{
+              'active': active === item.id,
+              'opacity-50': item.disabled,
             }"
           >
             <Icon v-if="item.icon" :name="item.icon" size="20" />
