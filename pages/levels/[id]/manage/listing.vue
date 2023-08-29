@@ -29,7 +29,7 @@ const form = computed(() => ({
 // Admin
 const censored = ref(!!level.value?.censored)
 const censorReason = ref(level.value?.censored ?? '')
-const category = ref<string[]>([])
+const category = ref<string[]>(level.value?.category ?? [])
 
 watch(censored, (val) => {
   if (!val) {

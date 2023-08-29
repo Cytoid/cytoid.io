@@ -112,6 +112,9 @@ levelData.value?.level?.charts.sort((a, b) => {
   }
 })
 
+const isQualified = computed(() => !!levelData.value?.level?.category.includes('qualified'))
+const isFeatured = computed(() => !!levelData.value?.level?.category.includes('featured'))
+
 const ratingDownCount = computed(() => {
   return levelData.value?.level?.rating.distribution
     .slice(0, 5).reduce((a, b) => a + b, 0) ?? 0
@@ -351,6 +354,19 @@ defineCytoidPage({
           <div v-else class="opacity-60 select-none">
             None
           </div>
+          <template v-if="isQualified || isFeatured">
+            <p class="card-subtitle pt-6">
+              {{ $t('level_details.details_card_categories_title') }}
+            </p>
+            <div class="grid grid-flow-col gap-2">
+              <div v-if="levelData.level.category.includes('featured')" class="badge badge-lg category-badge-featured">
+                Featured
+              </div>
+              <div v-if="levelData.level.category.includes('qualified')" class="badge badge-lg category-badge-qualified">
+                Qualified
+              </div>
+            </div>
+          </template>
         </div>
       </div>
       <div class="card w-full bg-base-100 shadow-xl mt-5">
