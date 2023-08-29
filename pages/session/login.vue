@@ -26,7 +26,6 @@ async function loginWithPayload(verify: () => Promise<string>) {
   loading.value = true
 
   const captchaToken = await verify()
-  // console.log(captchaToken)
   const response = await _loginWithPayload({
     ...loginForm,
     username: loginForm.username.toLowerCase(),
