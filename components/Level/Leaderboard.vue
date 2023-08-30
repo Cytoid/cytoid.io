@@ -38,6 +38,12 @@ const rankingQuery = gql(/* GraphQL */`
 
 // fetch Ranking
 const selectedDiffRank = ref((() => {
+  if (props.charts.some(c => c.type === 'extreme')) {
+    return 'extreme'
+  }
+  if (props.charts.some(c => c.type === 'hard')) {
+    return 'hard'
+  }
   return props.charts[0].type
 })())
 const diffRankPage = ref(1)
@@ -88,13 +94,13 @@ interface chartData {
         class="tabs rounded-full w-fit bg-neutral/25 mt-2"
       >
         <a
-          v-if="charts.some(c => c.type === 'extreme')"
+          v-if="charts.some(c => c.type === 'easy')"
           class="tab rounded-full order-1"
           :class="{
-            'tab-active diff-badge-extreme': selectedDiffRank === 'extreme',
+            'tab-active diff-badge-easy': selectedDiffRank === 'easy',
           }"
-          @click="selectedDiffRank = 'extreme'"
-        >Extreme</a>
+          @click="selectedDiffRank = 'easy'"
+        >Easy</a>
         <a
           v-if="charts.some(c => c.type === 'hard')"
           class="tab rounded-full order-2"
@@ -104,13 +110,13 @@ interface chartData {
           @click="selectedDiffRank = 'hard'"
         >Hard</a>
         <a
-          v-if="charts.some(c => c.type === 'easy')"
+          v-if="charts.some(c => c.type === 'extreme')"
           class="tab rounded-full order-3"
           :class="{
-            'tab-active diff-badge-easy': selectedDiffRank === 'easy',
+            'tab-active diff-badge-extreme': selectedDiffRank === 'extreme',
           }"
-          @click="selectedDiffRank = 'easy'"
-        >Easy</a>
+          @click="selectedDiffRank = 'extreme'"
+        >Extreme</a>
       </div>
 
       <!-- loading bar -->

@@ -31,7 +31,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
       <UserAvatarIcon :avatar="avatar" :size="size" />
       <p
         v-if="name"
-        class="px-2"
+        class="px-2 whitespace-nowrap"
         :class="{
           'pr-0': transparent && !reverse,
           'pl-0': transparent && reverse,

@@ -142,7 +142,9 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
         </h2>
         <div v-if="!hasVerifiedEmail" class="alert alert-warning">
           <Icon name="mdi:alert-circle-outline" size="24" />
-          <span>You have no verified email! You will not be able to access your Cytoid account if you lost your password!</span>
+          <span>
+            {{ $t('settings.email_verify_warning') }}
+          </span>
         </div>
         <div class="overflow-x-auto mb-4">
           <table class="table">

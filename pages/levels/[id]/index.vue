@@ -99,18 +99,6 @@ if (levelId && !levelData.value?.level) {
     statusMessage: `Level not found: ${levelId}`,
   }))
 }
-// Preset chart order
-levelData.value?.level?.charts.sort((a, b) => {
-  return getOrder(a.type) - getOrder(b.type)
-  function getOrder(t: string) {
-    switch (t) {
-      case 'extreme': return 1
-      case 'hard': return 2
-      case 'easy': return 3
-    }
-    return 0
-  }
-})
 
 const isQualified = computed(() => !!levelData.value?.level?.category.includes('qualified'))
 const isFeatured = computed(() => !!levelData.value?.level?.category.includes('featured'))
@@ -358,7 +346,7 @@ defineCytoidPage({
             <p class="card-subtitle pt-6">
               {{ $t('level_details.details_card_categories_title') }}
             </p>
-            <div class="grid grid-flow-col gap-2">
+            <div class="grid grid-flow-col w-fit gap-2">
               <div v-if="levelData.level.category.includes('featured')" class="badge badge-lg category-badge-featured">
                 Featured
               </div>
@@ -450,6 +438,10 @@ defineCytoidPage({
       <div class="card w-full bg-base-100 shadow-xl mt-5">
         <div class="card-body gap-6">
           <MetaBox v-if="levelData?.level?.metadata" :metadata="levelData?.level?.metadata" />
+        </div>
+      </div>
+      <div class="card w-full bg-base-100 shadow-xl mt-5">
+        <div class="card-body gap-6">
           <div class="flex flex-col gap-2">
             <p class="card-subtitle">
               {{ $t('level_details.details_card_last_updated_title') }}

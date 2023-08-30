@@ -239,10 +239,20 @@ defineCytoidPage({
           </div>
         </div>
         <div class="flex flex-col justify-center gap-1 flex-1 pt-6 px-4 w-0">
-          <div>
+          <div class="flex gap-1">
             <p class="card-title break-all">
               {{ profileData.profile.user?.name || profileData.profile.user?.uid }}
             </p>
+            <NuxtLink
+              v-if="['admin', 'moderator'].includes(user?.role ?? '')"
+              class="btn btn-xs btn-ghost btn-circle"
+              :to="{
+                name: 'studio-users',
+                hash: `#${profileData.profile.user?.uid ?? profileData.profile.user?.id}`,
+              }"
+            >
+              <Icon name="mdi:cog-outline" size="16" />
+            </NuxtLink>
           </div>
           <div v-if="profileData.profile.rating" class="flex gap-2">
             <div
