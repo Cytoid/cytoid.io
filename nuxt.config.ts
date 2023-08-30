@@ -1,5 +1,6 @@
 import config from 'config'
 import * as dotenv from 'dotenv'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import pkg from './package.json'
 
 dotenv.config()
@@ -45,6 +46,12 @@ export default defineNuxtConfig({
       servicesUA: process.env.SERVICES_UA ?? '',
       recaptcha: {
         v2SiteKey: config.get('captchaKey'),
+      },
+      sentry: {
+        enabled: process.env.NODE_ENV === 'production',
+        dsn: config.get('sentryDSN') ?? '',
+        environment: process.env.NODE_ENV ?? 'production',
+        tracePropagationTarget: config.get('serviceURLClient'),
       },
     },
   },
@@ -107,6 +114,28 @@ export default defineNuxtConfig({
     ],
   },
 
+  // vite
+  sourcemap: {
+    server: true,
+    client: true,
+  },
+  vite: {
+    clearScreen: false,
+    build: {
+      sourcemap: true,
+    },
+    plugins: [
+      sentryVitePlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: config.get('sentryOrg'),
+        project: config.get('sentryProject'),
+        telemetry: false,
+        disable: process.env.NODE_ENV !== 'production',
+        debug: true,
+      }),
+    ],
+  },
+
   // dev proxy
   nitro: {
     devProxy: {
@@ -134,9 +163,5 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-
-  vite: {
-    clearScreen: false,
   },
 })

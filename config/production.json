@@ -8,5 +8,8 @@
   "webURL": "https://next.cytoid.io",
   "cookieDomain": "next.cytoid.io",
   "captchaKey": "6Le6KqsUAAAAANemJwIe18ld-0kKSQn9aqR4-ltM",
-  "analyticsCode": "UA-127631599-1"
+  "analyticsCode": "UA-127631599-1",
+  "sentryOrg": "cytoid-next",
+  "sentryProject": "next-io",
+  "sentryDSN": "https://a6429cf7baa5d73b111c01d66a45989b@o4505793884717056.ingest.sentry.io/4505793949401088"
 }
