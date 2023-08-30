@@ -190,16 +190,21 @@ interface ConfirmCollectionData {
         <h2 class="card-subtitle">
           Create a new collection
         </h2>
-        <input
-          v-model="newCollectionTitle"
-          class="input input-bordered"
-          placeholder="Title"
-        >
-        <input
-          v-model="newCollectionUid"
-          class="input input-bordered"
-          placeholder="Uid"
-        >
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Title</span>
+          </label>
+          <input v-model="newCollectionTitle" type="text" class="input input-bordered w-full">
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Uid</span>
+          </label>
+          <input v-model="newCollectionUid" type="text" class="input input-bordered w-full">
+        </div>
+
         <div class="flex flex-col gap-2 items-end">
           <button
             class="btn btn-primary"
@@ -219,7 +224,7 @@ interface ConfirmCollectionData {
           Manage
         </h2>
 
-        <!-- Level List -->
+        <!-- Collection List -->
         <div class="overflow-x-auto">
           <table class="table w-full">
             <!-- head -->
@@ -232,7 +237,7 @@ interface ConfirmCollectionData {
             </thead>
             <tbody>
               <tr v-for="collection in collections" :key="collection.id">
-                <!-- Level Content -->
+                <!-- Collection Content -->
                 <td class="flex items-center space-x-3">
                   <div class="flex gap-4">
                     <div

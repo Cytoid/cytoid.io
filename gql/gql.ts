@@ -59,6 +59,13 @@ const documents = {
     "\n  mutation DeleteCollections($id: ID!) {\n    deleteCollection(id: $id) {\n      id\n    }\n  }\n": types.DeleteCollectionsDocument,
     "\n  query FetchLevelForStudio($limit: Int!, $start: Int!) {\n    my {\n      levelsCount\n      levels(start: $start, limit: $limit) {\n        id\n        uid\n        title\n        creationDate\n        bundle {\n          backgroundImage {\n            sized(height: 90, width: 160)\n          }\n        }\n        state\n        avgRating\n        ratingCount\n        downloadCount\n        playCount\n      }\n    }\n  }\n": types.FetchLevelForStudioDocument,
     "\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n": types.DeleteLevelDocument,
+    "\n  query StudioGetPosts {\n    posts: getPosts(limit: 100, all: true) {\n      id\n      type\n      uid\n      title\n      slogan\n      creationDate\n      state\n      cover {\n        sized(height: 90, width: 160)\n      }\n    }\n  }\n": types.StudioGetPostsDocument,
+    "\n  mutation StudioCreatePost($data: PostInput!) {\n    post: createPost(post: $data) {\n      id\n      uid\n    }\n  }\n": types.StudioCreatePostDocument,
+    "\n  mutation StudioDeletePost($id: ID!) {\n    deletePost(id: $id) {\n      id\n    }\n  }\n": types.StudioDeletePostDocument,
+    "\n  query StudioLookupUser($uid: String, $id: ID) {\n    user(id: $id, uid: $uid) {\n      id\n      uid\n      name\n      emails {\n        address\n        verified\n      }\n      registrationDate\n      role\n      avatar {\n        large\n      }\n      active\n    }\n  }\n": types.StudioLookupUserDocument,
+    "\n  mutation StudioSetUserActive($id: ID!, $active: Boolean!) {\n    setUserActive(id: $id, active: $active)\n  }\n": types.StudioSetUserActiveDocument,
+    "\n  mutation StudioGrantUserBadge($id: ID!, $badge: String!) {\n    grantUserBadge(id: $id, badge: $badge)\n  }\n": types.StudioGrantUserBadgeDocument,
+    "\n  mutation StudioBanUser($id: ID!, $reason: String!) {\n    banUser(id: $id, reason: $reason)\n  }\n": types.StudioBanUserDocument,
 };
 
 /**
@@ -259,6 +266,34 @@ export function graphql(source: "\n  query FetchLevelForStudio($limit: Int!, $st
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n"): (typeof documents)["\n  mutation DeleteLevel($id: ID!) {\n    deleteLevel(id: $id)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query StudioGetPosts {\n    posts: getPosts(limit: 100, all: true) {\n      id\n      type\n      uid\n      title\n      slogan\n      creationDate\n      state\n      cover {\n        sized(height: 90, width: 160)\n      }\n    }\n  }\n"): (typeof documents)["\n  query StudioGetPosts {\n    posts: getPosts(limit: 100, all: true) {\n      id\n      type\n      uid\n      title\n      slogan\n      creationDate\n      state\n      cover {\n        sized(height: 90, width: 160)\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation StudioCreatePost($data: PostInput!) {\n    post: createPost(post: $data) {\n      id\n      uid\n    }\n  }\n"): (typeof documents)["\n  mutation StudioCreatePost($data: PostInput!) {\n    post: createPost(post: $data) {\n      id\n      uid\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation StudioDeletePost($id: ID!) {\n    deletePost(id: $id) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation StudioDeletePost($id: ID!) {\n    deletePost(id: $id) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query StudioLookupUser($uid: String, $id: ID) {\n    user(id: $id, uid: $uid) {\n      id\n      uid\n      name\n      emails {\n        address\n        verified\n      }\n      registrationDate\n      role\n      avatar {\n        large\n      }\n      active\n    }\n  }\n"): (typeof documents)["\n  query StudioLookupUser($uid: String, $id: ID) {\n    user(id: $id, uid: $uid) {\n      id\n      uid\n      name\n      emails {\n        address\n        verified\n      }\n      registrationDate\n      role\n      avatar {\n        large\n      }\n      active\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation StudioSetUserActive($id: ID!, $active: Boolean!) {\n    setUserActive(id: $id, active: $active)\n  }\n"): (typeof documents)["\n  mutation StudioSetUserActive($id: ID!, $active: Boolean!) {\n    setUserActive(id: $id, active: $active)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation StudioGrantUserBadge($id: ID!, $badge: String!) {\n    grantUserBadge(id: $id, badge: $badge)\n  }\n"): (typeof documents)["\n  mutation StudioGrantUserBadge($id: ID!, $badge: String!) {\n    grantUserBadge(id: $id, badge: $badge)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation StudioBanUser($id: ID!, $reason: String!) {\n    banUser(id: $id, reason: $reason)\n  }\n"): (typeof documents)["\n  mutation StudioBanUser($id: ID!, $reason: String!) {\n    banUser(id: $id, reason: $reason)\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

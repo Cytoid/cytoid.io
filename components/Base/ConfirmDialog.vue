@@ -36,7 +36,7 @@ const confirmed = ref('')
           </button>
           <button
             class="btn flex-1"
-            :disabled="confirmed !== props.confirm"
+            :disabled="confirm === '' || confirmed !== props.confirm"
             :class="{
               'btn-success': type === 'success',
               'btn-error': type === 'error',
