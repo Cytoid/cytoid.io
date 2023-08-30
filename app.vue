@@ -34,4 +34,5 @@ useHead({
   </div>
   <AlertBox />
   <PreviewPlayer />
+  <BetaAlert />
 </template>
