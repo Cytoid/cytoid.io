@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import Layout from '~/app.vue'
 
-const { $sentryCaptureException } = useNuxtApp()
-
-const config = useRuntimeConfig()
-
 const error = useError()
 
 const detailDom = ref<HTMLDialogElement | null>(null)
@@ -18,10 +14,6 @@ watch(showDetail, (val) => {
     detailDom.value?.showModal()
   }
 })
-
-function showFeedbackDialog() {
-  $sentryCaptureException(error.value)
-}
 
 defineCytoidPage({
   title: 'Error',
@@ -41,15 +33,9 @@ defineCytoidPage({
           <p class="py-6">
             {{ $t('general.error_page_subtitle', { error: errorMsg ?? $t('general.error_page_default_message') }) }}
           </p>
-          <div class="flex gap-2">
-            <NuxtLink class="btn btn-primary" to="/">
-              {{ $t('general.nav_home') }}
-            </NuxtLink>
-            <button class="flex-1 btn btn-secondary" @click="showFeedbackDialog">
-              <!-- {{ $t('general.error_page_report') }} -->
-              Feedback
-            </button>
-          </div>
+          <NuxtLink class="btn btn-primary" to="/">
+            {{ $t('general.nav_home') }}
+          </NuxtLink>
         </div>
       </div>
     </div>
