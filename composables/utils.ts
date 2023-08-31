@@ -1,6 +1,14 @@
 import sanitizeHtml from 'sanitize-html'
 import type { CookieOptions } from '#app'
 
+export function copyToClipboard(text: string, name?: string) {
+  const { copy, isSupported } = useClipboard()
+  if (isSupported.value) {
+    copy(text)
+    successAlert(`Copied ${name || 'text'} to clipboard`)
+  }
+}
+
 export function useSavedCookie<T = string>(name: string, _opts?: CookieOptions<T>) {
   return useCookie(name, {
     maxAge: 7 * 24 * 60 * 60, // 7 days
