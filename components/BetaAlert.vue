@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const hide = useCookie('hide-beta-alert-v1', {
+const hide = useSavedCookie('hide-beta-alert-v1', {
   default: () => false,
 })
 const betaAlertDialog = ref<HTMLDialogElement | null>(null)
