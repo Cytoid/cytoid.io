@@ -43,10 +43,12 @@ const query = gql(/* GraphQL */`
         }
         collectionsCount
         lastSeen
-        levelsCount(category: "!featured")
+        levelsCount
+        qualifiedLevelsCount: levelsCount(category: "qualified")
         featuredLevelsCount: levelsCount(category: "featured")
-        levels(category: "!featured", first: 6, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
-        featuredLevels: levels(category: "featured", first: 6, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
+        levels(category: "!featured !qualified", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
+        qualifiedLevels: levels(category: "qualified", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
+        featuredLevels: levels(category: "featured", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
       }
       rating
       badges {
@@ -188,12 +190,21 @@ const registrationDate = computed<string>(() => {
   return dateFromNow(profileData.value?.profile?.user?.registrationDate)
 })
 
-const levels = computed(() => {
-  return profileData.value?.profile?.user?.levels ?? []
+const qualifiedLevels = computed(() => {
+  return profileData.value?.profile?.user?.qualifiedLevels ?? []
 })
 
 const featuredLevels = computed(() => {
-  return profileData.value?.profile?.user?.featuredLevels ?? []
+  const limit = Math.min(8, Math.max(2, 12 - Math.ceil(qualifiedLevels.value.length / 2) * 2))
+  return profileData.value?.profile?.user?.featuredLevels.slice(0, limit) ?? []
+})
+
+const levels = computed(() => {
+  const limit = Math.min(8, Math.max(2, 12 - (
+    Math.ceil(qualifiedLevels.value.length / 2)
+    + Math.ceil(featuredLevels.value.length / 2)
+  ) * 2))
+  return profileData.value?.profile?.user?.levels.slice(0, limit) ?? []
 })
 
 const collections = computed(() => {
@@ -422,43 +433,70 @@ defineCytoidPage({
       v-if="profileData.profile.user?.levelsCount ?? 0 > 0"
       class="card w-full bg-base-100 shadow-xl overflow-hidden mb-5"
     >
-      <div
-        v-if="profileData.profile.user?.featuredLevelsCount !== 0"
-        class="card-body card bg-featured/25"
-      >
-        <h2 class="card-subtitle">
-          {{ $t('profile.levels_title') }}
-        </h2>
-        <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-4"
-        >
-          <LevelCard
-            v-for="level, index in featuredLevels" :key="index"
-            class="h-48"
-            :trim="true"
-            :level="level"
-          />
+      <div class="bg-base-100 card overflow-hidden">
+        <div class="bg-qualified/25">
+          <div class="bg-base-100 card overflow-hidden">
+            <div class="bg-featured/25">
+              <!-- Featured Levels -->
+              <div
+                v-if="profileData.profile.user?.featuredLevelsCount !== 0"
+                class="card-body"
+              >
+                <h2 class="card-subtitle">
+                  {{ $t('profile.levels_title') }}
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <LevelCard
+                    v-for="level, index in featuredLevels" :key="index"
+                    class="h-48"
+                    :trim="true"
+                    :level="level"
+                  />
+                </div>
+                <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, featured: 'true' } }" class="btn bg-featured mt-4">
+                  {{ $t('profile.levels_featured_all_btn', { count: profileData.profile.user?.featuredLevelsCount }) }}
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qualified Levels -->
+          <div
+            v-if="profileData.profile.user?.qualifiedLevelsCount !== 0"
+            class="card-body"
+          >
+            <h2
+              v-if="profileData.profile.user?.featuredLevelsCount === 0"
+              class="card-subtitle"
+            >
+              {{ $t('profile.levels_title') }}
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <LevelCard
+                v-for="level, index in qualifiedLevels" :key="index"
+                class="h-48"
+                :trim="true"
+                :level="level"
+              />
+            </div>
+            <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, qualified: 'true' } }" class="btn bg-qualified mt-4">
+              {{ $t('profile.levels_qualified_all_btn', { count: profileData.profile.user?.qualifiedLevelsCount }) }}
+            </NuxtLink>
+          </div>
         </div>
-        <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, featured: 'true' } }" class="btn bg-featured mt-4">
-          {{ $t('profile.levels_featured_all_btn', { count: profileData.profile.user?.featuredLevelsCount }) }}
-        </NuxtLink>
       </div>
-      <!-- TODO: waiting qualified system -->
-      <!-- <div
-        v-if="profileData.profile.user?.featuredLevelsCount !== 0"
-        class="card-body card bg-qualified/25"
-        :class="{
-          'rounded-t-none': true || true,
-        }"
-      >
-      </div> -->
+
+      <!-- Other Levels -->
       <div class="card-body">
-        <h2 v-if="profileData.profile.user?.featuredLevelsCount === 0" class="card-subtitle">
+        <h2
+          v-if="(
+            profileData.profile.user?.featuredLevelsCount === 0
+            && profileData.profile.user?.qualifiedLevelsCount === 0
+          )" class="card-subtitle"
+        >
           {{ $t('profile.levels_title') }}
         </h2>
-        <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-4"
-        >
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <LevelCard
             v-for="level, index in levels" :key="index"
             class="h-48"

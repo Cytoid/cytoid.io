@@ -14,20 +14,6 @@ const order = computed({
     updateRouter({ order: newVal })
   },
 })
-const sort = computed({
-  get() {
-    if (search.value !== '') {
-      return route.query.sort || 'relevance'
-    }
-    if (route.query.sort === 'relevance') {
-      return 'creation_date'
-    }
-    return route.query.sort || 'creation_date'
-  },
-  set(newVal) {
-    updateRouter({ sort: newVal })
-  },
-})
 const featured = computed({
   get() {
     return route.query.featured === 'true' || false
@@ -42,6 +28,23 @@ const qualified = computed({
   },
   set(newVal) {
     updateRouter({ qualified: newVal ? 'true' : undefined })
+  },
+})
+const sort = computed({
+  get() {
+    if (search.value !== '') {
+      return route.query.sort ?? 'relevance'
+    }
+    if (route.query.sort === 'relevance') {
+      return 'creation_date'
+    }
+    if (qualified.value) {
+      return route.query.sort ?? 'modification_date'
+    }
+    return route.query.sort ?? 'creation_date'
+  },
+  set(newVal) {
+    updateRouter({ sort: newVal })
   },
 })
 function selectAll() {
@@ -156,7 +159,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
               <button
                 class="join-item btn btn-fea btn-neutral"
                 :class="{
-                  'btn-active': featured,
+                  'btn-active bg-featured/75': featured,
                 }"
                 @click="featured = !featured"
               >
@@ -165,7 +168,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
               <button
                 class="join-item btn btn-qua btn-neutral"
                 :class="{
-                  'btn-active': qualified,
+                  'btn-active bg-qualified/75': qualified,
                 }"
                 @click="qualified = !qualified"
               >

@@ -54,7 +54,7 @@ body {
 
 .category-badge-featured {
   @apply text-base-content font-bold border-none;
-  background: linear-gradient(to right bottom, #b91d73, #f953c6);
+  background: linear-gradient(to right bottom, #df3090, #f953c6);
   order: 1;
 }
 .category-badge-qualified {
@@ -64,7 +64,7 @@ body {
 }
 
 .bg-featured {
-  @apply bg-gradient-to-br from-[#b91d73] to-[#f953c6]
+  @apply bg-gradient-to-br from-[#df3090] to-[#f953c6]
 }
 
 .bg-qualified {  
@@ -72,11 +72,27 @@ body {
 }
 
 .bg-featured\/25 {
-  @apply bg-gradient-to-br from-[#b91d7340] to-[#f953c640]
+  @apply bg-gradient-to-br from-[#df309040] to-[#f953c640]
 }
 
 .bg-qualified\/25 {  
   @apply bg-gradient-to-br from-[#1D976C40] to-[#1cb06840]
+}
+
+.bg-featured\/50 {
+  @apply bg-gradient-to-br from-[#df309080] to-[#f953c680]
+}
+
+.bg-qualified\/50 {  
+  @apply bg-gradient-to-br from-[#1D976C80] to-[#1cb06880]
+}
+
+.bg-featured\/75 {
+  @apply bg-gradient-to-br from-[#df3090C0] to-[#f953c6C0]
+}
+
+.bg-qualified\/75 {  
+  @apply bg-gradient-to-br from-[#1D976CC0] to-[#1cb068C0]
 }
 
 
