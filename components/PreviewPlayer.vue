@@ -11,9 +11,16 @@ const player = ref<Howl | null>(null)
 
 const nowPlaying = ref<string>('')
 
+const fadeInTime = 500 // ms
+const fadeOutTime = 800 // ms
+
 const timer = useRafFn(() => {
   if (player.value && player.value.playing() === true) {
     updatePreviewCurrent(player.value.seek())
+    // fade out
+    if (player.value?.duration() - player.value?.seek() < fadeOutTime / 1000) {
+      player.value.volume(Math.max(0, player.value.volume() - 1 / fadeOutTime * 1000 / 60))
+    }
   }
 })
 
@@ -75,7 +82,7 @@ function ready(url: string) {
 
 async function play() {
   if (player.value) {
-    player.value.play()
+    player.value.fade(0, 1, fadeInTime).play()
   }
   updatePreviewState({
     state: 'playing',
