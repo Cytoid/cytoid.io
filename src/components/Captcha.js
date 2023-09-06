@@ -1,8 +1,9 @@
 function CaptchaScript (cb) {
   const script = document.createElement('script')
-  script.src = 'https://www.google.com/recaptcha/api.js'
+  // recaptcha mode
+  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha'
   if (cb) {
-    script.src += '?onload=grecaptchaOnload'
+    script.src += '&onload=grecaptchaOnload'
     global.grecaptchaOnload = cb
   }
   script.async = true
@@ -13,7 +14,7 @@ function CaptchaScript (cb) {
 export default {
   name: 'Captcha',
   mounted () {
-    // if not loaded, create script tag, and wait to render hcaptcha element
+    // if not loaded, create script tag, and wait to render turnstile element
     if (!global.grecaptcha) {
       console.log('loading captcha js')
       const script = CaptchaScript(this.renderCaptcha)
@@ -66,7 +67,7 @@ export default {
     },
     onError () {
       if (this.reject) {
-        this.reject(new Error('Can not load reCAPTCHA'))
+        this.reject(new Error('Can not load Turnstile'))
         this.resolve = null
         this.reject = null
       }

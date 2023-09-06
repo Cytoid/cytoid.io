@@ -17,6 +17,16 @@
           :loading="loading"
           expanded
           style="margin-top: 1rem;") {{ $t('login_btn') }}
+        b-button(
+          tag="a"
+          :href="`https://next.cytoid.io/session/login${$route.query.origin ? '?origin=' + $route.query.origin : ''}`"
+          expanded
+          active
+          type="is-info"
+          style="margin-top: 1rem;") {{ $t('redirect_btn') }}
+        b-notification(
+          style="margin-top: 1rem; background-color: #546083;"
+        ) {{$t('redirect_content')}}
     .level.is-mobile(style="margin-top: 1rem; margin-bottom: 1rem;")
       font-awesome-icon.level-item(v-if="externalLoginLoading" icon="spinner" spin)
       template(v-else)

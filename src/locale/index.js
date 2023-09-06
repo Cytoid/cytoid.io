@@ -14,7 +14,6 @@ import * as deDE from './de-DE/index.js'
 import * as huHU from './hu-HU/index.js'
 import * as frFR from './fr-FR/index.js'
 
-
 const locale = {
   'zh-CN': zhCN,
   'zh-TW': zhTW,

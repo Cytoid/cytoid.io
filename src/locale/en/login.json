@@ -7,5 +7,7 @@
   "password_field_error_required": "Please input your password.",
   "remember_me_checkbox_title": "Remember Me",
   "new_user_welcome_title": "New to Cytoid?",
-  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!"
+  "new_user_welcome_content": "Sign up to access all Cytoid multiplayer features. It takes less than 30 seconds!",
+  "redirect_btn": "Next Version of Cytoid.io",
+  "redirect_content": "We are renovating Cytoid.io, if you encounter any issues, please visit the next version of Cytoid.io"
 }

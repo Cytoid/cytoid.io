@@ -7,5 +7,7 @@
   "password_field_error_required": "请输入您的密码。",
   "remember_me_checkbox_title": "下次自动登录",
   "new_user_welcome_title": "还没有 Cytoid 帐号？",
-  "new_user_welcome_content": "注册以访问 Cytoid 所有的多人游戏功能。只需要 30 秒时间！"
+  "new_user_welcome_content": "注册以访问 Cytoid 所有的多人游戏功能。只需要 30 秒时间！",
+  "redirect_btn": "前往新版本",
+  "redirect_content": "我们正在翻新 Cytoid.io, 如果你遇到问题, 请访问新版本的 Cytoid.io"
 }
