@@ -151,14 +151,16 @@ async function changeCollectionVisibility() {
 }
 
 onMounted(() => {
-  nextTick(() => loadCollections)
+  nextTick(() => {
+    loadCollections()
+  })
 })
 
 async function loadCollections() {
   loading.value = true
   const data = await useQuery(query)
   if (!data?.my?.collections) {
-    errorAlert('Failed to load levels')
+    errorAlert('Failed to load collections')
     return
   }
   collections.value = data.my.collections
