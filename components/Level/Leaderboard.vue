@@ -166,25 +166,33 @@ interface chartData {
                 </div>
               </td>
               <td class="font-semibold">
-                <div class="flex gap-x-1 items-center">
-                  <RecordScoreBadge :score="rank.score" />
-                  {{ rank.score }}
-                </div>
+                <NuxtLink :to="{ name: 'records-chartId-id', params: { id: rank.id, chartId: rankData.chart.id } }">
+                  <div class="flex gap-x-1 items-center">
+                    <RecordScoreBadge :score="rank.score" />
+                    {{ rank.score }}
+                  </div>
+                </NuxtLink>
               </td>
               <td class="font-semibold">
-                {{ truncateNum(rank.accuracy * 100) }}%
+                <NuxtLink :to="{ name: 'records-chartId-id', params: { id: rank.id, chartId: rankData.chart.id } }">
+                  {{ truncateNum(rank.accuracy * 100) }}%
+                </NuxtLink>
               </td>
               <td class="font-semibold">
-                {{ rank.details.maxCombo }}x
+                <NuxtLink :to="{ name: 'records-chartId-id', params: { id: rank.id, chartId: rankData.chart.id } }">
+                  {{ rank.details.maxCombo }}x
+                </NuxtLink>
               </td>
               <td>
-                <div class="flex gap-x-1">
-                  <span class="text-blue-400">{{ rank.details.perfect }} </span> /
-                  <span class="text-yellow-400">{{ rank.details.great }} </span> /
-                  <span class="text-green-400">{{ rank.details.good }} </span> /
-                  <span class="text-red-400">{{ rank.details.bad }} </span> /
-                  <span>{{ rank.details.miss }}</span>
-                </div>
+                <NuxtLink :to="{ name: 'records-chartId-id', params: { id: rank.id, chartId: rankData.chart.id } }">
+                  <div class="flex gap-x-1">
+                    <span class="text-blue-400">{{ rank.details.perfect }} </span> /
+                    <span class="text-yellow-400">{{ rank.details.great }} </span> /
+                    <span class="text-green-400">{{ rank.details.good }} </span> /
+                    <span class="text-red-400">{{ rank.details.bad }} </span> /
+                    <span>{{ rank.details.miss }}</span>
+                  </div>
+                </NuxtLink>
               </td>
               <td>
                 <div class="flex">

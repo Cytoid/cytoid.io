@@ -34,6 +34,7 @@ export default defineNuxtPlugin((nuxt) => {
     url,
     exchanges: [
       cacheExchange,
+      ssr,
       fetchExchange,
     ],
     fetchOptions: () => {

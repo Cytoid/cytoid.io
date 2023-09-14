@@ -82,12 +82,12 @@ interface SelectorItem {
     >
       <div
         ref="box"
-        class="join join-vertical w-full shadow-xl"
+        class="join join-vertical w-full min-w-fit shadow-xl pt-2"
       >
         <button
           v-for="item in items"
           :key="item.value"
-          class="btn btn-neutral join-item justify-start flex-nowrap"
+          class="btn btn-neutral join-item min-w-fit justify-start flex-nowrap whitespace-nowrap"
           :class="{
             '[:not(:hover)>&]:btn-active': item.value === selected,
             'btn-sm': small,

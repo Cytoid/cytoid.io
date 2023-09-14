@@ -37,6 +37,7 @@ interface RecordData {
 <template>
   <BaseCard
     v-if="record.chart"
+    :to="{ name: 'records-chartId-id', params: { id: record.id, chartId: record.chart.id } }"
     :cover="record.chart.level?.bundle?.backgroundImage?.stripe ?? undefined"
     class="h-28"
   >
@@ -50,11 +51,11 @@ interface RecordData {
       />
     </div>
     <div class="flex-1" />
-    <NuxtLink :to="{ name: 'levels-id', params: { id: record.chart.level?.uid } }" class="max-w-full w-fit flex flex-row">
+    <NestedLink :to="{ name: 'levels-id', params: { id: record.chart.level?.uid } }" class="max-w-full w-fit flex flex-row">
       <h3 class="card-title text-lg block truncate py-1">
         {{ record.chart.level?.title }}
       </h3>
-    </NuxtLink>
+    </NestedLink>
     <div class="w-full flex flex-warp flex-row gap-2">
       <div class="min-w-0">
         <LevelDiffBadgeSmall

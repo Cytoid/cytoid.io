@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { StudioAnalyticsQuery } from '~/gql/graphql'
+import type { RecordFragmentForStudioAnalyticsFragment, StudioAnalyticsQuery } from '~/gql/graphql'
 
 const { user } = useAuth()
 
@@ -16,7 +16,7 @@ const query = gql(/* GraphQL */`
         }
       }
       rating
-      recentRecords(limit: 30) {
+      recentRecords(limit: 30, sort: RecentRating) {
         ...RecordFragmentForStudioAnalytics
       }
       bestRecords(limit: 30) {
@@ -45,6 +45,7 @@ const query = gql(/* GraphQL */`
     }
     accuracy
     rating
+    recentRating
   }
 `)
 
@@ -60,8 +61,8 @@ const profile = computed(() => {
   return undefined
 })
 
-const recentRecords = ref<Record[]>([])
-const bestRecords = ref<Record[]>([])
+const recentRecords = ref<RecordFragmentForStudioAnalyticsFragment[]>([])
+const bestRecords = ref<RecordFragmentForStudioAnalyticsFragment[]>([])
 
 const allRecords = computed(() => {
   if (selected.value === 'best') {
@@ -72,7 +73,12 @@ const allRecords = computed(() => {
   }
 })
 const avgRating = computed(() => {
-  return allRecords.value.reduce((acc, cur) => acc + cur.rating, 0) / allRecords.value.length
+  if (selected.value === 'best') {
+    return bestRecords.value.reduce((acc, cur) => acc + cur.rating, 0) / bestRecords.value.length
+  }
+  else {
+    return recentRecords.value.slice(0, 10).reduce((acc, cur) => acc + (cur?.recentRating ?? 0), 0) / 10
+  }
 })
 
 const page = ref(1)
@@ -111,29 +117,6 @@ onMounted(() => {
     }
   })
 })
-
-interface Record {
-  id: number
-  date: string
-  chart?: Maybe<{
-    id: number
-    type: string
-    name?: Maybe<string>
-    difficulty: number
-    notesCount: number
-    level?: Maybe<{
-      uid: string
-      title: string
-      bundle?: Maybe<{
-        backgroundImage?: Maybe<{
-          sized?: Maybe<string>
-        }>
-      }>
-    }>
-  }>
-  accuracy: number
-  rating: number
-}
 </script>
 
 <template>
@@ -184,7 +167,12 @@ interface Record {
             > Recent Records </a>
           </div>
           <div class="flex justify-end">
-            Average: {{ truncateNum(avgRating) }}
+            <template v-if="selected === 'best'">
+              Average: {{ truncateNum(avgRating) }}
+            </template>
+            <template v-else>
+              Average of best 10: {{ truncateNum(avgRating) }}
+            </template>
           </div>
         </div>
 
@@ -232,8 +220,26 @@ interface Record {
                     </div>
                   </div>
                 </td>
-                <td>{{ truncateNum(record.accuracy * 100) }}%</td>
-                <td>{{ truncateNum(record.rating) }}</td>
+                <td>
+                  <NuxtLink
+                    :to="{ name: 'records-chartId-id', params: { id: record.id, chartId: record.chart?.id } }"
+                  >
+                    {{ truncateNum(record.accuracy * 100) }}%
+                  </NuxtLink>
+                </td>
+                <td>
+                  <NuxtLink
+                    class="flex flex-nowrap gap-1"
+                    :to="{ name: 'records-chartId-id', params: { id: record.id, chartId: record.chart?.id } }"
+                  >
+                    <span>
+                      {{ truncateNum(record.rating) }}
+                    </span>
+                    <span class="opacity-75">
+                      ({{ truncateNum(record.recentRating ?? 0) }})
+                    </span>
+                  </NuxtLink>
+                </td>
                 <td>{{ dateFormatCalendar(record.date) }}</td>
               </tr>
             </tbody>

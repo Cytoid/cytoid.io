@@ -114,6 +114,30 @@ body {
   order: 3;
 }
 
+.grade-max-text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-tl from-[#0096FF] to-[#EC00C6];
+}
+
+.grade-sss-text-gradient,
+.grade-ss-text-gradient,
+.grade-s-text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-[#FFC53D] to-[#FF5E07];
+}
+
+.grade-aa-text-gradient,
+.grade-a-text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-[#FDEB70] to-[#E25FA6];
+}
+
+.grade-b-text-gradient,
+.grade-c-text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-[#95C529] to-[#3DB1C5];
+}
+
+.grade-text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-[#99A8D1] to-[#474E61];
+}
+
 /* Tailwind */
 .prose :where(hr):not(:where([class~="not-prose"] *)) {
   @apply my-4

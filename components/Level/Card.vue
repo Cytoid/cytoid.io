@@ -31,7 +31,7 @@ interface LevelData {
     } | null
     musicPreview?: string | null
   } | null
-  charts: {
+  charts?: {
     type: string
     difficulty: number
     name?: string | null
@@ -43,21 +43,23 @@ interface LevelData {
 <template>
   <BaseCard :to="{ name: 'levels-id', params: { id: level.uid } }" :cover="level.bundle?.backgroundImage?.thumbnail">
     <div class="px-2 w-full flex flex-row">
-      <div>
-        <UserAvatar
-          v-if="level.owner" :avatar="level.owner.avatar.small ?? undefined" :name="level.owner.name ?? level.owner.uid ?? undefined" :uid="level.owner.uid ?? undefined"
-          :transparent="true"
-        />
-      </div>
-      <div class="flex-1" />
-      <div v-if="level.category" class="grid grid-flow-row gap-2">
-        <div v-if="level.category.includes('featured')" class="badge badge-lg h-8 category-badge-featured">
-          Featured
+      <slot name="top">
+        <div>
+          <UserAvatar
+            v-if="level.owner" :avatar="level.owner.avatar.small ?? undefined" :name="level.owner.name ?? level.owner.uid ?? undefined" :uid="level.owner.uid ?? undefined"
+            :transparent="true"
+          />
         </div>
-        <div v-if="level.category.includes('qualified')" class="badge badge-lg h-8 category-badge-qualified">
-          Qualified
+        <div class="flex-1" />
+        <div v-if="level.category" class="grid grid-flow-row gap-2">
+          <div v-if="level.category.includes('featured')" class="badge badge-lg h-8 category-badge-featured">
+            Featured
+          </div>
+          <div v-if="level.category.includes('qualified')" class="badge badge-lg h-8 category-badge-qualified">
+            Qualified
+          </div>
         </div>
-      </div>
+      </slot>
     </div>
     <div class="flex-1" />
     <div class="px-2 w-full flex flex-row">
@@ -76,7 +78,7 @@ interface LevelData {
       <div />
     </div>
     <div class="mt-2 w-full flex flex-row">
-      <div class="flex items-center">
+      <div v-if="level.charts" class="flex items-center">
         <LevelDiffBadgeSmall
           v-for="chart in level.charts" :key="chart.type"
           :type="chart.type" :difficulty="chart.difficulty" :notes-count="chart.notesCount" class="mx-1 h-8 badge-lg"

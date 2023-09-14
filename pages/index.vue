@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FetchHomePageLateQuery } from '~/gql/graphql'
+// import type { FetchHomePageLateQuery } from '~/gql/graphql'
 
 const query = gql(/* GraphQL */`
   query FetchHomePage {
@@ -132,17 +132,18 @@ const queryDynamic = gql(/* GraphQL */`
   }
 `)
 const { data } = await useAsyncData(() => useQuery(query))
-const dataDynamic = ref<FetchHomePageLateQuery | undefined>(undefined)
+// const dataDynamic = ref<FetchHomePageLateQuery | undefined>(undefined)
+const { data: dataDynamic } = await useAsyncData(() => useQuery(queryDynamic))
 
 const hitechMetaData = computed(() => data?.value?.hitech)
 const hitechLevels = computed(() => data?.value?.hitech?.levels)
 const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels)
 
-onMounted(() => {
-  nextTick(async () => {
-    dataDynamic.value = await useQuery(queryDynamic)
-  })
-})
+// onMounted(() => {
+//   nextTick(async () => {
+//     dataDynamic.value = await useQuery(queryDynamic)
+//   })
+// })
 
 resetCytoidPage()
 </script>

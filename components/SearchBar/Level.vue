@@ -144,7 +144,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
           </div>
           <div class="pt-4 sm:pt-0">
             <p class="card-subtitle">
-              {{ $t('levels.sort_select_title') }}
+              {{ $t('levels.category_select_title') }}
             </p>
             <div class="join pt-2">
               <button
