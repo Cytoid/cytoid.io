@@ -65,10 +65,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       assetURL: config.get('assetURL'),
-      apiURL: config.get('serviceURLClient'),
+      serviceURLClient: config.get('serviceURLClient'),
+      serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
-      graphqlURL: config.get('graphql'),
+      graphqlURLServer: config.get('graphqlURLServer'),
+      graphqlURLClient: config.get('graphqlURLClient'),
       servicesUA: process.env.SERVICES_UA ?? '',
       recaptcha: {
         v2SiteKey: config.get('captchaKey'),
@@ -150,7 +152,7 @@ export default defineNuxtConfig({
         },
       },
       '/graphql': {
-        target: `${config.get('serviceURLServer')}/graphql`,
+        target: config.get('graphqlURLServer'),
         changeOrigin: true,
         ws: true,
         headers: {

@@ -8,7 +8,9 @@ export default defineNuxtPlugin((nuxt) => {
   const { vueApp } = nuxt
 
   const config = useRuntimeConfig()
-  const url = config.public.graphqlURL
+  const url = process.server
+    ? config.public.graphqlURLServer
+    : config.public.graphqlURLClient
 
   const ssr = ssrExchange({
     isClient: process.client,
