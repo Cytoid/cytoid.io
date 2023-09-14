@@ -7,9 +7,14 @@ import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date
 // ^ TODO: back to this after https://github.com/date-fns/date-fns/pull/3099
 
 export function useLocales() {
-  const { availableLocales, locale, setLocale: i18nSetLocale } = useI18n()
-
-  availableLocales.splice(availableLocales.indexOf('default'), 1)
+  const { locale, locales, setLocale: i18nSetLocale } = useI18n()
+  const availableLocales = locales.value.map((locale) => {
+    const code = typeof locale === 'string' ? locale : locale.code
+    const name = typeof locale === 'string' ? locale : locale.name ?? code
+    return {
+      code, name,
+    }
+  })
 
   const cookie = useSavedCookie('locale')
 
@@ -56,7 +61,7 @@ export function useLocales() {
     }).sort((a, b) => b.q - a.q)
     for (const lang of acceptLangList) {
       for (const availableLang of availableLocales) {
-        if (lang.name.toLowerCase() === availableLang.toLowerCase()) {
+        if (lang.name.toLowerCase() === availableLang.code.toLowerCase()) {
           setLocale(lang.name)
           return
         }

@@ -33,9 +33,9 @@ onClickOutside(langSelect, () => keepShowLangSelectBox.value = false)
             <Icon name="mdi:translate" size="16" /> {{ $t('general.language') }}
           </a>
           <ul tabindex="0" class="dropdown-content menu menu-compact p-2 shadow bg-base-100 shadow-2xl rounded-box w-44">
-            <li v-for="code in availableLocales" :key="code">
-              <a :key="code" :class="{ active: code === locale }" @click="setLocale(code)">
-                <span v-t="{ path: 'general.self', locale: code }" class="mx-auto" />
+            <li v-for="available in availableLocales" :key="available.code">
+              <a :key="available.code" :class="{ active: available.code === locale }" @click="setLocale(available.code)">
+                <span class="mx-auto" v-text="available.name" />
               </a>
             </li>
           </ul>

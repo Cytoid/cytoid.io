@@ -10,7 +10,7 @@ import signup from './signup.json'
 import studio from './studio.json'
 import link from './link.json'
 
-const locale = {
+export default defineI18nLocale(() => ({
   general,
   collection_details,
   homepage,
@@ -22,6 +22,4 @@ const locale = {
   signup,
   studio,
   link,
-}
-
-export default locale
+}))

@@ -6,7 +6,7 @@ export function useServiceFetch<T>(url: string, options: UseFetchOptions<T> = {}
   const baseURL = config.public.apiURL
   const defaults: UseFetchOptions<T> = {
     baseURL,
-    credentials: 'include',
+    credentials: 'same-origin',
     key: JSON.stringify({
       url,
       options,
