@@ -7,7 +7,10 @@ onMounted(() => {
   nextTick(async () => {
     try {
       // @ts-expect-error cdn
-      window?.twttr.widgets.load()
+      if (window?.twttr) {
+        // @ts-expect-error cdn
+        window?.twttr.widgets.load()
+      }
     }
     catch (error) {
       console.error(error)

@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     ],
     lazy: true,
     langDir: 'locale',
+    defaultLocale: 'en',
     strategy: 'no_prefix',
     experimental: {
       jsTsFormatResource: true,
