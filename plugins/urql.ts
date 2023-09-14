@@ -42,7 +42,7 @@ export default defineNuxtPlugin((nuxt) => {
         headers: {
           cookie: tokenCookie,
         },
-        credentials: 'same-origin',
+        credentials: 'include',
       }
     },
   })

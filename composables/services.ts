@@ -8,7 +8,7 @@ export function useServiceFetch<T>(url: string, options: UseFetchOptions<T> = {}
     : config.public.serviceURLClient
   const defaults: UseFetchOptions<T> = {
     baseURL,
-    credentials: 'same-origin',
+    credentials: 'include',
     key: JSON.stringify({
       url,
       options,
