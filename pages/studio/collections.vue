@@ -151,7 +151,7 @@ async function changeCollectionVisibility() {
 }
 
 onMounted(() => {
-  loadCollections()
+  nextTick(() => loadCollections)
 })
 
 async function loadCollections() {

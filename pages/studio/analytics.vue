@@ -98,16 +98,18 @@ watch(userUid, async (uid) => {
 })
 
 onMounted(() => {
-  if (user.value) {
-    userUid.value = user.value.uid
-  }
-  else {
-    watchOnce(user, (userData) => {
-      if (userData) {
-        userUid.value = userData.uid
-      }
-    })
-  }
+  nextTick(() => {
+    if (user.value) {
+      userUid.value = user.value.uid
+    }
+    else {
+      watchOnce(user, (userData) => {
+        if (userData) {
+          userUid.value = userData.uid
+        }
+      })
+    }
+  })
 })
 
 interface Record {

@@ -25,18 +25,20 @@ const ctl = ref<HTMLElement>()
 const ctlWith = ref(0)
 const ctlPos = ref(0)
 onMounted(() => {
-  const { pause, resume } = useRafFn(() => {
-    ctlWith.value = ctl.value?.offsetWidth ?? 0
-    ctlPos.value = ctl.value?.getBoundingClientRect().bottom ?? 0
-  })
-  pause()
-  watch(open, (val) => {
-    if (!val) {
-      pause()
-    }
-    else {
-      resume()
-    }
+  nextTick(() => {
+    const { pause, resume } = useRafFn(() => {
+      ctlWith.value = ctl.value?.offsetWidth ?? 0
+      ctlPos.value = ctl.value?.getBoundingClientRect().bottom ?? 0
+    })
+    pause()
+    watch(open, (val) => {
+      if (!val) {
+        pause()
+      }
+      else {
+        resume()
+      }
+    })
   })
 })
 

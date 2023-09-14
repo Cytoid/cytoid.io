@@ -11,8 +11,8 @@ function setHidden() {
 </script>
 
 <template>
-  <Teleport to="body">
-    <div v-if="!hide" class="toast toast-center z-50">
+  <Teleport v-if="!hide" to="body">
+    <div class="toast toast-center z-50">
       <div class="alert alert-info">
         <Icon name="mdi:lightbulb-on-outline" size="24" />
         <span>This is the next version of Cytoid.io</span>

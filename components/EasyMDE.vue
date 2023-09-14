@@ -14,18 +14,20 @@ const content = useVModel(props, 'modelValue', emit)
 const editorDom = ref<HTMLElement>()
 
 onMounted(() => {
-  if (editorDom.value) {
-    const editor = new EasyMDE({
-      element: editorDom.value,
-      previewClass: 'prose',
-      previewRender: useMarked,
-      spellChecker: false,
-      initialValue: content.value,
-    })
-    editor.codemirror.on('change', () => {
-      content.value = editor.value()
-    })
-  }
+  nextTick(() => {
+    if (editorDom.value) {
+      const editor = new EasyMDE({
+        element: editorDom.value,
+        previewClass: 'prose',
+        previewRender: useMarked,
+        spellChecker: false,
+        initialValue: content.value,
+      })
+      editor.codemirror.on('change', () => {
+        content.value = editor.value()
+      })
+    }
+  })
 })
 </script>
 

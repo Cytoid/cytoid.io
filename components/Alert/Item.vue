@@ -26,9 +26,11 @@ const dialog = ref(false)
 const show = ref(true)
 
 onMounted(() => {
-  setTimeout(() => {
-    show.value = false
-  }, props.delay * 1000)
+  nextTick(() => {
+    setTimeout(() => {
+      show.value = false
+    }, props.delay * 1000)
+  })
 })
 </script>
 
@@ -50,8 +52,8 @@ onMounted(() => {
       </button>
     </div>
   </div>
-  <Teleport to="body">
-    <div v-if="details">
+  <Teleport v-if="details" to="body">
+    <div>
       <div
         class="modal" :class="{
           'modal-active': dialog,

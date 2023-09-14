@@ -4,7 +4,7 @@ defineProps<{
 }>()
 
 onMounted(() => {
-  (async () => {
+  nextTick(async () => {
     try {
       // @ts-expect-error cdn
       window?.twttr.widgets.load()
@@ -12,7 +12,7 @@ onMounted(() => {
     catch (error) {
       console.error(error)
     }
-  })()
+  })
 })
 
 useHead({

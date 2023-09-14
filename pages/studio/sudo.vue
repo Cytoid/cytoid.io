@@ -11,19 +11,21 @@ const argument = ref('')
 
 const loading = ref(false)
 
-onMounted(async () => {
-  try {
-    await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-    if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
-      throw new Error('Permission denied')
+onMounted(() => {
+  nextTick(async () => {
+    try {
+      await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
+      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+        throw new Error('Permission denied')
+      }
     }
-  }
-  catch (error) {
-    console.error(error)
-    router.push({
-      name: 'studio',
-    })
-  }
+    catch (error) {
+      console.error(error)
+      router.push({
+        name: 'studio',
+      })
+    }
+  })
 })
 
 async function beSuperUser() {

@@ -52,24 +52,26 @@ const mutationLoading = ref(false)
 const pendingBanUser = ref<string | null>(null)
 const pendingBanReason = ref('')
 
-onMounted(async () => {
-  try {
-    await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-    if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
-      throw new Error('Permission denied')
-    }
-    else {
-      if (userId.value) {
-        await findUser(userId.value)
+onMounted(() => {
+  nextTick(async () => {
+    try {
+      await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
+      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+        throw new Error('Permission denied')
+      }
+      else {
+        if (userId.value) {
+          await findUser(userId.value)
+        }
       }
     }
-  }
-  catch (error) {
-    console.error(error)
-    router.push({
-      name: 'studio',
-    })
-  }
+    catch (error) {
+      console.error(error)
+      router.push({
+        name: 'studio',
+      })
+    }
+  })
 })
 
 async function findUser(id: string) {

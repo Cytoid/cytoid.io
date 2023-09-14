@@ -48,22 +48,24 @@ const mutationLoading = ref(false)
 const willDeletePostUid = ref<string | null>(null)
 const willDeletePost = computed(() => posts.value.find(post => post.uid === willDeletePostUid.value) ?? null)
 
-onMounted(async () => {
-  try {
-    await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-    if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
-      throw new Error('Permission denied')
+onMounted(() => {
+  nextTick(async () => {
+    try {
+      await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
+      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+        throw new Error('Permission denied')
+      }
+      else {
+        await loadPosts()
+      }
     }
-    else {
-      await loadPosts()
+    catch (error) {
+      console.error(error)
+      router.push({
+        name: 'studio',
+      })
     }
-  }
-  catch (error) {
-    console.error(error)
-    router.push({
-      name: 'studio',
-    })
-  }
+  })
 })
 
 async function loadPosts() {

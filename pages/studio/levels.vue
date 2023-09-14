@@ -44,7 +44,7 @@ const limit = ref(10)
 const totalPages = computed(() => Math.ceil(totalLevels.value / limit.value))
 
 onMounted(() => {
-  loadLevels(page.value)
+  nextTick(() => loadLevels(page.value))
 })
 watch(page, (val) => {
   loadLevels(val)
