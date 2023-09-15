@@ -188,23 +188,23 @@ export default defineNuxtConfig({
       // disable PWA in dev
     : {},
 
-  routeRules: {
-    // prerender
-    '/': { prerender: true },
-    '/pages/dmca': { prerender: true },
-    '/pages/terms': { prerender: true },
-    '/session/**': { prerender: true },
+  // routeRules: {
+  //   // prerender
+  //   '/': { prerender: true },
+  //   '/pages/dmca': { prerender: true },
+  //   '/pages/terms': { prerender: true },
+  //   '/session/**': { prerender: true },
 
-    // swr 3600s
-    '/levels/**': { swr: 3600 },
-    '/collection/**': { swr: 3600 },
-    '/profile/**': { swr: 3600 },
-    '/posts/**': { swr: 3600 },
+  //   // swr 3600s
+  //   '/levels/**': { swr: 3600 },
+  //   '/collection/**': { swr: 3600 },
+  //   '/profile/**': { swr: 3600 },
+  //   '/posts/**': { swr: 3600 },
 
-    // no ssr
-    '/settings/**': { ssr: false },
-    '/studio/**': { ssr: false },
-  },
+  //   // no ssr
+  //   '/settings/**': { ssr: false },
+  //   '/studio/**': { ssr: false },
+  // },
 
   legacy: {
     targets: [
