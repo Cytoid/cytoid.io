@@ -129,8 +129,8 @@ export default defineNuxtConfig({
     ? {
         registerType: 'autoUpdate',
         manifest: {
-          name: 'Cytoid',
-          short_name: 'Cytoid',
+          name: 'Cytoid IO',
+          short_name: 'CytoidIO',
           theme_color: '#a5b4fc',
           icons: [
             {
