@@ -25,7 +25,6 @@ useHead({
   link: [
     {
       rel: 'icon',
-      type: 'image/ico',
       href: '/favicon.ico',
     },
   ],
@@ -35,6 +34,8 @@ useHead({
 <template>
   <div class="w-full h-full">
     <NuxtLayout>
+      <VitePwaManifest />
+
       <NuxtLoadingIndicator color="#9CAFEC" />
       <NuxtPage />
       <slot />

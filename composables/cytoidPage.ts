@@ -68,7 +68,7 @@ function getDefault() {
   }
 }
 
-function getDefaultMeta() {
+function getDefaultMeta(): Parameters<typeof useSeoMeta>[0] {
   const config = useRuntimeConfig()
   const { t } = useI18n()
 

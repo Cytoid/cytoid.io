@@ -38,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "@urql/core": "^4.1.0",
+    "@vite-pwa/nuxt": "^0.1.1",
     "@vitejs/plugin-legacy": "^4.1.1",
     "@vueuse/components": "^10.3.0",
     "@vueuse/nuxt": "^10.2.1",
