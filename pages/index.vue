@@ -1,24 +1,10 @@
 <script setup lang="ts">
+import type { FetchHomePageLateQuery } from '~/gql/graphql'
+
 const query = gql(/* GraphQL */`
   query FetchHomePage {
     discordOnlineCount
     collectionsCount
-    comments: recentComments(limit: 5) {
-      id
-      category
-      key
-      content
-      date
-      owner {
-        id
-        uid
-        name
-        avatar {
-          small
-        }
-      }
-      metadata
-    }
     posts: getActivePosts(limit: 10) {
       id
       uid
@@ -42,37 +28,6 @@ const query = gql(/* GraphQL */`
       ...HomeLevelCardFragment
     }
     levelsCount
-    recentRecords(ranked:true, limit:10) {
-      id
-      date
-      owner {
-        id
-        uid
-        name
-        avatar {
-          small
-        }
-      }
-      chart {
-        id
-        difficulty
-        name
-        type
-        notesCount
-        level {
-          uid
-          title
-          bundle {
-            backgroundImage {
-            stripe
-            }
-          }
-        }
-      }
-      score
-      accuracy
-      rank
-    }
   }
   fragment HomeLevelCardFragment on Level {
     id
@@ -125,11 +80,69 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
+const queryDynamic = gql(/* GraphQL */`
+  query FetchHomePageLate {
+    comments: recentComments(limit: 5) {
+      id
+      category
+      key
+      content
+      date
+      owner {
+        id
+        uid
+        name
+        avatar {
+          small
+        }
+      }
+      metadata
+    }
+    recentRecords(ranked:true, limit:10) {
+      id
+      date
+      owner {
+        id
+        uid
+        name
+        avatar {
+          small
+        }
+      }
+      chart {
+        id
+        difficulty
+        name
+        type
+        notesCount
+        level {
+          uid
+          title
+          bundle {
+            backgroundImage {
+            stripe
+            }
+          }
+        }
+      }
+      score
+      accuracy
+      rank
+    }
+  }
+`)
 const { data } = await useAsyncData(() => useQuery(query))
+const dataDynamic = ref<FetchHomePageLateQuery | undefined>(undefined)
 
 const hitechMetaData = computed(() => data?.value?.hitech)
 const hitechLevels = computed(() => data?.value?.hitech?.levels)
 const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels)
+
+onMounted(() => {
+  nextTick(async () => {
+    dataDynamic.value = await useQuery(queryDynamic)
+  })
+})
 
 resetCytoidPage()
 </script>
@@ -251,7 +264,7 @@ resetCytoidPage()
     />
   </ShowCase>
 
-  <div v-if="data" class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
+  <div v-if="dataDynamic" class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
     <div class="col-span-7 md:col-span-6 lg:col-span-4 mt-4 md:mt-0">
       <div class="card w-full bg-base-100 shadow-xl mb-5">
         <div class="card-body">
@@ -259,7 +272,7 @@ resetCytoidPage()
             {{ $t('profile.recent_ranks_title') }}
           </h2>
           <RecordCard
-            v-for="record in data.recentRecords" :key="record.id" :record="{
+            v-for="record in dataDynamic.recentRecords" :key="record.id" :record="{
               ...record,
               owner: (record.owner?.uid && record.owner.avatar.small) ? {
                 uid: record.owner.uid,
@@ -287,7 +300,7 @@ resetCytoidPage()
             </h2>
             <div class="divide-y divide-solid divide-neutral-content/25">
               <CommentRecent
-                v-for="comment in data.comments" :key="comment.id" :comment="{
+                v-for="comment in dataDynamic.comments" :key="comment.id" :comment="{
                   ...comment,
                   owner: (comment.owner?.uid && comment.owner.avatar.small) ? {
                     uid: comment.owner.uid,
@@ -311,7 +324,7 @@ resetCytoidPage()
             class="card-body card bg-primary/25"
           >
             <h2 class="card-subtitle">
-              <img src="/images/discord.png" class="h-6 my-2 px-1">
+              <img src="/images/discord.webp" class="h-6 my-2 px-1">
             </h2>
             <p>
               {{ $t('homepage.connect_discord_content') }}
@@ -330,7 +343,7 @@ resetCytoidPage()
             class="card-body card bg-secondary/25"
           >
             <h2 class="card-subtitle">
-              <img src="/images/patreon.png" class="h-8">
+              <img src="/images/patreon.webp" class="h-8">
             </h2>
             <p>
               {{ $t('homepage.connect_patreon_content') }}

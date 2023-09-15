@@ -69,7 +69,7 @@ async function syncMembershipStatus(provider: string) {
       <div class="flex flex-col sm:flex-row">
         <div class="flex-1 flex flex-col justify-between">
           <h2 class="card-subtitle mb-2">
-            <img src="/images/patreon.png" class="h-8">
+            <img src="/images/patreon.webp" class="h-8">
           </h2>
 
           <p v-if="externals.includes('patreon')">

@@ -10,7 +10,7 @@ defineCytoidPage({
   <div class="hero">
     <div class="hero-content text-center">
       <div class="max-w-md">
-        <img src="https://artifacts.cytoid.io/logo.png">
+        <img src="/images/logo.webp">
         <p class="py-6">
           A community-driven music game
         </p>
