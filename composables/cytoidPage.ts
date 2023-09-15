@@ -23,7 +23,7 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
 
     let markedDescription: string | undefined = sanitizeHtml(useMarked(meta?.unsafeDescription ?? ''), { allowedTags: [] })
     if (markedDescription.length > 100) {
-      markedDescription = markedDescription.substring(0, 100)
+      markedDescription = markedDescription.substring(0, 250)
     }
     if (markedDescription === '') {
       markedDescription = undefined
@@ -40,8 +40,11 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
       twitterTitle: title,
       twitterDescription: markedDescription,
       twitterImage: data.background,
-      twitterCard: 'summary',
+      twitterCard: 'summary_large_image',
     })
+  }
+  else {
+    useSeoMeta(getDefaultMeta())
   }
 }
 
@@ -49,6 +52,7 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
 export function resetCytoidPage() {
   const pageData = useState<PageData>('pageData')
   pageData.value = getDefault()
+  useSeoMeta(getDefaultMeta())
 }
 
 export function useCytoidPage() {
@@ -61,6 +65,29 @@ function getDefault() {
     background: '',
     title: undefined,
     preview: undefined,
+  }
+}
+
+function getDefaultMeta() {
+  const config = useRuntimeConfig()
+  const { t } = useI18n()
+
+  const webUrl = config.public.webURL
+  const staticURL = config.public.staticURL
+  const title = 'Cytoid'
+  const imageUrl = `${staticURL}/img/session.jpg`
+  const description = t('homepage.slogan')
+  return {
+    title,
+    description,
+    ogTitle: title,
+    ogDescription: description,
+    ogUrl: webUrl,
+    ogImage: imageUrl,
+    twitterTitle: title,
+    twitterDescription: description,
+    twitterImage: imageUrl,
+    twitterCard: 'summary',
   }
 }
 

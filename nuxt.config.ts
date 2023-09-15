@@ -65,6 +65,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       assetURL: config.get('assetURL'),
+      staticURL: config.get('staticURL'),
       serviceURLClient: config.get('serviceURLClient'),
       serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),
