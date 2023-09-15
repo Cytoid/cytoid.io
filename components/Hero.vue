@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const { isLogin } = useAuth()
-</script>
-
 <template>
   <div>
     <div class="hero h-[50vh] w-full min-h-[18rem] max-w-md mx-auto sm:max-w-full max-h-[36rem] relative sm:flex">

@@ -1,4 +1,3 @@
-import sanitizeHtml from 'sanitize-html'
 import type { CookieOptions } from '#app'
 
 export function copyToClipboard(text: string, name?: string) {
@@ -44,40 +43,4 @@ export function formatBytes(bytes: number) {
       } Bytes`
   }
   else { return `${bytes} Byte` }
-}
-
-export class Meta {
-  meta: { hid: string; name: string; content: string }[]
-  title: string
-  constructor(title: string, description: string, verb = null) {
-    const _title = `${title}`
-
-    let markedDescription = sanitizeHtml(useMarked(description), { allowedTags: [] })
-    if (markedDescription.length > 100) {
-      markedDescription = markedDescription.substring(0, 100)
-    }
-
-    this.title = _title
-    if (verb) {
-      this.title = `${verb} ${this.title}`
-    }
-
-    this.meta = [
-      { hid: 'description', name: 'description', content: markedDescription },
-      { hid: 'og:description', name: 'og:description', content: markedDescription },
-      { hid: 'name', name: 'name', content: _title },
-      { hid: 'og:title', name: 'og:title', content: _title },
-    ]
-  }
-
-  extend(id: string, content?: string | null) {
-    if (!content) {
-      return
-    }
-    this.meta.push({
-      hid: id,
-      name: id,
-      content,
-    })
-  }
 }

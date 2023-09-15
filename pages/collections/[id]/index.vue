@@ -82,13 +82,10 @@ if (collectionId && !collection.value) {
 defineCytoidPage({
   title: collection.value?.title ?? 'Collection',
   background: collection.value?.cover?.original ?? undefined,
-}, (() => {
-  const meta = new Meta(collection.value?.title ?? 'Level', collection.value?.description ?? '')
-  meta.extend('author', collection.value?.owner?.name ?? collection.value?.owner?.uid)
-  meta.extend('og:image', collection.value?.cover?.original)
-
-  return meta
-})())
+}, {
+  unsafeDescription: collection.value?.description,
+  author: collection.value?.owner?.name ?? collection.value?.owner?.uid ?? undefined,
+})
 </script>
 
 <template>

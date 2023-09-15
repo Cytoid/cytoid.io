@@ -15,9 +15,9 @@ const externalsPending = useAsyncData(() => useQuery(query))
 const { data: membership } = await membershipPending
 const { data: externals } = await externalsPending
 
-async function reloadMembershipStatus(provider: string) {
-  reloadNuxtApp()
-}
+// async function reloadMembershipStatus(provider: string) {
+//   reloadNuxtApp()
+// }
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { isLogin, toLogin } = useAuth()
+const { toLogin } = useAuth()
 
 const query = gql(/* GraphQL */`
   query FetchUserLibrary {
@@ -46,7 +46,7 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query))
+const { data } = await useAsyncData(() => useQuery(query))
 
 if (!data.value?.my) {
   toLogin('/library')

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   close: () => void
 }>()
 const { user, logout: _logout } = useAuth()
-const router = useRouter()
 
 const query = graphql(/* GraphQL */`
   query FetchNavCard($id: ID!) {

@@ -6,21 +6,29 @@
     const headers = useRequestHeaders(['accept-language'])
     init(headers['accept-language'] ?? '')
   }
-})();
+})()
 
 // auth
-(async () => {
-  if (process.client) {
-    const { init } = useAuth()
-    await wait() // Idk but the next line will always return null if I don't wait a millisecond
-    await init().catch(() => null)
-  }
-})()
+onMounted(() => {
+  nextTick(async () => {
+    if (process.client) {
+      const { init } = useAuth()
+      await init().catch(() => null)
+    }
+  })
+})
 
 useHead({
   titleTemplate(title) {
-    return title ? `${title} - Cytoid` : 'Cytoid'
+    return title || 'Cytoid'
   },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/ico',
+      href: '/favicon.ico',
+    },
+  ],
 })
 </script>
 

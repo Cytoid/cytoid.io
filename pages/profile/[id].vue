@@ -228,16 +228,10 @@ function getTotalPlayTimeText(time: number) {
 defineCytoidPage({
   title: profileData.value?.profile?.user?.name ?? profileId,
   background: profileData.value?.profile?.header?.original ?? undefined,
-}, (() => {
-  const meta = new Meta(
-    profileData.value?.profile?.user?.name ?? profileData.value?.profile?.user?.uid ?? 'Profile',
-    profileData.value?.profile?.bio ?? 'There is no bio yet.',
-  )
-  meta.extend('author', profileData.value?.profile?.user?.name ?? profileData.value?.profile?.user?.uid ?? 'Profile')
-  meta.extend('og:image', profileData.value?.profile?.header?.original)
-
-  return meta
-})())
+}, {
+  unsafeDescription: profileData.value?.profile?.bio ?? undefined,
+  author: profileData.value?.profile?.user?.name ?? profileData.value?.profile?.user?.uid ?? undefined,
+})
 </script>
 
 <template>

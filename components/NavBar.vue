@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { logout: _logout, ready, toLogin, isLogin } = useAuth()
-const router = useRouter()
 const profileDialog = ref(false)
 
 const { user } = useAuth()
