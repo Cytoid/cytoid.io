@@ -113,16 +113,12 @@ defineCytoidPage({
 
     <template #additionContent>
       <div v-if="collection.state === 'UNLISTED'" class="alert alert-info shadow-lg mt-6">
-        <div>
-          <Icon name="mdi:eye-off-outline" size="24" />
-          <span> {{ $t('collection_details.message_unlisted') }} </span>
-        </div>
+        <Icon name="mdi:eye-off-outline" size="24" />
+        <span> {{ $t('collection_details.message_unlisted') }} </span>
       </div>
       <div v-else-if="collection.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
-        <div>
-          <Icon name="mdi:lock-outline" size="24" />
-          <span> {{ $t('collection_details.message_private') }} </span>
-        </div>
+        <Icon name="mdi:lock-outline" size="24" />
+        <span> {{ $t('collection_details.message_private') }} </span>
       </div>
     </template>
 

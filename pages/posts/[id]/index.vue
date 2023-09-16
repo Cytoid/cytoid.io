@@ -135,16 +135,12 @@ defineCytoidPage({
 
     <template #additionContent>
       <div v-if="post.state === 'UNLISTED'" class="alert alert-info shadow-lg mt-6">
-        <div>
-          <Icon name="mdi:eye-off-outline" size="24" />
-          <span> This post has expired </span>
-        </div>
+        <Icon name="mdi:eye-off-outline" size="24" />
+        <span> This post has expired </span>
       </div>
       <div v-else-if="post.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
-        <div>
-          <Icon name="mdi:lock-outline" size="24" />
-          <span> This post is not published </span>
-        </div>
+        <Icon name="mdi:lock-outline" size="24" />
+        <span> This post is not published </span>
       </div>
 
       <!-- Post Collection -->
