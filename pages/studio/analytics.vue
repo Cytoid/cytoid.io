@@ -103,6 +103,10 @@ watch(userUid, async (uid) => {
   }
 })
 
+const isMine = computed(() => {
+  return userUid.value === user.value?.uid
+})
+
 onMounted(() => {
   nextTick(() => {
     if (user.value) {
@@ -261,6 +265,20 @@ onMounted(() => {
           :to-final-page="() => { page = pageCount }"
           :jump-to-page="(i) => { page = i }"
         />
+
+        <NuxtLink
+          v-if="isMine"
+          :to="{
+            name: 'records',
+            query: {
+              best: selected === 'best' ? 'true' : undefined,
+              sort: selected === 'best' ? 'rating' : 'recent_rating',
+            },
+          }"
+          class="btn btn-secondary btn-block mt-2"
+        >
+          View Details
+        </NuxtLink>
       </div>
     </div>
   </div>

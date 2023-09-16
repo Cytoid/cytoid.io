@@ -129,13 +129,13 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             </p>
             <div v-if="ownerIdOrUid !== null" class="flex gap-2">
               <input v-model="ownerIdOrUid" class="input input-bordered w-full max-w-xs" placeholder="Owner">
-              <btn class="btn btn-neutral" @click="ownerIdOrUid = '_'">
+              <button class="btn btn-neutral" @click="ownerIdOrUid = '_'">
                 All
-              </btn>
+              </button>
             </div>
-            <btn v-else class="btn btn-secondary" @click="ownerIdOrUid = undefined">
+            <button v-else class="btn btn-secondary" @click="ownerIdOrUid = undefined">
               Search by owner
-            </btn>
+            </button>
           </div>
         </div>
       </div>

@@ -169,7 +169,7 @@ defineCytoidPage({
 
 <template>
   <div class="max-w-5xl mx-auto">
-    <div class="h-24 relative">
+    <div class="h-24 relative mb-4">
       <div id="contentTitle" class="absolute bottom-0 left-0">
         <h1 class="text-4xl font-bold">
           Records
@@ -261,8 +261,12 @@ defineCytoidPage({
                   </div>
                 </td>
                 <td>
-                  {{ truncateNum(record.rating) }}
-                  ({{ truncateNum(record.recentRating ?? 0) }})
+                  <span>
+                    {{ truncateNum(record.rating) }}
+                  </span>
+                  <span class="opacity-75">
+                    ({{ truncateNum(record.recentRating ?? 0) }})
+                  </span>
                 </td>
                 <td>{{ dateFormatCalendar(record.date) }}</td>
               </tr>
