@@ -50,7 +50,7 @@ const diffRankPage = ref(1)
 const realDiffRankPage = ref(1)
 const loadingRank = ref(true)
 
-const rankData = ref(await (async () => await syncRanking())())
+const rankData = ref(await syncRanking())
 
 watch(selectedDiffRank, async () => {
   const newRanking = await syncRanking()
@@ -214,6 +214,10 @@ interface chartData {
             No record yet.
           </p>
         </div>
+      </div>
+
+      <div v-if="rankData.chart" class="opacity-75 mt-1">
+        Id: {{ rankData.chart.id }}
       </div>
 
       <!-- Page Switch -->

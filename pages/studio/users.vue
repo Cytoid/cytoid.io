@@ -267,6 +267,18 @@ async function setActive(active: boolean) {
           </div>
 
           <h2 class="card-subtitle">
+            Records
+          </h2>
+          <div class="flex gap-2">
+            <NuxtLink
+              class="btn btn-neutral"
+              :to="{ name: 'records', query: { owner: data.user.uid } }"
+            >
+              View All Records
+            </NuxtLink>
+          </div>
+
+          <h2 class="card-subtitle">
             Disable User
           </h2>
           <div class="flex gap-2">

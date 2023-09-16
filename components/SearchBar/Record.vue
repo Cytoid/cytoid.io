@@ -15,20 +15,17 @@ const chartId = computed({
     updateRouter({ chartId: newVal || undefined })
   },
 })
+const _chartId = ref<string | undefined>(chartId.value)
 
 const ownerIdOrUid = computed({
   get() {
-    const val = route.query.owner?.toString()
-    if (val === '_') {
-      // query all records
-      return null
-    }
-    return val
+    return route.query.owner?.toString()
   },
   set(newVal) {
     updateRouter({ owner: newVal || undefined })
   },
 })
+const _ownerIdOrUid = ref<string | null | undefined>(ownerIdOrUid.value)
 
 const startDate = computed({
   get() {
@@ -94,6 +91,13 @@ const sort = computed<RecordQuerySort>({
   },
 })
 
+function updateInput() {
+  updateRouter({
+    chartId: _chartId.value,
+    owner: _ownerIdOrUid.value ?? undefined,
+  })
+}
+
 async function updateRouter(val: LocationQueryRaw | undefined) {
   await router.replace({
     query: {
@@ -109,37 +113,64 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body gap-4">
       <!-- Chart -->
-      <div v-if="chartId" class="w-full sm:flex">
-        <div class="sm:flex gap-4">
-          <div class="max-w-fit">
+      <div class="w-full sm:flex">
+        <div class="sm:flex gap-4 w-full">
+          <div class="w-full max-w-xl">
             <p class="card-subtitle">
               Chart
             </p>
-            {{ chartId }}
+            <div class="join w-full">
+              <input v-model="_chartId" class="join-item input input-bordered w-full max-w-xs" placeholder="Chart ID">
+              <button class="join-item btn btn-neutral" @click="_chartId = ''">
+                <Icon name="mdi:close" size="20" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Owner -->
       <div v-if="['admin', 'moderator'].includes(user?.role ?? '')" class="w-full sm:flex">
-        <div class="sm:flex gap-4">
-          <div class="max-w-fit">
+        <div class="sm:flex gap-4 w-full">
+          <div class="w-full max-w-xl">
             <p class="card-subtitle">
               Owner
             </p>
-            <div v-if="ownerIdOrUid !== null" class="flex gap-2">
-              <input v-model="ownerIdOrUid" class="input input-bordered w-full max-w-xs" placeholder="Owner">
-              <button class="btn btn-neutral" @click="ownerIdOrUid = '_'">
+            <div v-if="ownerIdOrUid !== '_'" class="join w-full">
+              <input v-model="_ownerIdOrUid" class="join-item input input-bordered w-full max-w-xs" placeholder="User ID or UID">
+              <button
+                class="join-item btn btn-neutral"
+                @click="() => {
+                  _ownerIdOrUid = ownerIdOrUid
+                  ownerIdOrUid = '_'
+                }"
+              >
                 All
               </button>
             </div>
-            <button v-else class="btn btn-secondary" @click="ownerIdOrUid = undefined">
+            <button
+              v-else
+              class="btn btn-secondary"
+              @click="() => {
+                ownerIdOrUid = _ownerIdOrUid === '_' ? '' : _ownerIdOrUid ?? undefined
+              }"
+            >
               Search by owner
             </button>
           </div>
         </div>
       </div>
 
+      <div class="w-full flex justify-end">
+        <button class="btn btn-primary" @click="updateInput">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body gap-4">
       <!-- Date -->
       <div class="w-full sm:flex">
         <div class="w-full">

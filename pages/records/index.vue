@@ -168,8 +168,8 @@ defineCytoidPage({
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto">
-    <div class="h-24 relative mb-4">
+  <div class="max-w-5xl mx-auto flex flex-col gap-4">
+    <div class="h-24 relative">
       <div id="contentTitle" class="absolute bottom-0 left-0">
         <h1 class="text-4xl font-bold">
           Records
@@ -180,7 +180,7 @@ defineCytoidPage({
     <SearchBarRecord />
     <progress v-if="loading && records.length > 0" class="progress progress-info w-full" />
 
-    <div class="card bg-base-100 mt-4">
+    <div class="card bg-base-100">
       <div class="card-body">
         <div class="overflow-x-auto">
           <table class="table">
