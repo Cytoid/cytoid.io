@@ -387,7 +387,7 @@ type Query {
   recentTweet: String
   collectionsCount: Int!
   collection(id: ID, uid: String): Collection
-  collections(limit: Int, cursor: ID, ownerId: String): [CollectionListing!]!
+  collections(limit: Int, cursor: ID, ownerId: String, ownerUid: String): [CollectionListing!]!
   recentComments(limit: Int): [Comment!]!
   level(uid: String!): Level
   levels(order: QueryOrder, page: Int, limit: Int, sort: LevelQuerySort, category: String): [Level!]!

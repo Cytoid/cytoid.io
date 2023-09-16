@@ -634,6 +634,7 @@ export type QueryCollectionsArgs = {
   cursor?: InputMaybe<Scalars['ID']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   ownerId?: InputMaybe<Scalars['String']['input']>;
+  ownerUid?: InputMaybe<Scalars['String']['input']>;
 };
 
 
