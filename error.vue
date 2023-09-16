@@ -33,7 +33,7 @@ defineCytoidPage({
           <p class="py-6">
             {{ $t('general.error_page_subtitle', { error: errorMsg ?? $t('general.error_page_default_message') }) }}
           </p>
-          <NuxtLink class="btn btn-primary" to="/">
+          <NuxtLink class="btn btn-primary" :to="{ name: 'index' }">
             {{ $t('general.nav_home') }}
           </NuxtLink>
         </div>

@@ -247,7 +247,7 @@ defineCytoidPage({
           </h2>
           <p>{{ t('signup.existing_user_content') }}</p>
           <div class="form-control mt-2">
-            <NuxtLink class="btn btn-primary" to="/session/login">
+            <NuxtLink class="btn btn-primary" :to="{ name: 'session-login' }">
               {{ t('general.login_btn') }}
             </NuxtLink>
           </div>

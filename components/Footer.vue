@@ -9,10 +9,10 @@ onClickOutside(langSelect, () => keepShowLangSelectBox.value = false)
   <footer class="footer footer-center my-10 text-base-content rounded">
     <div>
       <div class="footer-item-box">
-        <NuxtLink class="clickable select-none" to="/pages/dmca">
+        <NuxtLink class="clickable select-none" :to="{ name: 'pages-id', params: { id: 'dmca' } }">
           {{ $t('general.dmca') }}
         </NuxtLink>
-        <NuxtLink class="clickable select-none" to="/pages/terms">
+        <NuxtLink class="clickable select-none" :to="{ name: 'pages-id', params: { id: 'terms' } }">
           {{ $t('general.tos') }}
         </NuxtLink>
         <NuxtLink class="clickable select-none" to="https://github.com/Cytoid/">
@@ -21,7 +21,7 @@ onClickOutside(langSelect, () => keepShowLangSelectBox.value = false)
         <NuxtLink class="clickable select-none" to="https://github.com/Cytoid/">
           GitHub
         </NuxtLink>
-        <NuxtLink class="clickable select-none" to="/credits">
+        <NuxtLink class="clickable select-none" :to="{ name: 'credits' }">
           {{ $t('general.credits') }}
         </NuxtLink>
         <div

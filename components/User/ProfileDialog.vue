@@ -91,17 +91,17 @@ async function logout() {
             </NuxtLink>
           </li>
           <li class="hover-bordered">
-            <NuxtLink to="/studio" @click="close">
+            <NuxtLink :to="{ name: 'studio' }" @click="close">
               <Icon name="carbon:media-library-filled" size="24" /> {{ $t('general.studio') }}
             </NuxtLink>
           </li>
           <li class="hover-bordered">
-            <NuxtLink to="/library" @click="close">
+            <NuxtLink :to="{ name: 'library' }" @click="close">
               <Icon name="mdi:puzzle" size="24" /> {{ $t('general.library') }}
             </NuxtLink>
           </li>
           <li class="hover-bordered">
-            <NuxtLink to="/settings" @click="close">
+            <NuxtLink :to="{ name: 'settings' }" @click="close">
               <Icon name="ic:baseline-settings" size="24" /> {{ $t('general.settings') }}
             </NuxtLink>
           </li>

@@ -22,10 +22,10 @@ async function logout() {
   <div class="navbar max-w-screen-2xl m-auto sm:px-12">
     <div class="flex flex-1 gap-0">
       <div class="hidden sm:block">
-        <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="/">
+        <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" :to="{ name: 'index' }">
           {{ $t('general.nav_home') }}
         </NuxtLink>
-        <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="/levels">
+        <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" :to="{ name: 'levels' }">
           {{ $t('general.nav_levels') }}
         </NuxtLink>
         <NuxtLink class="btn btn-sm btn-ghost text-base-content font-medium tracking-wider hover:bg-transparent hover:text-primary" to="https://cytoid.wiki">
@@ -46,12 +46,12 @@ async function logout() {
             </label>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li>
-                <NuxtLink to="/">
+                <NuxtLink :to="{ name: 'index' }">
                   {{ $t('general.nav_home') }}
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/levels">
+                <NuxtLink :to="{ name: 'levels' }">
                   {{ $t('general.nav_levels') }}
                 </NuxtLink>
               </li>

@@ -142,7 +142,7 @@ defineCytoidPage({
           </h2>
           <p>{{ 'Welcome back to Cytoid!' }}</p>
           <div class="form-control mt-2">
-            <NuxtLink class="btn btn-success" to="/session/login">
+            <NuxtLink class="btn btn-success" :to="{ name: 'session-login' }">
               {{ t('general.login_btn') }}
             </NuxtLink>
           </div>
@@ -154,7 +154,7 @@ defineCytoidPage({
           </h2>
           <p>{{ 'This is a bit awkward, but the link expired.' }}</p>
           <div class="form-control mt-2">
-            <NuxtLink class="btn btn-secondary" to="/session/reset">
+            <NuxtLink class="btn btn-secondary" :to="{ name: 'session-reset' }">
               {{ 'Try Again' }}
             </NuxtLink>
           </div>

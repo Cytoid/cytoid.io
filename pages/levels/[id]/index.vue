@@ -222,6 +222,26 @@ function formatSize(size: number) {
   return formatBytes(size)
 }
 
+// (DANGEROUS) TODO: it is a dirty way to fix vue router bug, need to remove it once vue router fixed
+onMounted(() => {
+  nextTick(() => {
+    // if there a space in levelId
+    if (levelId.includes(' ')) {
+      const route = useRoute()
+      const router = useRouter()
+      // magic
+      const err = router.push({
+        ...route,
+        force: true,
+      })
+      if (err) {
+        console.error(err)
+      }
+      console.error('The level id contains space')
+    }
+  })
+})
+
 defineCytoidPage({
   title: levelData.value?.level?.title ? `${levelData.value?.level?.title}` : 'Level',
   background: levelData.value?.level?.bundle?.backgroundImage?.original ?? undefined,
