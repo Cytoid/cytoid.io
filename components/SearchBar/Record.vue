@@ -9,7 +9,7 @@ const { user } = useAuth()
 
 const chartId = computed({
   get() {
-    return route.query.chartId?.toString() || undefined
+    return route.query.chartId?.toString()
   },
   set(newVal) {
     updateRouter({ chartId: newVal || undefined })
@@ -18,7 +18,12 @@ const chartId = computed({
 
 const ownerIdOrUid = computed({
   get() {
-    return route.query.owner?.toString() || undefined
+    const val = route.query.owner?.toString()
+    if (val === '_') {
+      // query all records
+      return null
+    }
+    return val
   },
   set(newVal) {
     updateRouter({ owner: newVal || undefined })
@@ -27,7 +32,7 @@ const ownerIdOrUid = computed({
 
 const startDate = computed({
   get() {
-    return route.query.start_date?.toString() || undefined
+    return route.query.start_date?.toString()
   },
   set(newVal) {
     updateRouter({ start_date: newVal || undefined })
@@ -36,7 +41,7 @@ const startDate = computed({
 
 const endDate = computed({
   get() {
-    return route.query.end_date?.toString() || undefined
+    return route.query.end_date?.toString()
   },
   set(newVal) {
     updateRouter({ end_date: newVal || undefined })
@@ -122,7 +127,15 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             <p class="card-subtitle">
               Owner
             </p>
-            <input v-model="ownerIdOrUid" class="input input-bordered w-full max-w-xs" placeholder="Owner">
+            <div v-if="ownerIdOrUid !== null" class="flex gap-2">
+              <input v-model="ownerIdOrUid" class="input input-bordered w-full max-w-xs" placeholder="Owner">
+              <btn class="btn btn-neutral" @click="ownerIdOrUid = '_'">
+                All
+              </btn>
+            </div>
+            <btn v-else class="btn btn-secondary" @click="ownerIdOrUid = undefined">
+              Search by owner
+            </btn>
           </div>
         </div>
       </div>
