@@ -44,7 +44,7 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
     })
   }
   else {
-    useSeoMeta(getDefaultMeta())
+    useSeoMeta(getDefaultMeta(title))
   }
 }
 
@@ -68,23 +68,23 @@ function getDefault() {
   }
 }
 
-function getDefaultMeta(): Parameters<typeof useSeoMeta>[0] {
+function getDefaultMeta(title?: string): Parameters<typeof useSeoMeta>[0] {
   const config = useRuntimeConfig()
   const { t } = useI18n()
 
   const webUrl = config.public.webURL
   const staticURL = config.public.staticURL
-  const title = 'Cytoid'
+  const _title = title || 'Cytoid'
   const imageUrl = `${staticURL}/img/session.jpg`
   const description = t('homepage.slogan')
   return {
-    title,
+    title: _title,
     description,
-    ogTitle: title,
+    ogTitle: _title,
     ogDescription: description,
     ogUrl: webUrl,
     ogImage: imageUrl,
-    twitterTitle: title,
+    twitterTitle: _title,
     twitterDescription: description,
     twitterImage: imageUrl,
     twitterCard: 'summary',
