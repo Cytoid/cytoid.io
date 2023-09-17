@@ -1,12 +1,8 @@
 <script setup lang="ts">
-const { loadedLocales, locale, locales, setLocale } = useLocales()
+const { locale, locales, setLocale } = useLocales()
 const langSelect = ref(null)
 const keepShowLangSelectBox = ref(false)
 onClickOutside(langSelect, () => keepShowLangSelectBox.value = false)
-
-function isLoaded(locale: string) {
-  return loadedLocales.includes(locale)
-}
 </script>
 
 <template>
@@ -34,13 +30,12 @@ function isLoaded(locale: string) {
           }"
         >
           <a class="clickable select-none" @click="keepShowLangSelectBox = !keepShowLangSelectBox">
-            <Icon name="mdi:translate" size="16" /> {{ $t('general.language') }} {{ locale }}
+            <Icon name="mdi:translate" size="16" /> {{ $t('general.language') }}
           </a>
           <ul tabindex="0" class="dropdown-content menu menu-compact p-2 shadow bg-base-100 shadow-2xl rounded-box w-44">
             <li v-for="available in locales" :key="available.code">
               <button :class="{ active: locale === available.code }" @click="setLocale(available.code)">
                 <span class="mx-auto" v-text="available.name" />
-                ({{ locale === available.code }})
               </button>
             </li>
           </ul>
