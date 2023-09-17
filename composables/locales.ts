@@ -8,9 +8,36 @@ import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date
 // ^ TODO: back to this after https://github.com/date-fns/date-fns/pull/3099
 
 export function useLocales() {
-  const { locale, availableLocales, t } = useI18n()
-  const i18nSetLocale = (val: string) => {
-    locale.value = val
+  const locales: Array<{ name: string; code: string; loaded?: boolean }> = [
+    { name: 'Čeština', code: 'cs-CZ' },
+    { name: 'Deutsch', code: 'de-DE' },
+    { name: 'English', code: 'en' },
+    { name: 'Inglés', code: 'es-ES' },
+    { name: 'Português', code: 'pt-BR' },
+    { name: 'Tiếng Việt', code: 'vi-VN' },
+    { name: 'Tagalog', code: 'tl-PH' },
+    { name: 'ภาษาไทย', code: 'th-TH' },
+    { name: '日本語', code: 'ja-JP' },
+    { name: '한국어', code: 'ko-KR' },
+    { name: 'Bahasa Inggris', code: 'id-ID' },
+    { name: 'Français', code: 'fr-FR' },
+    { name: 'Angol', code: 'hu-HU' },
+    { name: 'Malay', code: 'ms-MY' },
+    { name: 'Russian', code: 'ru-RU' },
+    { name: '中文（简体）', code: 'zh-CN' },
+    { name: '中文（繁體）', code: 'zh-TW' },
+    { name: '中文（符语）', code: 'zh-FJ' },
+  ]
+
+  const { locale: _locale, availableLocales: loadedLocales, t, setLocaleMessage } = useI18n()
+  const setLocaleWithoutSave = async (code: string) => {
+    // lazy load
+    if (locales.find(l => l.code === code && !l.loaded)) {
+      const m = await import(`../locale/${code}/index.ts`)
+      setLocaleMessage(code, m.default)
+      locales.find(l => l.code === code)!.loaded = true
+    }
+    _locale.value = code
   }
 
   const cookie = useSavedCookie('locale')
@@ -18,57 +45,66 @@ export function useLocales() {
   const _ready = useState(() => false)
   const ready = computed<boolean>(() => _ready.value)
 
-  const setLocale = (code: string) => {
+  const setLocale = async (code: string) => {
     cookie.value = code
-    i18nSetLocale(code)
     useHead({
       htmlAttrs: {
         lang: code,
         // lang: code
       },
     })
+    await setLocaleWithoutSave(code)
   }
 
-  i18nSetLocale(cookie.value || 'en')
   useHead({
     htmlAttrs: {
       lang: cookie.value || 'en',
     },
   })
 
-  const init = (acceptLangHeader?: string) => {
+  const init = async (acceptLangHeader?: string) => {
     if (ready.value) {
       return
     }
 
     if (cookie.value) {
+      await setLocaleWithoutSave(cookie.value)
       return
     }
 
-    if (!acceptLangHeader) {
+    if (process.client || !acceptLangHeader) {
       return
     }
 
+    // no cookies, auto load language
     const acceptLangs = acceptLangHeader.split(',')
     const acceptLangList = acceptLangs.map((lang) => {
       const [name, langQ] = lang.split(';')
       const q = langQ ? Number.parseFloat(langQ.split('=')[1]) : 1
-      const langM = { name, q }
+      const langM = { code: name, q }
       return langM
     }).sort((a, b) => b.q - a.q)
     for (const lang of acceptLangList) {
-      for (const availableLang of availableLocales) {
-        if (lang.name.toLowerCase() === availableLang.toLowerCase()) {
-          setLocale(lang.name)
+      for (const available of locales) {
+        if (lang.code.toLowerCase() === available.code.toLowerCase()) {
+          await setLocale(lang.code)
           return
         }
       }
     }
   }
 
-  return { t, availableLocales, locale, setLocale, localeCookie: cookie, init }
+  const locale = computed({
+    get: () => _locale.value,
+    set: async (code: string) => {
+      await setLocale(code)
+    },
+  })
+
+  return { t, loadedLocales, locales, locale, setLocale, localeCookie: cookie, init }
 }
 
+// date-fns
 export const dateLocales = Object.freeze({
   'en': enUS,
   'zh-CN': zhCN,

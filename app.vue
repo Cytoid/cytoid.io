@@ -1,11 +1,11 @@
 <script setup lang="ts">
 // i18n
-(() => {
-  if (process.server) {
-    const { init } = useLocales()
-    const headers = useRequestHeaders(['accept-language'])
-    init(headers['accept-language'] ?? '')
-  }
+await (async () => {
+  const { init } = useLocales()
+  const headers = process.server
+    ? useRequestHeaders(['accept-language'])['accept-language'] ?? ''
+    : ''
+  await init(headers)
 })()
 
 // auth
