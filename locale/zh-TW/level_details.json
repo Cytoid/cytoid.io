@@ -5,6 +5,7 @@
   "message_censored": "該關卡因為涉及「{reason}」，違反相關規範而執行隱蔽處置。",
   "details_card_rating_title": "評分",
   "details_card_tags_title": "標記",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "修改日期",
   "credits_card_music_title": "樂曲創作者",
   "credits_card_cover_art_title": "繪圖創作者",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "請簡述執行隱蔽處置的理由。",
       "category_title": "分類",
       "category_placeholder": "加入新分類"
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

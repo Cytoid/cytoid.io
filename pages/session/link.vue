@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const { t } = useI18n()
+const { t } = useLocales()
 
 const { login: _loginWithPayload, user } = useAuth()
 

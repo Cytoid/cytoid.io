@@ -5,6 +5,7 @@
   "message_censored": "เลเวลนี้ถูกจำกัดการมองเห็นเนื่องจาก: {reason}",
   "details_card_rating_title": "เรตติ้ง",
   "details_card_tags_title": "แท็ก",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "อัปเดตล่าสุด",
   "credits_card_music_title": "ศิลปิน",
   "credits_card_cover_art_title": "ภาพประกอบ",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "อธิบายเหตุผลที่เลเวลไม่เหมาะสมสำหรับการออกสู่รายการสาธารณะโดยสังเขป",
       "category_title": "หมวดหมู่",
       "category_placeholder": "หมวดหมู่โดยผู้ดูแล"
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

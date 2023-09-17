@@ -5,6 +5,7 @@
   "message_censored": "该关卡已被下架，原因是：{reason}",
   "details_card_rating_title": "评分",
   "details_card_tags_title": "Tag",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "最后更新于",
   "credits_card_music_title": "曲师",
   "credits_card_cover_art_title": "曲绘",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "用一个英文词语来描述为什么该关卡不适于公开",
       "category_title": "类别",
       "category_placeholder": "添加一个管理类别..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

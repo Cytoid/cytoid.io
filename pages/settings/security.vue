@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t } = useLocales()
 const config = useRuntimeConfig()
 
 const { user, updateUser } = useAuth()

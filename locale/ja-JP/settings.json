@@ -15,6 +15,7 @@
   "email_add_btn": "追加",
   "email_valid": "有効なメールアドレスではありません。",
   "email_required": "An email address is required.",
+  "email_verify_warning": "You have no verified email! You will not be able to access your Cytoid account if you lost your password!",
   "profile_header_title": "カバー画像",
   "profile_bio_title": "自己紹介",
   "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",

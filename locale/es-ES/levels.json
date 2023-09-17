@@ -9,5 +9,6 @@
   "sort_select_relevance": "Relevancia",
   "category_select_title": "Categoría",
   "category_select_item_all": "Todo",
-  "category_select_item_featured": "Destacado"
+  "category_select_item_featured": "Destacado",
+  "category_select_item_qualified": "Qualified"
 }

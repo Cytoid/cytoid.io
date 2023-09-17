@@ -5,6 +5,7 @@
   "message_censored": "Tato úroveň byla cezurována kvůli: {reason}",
   "details_card_rating_title": "Hodnocení",
   "details_card_tags_title": "Tagy",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "Naposledy aktualizováno",
   "credits_card_music_title": "Hudba",
   "credits_card_cover_art_title": "Obrázek alba",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "Jedno slovo ke shrnutí, proč je tato úroveň nevhodná pro veřejnost",
       "category_title": "Kategorie",
       "category_placeholder": "Přidat administrativní kategorie..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

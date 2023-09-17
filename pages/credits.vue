@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data } = await useServiceFetch<CreditMeta>('/creditmeta')
-const { t } = useI18n()
+const { t } = useLocales()
 defineCytoidPage({
   title: t('general.credits'),
 })

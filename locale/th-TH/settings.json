@@ -15,6 +15,7 @@
   "email_add_btn": "เพิ่ม",
   "email_valid": "นี่ไม่ใช่รูปแบบอีเมลที่ถูกต้อง",
   "email_required": "จำเป็นต้องกรอกที่อยู่อีเมล",
+  "email_verify_warning": "You have no verified email! You will not be able to access your Cytoid account if you lost your password!",
   "profile_header_title": "รูปภาพปก",
   "profile_bio_title": "ประวัติ",
   "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",

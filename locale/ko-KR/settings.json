@@ -15,6 +15,7 @@
   "email_add_btn": "추가",
   "email_valid": "이 이메일 주소는 존재하지 않습니다.",
   "email_required": "이메일 주소가 필요합니다.",
+  "email_verify_warning": "You have no verified email! You will not be able to access your Cytoid account if you lost your password!",
   "profile_header_title": "배경 사진",
   "profile_bio_title": "소개",
   "patreon_link_prompt": "Link your Patreon account to claim your deserved benefits!",

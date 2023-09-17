@@ -5,6 +5,7 @@
   "message_censored": "这个关卡美丽！（原因：{reason}）",
   "details_card_rating_title": "谱师被问候次数",
   "details_card_tags_title": "Tag",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "最后贵阳于",
   "credits_card_music_title": "曲子",
   "credits_card_cover_art_title": "好康的",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "用一个符语来描述为啥该关卡不适于上市",
       "category_title": "类别",
       "category_placeholder": "添加一个管理类别..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { formatDistanceToNow, formatRelative, parseISO } from 'date-fns'
 
 // @ts-expect-error https://github.com/date-fns/date-fns/issues/2629
@@ -7,14 +8,10 @@ import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date
 // ^ TODO: back to this after https://github.com/date-fns/date-fns/pull/3099
 
 export function useLocales() {
-  const { locale, locales, setLocale: i18nSetLocale } = useI18n()
-  const availableLocales = locales.value.map((locale) => {
-    const code = typeof locale === 'string' ? locale : locale.code
-    const name = typeof locale === 'string' ? locale : locale.name ?? code
-    return {
-      code, name,
-    }
-  })
+  const { locale, availableLocales, t } = useI18n()
+  const i18nSetLocale = (val: string) => {
+    locale.value = val
+  }
 
   const cookie = useSavedCookie('locale')
 
@@ -61,7 +58,7 @@ export function useLocales() {
     }).sort((a, b) => b.q - a.q)
     for (const lang of acceptLangList) {
       for (const availableLang of availableLocales) {
-        if (lang.name.toLowerCase() === availableLang.code.toLowerCase()) {
+        if (lang.name.toLowerCase() === availableLang.toLowerCase()) {
           setLocale(lang.name)
           return
         }
@@ -69,7 +66,7 @@ export function useLocales() {
     }
   }
 
-  return { availableLocales, locale, setLocale, localeCookie: cookie, init }
+  return { t, availableLocales, locale, setLocale, localeCookie: cookie, init }
 }
 
 export const dateLocales = Object.freeze({

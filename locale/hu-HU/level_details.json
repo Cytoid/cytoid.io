@@ -5,6 +5,7 @@
   "message_censored": "Ezt a szintet a következő okból cenzúrázták: {reason}",
   "details_card_rating_title": "Értékelés",
   "details_card_tags_title": "Cimkék",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "Utoljára frissítve",
   "credits_card_music_title": "Zene",
   "credits_card_cover_art_title": "Borítókép",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
       "category_title": "Category",
       "category_placeholder": "Adding an administrative category..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

@@ -5,6 +5,7 @@
   "message_censored": "Bài này đã bị che giấu vì lý do: {reason}",
   "details_card_rating_title": "Đánh giá",
   "details_card_tags_title": "Nhãn",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "Lần cuối được cập nhật",
   "credits_card_music_title": "Nhạc",
   "credits_card_cover_art_title": "Ảnh bìa",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "Một từ để mô tả tại sao màn chơi này có thể không phù hợp cho tất cả mọi người",
       "category_title": "Danh mục",
       "category_placeholder": "Thêm một loại danh mục quản lý hành chính..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

@@ -10,7 +10,7 @@ import signup from './signup.json'
 import studio from './studio.json'
 import link from './link.json'
 
-export default defineI18nLocale(() => ({
+export default {
   general,
   collection_details,
   homepage,
@@ -22,4 +22,4 @@ export default defineI18nLocale(() => ({
   signup,
   studio,
   link,
-}))
+}

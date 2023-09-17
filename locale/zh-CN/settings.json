@@ -15,6 +15,7 @@
   "email_add_btn": "添加",
   "email_valid": "邮箱地址无效。",
   "email_required": "请输入邮箱地址。",
+  "email_verify_warning": "You have no verified email! You will not be able to access your Cytoid account if you lost your password!",
   "profile_header_title": "封面图片",
   "profile_bio_title": "简介",
   "patreon_link_prompt": "连接您的 Patreon 账户以领取捐赠奖励！",

@@ -15,6 +15,7 @@
   "email_add_btn": "Ajouter",
   "email_valid": "Ce n'est pas une adresse e-mail valide.",
   "email_required": "Une adresse e-mail est requise.",
+  "email_verify_warning": "You have no verified email! You will not be able to access your Cytoid account if you lost your password!",
   "profile_header_title": "Image de couverture",
   "profile_bio_title": "Bio",
   "patreon_link_prompt": "Liez votre compte Patreon pour obtenir les avantages mérités !",

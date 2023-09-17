@@ -5,6 +5,7 @@
   "message_censored": "This level was censored for: {reason}",
   "details_card_rating_title": "Rating",
   "details_card_tags_title": "Tags",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "Last updated",
   "credits_card_music_title": "Music",
   "credits_card_cover_art_title": "Cover art",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
       "category_title": "Category",
       "category_placeholder": "Adding an administrative category..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

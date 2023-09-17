@@ -32,7 +32,7 @@ const mutationVerify = gql(/* GraphQL */`
   }
 `)
 
-const { t } = useI18n()
+const { t } = useLocales()
 
 const { data } = await useAsyncData(() => useQuery(query))
 

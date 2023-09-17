@@ -15,6 +15,7 @@
   "email_add_btn": "Thêm",
   "email_valid": "Đây không phải là một email hợp lệ.",
   "email_required": "Cần một địa chỉ email.",
+  "email_verify_warning": "You have no verified email! You will not be able to access your Cytoid account if you lost your password!",
   "profile_header_title": "Ảnh bìa",
   "profile_bio_title": "Tiểu sử",
   "patreon_link_prompt": "Liên kết với tài khoản Patreon của bạn để nhận được lợi ích đặc biệt!",

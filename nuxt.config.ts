@@ -18,42 +18,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
     'nuxt-icon',
-    '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
     'vue-recaptcha/nuxt',
     '@vite-pwa/nuxt',
   ],
-
-  i18n: {
-    locales: [
-      { name: 'Čeština', code: 'cs-CZ', file: 'cs-CZ/index.ts' },
-      { name: 'Deutsch', code: 'de-DE', file: 'de-DE/index.ts' },
-      { name: 'English', code: 'en', file: 'en/index.ts' },
-      { name: 'Inglés', code: 'es-ES', file: 'es-ES/index.ts' },
-      { name: 'Português', code: 'pt-BR', file: 'pt-BR/index.ts' },
-      { name: 'Tiếng Việt', code: 'vi-VN', file: 'vi-VN/index.ts' },
-      { name: 'Tagalog', code: 'tl-PH', file: 'tl-PH/index.ts' },
-      { name: 'ภาษาไทย', code: 'th-TH', file: 'th-TH/index.ts' },
-      { name: '日本語', code: 'ja-JP', file: 'ja-JP/index.ts' },
-      { name: '한국어', code: 'ko-KR', file: 'ko-KR/index.ts' },
-      { name: 'Bahasa Inggris', code: 'id-ID', file: 'id-ID/index.ts' },
-      { name: 'Français', code: 'fr-FR', file: 'fr-FR/index.ts' },
-      { name: 'Angol', code: 'hu-HU', file: 'hu-HU/index.ts' },
-      { name: 'Malay', code: 'ms-MY', file: 'ms-MY/index.ts' },
-      { name: 'Russian', code: 'ru-RU', file: 'ru-RU/index.ts' },
-      { name: '中文（简体）', code: 'zh-CN', file: 'zh-CN/index.ts' },
-      { name: '中文（繁體）', code: 'zh-TW', file: 'zh-TW/index.ts' },
-      { name: '中文（符语）', code: 'zh-FJ', file: 'zh-FJ/index.ts' },
-    ],
-    lazy: true,
-    langDir: 'locale',
-    defaultLocale: 'en',
-    strategy: 'no_prefix',
-    experimental: {
-      jsTsFormatResource: true,
-    },
-    vueI18n: './i18n.config.ts',
-  },
 
   googleFonts: {
     download: false, // speed up dev by not downloading fonts

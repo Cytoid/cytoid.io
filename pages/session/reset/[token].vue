@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const { t } = useI18n()
+const { t } = useLocales()
 
 const token = computed(() => route.params.token as string)
 

@@ -2,7 +2,7 @@
 const router = useRouter()
 const route = useRoute()
 
-const { t } = useI18n()
+const { t } = useLocales()
 
 const { login: _loginWithPayload, user } = useAuth()
 

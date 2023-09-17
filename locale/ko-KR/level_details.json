@@ -5,6 +5,7 @@
   "message_censored": "이 레벨은 {reason} 로 인하여 삭제 되었습니다.",
   "details_card_rating_title": "평점",
   "details_card_tags_title": "태그",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "최근 업데이트",
   "credits_card_music_title": "음악",
   "credits_card_cover_art_title": "배경 사진",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "One word to summarize why this level is not suitable for public viewing",
       "category_title": "Category",
       "category_placeholder": "Adding an administrative category..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

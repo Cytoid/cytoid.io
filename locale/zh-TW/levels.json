@@ -9,5 +9,6 @@
   "sort_select_relevance": "關聯性",
   "category_select_title": "分類選擇",
   "category_select_item_all": "全部",
-  "category_select_item_featured": "推薦"
+  "category_select_item_featured": "推薦",
+  "category_select_item_qualified": "Qualified"
 }

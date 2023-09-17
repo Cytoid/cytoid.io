@@ -5,6 +5,7 @@
   "message_censored": "Esse nível foi censurado por: {reason}",
   "details_card_rating_title": "Avaliação",
   "details_card_tags_title": "Tags",
+  "details_card_categories_title": "Categories",
   "details_card_last_updated_title": "Última Atualização",
   "credits_card_music_title": "Música",
   "credits_card_cover_art_title": "Arte da capa",
@@ -43,6 +44,8 @@
       "censorship_reason_hint": "Uma palavra pra resumir o por que deste nível não ser adequado para o público",
       "category_title": "Categoria",
       "category_placeholder": "Adicionando uma categoria administrativa..."
-    }
+    },
+    "replace_upload_freeze": "The level is not allowed to be edited",
+    "replace_upload_qualified": "The level will be disqualified after being replaced"
   }
 }

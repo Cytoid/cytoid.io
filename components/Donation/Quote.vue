@@ -6,7 +6,7 @@ const props = defineProps<{
   quote: string
 }>()
 
-const { t } = useI18n()
+const { t } = useLocales()
 
 const avatar = computed(() => avatarURL(props.userUid))
 const otherExternals = computed(() => [

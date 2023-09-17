@@ -70,7 +70,7 @@ function getDefault() {
 
 function getDefaultMeta(title?: string): Parameters<typeof useSeoMeta>[0] {
   const config = useRuntimeConfig()
-  const { t } = useI18n()
+  const { t } = useLocales()
 
   const webUrl = config.public.webURL
   const staticURL = config.public.staticURL
