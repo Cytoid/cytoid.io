@@ -105,9 +105,8 @@ function isLinked(provider: string) {
 function link(provider: string) {
   providersLoading.value = provider
 
-  const apiURL = config.public.apiURL
   providersLoading.value = provider
-  window.open(`${apiURL}/session/external/${provider}`)
+  window.open(useServiceUrl(`/session/external/${provider}`))
   useEventListener('message', async (event) => {
     if (event.data.user) {
       updateUser(event.data.user)

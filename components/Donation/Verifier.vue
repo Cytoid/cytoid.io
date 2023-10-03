@@ -15,9 +15,8 @@ const loading = ref<string | null>(null)
 function link(provider: string) {
   loading.value = provider
 
-  const apiURL = config.public.apiURL
   loading.value = provider
-  window.open(`${apiURL}/session/external/${provider}`)
+  window.open(useServiceUrl(`/session/external/${provider}`))
   useEventListener('message', async (event) => {
     if (event.data.user) {
       updateUser(event.data.user)
