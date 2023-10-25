@@ -101,6 +101,7 @@ export default defineNuxtConfig({
 
   pwa: process.env.NODE_ENV === 'production'
     ? {
+        strategies: 'generateSW',
         registerType: 'autoUpdate',
         manifest: {
           name: 'Cytoid IO',
@@ -137,7 +138,7 @@ export default defineNuxtConfig({
           ],
         },
         workbox: {
-          // navigateFallback: '/',
+          navigateFallback: null,
           globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
         },
         client: {
