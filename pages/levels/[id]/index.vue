@@ -163,34 +163,13 @@ const { isIos, isAndroid, isMacOS, isApple } = useDevice()
 const isMobile = computed(() => {
   return isAndroid || isIos || isMacOS || isApple
 })
+const downloadCytoidDialog = ref<HTMLDialogElement | null>(null)
 async function openWithCytoid() {
   const url = `cytoid://levels/${levelData.value!.level!.uid}`
-  if (process.client) {
-    const timeout = 2000 // ms
-    const res = await new Promise((resolve) => {
-      const iframe = document.createElement('iframe')
-
-      iframe.style.display = 'none'
-      document.body.appendChild(iframe)
-
-      const timer = setTimeout(() => {
-        document.body.removeChild(iframe)
-        resolve(false)
-      }, timeout)
-
-      iframe.onload = iframe.onerror = function () {
-        clearTimeout(timer)
-        document.body.removeChild(iframe)
-        resolve(true)
-      }
-
-      iframe.src = url
-    })
-    if (!res) {
-      // Failed to open Cytoid
-      router.push({ name: 'download' })
-    }
+  if (process.client && window?.location) {
+    window.location.href = url
   }
+  downloadCytoidDialog.value?.showModal()
 }
 
 // rating
@@ -547,4 +526,23 @@ defineCytoidPage({
       :thread="levelData?.level?.uid"
     />
   </LayoutContent>
+
+  <dialog ref="downloadCytoidDialog" class="modal">
+    <form method="dialog" class="modal-box">
+      <h3 class="font-bold text-lg">
+        Download Cytoid
+      </h3>
+      <p class="py-4">
+        Don't have Cytoid on your device yet? Download Cytoid now!
+      </p>
+      <div class="modal-action">
+        <button class="btn btn-neutral btn-square">
+          <Icon name="mdi:close" size="18" />
+        </button>
+        <NuxtLink class="btn btn-primary flex-1" :to="{ name: 'download' }">
+          Download Cytoid
+        </NuxtLink>
+      </div>
+    </form>
+  </dialog>
 </template>
