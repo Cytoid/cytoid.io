@@ -145,6 +145,7 @@ const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels)
 //   })
 // })
 
+useSWR(60)
 resetCytoidPage()
 </script>
 

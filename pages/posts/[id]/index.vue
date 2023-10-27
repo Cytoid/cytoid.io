@@ -103,6 +103,9 @@ if (postId && !post) {
     statusMessage: `Post not found: ${postId}`,
   }))
 }
+else {
+  useSWR()
+}
 
 defineCytoidPage({
   title: post.value?.title ?? 'Post',

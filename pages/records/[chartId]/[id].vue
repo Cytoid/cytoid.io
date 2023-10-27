@@ -58,10 +58,19 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncData(() => useQuery(query, {
   id: recordId,
   chartId,
 }))
+if (recordId && !data.value?.record) {
+  showError(error.value?.message ?? createError({
+    statusCode: 404,
+    statusMessage: 'Record not found',
+  }))
+}
+else {
+  useSWR()
+}
 
 const scoreTextColor = computed(() => {
   if (data.value?.record?.score === 1000000) {

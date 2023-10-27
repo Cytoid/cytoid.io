@@ -78,6 +78,9 @@ if (collectionId && !collection.value) {
     message: `Collection not found: ${collectionId}`,
   }))
 }
+else {
+  useSWR()
+}
 
 defineCytoidPage({
   title: collection.value?.title ?? 'Collection',

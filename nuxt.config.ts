@@ -1,6 +1,7 @@
 import config from 'config'
 import * as dotenv from 'dotenv'
 import pkg from './package.json'
+import manifest from './manifest.json'
 
 dotenv.config()
 
@@ -93,8 +94,9 @@ export default defineNuxtConfig({
       ],
       script: [
         { src: 'https://polyfill.io/v3/polyfill.min.js?version=3.110.1' },
-        { src: `https://www.googletagmanager.com/gtag/js?id=${config.get('analyticsCode')}`, async: true },
-        { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` },
+        // disable analytics
+        // { src: `https://www.googletagmanager.com/gtag/js?id=${config.get('analyticsCode')}`, async: true },
+        // { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` },
       ],
     },
   },
@@ -103,71 +105,17 @@ export default defineNuxtConfig({
     ? {
         strategies: 'generateSW',
         registerType: 'autoUpdate',
-        manifest: {
-          name: 'Cytoid IO',
-          short_name: 'CytoidIO',
-          theme_color: '#a5b4fc',
-          icons: [
-            {
-              src: 'pwa-64x64.png',
-              sizes: '64x64',
-              type: 'image/png',
-            },
-            {
-              src: 'pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any',
-            },
-            {
-              src: 'maskable-icon-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'maskable',
-            },
-          ],
-        },
+        manifest,
         workbox: {
           navigateFallback: null,
           globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
         },
         client: {
           installPrompt: true,
-          // you don't need to include this: only for testing purposes
-          // if enabling periodic sync for update use 1 hour or so (periodicSyncForUpdates: 3600)
-          // periodicSyncForUpdates: 20,
         },
       }
       // disable PWA in dev
     : {},
-
-  // routeRules: {
-  //   // prerender
-  //   '/': { prerender: true },
-  //   '/pages/dmca': { prerender: true },
-  //   '/pages/terms': { prerender: true },
-  //   '/session/**': { prerender: true },
-
-  //   // swr 3600s
-  //   '/levels/**': { swr: 3600 },
-  //   '/collection/**': { swr: 3600 },
-  //   '/profile/**': { swr: 3600 },
-  //   '/posts/**': { swr: 3600 },
-
-  //   // no ssr
-  //   '/settings/**': { ssr: false },
-  //   '/studio/**': { ssr: false },
-  // },
 
   legacy: {
     targets: [

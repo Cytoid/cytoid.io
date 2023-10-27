@@ -137,6 +137,10 @@ if (profileId && !profileData.value?.profile) {
     statusMessage: `Profile not found: ${profileId}`,
   }))
 }
+else {
+  useSWR()
+}
+
 if (profileData.value?.profile?.user?.active === false) {
   showError(error.value?.message ?? createError({
     statusCode: 403,

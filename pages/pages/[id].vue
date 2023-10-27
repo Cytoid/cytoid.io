@@ -23,9 +23,18 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncData(() => useQuery(query, {
   uid: pageId,
 }))
+if (pageId && !data.value?.page) {
+  showError(error.value?.message ?? createError({
+    statusCode: 404,
+    statusMessage: `Page not found: ${pageId}`,
+  }))
+}
+else {
+  useSWR()
+}
 
 if (data.value?.page?.title) {
   defineCytoidPage({

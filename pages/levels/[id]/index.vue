@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ResourceState } from '~/gql/graphql'
+
 const route = useRoute()
 
 const { isLogin, toLogin, user } = useAuth()
@@ -98,6 +100,9 @@ if (levelId && !levelData.value?.level) {
     statusCode: 404,
     statusMessage: `Level not found: ${levelId}`,
   }))
+}
+else if (levelData.value?.level?.state === ResourceState.Public) {
+  useSWR()
 }
 
 const isQualified = computed(() => !!levelData.value?.level?.category.includes('qualified'))
