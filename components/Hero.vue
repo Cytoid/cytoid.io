@@ -1,3 +1,11 @@
+<script setup lang="ts">
+withDefaults(defineProps<{
+  downloads?: boolean
+}>(), {
+  downloads: true,
+})
+</script>
+
 <template>
   <div>
     <div class="hero h-[50vh] w-full min-h-[18rem] max-w-md mx-auto sm:max-w-full max-h-[36rem] relative sm:flex">
@@ -14,7 +22,7 @@
           <p class="py-6 ml-4">
             {{ $t('homepage.slogan') }}
           </p>
-          <div class=" ml-4 flex flex-col sm:flex-row gap-2">
+          <div v-if="downloads" class="ml-4 flex flex-col sm:flex-row gap-2">
             <NuxtLink class="btn btn-primary flex-nowrap" to="https://play.google.com/store/apps/details?id=me.tigerhix.cytoid" target="_blank">
               <Icon name="mdi:google-play" size="20" />
               {{ $t('homepage.download_googleplay') }}

@@ -2,6 +2,7 @@
 import { ResourceState } from '~/gql/graphql'
 
 const route = useRoute()
+const router = useRouter()
 
 const { isLogin, toLogin, user } = useAuth()
 
@@ -158,6 +159,40 @@ async function downloadLevel(verify: () => Promise<string>) {
   }
 }
 
+const { isIos, isAndroid } = useDevice()
+const isMobile = computed(() => {
+  return isAndroid || isIos
+})
+async function openWithCytoid() {
+  const url = `cytoid://levels/${levelData.value!.level!.uid}`
+  if (process.client) {
+    const timeout = 2000 // ms
+    const res = await new Promise((resolve) => {
+      const iframe = document.createElement('iframe')
+
+      iframe.style.display = 'none'
+      document.body.appendChild(iframe)
+
+      const timer = setTimeout(() => {
+        document.body.removeChild(iframe)
+        resolve(false)
+      }, timeout)
+
+      iframe.onload = iframe.onerror = function () {
+        clearTimeout(timer)
+        document.body.removeChild(iframe)
+        resolve(true)
+      }
+
+      iframe.src = url
+    })
+    if (!res) {
+      // Failed to open Cytoid
+      router.push({ name: 'download' })
+    }
+  }
+}
+
 // rating
 const updateRateLoading = ref(false)
 async function updateRate(v: number) {
@@ -271,14 +306,18 @@ defineCytoidPage({
           <LevelDiffBadge :type="chart.type" :difficulty="chart.difficulty" :name="chart.name ?? undefined" :notes-count="chart.notesCount" />
         </template>
       </div>
-      <div class="flex gap-3 flex-wrap max-w-xl">
+      <div class="flex gap-3 flex-wrap">
+        <button v-if="isMobile" class="btn btn-accent" @click="openWithCytoid">
+          <Icon name="ph:circle-duotone" size="24" class="mr-2" />
+          Cytoid
+        </button>
         <Captcha v-slot="{ verify }">
           <button class="btn btn-primary" @click="downloadLevel(verify)">
             <Icon name="material-symbols:download-sharp" size="24" class="mr-2" />
             {{ $t('level_details.download_btn', { size: formatSize(levelData?.level?.size) }) }}
           </button>
-          <div ref="downloadCtl" class="hidden" />
         </Captcha>
+        <div ref="downloadCtl" class="hidden" />
         <template v-if="isLogin">
           <button
             v-if="levelData?.level?.owned === null"

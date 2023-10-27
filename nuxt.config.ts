@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'vue-recaptcha/nuxt',
     '@vite-pwa/nuxt',
+    '@nuxtjs/device',
   ],
 
   googleFonts: {
