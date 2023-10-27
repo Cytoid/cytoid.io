@@ -159,9 +159,9 @@ async function downloadLevel(verify: () => Promise<string>) {
   }
 }
 
-const { isIos, isAndroid } = useDevice()
+const { isIos, isAndroid, isMacOS, isApple } = useDevice()
 const isMobile = computed(() => {
-  return isAndroid || isIos
+  return isAndroid || isIos || isMacOS || isApple
 })
 async function openWithCytoid() {
   const url = `cytoid://levels/${levelData.value!.level!.uid}`
