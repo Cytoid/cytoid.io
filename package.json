@@ -53,7 +53,7 @@
     "eslint": "^8.45.0",
     "howler": "^2.2.3",
     "marked": "^5.1.2",
-    "nuxt": "^3.7.3",
+    "nuxt": "^3.8.0",
     "nuxt-icon": "^0.4.2",
     "sanitize-html": "^2.11.0",
     "terser": "^5.19.2",
