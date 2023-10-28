@@ -61,6 +61,27 @@ const owner = computed<string | undefined>({
     updateRouter({ owner: newVal })
   },
 })
+const tags = computed<string[]>({
+  get() {
+    return route.query.tags?.toString().split(',') || []
+  },
+  set(newVal) {
+    if (newVal.length > 0) {
+      updateRouter({ tags: newVal.join(',') })
+    }
+    else {
+      updateRouter({ tags: undefined })
+    }
+  },
+})
+function addTag(tag: string) {
+  if (!tags.value.includes(tag)) {
+    tags.value.push(tag)
+  }
+}
+function removeTag(tag: string) {
+  tags.value = tags.value.filter(t => t !== tag)
+}
 
 function updateSearch() {
   updateRouter({ search: search.value })
@@ -80,13 +101,20 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
 <template>
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <div v-if="owner" class="flex items-center flex-wrap mb-4 gap-4">
-        <div class="hidden" />
-        <div class="badge badge-lg h-8 flex">
+      <div v-if="owner || tags.length > 0" class="flex items-center flex-wrap mb-4 gap-4">
+        <div v-if="owner" class="badge badge-lg h-8 flex">
           <span class="ellipsis">
             Owner: {{ owner }}
           </span>
           <button class="btn btn-circle btn-xs ml-2" @click="owner = undefined">
+            <Icon name="material-symbols:close" size="16" />
+          </button>
+        </div>
+        <div v-for="tag in tags" :key="tag" class="badge badge-lg h-8 flex">
+          <span class="ellipsis">
+            Tag: {{ tag }}
+          </span>
+          <button class="btn btn-circle btn-xs ml-2" @click="removeTag(tag)">
             <Icon name="material-symbols:close" size="16" />
           </button>
         </div>
