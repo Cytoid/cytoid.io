@@ -83,6 +83,20 @@ const scoreTextColor = computed(() => {
 
 defineCytoidPage({
   title: `Record ${data.value?.record?.chart?.level?.title}`,
+}, {
+  image: data.value?.record?.chart?.level?.bundle?.backgroundImage?.thumbnail ?? undefined,
+  unsafeDescription: [
+    `Player: ${data.value?.record?.owner?.name ?? data.value?.record?.owner?.uid}`,
+    `Score: ${data.value?.record?.score}`,
+    `MAX Combo: ${data.value?.record?.details.maxCombo}`,
+    `Accuracy: ${truncateNum((data.value?.record?.accuracy ?? 0) * 100)}%`,
+    ...(
+      (data.value?.record?.rating ?? 0) !== 0
+        ? [`Rating: ${truncateNum(data.value!.record!.rating)}`]
+        : []
+    ),
+  ].join(' | '),
+  cardType: 'summary',
 })
 </script>
 

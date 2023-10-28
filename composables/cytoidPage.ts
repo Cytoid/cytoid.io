@@ -28,6 +28,7 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
     if (markedDescription === '') {
       markedDescription = undefined
     }
+    const image = meta?.image ?? data.background
 
     useSeoMeta({
       title,
@@ -36,11 +37,11 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
       ogTitle: title,
       ogDescription: markedDescription,
       ogUrl: url,
-      ogImage: data.background,
+      ogImage: image,
       twitterTitle: title,
       twitterDescription: markedDescription,
-      twitterImage: data.background,
-      twitterCard: 'summary_large_image',
+      twitterImage: image,
+      twitterCard: meta.cardType ?? 'summary_large_image',
     })
   }
   else {
@@ -110,4 +111,6 @@ interface PageDataWithTitle {
 interface PageMeta {
   unsafeDescription?: string
   author?: string
+  cardType?: 'summary' | 'summary_large_image'
+  image?: string
 }

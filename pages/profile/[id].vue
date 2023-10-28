@@ -235,6 +235,7 @@ defineCytoidPage({
 }, {
   unsafeDescription: profileData.value?.profile?.bio ?? undefined,
   author: profileData.value?.profile?.user?.name ?? profileData.value?.profile?.user?.uid ?? undefined,
+  cardType: 'summary',
 })
 </script>
 
