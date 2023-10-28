@@ -24,7 +24,7 @@ html[lang="ko-KR"] {
   font-family: Nunito,'Noto Sans', 'Noto Sans KR','M PLUS Rounded\ 1c',system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,sans-serif
 }
 body {
-  @apply bg-black bg-opacity-30 break-words
+  @apply bg-black bg-opacity-30 break-words min-w-[380px]
 }
 
 /* Scrollbar */
