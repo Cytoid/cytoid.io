@@ -75,7 +75,11 @@ async function logout() {
             <Icon name="mdi:loading" size="18" class="animate-spin" />
           </label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a @click="logout">{{ $t('general.signout_btn') }}</a></li>
+            <li>
+              <button @click="logout">
+                {{ $t('general.signout_btn') }}
+              </button>
+            </li>
           </ul>
         </div>
       </div>
