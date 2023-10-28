@@ -42,7 +42,7 @@ useHead({
         data-theme="dark"
         data-tweet-limit="4"
         data-chrome="transparent noborders nofooter noheader noscrollbar"
-        href="https://twitter.com/cytoidio"
+        href="https://twitter.com/cytoidio?ref_src=twsrc%5Etfw"
       >
         Loading Tweets...
       </a>
