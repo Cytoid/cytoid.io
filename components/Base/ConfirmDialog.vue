@@ -7,6 +7,9 @@ const props = defineProps<{
   type?: 'success' | 'error' | 'warning' | 'info'
 }>()
 const confirmed = ref('')
+function quickConfirm() {
+  confirmed.value = props.confirm
+}
 </script>
 
 <template>
@@ -23,7 +26,7 @@ const confirmed = ref('')
         </h3>
 
         <!-- Messages -->
-        <slot />
+        <slot :quick-confirm="quickConfirm" />
 
         <input
           v-model="confirmed"

@@ -51,6 +51,13 @@ const mutationLoading = ref(false)
 
 const pendingBanUser = ref<string | null>(null)
 const pendingBanReason = ref('')
+function setBanReason(reason: string) {
+  pendingBanReason.value = reason
+}
+const exampleBanReasons = [
+  'Cheating',
+  'Other',
+]
 
 onMounted(() => {
   nextTick(async () => {
@@ -230,6 +237,9 @@ async function setActive(active: boolean) {
                   <div v-if="!email.verified" class="badge badge-warning badge-outline badge-sm">
                     Unverified
                   </div>
+                  <div v-else class="badge badge-success badge-outline badge-sm">
+                    <Icon name="mdi:check-bold" size="10" class="text-success" />
+                  </div>
                 </li>
               </ul>
 
@@ -341,34 +351,44 @@ async function setActive(active: boolean) {
     :confirm="(pendingBanReason ? pendingBanUser : null) ?? ''"
     :on-confirm="() => { banUser() }"
     :on-cancel="() => { pendingBanUser = null; pendingBanReason = '' }"
+
     type="error"
   >
     <template #title>
       Nuke {{ data.user.name || data.user.uid }}'s account?
     </template>
 
-    <div class="w-full flex flex-col gap-4">
-      <p>
-        This is going to delete all his playing records, make the user inactive, and give the user a cheater badge.
-      </p>
-      <div class="flex flex-col gap-1">
-        <strong>Reason:</strong>
-        <div class="join w-full">
-          <label for="pending-ban-reason" class="join-item btn btn-neutral">
-            <Icon name="mdi:account-question-outline" size="18" />
-          </label>
-          <input
-            id="pending-ban-reason"
-            v-model="pendingBanReason"
-            placeholder="e.g. Cheating"
-            class="join-item input input-bordered flex-1 w-full"
-          >
+    <template #default="{ quickConfirm }">
+      <div class="w-full flex flex-col gap-4">
+        <p>
+          This is going to delete all his playing records, make the user inactive, and give the user a cheater badge.
+        </p>
+        <div class="flex flex-col gap-1">
+          <strong>Reason:</strong>
+          <div class="flex gap-1 my-1">
+            <button v-for="r in exampleBanReasons" :key="r" class="badge badge-accent" @click="setBanReason(r)">
+              {{ r }}
+            </button>
+          </div>
+          <div class="join w-full">
+            <label for="pending-ban-reason" class="join-item btn btn-neutral">
+              <Icon name="mdi:account-question-outline" size="18" />
+            </label>
+            <input
+              id="pending-ban-reason"
+              v-model="pendingBanReason"
+              placeholder="e.g. Cheating"
+              class="join-item input input-bordered flex-1 w-full"
+            >
+          </div>
         </div>
+        <p>
+          To continue, please input the uid of the user <button class="font-bold text-error" @dblclick="quickConfirm">
+            {{ data.user.uid }}
+          </button> to proceed. (or double tap the red uid.)
+        </p>
       </div>
-      <p>
-        To continue, please input the uid of the user <strong class="font-bold text-error">{{ data.user.uid }}</strong> to proceed.
-      </p>
-    </div>
+    </template>
 
     <template #buttonContext>
       Ban
