@@ -1,0 +1,48 @@
+name: Build and Publish the Docker Image
+on:
+  push:
+    branches:
+      - main
+env:
+  GITHUB_SHA: ${{ github.sha }}
+  IMAGE: ssr
+  REGISTRY_HOSTNAME: ghcr.io
+  NODE_ENV: production
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build API
+        run: yarn build
+      - name: Prune Dev Dependencies
+        run: npm prune --production
+      - name: Build Docker Image
+        run: |
+          docker build \
+            -t "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE" \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" .
+      - name: Publish Docker Image
+        run: |
+          docker push "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Publish
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: cytoid
+          directory: ./.output/public
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
