@@ -9,11 +9,8 @@ watchEffect(() => {
   <!-- Background -->
   <div v-if="ctdApp.background !== ''" class="relative h-0">
     <div class="absolute select-none w-full h-full top-0" style="z-index: -1;">
-      <div class="w-full h-screen sm:max-h-[100vw]">
-        <div
-          class="absolute w-full h-screen bg-center bg-cover brightness-75"
-          :style="`background-image: url(&quot;${ctdApp.background}&quot;)`"
-        />
+      <div class="relative w-full h-screen lg:max-h-[100vw]">
+        <div class="w-full h-full bg-center bg-cover brightness-75" :style="`background-image: url(&quot;${ctdApp.background}&quot;)`" />
         <div class="absolute top-0 h-32 w-full bg-gradient-to-b from-base-100/60 to-base-100/0" />
         <div class="absolute bottom-0 h-2/3 w-full bg-gradient-to-b from-base-100/0 to-base-100" />
       </div>
