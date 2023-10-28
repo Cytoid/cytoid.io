@@ -35,7 +35,7 @@ useHead({
         {{ $t('homepage.latest_tweet_title') }}
       </h2>
     </div>
-    <div class="p-4 pt-0 mb-8 max-h-96 overflow-y-auto">
+    <div class="twitter-box p-4 pt-0 mb-8 max-h-96 overflow-y-auto">
       <a
         class="twitter-timeline"
         data-dnt="true"
@@ -53,5 +53,8 @@ useHead({
 <style>
 .twitter-timeline > iframe {
   color-scheme: light;
+}
+.twitter-box:has(.twitter-timeline:not(.twitter-timeline-rendered)) {
+  @apply flex justify-center
 }
 </style>
