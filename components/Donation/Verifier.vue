@@ -2,7 +2,6 @@
 defineProps<{
   externals: string[]
 }>()
-const config = useRuntimeConfig()
 const { user, updateUser } = useAuth()
 
 const linkMutation = graphql(/* GraphQL */`

@@ -2,7 +2,6 @@
 import { ResourceState } from '~/gql/graphql'
 
 const route = useRoute()
-const router = useRouter()
 
 const { isLogin, toLogin, user } = useAuth()
 
@@ -530,7 +529,7 @@ defineCytoidPage({
   <dialog ref="downloadCytoidDialog" class="modal">
     <form method="dialog" class="modal-box">
       <h3 class="font-bold text-lg">
-        Download Cytoid
+        Launching Cytoid...
       </h3>
       <p class="py-4">
         Don't have Cytoid on your device yet? Download Cytoid now!

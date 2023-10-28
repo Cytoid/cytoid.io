@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { t } = useLocales()
-const config = useRuntimeConfig()
 
 const { user, updateUser } = useAuth()
 
