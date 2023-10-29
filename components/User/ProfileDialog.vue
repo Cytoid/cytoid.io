@@ -49,18 +49,20 @@ async function logout() {
         <div class="card-body px-6 py-2 select-none">
           <div class="flex w-full mt-4">
             <div class="avatar">
-              <div class="w-16 h-16 mt-4 rounded-full">
-                <img v-if="profile.user?.avatar.original" :src="profile.user.avatar.original">
-              </div>
+              <NuxtLink class="w-16 h-16 mt-4" :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
+                <img v-if="profile.user?.avatar.original" :src="profile.user.avatar.original" class="rounded-full">
+              </NuxtLink>
             </div>
             <div class="flex flex-col justify-center gap-1 flex-1 pt-4 px-4 w-0">
               <div>
-                <p class="card-title break-all">
+                <NuxtLink class="card-title break-all" :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
                   {{ user?.name || user?.uid }}
-                </p>
+                </NuxtLink>
               </div>
               <div v-if="profile.rating" class="flex gap-2">
-                <UserRatingBadge :rating="profile.rating" />
+                <NuxtLink :to="{ name: 'studio-analytics' }" @click="close">
+                  <UserRatingBadge :rating="profile.rating" />
+                </NuxtLink>
               </div>
             </div>
           </div>
