@@ -34,7 +34,12 @@ const progress = computed(() => {
 watch(previewOrder, (val) => {
   if (val) {
     if (val === nowPlaying.value) {
-      reset()
+      if (previewState.value.state === 'playing') {
+        reset()
+      }
+      else {
+        play()
+      }
     }
     else {
       readyAndPlay(val)
