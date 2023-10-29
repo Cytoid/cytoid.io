@@ -2,10 +2,9 @@
 import { ResourceState } from '~/gql/graphql'
 
 const route = useRoute()
+const levelId = route.params.id.toString()
 
 const { isLogin, toLogin, user } = useAuth()
-
-const levelId = route.params.id.toString()
 
 const query = gql(/* GraphQL */`
   query FetchLevel($uid: String!){

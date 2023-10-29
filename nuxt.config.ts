@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     'vue-recaptcha/nuxt',
     '@vite-pwa/nuxt',
     '@nuxtjs/device',
+    'nuxt-gtag',
   ],
 
   googleFonts: {
@@ -81,6 +82,10 @@ export default defineNuxtConfig({
     },
   },
 
+  gtag: {
+    id: config.get('analyticsCode'),
+  },
+
   app: {
     head: {
       meta: [
@@ -95,9 +100,6 @@ export default defineNuxtConfig({
       ],
       script: [
         { src: 'https://polyfill.io/v3/polyfill.min.js?version=3.110.1' },
-        // disable analytics
-        // { src: `https://www.googletagmanager.com/gtag/js?id=${config.get('analyticsCode')}`, async: true },
-        // { innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${config.get('analyticsCode')}');` },
       ],
     },
   },

@@ -38,7 +38,7 @@ resetCytoidPage()
           </h2>
           <div class="carousel h-40 space-x-4 rounded-box">
             <div v-for="image of images" :key="image" class="carousel-item">
-              <img :src="image" class="rounded-box">
+              <img :src="image" class="rounded-box h-40">
             </div>
           </div>
           <p>
