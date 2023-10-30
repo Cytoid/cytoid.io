@@ -53,24 +53,24 @@ async function readyAndPlay(url: string) {
   await play()
 }
 
-function ready(url: string) {
-  return new Promise<void>((resolve) => {
+async function ready(url: string) {
+  reset()
+  updatePreviewState({
+    state: 'loading',
+    url,
+  })
+  nowPlaying.value = url
+  player.value = new Howl({
+    src: [await preDecodeAudio(nowPlaying.value)],
+  })
+  player.value.once('end', () => {
     reset()
-    updatePreviewState({
-      state: 'loading',
-      url,
-    })
-    nowPlaying.value = url
-    player.value = new Howl({
-      src: [nowPlaying.value],
-    })
-    player.value.once('end', () => {
-      reset()
-    })
-    player.value.on('play', () => {
-      timer.resume()
-    })
-    player.value.once('load', () => {
+  })
+  player.value.on('play', () => {
+    timer.resume()
+  })
+  await new Promise<void>((resolve) => {
+    player.value!.once('load', () => {
       updatePreviewState({
         state: 'paused',
         url: nowPlaying.value,
@@ -79,7 +79,7 @@ function ready(url: string) {
       })
       resolve()
     })
-    if (player.value.state() === 'loaded') {
+    if (player.value!.state() === 'loaded') {
       resolve()
     }
   })
