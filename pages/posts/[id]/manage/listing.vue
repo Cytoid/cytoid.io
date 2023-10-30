@@ -72,7 +72,7 @@ async function submit() {
               v-model="visibility"
               :items="[
                 { value: ResourceState.Public, label: $t('general.visibility_status_public'), icon: 'mdi:earth' },
-                { value: ResourceState.Unlisted, label: $t('general.visibility_action_unlist'), icon: 'mdi:eye-off-outline' },
+                { value: ResourceState.Unlisted, label: $t('general.visibility_status_unlisted'), icon: 'mdi:eye-off-outline' },
                 { value: ResourceState.Private, label: $t('general.visibility_status_private'), icon: 'mdi:lock-outline' },
               ]"
             />
