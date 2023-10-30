@@ -56,7 +56,7 @@ interface RecordData {
         {{ record.chart.level?.title }}
       </h3>
     </NestedLink>
-    <div class="w-full flex flex-warp flex-row gap-2">
+    <div class="w-full flex flex-warp flex-row items-center gap-2">
       <div class="min-w-0">
         <LevelDiffBadgeSmall
           :type="record.chart.type"
@@ -68,9 +68,9 @@ interface RecordData {
       </div>
       <RecordScoreBadge class="badge-md flex-none" :score="record.score" />
       <div class="flex-1" />
-      <p v-if="record.date" class="w-fit grow-0 text-xs flex-none">
+      <span v-if="record.date" class="w-fit h-fit grow-0 text-xs flex-none">
         {{ dateFromNow(record.date) }}
-      </p>
+      </span>
     </div>
   </BaseCard>
 </template>
