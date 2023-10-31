@@ -7,7 +7,6 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   IMAGE: ssr
   REGISTRY_HOSTNAME: ghcr.io
-  NODE_ENV: production
 jobs:
   build:
     name: Build
@@ -17,8 +16,8 @@ jobs:
         os: [ubuntu-latest]
         node: [18]
     steps:
-      # - name: Log in to registry
-      #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
       - uses: actions/setup-node@v3
         with:
@@ -27,32 +26,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Cache node_modules
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: node_modules
-      #     key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: cached-node_modules
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: Install Dependencies
-        # if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn
+        if: steps.cached-node_modules.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
 
       - name: Build Nuxt App
         run: yarn build
 
-      # - name: Prune Dev Dependencies
-      #   run: npm prune --production
+      - name: Build Docker Image
+        run: |
+          docker build \
+            -t "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE" \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" .
 
-      # - name: Build Docker Image
-      #   run: |
-      #     docker build \
-      #       -t "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE" \
-      #       --build-arg GITHUB_SHA="$GITHUB_SHA" \
-      #       --build-arg GITHUB_REF="$GITHUB_REF" .
-
-      # - name: Publish Docker Image
-      #   run: |
-      #     docker push "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE"
+      - name: Publish Docker Image
+        run: |
+          docker push "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE"
 
       # - uses: actions/setup-node@v3
       #   with:
