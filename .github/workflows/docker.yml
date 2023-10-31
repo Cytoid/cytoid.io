@@ -48,6 +48,16 @@ jobs:
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" .
 
+      - name: Save Docker Image
+        run: |
+          docker save "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE" | gzip > image.tar.gz
+
+      - name: Upload Docker Image
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image
+          path: image.tar.gz
+
       - name: Publish Docker Image
         run: |
           docker push "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE"
