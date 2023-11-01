@@ -22,6 +22,12 @@ async function execute(): Promise<string> {
       reset()
     })
     _execute()
+
+    // timeout: 60s
+    setTimeout(() => {
+      reject(new Error('timeout'))
+      reset()
+    }, 60000)
   })
   return response
 }
