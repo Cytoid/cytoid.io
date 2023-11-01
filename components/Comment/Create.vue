@@ -18,8 +18,10 @@ const url = computed(() => {
 })
 
 const post = ref('')
+const loading = ref(false)
 
 async function sendPost() {
+  loading.value = true
   const res = await useServiceFetch<CommentResponse>(url.value, {
     method: 'POST',
     body: {
@@ -45,6 +47,7 @@ async function sendPost() {
     post.value = ''
     successAlert('Comment Added')
   }
+  loading.value = false
 }
 </script>
 
@@ -65,7 +68,7 @@ async function sendPost() {
         </div>
         <textarea v-model="post" class="textarea textarea-primary h-48" :disabled="!isLogin" />
         <div class="card-actions justify-end pt-2">
-          <button v-if="isLogin" class="btn btn-sm btn-secondary" :disabled="post.length === 0" @click="sendPost">
+          <button v-if="isLogin" class="btn btn-sm btn-secondary" :disabled="post.length === 0 || loading" @click="sendPost">
             {{ $t('general.comment_post') }}
           </button>
           <button v-else class="btn btn-sm btn-warning" @click="toLogin()">
