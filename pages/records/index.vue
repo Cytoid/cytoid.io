@@ -64,6 +64,12 @@ const query = gql(/* GraphQL */`
       rating
       recentRating
     }
+  }
+`)
+const queryCount = gql(/* GraphQL */`
+  query FetchRecordsCount (
+    $query: RecordQueryInput
+  ) {
     recordsCount(query: $query)
   }
 `)
@@ -87,7 +93,7 @@ const limit = 10
 const loading = ref(true)
 const pageCount = computed(() => Math.ceil(totalRecordsCount.value / limit))
 
-const syncData = useDebounceFn(async () => {
+const syncData = useDebounceFn(async (recount: boolean = true) => {
   loading.value = true
 
   await until(user).toMatch(u => !!u)
@@ -108,6 +114,26 @@ const syncData = useDebounceFn(async () => {
   const order = route.query.order as string ?? undefined
 
   const page = Number.parseInt(route.query.page?.toString() ?? '1') - 1
+
+  if (recount) {
+    const countData = await useQuery(queryCount, {
+      query: {
+        ...(
+          owner
+            ? isUUID(owner)
+              ? { ownerId: owner }
+              : { ownerUid: owner }
+            : {}
+        ),
+        chartId,
+        startDate,
+        endDate,
+        best,
+        ranked,
+      },
+    })
+    totalRecordsCount.value = countData?.recordsCount ?? 0
+  }
 
   const data = await useQuery(query, {
     query: {
@@ -139,7 +165,6 @@ const syncData = useDebounceFn(async () => {
     }[order] ?? QueryOrder.Desc,
   })
   records.value = data?.records ?? []
-  totalRecordsCount.value = data?.recordsCount ?? 0
 
   loading.value = false
 
@@ -148,8 +173,10 @@ const syncData = useDebounceFn(async () => {
 
 watch(
   () => route.query,
-  async () => {
-    await syncData()
+  async (newVal, oldVal) => {
+    // if only pages changed, don't recount
+    const isNeedRecount = Object.keys(newVal).some(key => key !== 'page' && newVal[key] !== oldVal[key])
+    await syncData(isNeedRecount)
     if (window) {
       window.scroll(0, 0)
     }
