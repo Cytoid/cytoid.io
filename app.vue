@@ -41,6 +41,6 @@ useHead({
       <slot />
     </NuxtLayout>
   </div>
-  <AlertBox />
+  <ToastBox />
   <PreviewPlayer />
 </template>

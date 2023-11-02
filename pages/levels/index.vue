@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { LocationQuery } from 'vue-router'
-import type { LocationQueryRaw } from '.nuxt/vue-router'
+import type { LocationQuery, LocationQueryRaw } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()

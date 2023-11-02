@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FetchLevelForEditingQuery } from 'gql/graphql'
+import type { FetchLevelForEditingQuery } from '~/gql/graphql'
 
 const props = defineProps<{
   data: FetchLevelForEditingQuery

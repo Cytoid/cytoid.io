@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RouteLocationRaw } from '.nuxt/vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 
 defineProps<{
   cover?: string | null
