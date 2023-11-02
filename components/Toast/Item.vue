@@ -5,6 +5,7 @@ const props = defineProps<{
 }>()
 
 const progress = ref<null | number>(null)
+const jitterDone = ref(false)
 
 const { closeToast } = useToast()
 
@@ -31,6 +32,7 @@ if (props.toast.timeout !== 0) {
     }
     else {
       pause()
+      jitterDone.value = true
     }
   })
 }
@@ -66,7 +68,7 @@ function close(clicked: boolean) {
 <template>
   <div
     v-if="display" class="toast-item relative rounded-2xl shadow-md overflow-hidden"
-    :class="[toastClass, toast.onClick && 'cursor-pointer']"
+    :class="[toastClass, toast.onClick && 'cursor-pointer', jitterDone && 'jitter-done']"
     @click="toast.onClick ? close(true) : undefined"
   >
     <div class="flex items-center gap-4 p-4">
@@ -107,7 +109,7 @@ function close(clicked: boolean) {
   }
 }
 
-.toast-item:nth-last-child(2) {
+.toast-item:nth-last-child(2):not(.jitter-done) {
   animation: jitter 0.3s ease-in-out;
 }
 </style>

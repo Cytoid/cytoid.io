@@ -19,7 +19,7 @@ export function useToast() {
       type,
       icon: defaultIcon,
       closeIcon: 'mdi:close',
-      timeout: 10000,
+      timeout: 6000,
       ...data,
     }
     toasts.value.push(toast)
