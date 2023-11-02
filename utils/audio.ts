@@ -9,10 +9,6 @@ export async function preDecodeAudio(url: string): Promise<string> {
     return url
   }
 
-  log('running on safari and found ogg file, decoding to wav')
-  log(url)
-
-  log('loading audio file')
   const file = await $fetch<ArrayBuffer>(url, { responseType: 'arrayBuffer' })
   let res: {
     channelData: Float32Array[]
@@ -20,28 +16,25 @@ export async function preDecodeAudio(url: string): Promise<string> {
     sampleRate: number
   } | undefined
 
-  log('decoding audio file as vorbis')
   try {
     res = await decodeVorbis(new Uint8Array(file))
   }
   catch (e) {
-    log('vorbis decoding failed')
+    // ignore
   }
   if (!res) {
-    log('decoding audio file as opus')
     try {
       res = await decodeOpus(new Uint8Array(file))
     }
     catch (e) {
-      log('opus decoding failed')
+      // ignore
     }
   }
   if (!res) {
-    log('decoding failed')
+    console.error('Failed to decode audio')
     return url
   }
 
-  log('creating blob')
   const interleaved = getInterleaved(res.channelData, res.samplesDecoded)
   const waveHeader = generateHeader(
     interleaved.length * Int16Array.BYTES_PER_ELEMENT,
@@ -61,16 +54,10 @@ export async function preDecodeAudio(url: string): Promise<string> {
   const reader = new FileReader()
   return new Promise((resolve) => {
     reader.onloadend = () => {
-      log('decoded audio file as wav')
       resolve(reader.result as string)
     }
     reader.readAsDataURL(blob)
   })
-
-  function log(...args: any[]) {
-    // eslint-disable-next-line no-console
-    console.log('[preview]', ...args)
-  }
 }
 
 async function decodeOpus(data: Uint8Array) {
