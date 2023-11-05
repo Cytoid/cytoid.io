@@ -3,7 +3,7 @@
   "staticURL": "https://static.cytoid.io",
   "serviceURLServer": "http://127.0.0.1:4000",
   "serviceURLClient": "http://localhost:3000/services",
-  "graphqlURLServer": "http://localhost:4000/graphql",
+  "graphqlURLServer": "http://127.0.0.1:4000/graphql",
   "graphqlURLClient": "http://localhost:3000/graphql",
   "imageURL": "https://images.cytoid.io",
   "webURL": "http://localhost:3000",
