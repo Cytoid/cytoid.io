@@ -79,7 +79,8 @@ const canSubmit = computed(() => {
     return false
   }
 
-  return true
+  // return true
+  return false // waiting services
 })
 
 async function submit(verify: () => Promise<string>) {
