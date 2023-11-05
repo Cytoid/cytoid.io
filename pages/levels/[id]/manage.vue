@@ -35,6 +35,7 @@ const query = gql(/* GraphQL */`
         notesCount
       }
       metadata {
+        title_localized
         artist {
           name
           localized_name
@@ -42,18 +43,13 @@ const query = gql(/* GraphQL */`
         }
         illustrator {
           name
-          localized_name
           url
         }
         charter {
           name
-          localized_name
-          url
         }
         storyboarder {
           name
-          localized_name
-          url
         }
       }
       rating {
@@ -124,6 +120,6 @@ defineCytoidPage({
       />
     </template>
 
-    <NuxtPage v-if="data?.level" :data="data" />
+    <NuxtPage v-if="data?.level" v-model="data" />
   </LayoutStudio>
 </template>

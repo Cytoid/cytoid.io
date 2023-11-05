@@ -2,10 +2,13 @@
 import type { FetchLevelForEditingQuery } from '~/gql/graphql'
 
 const props = defineProps<{
-  data: FetchLevelForEditingQuery
+  modelValue: FetchLevelForEditingQuery
 }>()
 
-const level = computed(() => props.data.level)
+const emit = defineEmits(['update:modelValue'])
+const data = useVModel(props, 'modelValue', emit)
+
+const level = computed(() => data.value.level)
 </script>
 
 <template>
@@ -45,17 +48,10 @@ const level = computed(() => props.data.level)
         />
       </div>
     </div>
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
-      <div class="card-body">
-        <h2 class="card-subtitle">
-          Comments
-        </h2>
-        <LazyCommentThread
-          v-if="level?.uid"
-          category="level"
-          :thread="level.uid"
-        />
-      </div>
-    </div>
+    <LazyCommentThread
+      v-if="level?.uid"
+      category="level"
+      :thread="level.uid"
+    />
   </div>
 </template>

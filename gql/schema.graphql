@@ -216,6 +216,7 @@ type Mutation {
   evaluateEpic(id: String): String
   rateLevel(id: String!, rating: Int): Rating!
   unpackLevelPackage(token: String!, replace: String): UserLevel
+  editLevelMetadata(id: String!, metadata: PartialMetadata): UserLevel
   deleteLevel(id: ID!): Boolean
   updateLevel(id: ID!, input: UpdateLevelInput): Boolean
   addToLibrary(levelId: Int!): Boolean
@@ -251,6 +252,25 @@ type My {
 }
 
 scalar Object
+
+input PartialChartMetadata {
+  type: String!
+  name: String
+  difficulty: Int
+}
+
+input PartialMetadata {
+  title: String
+  title_localized: String
+  artist: String
+  artist_localized: String
+  artist_source: String
+  illustrator: String
+  illustrator_source: String
+  charter: String
+  storyboarder: String
+  charts: [PartialChartMetadata!]
+}
 
 type Post {
   id: String!

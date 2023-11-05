@@ -114,6 +114,21 @@ body {
   order: 3;
 }
 
+.diff-bg-easy {
+  @apply text-base-content border-none text-white !important;
+  background: linear-gradient(to top left, #4ca2cd, #67B26F);
+}
+
+.diff-bg-hard {
+  @apply text-base-content border-none text-white !important;
+  background: linear-gradient(to bottom right, #B06AB3, #4568DC);
+}
+
+.diff-bg-extreme {
+  @apply text-base-content border-none text-white !important;
+  background: linear-gradient(to bottom right, #700f0f, #4d0000);
+}
+
 .grade-max-text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-tl from-[#0096FF] to-[#EC00C6];
 }

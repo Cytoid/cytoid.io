@@ -2,8 +2,13 @@
 import { type FetchLevelForEditingQuery, ResourceState } from '~/gql/graphql'
 
 const props = defineProps<{
-  data: FetchLevelForEditingQuery
+  modelValue: FetchLevelForEditingQuery
 }>()
+
+const emit = defineEmits(['update:modelValue'])
+const data = useVModel(props, 'modelValue', emit)
+
+const level = computed(() => data.value.level)
 
 const mutation = gql(/* GraphQL */`
   mutation UpdateLevel($id: ID!, $input: UpdateLevelInput!) {
@@ -13,8 +18,6 @@ const mutation = gql(/* GraphQL */`
 const isSubmitting = ref(false)
 
 const { user } = useAuth()
-
-const level = computed(() => props.data.level)
 
 const description = ref(level?.value?.description ?? '')
 const tags = ref(level.value?.tags ?? [])
