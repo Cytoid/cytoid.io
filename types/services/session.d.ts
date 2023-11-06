@@ -1,4 +1,4 @@
-interface LoginPayload{
+interface LoginPayload {
   username: string
   password: string
   remember: boolean
@@ -12,8 +12,8 @@ interface SessionResponse {
 
 interface UserData {
   id: string
-  uid:string
-  name?:string
-  email:string
-  role:string
+  uid: string
+  name?: string
+  email: string
+  role: string
 }

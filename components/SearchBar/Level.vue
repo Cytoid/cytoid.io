@@ -74,6 +74,7 @@ const tags = computed<string[]>({
     }
   },
 })
+// eslint-disable-next-line unused-imports/no-unused-vars
 function addTag(tag: string) {
   if (!tags.value.includes(tag)) {
     tags.value.push(tag)

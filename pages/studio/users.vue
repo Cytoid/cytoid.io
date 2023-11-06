@@ -87,11 +87,9 @@ async function findUser(id: string) {
   router.push({
     hash: `#${id}`,
   })
-  const ans = await useQuery(query,
-    isUUID(id)
-      ? { id }
-      : { uid: id },
-  )
+  const ans = await useQuery(query, isUUID(id)
+    ? { id }
+    : { uid: id })
   if (!ans?.user?.id) {
     notFound.value = id
   }
