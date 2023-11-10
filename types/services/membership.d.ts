@@ -11,4 +11,3 @@ type MembershipPatchResponse = {
   uid: string
   token?: string
 } | null
-

@@ -1,2 +1,2 @@
 // Maybe
-type Maybe<T> = T | null;
+type Maybe<T> = T | null

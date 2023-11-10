@@ -1,52 +1,52 @@
 interface LevelCommentMetadata {
-	path: {
-    name: "level-id"
+  path: {
+    name: 'level-id'
     params: {
       id: string
     }
   }
-	level: {
+  level: {
     id: number
     uid: string
     title: string
   }
-	title: string
+  title: string
 }
 
 interface ProfileCommentMetadata {
-	path: {
-    name: "profile-id"
+  path: {
+    name: 'profile-id'
     params: {
       id: string
     }
   }
-	user: {
+  user: {
     id: number
     uid: string
     name?: string
   }
-	title: string
+  title: string
 }
 
 interface CollectionCommentMetadata {
-	path: {
+  path: {
     name: 'collections-id'
     params: {
       id: string
     }
   }
-	title: string
+  title: string
 }
 
 type CommentMetadata = LevelCommentMetadata | ProfileCommentMetadata | CollectionCommentMetadata
 
 interface CommentResponse {
-	id: number
-	content: string
-	date: string
-	anonymous: boolean
-	metadata: CommentMetadata
-	owner: {
+  id: number
+  content: string
+  date: string
+  anonymous: boolean
+  metadata: CommentMetadata
+  owner: {
     id: string
     uid: string
     name?: any
@@ -57,5 +57,5 @@ interface CommentResponse {
       large: string
     }
   }
-	count: number
+  count: number
 }

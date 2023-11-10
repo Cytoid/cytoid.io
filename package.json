@@ -21,7 +21,7 @@
     "graphql": "^16.7.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.8",
+    "@antfu/eslint-config": "^1.1.0",
     "@graphql-codegen/cli": "^4.0.1",
     "@graphql-codegen/client-preset": "^4.0.1",
     "@nuxt/devtools": "latest",
