@@ -173,24 +173,30 @@ async function openWithCytoid() {
 // rating
 const updateRateLoading = ref(false)
 async function updateRate(v: number) {
+  updateRateLoading.value = true
+
   if (v <= 0) {
-    updateRateLoading.value = true
     await removeRate()
     updateRateLoading.value = false
     return
   }
   else if (v > 10) {
+    updateRateLoading.value = false
     return
   }
 
   const res = await useMutation(updateRateMutation, {
     uid: levelId,
     rating: v,
+  }).catch((e) => {
+    handleErrorToast(e)
+    userRating.value = 0
   })
 
   if (res) {
     levelData.value!.level!.rating = res.rateLevel
   }
+  updateRateLoading.value = false
 
   async function removeRate() {
     userRating.value = 0

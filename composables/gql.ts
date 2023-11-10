@@ -20,7 +20,7 @@ export async function useQuery<Data = any, Variables extends AnyVariables = AnyV
   const { client } = useUrql()
   const ans = await client.query(query, variables, context).toPromise()
   if (ans.error) {
-    throw new Error(ans.error.message)
+    throw createUrqlError(ans.error)
   }
 
   return ans.data
@@ -34,10 +34,20 @@ export async function useMutation<Data = any, Variables extends AnyVariables = A
   const { client } = useUrql()
   const ans = await client.mutation(query, variables, context).toPromise()
   if (ans.error) {
-    throw new Error(ans.error.message)
+    throw createUrqlError(ans.error)
   }
 
   return ans.data
+}
+
+function createUrqlError(error: CombinedError) {
+  const graphqlErrors = error.graphQLErrors.map(e => e.message)
+  const networkError = error.networkError?.message
+  const message = [
+    ...graphqlErrors,
+    ...(networkError ? [`Network error: ${networkError}`] : []),
+  ].join('; ')
+  return new Error(message)
 }
 
 // Not tested
