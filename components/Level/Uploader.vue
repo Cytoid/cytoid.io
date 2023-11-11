@@ -5,6 +5,7 @@ const props = defineProps<{
 const router = useRouter()
 
 const file = ref<File | null>(null)
+const uploading = ref(false)
 const started = ref(false)
 
 const mutation = gql(/* GraphQL */`
@@ -18,8 +19,11 @@ const mutation = gql(/* GraphQL */`
 `)
 
 async function uploadHook(upload: () => Promise<FilePostResponse | null | undefined>) {
+  uploading.value = true
   started.value = true
-  await upload()
+  await upload().finally(() => {
+    uploading.value = false
+  })
 }
 
 async function afterUpload(data: FilePostResponse | null | undefined) {
@@ -76,7 +80,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
             :class="{
               'border-neutral-content': isOverDropZone,
               'border-neutral-content/25': !isOverDropZone,
-              'clickable': !started,
+              'clickable': !uploading,
             }"
             @click="openDialog"
           >
@@ -94,7 +98,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
             </div>
           </div>
           <div class="card-actions">
-            <button v-show="file" class="btn btn-ghost" :disabled="started" @click="reset()">
+            <button v-show="file" class="btn btn-ghost" :disabled="uploading" @click="reset()">
               Cancel
             </button>
             <div class="flex-1" />
@@ -104,7 +108,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
                 'btn-secondary': replace,
                 'btn-primary': !replace,
               }"
-              :disabled="started || !file"
+              :disabled="uploading || !file"
               @click="uploadHook(upload)"
             >
               Upload
@@ -117,11 +121,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
       #default="{ message, progress, error }"
     >
       <div v-if="started">
-        <div v-if="error" class="alert alert-error">
-          <Icon name="material-symbols:error-circle-rounded-outline" size="24" />
-          <span>{{ error }}</span>
-        </div>
-        <div v-else class="alert bg-neutral border-0 shadow-lg">
+        <div v-if="uploading" class="alert bg-neutral border-0 shadow-lg">
           <Icon name="mdi:upload" size="24" />
           <div>
             <h3 class="font-bold">
@@ -141,6 +141,10 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
           <div v-else>
             <Icon name="mdi:loading" size="24" class="animate-spin" />
           </div>
+        </div>
+        <div v-else-if="error" class="alert alert-error">
+          <Icon name="material-symbols:error-circle-rounded-outline" size="24" />
+          <span>{{ error }}</span>
         </div>
       </div>
       <div v-else>
