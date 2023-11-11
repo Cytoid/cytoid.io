@@ -112,7 +112,7 @@ async function submit(verify: () => Promise<string>) {
       changed = true
       chartData.name = chart.name
     }
-    if (Number.isNaN(Number.parseInt(chart.difficulty)) && originalChart?.difficulty.toString() !== chart.difficulty) {
+    if (!Number.isNaN(Number.parseInt(chart.difficulty)) && originalChart?.difficulty.toString() !== chart.difficulty) {
       changed = true
       chartData.difficulty = Number.parseInt(chart.difficulty)
     }
