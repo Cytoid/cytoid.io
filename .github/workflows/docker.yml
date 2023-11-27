@@ -32,14 +32,14 @@ jobs:
         with:
           path: |
             node_modules
-          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Dependencies
         if: steps.cached-node_modules.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build Nuxt App
-        run: yarn build
+        run: pnpm build
 
       - name: Build Docker Image
         run: |
