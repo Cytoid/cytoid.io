@@ -28,6 +28,10 @@ const gradeList = [
     grade: 'A',
   },
   {
+    cutoff: 950000,
+    grade: 'AA',
+  },
+  {
     cutoff: 990000,
     grade: 'S',
   },
