@@ -6,16 +6,16 @@ Cytoid is a music game where you can create, share and play your own levels!
 Powered by community, with many dedicated creators, Cytoid provides a huge
 variety of musical genres to enjoy and a diverse range of gameplay design.
 
-This is the repository for the **next version** of Cytoid.io Website. 
+This is the repository for the Cytoid.io Website. 
 The website was constructed using Vue.js, Nuxt.js.
 
 ## Setup
 
-Make sure you have yarn globally, then:
+Make sure you have pnpm globally, then:
 
 ```bash
-# yarn
-yarn install
+# pnpm
+pnpm i
 ```
 
 ## Development Server
@@ -23,8 +23,8 @@ yarn install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# yarn
-yarn dev
+# pnpm
+pnpm run dev
 ```
 
 ## Production
@@ -32,7 +32,7 @@ yarn dev
 Build the application for production:
 
 ```bash
-# yarn
-yarn build
+# pnpm
+pnpm build
 ```
 
