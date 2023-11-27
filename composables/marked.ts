@@ -2,10 +2,7 @@ import { marked } from 'marked'
 import sanitizeHtml from 'sanitize-html'
 
 export function useSafeMarked(safeMdText: string) {
-  marked.use({
-    mangle: false,
-    headerIds: false,
-  })
+  marked.use({})
   return marked.parse(safeMdText)
 }
 
