@@ -23,20 +23,24 @@ async function sendResetRequest(verify: () => Promise<string>) {
 
   loading.value = true
 
-  const captchaToken = await verify()
-  const response = await useMutation(mutation, {
-    email: email.value,
-    captcha: captchaToken,
-  }).catch((e) => {
-    handleErrorToast(e)
-  })
-  const success = response?.sendResetPasswordEmail ?? false
-  if (!success) {
-    errorAlert('The email was never registered / confirmed!')
-  }
-  else {
-    sent.value = email.value
-    startTimer()
+  try {
+    const captchaToken = await verify()
+    const response = await useMutation(mutation, {
+      email: email.value,
+      captcha: captchaToken,
+    }).catch((e) => {
+      handleErrorToast(e)
+    })
+    const success = response?.sendResetPasswordEmail ?? false
+    if (!success) {
+      errorAlert('The email was never registered / confirmed!')
+    }
+    else {
+      sent.value = email.value
+      startTimer()
+    }
+  } catch (error) {
+    handleErrorToast(error as Error)    
   }
 
   loading.value = false
@@ -44,18 +48,20 @@ async function sendResetRequest(verify: () => Promise<string>) {
 
 async function resend(verify: () => Promise<string>) {
   loading.value = true
-  useTimeoutFn(() => {
-    loading.value = false
-  }, 1000)
-
-  const captchaToken = await verify()
-  await useMutation(mutation, {
-    email: sent.value,
-    captcha: captchaToken,
-  }).catch((e) => {
-    handleErrorToast(e)
-  })
-
+  try {
+    const captchaToken = await verify()
+    await Promise.race([
+      useTimeoutFn(() => {
+        throw new Error('Timeout')
+      }, 10000),
+      useMutation(mutation, {
+        email: sent.value,
+        captcha: captchaToken,
+      }),
+    ])
+  } catch (error) {
+    handleErrorToast(error as Error)
+  }
   loading.value = false
 }
 

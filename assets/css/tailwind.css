@@ -26,6 +26,9 @@ html[lang="ko-KR"] {
 body {
   @apply bg-black bg-opacity-30 break-words min-w-[380px]
 }
+html {
+  @apply overflow-y-scroll
+}
 
 /* Scrollbar */
 

@@ -85,46 +85,48 @@ const verified = computed(() => {
 async function signUp(verify: () => Promise<string>) {
   loading.value = true
 
-  const captchaToken = await verify()
+  try {
+    const captchaToken = await verify()
 
-  const response = await useServiceFetch<SessionResponse>('/session', {
-    method: 'PUT',
-    body: {
-      uid: form.value.username,
-      email: form.value.email,
-      password: form.value.password,
-      captcha: captchaToken,
-    },
-  })
-  const { data, error } = response
-  if (error.value || !data.value?.user) {
-    if (error.value?.message) {
-      handleErrorToast(new Error(error.value.message))
-    }
-    else {
-      handleErrorToast(error.value ?? new Error('Unknown error'))
-    }
-
-    loading.value = false
-    return
-  }
-
-  const userData = data.value?.user
-
-  if (route.query.token) {
-    const token = route.query.token.toString()
-    // Bind account if register by third party
-    await useMutation(linkMutation, {
-      token,
+    const response = await useServiceFetch<SessionResponse>('/session', {
+      method: 'PUT',
+      body: {
+        uid: form.value.username,
+        email: form.value.email,
+        password: form.value.password,
+        captcha: captchaToken,
+      },
     })
+    const { data, error } = response
+    if (error.value || !data.value?.user) {
+      if (error.value?.message) {
+        handleErrorToast(new Error(error.value.message))
+      }
+      else {
+        handleErrorToast(error.value ?? new Error('Unknown error'))
+      }
+
+      loading.value = false
+      return
+    }
+
+    const userData = data.value?.user
+
+    if (route.query.token) {
+      const token = route.query.token.toString()
+      // Bind account if register by third party
+      await useMutation(linkMutation, {
+        token,
+      })
+    }
+
+    user.value = userData
+    successAlert('Sign up successfully!')
+    loginNext()
+  } catch (error) {
+    handleErrorToast(error as Error)
   }
-
-  user.value = userData
-
-  successAlert('Sign up successfully!')
-
   loading.value = false
-  loginNext()
 }
 
 function loginNext() {

@@ -22,30 +22,34 @@ const loading = ref(false)
 
 async function sendPost() {
   loading.value = true
-  const res = await useServiceFetch<CommentResponse>(url.value, {
-    method: 'POST',
-    body: {
-      captcha: await props.verify(),
-      content: post.value,
-      category: props.category,
-      key: props.thread,
-    },
-  })
-  if (res.data.value && user.value) {
-    res.data.value.owner = {
-      id: user.value.id,
-      uid: user.value.uid,
-      name: user.value.name,
-      avatar: {
-        small: avatarURL(user.value.id),
-        original: avatarURL(user.value.id),
-        medium: avatarURL(user.value.id),
-        large: avatarURL(user.value.id),
+  try {
+    const res = await useServiceFetch<CommentResponse>(url.value, {
+      method: 'POST',
+      body: {
+        captcha: await props.verify(),
+        content: post.value,
+        category: props.category,
+        key: props.thread,
       },
+    })
+    if (res.data.value && user.value) {
+      res.data.value.owner = {
+        id: user.value.id,
+        uid: user.value.uid,
+        name: user.value.name,
+        avatar: {
+          small: avatarURL(user.value.id),
+          original: avatarURL(user.value.id),
+          medium: avatarURL(user.value.id),
+          large: avatarURL(user.value.id),
+        },
+      }
+      props.afterPost(res.data.value)
+      post.value = ''
+      successAlert('Comment Added')
     }
-    props.afterPost(res.data.value)
-    post.value = ''
-    successAlert('Comment Added')
+  } catch (error) {
+    handleErrorToast(error as Error)
   }
   loading.value = false
 }

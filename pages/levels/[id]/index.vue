@@ -132,8 +132,8 @@ async function downloadLevel(verify: () => Promise<string>) {
   }
 
   if (downloadLink.value === '') {
-    const token = await verify()
     try {
+      const token = await verify()
       const { data: res } = await useServiceFetch<levelDownloadResponse>(`/levels/${levelId}/resources`, {
         method: 'POST',
         body: {

@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-icon',
     '@nuxtjs/google-fonts',
-    'vue-recaptcha/nuxt',
+    '@nuxtjs/turnstile',
     '@vite-pwa/nuxt',
     '@nuxtjs/device',
     'nuxt-gtag',
@@ -51,10 +51,11 @@ export default defineNuxtConfig({
       graphqlURLServer: config.get('graphqlURLServer'),
       graphqlURLClient: config.get('graphqlURLClient'),
       servicesUA: process.env.SERVICES_UA ?? '',
-      recaptcha: {
-        v2SiteKey: config.get('captchaKey'),
-      },
     },
+  },
+
+  turnstile: {
+    siteKey: config.get('captchaKey'),
   },
 
   graphqlCodegen: {

@@ -41,56 +41,59 @@ async function linkAccount(verify: () => Promise<string>) {
 
   loading.value = true
 
-  const captchaToken = await verify()
-  // try to login
-  const response = await _loginWithPayload({
-    ...linkForm,
-    remember: false,
-    captcha: captchaToken,
-  })
-  if (response.error.value) {
-    const error = response.error.value
-    const code = error.statusCode
-    if (code === 401) {
-      errorAlert(t('general.login_password_error'))
-      return
-    }
-    else if (code === 403) {
-      warningAlert(t('general.login_inactive_error'))
-      return
-    }
-    else if (code === 404) {
-      // Account does not exist.
-      router.replace({
-        name: 'session-signup',
-        query: {
-          token: token.value,
-          provider: provider.value,
-          username: linkForm.username,
-          origin: origin.value,
-        },
-      })
+  try {
+    const captchaToken = await verify()
+    // try to login
+    const response = await _loginWithPayload({
+      ...linkForm,
+      remember: false,
+      captcha: captchaToken,
+    })
+    if (response.error.value) {
+      const error = response.error.value
+      const code = error.statusCode
+      if (code === 401) {
+        errorAlert(t('general.login_password_error'))
+        return
+      }
+      else if (code === 403) {
+        warningAlert(t('general.login_inactive_error'))
+        return
+      }
+      else if (code === 404) {
+        // Account does not exist.
+        router.replace({
+          name: 'session-signup',
+          query: {
+            token: token.value,
+            provider: provider.value,
+            username: linkForm.username,
+            origin: origin.value,
+          },
+        })
+      }
+      else {
+        handleErrorToast(error)
+      }
     }
     else {
-      handleErrorToast(error)
-    }
-  }
-  else {
-    if (user.value) {
-      // link Account
-      await useMutation(mutation, {
-        token: token.value,
-      })
+      if (user.value) {
+        // link Account
+        await useMutation(mutation, {
+          token: token.value,
+        })
 
-      successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
-      // loginNext()
-      if (route.query.origin) {
-        router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
+        successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
+        // loginNext()
+        if (route.query.origin) {
+          router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
+        }
+        else { router.replace({ name: 'settings-account' }) }
       }
-      else { router.replace({ name: 'settings-account' }) }
     }
+  } catch (error) {
+    handleErrorToast(error as Error)
   }
-
   loading.value = false
 }
 

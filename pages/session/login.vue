@@ -25,36 +25,41 @@ async function loginWithPayload(verify: () => Promise<string>) {
 
   loading.value = true
 
-  const captchaToken = await verify()
-  const response = await _loginWithPayload({
-    ...loginForm,
-    username: loginForm.username.toLowerCase(),
-    captcha: captchaToken,
-  })
+  try {
+    const captchaToken = await verify()
+    const response = await _loginWithPayload({
+      ...loginForm,
+      username: loginForm.username.toLowerCase(),
+      captcha: captchaToken,
+    })
+
+    if (response.error.value) {
+      const error = response.error.value
+      const code = error.statusCode
+      if (code === 401) {
+        errorAlert(t('general.login_password_error'))
+      }
+      else if (code === 403) {
+        warningAlert(t('general.login_inactive_error'))
+      }
+      else if (code === 404) {
+        errorAlert(t('general.login_username_error'))
+      }
+      else {
+        handleErrorToast(error)
+      }
+      return
+    }
+
+    if (user.value) {
+      successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
+      loginNext()
+    }
+  } catch (error) {
+    handleErrorToast(error as Error)
+  }
+
   loading.value = false
-
-  if (response.error.value) {
-    const error = response.error.value
-    const code = error.statusCode
-    if (code === 401) {
-      errorAlert(t('general.login_password_error'))
-    }
-    else if (code === 403) {
-      warningAlert(t('general.login_inactive_error'))
-    }
-    else if (code === 404) {
-      errorAlert(t('general.login_username_error'))
-    }
-    else {
-      handleErrorToast(error)
-    }
-    return
-  }
-
-  if (user.value) {
-    successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
-    loginNext()
-  }
 }
 function loginWithProvider(provider: string) {
   if (process.client) {
