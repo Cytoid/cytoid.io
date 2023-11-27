@@ -92,6 +92,7 @@ export default defineNuxtConfig({
   },
 
   app: {
+    cdnURL: config.get('staticURL'),
     head: {
       meta: [
         { charset: 'utf-8' },
