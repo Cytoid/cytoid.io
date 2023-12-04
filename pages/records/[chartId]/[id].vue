@@ -76,7 +76,7 @@ const scoreTextColor = computed(() => {
   if (data.value?.record?.score === 1000000) {
     return 'grade-max-text-gradient'
   }
-  if (data.value?.record?.details.maxCombo === data.value?.record?.chart?.notesCount) {
+  if ((data.value?.record?.score ?? 0) > 999000) {
     return 'grade-sss-text-gradient'
   }
 })
