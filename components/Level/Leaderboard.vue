@@ -216,9 +216,9 @@ interface chartData {
         </div>
       </div>
 
-      <div v-if="rankData.chart" class="opacity-75 mt-1">
+      <NuxtLink v-if="rankData.chart" class="opacity-75" :to="{ name: 'records', query: { chartId: rankData.chart.id } }">
         Id: {{ rankData.chart.id }}
-      </div>
+      </NuxtLink>
 
       <!-- Page Switch -->
       <Pagination
