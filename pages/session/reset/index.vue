@@ -39,8 +39,9 @@ async function sendResetRequest(verify: () => Promise<string>) {
       sent.value = email.value
       startTimer()
     }
-  } catch (error) {
-    handleErrorToast(error as Error)    
+  }
+  catch (error) {
+    handleErrorToast(error as Error)
   }
 
   loading.value = false
@@ -59,7 +60,8 @@ async function resend(verify: () => Promise<string>) {
         captcha: captchaToken,
       }),
     ])
-  } catch (error) {
+  }
+  catch (error) {
     handleErrorToast(error as Error)
   }
   loading.value = false

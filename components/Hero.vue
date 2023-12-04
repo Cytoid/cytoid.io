@@ -16,7 +16,7 @@ withDefaults(defineProps<{
         <div class="h-full w-full flex flex-col sm:justify-center mr-4">
           <h1 class="text-5xl font-bold flex-1 sm:flex-initial flex items-end">
             <div class="w-full h-full max-h-20">
-              <div class="h-full h-16 sm:h-20 max-w-full max-h-full bg-contain bg-no-repeat bg-center sm:bg-left-bottom" style="background-image: url(/images/logo.webp);" />
+              <div class="h-full sm:h-20 max-w-full max-h-full bg-contain bg-no-repeat bg-center sm:bg-left-bottom" style="background-image: url(/images/logo.webp);" />
             </div>
           </h1>
           <p class="py-6 ml-4">
@@ -25,11 +25,15 @@ withDefaults(defineProps<{
           <div v-if="downloads" class="ml-4 flex flex-col sm:flex-row gap-2">
             <NuxtLink class="btn btn-primary flex-nowrap" to="https://play.google.com/store/apps/details?id=me.tigerhix.cytoid" target="_blank">
               <Icon name="mdi:google-play" size="20" />
-              {{ $t('homepage.download_googleplay') }}
+              <span class="flex-1">
+                {{ $t('homepage.download_googleplay') }}
+              </span>
             </NuxtLink>
             <NuxtLink class="btn btn-primary flex-nowrap" to="https://apps.apple.com/us/app/cytoid/id1266582726" target="_blank">
               <Icon name="ion:ios-appstore" size="20" />
-              {{ $t('homepage.download_appstore') }}
+              <span class="flex-1">
+                {{ $t('homepage.download_appstore') }}
+              </span>
             </NuxtLink>
           </div>
         </div>

@@ -3,7 +3,7 @@ import type { CollectionInput, FetchCollectionForEditingQuery } from '~/gql/grap
 
 const props = defineProps<{
   modelValue: FetchCollectionForEditingQuery
-  submit: (data: CollectionInput, levelCache?: { id: number; uid: string; title: string }[]) => Promise<void>
+  submit: (data: CollectionInput, levelCache?: { id: number, uid: string, title: string }[]) => Promise<void>
 }>()
 const emit = defineEmits(['update:modelValue'])
 const data = useVModel(props, 'modelValue', emit)
@@ -31,8 +31,8 @@ const verified = ref<{ [key: string]: string | undefined | null }>((() => {
   return verified
 })())
 
-const cache = ref<{ id: number; uid: string; title: string }[]>((() => {
-  const cache: { id: number; uid: string; title: string }[] = []
+const cache = ref<{ id: number, uid: string, title: string }[]>((() => {
+  const cache: { id: number, uid: string, title: string }[] = []
   data.value.collection?.levels?.forEach((level) => {
     cache.push({
       id: level.id,
@@ -52,7 +52,7 @@ const updateSuggestions = useDebounceFn(async (value: string) => {
     suggestions.value = []
     return
   }
-  const { data } = await useServiceFetch<{ id: number; uid: string; title: string }[]>('/search/level_uids', {
+  const { data } = await useServiceFetch<{ id: number, uid: string, title: string }[]>('/search/level_uids', {
     query: {
       search: value,
     },

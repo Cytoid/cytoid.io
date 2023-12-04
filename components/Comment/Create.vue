@@ -48,7 +48,8 @@ async function sendPost() {
       post.value = ''
       successAlert('Comment Added')
     }
-  } catch (error) {
+  }
+  catch (error) {
     handleErrorToast(error as Error)
   }
   loading.value = false

@@ -49,11 +49,15 @@ resetCytoidPage()
           </p>
           <NuxtLink class="btn btn-secondary mt-4" to="https://play.google.com/store/apps/details?id=me.tigerhix.cytoid" target="_blank">
             <Icon name="mdi:google-play" size="20" />
-            {{ $t('homepage.download_googleplay') }}
+            <span class="flex-1">
+              {{ $t('homepage.download_googleplay') }}
+            </span>
           </NuxtLink>
           <NuxtLink class="btn btn-secondary mt-4" to="https://apps.apple.com/us/app/cytoid/id1266582726" target="_blank">
             <Icon name="ion:ios-appstore" size="20" />
-            {{ $t('homepage.download_appstore') }}
+            <span class="flex-1">
+              {{ $t('homepage.download_appstore') }}
+            </span>
           </NuxtLink>
         </div>
       </div>
@@ -71,7 +75,10 @@ resetCytoidPage()
           </p>
           <NuxtLink class="btn btn-neutral mt-4" to="https://github.com/Cytoid/Cytoid/releases" target="_blank">
             <Icon name="mdi:github" size="20" />
-            GitHub Release
+            <span class="flex-1">
+
+              GitHub Release
+            </span>
           </NuxtLink>
         </div>
       </div>

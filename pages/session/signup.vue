@@ -123,7 +123,8 @@ async function signUp(verify: () => Promise<string>) {
     user.value = userData
     successAlert('Sign up successfully!')
     loginNext()
-  } catch (error) {
+  }
+  catch (error) {
     handleErrorToast(error as Error)
   }
   loading.value = false

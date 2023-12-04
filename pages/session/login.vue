@@ -55,7 +55,8 @@ async function loginWithPayload(verify: () => Promise<string>) {
       successAlert(t('general.login_snack_bar', { name: user.value.name || user.value.uid }))
       loginNext()
     }
-  } catch (error) {
+  }
+  catch (error) {
     handleErrorToast(error as Error)
   }
 

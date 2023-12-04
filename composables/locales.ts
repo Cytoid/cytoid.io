@@ -8,7 +8,7 @@ import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date
 // ^ TODO: back to this after https://github.com/date-fns/date-fns/pull/3099
 
 export function useLocales() {
-  const locales: Array<{ name: string; code: string; loaded?: boolean }> = [
+  const locales: Array<{ name: string, code: string, loaded?: boolean }> = [
     { name: 'Čeština', code: 'cs-CZ' },
     { name: 'Deutsch', code: 'de-DE' },
     { name: 'English', code: 'en' },

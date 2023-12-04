@@ -234,7 +234,6 @@ interface ConfirmLevelData {
                               openChangeVisConfirm(level, v as ResourceState)
                             }"
                           />
-
                         </div>
                       </div>
                     </div>
