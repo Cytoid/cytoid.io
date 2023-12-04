@@ -88,8 +88,8 @@ if (route.name === 'posts-id-manage') {
 
 async function submit(
   input: PostInput,
-  levelData?: { id: number; uid: string; title: string },
-  collectionData?: { id: string; uid: string; title: string },
+  levelData?: { id: number, uid: string, title: string },
+  collectionData?: { id: string, uid: string, title: string },
 ) {
   if (!data.value?.post?.id) {
     return

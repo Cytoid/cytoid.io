@@ -82,7 +82,7 @@ if (route.name === 'collections-id-manage') {
   })
 }
 
-async function submit(input: CollectionInput, levelCache?: { id: number; uid: string; title: string }[]) {
+async function submit(input: CollectionInput, levelCache?: { id: number, uid: string, title: string }[]) {
   if (!data.value?.collection?.id) {
     return
   }

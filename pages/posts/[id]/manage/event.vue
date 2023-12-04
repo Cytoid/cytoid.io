@@ -5,8 +5,8 @@ const props = defineProps<{
   modelValue: FetchPostForEditingQuery
   submit: (
     input: PostInput,
-    levelData?: { id: number; uid: string; title: string },
-    collectionData?: { id: string; uid: string; title: string },
+    levelData?: { id: number, uid: string, title: string },
+    collectionData?: { id: string, uid: string, title: string },
   ) => Promise<void>
 }>()
 const emit = defineEmits(['update:modelValue'])
@@ -59,7 +59,7 @@ const verifyLevel = useDebounceFn(async (uid: string) => {
     return
   }
 
-  const { data } = await useServiceFetch<{ id: number; uid: string; title: string }[]>('/search/level_uids', {
+  const { data } = await useServiceFetch<{ id: number, uid: string, title: string }[]>('/search/level_uids', {
     query: {
       search: uid,
     },
@@ -86,7 +86,7 @@ const verifyCollection = useDebounceFn(async (uid: string) => {
     return
   }
 
-  const { data } = await useServiceFetch<{ id: string; uid: string; title: string }[]>('/search/collection_uids', {
+  const { data } = await useServiceFetch<{ id: string, uid: string, title: string }[]>('/search/collection_uids', {
     query: {
       search: uid,
     },

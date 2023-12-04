@@ -81,14 +81,14 @@ interface SelectorItem {
         :class="{ disabled: item.disabled }"
       >
         <button
-            class="flex flex-nowrap break-keep"
-            :class="{ '[:not(:hover)>li>&]:focus': item.value === selected }"
-            @click="change(item.value)"
-            :disabled="item.disabled"
-          >
-            <Icon v-if="item.icon" :name="item.icon" size="20" />
-            {{ item.label }}
-          </button>
+          class="flex flex-nowrap break-keep"
+          :class="{ '[:not(:hover)>li>&]:focus': item.value === selected }"
+          :disabled="item.disabled"
+          @click="change(item.value)"
+        >
+          <Icon v-if="item.icon" :name="item.icon" size="20" />
+          {{ item.label }}
+        </button>
       </li>
     </ul>
   </div>

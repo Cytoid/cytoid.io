@@ -91,7 +91,8 @@ async function linkAccount(verify: () => Promise<string>) {
         else { router.replace({ name: 'settings-account' }) }
       }
     }
-  } catch (error) {
+  }
+  catch (error) {
     handleErrorToast(error as Error)
   }
   loading.value = false
