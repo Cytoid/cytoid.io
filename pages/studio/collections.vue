@@ -275,9 +275,8 @@ interface ConfirmCollectionData {
                             <Icon v-else name="mdi:delete-outline" size="18" />
                           </button>
                         </div>
-                        <Selector
+                        <InnerSelector
                           v-model="collection.state"
-                          :small="true"
                           :items="[
                             { value: ResourceState.Public, label: $t('general.visibility_status_public'), icon: 'mdi:earth' },
                             { value: ResourceState.Unlisted, label: $t('general.visibility_action_unlist'), icon: 'mdi:eye-off-outline' },

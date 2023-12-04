@@ -21,12 +21,10 @@ onClickOutside(box, () => {
 })
 
 const ctl = ref<HTMLElement>()
-const ctlWith = ref(0)
 const ctlPos = ref(0)
 onMounted(() => {
   nextTick(() => {
     const { pause, resume } = useRafFn(() => {
-      ctlWith.value = ctl.value?.offsetWidth ?? 0
       ctlPos.value = ctl.value?.getBoundingClientRect().bottom ?? 0
     })
     pause()
@@ -60,11 +58,11 @@ interface SelectorItem {
 </script>
 
 <template>
-  <div class="dropdown z-[1]">
+  <div class="dropdown" :class="{ 'dropdown-open': open }">
     <div
-      tabindex="0"
-      role="button"
-      class="btn btn-neutral flex-nowrap"
+      ref="ctl"
+      class="btn btn-neutral flex-nowrap btn-sm"
+      @click="open = !open"
     >
       <template v-if="selectedItem">
         <Icon v-if="selectedItem.icon" :name="selectedItem.icon" size="20" />
@@ -73,8 +71,9 @@ interface SelectorItem {
       <Icon name="material-symbols:arrow-drop-down" size="20" />
     </div>
     <ul
-      tabindex="0"
-      class="dropdown-content menu p-2 shadow bg-neutral rounded-box mt-2"
+      ref="box"
+      class="dropdown-content z-[1] menu p-2 shadow bg-neutral rounded-box !fixed mt-2"
+      :style="`top: ${ctlPos}px`"
     >
       <li
         v-for="item in items"
@@ -82,7 +81,7 @@ interface SelectorItem {
         :class="{ disabled: item.disabled }"
       >
         <button
-            class="flex flex-nowrap whitespace-nowrap"
+            class="flex flex-nowrap break-keep"
             :class="{ '[:not(:hover)>li>&]:focus': item.value === selected }"
             @click="change(item.value)"
             :disabled="item.disabled"
