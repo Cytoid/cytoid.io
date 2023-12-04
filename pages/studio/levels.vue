@@ -166,14 +166,14 @@ interface ConfirmLevelData {
 <template>
   <div class="w-full flex flex-col gap-5">
     <LevelUploader />
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div class="card bg-base-100 w-full shadow-xl">
       <div class="card-body">
         <h2 class="card-subtitle">
           Manage
         </h2>
 
         <!-- Level List -->
-        <div class="overflow-x-auto">
+        <div class="overflow-x-scroll">
           <table class="table w-full">
             <!-- head -->
             <thead>
@@ -184,7 +184,7 @@ interface ConfirmLevelData {
                 <th>Creation Date</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="overflow-y-visible">
               <tr v-for="level in levels" :key="level.uid">
                 <!-- Level Content -->
                 <td class="flex items-center space-x-3">
@@ -222,18 +222,20 @@ interface ConfirmLevelData {
                             <Icon v-else name="mdi:delete-outline" size="18" />
                           </button>
                         </div>
-                        <Selector
-                          v-model="level.state"
-                          :small="true"
-                          :items="[
-                            { value: ResourceState.Public, label: $t('general.visibility_status_public'), icon: 'mdi:earth' },
-                            { value: ResourceState.Unlisted, label: $t('general.visibility_status_unlisted'), icon: 'mdi:eye-off-outline' },
-                            { value: ResourceState.Private, label: $t('general.visibility_status_private'), icon: 'mdi:lock-outline' },
-                          ]"
-                          @change="(v) => {
-                            openChangeVisConfirm(level, v as ResourceState)
-                          }"
-                        />
+                        <div class="h-0 overflow-visible">
+                          <InnerSelector
+                            v-model="level.state"
+                            :items="[
+                              { value: ResourceState.Public, label: $t('general.visibility_status_public'), icon: 'mdi:earth' },
+                              { value: ResourceState.Unlisted, label: $t('general.visibility_status_unlisted'), icon: 'mdi:eye-off-outline' },
+                              { value: ResourceState.Private, label: $t('general.visibility_status_private'), icon: 'mdi:lock-outline' },
+                            ]"
+                            @change="(v) => {
+                              openChangeVisConfirm(level, v as ResourceState)
+                            }"
+                          />
+
+                        </div>
                       </div>
                     </div>
                   </div>

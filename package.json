@@ -24,6 +24,8 @@
     "@antfu/eslint-config": "^2.2.2",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/client-preset": "^4.1.0",
+    "@headlessui/tailwindcss": "^0.2.0",
+    "@headlessui/vue": "^1.7.16",
     "@nuxt/devtools": "^1.0.4",
     "@nuxtjs/device": "^3.1.1",
     "@nuxtjs/google-fonts": "^3.1.0",

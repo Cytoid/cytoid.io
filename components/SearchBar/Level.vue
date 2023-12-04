@@ -30,18 +30,18 @@ const qualified = computed({
     updateRouter({ qualified: newVal ? 'true' : undefined })
   },
 })
-const sort = computed({
-  get() {
+const sort = computed<string>({
+  get(): string {
     if (search.value !== '') {
-      return route.query.sort ?? 'relevance'
+      return route.query.sort?.toString() ?? 'relevance'
     }
     if (route.query.sort === 'relevance') {
       return 'creation_date'
     }
     if (qualified.value) {
-      return route.query.sort ?? 'modification_date'
+      return route.query.sort?.toString() ?? 'modification_date'
     }
-    return route.query.sort ?? 'creation_date'
+    return route.query.sort?.toString() ?? 'creation_date'
   },
   set(newVal) {
     updateRouter({ sort: newVal })
@@ -138,36 +138,29 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
               {{ $t('levels.sort_select_title') }}
             </p>
             <div class="form-control w-full max-w-xs pt-2">
-              <div class="join">
+              <div class="flex items-center justify-center gap-2">
                 <button v-if="order === 'desc'" class="join-item btn btn-square btn-neutral" @click="order = 'asc'">
                   <Icon name="fa-solid:sort-amount-down" size="20" />
                 </button>
                 <button v-else class="join-item btn btn-square btn-neutral" @click="order = 'desc'">
                   <Icon name="fa-solid:sort-amount-up" size="20" />
                 </button>
-                <select v-model="sort" class="join-item select select-bordered">
-                  <option value="relevance" :disabled="search.length === 0">
-                    {{ $t('levels.sort_select_relevance') }}
-                  </option>
-                  <option value="creation_date">
-                    {{ $t('levels.sort_select_upload_date') }}
-                  </option>
-                  <option value="modification_date">
-                    {{ $t('levels.sort_select_modification_date') }}
-                  </option>
-                  <option value="difficulty">
-                    {{ $t('levels.sort_select_difficulty') }}
-                  </option>
-                  <option value="duration">
-                    {{ $t('levels.sort_select_duration') }}
-                  </option>
-                  <option value="downloads">
-                    {{ $t('levels.sort_select_downloads') }}
-                  </option>
-                  <option value="rating">
-                    {{ $t('levels.sort_select_rating') }}
-                  </option>
-                </select>
+                <Selector
+                  v-model="sort"
+                  class="join-item btn btn-square btn-neutral w-fit"
+                  :items="[
+                    { value: 'relevance', label: $t('levels.sort_select_relevance'), disabled: search.length === 0 },
+                    { value: 'creation_date', label: $t('levels.sort_select_upload_date') },
+                    { value: 'modification_date', label: $t('levels.sort_select_modification_date') },
+                    { value: 'difficulty', label: $t('levels.sort_select_difficulty') },
+                    { value: 'duration', label: $t('levels.sort_select_duration') },
+                    { value: 'downloads', label: $t('levels.sort_select_downloads') },
+                    { value: 'rating', label: $t('levels.sort_select_rating') },
+                  ]"
+                  @change="(s) => {
+                    sort = s
+                  }"
+                />
               </div>
             </div>
           </div>

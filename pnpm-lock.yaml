@@ -19,6 +19,12 @@ devDependencies:
   '@graphql-codegen/client-preset':
     specifier: ^4.1.0
     version: 4.1.0(graphql@16.8.1)
+  '@headlessui/tailwindcss':
+    specifier: ^0.2.0
+    version: 0.2.0(tailwindcss@3.3.5)
+  '@headlessui/vue':
+    specifier: ^1.7.16
+    version: 1.7.16(vue@3.3.9)
   '@nuxt/devtools':
     specifier: ^1.0.4
     version: 1.0.4(nuxt@3.8.2)(rollup@2.79.1)(vite@5.0.5)
@@ -2703,6 +2709,24 @@ packages:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.8.1
+    dev: true
+
+  /@headlessui/tailwindcss@0.2.0(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-fpL830Fln1SykOCboExsWr3JIVeQKieLJ3XytLe/tt1A0XzqUthOftDmjcCYLW62w7mQI7wXcoPXr3tZ9QfGxw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      tailwindcss: ^3.0
+    dependencies:
+      tailwindcss: 3.3.5
+    dev: true
+
+  /@headlessui/vue@1.7.16(vue@3.3.9):
+    resolution: {integrity: sha512-nKT+nf/q6x198SsyK54mSszaQl/z+QxtASmgMEJtpxSX2Q0OPJX0upS/9daDyiECpeAsvjkoOrm2O/6PyBQ+Qg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.3.9(typescript@5.3.2)
     dev: true
 
   /@humanwhocodes/config-array@0.11.13:
