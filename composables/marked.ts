@@ -2,8 +2,10 @@ import { marked } from 'marked'
 import sanitizeHtml from 'sanitize-html'
 
 export function useSafeMarked(safeMdText: string) {
-  marked.use({})
-  return marked.parse(safeMdText)
+  marked.use({
+    async: false,
+  })
+  return marked.parse(safeMdText) as string
 }
 
 export function useMarkedWithCleaner(mdText: string) {
@@ -12,6 +14,7 @@ export function useMarkedWithCleaner(mdText: string) {
       'img',
       'details',
       'summary',
+      'del',
     ]),
   })
 }
