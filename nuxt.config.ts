@@ -24,7 +24,33 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxtjs/device',
     'nuxt-gtag',
+    '@teages/nuxt-locale-lite',
   ],
+
+  locale: {
+    langDir: 'locale',
+    lang: {
+      'cs-CZ': { name: 'Čeština' },
+      'de-DE': { name: 'Deutsch' },
+      'en': { name: 'English' },
+      'es-ES': { name: 'Inglés' },
+      'pt-BR': { name: 'Português' },
+      'vi-VN': { name: 'Tiếng Việt' },
+      'tl-PH': { name: 'Tagalog' },
+      'th-TH': { name: 'ภาษาไทย' },
+      'ja-JP': { name: '日本語' },
+      'ko-KR': { name: '한국어' },
+      'id-ID': { name: 'Bahasa Inggris' },
+      'fr-FR': { name: 'Français' },
+      'hu-HU': { name: 'Angol' },
+      'ms-MY': { name: 'Malay' },
+      'ru-RU': { name: 'Russian' },
+      'zh-CN': { name: '中文（简体）' },
+      'zh-TW': { name: '中文（繁體）' },
+      'zh-FJ': { name: '中文（符语）' },
+    },
+    defaultLocale: 'en',
+  },
 
   googleFonts: {
     download: false, // speed up dev by not downloading fonts

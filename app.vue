@@ -1,13 +1,4 @@
 <script setup lang="ts">
-// i18n
-await (async () => {
-  const { init } = useLocales()
-  const headers = process.server
-    ? useRequestHeaders(['accept-language'])['accept-language'] ?? ''
-    : ''
-  await init(headers)
-})()
-
 // auth
 onMounted(() => {
   nextTick(async () => {
