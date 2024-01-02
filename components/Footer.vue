@@ -66,7 +66,7 @@ const links: {
       </div>
       <div>
         <p>
-          Cytoid built by <a href="https://cytoid.io/profile/tigerhix" class="link link-hover">TigerHix</a> and <a href="https://cytoid.io/profile/neo" class="link link-hover">Neo</a>. All rights
+          Cytoid built by <a href="https://cytoid.io/profile/tigerhix" class="link link-hover">TigerHix</a>, <a href="https://cytoid.io/profile/neo" class="link link-hover">Neo</a> and <a href="https://cytoid.io/profile/teages_0v0" class="link link-hover">Teages</a>. All rights
           reserved.
         </p>
       </div>

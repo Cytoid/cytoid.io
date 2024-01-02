@@ -73,8 +73,8 @@ async function syncData() {
       limit: pageSize,
     },
   })
-  totalPagesCount.value = Number.parseInt(res.headers.get('x-total-page') ?? '0')
   totalLevelsCount.value = Number.parseInt(res.headers.get('x-total-entries') ?? '0')
+  totalPagesCount.value = Math.ceil(totalLevelsCount.value / pageSize)
   if (res._data) {
     levels.value = [...res._data]
   }

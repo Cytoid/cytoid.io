@@ -1,11 +1,7 @@
 import { useI18n } from 'vue-i18n'
 import { formatDistanceToNow, formatRelative, parseISO } from 'date-fns'
 
-// @ts-expect-error https://github.com/date-fns/date-fns/issues/2629
-import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date-fns/locale/index.js'
-
-// import { enUS, zhCN, zhTW, ptBR, th, vi, ja, es, id, cs, de, hu, ko } from 'date-fns/locale'
-// ^ TODO: back to this after https://github.com/date-fns/date-fns/pull/3099
+import { cs, de, enUS, es, hu, id, ja, ko, ptBR, th, vi, zhCN, zhTW } from 'date-fns/locale'
 
 export function useLocales() {
   const locales: Array<{ name: string, code: string, loaded?: boolean }> = [

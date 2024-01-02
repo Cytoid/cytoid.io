@@ -71,13 +71,12 @@ function getDefault() {
 
 function getDefaultMeta(title?: string): Parameters<typeof useSeoMeta>[0] {
   const config = useRuntimeConfig()
-  const { t } = useLocales()
 
   const webUrl = config.public.webURL
   const staticURL = config.public.staticURL
   const _title = title || 'Cytoid'
   const imageUrl = `${staticURL}/img/session.jpg`
-  const description = t('homepage.slogan')
+  const description = config.public.description // TODO: i18n
   return {
     title: _title,
     description,
