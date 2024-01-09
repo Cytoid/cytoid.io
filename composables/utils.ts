@@ -1,4 +1,4 @@
-import type { CookieOptions } from '#app'
+import type { CookieOptions, CookieRef } from '#app'
 
 export function isUUID(val: string) {
   return val.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
@@ -12,11 +12,22 @@ export function copyToClipboard(text: string, name?: string) {
   }
 }
 
-export function useSavedCookie<T = string>(name: string, _opts?: CookieOptions<T>) {
+export function useSavedCookie<T = string | null | undefined>(
+  name: string,
+  _opts?: CookieOptions<T> & { readonly?: false },
+): CookieRef<T>
+export function useSavedCookie<T = string | null | undefined>(
+  name: string,
+  _opts?: CookieOptions<T> & { readonly: true },
+): Readonly<CookieRef<T>>
+export function useSavedCookie<T = string | null | undefined>(
+  name: string,
+  _opts?: CookieOptions<T>,
+) {
   return useCookie(name, {
     maxAge: 7 * 24 * 60 * 60, // 7 days
     ..._opts,
-  })
+  } as any)
 }
 
 export function truncateNum(num: number, digits = 2) {
