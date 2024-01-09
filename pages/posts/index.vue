@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchPosts($skip: Int, $limit: Int!){
     posts: getPosts(limit: $limit, skip: $skip) {
       id

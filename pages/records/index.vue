@@ -10,7 +10,7 @@ const route = useRoute()
 const router = useRouter()
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchRecords (
     $query: RecordQueryInput,
     $page: Int,
@@ -66,7 +66,7 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
-const queryCount = gql(/* GraphQL */`
+const queryCount = gql(`
   query FetchRecordsCount (
     $query: RecordQueryInput
   ) {

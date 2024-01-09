@@ -3,7 +3,7 @@ import type { RecordFragmentForStudioAnalyticsFragment, StudioAnalyticsQuery } f
 
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query StudioAnalytics($uid: String!) {
     profile(uid: $uid) {
       id

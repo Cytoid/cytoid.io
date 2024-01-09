@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ResourceState } from '~/gql/graphql'
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchLevelForStudio($limit: Int!, $start: Int!) {
     my {
       levelsCount
@@ -24,12 +24,12 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
-const mutationUpdateLevel = gql(/* GraphQL */`
+const mutationUpdateLevel = gql(`
   mutation UpdateLevel($id: ID!, $input: UpdateLevelInput!) {
     updateLevel(id: $id, input: $input)
   }
 `)
-const mutationDeleteLevel = gql(/* GraphQL */`
+const mutationDeleteLevel = gql(`
   mutation DeleteLevel($id: ID!) {
     deleteLevel(id: $id)
   }

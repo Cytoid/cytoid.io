@@ -10,7 +10,7 @@ const data = useVModel(props, 'modelValue', emit)
 
 const level = computed(() => data.value.level)
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation UpdateLevel($id: ID!, $input: UpdateLevelInput!) {
     updateLevel(id: $id, input: $input)
   }

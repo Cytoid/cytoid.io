@@ -4,7 +4,7 @@ const route = useRoute()
 const recordId = Number.parseInt(route.params.id.toString())
 const chartId = Number.parseInt(route.params.chartId.toString())
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchRecord($id: Int!, $chartId: Int!) {
     record (id: $id, chartId: $chartId) {
       id

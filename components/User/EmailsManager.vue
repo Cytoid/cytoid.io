@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const query = gql(/* GraphQL */`
+const query = gql(`
   query GetUserEmails {
     my {
       emails {
@@ -11,22 +11,22 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const mutationAdd = gql(/* GraphQL */`
+const mutationAdd = gql(`
   mutation AddEmail($email: String!) {
     addEmail(email: $email)
   }
 `)
-const mutationRemove = gql(/* GraphQL */`
+const mutationRemove = gql(`
   mutation DeleteEmail($email: String!) {
     deleteEmail(email: $email)
   }
 `)
-const mutationMakePrimary = gql(/* GraphQL */`
+const mutationMakePrimary = gql(`
   mutation MakeEmailPrimary($email: String!) {
     makeEmailPrimary(email: $email)
   }
 `)
-const mutationVerify = gql(/* GraphQL */`
+const mutationVerify = gql(`
   mutation SendConfirmationEmail($email: String!) {
     sendVerificationEmail(email: $email)
   }
@@ -34,7 +34,7 @@ const mutationVerify = gql(/* GraphQL */`
 
 const { t } = useLocales()
 
-const { data } = await useAsyncData(() => useQuery(query))
+const { data } = await useAsyncQuery(query)
 
 const loading = ref(false)
 

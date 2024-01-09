@@ -4,7 +4,7 @@ import type { PostType, ResourceState } from '~/gql/graphql'
 const router = useRouter()
 const { user, ready } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query StudioGetPosts {
     posts: getPosts(limit: 100, all: true) {
       id
@@ -20,7 +20,7 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
-const mutationCreate = gql(/* GraphQL */`
+const mutationCreate = gql(`
   mutation StudioCreatePost($data: PostInput!) {
     post: createPost(post: $data) {
       id
@@ -28,7 +28,7 @@ const mutationCreate = gql(/* GraphQL */`
     }
   }
 `)
-const mutationDelete = gql(/* GraphQL */`
+const mutationDelete = gql(`
   mutation StudioDeletePost($id: ID!) {
     deletePost(id: $id) {
       id

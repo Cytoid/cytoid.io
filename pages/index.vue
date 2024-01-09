@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // import type { FetchHomePageLateQuery } from '~/gql/graphql'
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchHomePage {
     discordOnlineCount
     collectionsCount
@@ -80,7 +80,7 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
-const queryDynamic = gql(/* GraphQL */`
+const queryDynamic = gql(`
   query FetchHomePageLate {
     comments: recentComments(limit: 5) {
       id

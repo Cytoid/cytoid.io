@@ -6,7 +6,7 @@ const email = ref('')
 
 const time = ref(0)
 
-const mutation = graphql(/* GraphQL */`
+const mutation = gql(`
   mutation SendPasswordResetEmail($email: String!){
     sendResetPasswordEmail(email: $email)
   }

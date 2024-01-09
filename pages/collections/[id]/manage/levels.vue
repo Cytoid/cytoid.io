@@ -8,7 +8,7 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue'])
 const data = useVModel(props, 'modelValue', emit)
 
-const verifyQuery = gql(/* GraphQL */`
+const verifyQuery = gql(`
   query VerifyLevelsForCollection($id: String!) {
     level(uid: $id) {
       id

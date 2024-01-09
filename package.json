@@ -21,9 +21,8 @@
     "graphql": "^16.8.1"
   },
   "devDependencies": {
+    "@0no-co/graphqlsp": "^0.14.1",
     "@antfu/eslint-config": "^2.4.5",
-    "@graphql-codegen/cli": "^5.0.0",
-    "@graphql-codegen/client-preset": "^4.1.0",
     "@headlessui/tailwindcss": "^0.2.0",
     "@headlessui/vue": "^1.7.16",
     "@nuxt/devtools": "^1.0.6",
@@ -34,6 +33,7 @@
     "@nuxtjs/turnstile": "^0.6.3",
     "@tailwindcss/typography": "^0.5.10",
     "@teages/nuxt-locale-lite": "^0.0.4",
+    "@teages/nuxt-urql-client": "^1.2.0",
     "@types/config": "^3.3.3",
     "@types/glob": "^8.1.0",
     "@types/howler": "^2.2.11",
@@ -42,7 +42,6 @@
     "@types/sanitize-html": "^2.9.5",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
-    "@urql/core": "^4.2.2",
     "@vite-pwa/nuxt": "^0.3.5",
     "@vitejs/plugin-legacy": "^5.2.0",
     "@vueuse/components": "^10.7.0",

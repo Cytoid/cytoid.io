@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query GetUserSecuritySettings {
     my {
       externals: externalAccountProviders

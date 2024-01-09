@@ -5,7 +5,7 @@ const route = useRoute()
 const router = useRouter()
 const { user, ready } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query StudioLookupUser($uid: String, $id: ID) {
     user(id: $id, uid: $uid) {
       id
@@ -24,17 +24,17 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
-const activeMutation = gql(/* GraphQL */`
+const activeMutation = gql(`
   mutation StudioSetUserActive($id: ID!, $active: Boolean!) {
     setUserActive(id: $id, active: $active)
   }
 `)
-const grantMutation = gql(/* GraphQL */`
+const grantMutation = gql(`
   mutation StudioGrantUserBadge($id: ID!, $badge: String!) {
     grantUserBadge(id: $id, badge: $badge)
   }
 `)
-const banMutation = gql(/* GraphQL */`
+const banMutation = gql(`
   mutation StudioBanUser($id: ID!, $reason: String!) {
     banUser(id: $id, reason: $reason)
   }

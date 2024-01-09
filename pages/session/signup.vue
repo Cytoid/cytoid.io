@@ -5,7 +5,7 @@ const route = useRoute()
 const { t } = useLocales()
 const { user } = useAuth()
 
-const linkMutation = graphql(/* GraphQL */`
+const linkMutation = gql(`
   mutation LinkExternalAccount($token: String!) {
     result: addExternalAccount(token: $token)
   }

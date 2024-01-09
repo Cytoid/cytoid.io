@@ -25,7 +25,24 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     'nuxt-gtag',
     '@teages/nuxt-locale-lite',
+    '@teages/nuxt-urql-client',
   ],
+
+  urqlClient: {
+    clients: {
+      default: {
+        url: config.get('graphqlURL'),
+        credentials: 'include',
+        cookiesFilter: ['cyt:sess'],
+      },
+    },
+    codegen: {
+      schemaOverride: 'gql/schema.graphql',
+      presetConfig: {
+        fragmentMasking: false,
+      },
+    },
+  },
 
   locale: {
     langDir: 'locale',
@@ -75,8 +92,6 @@ export default defineNuxtConfig({
       serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
-      graphqlURLServer: config.get('graphqlURLServer'),
-      graphqlURLClient: config.get('graphqlURLClient'),
       servicesUA: process.env.SERVICES_UA ?? '',
     },
   },
@@ -85,33 +100,20 @@ export default defineNuxtConfig({
     siteKey: config.get('captchaKey'),
   },
 
-  graphqlCodegen: {
-    config: {
-      schema: 'gql/schema.graphql',
-      documents: [
-        './*.vue',
-        'composables/**/*.ts',
-        'pages/**/*.vue',
-        'components/**/*.vue',
-      ],
-      ignoreNoDocuments: true, // for better experience with the watcher
-      generates: {
-        './gql/': {
-          preset: 'client',
-          presetConfig: {
-            fragmentMasking: false,
-          },
-          config: {
-            useTypeImports: true,
-          },
-        },
-      },
-    },
-  },
-
   typescript: {
     tsConfig: {
       include: ['types/**/*'],
+      compilerOptions: {
+        plugins: [
+          {
+            name: '@0no-co/graphqlsp',
+            schema: './gql/schema.graphql',
+            disableTypegen: true,
+            templateIsCallExpression: true,
+            trackFieldUsage: true,
+          },
+        ],
+      },
     },
   },
 
@@ -184,7 +186,7 @@ export default defineNuxtConfig({
         },
       },
       '/graphql': {
-        target: config.get('graphqlURLServer'),
+        target: config.get('graphqlURLProxy'),
         changeOrigin: true,
         ws: true,
         headers: {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { user } = useAuth()
 
-const query = graphql(/* GraphQL */`
+const query = gql(`
   query GetSettingsProfile($id: ID!) {
     profile(id: $id) {
       id
@@ -13,7 +13,7 @@ const query = graphql(/* GraphQL */`
     }
   }
 `)
-const mutation = graphql(/* GraphQL */`
+const mutation = gql(`
   mutation UpdateProfile($input: ProfileInput!) {
     result: updateProfile(input: $input)
   }

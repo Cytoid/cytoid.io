@@ -8,7 +8,7 @@ const file = ref<File | null>(null)
 const uploading = ref(false)
 const started = ref(false)
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation UnpackLevel($token: String!, $replace: String) {
     package: unpackLevelPackage(token: $token, replace: $replace) {
       id

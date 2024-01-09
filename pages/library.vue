@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { toLogin } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchUserLibrary {
     my {
       grantedLevels: library(granted: true) {

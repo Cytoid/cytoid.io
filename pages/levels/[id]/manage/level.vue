@@ -8,7 +8,7 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue'])
 const data = useVModel(props, 'modelValue', emit)
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation editLevelMetadata(
     $id: String!,
     $metadata: PartialMetadata
