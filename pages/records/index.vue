@@ -105,13 +105,24 @@ const syncData = useDebounceFn(async (recount: boolean = true) => {
       ? undefined
       : (ownerQuery ?? user.value!.id)
   const chartId = Number.parseInt(route.query.chartId as string) || undefined
-  const startDate = route.query.start_date as string ?? undefined
-  const endDate = route.query.end_date as string ?? undefined
   const best = (route.query.best as string) === 'true'
   const ranked = true
 
-  const sort = route.query.sort as string ?? undefined
-  const order = route.query.order as string ?? undefined
+  const sort = route.query.sort?.toString() || 'date'
+  const order = route.query.order?.toString() || 'desc'
+
+  const startDate = sort === 'recent_rating'
+    ? new Date(Math.max(
+      Date.now() - 1000 * 60 * 60 * 24 * 7,
+      new Date(route.query.start_date?.toString() ?? 0).getTime(),
+    )).toISOString().split('T')[0]
+    : route.query.start_date?.toString()
+  const endDate = sort === 'recent_rating'
+    ? new Date(Math.max(
+      (new Date(startDate!)).getTime(),
+      new Date(route.query.end_date?.toString() ?? Date.now()).getTime(),
+    )).toISOString().split('T')[0]
+    : route.query.end_date?.toString()
 
   const page = Number.parseInt(route.query.page?.toString() ?? '1') - 1
 
