@@ -57,7 +57,7 @@
     "eslint": "^8.55.0",
     "howler": "^2.2.4",
     "marked": "^11.1.0",
-    "nuxt": "^3.9.0",
+    "nuxt": "^3.9.3",
     "nuxt-gtag": "^1.1.1",
     "nuxt-icon": "^0.6.7",
     "ogg-opus-decoder": "^1.6.10",
