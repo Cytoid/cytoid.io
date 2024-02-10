@@ -4,7 +4,7 @@ const postId = route.params.id as string
 
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query GetPost($uid: String!) {
     post: getPost(uid: $uid) {
       id

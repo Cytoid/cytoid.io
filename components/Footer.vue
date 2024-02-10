@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RouteLocationRaw } from '#vue-router'
 
-const { locale, locales, setLocale, t } = useLocales()
+const { locale, locales, t } = useLocales()
 const langSelect = ref(null)
 const keepShowLangSelectBox = ref(false)
 onClickOutside(langSelect, () => keepShowLangSelectBox.value = false)
@@ -57,7 +57,7 @@ const links: {
           </button>
           <ul tabindex="0" class="dropdown-content menu menu-compact p-2 shadow bg-base-100 shadow-2xl rounded-box w-44">
             <li v-for="available in locales" :key="available.code">
-              <button :class="{ active: locale === available.code }" @click="setLocale(available.code)">
+              <button :class="{ active: locale === available.code }" @click="locale = available.code">
                 <span class="mx-auto" v-text="available.name" />
               </button>
             </li>

@@ -6,7 +6,7 @@ const levelId = route.params.id.toString()
 
 const { isLogin, toLogin, user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchLevel($uid: String!){
     level(uid: $uid) {
       id
@@ -70,7 +70,7 @@ const query = gql(/* GraphQL */`
     }
   }
 `)
-const updateRateMutation = gql(/* GraphQL */`
+const updateRateMutation = gql(`
   mutation LevelRate($uid: String!, $rating: Int) {
     rateLevel(id: $uid, rating: $rating) {
       average
@@ -80,12 +80,12 @@ const updateRateMutation = gql(/* GraphQL */`
     }
   }
 `)
-const addToLabMutation = gql(/* GraphQL */`
+const addToLabMutation = gql(`
   mutation AddToLibrary($levelId: Int!) {
     addToLibrary(levelId: $levelId)
   }
 `)
-const removeFromLibMutation = gql(/* GraphQL */`
+const removeFromLibMutation = gql(`
   mutation RemoveFromLibrary($levelId: Int!) {
     removeFromLibrary(levelId: $levelId)
   }

@@ -5,7 +5,7 @@ definePageMeta({
   middleware: ['auth'],
 })
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation StudioUpdateCollection($id: ID!, $data: CollectionInput!) {
     updateCollection(id: $id, input: $data) {
       id
@@ -18,7 +18,7 @@ const collectionId = route.params.id as string
 
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchCollectionForEditing($uid: String!) {
     collection(uid: $uid) {
       id

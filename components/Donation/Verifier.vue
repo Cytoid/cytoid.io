@@ -4,7 +4,7 @@ defineProps<{
 }>()
 const { user, updateUser } = useAuth()
 
-const linkMutation = graphql(/* GraphQL */`
+const linkMutation = gql(`
   mutation LinkExternalAccountDonation($token: String!) {
     result: addExternalAccount(token: $token)
   }

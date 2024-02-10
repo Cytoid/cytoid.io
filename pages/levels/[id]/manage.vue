@@ -8,7 +8,7 @@ const levelId = route.params.id as string
 
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchLevelForEditing($uid: String!) {
     level(uid: $uid) {
       id

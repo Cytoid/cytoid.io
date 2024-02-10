@@ -4,7 +4,7 @@ defineProps<{
 }>()
 const { user, logout: _logout } = useAuth()
 
-const query = graphql(/* GraphQL */`
+const query = gql(`
   query FetchNavCard($id: ID!) {
     profile(id: $id) {
       id

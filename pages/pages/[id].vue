@@ -3,7 +3,7 @@ const route = useRoute()
 
 const pageId = route.params.id as string
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query GetPosts($uid: String!) {
     page: getPost(uid: $uid) {
       id

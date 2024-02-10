@@ -6,7 +6,7 @@ definePageMeta({
   middleware: ['auth'],
 })
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation StudioUpdatePost($id: ID!, $data: PostInput!) {
     updatePost(id: $id, input: $data) {
       id
@@ -19,7 +19,7 @@ const postId = route.params.id as string
 
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchPostForEditing($uid: String!) {
     post: getPost(uid: $uid) {
       id

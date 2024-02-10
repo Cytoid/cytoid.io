@@ -68,7 +68,6 @@ async function decodeOpus(data: Uint8Array) {
 }
 
 async function decodeVorbis(data: Uint8Array) {
-  // @ts-expect-error idk, it is typed but typescript can't find it
   const { OggVorbisDecoderWebWorker } = await import('@wasm-audio-decoders/ogg-vorbis')
   const decoder = new OggVorbisDecoderWebWorker()
   await decoder.ready

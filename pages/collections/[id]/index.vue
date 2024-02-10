@@ -4,7 +4,7 @@ const collectionId = route.params.id as string
 
 const { user } = useAuth()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchCollection($uid: String!) {
     collection(uid: $uid) {
       id

@@ -6,7 +6,7 @@ const props = defineProps<{
 const file = ref<File | null>(null)
 const started = ref(false)
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query GetSettingsProfileHeader($id: ID!) {
     profile(id: $id) {
       header {
@@ -16,7 +16,7 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation UpdateProfileHeader($path: String!) {
     result: updateProfileHeader(path: $path) {
       stripe

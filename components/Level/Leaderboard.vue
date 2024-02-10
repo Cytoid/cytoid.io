@@ -4,7 +4,7 @@ const props = defineProps<{
   charts: chartData[]
 }>()
 
-const rankingQuery = gql(/* GraphQL */`
+const rankingQuery = gql(`
   query FetchLevelRanking($levelUid: String!, $type: String!, $start: Int!) {
     chart(levelUid: $levelUid, chartType: $type) {
       id

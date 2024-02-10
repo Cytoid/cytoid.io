@@ -16,7 +16,7 @@ const linkForm = {
   confirm: '',
 }
 
-const mutation = graphql(/* GraphQL */`
+const mutation = gql(`
   mutation LinkExternalAccount($token: String!) {
     result: addExternalAccount(token: $token)
   }

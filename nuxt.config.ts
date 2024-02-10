@@ -24,7 +24,50 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxtjs/device',
     'nuxt-gtag',
+    '@teages/nuxt-locale-lite',
+    '@teages/nuxt-urql-client',
   ],
+
+  urqlClient: {
+    clients: {
+      default: {
+        url: config.get('graphqlURL'),
+        credentials: 'include',
+        cookiesFilter: ['cyt:sess'],
+      },
+    },
+    codegen: {
+      schemaOverride: 'gql/schema.graphql',
+      presetConfig: {
+        fragmentMasking: false,
+      },
+    },
+  },
+
+  locale: {
+    langDir: 'locale',
+    lang: {
+      'cs-CZ': { name: 'Čeština' },
+      'de-DE': { name: 'Deutsch' },
+      'en': { name: 'English' },
+      'es-ES': { name: 'Inglés' },
+      'pt-BR': { name: 'Português' },
+      'vi-VN': { name: 'Tiếng Việt' },
+      'tl-PH': { name: 'Tagalog' },
+      'th-TH': { name: 'ภาษาไทย' },
+      'ja-JP': { name: '日本語' },
+      'ko-KR': { name: '한국어' },
+      'id-ID': { name: 'Bahasa Inggris' },
+      'fr-FR': { name: 'Français' },
+      'hu-HU': { name: 'Angol' },
+      'ms-MY': { name: 'Malay' },
+      'ru-RU': { name: 'Russian' },
+      'zh-CN': { name: '中文（简体）' },
+      'zh-TW': { name: '中文（繁體）' },
+      'zh-FJ': { name: '中文（符语）' },
+    },
+    defaultLocale: 'en',
+  },
 
   googleFonts: {
     download: false, // speed up dev by not downloading fonts
@@ -49,8 +92,6 @@ export default defineNuxtConfig({
       serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
-      graphqlURLServer: config.get('graphqlURLServer'),
-      graphqlURLClient: config.get('graphqlURLClient'),
       servicesUA: process.env.SERVICES_UA ?? '',
     },
   },
@@ -59,33 +100,20 @@ export default defineNuxtConfig({
     siteKey: config.get('captchaKey'),
   },
 
-  graphqlCodegen: {
-    config: {
-      schema: 'gql/schema.graphql',
-      documents: [
-        './*.vue',
-        'composables/**/*.ts',
-        'pages/**/*.vue',
-        'components/**/*.vue',
-      ],
-      ignoreNoDocuments: true, // for better experience with the watcher
-      generates: {
-        './gql/': {
-          preset: 'client',
-          presetConfig: {
-            fragmentMasking: false,
-          },
-          config: {
-            useTypeImports: true,
-          },
-        },
-      },
-    },
-  },
-
   typescript: {
     tsConfig: {
       include: ['types/**/*'],
+      compilerOptions: {
+        plugins: [
+          {
+            name: '@0no-co/graphqlsp',
+            schema: './gql/schema.graphql',
+            disableTypegen: true,
+            templateIsCallExpression: true,
+            trackFieldUsage: true,
+          },
+        ],
+      },
     },
   },
 
@@ -158,7 +186,7 @@ export default defineNuxtConfig({
         },
       },
       '/graphql': {
-        target: config.get('graphqlURLServer'),
+        target: config.get('graphqlURLProxy'),
         changeOrigin: true,
         ws: true,
         headers: {

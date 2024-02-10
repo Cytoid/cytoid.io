@@ -49,7 +49,7 @@ const verified = computed(() => {
   return passwordVerify.value === null && passwordAgainVerify.value === null
 })
 
-const mutation = graphql(/* GraphQL */`
+const mutation = gql(`
   mutation ChangePasswordWithToken($password: String!, $token: String!) {
     success: changePasswordWithToken(password: $password, token: $token)
   }

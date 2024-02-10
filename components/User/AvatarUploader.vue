@@ -8,7 +8,7 @@ const started = ref(false)
 
 const userOnlineAvatar = ref<string>(avatarURL(props.userId))
 
-const mutation = gql(/* GraphQL */`
+const mutation = gql(`
   mutation UpdateAvatar($path: String) {
     result: setAvatar(path: $path) {
       large

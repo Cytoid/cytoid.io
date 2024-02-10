@@ -3,24 +3,24 @@ const { t } = useLocales()
 
 const { user, updateUser } = useAuth()
 
-const query = graphql(/* GraphQL */`
+const query = gql(`
   query GetUserSecuritySettings {
     my {
       externals: externalAccountProviders
     }
   }
 `)
-const changePassowordMutation = graphql(/* GraphQL */`
+const changePassowordMutation = gql(`
   mutation ChangePassword($old: String!, $new: String!) {
     result: changePassword(oldPassword: $old, newPassword: $new)
   }
 `)
-const unLinkMutation = graphql(/* GraphQL */`
+const unLinkMutation = gql(`
   mutation RemoveExternalAccount($provider: String!) {
     result: removeExternalAccount(provider: $provider)
   }        
 `)
-const linkMutation = graphql(/* GraphQL */`
+const linkMutation = gql(`
   mutation LinkExternalAccount($token: String!) {
     result: addExternalAccount(token: $token)
   }

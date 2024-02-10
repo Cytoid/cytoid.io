@@ -5,7 +5,7 @@ const route = useRoute()
 const { t } = useLocales()
 const { user } = useAuth()
 
-const linkMutation = graphql(/* GraphQL */`
+const linkMutation = gql(`
   mutation LinkExternalAccount($token: String!) {
     result: addExternalAccount(token: $token)
   }
@@ -99,8 +99,8 @@ async function signUp(verify: () => Promise<string>) {
     })
     const { data, error } = response
     if (error.value || !data.value?.user) {
-      if (error.value?.message) {
-        handleErrorToast(new Error(error.value.message))
+      if (error.value?.data.message) {
+        handleErrorToast(new Error(error.value.data.message))
       }
       else {
         handleErrorToast(error.value ?? new Error('Unknown error'))

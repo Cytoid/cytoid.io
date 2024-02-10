@@ -3,7 +3,7 @@ const route = useRoute()
 const ownerId = route.query.owner as string | undefined
 const limit = 24
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchCollections($cursor: ID, $limit: Int!, $ownerId: String){
     collections(limit: $limit, cursor: $cursor, ownerId: $ownerId) {
       id

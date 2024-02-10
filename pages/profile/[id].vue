@@ -14,7 +14,7 @@ const hiddenProfile = ref(false)
 
 const selectChart = ref<'activity' | 'rating' | 'accuracy'>('rating')
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchProfilePage($uid: String!) {
     profile(uid: $uid) {
       bio

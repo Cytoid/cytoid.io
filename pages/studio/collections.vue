@@ -3,7 +3,7 @@ import { ResourceState } from '~/gql/graphql'
 
 const router = useRouter()
 
-const query = gql(/* GraphQL */`
+const query = gql(`
   query FetchCollectionsForStudio {
     my {
       collections {
@@ -21,7 +21,7 @@ const query = gql(/* GraphQL */`
   }
 `)
 
-const mutationCreateCollection = gql(/* GraphQL */`
+const mutationCreateCollection = gql(`
   mutation StudioCreateCollection($data: CollectionInput!) {
     createCollection(input: $data) {
       id
@@ -29,14 +29,14 @@ const mutationCreateCollection = gql(/* GraphQL */`
     }
   }
 `)
-const mutationUpdateCollection = gql(/* GraphQL */`
+const mutationUpdateCollection = gql(`
   mutation UpdateCollectionsForStudio($id: ID!, $input: CollectionInput!) {
     updateCollection(id: $id, input: $input) {
       id
     }
   }
 `)
-const mutationDeleteCollection = gql(/* GraphQL */`
+const mutationDeleteCollection = gql(`
   mutation DeleteCollections($id: ID!) {
     deleteCollection(id: $id) {
       id
