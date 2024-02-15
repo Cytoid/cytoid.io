@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const props = defineProps<{
-  toFirstPage(): void
-  toPrevPage(): void
-  toNextPage(): void
-  toFinalPage(): void
+  toFirstPage: () => void
+  toPrevPage: () => void
+  toNextPage: () => void
+  toFinalPage: () => void
   page: number
   totalPage: number
 
-  jumpToPage(page: number): void
+  jumpToPage: (page: number) => void
 
   isFirstPage?: boolean
   isFinalPage?: boolean
