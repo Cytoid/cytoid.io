@@ -1,4 +1,4 @@
-import { defineNuxtModule } from '@nuxt/kit'
+import { defineNuxtModule } from 'nuxt/kit'
 import { pick } from 'lodash'
 import legacy from '@vitejs/plugin-legacy'
 
