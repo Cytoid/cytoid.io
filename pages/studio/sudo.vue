@@ -30,7 +30,7 @@ onMounted(() => {
 
 async function beSuperUser() {
   try {
-    await $fetch(useServiceUrl('/session/sudo'), {
+    await useServiceFetch('/session/sudo', {
       method: 'POST',
     })
     reloadNuxtApp({
@@ -44,17 +44,18 @@ async function beSuperUser() {
 }
 
 async function sendWorkerCommand(type?: string) {
-  await $fetch(useServiceUrl(
+  await useServiceFetch(
     type
       ? `/workers/${type}`
       : '/workers',
-  ), {
-    method: 'POST',
-    body: {
-      command: command.value,
-      argument: argument.value,
+    {
+      method: 'POST',
+      body: {
+        command: command.value,
+        argument: argument.value,
+      },
     },
-  })
+  )
   successAlert('Command sent')
 }
 </script>
