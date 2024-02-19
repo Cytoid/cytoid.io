@@ -222,13 +222,6 @@ function commaSeparated(n: number) {
   return '0'
 }
 
-function getTotalPlayTimeText(time: number) {
-  const hours = Math.floor(time / 36000)
-  const minutes = Math.floor((time % 36000) / 600)
-  const seconds = Math.floor((time % 600) / 10)
-  return `${hours}H ${minutes}M ${seconds}S`
-}
-
 defineCytoidPage({
   title: profileData.value?.profile?.user?.name ?? profileId,
   background: profileData.value?.profile?.header?.original ?? undefined,
@@ -370,7 +363,7 @@ defineCytoidPage({
           <StatItem :title="$t('profile.highest_max_combo')" :data="commaSeparated(profileData.profile.activity.maxCombo)" />
           <StatItem :title="$t('profile.avg_ranked_accuracy')" :data="`${truncateNum(profileData.profile.activity.averageRankedAccuracy * 100)}%`" />
           <StatItem :title="$t('profile.total_ranked_score')" :data="commaSeparated(profileData.profile.activity.totalRankedScore)" />
-          <StatItem :title="$t('profile.total_play_time')" :data="getTotalPlayTimeText(profileData.profile.activity.totalPlayTime)" />
+          <StatItem :title="$t('profile.total_play_time')" :data="timeFormatDuration(profileData.profile.activity.totalPlayTime)" />
         </div>
 
         <div class="overflow-auto w-auto">
