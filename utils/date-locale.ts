@@ -1,4 +1,4 @@
-import { formatDistanceToNow, formatRelative, parseISO } from 'date-fns'
+import { formatDistanceToNow, formatDuration, formatRelative, parseISO } from 'date-fns'
 
 import { cs, de, enUS, es, fr, hu, id, ja, ko, ms, ptBR, ru, th, vi, zhCN, zhTW } from 'date-fns/locale'
 
@@ -44,4 +44,13 @@ export function dateFormatCalendar(dateStr: string, from = new Date()) {
       locale: dateLocales[locale],
     },
   )
+}
+
+export function timeFormatDuration(seconds: number) {
+  const locale = useLocales().locale.value
+  return formatDuration({
+    hours: Math.floor(seconds / 3600),
+    minutes: Math.floor((seconds % 3600) / 60),
+    seconds: Math.floor(seconds % 60),
+  }, { locale: dateLocales[locale], zero: false })
 }
