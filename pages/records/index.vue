@@ -316,14 +316,8 @@ defineCytoidPage({
 
         <Pagination
           v-if="records && pageCount > 1"
+          v-model="page" :total="pageCount"
           class="w-full justify-center sm:justify-end"
-          :page="page"
-          :total-page="pageCount"
-          :to-first-page="() => { page = 1 }"
-          :to-prev-page="() => { page -= 1 }"
-          :to-next-page="() => { page += 1 }"
-          :to-final-page="() => { page = pageCount }"
-          :jump-to-page="(i) => { page = i }"
         />
       </div>
     </div>

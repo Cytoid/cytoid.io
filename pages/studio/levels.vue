@@ -299,16 +299,10 @@ interface ConfirmLevelData {
         />
 
         <!-- Pagination -->
-        <Pagination
+        <PaginationLite
           v-if="totalLevels > 10"
+          v-model="page" :total="totalPages"
           class="w-full justify-center sm:justify-end"
-          :page="page"
-          :total-page="totalPages"
-          :to-first-page="() => { page = 1 }"
-          :to-prev-page="() => { page -= 1 }"
-          :to-next-page="() => { page += 1 }"
-          :to-final-page="() => { page = totalPages }"
-          :jump-to-page="(newPage) => { page = newPage }"
         />
       </div>
     </div>
