@@ -8,7 +8,7 @@ definePageMeta({
 
 const route = useRoute()
 const router = useRouter()
-const { user } = useAuth()
+const { user, isModerator } = useAuth()
 
 const query = gql(`
   query FetchRecords (
@@ -61,6 +61,7 @@ const query = gql(`
       }
       score
       accuracy
+      ranked
       rating
       recentRating
     }
@@ -106,7 +107,7 @@ const syncData = useDebounceFn(async (recount: boolean = true) => {
       : (ownerQuery ?? user.value!.id)
   const chartId = Number.parseInt(route.query.chartId as string) || undefined
   const best = (route.query.best as string) === 'true'
-  const ranked = true
+  const ranked = isModerator && (route.query.ranked as string) !== 'false'
 
   const sort = route.query.sort?.toString() || 'date'
   const order = route.query.order?.toString() || 'desc'
@@ -299,11 +300,16 @@ defineCytoidPage({
                   </div>
                 </td>
                 <td>
-                  <span>
-                    {{ truncateNum(record.rating) }}
-                  </span>
-                  <span class="opacity-75">
-                    ({{ truncateNum(record.recentRating ?? 0) }})
+                  <template v-if="record.ranked">
+                    <span>
+                      {{ truncateNum(record.rating) }}
+                    </span>
+                    <span class="opacity-75">
+                      ({{ truncateNum(record.recentRating ?? 0) }})
+                    </span>
+                  </template>
+                  <span v-else class="opacity-75 select-none">
+                    Practice
                   </span>
                 </td>
                 <td>{{ dateFormatCalendar(record.date) }}</td>

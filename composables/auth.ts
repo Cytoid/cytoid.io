@@ -66,6 +66,8 @@ export function useAuth() {
   }
 
   const hasAuthToken = computed(() => !!cookie.value)
+  const isModerator = computed(() => ['admin', 'moderator'].includes(user.value?.role ?? 'user'))
+  const isAdmin = computed(() => user.value?.role === 'admin')
 
-  return { user, login, init, logout, isLogin, ready, toLogin, hasAuthToken, updateUser }
+  return { user, login, init, logout, isLogin, ready, toLogin, hasAuthToken, updateUser, isModerator, isAdmin }
 }

@@ -5,7 +5,7 @@ import { RecordQuerySort } from '~/gql/graphql'
 const route = useRoute()
 const router = useRouter()
 
-const { user } = useAuth()
+const { user, isModerator } = useAuth()
 
 const chartId = computed({
   get() {
@@ -47,24 +47,26 @@ const endDate = computed({
 
 const best = computed({
   get() {
-    return route.query.best === 'true' ?? false
+    return route.query.best === 'true'
   },
   set(newVal) {
     updateRouter({ best: newVal ? 'true' : undefined })
   },
 })
 
-// const ranked = computed({
-//   get() {
-//     if (best.value) {
-//       return false
-//     }
-//     return route.query.ranked === 'false' ?? true
-//   },
-//   set(newVal) {
-//     updateRouter({ ranked: newVal ? 'false' : undefined })
-//   },
-// })
+const ranked = computed({
+  get() {
+    if (best.value || !isModerator.value) {
+      return true
+    }
+    // unless it is explicitly set to false
+    return route.query.ranked !== 'false'
+  },
+  set(newVal) {
+    console.log(newVal)
+    updateRouter({ ranked: newVal.toString() || undefined })
+  },
+})
 
 const order = computed({
   get() {
@@ -214,9 +216,9 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
         </div>
       </div>
 
-      <!-- Sort -->
       <div class="w-full sm:flex">
         <div class="sm:flex gap-4">
+          <!-- Sort -->
           <div class="max-w-fit">
             <p class="card-subtitle">
               Sort
@@ -247,6 +249,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             </div>
           </div>
 
+          <!-- Is best -->
           <div class="pt-4 sm:pt-0">
             <p class="card-subtitle">
               Best Record
@@ -271,6 +274,37 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                   @click="best = !best"
                 >
                   Best
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Is ranked (admin only) -->
+          <div v-if="isModerator" class="pt-4 sm:pt-0">
+            <p class="card-subtitle">
+              Ranked
+            </p>
+            <div class="pt-4 sm:pt-0">
+              <div class="join pt-2">
+                <button
+                  class="join-item btn"
+                  :class="{
+                    'btn-active btn-secondary': !ranked,
+                    'btn-neutral': ranked,
+                  }"
+                  @click="ranked = false"
+                >
+                  Practice
+                </button>
+                <button
+                  class="join-item btn"
+                  :class="{
+                    'btn-active btn-primary': ranked,
+                    'btn-neutral': !ranked,
+                  }"
+                  @click="ranked = true"
+                >
+                  Ranked
                 </button>
               </div>
             </div>
