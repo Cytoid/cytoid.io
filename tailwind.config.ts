@@ -1,5 +1,11 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+import typographyPlugin from '@tailwindcss/typography'
+import daisyui from 'daisyui'
+
+import daisyuiThemes from 'daisyui/src/theming/themes'
+
+export default {
   content: [
     './components/**/*.{js,vue,ts}',
     './layouts/**/*.vue',
@@ -8,7 +14,7 @@ module.exports = {
     './nuxt.config.{js,ts}',
     './*.vue',
   ],
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [typographyPlugin, daisyui],
   theme: {
     container: {
       center: true,
@@ -18,7 +24,7 @@ module.exports = {
     themes: [
       {
         dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=dracula]'],
+          ...daisyuiThemes.dracula,
           primary: '#a5b4fc',
           secondary: '#d8b4fe',
           accent: '#ffb86b',
@@ -27,4 +33,4 @@ module.exports = {
     ],
     logs: false,
   },
-}
+} satisfies Config

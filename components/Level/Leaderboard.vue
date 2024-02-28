@@ -149,7 +149,7 @@ interface chartData {
           <tbody>
             <tr
               v-for="(rank, index) in rankData.chart.leaderboard" :key="index + realDiffRankPage * 10 - 9"
-              class="even:bg-neutral-focus border-b-0"
+              class="even:bg-[color-mix(in_oklab,oklch(var(--n)),black_7%)] border-b-0"
             >
               <th>#{{ index + realDiffRankPage * 10 - 9 }}</th>
               <td class="text-sm">

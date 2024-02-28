@@ -158,14 +158,14 @@ onMounted(() => {
             <a
               class="tab rounded-full"
               :class="{
-                'tab-active bg-primary-focus text-primary-content': selected === 'best',
+                'tab-active bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] text-primary-content': selected === 'best',
               }"
               @click="selected = 'best'"
             > Best Records </a>
             <a
               class="tab rounded-full"
               :class="{
-                'tab-active bg-primary-focus text-primary-content': selected === 'recent',
+                'tab-active bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] text-primary-content': selected === 'recent',
               }"
               @click="selected = 'recent'"
             > Recent Records </a>
