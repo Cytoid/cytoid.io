@@ -61,9 +61,6 @@ watch(diffRankPage, async (val) => {
   rankData.value = newRanking
   realDiffRankPage.value = val
 })
-function setRankPage(val: number) {
-  diffRankPage.value = val
-}
 async function syncRanking() {
   loadingRank.value = true
   const ans = await useQuery(rankingQuery, {
@@ -152,7 +149,7 @@ interface chartData {
           <tbody>
             <tr
               v-for="(rank, index) in rankData.chart.leaderboard" :key="index + realDiffRankPage * 10 - 9"
-              class="even:bg-neutral-focus border-b-0"
+              class="even:bg-[color-mix(in_oklab,oklch(var(--n)),black_7%)] border-b-0"
             >
               <th>#{{ index + realDiffRankPage * 10 - 9 }}</th>
               <td class="text-sm">
@@ -221,16 +218,11 @@ interface chartData {
       </NuxtLink>
 
       <!-- Page Switch -->
-      <Pagination
+      <PaginationLite
         v-if="rankData.chart?.numPlayers && rankData.chart?.numPlayers > 10"
+        v-model="diffRankPage"
+        :total="Math.ceil(rankData.chart?.numPlayers / 10)"
         class="w-full justify-center sm:justify-end"
-        :page="diffRankPage"
-        :total-page="Math.ceil(rankData.chart?.numPlayers / 10)"
-        :to-first-page="() => { diffRankPage = 1 }"
-        :to-prev-page="() => { diffRankPage -= 1 }"
-        :to-next-page="() => { diffRankPage += 1 }"
-        :to-final-page="() => { if (rankData?.chart) { diffRankPage = Math.ceil(rankData.chart.numPlayers / 10) } }"
-        :jump-to-page="setRankPage"
       />
     </div>
     <div v-else>

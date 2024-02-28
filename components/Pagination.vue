@@ -1,45 +1,86 @@
 <script setup lang="ts">
-const props = defineProps<{
-  toFirstPage: () => void
-  toPrevPage: () => void
-  toNextPage: () => void
-  toFinalPage: () => void
-  page: number
-  totalPage: number
-
-  jumpToPage: (page: number) => void
-
-  isFirstPage?: boolean
-  isFinalPage?: boolean
-
+const props = withDefaults(defineProps<{
+  total: number
+  max?: number
   disabled?: boolean
-}>()
-
-const _isFirstPage = computed(() => {
-  if (props.isFirstPage) {
-    return props.isFirstPage
-  }
-  if (props.page !== undefined && props.totalPage !== undefined) {
-    return props.page === 1
-  }
-  return false
+}>(), {
+  max: 6,
+  disabled: false,
 })
 
-const _isFinalPage = computed(() => {
-  if (props.isFinalPage) {
-    return props.isFinalPage
+const page = defineModel<number>({ required: true })
+const total = computed(() => props.total)
+
+const disabled = computed(() => !!props.disabled)
+
+const displayedPages = computed<Array<number | '...'>>(() => {
+  const total = props.total
+  const current = page.value
+  const pages = new Set<number>()
+
+  pages.add(1)
+  pages.add(current)
+  pages.add(total)
+
+  const max = props.max - pages.size
+
+  let addedPrev = current
+  let addedNext = current
+  for (let i = 0; i < max; i += 1) {
+    const can: Array<'prev' | 'next'> = []
+    if (addedPrev - 1 > 1) {
+      can.push('prev')
+    }
+    if (addedNext + 1 < total) {
+      can.push('next')
+    }
+    const prefer = i % 2 === 0 ? 'next' : 'prev'
+    const direction: 'prev' | 'next' | undefined = can.includes(prefer) ? prefer : can[0]
+    if (direction === 'prev') {
+      pages.add(addedPrev - 1)
+      addedPrev -= 1
+    }
+    else if (direction === 'next') {
+      pages.add(addedNext + 1)
+      addedNext += 1
+    }
+    else {
+      break
+    }
   }
-  if (props.page !== undefined && props.totalPage !== undefined) {
-    return props.page === props.totalPage
+
+  const result: Array<number | '...'> = [...pages.values()].sort((a, b) => a - b)
+
+  // push '...' in non-sequential pages
+  let last = 1
+  for (let i = 0; i < result.length; i += 1) {
+    const p = result[i] as number
+    if (p - last > 1) {
+      result.splice(i, 0, '...')
+      i += 1
+    }
+    last = p
   }
-  return false
+
+  return result
 })
 
 const open = ref(false)
 const customPage = ref('')
-function _jumpToPage() {
-  const _customPage = Number.parseInt(customPage.value) || 1
-  props.jumpToPage(_customPage)
+function onClickPage(p: number) {
+  if (p === page.value) {
+    openJump()
+  }
+  else {
+    page.value = p
+  }
+}
+function openJump() {
+  customPage.value = page.value.toString()
+  open.value = true
+}
+function jumpToPage() {
+  page.value = Number.parseInt(customPage.value) || 1
   open.value = false
   customPage.value = ''
 }
@@ -49,24 +90,29 @@ function _jumpToPage() {
   <div class="flex">
     <div v-if="!open" class="flex pt-4">
       <div class="flex-1" />
-      <div class="join shadow-xl">
-        <button v-if="toFirstPage" class="join-item btn btn-neutral btn-sm" :disabled="_isFirstPage || disabled" @click="toFirstPage">
-          <Icon name="ic:round-keyboard-double-arrow-left" />
-        </button>
-        <button v-if="toPrevPage" class="join-item btn btn-neutral btn-sm" :disabled="_isFirstPage || disabled" @click="toPrevPage">
+      <div class="shadow-xl flex content-center items-center gap-2">
+        <!-- <button class="btn btn-neutral btn-sm btn-square" :disabled="isFirstPage || disabled" @click="page -= 1">
           <Icon name="ic:round-keyboard-arrow-left" />
-        </button>
-        <button v-if="page" class="join-item btn font-bold btn-sm btn-primary" :disabled="disabled" @click="open = (jumpToPage != null)">
-          {{ page }}
-          <template v-if="totalPage">
-            / {{ totalPage }}
-          </template>
-        </button>
-        <button v-if="toNextPage" class="join-item btn btn-neutral btn-sm" :disabled="_isFinalPage || disabled" @click="toNextPage">
+        </button> -->
+        <template v-for="p in displayedPages" :key="p">
+          <button
+            v-if="p !== '...'"
+            class="btn btn-sm"
+            :class="{
+              'btn-primary': p === page,
+              'btn-neutral': p !== page,
+            }"
+            :disabled="disabled"
+            @click="onClickPage(p)"
+            v-text="p"
+          />
+          <span v-else class="select-none">...</span>
+        </template>
+        <!-- <button class="btn btn-neutral btn-sm btn-square" :disabled="isFinalPage || disabled" @click="page += 1">
           <Icon name="ic:round-keyboard-arrow-right" />
-        </button>
-        <button v-if="toFinalPage" class="join-item btn btn-neutral btn-sm" :disabled="_isFinalPage || disabled" @click="toFinalPage">
-          <Icon name="ic:round-keyboard-double-arrow-right" />
+        </button> -->
+        <button class="btn btn-secondary btn-sm btn-circle" :disabled="disabled" @click="openJump">
+          <Icon name="uil:enter" />
         </button>
       </div>
     </div>
@@ -77,14 +123,14 @@ function _jumpToPage() {
           <Icon name="material-symbols:close" size="24" />
         </button>
         <input
-          v-model="customPage" type="number" :placeholder="page?.toString()" :min="1" :max="totalPage" class="join-item input input-sm text-center w-20 input-bordered appearance-none"
+          v-model="customPage" type="number" :placeholder="page?.toString()" :min="1" :max="total" class="join-item input input-sm text-center w-20 input-bordered appearance-none"
           @keyup.enter="null"
         >
-        <button v-if="totalPage" class="join-item btn btn-neutral w-20 font-bold btn-sm" :disabled="disabled" @click="customPage = totalPage.toString()">
-          / {{ totalPage }}
+        <button class="join-item btn btn-neutral w-20 font-bold btn-sm" :disabled="disabled" @click="customPage = total.toString()">
+          / {{ total }}
         </button>
-        <button class="join-item btn btn-sm btn-primary btn-square" :disabled="disabled || customPage === ''" @click="_jumpToPage">
-          <Icon name="ic:twotone-keyboard-arrow-right" size="24" />
+        <button class="join-item btn btn-sm btn-primary btn-square" :disabled="disabled || customPage === ''" @click="jumpToPage">
+          <Icon name="uil:enter" size="24" />
         </button>
       </div>
     </div>

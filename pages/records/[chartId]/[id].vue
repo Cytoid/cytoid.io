@@ -52,6 +52,7 @@ const query = gql(`
       mods
       accuracy
       score
+      ranked
       rating
       recentRating
     }
@@ -195,12 +196,16 @@ defineCytoidPage({
                   </span>
                   <!-- Rating -->
                   <div
+                    v-if="data.record.ranked"
                     class="tooltip tooltip-primary"
                     :data-tip="`recent: ${truncateNum(data.record.recentRating ?? 0)}`"
                   >
                     <div class="badge badge-neutral flex-nowrap">
                       Rating {{ truncateNum(data.record.rating) }}
                     </div>
+                  </div>
+                  <div v-else class="badge badge-secondary">
+                    Practice
                   </div>
                 </div>
               </div>

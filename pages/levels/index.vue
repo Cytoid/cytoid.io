@@ -135,15 +135,9 @@ defineCytoidPage({
       <progress v-if="loading" class="progress progress-info w-full" />
 
       <Pagination
+        v-model="page"
+        :total="totalPagesCount"
         class="w-full justify-center sm:justify-end"
-        :page="page"
-        :total-page="totalPagesCount"
-        :to-first-page="() => { page = 1 }"
-        :to-prev-page="() => { page -= 1 }"
-        :to-next-page="() => { page += 1 }"
-        :to-final-page="() => { page = totalPagesCount }"
-        :jump-to-page="(val) => { updateRouter({ page: val }) }"
-        :disabled="loading"
       />
     </template>
     <template v-else-if="!loading">
