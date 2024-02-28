@@ -373,21 +373,21 @@ defineCytoidPage({
             <a
               class="tab rounded-full"
               :class="{
-                'tab-active bg-primary-focus text-primary-content': selectChart === 'rating',
+                'tab-active bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] text-primary-content': selectChart === 'rating',
               }"
               @click="selectChart = 'rating'"
             >{{ $t('profile.chart_radio_rating') }}</a>
             <a
               class="tab rounded-full"
               :class="{
-                'tab-active bg-primary-focus text-primary-content': selectChart === 'activity',
+                'tab-active bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] text-primary-content': selectChart === 'activity',
               }"
               @click="selectChart = 'activity'"
             >{{ $t('profile.chart_radio_ranked_plays') }}</a>
             <a
               class="tab rounded-full"
               :class="{
-                'tab-active bg-primary-focus text-primary-content': selectChart === 'accuracy',
+                'tab-active bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] text-primary-content': selectChart === 'accuracy',
               }"
               @click="selectChart = 'accuracy'"
             >{{ $t('profile.avg_ranked_accuracy') }}</a>
