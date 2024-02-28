@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   total: number
-  max: number
-  disabled: boolean
+  max?: number
+  disabled?: boolean
 }>(), {
   max: 6,
   disabled: false,
