@@ -1,4 +1,4 @@
-export default defineComponent({
+export default defineNuxtComponent({
   async setup() {
     const route = useRoute()
     const uid = route.params.uid.toString()

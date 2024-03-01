@@ -12,3 +12,16 @@ export function decompressRecordId(compressedId: string) {
 
   return { chartId, recordId }
 }
+
+export function compressLevelId(levelId: number) {
+  const base36Num = levelId.toString(36)
+
+  return base36Num
+}
+
+export function decompressLevelId(compressedId: string) {
+  const base36Num = compressedId
+  const id = Number.parseInt(base36Num, 36)
+
+  return id
+}
