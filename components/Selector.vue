@@ -1,10 +1,9 @@
 <script setup lang="ts" generic="T extends string | number | symbol">
 const props = defineProps<{
-  modelValue: T
   items: Array<SelectorItem>
   onChange?: (value: T) => void
 }>()
-const selected = defineModel<T>()
+const selected = defineModel<T>({ required: true })
 
 const items = computed(() => props.items)
 const selectedItem = computed(() => {

@@ -1,7 +1,5 @@
 import config from 'config'
 import * as dotenv from 'dotenv'
-import { glob } from 'glob'
-import { normalize, resolve } from 'pathe'
 import pkg from './package.json'
 import manifest from './manifest.json'
 

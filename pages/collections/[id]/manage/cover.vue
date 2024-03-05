@@ -2,12 +2,10 @@
 import type { CollectionInput, FetchCollectionForEditingQuery } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
-  modelValue: FetchCollectionForEditingQuery
   submit: (data: CollectionInput) => Promise<void>
   updateCover: (coverUrl: string) => Promise<void>
 }>()
-const emit = defineEmits(['update:modelValue'])
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<FetchCollectionForEditingQuery>({ required: true })
 
 const metadata = ref({
   name: data.value.collection?.metadata.cover?.name ?? '',

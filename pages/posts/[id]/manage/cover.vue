@@ -2,13 +2,12 @@
 import type { FetchPostForEditingQuery, PostInput } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
-  modelValue: FetchPostForEditingQuery
   submit: (data: PostInput) => Promise<void>
   updateCover: (coverUrl: string) => Promise<void>
   updateLogo: (logoUrl: string) => Promise<void>
 }>()
-const emit = defineEmits(['update:modelValue'])
-const data = useVModel(props, 'modelValue', emit)
+
+const data = defineModel<FetchPostForEditingQuery>({ required: true })
 
 const metadata = ref({
   name: data.value.post?.metadata?.cover?.name ?? '',

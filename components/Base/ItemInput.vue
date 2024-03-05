@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  modelValue: Array<string>
   onInput?: (value: string, oldValue: string) => void
   suggestion?: Array<string>
   verified?: { [key: string]: string | undefined | null }
@@ -18,8 +17,7 @@ const props = withDefaults(defineProps<{
   allowAdvanced: true,
   limited: false,
 })
-const emit = defineEmits(['update:modelValue'])
-const itemsData = useVModel(props, 'modelValue', emit)
+const itemsData = defineModel<Array<string>>({ required: true })
 
 const items = computed(() => {
   return itemsData.value.map((item) => {

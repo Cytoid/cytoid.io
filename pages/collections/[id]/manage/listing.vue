@@ -3,11 +3,9 @@ import { ResourceState } from '#build/urql-client/codegen/default/graphql'
 import type { CollectionInput, FetchCollectionForEditingQuery } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
-  modelValue: FetchCollectionForEditingQuery
   submit: (data: CollectionInput) => Promise<void>
 }>()
-const emit = defineEmits(['update:modelValue'])
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<FetchCollectionForEditingQuery>({ required: true })
 
 const title = ref(data.value.collection?.title ?? '')
 const slogan = ref(data.value.collection?.slogan ?? '')
