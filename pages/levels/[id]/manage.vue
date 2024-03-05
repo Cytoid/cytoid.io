@@ -73,9 +73,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: levelId,
-}))
+})
 
 const hasPermission = computed(() => {
   return data.value?.level?.owner?.id === data.value?.my?.user?.id

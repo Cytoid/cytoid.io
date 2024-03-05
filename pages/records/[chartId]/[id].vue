@@ -59,10 +59,10 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   id: recordId,
   chartId,
-}))
+})
 if (recordId && !data.value?.record) {
   showError(error.value?.message ?? createError({
     statusCode: 404,
@@ -92,9 +92,9 @@ defineCytoidPage({
     `MAX Combo: ${data.value?.record?.details.maxCombo}`,
     `Accuracy: ${truncateNum((data.value?.record?.accuracy ?? 0) * 100)}%`,
     ...(
-      (data.value?.record?.rating ?? 0) !== 0
-        ? [`Rating: ${truncateNum(data.value!.record!.rating)}`]
-        : []
+      data.value?.record?.ranked
+        ? [`Rating: ${truncateNum(data.value?.record?.rating ?? 0)}`]
+        : ['Practice']
     ),
   ].join(' | '),
   cardType: 'summary',

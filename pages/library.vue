@@ -46,7 +46,7 @@ const query = gql(`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query))
+const { data } = await useAsyncQuery(query)
 
 if (!data.value?.my) {
   toLogin('/library')

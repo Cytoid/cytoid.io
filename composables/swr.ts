@@ -6,6 +6,6 @@ export async function useSWR(
       ? 'X-Dev-Cache-Control'
       : 'Cache-Control'
     const event = useRequestEvent()
-    event.node.res.setHeader(headerName, `max-age=${maxAge}`)
+    event?.node.res.setHeader(headerName, `max-age=${maxAge}`)
   }
 }

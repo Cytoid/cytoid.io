@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CollectionInput, FetchCollectionForEditingQuery } from '~/gql/graphql'
+import type { CollectionInput, FetchCollectionForEditingQuery } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
   modelValue: FetchCollectionForEditingQuery

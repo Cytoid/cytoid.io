@@ -128,9 +128,9 @@ const query = gql(`
   }
 `)
 
-const { data: profileData, error } = await useAsyncData(() => useQuery(query, {
+const { data: profileData, error } = await useAsyncQuery(query, {
   uid: profileId,
-}))
+})
 if (profileId && !profileData.value?.profile) {
   showError(error.value?.message ?? createError({
     statusCode: 404,

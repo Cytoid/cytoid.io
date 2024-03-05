@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import type { FetchHomePageLateQuery } from '~/gql/graphql'
+// import type { FetchHomePageLateQuery } from '#build/urql-client/codegen/default/graphql'
 
 const query = gql(`
   query FetchHomePage {
@@ -131,9 +131,9 @@ const queryDynamic = gql(`
     }
   }
 `)
-const { data } = await useAsyncData(() => useQuery(query))
+const { data } = await useAsyncQuery(query)
 // const dataDynamic = ref<FetchHomePageLateQuery | undefined>(undefined)
-const { data: dataDynamic } = await useAsyncData(() => useQuery(queryDynamic))
+const { data: dataDynamic } = await useAsyncQuery(queryDynamic)
 
 const hitechMetaData = computed(() => data?.value?.hitech)
 const hitechLevels = computed(() => data?.value?.hitech?.levels)

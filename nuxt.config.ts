@@ -1,5 +1,7 @@
 import config from 'config'
 import * as dotenv from 'dotenv'
+import { glob } from 'glob'
+import { normalize, resolve } from 'pathe'
 import pkg from './package.json'
 import manifest from './manifest.json'
 
@@ -25,6 +27,7 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     'nuxt-gtag',
     '@teages/nuxt-locale-lite',
+    // '../nuxt-urql-client/src/modules',
     '@teages/nuxt-urql-client',
   ],
 
@@ -34,12 +37,12 @@ export default defineNuxtConfig({
         url: config.get('graphqlURL'),
         credentials: 'include',
         cookiesFilter: ['cyt:sess'],
-      },
-    },
-    codegen: {
-      schemaOverride: 'gql/schema.graphql',
-      presetConfig: {
-        fragmentMasking: false,
+        codegen: {
+          schemaOverride: 'gql/schema.graphql',
+          presetConfig: {
+            fragmentMasking: false,
+          },
+        },
       },
     },
   },
@@ -103,17 +106,6 @@ export default defineNuxtConfig({
   typescript: {
     tsConfig: {
       include: ['types/**/*'],
-      compilerOptions: {
-        plugins: [
-          {
-            name: '@0no-co/graphqlsp',
-            schema: './gql/schema.graphql',
-            disableTypegen: true,
-            templateIsCallExpression: true,
-            trackFieldUsage: true,
-          },
-        ],
-      },
     },
   },
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { FetchRecordsQuery } from '~/gql/graphql'
-import { QueryOrder, RecordQuerySort } from '~/gql/graphql'
+import type { FetchRecordsQuery } from '#build/urql-client/codegen/default/graphql'
+import { QueryOrder, RecordQuerySort } from '#build/urql-client/codegen/default/graphql'
 
 definePageMeta({
   middleware: ['auth'],

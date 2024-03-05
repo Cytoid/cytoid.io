@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LocationQueryRaw } from 'vue-router'
-import { RecordQuerySort } from '~/gql/graphql'
+import { RecordQuerySort } from '#build/urql-client/codegen/default/graphql'
 
 const route = useRoute()
 const router = useRouter()

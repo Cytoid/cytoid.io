@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RecordFragmentForStudioAnalyticsFragment, StudioAnalyticsQuery } from '~/gql/graphql'
+import type { RecordFragmentForStudioAnalyticsFragment, StudioAnalyticsQuery } from '#build/urql-client/codegen/default/graphql'
 
 const { user } = useAuth()
 

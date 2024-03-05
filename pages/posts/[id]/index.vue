@@ -93,9 +93,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: postId,
-}))
+})
 const post = computed(() => data.value?.post)
 if (postId && !post) {
   showError(error.value?.message ?? createError({

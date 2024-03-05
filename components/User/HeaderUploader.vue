@@ -24,9 +24,9 @@ const mutation = gql(`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncQuery(query, {
   id: props.userId,
-}))
+})
 
 const userOnlineCover = ref(data.value?.profile?.header?.stripe ?? '')
 

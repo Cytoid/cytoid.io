@@ -1,13 +1,9 @@
 <script setup lang="ts" generic="T extends string | number | symbol">
-import type { WritableComputedRef } from 'nuxt/dist/app/compat/vue-demi'
-
 const props = defineProps<{
-  modelValue: T
   items: Array<SelectorItem>
   onChange?: (value: T) => void
 }>()
-const emit = defineEmits(['update:modelValue'])
-const selected = useVModel(props, 'modelValue', emit) as WritableComputedRef<T>
+const selected = defineModel<T>()
 
 const items = computed(() => props.items)
 const selectedItem = computed(() => {

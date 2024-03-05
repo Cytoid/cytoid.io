@@ -16,10 +16,10 @@ const query = gql(`
 
 const limit = 32
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncQuery(query, {
   limit,
   skip: null,
-}))
+})
 
 const posts = ref(data.value?.posts ?? [])
 

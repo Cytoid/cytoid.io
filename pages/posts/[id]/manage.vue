@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PostInput } from '~/gql/graphql'
-import { PostType } from '~/gql/graphql'
+import type { PostInput } from '#build/urql-client/codegen/default/graphql'
+import { PostType } from '#build/urql-client/codegen/default/graphql'
 
 definePageMeta({
   middleware: ['auth'],
@@ -60,9 +60,9 @@ const query = gql(`
     }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: postId,
-}))
+})
 
 const hasPermission = computed(() => {
   return ['admin', 'moderator'].includes(user.value?.role ?? '')

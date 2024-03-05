@@ -94,7 +94,7 @@ async function changePassword() {
 
 // External Accounts
 
-const { data } = useAsyncData(() => useQuery(query))
+const { data } = useAsyncQuery(query)
 const providersLoading = ref<string | null>(null)
 
 function isLinked(provider: string) {

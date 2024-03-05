@@ -68,9 +68,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: collectionId,
-}))
+})
 const collection = computed(() => data.value?.collection)
 if (collectionId && !collection.value) {
   showError(error.value?.message ?? createError({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type FetchLevelForEditingQuery, ResourceState } from '~/gql/graphql'
+import { type FetchLevelForEditingQuery, ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
   modelValue: FetchLevelForEditingQuery
