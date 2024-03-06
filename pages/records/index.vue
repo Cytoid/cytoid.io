@@ -239,13 +239,6 @@ defineCytoidPage({
                     class="w-80"
                     :record="{
                       ...record,
-                      owner: (record.owner?.uid && record.owner.avatar.small) ? {
-                        uid: record.owner.uid,
-                        name: record.owner.name ?? record.owner.uid,
-                        avatar: {
-                          small: record.owner.avatar.small,
-                        },
-                      } : undefined,
                     }"
                   />
                 </td>

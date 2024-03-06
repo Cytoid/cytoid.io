@@ -46,9 +46,9 @@ const query = gql(`
         levelsCount
         qualifiedLevelsCount: levelsCount(category: "qualified")
         featuredLevelsCount: levelsCount(category: "featured")
-        levels(category: "!featured !qualified", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
-        qualifiedLevels: levels(category: "qualified", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
-        featuredLevels: levels(category: "featured", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...LevelInfo }
+        levels(category: "!featured !qualified", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...UserLevelCardData }
+        qualifiedLevels: levels(category: "qualified", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...UserLevelCardData }
+        featuredLevels: levels(category: "featured", first: 8, sort: MODIFICATION_DATE, order: DESC) { ...UserLevelCardData }
       }
       rating
       badges {
@@ -102,7 +102,10 @@ const query = gql(`
       }
     }
   }
-  fragment LevelInfo on UserLevel{
+`)
+
+const UserLevelCardData = gql(`
+  fragment UserLevelCardData on UserLevel {
     id
     uid
     title
@@ -195,12 +198,18 @@ const registrationDate = computed<string>(() => {
 })
 
 const qualifiedLevels = computed(() => {
-  return profileData.value?.profile?.user?.qualifiedLevels ?? []
+  return parseFragment(
+    UserLevelCardData,
+    profileData.value?.profile?.user?.qualifiedLevels,
+  ) ?? []
 })
 
 const featuredLevels = computed(() => {
   const limit = Math.min(8, Math.max(2, 12 - Math.ceil(qualifiedLevels.value.length / 2) * 2))
-  return profileData.value?.profile?.user?.featuredLevels.slice(0, limit) ?? []
+  return parseFragment(
+    UserLevelCardData,
+    profileData.value?.profile?.user?.featuredLevels.slice(0, limit),
+  ) ?? []
 })
 
 const levels = computed(() => {
@@ -208,7 +217,10 @@ const levels = computed(() => {
     Math.ceil(qualifiedLevels.value.length / 2)
     + Math.ceil(featuredLevels.value.length / 2)
   ) * 2))
-  return profileData.value?.profile?.user?.levels.slice(0, limit) ?? []
+  return parseFragment(
+    UserLevelCardData,
+    profileData.value?.profile?.user?.levels.slice(0, limit),
+  ) ?? []
 })
 
 const collections = computed(() => {
@@ -443,7 +455,11 @@ defineCytoidPage({
                     v-for="level, index in featuredLevels" :key="index"
                     class="h-48"
                     :trim="true"
-                    :level="level"
+                    :hide-category="true"
+                    :level="{
+                      ...level,
+                      category: ['featured'],
+                    }"
                   />
                 </div>
                 <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, featured: 'true' } }" class="btn bg-featured mt-4">
@@ -469,7 +485,11 @@ defineCytoidPage({
                 v-for="level, index in qualifiedLevels" :key="index"
                 class="h-48"
                 :trim="true"
-                :level="level"
+                :hide-category="true"
+                :level="{
+                  ...level,
+                  category: ['featured'],
+                }"
               />
             </div>
             <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, qualified: 'true' } }" class="btn bg-qualified mt-4">
@@ -494,7 +514,11 @@ defineCytoidPage({
             v-for="level, index in levels" :key="index"
             class="h-48"
             :trim="true"
-            :level="level"
+            :hide-category="true"
+            :level="{
+              ...level,
+              category: ['featured'],
+            }"
           />
         </div>
         <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id } }" class="btn btn-neutral mt-4">

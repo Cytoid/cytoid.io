@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { RecordFragmentForStudioAnalyticsFragment, StudioAnalyticsQuery } from '#build/urql-client/codegen/default/graphql'
-
 const { user } = useAuth()
 
 const query = gql(`
@@ -17,14 +15,17 @@ const query = gql(`
       }
       rating
       recentRecords(limit: 30, sort: RecentRating) {
-        ...RecordFragmentForStudioAnalytics
+        ...RecordDataForStudioAnalytics
       }
       bestRecords(limit: 30) {
-        ...RecordFragmentForStudioAnalytics
+        ...RecordDataForStudioAnalytics
       }
     }
   }
-  fragment RecordFragmentForStudioAnalytics on UserRecord {
+`)
+
+const RecordDataForStudioAnalytics = gql(`
+  fragment RecordDataForStudioAnalytics on UserRecord {
     id
     date
     chart {
@@ -52,7 +53,25 @@ const query = gql(`
 const selected = ref<'recent' | 'best'>('best')
 const userUid = ref<string>('')
 
-const data = ref<StudioAnalyticsQuery | null>(null)
+// const data = ref<StudioAnalyticsQuery | null>(null)
+const { data } = useAsyncData(
+  () => userUid.value.length < 2
+    ? Promise.resolve(null)
+    : useQuery(query, { uid: userUid.value }),
+  { watch: [userUid] },
+)
+const recentRecords = computed(
+  () => getFragmentData(
+    RecordDataForStudioAnalytics,
+    data.value?.profile?.recentRecords,
+  ) ?? [],
+)
+const bestRecords = computed(
+  () => getFragmentData(
+    RecordDataForStudioAnalytics,
+    data.value?.profile?.bestRecords,
+  ) ?? [],
+)
 
 const profile = computed(() => {
   if (data.value?.profile?.user?.uid === userUid.value) {
@@ -60,9 +79,6 @@ const profile = computed(() => {
   }
   return undefined
 })
-
-const recentRecords = ref<RecordFragmentForStudioAnalyticsFragment[]>([])
-const bestRecords = ref<RecordFragmentForStudioAnalyticsFragment[]>([])
 
 const allRecords = computed(() => {
   if (selected.value === 'best') {
@@ -89,18 +105,6 @@ const records = computed(() => {
   const start = (page.value - 1) * 10
   const end = Math.min(start + 10, allRecords.value.length)
   return allRecords.value.slice(start, end)
-})
-
-watch(userUid, async (uid) => {
-  if (!uid) {
-    return
-  }
-  const ans = await useQuery(query, { uid })
-  if (ans?.profile) {
-    data.value = ans
-    recentRecords.value = ans.profile.recentRecords
-    bestRecords.value = ans.profile.bestRecords
-  }
 })
 
 const isMine = computed(() => {

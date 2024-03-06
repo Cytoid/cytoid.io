@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^0.0.5
     version: 0.0.5(rollup@2.79.1)(vue@3.4.21)
   '@teages/nuxt-urql-client':
-    specifier: ^2.0.3
-    version: 2.0.3(@types/node@20.11.24)(graphql@16.8.1)(rollup@2.79.1)
+    specifier: ^2.0.4
+    version: 2.0.4(@types/node@20.11.24)(graphql@16.8.1)(rollup@2.79.1)
   '@types/config':
     specifier: ^3.3.3
     version: 3.3.3
@@ -4276,8 +4276,8 @@ packages:
       - vue
     dev: true
 
-  /@teages/nuxt-urql-client@2.0.3(@types/node@20.11.24)(graphql@16.8.1)(rollup@2.79.1):
-    resolution: {integrity: sha512-fsxIrHzaknUbD49luie4XENo5S9ABavKT0FaaAQjK8cUGDZyKZEYkLGALnt4keYFTH+fOU39pTH32PBjynIXxg==}
+  /@teages/nuxt-urql-client@2.0.4(@types/node@20.11.24)(graphql@16.8.1)(rollup@2.79.1):
+    resolution: {integrity: sha512-u1zuzGsyO1k7j+3bZxWhbAZNxc2ojILUnjSBHngO0gZHmd8bhWYlm8MOpaAT/pXktE0sPrVCZpUvAa5CI1QaeA==}
     peerDependencies:
       graphql: ^16.8.1
     dependencies:

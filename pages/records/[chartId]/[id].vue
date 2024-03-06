@@ -32,6 +32,7 @@ const query = gql(`
         notesCount
         difficulty
         level {
+          id
           uid
           title
           category

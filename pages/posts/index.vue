@@ -2,14 +2,7 @@
 const query = gql(`
   query FetchPosts($skip: Int, $limit: Int!){
     posts: getPosts(limit: $limit, skip: $skip) {
-      id
-      uid
-      title
-      slogan
-      cover {
-        stripe
-      }
-      creationDate
+      ...PostCardData
     }
   }
 `)
@@ -49,7 +42,7 @@ defineCytoidPage({
 <template>
   <div class="grid gap-4 max-w-3xl mx-auto">
     <div class="grid gap-4">
-      <PostCard v-for="post in posts" :key="post.id" :post="post" />
+      <PostCard v-for="post in posts" :key="fid(post)" :post="post" />
     </div>
 
     <button v-if="!noMore" class="btn btn-primary btn-block" @click="loadMore">

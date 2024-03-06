@@ -6,78 +6,18 @@ const query = gql(`
     discordOnlineCount
     collectionsCount
     posts: getActivePosts(limit: 10) {
-      id
-      uid
-      title
-      slogan
-      cover {
-        stripe
-      }
-      creationDate
+      ...PostCardData
     }
     gettingStarted: collection(uid: "getting-started") {
-      ...CollectionInfoFragment
+      ...CollectionCardData
     }
     hitech: collection(uid: "hi-tech") {
-      ...CollectionInfoFragment
-      levels(limit: 5) {
-        ...HomeLevelCardFragment
-      }
+      ...CollectionShowCaseData
     }
     latestFeaturedLevels: levels(category: "featured", limit:1, sort: CREATION_DATE, order:DESC) {
-      ...HomeLevelCardFragment
+      ...LevelCardData
     }
     levelsCount
-  }
-  fragment HomeLevelCardFragment on Level {
-    id
-    uid
-    title
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
-    metadata {
-      title_localized
-      artist {
-        name
-      }
-    }
-    charts {
-      type
-      difficulty
-      name
-      notesCount
-    }
-    bundle {
-      backgroundImage {
-        thumbnail
-      }
-      music
-      musicPreview
-    }
-  }
-  fragment CollectionInfoFragment on Collection {
-    id
-    uid
-    title
-    slogan
-    levelCount
-    cover {
-      thumbnail
-    }
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
   }
 `)
 const queryDynamic = gql(`
@@ -135,8 +75,6 @@ const { data } = await useAsyncQuery(query)
 // const dataDynamic = ref<FetchHomePageLateQuery | undefined>(undefined)
 const { data: dataDynamic } = await useAsyncQuery(queryDynamic)
 
-const hitechMetaData = computed(() => data?.value?.hitech)
-const hitechLevels = computed(() => data?.value?.hitech?.levels)
 const latestFeaturedLevels = computed(() => data?.value?.latestFeaturedLevels)
 
 // onMounted(() => {
@@ -161,7 +99,7 @@ resetCytoidPage()
             {{ $t('homepage.news_title') }}
           </h2>
 
-          <PostCard v-for="post in data.posts" :key="post.id" :post="post" />
+          <PostCard v-for="post in data.posts" :key="fid(post)" :post="post" />
 
           <NuxtLink :to="{ name: 'posts' }" class="btn btn-primary mt-4">
             {{ $t('homepage.news_previous') }}
@@ -213,6 +151,7 @@ resetCytoidPage()
               class="h-48"
               :trim="true"
               :level="level"
+              :hide-category="true"
             />
           </div>
           <NuxtLink :to="{ name: 'levels' }" class="btn btn-secondary mt-4">
@@ -223,48 +162,10 @@ resetCytoidPage()
     </div>
   </div>
 
-  <ShowCase
-    v-if="hitechMetaData"
-    :cover="hitechMetaData.cover?.thumbnail"
-    :more="{ name: 'collections-id', params: { id: hitechMetaData.uid } }"
-    class="mt-4"
-  >
-    <template #desperation>
-      <div class="px-2 py-1 w-full flex flex-row items-center">
-        <div class="w-full">
-          <h2 class="card-title block truncate">
-            <NuxtLink :to="{ name: 'collections-id', params: { id: hitechMetaData.uid } }">
-              {{ hitechMetaData.title }}
-            </NuxtLink>
-          </h2>
-          <h2 class="text-neutral-content opacity-80 truncate">
-            {{ hitechMetaData.slogan }}
-          </h2>
-        </div>
-      </div>
-    </template>
-
-    <template #subDesperation>
-      <div class="px-2 w-full flex flex-row items-center">
-        <div>
-          <UserAvatar
-            v-if="hitechMetaData.owner"
-            :avatar="hitechMetaData.owner.avatar?.small ?? undefined"
-            :name="hitechMetaData.owner.name ?? hitechMetaData.owner.uid ?? undefined"
-            :uid="hitechMetaData.owner.uid ?? undefined"
-            :transparent="true"
-            class="h-8"
-          />
-        </div>
-      </div>
-    </template>
-    <LevelCard
-      v-for="level, index in hitechLevels" :key="index"
-      class="h-48"
-      :trim="true"
-      :level="level"
-    />
-  </ShowCase>
+  <CollectionShowCase
+    v-if="data?.hitech"
+    :collection="data.hitech"
+  />
 
   <div v-if="dataDynamic" class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
     <div class="col-span-7 md:col-span-6 lg:col-span-4 mt-4 md:mt-0">
@@ -276,13 +177,6 @@ resetCytoidPage()
           <RecordCard
             v-for="record in dataDynamic.recentRecords" :key="record.id" :record="{
               ...record,
-              owner: (record.owner?.uid && record.owner.avatar.small) ? {
-                uid: record.owner.uid,
-                name: record.owner.name ?? record.owner.uid,
-                avatar: {
-                  small: record.owner.avatar.small,
-                },
-              } : undefined,
             }"
           />
         </div>

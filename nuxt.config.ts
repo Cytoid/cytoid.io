@@ -37,8 +37,8 @@ export default defineNuxtConfig({
         cookiesFilter: ['cyt:sess'],
         codegen: {
           schemaOverride: 'gql/schema.graphql',
-          presetConfig: {
-            fragmentMasking: false,
+          config: {
+            skipTypename: true,
           },
         },
       },

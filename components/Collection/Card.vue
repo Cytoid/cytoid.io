@@ -1,25 +1,30 @@
 <script setup lang="ts">
-defineProps<{
-  collection: CollectionData
+const props = defineProps<{
+  collection: MaybeFragmentType<typeof CollectionCardData>
 }>()
 
-interface CollectionData {
-  uid: string
-  title?: string | null
-  slogan?: string | null
-  levelCount: number
-  cover?: {
-    __typename?: 'Image'
-    thumbnail?: string | null
-  } | null
-  owner?: {
-    uid?: string | null
-    name?: string | null
-    avatar: {
-      small?: string | null
+const CollectionCardData = gql(`
+  fragment CollectionCardData on Collection {
+    id
+    uid
+    title
+    slogan
+    levelCount
+    cover {
+      thumbnail
     }
-  } | null
-}
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
+    }
+  }
+`)
+
+const collection = computed(() => parseFragment(CollectionCardData, props.collection))
 </script>
 
 <template>

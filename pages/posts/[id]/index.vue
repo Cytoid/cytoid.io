@@ -32,49 +32,20 @@ const query = gql(`
         }
       }
       level {
-        ...PostLevelCardFragment
+        ...LevelCardData
       }
       collection {
-        ...PostCollectionInfoFragment
+        ...PostCollectionData
         levels(limit: 5) {
-          ...PostLevelCardFragment
+          ...LevelCardData
         }
       }
     }
   }
-  fragment PostLevelCardFragment on Level {
-    id
-    uid
-    title
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
-    metadata {
-      title_localized
-      artist {
-        name
-      }
-    }
-    bundle {
-      backgroundImage {
-        thumbnail
-      }
-      music
-      musicPreview
-    }
-    charts {
-      type
-      difficulty
-      name
-      notesCount
-    }
-  }
-  fragment PostCollectionInfoFragment on Collection {
+`)
+
+const PostCollectionData = gql(`
+  fragment PostCollectionData on Collection {
     id
     uid
     title
@@ -106,6 +77,9 @@ if (postId && !post) {
 else {
   useSWR()
 }
+
+const collection = computed(() => getFragmentData(PostCollectionData, post.value?.collection))
+const levels = computed(() => post.value?.collection?.levels)
 
 defineCytoidPage({
   title: post.value?.title ?? 'Post',
@@ -148,21 +122,21 @@ defineCytoidPage({
 
       <!-- Post Collection -->
       <template
-        v-if="post.collection"
+        v-if="collection"
       >
         <div class="h-6" />
         <ShowCase
-          :cover="post.collection.cover?.thumbnail"
+          :cover="collection.cover?.thumbnail"
           class="mt-4"
         >
           <template #desperation>
             <div class="px-2 py-1 w-full flex flex-row items-center">
               <div class="w-full">
                 <h2 class="card-title block truncate">
-                  {{ post.collection.title }}
+                  {{ collection.title }}
                 </h2>
                 <h2 class="text-neutral-content opacity-80 truncate">
-                  {{ post.collection.slogan }}
+                  {{ collection.slogan }}
                 </h2>
               </div>
             </div>
@@ -172,10 +146,10 @@ defineCytoidPage({
             <div class="px-2 w-full flex flex-row items-center">
               <div>
                 <UserAvatar
-                  v-if="post.collection.owner"
-                  :avatar="post.collection.owner.avatar?.small ?? undefined"
-                  :name="post.collection.owner.name ?? post.collection.owner.uid ?? undefined"
-                  :uid="post.collection.owner.uid ?? undefined"
+                  v-if="collection.owner"
+                  :avatar="collection.owner.avatar?.small ?? undefined"
+                  :name="collection.owner.name ?? collection.owner.uid ?? undefined"
+                  :uid="collection.owner.uid ?? undefined"
                   :transparent="true"
                   class="h-8"
                 />
@@ -183,10 +157,11 @@ defineCytoidPage({
             </div>
           </template>
           <LevelCard
-            v-for="level, index in post.collection.levels" :key="index"
+            v-for="level, index in levels" :key="index"
             class="h-48"
             :trim="true"
             :level="level"
+            :hide-category="true"
           />
         </ShowCase>
       </template>

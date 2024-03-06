@@ -31,7 +31,7 @@
     "@nuxtjs/turnstile": "^0.6.3",
     "@tailwindcss/typography": "^0.5.10",
     "@teages/nuxt-locale-lite": "^0.0.5",
-    "@teages/nuxt-urql-client": "^2.0.3",
+    "@teages/nuxt-urql-client": "^2.0.4",
     "@types/config": "^3.3.3",
     "@types/glob": "^8.1.0",
     "@types/howler": "^2.2.11",
