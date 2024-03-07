@@ -63,7 +63,6 @@ const ranked = computed({
     return route.query.ranked !== 'false'
   },
   set(newVal) {
-    console.log(newVal)
     updateRouter({ ranked: newVal.toString() || undefined })
   },
 })
