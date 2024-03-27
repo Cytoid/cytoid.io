@@ -15,7 +15,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "tsc": "nuxi typecheck"
   },
   "dependencies": {
     "graphql": "^16.8.1"

@@ -1,4 +1,4 @@
-import { useSavedCookie } from './utils'
+import { useSavedCookie } from './cookie'
 
 export function useAuth() {
   const user: Ref<UserData | null> = useState('user')
