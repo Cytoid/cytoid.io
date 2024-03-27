@@ -1,7 +1,7 @@
-import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
+import type { NitroAppPlugin } from 'nitropack'
 
 // Make vite-legacy build operational, see https://github.com/nuxt/nuxt/issues/15464
-export default defineNitroPlugin((nitroApp) => {
+export default <NitroAppPlugin> function (nitroApp) {
   nitroApp.hooks.hook('render:response', (response) => {
     // Mark legacy chunks as nomodule (prevents modern browsers from loading them)
     // At the same time, unmark them as defer (otherwise System.register() in the legacy entry doesn't actually execute the code)
@@ -23,4 +23,4 @@ export default defineNitroPlugin((nitroApp) => {
     //
     // This is similar to what vite-legacy-plugin does in vanilla vite.
   })
-})
+}

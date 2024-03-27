@@ -2,7 +2,7 @@
 // auth
 onMounted(() => {
   nextTick(async () => {
-    if (process.client) {
+    if (import.meta.client) {
       const { init } = useAuth()
       await init().catch(() => null)
     }

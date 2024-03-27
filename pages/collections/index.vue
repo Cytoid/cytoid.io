@@ -27,11 +27,11 @@ const query = gql(`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncQuery(query, {
   limit,
   cursor: null,
   ownerId,
-}))
+})
 
 const collections = ref(data.value?.collections ?? [])
 

@@ -3,7 +3,7 @@ import { defu } from 'defu'
 
 export function useServiceFetch<T>(url: string, options: UseFetchOptions<T> = {}) {
   const config = useRuntimeConfig()
-  const baseURL = process.server
+  const baseURL = import.meta.server
     ? config.public.serviceURLServer
     : config.public.serviceURLClient
   const defaults: UseFetchOptions<T> = {
@@ -20,7 +20,7 @@ export function useServiceFetch<T>(url: string, options: UseFetchOptions<T> = {}
 
 export function useServiceUrl(url: string) {
   const config = useRuntimeConfig()
-  const baseURL = process.server
+  const baseURL = import.meta.server
     ? config.public.serviceURLServer
     : config.public.serviceURLClient
   return `${baseURL}${url}`

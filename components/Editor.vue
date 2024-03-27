@@ -1,13 +1,5 @@
 <script setup lang="ts">
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: false,
-    default: '',
-  },
-})
-const emit = defineEmits(['update:modelValue'])
-const content = useVModel(props, 'modelValue', emit)
+const content = defineModel<string>({ required: false, default: '' })
 </script>
 
 <template>

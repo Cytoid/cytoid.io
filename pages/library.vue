@@ -5,48 +5,16 @@ const query = gql(`
   query FetchUserLibrary {
     my {
       grantedLevels: library(granted: true) {
-        ...LibraryLevelCardFragment
+        ...LevelCardData
       }
       levels: library(granted: false) {
-        ...LibraryLevelCardFragment
+        ...LevelCardData
       }
-    }
-  }
-  fragment LibraryLevelCardFragment on Level {
-    id
-    uid
-    title
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
-    metadata {
-      title_localized
-      artist {
-        name
-      }
-    }
-    bundle {
-      backgroundImage {
-        thumbnail
-      }
-      music
-      musicPreview
-    }
-    charts {
-      type
-      difficulty
-      name
-      notesCount
     }
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query))
+const { data } = await useAsyncQuery(query)
 
 if (!data.value?.my) {
   toLogin('/library')

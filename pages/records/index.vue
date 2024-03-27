@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { FetchRecordsQuery } from '~/gql/graphql'
-import { QueryOrder, RecordQuerySort } from '~/gql/graphql'
+import type { FetchRecordsQuery } from '#build/urql-client/codegen/default/graphql'
+import { QueryOrder, RecordQuerySort } from '#build/urql-client/codegen/default/graphql'
 
 definePageMeta({
   middleware: ['auth'],
@@ -239,13 +239,6 @@ defineCytoidPage({
                     class="w-80"
                     :record="{
                       ...record,
-                      owner: (record.owner?.uid && record.owner.avatar.small) ? {
-                        uid: record.owner.uid,
-                        name: record.owner.name ?? record.owner.uid,
-                        avatar: {
-                          small: record.owner.avatar.small,
-                        },
-                      } : undefined,
                     }"
                   />
                 </td>

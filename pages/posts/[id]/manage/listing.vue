@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { PostType, ResourceState } from '~/gql/graphql'
-import type { FetchPostForEditingQuery, PostInput } from '~/gql/graphql'
+import { PostType, ResourceState } from '#build/urql-client/codegen/default/graphql'
+import type { FetchPostForEditingQuery, PostInput } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
-  modelValue: FetchPostForEditingQuery
   submit: (data: PostInput) => Promise<void>
 }>()
-const emit = defineEmits(['update:modelValue'])
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<FetchPostForEditingQuery>({ required: true })
 
 const title = ref(data.value.post?.title ?? '')
 const slogan = ref(data.value.post?.slogan ?? '')

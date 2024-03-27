@@ -10,7 +10,7 @@ const query = gql(`
 `)
 
 const membershipPending = useServiceFetch<MembershipResponse>('/membership')
-const externalsPending = useAsyncData(() => useQuery(query))
+const externalsPending = useAsyncQuery(query)
 
 const { data: membership } = await membershipPending
 const { data: externals } = await externalsPending

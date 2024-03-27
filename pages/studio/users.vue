@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { StudioLookupUserQuery } from '~/gql/graphql'
+import type { StudioLookupUserQuery } from '#build/urql-client/codegen/default/graphql'
 
 const route = useRoute()
 const router = useRouter()

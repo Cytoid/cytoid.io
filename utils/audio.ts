@@ -3,7 +3,7 @@
 export async function preDecodeAudio(url: string): Promise<string> {
   const isOgg = new URL(url).pathname.endsWith('.ogg')
   const { isSafari, isIos } = useDevice()
-  const isClient = process.client
+  const isClient = import.meta.client
   if (!(isOgg && isClient && (isIos || isSafari))) {
     // skip
     return url

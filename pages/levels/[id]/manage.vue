@@ -73,9 +73,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: levelId,
-}))
+})
 
 const hasPermission = computed(() => {
   return data.value?.level?.owner?.id === data.value?.my?.user?.id
@@ -87,7 +87,7 @@ if (levelId && !data.value?.level) {
     statusMessage: `Level not found: ${levelId}`,
   }))
 }
-else if (!hasPermission) {
+else if (!hasPermission.value) {
   showError(createError({
     statusCode: 403,
     statusMessage: `You do not have permission to manage this level: ${levelId}`,

@@ -63,7 +63,7 @@ async function loginWithPayload(verify: () => Promise<string>) {
   loading.value = false
 }
 function loginWithProvider(provider: string) {
-  if (process.client) {
+  if (import.meta.client) {
     window.addEventListener('message', providerResponded)
     window.open(useServiceUrl(`/session/external/${provider}`))
   }

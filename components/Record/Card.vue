@@ -1,37 +1,43 @@
 <script setup lang="ts">
-defineProps<{
-  record: RecordData
+const props = defineProps<{
+  record: MaybeFragmentType<typeof RecordCardData>
 }>()
 
-interface RecordData {
-  id: number
-  date: any
-  score: number
-  accuracy: number
-  chart?: {
-    id: number
-    difficulty: number
-    name?: string | null
-    type: string
-    notesCount: number
-    level?: {
-      uid: string
-      title: string
-      bundle?: {
-        backgroundImage?: {
-          stripe?: string | null
-        } | null
-      } | null
-    } | null
-  } | null
-  owner?: {
-    uid: string
-    name?: string | null
-    avatar?: {
-      small: string | null
+const RecordCardData = gql(`
+  fragment RecordCardData on Record {
+    id
+    date
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
     }
-  } | null
-}
+    chart {
+      id
+      difficulty
+      name
+      type
+      notesCount
+      level {
+        uid
+        title
+        bundle {
+          backgroundImage {
+            stripe
+          }
+        }
+      }
+    }
+    score
+    accuracy
+    recentRating
+  }
+`)
+
+const record = computed(() => parseFragment(RecordCardData, props.record))
 </script>
 
 <template>
@@ -44,8 +50,8 @@ interface RecordData {
     <div class="w-full flex flex-row gap-1">
       <UserAvatar
         v-if="record.owner" :avatar="record.owner.avatar?.small ?? undefined"
-        :name="record.owner.name || record.owner.uid"
-        :uid="record.owner.uid"
+        :name="record.owner.name || record.owner.uid || undefined"
+        :uid="record.owner.uid || undefined"
         :size="6"
         :transparent="true"
       />

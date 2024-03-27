@@ -1,15 +1,23 @@
-import { marked } from 'marked'
+import { marked as _marked } from 'marked'
 import sanitizeHtml from 'sanitize-html'
 
-export function useSafeMarked(safeMdText: string) {
-  marked.use({
+function marked(raw: string): string {
+  const md = _marked.use({
     async: false,
   })
-  return marked.parse(safeMdText) as string
+  return md.parse(raw) as string
+}
+
+export function useSafeMarked(safeMdText: string) {
+  return sanitizeHtml(marked(safeMdText), {
+    allowedTags: false,
+    allowedAttributes: false,
+    allowVulnerableTags: true,
+  })
 }
 
 export function useMarkedWithCleaner(mdText: string) {
-  return sanitizeHtml(useSafeMarked(mdText), {
+  return sanitizeHtml(marked(mdText), {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat([
       'img',
       'details',

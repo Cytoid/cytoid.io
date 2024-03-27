@@ -19,9 +19,9 @@ const mutation = gql(`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncQuery(query, {
   id: user.value?.id ?? '',
-}))
+})
 
 const birthday = ref<string>(data.value?.profile?.birthday ?? '')
 const bio = ref(data.value?.profile?.bio ?? '')

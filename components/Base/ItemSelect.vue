@@ -1,12 +1,10 @@
 <script setup lang="ts">
 const props = defineProps<{
-  modelValue: string | null
   verified: string | null | undefined
   icon: string
   id?: string
 }>()
-const emit = defineEmits(['update:modelValue'])
-const item = useVModel(props, 'modelValue', emit)
+const item = defineModel<string | null>({ required: true })
 </script>
 
 <template>

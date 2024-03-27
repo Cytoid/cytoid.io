@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  modelValue: File | null
   type: string
   value?: any
   disabled?: boolean
@@ -9,8 +8,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   disabled: false,
 })
-const emit = defineEmits(['update:modelValue'])
-const file = useVModel(props, 'modelValue', emit)
+const file = defineModel<File | null>({ required: true })
 
 function updateFile(f: File | null) {
   const accepts = props.accept?.split(',') ?? []

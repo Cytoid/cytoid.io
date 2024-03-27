@@ -1,8 +1,8 @@
 export default defineNuxtRouteMiddleware((to) => {
   const { isLogin, hasAuthToken } = useAuth()
   if (
-    (process.server && !hasAuthToken.value)
-    || (process.client && isLogin.value === false)
+    (import.meta.server && !hasAuthToken.value)
+    || (import.meta.client && isLogin.value === false)
   ) {
     return navigateTo({
       path: '/session/login',

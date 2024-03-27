@@ -1,23 +1,28 @@
 <script setup lang="ts">
-defineProps<{
-  post: PostData
+const props = defineProps<{
+  post: FragmentType<typeof PostCardData>
 }>()
 
-interface PostData {
-  uid: string
-  title?: string | null
-  slogan?: string | null
-  cover?: {
-    stripe?: string | null
-  } | null
-  creationDate?: string | null
-}
+const PostCardData = gql(`
+  fragment PostCardData on Post {
+    id
+    uid
+    title
+    slogan
+    cover {
+      stripe
+    }
+    creationDate
+  }
+`)
+
+const post = computed(() => getFragmentData(PostCardData, props.post))
 </script>
 
 <template>
   <BaseCard
     :to="{ name: 'posts-id', params: { id: post.uid } }"
-    :cover="post.cover?.stripe ?? undefined"
+    :cover="post.cover?.stripe"
     class="h-44"
   >
     <div v-if="post.creationDate" class="px-2 py-1 w-full flex flex-row items-center">

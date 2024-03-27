@@ -32,72 +32,20 @@ const query = gql(`
         }
       }
       level {
-        ...PostLevelCardFragment
+        ...LevelCardData
       }
       collection {
-        ...PostCollectionInfoFragment
-        levels(limit: 5) {
-          ...PostLevelCardFragment
-        }
-      }
-    }
-  }
-  fragment PostLevelCardFragment on Level {
-    id
-    uid
-    title
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
-      }
-    }
-    metadata {
-      title_localized
-      artist {
-        name
-      }
-    }
-    bundle {
-      backgroundImage {
-        thumbnail
-      }
-      music
-      musicPreview
-    }
-    charts {
-      type
-      difficulty
-      name
-      notesCount
-    }
-  }
-  fragment PostCollectionInfoFragment on Collection {
-    id
-    uid
-    title
-    slogan
-    cover {
-      thumbnail
-    }
-    owner {
-      id
-      uid
-      name
-      avatar {
-        small
+        ...CollectionShowCaseData
       }
     }
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: postId,
-}))
+})
 const post = computed(() => data.value?.post)
-if (postId && !post) {
+if (postId && !post.value) {
   showError(error.value?.message ?? createError({
     statusCode: 404,
     statusMessage: `Post not found: ${postId}`,
@@ -151,44 +99,10 @@ defineCytoidPage({
         v-if="post.collection"
       >
         <div class="h-6" />
-        <ShowCase
-          :cover="post.collection.cover?.thumbnail"
+        <CollectionShowCase
+          :collection="post.collection"
           class="mt-4"
-        >
-          <template #desperation>
-            <div class="px-2 py-1 w-full flex flex-row items-center">
-              <div class="w-full">
-                <h2 class="card-title block truncate">
-                  {{ post.collection.title }}
-                </h2>
-                <h2 class="text-neutral-content opacity-80 truncate">
-                  {{ post.collection.slogan }}
-                </h2>
-              </div>
-            </div>
-          </template>
-
-          <template #subDesperation>
-            <div class="px-2 w-full flex flex-row items-center">
-              <div>
-                <UserAvatar
-                  v-if="post.collection.owner"
-                  :avatar="post.collection.owner.avatar?.small ?? undefined"
-                  :name="post.collection.owner.name ?? post.collection.owner.uid ?? undefined"
-                  :uid="post.collection.owner.uid ?? undefined"
-                  :transparent="true"
-                  class="h-8"
-                />
-              </div>
-            </div>
-          </template>
-          <LevelCard
-            v-for="level, index in post.collection.levels" :key="index"
-            class="h-48"
-            :trim="true"
-            :level="level"
-          />
-        </ShowCase>
+        />
       </template>
     </template>
 

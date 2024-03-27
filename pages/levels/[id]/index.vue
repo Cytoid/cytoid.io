@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ResourceState } from '~/gql/graphql'
+import { ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const route = useRoute()
 const levelId = route.params.id.toString()
@@ -91,9 +91,9 @@ const removeFromLibMutation = gql(`
   }
 `)
 
-const { data: levelData, error } = await useAsyncData(() => useQuery(query, {
+const { data: levelData, error } = await useAsyncQuery(query, {
   uid: levelId,
-}))
+})
 if (levelId && !levelData.value?.level) {
   showError(error.value?.message ?? createError({
     statusCode: 404,
@@ -164,7 +164,7 @@ const isMobile = computed(() => {
 const downloadCytoidDialog = ref<HTMLDialogElement | null>(null)
 async function openWithCytoid() {
   const url = `cytoid://levels/${levelData.value!.level!.uid}`
-  if (process.client && window?.location) {
+  if (import.meta.client && window?.location) {
     window.location.href = url
   }
   downloadCytoidDialog.value?.showModal()

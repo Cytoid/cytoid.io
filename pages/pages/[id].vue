@@ -23,9 +23,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: pageId,
-}))
+})
 if (pageId && !data.value?.page) {
   showError(error.value?.message ?? createError({
     statusCode: 404,

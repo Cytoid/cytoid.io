@@ -27,9 +27,9 @@ const query = gql(`
     }
   }
 `)
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncQuery(query, {
   id: user.value?.id ?? '',
-}))
+})
 const profile = computed(() => data.value?.profile)
 
 async function logout() {

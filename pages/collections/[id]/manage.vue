@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CollectionInput } from '~/gql/graphql'
+import type { CollectionInput } from '#build/urql-client/codegen/default/graphql'
 
 definePageMeta({
   middleware: ['auth'],
@@ -55,9 +55,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: collectionId,
-}))
+})
 
 const hasPermission = computed(() => {
   return data.value?.collection?.owner?.id === data.value?.my?.user?.id
@@ -69,7 +69,7 @@ if (collectionId && !data.value?.collection) {
     statusMessage: `Collection not found: ${collectionId}`,
   }))
 }
-else if (!hasPermission) {
+else if (!hasPermission.value) {
   showError(createError({
     statusCode: 403,
     statusMessage: `You do not have permission to manage this collection: ${collectionId}`,

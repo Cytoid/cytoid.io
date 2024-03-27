@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     'nuxt-gtag',
     '@teages/nuxt-locale-lite',
+    // '../nuxt-urql-client/src/modules',
     '@teages/nuxt-urql-client',
   ],
 
@@ -34,12 +35,12 @@ export default defineNuxtConfig({
         url: config.get('graphqlURL'),
         credentials: 'include',
         cookiesFilter: ['cyt:sess'],
-      },
-    },
-    codegen: {
-      schemaOverride: 'gql/schema.graphql',
-      presetConfig: {
-        fragmentMasking: false,
+        codegen: {
+          schemaOverride: 'gql/schema.graphql',
+          config: {
+            skipTypename: true,
+          },
+        },
       },
     },
   },
@@ -92,7 +93,7 @@ export default defineNuxtConfig({
       serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
-      servicesUA: process.env.SERVICES_UA ?? '',
+      servicesUA: import.meta.env.SERVICES_UA ?? '',
     },
   },
 
@@ -103,17 +104,6 @@ export default defineNuxtConfig({
   typescript: {
     tsConfig: {
       include: ['types/**/*'],
-      compilerOptions: {
-        plugins: [
-          {
-            name: '@0no-co/graphqlsp',
-            schema: './gql/schema.graphql',
-            disableTypegen: true,
-            templateIsCallExpression: true,
-            trackFieldUsage: true,
-          },
-        ],
-      },
     },
   },
 
@@ -139,7 +129,7 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa: process.env.NODE_ENV === 'production'
+  pwa: import.meta.env.NODE_ENV === 'production'
     ? {
         strategies: 'generateSW',
         registerType: 'autoUpdate',
@@ -179,7 +169,7 @@ export default defineNuxtConfig({
         prependPath: false,
         ws: true,
         headers: {
-          'user-agent': process.env.SERVICES_UA ?? '',
+          'user-agent': import.meta.env.SERVICES_UA ?? '',
         },
         cookieDomainRewrite: {
           'cytoid.io': 'localhost',
@@ -190,7 +180,7 @@ export default defineNuxtConfig({
         changeOrigin: true,
         ws: true,
         headers: {
-          'user-agent': process.env.SERVICES_UA ?? '',
+          'user-agent': import.meta.env.SERVICES_UA ?? '',
         },
         cookieDomainRewrite: {
           'cytoid.io': 'localhost',

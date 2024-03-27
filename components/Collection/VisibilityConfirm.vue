@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ResourceState } from '~/gql/graphql'
+import { ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 defineProps<{
   open?: boolean

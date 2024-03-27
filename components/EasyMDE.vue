@@ -2,14 +2,7 @@
 import EasyMDE from 'easymde'
 import 'easymde/dist/easymde.min.css'
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-})
-const emit = defineEmits(['update:modelValue'])
-const content = useVModel(props, 'modelValue', emit)
+const content = defineModel<string>({ required: true })
 
 const editorDom = ref<HTMLElement>()
 

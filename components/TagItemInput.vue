@@ -1,9 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{
-  modelValue: Array<string>
-}>()
-const emit = defineEmits(['update:modelValue'])
-const itemsData = useVModel(props, 'modelValue', emit)
+const itemsData = defineModel<Array<string>>({ required: true })
 
 const suggestions = ref<string[]>([])
 

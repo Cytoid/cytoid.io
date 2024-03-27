@@ -24,9 +24,9 @@ const mutation = gql(`
   }
 `)
 
-const { data } = await useAsyncData(() => useQuery(query, {
+const { data } = await useAsyncQuery(query, {
   id: props.userId,
-}))
+})
 
 const userOnlineCover = ref(data.value?.profile?.header?.stripe ?? '')
 
@@ -55,7 +55,7 @@ async function afterUpload(newData: FilePostResponse | null | undefined) {
 }
 
 function getSelectFileUrl(file: File) {
-  if (process.client) {
+  if (import.meta.client) {
     return URL.createObjectURL(file)
   }
   else {

@@ -28,35 +28,7 @@ const query = gql(`
         }
       }
       levels {
-        id
-        uid
-        title
-        owner {
-          id
-          uid
-          name
-          avatar {
-            small
-          }
-        }
-        metadata {
-          title_localized
-          artist {
-            name
-          }
-        }
-        bundle {
-          backgroundImage {
-            thumbnail
-          }
-          musicPreview
-        }
-        charts {
-          type
-          difficulty
-          name
-          notesCount
-        }
+        ...LevelCardData
       }
       metadata {
         cover {
@@ -68,9 +40,9 @@ const query = gql(`
   }
 `)
 
-const { data, error } = await useAsyncData(() => useQuery(query, {
+const { data, error } = await useAsyncQuery(query, {
   uid: collectionId,
-}))
+})
 const collection = computed(() => data.value?.collection)
 if (collectionId && !collection.value) {
   showError(error.value?.message ?? createError({
@@ -197,7 +169,7 @@ defineCytoidPage({
           class="grid grid-cols-1 lg:grid-cols-2 gap-4"
         >
           <LevelCard
-            v-for="level, index in collection.levels" :key="index"
+            v-for="level in collection.levels" :key="fid(level)"
             class="h-48"
             :trim="true"
             :level="level"

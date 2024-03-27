@@ -1,43 +1,50 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  level: LevelData
+const props = withDefaults(defineProps<{
+  level: MaybeFragmentType<typeof LevelCardData>
   cover?: string
   trim?: boolean
+  hideCategory?: boolean
 }>(), {
   trim: false,
 })
 
-interface LevelData {
-  uid: string
-  title: string
-  category?: string[]
-  owner?: {
-    id: string
-    uid?: string | null
-    name?: string | null
-    avatar: {
-      small?: string | null
+const LevelCardData = gql(`
+  fragment LevelCardData on Level {
+    id
+    uid
+    title
+    category
+    owner {
+      id
+      uid
+      name
+      avatar {
+        small
+      }
     }
-  } | null
-  metadata: {
-    title_localized?: string | null
-    artist?: {
-      name?: string | null
-    } | null
+    metadata {
+      title_localized
+      artist {
+        name
+      }
+    }
+    bundle {
+      backgroundImage {
+        thumbnail
+      }
+      music
+      musicPreview
+    }
+    charts {
+      type
+      difficulty
+      name
+      notesCount
+    }
   }
-  bundle?: {
-    backgroundImage?: {
-      thumbnail?: string | null
-    } | null
-    musicPreview?: string | null
-  } | null
-  charts?: {
-    type: string
-    difficulty: number
-    name?: string | null
-    notesCount: number
-  }[]
-}
+`)
+
+const level = computed(() => parseFragment(LevelCardData, props.level))
 </script>
 
 <template>
@@ -51,7 +58,7 @@ interface LevelData {
           />
         </div>
         <div class="flex-1" />
-        <div v-if="level.category" class="grid grid-flow-row gap-2">
+        <div v-if="!hideCategory" class="grid grid-flow-row gap-2">
           <div v-if="level.category.includes('featured')" class="badge badge-lg h-8 category-badge-featured">
             Featured
           </div>

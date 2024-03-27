@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PostType, ResourceState } from '~/gql/graphql'
+import type { PostType, ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const router = useRouter()
 const { user, ready } = useAuth()
