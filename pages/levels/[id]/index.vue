@@ -164,7 +164,7 @@ const isMobile = computed(() => {
 const downloadCytoidDialog = ref<HTMLDialogElement | null>(null)
 async function openWithCytoid() {
   const url = `cytoid://levels/${levelData.value!.level!.uid}`
-  if (process.client && window?.location) {
+  if (import.meta.client && window?.location) {
     window.location.href = url
   }
   downloadCytoidDialog.value?.showModal()

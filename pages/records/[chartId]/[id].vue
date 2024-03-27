@@ -81,6 +81,7 @@ const scoreTextColor = computed(() => {
   if ((data.value?.record?.score ?? 0) > 999000) {
     return 'grade-sss-text-gradient'
   }
+  return ''
 })
 
 defineCytoidPage({

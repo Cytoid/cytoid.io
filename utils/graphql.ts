@@ -1,4 +1,4 @@
-import type { DocumentTypeDecoration, TypedDocumentNode } from '@graphql-typed-document-node/core'
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 
 export function fid(item: unknown): string | number {
   if (

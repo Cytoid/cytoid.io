@@ -93,7 +93,7 @@ export default defineNuxtConfig({
       serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
-      servicesUA: process.env.SERVICES_UA ?? '',
+      servicesUA: import.meta.env.SERVICES_UA ?? '',
     },
   },
 
@@ -129,7 +129,7 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa: process.env.NODE_ENV === 'production'
+  pwa: import.meta.env.NODE_ENV === 'production'
     ? {
         strategies: 'generateSW',
         registerType: 'autoUpdate',
@@ -169,7 +169,7 @@ export default defineNuxtConfig({
         prependPath: false,
         ws: true,
         headers: {
-          'user-agent': process.env.SERVICES_UA ?? '',
+          'user-agent': import.meta.env.SERVICES_UA ?? '',
         },
         cookieDomainRewrite: {
           'cytoid.io': 'localhost',
@@ -180,7 +180,7 @@ export default defineNuxtConfig({
         changeOrigin: true,
         ws: true,
         headers: {
-          'user-agent': process.env.SERVICES_UA ?? '',
+          'user-agent': import.meta.env.SERVICES_UA ?? '',
         },
         cookieDomainRewrite: {
           'cytoid.io': 'localhost',

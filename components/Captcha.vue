@@ -8,11 +8,11 @@ const isMain = ref(false)
 
 const turnstile = ref()
 
-if (process.client && loaded.value === false) {
+if (import.meta.client && loaded.value === false) {
   loaded.value = true
   isMain.value = true
 }
-if (isMain) {
+if (isMain.value) {
   onBeforeUnmount(() => {
     isMain.value = false
     loaded.value = false

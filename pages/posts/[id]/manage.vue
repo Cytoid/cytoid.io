@@ -73,7 +73,7 @@ if (postId && !data.value?.post) {
     statusMessage: `Post not found: ${postId}`,
   }))
 }
-else if (!hasPermission) {
+else if (!hasPermission.value) {
   showError(createError({
     statusCode: 403,
     statusMessage: 'You do not have permission to manage posts',

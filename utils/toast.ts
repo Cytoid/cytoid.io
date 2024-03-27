@@ -1,5 +1,5 @@
 export function log(data: ToastOptions) {
-  if (process.client) {
+  if (import.meta.client) {
     const { addToast } = useToast()
     addToast(data)
   }

@@ -8,7 +8,7 @@ const router = useRouter()
 
 function openInNewTab() {
   const url = router.resolve(props.to).href
-  if (process.client) {
+  if (import.meta.client) {
     window.open(url)
   }
 }

@@ -68,7 +68,7 @@ const { data, error } = await useAsyncQuery(query, {
   uid: postId,
 })
 const post = computed(() => data.value?.post)
-if (postId && !post) {
+if (postId && !post.value) {
   showError(error.value?.message ?? createError({
     statusCode: 404,
     statusMessage: `Post not found: ${postId}`,
@@ -125,7 +125,7 @@ defineCytoidPage({
         v-if="collection"
       >
         <div class="h-6" />
-        <ShowCase
+        <BaseShowCase
           :cover="collection.cover?.thumbnail"
           class="mt-4"
         >
@@ -163,7 +163,7 @@ defineCytoidPage({
             :level="level"
             :hide-category="true"
           />
-        </ShowCase>
+        </BaseShowCase>
       </template>
     </template>
 

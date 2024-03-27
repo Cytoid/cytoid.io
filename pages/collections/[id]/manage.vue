@@ -69,7 +69,7 @@ if (collectionId && !data.value?.collection) {
     statusMessage: `Collection not found: ${collectionId}`,
   }))
 }
-else if (!hasPermission) {
+else if (!hasPermission.value) {
   showError(createError({
     statusCode: 403,
     statusMessage: `You do not have permission to manage this collection: ${collectionId}`,

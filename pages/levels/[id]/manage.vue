@@ -87,7 +87,7 @@ if (levelId && !data.value?.level) {
     statusMessage: `Level not found: ${levelId}`,
   }))
 }
-else if (!hasPermission) {
+else if (!hasPermission.value) {
   showError(createError({
     statusCode: 403,
     statusMessage: `You do not have permission to manage this level: ${levelId}`,

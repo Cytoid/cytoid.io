@@ -18,7 +18,7 @@ async function afterUpload(newData: FilePostResponse | null | undefined) {
 }
 
 function getSelectFileUrl(file: File) {
-  if (process.client) {
+  if (import.meta.client) {
     return URL.createObjectURL(file)
   }
   else {
