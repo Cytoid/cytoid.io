@@ -8,7 +8,7 @@
     "build": "pnpm test && nuxt build",
     "start": "node .output/server/index.mjs",
     "dev": "nuxt dev",
-    "test": "nuxt prepare && pnpm lint && pnpm tsc",
+    "test": "pnpm tsc && pnpm lint",
     "dev:local": "cross-env NODE_APP_INSTANCE=local nuxt dev",
     "gql": "npx cross-env NODE_ENV=production node ./cli/codegen-update.js",
     "gql:local": "npx cross-env NODE_APP_INSTANCE=local node ./cli/codegen-update.js",
