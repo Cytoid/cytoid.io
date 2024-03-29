@@ -68,6 +68,7 @@ const query = gql(`
     my {
       user {
         id
+        role
       }
     }
   }
@@ -79,7 +80,7 @@ const { data, error } = await useAsyncQuery(query, {
 
 const hasPermission = computed(() => {
   return data.value?.level?.owner?.id === data.value?.my?.user?.id
-    || ['admin', 'moderator'].includes(user.value?.role ?? '')
+    || ['admin', 'moderator'].includes((data.value?.my?.user?.role ?? '').toLowerCase())
 })
 if (levelId && !data.value?.level) {
   showError(error.value?.message ?? createError({
