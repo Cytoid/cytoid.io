@@ -45,7 +45,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
     <AvatarBody />
   </button>
 
-  <NestedLink v-else :to="{ name: 'profile-id', params: { id: uid } }">
+  <NestedLink v-else :to="{ name: 'profile-id', params: { id: uid } }" v-bind="$attrs">
     <AvatarBody />
   </NestedLink>
 </template>
