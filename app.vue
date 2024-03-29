@@ -1,14 +1,4 @@
 <script setup lang="ts">
-// auth
-onMounted(() => {
-  nextTick(async () => {
-    if (import.meta.client) {
-      const { init } = useAuth()
-      await init().catch(() => null)
-    }
-  })
-})
-
 useHead({
   titleTemplate(title) {
     return title || 'Cytoid'

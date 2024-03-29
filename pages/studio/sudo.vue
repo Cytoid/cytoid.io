@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const router = useRouter()
-const { user, ready } = useAuth()
+const { user, ready, isModerator, isAdmin } = useAuth()
 
 const superuserDialog = ref<HTMLDialogElement | null>(null)
 
@@ -15,7 +15,7 @@ onMounted(() => {
   nextTick(async () => {
     try {
       await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+      if (!isModerator) {
         throw new Error('Permission denied')
       }
     }
@@ -65,7 +65,7 @@ async function sendWorkerCommand(type?: string) {
     <Icon name="ph:hash-bold" size="24" />
     <span>You're the superuser now!</span>
   </div>
-  <div v-else-if="user && ['admin', 'moderator'].includes(user.role)" class="w-full flex flex-col gap-5">
+  <div v-else-if="isModerator" class="w-full flex flex-col gap-5">
     <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
       <div class="card-body gap-4 bg-secondary/25">
         <div class="flex flex-col gap-2">
@@ -82,7 +82,7 @@ async function sendWorkerCommand(type?: string) {
       </div>
     </div>
 
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div v-if="isAdmin" class="card overflow-hidden bg-base-100 w-full shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">

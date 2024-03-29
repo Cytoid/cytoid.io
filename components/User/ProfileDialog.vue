@@ -2,7 +2,8 @@
 defineProps<{
   close: () => void
 }>()
-const { user, logout: _logout } = useAuth()
+const { logout: _logout } = useWriteableAuth()
+const { user } = useAuth()
 
 const query = gql(`
   query FetchNavCard($id: ID!) {

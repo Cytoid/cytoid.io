@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const { logout: _logout, ready, toLogin, isLogin } = useAuth()
+const { logout: _logout } = useWriteableAuth()
 const profileDialog = ref(false)
 
-const { user } = useAuth()
+const { user, ready, toLogin, isLogin, isAdmin, isModerator } = useAuth()
 
 const profileDialogDom = ref()
 onClickOutside(profileDialogDom, () => {
@@ -84,12 +84,12 @@ async function logout() {
         </div>
       </div>
       <div v-else-if="isLogin && user" class="flex-none px-2 sm:px-0">
-        <div v-if="user.role === 'admin'" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Admin">
+        <div v-if="isAdmin" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Admin">
           <button class="btn btn-circle btn-sm not-clickable btn-primary">
             <Icon name="clarity:administrator-solid" size="18" />
           </button>
         </div>
-        <div v-else-if="user.role === 'moderator'" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Moderator">
+        <div v-else-if="isModerator" class="px-2 tooltip tooltip-bottom" data-tip="Cytoid Moderator">
           <button class="btn btn-circle btn-sm not-clickable btn-primary">
             <Icon name="pajamas:admin" size="18" />
           </button>

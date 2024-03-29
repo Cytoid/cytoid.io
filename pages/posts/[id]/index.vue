@@ -2,7 +2,7 @@
 const route = useRoute()
 const postId = route.params.id as string
 
-const { user } = useAuth()
+const { isModerator } = useAuth()
 
 const query = gql(`
   query GetPost($uid: String!) {
@@ -71,7 +71,7 @@ defineCytoidPage({
         {{ post.slogan }}
       </p>
       <div
-        v-if="user && ['admin', 'moderator'].includes(user.role)"
+        v-if="isModerator"
         class="mt-6 flex gap-3 flex-wrap max-w-xl"
       >
         <NuxtLink

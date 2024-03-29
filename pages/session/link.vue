@@ -3,7 +3,8 @@ const route = useRoute()
 const router = useRouter()
 const { t } = useLocales()
 
-const { login: _loginWithPayload, user } = useAuth()
+const { login: _loginWithPayload } = useWriteableAuth()
+const { user } = useAuth()
 
 const token = computed(() => route.query.token as string | undefined)
 const provider = computed(() => route.query.provider as string | undefined)

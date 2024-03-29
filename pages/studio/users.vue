@@ -3,7 +3,7 @@ import type { StudioLookupUserQuery } from '#build/urql-client/codegen/default/g
 
 const route = useRoute()
 const router = useRouter()
-const { user, ready } = useAuth()
+const { ready, isModerator } = useAuth()
 
 const query = gql(`
   query StudioLookupUser($uid: String, $id: ID) {
@@ -63,7 +63,7 @@ onMounted(() => {
   nextTick(async () => {
     try {
       await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+      if (!isModerator) {
         throw new Error('Permission denied')
       }
       else {
@@ -151,7 +151,7 @@ async function setActive(active: boolean) {
 </script>
 
 <template>
-  <div v-if="user && ['admin', 'moderator'].includes(user.role)" class="w-full flex flex-col gap-5">
+  <div v-if="isModerator" class="w-full flex flex-col gap-5">
     <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">

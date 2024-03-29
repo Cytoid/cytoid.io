@@ -12,7 +12,7 @@ const mutation = gql(`
 `)
 const isSubmitting = ref(false)
 
-const { user } = useAuth()
+const { isModerator } = useAuth()
 
 const description = ref(level?.value?.description ?? '')
 const tags = ref(level.value?.tags ?? [])
@@ -46,13 +46,11 @@ async function submit() {
   }
   isSubmitting.value = true
   try {
-    const isAdmin = ['admin', 'moderator'].includes(user.value?.role ?? '')
-
     await useMutation(mutation, {
       id: level.value.id.toString(),
       input: {
         ...form.value,
-        ...(isAdmin
+        ...(isModerator
           ? adminForm.value
           : {}
         ),
@@ -64,7 +62,7 @@ async function submit() {
     level.value.state = form.value.state
     level.value.tags = form.value.tags
     level.value.description = form.value.description
-    if (isAdmin) {
+    if (isModerator) {
       level.value.censored = adminForm.value.censored
       level.value.category = adminForm.value.category
     }
@@ -120,7 +118,7 @@ async function submit() {
       </div>
     </div>
     <div
-      v-if="['admin', 'moderator'].includes(user?.role ?? '')"
+      v-if="isModerator"
       class="card bg-base-100 w-full shadow-xl"
     >
       <div class="card-body gap-4">

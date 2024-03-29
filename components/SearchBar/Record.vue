@@ -5,7 +5,7 @@ import { RecordQuerySort } from '#build/urql-client/codegen/default/graphql'
 const route = useRoute()
 const router = useRouter()
 
-const { user, isModerator } = useAuth()
+const { isModerator } = useAuth()
 
 const chartId = computed({
   get() {
@@ -131,7 +131,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
       </div>
 
       <!-- Owner -->
-      <div v-if="['admin', 'moderator'].includes(user?.role ?? '')" class="w-full sm:flex">
+      <div v-if="isModerator" class="w-full sm:flex">
         <div class="sm:flex gap-4 w-full">
           <div class="w-full max-w-xl">
             <p class="card-subtitle">

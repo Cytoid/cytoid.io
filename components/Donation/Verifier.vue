@@ -2,7 +2,8 @@
 defineProps<{
   externals: string[]
 }>()
-const { user, updateUser } = useAuth()
+const { updateUser } = useWriteableAuth()
+const { user } = useAuth()
 
 const linkMutation = gql(`
   mutation LinkExternalAccountDonation($token: String!) {

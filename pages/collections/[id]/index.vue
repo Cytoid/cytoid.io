@@ -2,7 +2,7 @@
 const route = useRoute()
 const collectionId = route.params.id as string
 
-const { user } = useAuth()
+const { user, isModerator } = useAuth()
 
 const query = gql(`
   query FetchCollection($uid: String!) {
@@ -73,7 +73,7 @@ defineCytoidPage({
         {{ collection.slogan }}
       </p>
       <div
-        v-if="user && (['admin', 'moderator'].includes(user.role) || user.id === collection.owner?.id)"
+        v-if="user && (isModerator || user.id === collection.owner?.id)"
         class="mt-6 flex gap-3 flex-wrap max-w-xl"
       >
         <NuxtLink

@@ -17,7 +17,7 @@ const mutation = gql(`
 const route = useRoute()
 const postId = route.params.id as string
 
-const { user } = useAuth()
+const { isModerator } = useAuth()
 
 const query = gql(`
   query FetchPostForEditing($uid: String!) {
@@ -65,7 +65,7 @@ const { data, error } = await useAsyncQuery(query, {
 })
 
 const hasPermission = computed(() => {
-  return ['admin', 'moderator'].includes(user.value?.role ?? '')
+  return isModerator.value
 })
 if (postId && !data.value?.post) {
   showError(error.value?.message ?? createError({

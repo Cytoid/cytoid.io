@@ -16,8 +16,6 @@ const mutation = gql(`
 const route = useRoute()
 const collectionId = route.params.id as string
 
-const { user } = useAuth()
-
 const query = gql(`
   query FetchCollectionForEditing($uid: String!) {
     collection(uid: $uid) {

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const { t } = useLocales()
 
-const { user, updateUser } = useAuth()
+const { updateUser } = useWriteableAuth()
+const { user } = useAuth()
 
 const query = gql(`
   query GetUserSecuritySettings {

@@ -4,7 +4,8 @@ const route = useRoute()
 
 const { t } = useLocales()
 
-const { login: _loginWithPayload, user } = useAuth()
+const { login: _loginWithPayload, updateUser } = useWriteableAuth()
+const { user } = useAuth()
 
 const loading = ref(false)
 
@@ -75,7 +76,7 @@ function loginWithProvider(provider: string) {
 
     window.removeEventListener('message', providerResponded)
     if (event.data.user) {
-      user.value = event.data.user
+      updateUser(event.data.user)
       successAlert(t('general.login_snack_bar', { name: event.data.user.name || event.data.user.uid }))
       loginNext()
     }

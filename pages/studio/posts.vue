@@ -2,7 +2,7 @@
 import type { PostType, ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const router = useRouter()
-const { user, ready } = useAuth()
+const { ready, isModerator } = useAuth()
 
 const query = gql(`
   query StudioGetPosts {
@@ -52,7 +52,7 @@ onMounted(() => {
   nextTick(async () => {
     try {
       await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+      if (!isModerator) {
         throw new Error('Permission denied')
       }
       else {
@@ -134,7 +134,7 @@ interface StudioPostData {
 </script>
 
 <template>
-  <div v-if="user && ['admin', 'moderator'].includes(user.role)" class="w-full flex flex-col gap-5">
+  <div v-if="isModerator" class="w-full flex flex-col gap-5">
     <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
       <div class="card-body gap-4">
         <h2 class="card-subtitle">

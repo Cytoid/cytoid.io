@@ -99,7 +99,7 @@ const syncData = useDebounceFn(async (recount: boolean = true) => {
 
   await until(user).toMatch(u => !!u)
   const ownerQuery = route.query.owner as string
-  const allowOwner = ['admin', 'moderator'].includes(user.value!.role)
+  const allowOwner = isModerator.value
   const owner = !allowOwner
     ? user.value!.id
     : ownerQuery === '_'

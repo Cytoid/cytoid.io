@@ -3,7 +3,7 @@ const router = useRouter()
 const route = useRoute()
 
 const { t } = useLocales()
-const { user } = useAuth()
+const { updateUser } = useWriteableAuth()
 
 const linkMutation = gql(`
   mutation LinkExternalAccount($token: String!) {
@@ -120,7 +120,7 @@ async function signUp(verify: () => Promise<string>) {
       })
     }
 
-    user.value = userData
+    updateUser(userData)
     successAlert('Sign up successfully!')
     loginNext()
   }

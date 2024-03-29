@@ -4,7 +4,7 @@ import { ResourceState } from '#build/urql-client/codegen/default/graphql'
 const route = useRoute()
 const levelId = route.params.id.toString()
 
-const { isLogin, toLogin, user } = useAuth()
+const { isLogin, toLogin, user, isModerator } = useAuth()
 
 const query = gql(`
   query FetchLevel($uid: String!){
@@ -330,7 +330,7 @@ defineCytoidPage({
           </button>
 
           <NuxtLink
-            v-if="levelData?.level?.owner?.id === user?.id || user?.role === 'admin' || user?.role === 'moderator'"
+            v-if="levelData?.level?.owner?.id === user?.id || isModerator"
             :to="{ name: 'levels-id-manage', params: { uid: levelData?.level?.uid } }"
           >
             <button class="btn btn-neutral">

@@ -1,18 +1,20 @@
 import { useSavedCookie } from './cookie'
 
-export function useAuth() {
-  const user: Ref<UserData | null> = useState('user')
-  const cookie = useSavedCookie<string | null>('cyt:sess')
+function useAuthCookie() {
+  return useSavedCookie<string | null>('cyt:sess')
+}
 
-  const _ready = useState(() => false)
-  const ready = computed<boolean>(() => _ready.value)
-  const isLogin = computed<boolean | null>(() => {
-    if (ready.value) {
-      return user.value !== null
-    }
+function useUserState() {
+  return useState<UserData | null>('user')
+}
 
-    return null
-  })
+function useAuthReady() {
+  return useState('auth-ready', () => false)
+}
+
+export function useWriteableAuth() {
+  const user = useUserState()
+  const ready = useAuthReady()
 
   const logout = async () => {
     user.value = null
@@ -26,7 +28,7 @@ export function useAuth() {
       return user.value
     }
 
-    _ready.value = false
+    ready.value = false
     const response = await useServiceFetch<SessionResponse>('session')
     if (response.status.value === 'success') {
       const userData = response.data.value?.user ?? null
@@ -35,7 +37,7 @@ export function useAuth() {
     else {
       user.value = null
     }
-    _ready.value = true
+    ready.value = true
     return user.value
   }
 
@@ -53,6 +55,22 @@ export function useAuth() {
     return response
   }
 
+  return { login, init, logout, updateUser }
+}
+
+export function useReadonlyAuth() {
+  const user = useUserState()
+  const cookie = useAuthCookie()
+  const ready = useAuthReady()
+
+  const isLogin = computed<boolean | null>(() => {
+    if (ready.value) {
+      return user.value !== null
+    }
+
+    return null
+  })
+
   const toLogin = async (back?: string) => {
     const route = useRoute()
     const router = useRouter()
@@ -65,9 +83,14 @@ export function useAuth() {
     })
   }
 
+  const readonlyReady = readonly(ready)
+  const readonlyUser = readonly(user)
+
   const hasAuthToken = computed(() => !!cookie.value)
   const isModerator = computed(() => ['admin', 'moderator'].includes(user.value?.role ?? 'user'))
   const isAdmin = computed(() => user.value?.role === 'admin')
 
-  return { user, login, init, logout, isLogin, ready, toLogin, hasAuthToken, updateUser, isModerator, isAdmin }
+  return { user: readonlyUser, isLogin, ready: readonlyReady, toLogin, hasAuthToken, isModerator, isAdmin }
 }
+
+export const useAuth = useReadonlyAuth

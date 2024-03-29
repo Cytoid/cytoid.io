@@ -7,7 +7,7 @@ const [defineStatItem, StatItem] = createReusableTemplate<{
 }>()
 
 const route = useRoute()
-const { user } = useAuth()
+const { isModerator } = useAuth()
 const profileId = route.params.id.toString()
 
 const hiddenProfile = ref(false)
@@ -260,7 +260,7 @@ defineCytoidPage({
               {{ profileData.profile.user?.name || profileData.profile.user?.uid }}
             </p>
             <NuxtLink
-              v-if="['admin', 'moderator'].includes(user?.role ?? '')"
+              v-if="isModerator"
               class="btn btn-xs btn-ghost btn-circle"
               :to="{
                 name: 'studio-users',
@@ -538,10 +538,7 @@ defineCytoidPage({
   <!-- Admin -->
   <div class="w-full flex">
     <button
-      v-if="(
-        user?.role === 'admin'
-        || user?.role === 'moderator'
-      ) && hiddenProfile === true"
+      v-if="(isModerator) && hiddenProfile === true"
       class="btn btn-ghost flex-1" @click="hiddenProfile = false"
     >
       Show Hidden Profile (ADMIN)
