@@ -329,7 +329,7 @@ async function setActive(active: boolean) {
             <button
               :disabled="mutationLoading"
               class="btn btn-error"
-              @click="pendingBanUser = data.user.uid ?? ''"
+              @click="pendingBanUser = data?.user?.uid ?? null"
             >
               Ban User
             </button>

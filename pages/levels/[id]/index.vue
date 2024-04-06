@@ -475,7 +475,7 @@ defineCytoidPage({
       </div>
       <div class="card mt-5 w-full bg-base-100 shadow-xl">
         <div class="card-body gap-6">
-          <MetaBox v-if="levelData?.level?.metadata" :metadata="levelData?.level?.metadata" />
+          <MetaBox v-if="levelData.level.metadata" :metadata="levelData?.level?.metadata" />
 
           <div class="flex flex-col gap-2">
             <p class="card-subtitle">
@@ -483,7 +483,7 @@ defineCytoidPage({
             </p>
             <a
               class="cursor-pointer text-2xl decoration-primary/80 underline-offset-4 hover:underline "
-              @click="copyToClipboard(levelData.level.uid, 'level id')"
+              @click="copyToClipboard(levelData!.level!.uid, 'level id')"
             >
               {{ levelData.level.uid }}<Icon name="mdi:content-copy" size="18" class="ml-2" />
             </a>
