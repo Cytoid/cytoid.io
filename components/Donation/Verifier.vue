@@ -60,13 +60,13 @@ async function syncMembershipStatus(provider: string) {
 
 <template>
   <div
-    class="card w-full bg-base-100 shadow-xl overflow-hidden"
+    class="card w-full overflow-hidden bg-base-100 shadow-xl"
   >
     <div
-      class="card-body card bg-secondary/25"
+      class="card card-body bg-secondary/25"
     >
       <div class="flex flex-col sm:flex-row">
-        <div class="flex-1 flex flex-col justify-between">
+        <div class="flex flex-1 flex-col justify-between">
           <h2 class="card-subtitle mb-2">
             <img src="/images/patreon.webp" class="h-8">
           </h2>
@@ -88,7 +88,7 @@ async function syncMembershipStatus(provider: string) {
         <div class="divider sm:divider-horizontal">
           OR
         </div>
-        <div class="flex-1 flex flex-col justify-end">
+        <div class="flex flex-1 flex-col justify-end">
           <p>
             {{ $t('homepage.connect_patreon_content') }}
           </p>

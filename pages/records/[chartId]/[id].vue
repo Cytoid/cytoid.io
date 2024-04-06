@@ -104,20 +104,20 @@ defineCytoidPage({
 </script>
 
 <template>
-  <div v-if="data?.record" class="max-w-5xl mx-auto">
-    <div class="h-24 relative">
+  <div v-if="data?.record" class="mx-auto max-w-5xl">
+    <div class="relative h-24">
       <div id="contentTitle" class="absolute bottom-0 left-0">
         <h1 class="text-4xl font-bold">
           Record
         </h1>
       </div>
     </div>
-    <div class="card bg-base-100 mt-4">
+    <div class="card mt-4 bg-base-100">
       <div class="card-body">
-        <div class="grid items-center grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 sm:grid-flow-dense">
+        <div class="grid grid-cols-1 items-center gap-4 sm:grid-flow-dense sm:grid-cols-12 sm:gap-6">
           <LevelCard
             v-if="data.record.chart?.level"
-            class="h-48 sm:h-full sm:col-span-7"
+            class="h-48 sm:col-span-7 sm:h-full"
             :level="{
               ...data.record.chart.level,
               charts: [
@@ -133,7 +133,7 @@ defineCytoidPage({
               </div>
             </template>
           </LevelCard>
-          <div class="sm:col-span-5 flex flex-col gap-2">
+          <div class="flex flex-col gap-2 sm:col-span-5">
             <!-- Owner -->
             <div
               v-if="data.record.owner"
@@ -143,11 +143,11 @@ defineCytoidPage({
                 :to="{ name: 'profile-id', params: { id: data.record.owner.uid ?? data.record.owner.id } }"
                 class="avatar"
               >
-                <div class="w-16 h-16 rounded-full">
+                <div class="size-16 rounded-full">
                   <img v-if="data.record.owner.avatar.large" :src="data.record.owner.avatar.large">
                 </div>
               </NuxtLink>
-              <div class="flex flex-col justify-center gap-1 flex-1 px-4 w-0">
+              <div class="flex w-0 flex-1 flex-col justify-center gap-1 px-4">
                 <NuxtLink
                   :to="{ name: 'profile-id', params: { id: data.record.owner.uid ?? data.record.owner.id } }"
                   class="w-fit"
@@ -172,12 +172,12 @@ defineCytoidPage({
               <div class="flex flex-col gap-2">
                 <!-- Score -->
                 <p
-                  class="text-6xl lg:text-7xl xl:text-8xl font-light w-fit"
+                  class="w-fit text-6xl font-light lg:text-7xl xl:text-8xl"
                   :class="scoreTextColor"
                 >
                   {{ data.record.score }}
                 </p>
-                <div class="flex flex-wrap-reverse gap-x-4 gap-y-1 items-center">
+                <div class="flex flex-wrap-reverse items-center gap-x-4 gap-y-1">
                   <!-- Acc -->
                   <span class="flex flex-nowrap">
                     <template v-if="data.record.accuracy === 1">
@@ -213,31 +213,31 @@ defineCytoidPage({
               </div>
               <!-- Detail -->
               <div class="flex flex-wrap gap-x-4">
-                <div class="text-blue-400 flex gap-1 flex-nowarp">
+                <div class="flex-nowarp flex gap-1 text-blue-400">
                   <span class="text-blue-100">
                     Perfect
                   </span>
                   {{ data.record.details.perfect }}
                 </div>
-                <div class="text-yellow-400 flex gap-1 flex-nowarp">
+                <div class="flex-nowarp flex gap-1 text-yellow-400">
                   <span class="text-yellow-100">
                     Great
                   </span>
                   {{ data.record.details.great }}
                 </div>
-                <div class="text-green-400 flex gap-1 flex-nowarp">
+                <div class="flex-nowarp flex gap-1 text-green-400">
                   <span class="text-green-100">
                     Good
                   </span>
                   {{ data.record.details.good }}
                 </div>
-                <div class="text-red-400 flex gap-1 flex-nowarp">
+                <div class="flex-nowarp flex gap-1 text-red-400">
                   <span class="text-red-100">
                     Bad
                   </span>
                   {{ data.record.details.bad }}
                 </div>
-                <div class="text-slate-400 flex gap-1 flex-nowarp">
+                <div class="flex-nowarp flex gap-1 text-slate-400">
                   <span class="text-slate-100">
                     Miss
                   </span>

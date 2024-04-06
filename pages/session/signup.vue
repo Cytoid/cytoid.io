@@ -148,7 +148,7 @@ defineCytoidPage({
 <template>
   <LayoutSession>
     <div class="my-2">
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
         <div class="card-body">
           <h2 class="card-title">
             {{ t('signup.title') }}
@@ -157,14 +157,14 @@ defineCytoidPage({
           <!-- Cytoid ID -->
           <div class="form-control">
             <div class="join w-full">
-              <label for="login-username" class="join-item btn btn-neutral">
+              <label for="login-username" class="btn join-item btn-neutral">
                 <Icon name="ph:user-bold" size="18" />
               </label>
               <input
                 id="login-username" v-model="form.username" type="text" :placeholder="t('signup.id_placeholder')"
                 :class="{
                   'input-error': ctdIdVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">
@@ -175,13 +175,13 @@ defineCytoidPage({
           <!-- Email -->
           <div class="form-control">
             <div class="join w-full">
-              <label for="reset-mail" class="join-item btn btn-neutral">
+              <label for="reset-mail" class="btn join-item btn-neutral">
                 <Icon name="mdi:email-outline" size="18" />
               </label>
               <input
                 id="reset-mail" v-model="form.email" type="email" :placeholder="t('signup.email_placeholder')" :class="{
                   'input-error': emailVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">
@@ -193,14 +193,14 @@ defineCytoidPage({
           <!-- Password -->
           <div class="form-control">
             <div class="join w-full">
-              <label for="reset-password" class="join-item btn btn-neutral">
+              <label for="reset-password" class="btn join-item btn-neutral">
                 <Icon name="material-symbols:key" size="18" />
               </label>
               <input
                 id="reset-password" v-model="form.password" type="password"
                 :placeholder="t('signup.password_field_placeholder')" :class="{
                   'input-error': passwordVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">
@@ -210,14 +210,14 @@ defineCytoidPage({
           </div>
           <div class="form-control">
             <div class="join w-full">
-              <label for="reset-password-again" class="join-item btn btn-neutral">
+              <label for="reset-password-again" class="btn join-item btn-neutral">
                 <Icon name="material-symbols:key" size="18" />
               </label>
               <input
                 id="reset-password-again" v-model="form.passwordAgain" type="password"
                 :placeholder="t('signup.password_confirm_field_placeholder')" :class="{
                   'input-error': passwordAgainVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">
@@ -230,11 +230,11 @@ defineCytoidPage({
           <div class="form-control">
             <label class="label cursor-pointer">
               <span class="label-text">{{ t('signup.tos_field_title', [t('general.tos')]) }}</span>
-              <input v-model="tos" type="checkbox" class="checkbox checkbox-primary">
+              <input v-model="tos" type="checkbox" class="checkbox-primary checkbox">
             </label>
           </div>
 
-          <div class="form-control mt-2 tooltip" :data-tip="t('signup.tos_field_error_required')">
+          <div class="form-control tooltip mt-2" :data-tip="t('signup.tos_field_error_required')">
             <Captcha v-slot="{ verify }">
               <button :disabled="loading || !verified" class="btn btn-secondary w-full" @click="signUp(verify)">
                 {{ t('signup.join_btn') }}

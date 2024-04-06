@@ -53,10 +53,10 @@ const scoreGrade = computed(() => gradeList.reduce((prev, { cutoff, grade }) => 
 </script>
 
 <template>
-  <div v-if="scoreGrade === 'MAX'" class="badge badge-sm badge-record-max">
+  <div v-if="scoreGrade === 'MAX'" class="badge-record-max badge badge-sm">
     {{ scoreGrade }}
   </div>
-  <div v-else-if="scoreGrade === 'SSS'" class="badge badge-sm badge-record-sss">
+  <div v-else-if="scoreGrade === 'SSS'" class="badge-record-sss badge badge-sm">
     {{ scoreGrade }}
   </div>
   <div v-else class="badge badge-neutral badge-sm">

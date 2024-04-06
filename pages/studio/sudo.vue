@@ -65,8 +65,8 @@ async function sendWorkerCommand(type?: string) {
     <Icon name="ph:hash-bold" size="24" />
     <span>You're the superuser now!</span>
   </div>
-  <div v-else-if="isModerator" class="w-full flex flex-col gap-5">
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+  <div v-else-if="isModerator" class="flex w-full flex-col gap-5">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body gap-4 bg-secondary/25">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">
@@ -82,7 +82,7 @@ async function sendWorkerCommand(type?: string) {
       </div>
     </div>
 
-    <div v-if="isAdmin" class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div v-if="isAdmin" class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">
@@ -128,7 +128,7 @@ async function sendWorkerCommand(type?: string) {
 
   <dialog ref="superuserDialog" class="modal">
     <form method="dialog" class="modal-box">
-      <h3 class="font-bold text-lg">
+      <h3 class="text-lg font-bold">
         Be a superuser
       </h3>
       <p class="py-4">

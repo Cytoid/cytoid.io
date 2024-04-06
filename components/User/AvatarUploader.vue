@@ -60,15 +60,15 @@ function getSelectFileUrl(file: File) {
     <template
       #dropZone="{ upload, reset, isOverDropZone, openDialog }"
     >
-      <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
+      <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
         <div
-          class="card-body card flex flex-col bg-primary/25"
+          class="card card-body flex flex-col bg-primary/25"
         >
           <h2 class="card-subtitle">
             {{ $t('settings.avatar_title') }}
           </h2>
           <div
-            class="flex-1 border-4 border-dashed p-6 my-2 rounded-2xl flex flex-col items-center justify-between select-none gap-2"
+            class="my-2 flex flex-1 select-none flex-col items-center justify-between gap-2 rounded-2xl border-4 border-dashed p-6"
             :class="{
               'border-neutral-content': isOverDropZone,
               'border-neutral-content/25': !isOverDropZone,
@@ -76,19 +76,19 @@ function getSelectFileUrl(file: File) {
             }"
             @click="openDialog"
           >
-            <div class="w-full flex justify-center gap-2">
+            <div class="flex w-full justify-center gap-2">
               <div
-                class="w-[40%] max-w-[10rem] aspect-square bg-cover bg-center rounded-full"
+                class="aspect-square w-2/5 max-w-40 rounded-full bg-cover bg-center"
                 :style="{
                   'background-image': `url(${userOnlineAvatar})`,
                 }"
               />
               <template v-if="file">
-                <div class="flex flex-col justify-center items-center px-4">
+                <div class="flex flex-col items-center justify-center px-4">
                   <Icon name="mdi:arrow-right" size="40" />
                 </div>
                 <div
-                  class="w-[40%] max-w-[10rem] aspect-square bg-cover bg-center rounded-full"
+                  class="aspect-square w-2/5 max-w-40 rounded-full bg-cover bg-center"
                   :style="{
                     'background-image': `url(${getSelectFileUrl(file)})`,
                   }"
@@ -120,7 +120,7 @@ function getSelectFileUrl(file: File) {
           <Icon name="material-symbols:error-circle-rounded-outline" size="24" />
           <span>{{ error }}</span>
         </div>
-        <div v-else class="alert bg-neutral border-0 shadow-lg">
+        <div v-else class="alert border-0 bg-neutral shadow-lg">
           <Icon name="mdi:upload" size="24" />
           <div>
             <h3 class="font-bold">

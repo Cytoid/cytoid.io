@@ -81,36 +81,36 @@ interface chartData {
 </script>
 
 <template>
-  <div class="card w-full bg-base-100 mb-5">
+  <div class="card mb-5 w-full bg-base-100">
     <div v-if="rankData" class="px-4 py-8 sm:px-8">
       <!-- Difficult Selector -->
       <p class="card-subtitle">
         {{ $t('level_details.difficulty_card_title') }}
       </p>
       <div
-        class="tabs rounded-full w-fit bg-neutral/25 mt-2"
+        class="tabs mt-2 w-fit rounded-full bg-neutral/25"
       >
         <a
           v-if="charts.some(c => c.type === 'easy')"
-          class="tab rounded-full order-1"
+          class="tab order-1 rounded-full"
           :class="{
-            'tab-active diff-badge-easy': selectedDiffRank === 'easy',
+            'diff-badge-easy tab-active': selectedDiffRank === 'easy',
           }"
           @click="selectedDiffRank = 'easy'"
         >Easy</a>
         <a
           v-if="charts.some(c => c.type === 'hard')"
-          class="tab rounded-full order-2"
+          class="tab order-2 rounded-full"
           :class="{
-            'tab-active diff-badge-hard': selectedDiffRank === 'hard',
+            'diff-badge-hard tab-active': selectedDiffRank === 'hard',
           }"
           @click="selectedDiffRank = 'hard'"
         >Hard</a>
         <a
           v-if="charts.some(c => c.type === 'extreme')"
-          class="tab rounded-full order-3"
+          class="tab order-3 rounded-full"
           :class="{
-            'tab-active diff-badge-extreme': selectedDiffRank === 'extreme',
+            'diff-badge-extreme tab-active': selectedDiffRank === 'extreme',
           }"
           @click="selectedDiffRank = 'extreme'"
         >Extreme</a>
@@ -149,7 +149,7 @@ interface chartData {
           <tbody>
             <tr
               v-for="(rank, index) in rankData.chart.leaderboard" :key="index + realDiffRankPage * 10 - 9"
-              class="even:bg-[color-mix(in_oklab,oklch(var(--n)),black_7%)] border-b-0"
+              class="border-b-0 even:bg-[color-mix(in_oklab,oklch(var(--n)),black_7%)]"
             >
               <th>#{{ index + realDiffRankPage * 10 - 9 }}</th>
               <td class="text-sm">
@@ -164,7 +164,7 @@ interface chartData {
               </td>
               <td class="font-semibold">
                 <NuxtLink :to="{ name: 'records-chartId-id', params: { id: rank.id, chartId: rankData.chart.id } }">
-                  <div class="flex gap-x-1 items-center">
+                  <div class="flex items-center gap-x-1">
                     <RecordScoreBadge :score="rank.score" />
                     {{ rank.score }}
                   </div>
@@ -206,8 +206,8 @@ interface chartData {
             </tr>
           </tbody>
         </table>
-        <div v-if="rankData.chart.leaderboard.length === 0" class="bg-base-200 w-full">
-          <p class="m-auto p-10 w-fit opacity-60 select-none">
+        <div v-if="rankData.chart.leaderboard.length === 0" class="w-full bg-base-200">
+          <p class="m-auto w-fit select-none p-10 opacity-60">
             No record yet.
           </p>
         </div>

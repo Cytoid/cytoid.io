@@ -40,7 +40,7 @@ defineCytoidPage({
 </script>
 
 <template>
-  <div class="grid gap-4 max-w-3xl mx-auto">
+  <div class="mx-auto grid max-w-3xl gap-4">
     <div class="grid gap-4">
       <PostCard v-for="post in posts" :key="fid(post)" :post="post" />
     </div>

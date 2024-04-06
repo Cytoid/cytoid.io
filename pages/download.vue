@@ -8,37 +8,37 @@ resetCytoidPage()
 </script>
 
 <template>
-  <div class="hero h-[25vh] w-full min-h-[10rem] max-w-md mx-auto sm:max-w-full max-h-[36rem] relative sm:flex">
-    <div class="absolute -top-12 sm:top-0 sm:right-0 sm:w-1/2 opacity-50 sm:opacity-100">
-      <img src="/images/cryout.webp" class="w-auto h-auto max-w-full max-h-full">
+  <div class="hero relative mx-auto h-[25vh] max-h-[36rem] min-h-40 w-full max-w-md sm:flex sm:max-w-full">
+    <div class="absolute -top-12 opacity-50 sm:right-0 sm:top-0 sm:w-1/2 sm:opacity-100">
+      <img src="/images/cryout.webp" class="size-auto max-h-full max-w-full">
     </div>
-    <div class="hero-content h-full w-full">
-      <div class="h-full w-full flex flex-col sm:justify-center mr-4">
-        <h1 class="text-5xl font-bold flex-1 sm:flex-initial flex items-end">
-          <div class="w-full h-full max-h-20">
-            <div class="h-full h-16 sm:h-20 max-w-full max-h-full bg-contain bg-no-repeat bg-center sm:bg-left-bottom" style="background-image: url(/images/logo.webp);" />
+    <div class="hero-content size-full">
+      <div class="mr-4 flex size-full flex-col sm:justify-center">
+        <h1 class="flex flex-1 items-end text-5xl font-bold sm:flex-initial">
+          <div class="size-full max-h-20">
+            <div class="h-full max-h-full max-w-full bg-contain bg-center bg-no-repeat sm:h-20 sm:bg-left-bottom" style="background-image: url(/images/logo.webp);" />
           </div>
         </h1>
-        <p class="py-6 ml-4">
+        <p class="ml-4 py-6">
           {{ $t('homepage.slogan') }}
         </p>
       </div>
     </div>
   </div>
 
-  <div class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
-    <div class="col-span-7 lg:col-span-8 mt-4 md:mt-0">
+  <div class="mt-4 md:grid md:grid-flow-col md:grid-cols-12 md:gap-4">
+    <div class="col-span-7 mt-4 md:mt-0 lg:col-span-8">
       <!-- Official -->
       <div
-        class="card w-full bg-base-100 shadow-xl overflow-hidden mb-4"
+        class="card mb-4 w-full overflow-hidden bg-base-100 shadow-xl"
       >
-        <div class="card-body card bg-secondary/25">
+        <div class="card card-body bg-secondary/25">
           <h2 class="card-subtitle">
             Download
           </h2>
           <div class="carousel h-40 space-x-4 rounded-box">
             <div v-for="image of images" :key="image" class="carousel-item">
-              <img :src="image" class="rounded-box h-40">
+              <img :src="image" class="h-40 rounded-box">
             </div>
           </div>
           <p>
@@ -64,7 +64,7 @@ resetCytoidPage()
 
       <!-- Android: APK -->
       <div
-        class="card w-full bg-base-100 shadow-xl overflow-hidden mb-4"
+        class="card mb-4 w-full overflow-hidden bg-base-100 shadow-xl"
       >
         <div class="card-body">
           <!-- <h2 class="card-subtitle">
@@ -86,13 +86,13 @@ resetCytoidPage()
 
     <div class="col-span-5 lg:col-span-4">
       <div
-        class="card w-full bg-base-100 shadow-xl overflow-hidden mb-4"
+        class="card mb-4 w-full overflow-hidden bg-base-100 shadow-xl"
       >
         <div
-          class="card-body card bg-primary/25"
+          class="card card-body bg-primary/25"
         >
           <h2 class="card-subtitle">
-            <img src="/images/discord.webp" class="h-6 my-2 px-1">
+            <img src="/images/discord.webp" class="my-2 h-6 px-1">
           </h2>
           <p>
             {{ $t('homepage.connect_discord_content') }}

@@ -13,7 +13,7 @@ useHead({
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="size-full">
     <NuxtLayout>
       <VitePwaManifest />
 

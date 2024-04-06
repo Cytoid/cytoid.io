@@ -281,15 +281,15 @@ defineCytoidPage({
       <h1 class="text-5xl font-bold">
         {{ levelData?.level?.title }}
       </h1>
-      <p v-if="levelData?.level?.metadata.artist" class="text-xl pt-6">
+      <p v-if="levelData?.level?.metadata.artist" class="pt-6 text-xl">
         {{ levelData?.level?.metadata.artist.name }}
       </p>
-      <div class="py-6 flex gap-2 flex-wrap max-w-xl">
+      <div class="flex max-w-xl flex-wrap gap-2 py-6">
         <template v-for="chart in levelData?.level?.charts" :key="chart.type">
           <LevelDiffBadge :type="chart.type" :difficulty="chart.difficulty" :name="chart.name ?? undefined" :notes-count="chart.notesCount" />
         </template>
       </div>
-      <div class="flex gap-3 flex-wrap">
+      <div class="flex flex-wrap gap-3">
         <button v-if="isMobile" class="btn btn-accent" @click="openWithCytoid">
           <Icon name="ph:circle-duotone" size="24" class="mr-2" />
           Cytoid
@@ -340,15 +340,15 @@ defineCytoidPage({
           </NuxtLink>
         </template>
       </div>
-      <div v-if="levelData?.level?.state === 'UNLISTED'" class="alert alert-info shadow-lg mt-6">
+      <div v-if="levelData?.level?.state === 'UNLISTED'" class="alert alert-info mt-6 shadow-lg">
         <Icon name="mdi:eye-off-outline" size="24" />
         <span>{{ $t('level_details.message_unlisted') }}</span>
       </div>
-      <div v-else-if="levelData?.level?.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
+      <div v-else-if="levelData?.level?.state === 'PRIVATE'" class="alert alert-warning mt-6 shadow-lg">
         <Icon name="mdi:lock-outline" size="24" />
         <span>{{ $t('level_details.message_private') }}</span>
       </div>
-      <div v-else-if="levelData?.level?.censored" class="alert alert-error shadow-lg mt-6">
+      <div v-else-if="levelData?.level?.censored" class="alert alert-error mt-6 shadow-lg">
         <Icon name="mdi:exclamation-thick" size="24" />
         <span>{{ $t('level_details.message_censored', { reason: levelData?.level?.censored }) }}</span>
       </div>
@@ -363,7 +363,7 @@ defineCytoidPage({
             :name="levelData?.level?.owner.name || levelData?.level?.owner.uid || 'Unknown'"
             :uid="levelData?.level?.owner.uid ?? undefined"
           />
-          <div class="prose prose-sm max-w-none mt-4" v-html="useMarked(levelData?.level?.description ?? '')" />
+          <div class="prose prose-sm mt-4 max-w-none" v-html="useMarked(levelData?.level?.description ?? '')" />
           <p class="card-subtitle pt-6">
             {{ $t('level_details.details_card_tags_title') }}
           </p>
@@ -371,35 +371,35 @@ defineCytoidPage({
             <NuxtLink
               v-for="tag in levelData?.level?.tags"
               :key="tag"
-              class="badge badge-neutral select-none mr-2 my-1 max-w-full"
+              class="badge badge-neutral my-1 mr-2 max-w-full select-none"
               :href="`/levels?tags=${tag.toLowerCase()}`"
             >
               <span class="truncate" v-text="tag" />
             </NuxtLink>
           </div>
-          <div v-else class="opacity-60 select-none">
+          <div v-else class="select-none opacity-60">
             None
           </div>
           <template v-if="isQualified || isFeatured">
             <p class="card-subtitle pt-6">
               {{ $t('level_details.details_card_categories_title') }}
             </p>
-            <div class="grid grid-flow-col w-fit gap-2">
-              <div v-if="levelData.level.category.includes('featured')" class="badge badge-lg category-badge-featured">
+            <div class="grid w-fit grid-flow-col gap-2">
+              <div v-if="levelData.level.category.includes('featured')" class="category-badge-featured badge badge-lg">
                 Featured
               </div>
-              <div v-if="levelData.level.category.includes('qualified')" class="badge badge-lg category-badge-qualified">
+              <div v-if="levelData.level.category.includes('qualified')" class="category-badge-qualified badge badge-lg">
                 Qualified
               </div>
             </div>
           </template>
         </div>
       </div>
-      <div class="card w-full bg-base-100 shadow-xl mt-5">
+      <div class="card mt-5 w-full bg-base-100 shadow-xl">
         <div class="card-body">
           <p class="card-subtitle flex items-center gap-2">
             {{ $t('level_details.details_card_rating_title') }}
-            <span class="badge badge-sm badge-neutral">
+            <span class="badge badge-neutral badge-sm">
               {{ levelData?.level?.rating.total }}
             </span>
           </p>
@@ -408,7 +408,7 @@ defineCytoidPage({
               :class="{
                 'flex-1': !(ratingUpCount > ratingDownCount),
               }"
-              class="stat w-2/5 flex justify-center items-end"
+              class="stat flex w-2/5 items-end justify-center"
             >
               <div class="stat-value text-center text-2xl">
                 <p
@@ -431,7 +431,7 @@ defineCytoidPage({
               :class="{
                 'flex-1': !(ratingDownCount > ratingUpCount),
               }"
-              class="stat w-2/5 flex justify-center items-end"
+              class="stat flex w-2/5 items-end justify-center"
             >
               <div class="stat-value text-center text-2xl">
                 <p
@@ -451,8 +451,8 @@ defineCytoidPage({
           </div>
 
           <template v-if="isLogin">
-            <div class="flex py-3 px-4 mt-2 bg-gray-500/20 rounded-full select-none">
-              <span class="aspect-square rounded-full overflow-hidden h-8">
+            <div class="mt-2 flex select-none rounded-full bg-gray-500/20 px-4 py-3">
+              <span class="aspect-square h-8 overflow-hidden rounded-full">
                 <img :src="avatarURL(user?.id)">
               </span>
               <div class="flex-1" />
@@ -465,7 +465,7 @@ defineCytoidPage({
                 >
               </div>
               <div class="flex-1" />
-              <button v-if="updateRateLoading" class="btn btn-circle btn-ghost btn-sm loading" />
+              <button v-if="updateRateLoading" class="btn btn-circle btn-ghost loading btn-sm" />
               <button v-else :disabled="!userRating" class="btn btn-circle btn-ghost btn-sm" @click="updateRate(0)">
                 <Icon name="mdi:delete-outline" size="23" />
               </button>
@@ -473,7 +473,7 @@ defineCytoidPage({
           </template>
         </div>
       </div>
-      <div class="card w-full bg-base-100 shadow-xl mt-5">
+      <div class="card mt-5 w-full bg-base-100 shadow-xl">
         <div class="card-body gap-6">
           <MetaBox v-if="levelData?.level?.metadata" :metadata="levelData?.level?.metadata" />
 
@@ -482,7 +482,7 @@ defineCytoidPage({
               Id
             </p>
             <a
-              class="text-2xl cursor-pointer hover:underline underline-offset-4 decoration-primary/80 "
+              class="cursor-pointer text-2xl decoration-primary/80 underline-offset-4 hover:underline "
               @click="copyToClipboard(levelData.level.uid, 'level id')"
             >
               {{ levelData.level.uid }}<Icon name="mdi:content-copy" size="18" class="ml-2" />
@@ -490,7 +490,7 @@ defineCytoidPage({
           </div>
         </div>
       </div>
-      <div class="card w-full bg-base-100 shadow-xl mt-5">
+      <div class="card mt-5 w-full bg-base-100 shadow-xl">
         <div class="card-body gap-6">
           <div class="flex flex-col gap-2">
             <p class="card-subtitle">
@@ -533,14 +533,14 @@ defineCytoidPage({
 
   <dialog ref="downloadCytoidDialog" class="modal">
     <form method="dialog" class="modal-box">
-      <h3 class="font-bold text-lg">
+      <h3 class="text-lg font-bold">
         Launching Cytoid...
       </h3>
       <p class="py-4">
         Don't have Cytoid on your device yet? Download Cytoid now!
       </p>
       <div class="modal-action">
-        <button class="btn btn-neutral btn-square">
+        <button class="btn btn-square btn-neutral">
           <Icon name="mdi:close" size="18" />
         </button>
         <NuxtLink class="btn btn-primary flex-1" :to="{ name: 'download' }">

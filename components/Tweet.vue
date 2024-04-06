@@ -29,13 +29,13 @@ useHead({
 </script>
 
 <template>
-  <div class="card bg-base-100 overflow-hidden border-solid border-gray-500">
+  <div class="card overflow-hidden border-solid border-gray-500 bg-base-100">
     <div class="p-8 pb-2">
       <h2 class="card-subtitle">
         {{ $t('homepage.latest_tweet_title') }}
       </h2>
     </div>
-    <div class="twitter-box p-4 pt-0 mb-8 max-h-96 overflow-y-auto">
+    <div class="twitter-box mb-8 max-h-96 overflow-y-auto p-4 pt-0">
       <a
         class="twitter-timeline"
         data-dnt="true"

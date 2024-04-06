@@ -57,7 +57,7 @@ interface SelectorItem {
   <div class="dropdown" :class="{ 'dropdown-open': open }">
     <div
       ref="ctl"
-      class="btn btn-neutral flex-nowrap btn-sm"
+      class="btn btn-neutral btn-sm flex-nowrap"
       @click="open = !open"
     >
       <template v-if="selectedItem">
@@ -68,7 +68,7 @@ interface SelectorItem {
     </div>
     <ul
       ref="box"
-      class="dropdown-content z-[1] menu p-2 shadow bg-neutral rounded-box !fixed mt-2"
+      class="menu dropdown-content !fixed z-[1] mt-2 rounded-box bg-neutral p-2 shadow"
       :style="`top: ${ctlPos}px`"
     >
       <li

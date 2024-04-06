@@ -25,16 +25,16 @@ const post = computed(() => getFragmentData(PostCardData, props.post))
     :cover="post.cover?.stripe"
     class="h-44"
   >
-    <div v-if="post.creationDate" class="px-2 py-1 w-full flex flex-row items-center">
+    <div v-if="post.creationDate" class="flex w-full flex-row items-center px-2 py-1">
       {{ dateFromNow(post.creationDate) }}
     </div>
     <div class="flex-1" />
-    <div class="px-2 py-1 w-full flex flex-row items-center">
+    <div class="flex w-full flex-row items-center px-2 py-1">
       <div class="w-full">
         <h2 class="card-title block truncate">
           {{ post.title }}
         </h2>
-        <h2 v-if="post.slogan" class="text-neutral-content opacity-80 truncate">
+        <h2 v-if="post.slogan" class="truncate text-neutral-content opacity-80">
           {{ post.slogan }}
         </h2>
       </div>

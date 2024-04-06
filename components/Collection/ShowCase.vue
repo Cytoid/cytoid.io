@@ -37,14 +37,14 @@ const collection = computed(() => parseFragment(CollectionShowCaseData, props.co
     class="mt-4"
   >
     <template #desperation>
-      <div class="px-2 py-1 w-full flex flex-row items-center">
+      <div class="flex w-full flex-row items-center px-2 py-1">
         <div class="w-full">
           <h2 class="card-title block truncate">
             <NuxtLink :to="{ name: 'collections-id', params: { id: collection.uid } }">
               {{ collection.title }}
             </NuxtLink>
           </h2>
-          <h2 class="text-neutral-content opacity-80 truncate">
+          <h2 class="truncate text-neutral-content opacity-80">
             {{ collection.slogan }}
           </h2>
         </div>
@@ -52,7 +52,7 @@ const collection = computed(() => parseFragment(CollectionShowCaseData, props.co
     </template>
 
     <template #subDesperation>
-      <div class="px-2 w-full flex flex-row items-center">
+      <div class="flex w-full flex-row items-center px-2">
         <div>
           <UserAvatar
             v-if="collection.owner"

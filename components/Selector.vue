@@ -70,7 +70,7 @@ interface SelectorItem {
     </div>
     <ul
       tabindex="0"
-      class="dropdown-content menu p-2 shadow bg-neutral rounded-box mt-2"
+      class="menu dropdown-content mt-2 rounded-box bg-neutral p-2 shadow"
     >
       <li
         v-for="item in items"

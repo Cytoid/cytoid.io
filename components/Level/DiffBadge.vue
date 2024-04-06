@@ -40,11 +40,11 @@ const _difficulty = computed(() => {
 
 <template>
   <div :class="`w-min max-w-xs diff-badge rounded-full diff-badge-${_type} tooltip tooltip-primary`" :data-tip="notesCount ? `${notesCount} notes` : ``">
-    <div class="diff-badge-body py-2 px-5 flex justify-center items-center">
+    <div class="diff-badge-body flex items-center justify-center px-5 py-2">
       <div>
         <span class="diff-badge-lv">Lv.</span>{{ _difficulty }}
       </div>
-      <span class="diff-badge-name truncate ml-2">{{ _name }}</span>
+      <span class="diff-badge-name ml-2 truncate">{{ _name }}</span>
     </div>
   </div>
 </template>

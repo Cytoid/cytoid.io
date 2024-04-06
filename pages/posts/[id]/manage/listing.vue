@@ -29,8 +29,8 @@ async function submit() {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div class="card bg-base-100 w-full shadow-xl">
+  <div class="flex w-full flex-col gap-5">
+    <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <!-- Title -->
         <div class="flex flex-col gap-2">
@@ -109,7 +109,7 @@ async function submit() {
           <h2 class="card-subtitle">
             Access Restriction
           </h2>
-          <label class="w-fit label cursor-pointer flex gap-4 sm:flex-row-reverse">
+          <label class="label flex w-fit cursor-pointer gap-4 sm:flex-row-reverse">
             <span class="label-text">
               {{ locked ? 'Locked' : 'Unlocked' }}
             </span>
@@ -132,7 +132,7 @@ async function submit() {
           </label>
         </div>
 
-        <div class="flex flex-col gap-2 items-end">
+        <div class="flex flex-col items-end gap-2">
           <button class="btn btn-primary" :disabled="loading" @click="submit">
             <span v-if="loading" class="loading loading-spinner" />
             {{ $t('general.save_btn') }}

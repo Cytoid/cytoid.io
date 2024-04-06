@@ -69,12 +69,12 @@ defineCytoidPage({
       <h1 class="text-5xl font-bold">
         {{ collection.title }}
       </h1>
-      <p v-if="collection.slogan" class="text-xl pt-6">
+      <p v-if="collection.slogan" class="pt-6 text-xl">
         {{ collection.slogan }}
       </p>
       <div
         v-if="user && (isModerator || user.id === collection.owner?.id)"
-        class="mt-6 flex gap-3 flex-wrap max-w-xl"
+        class="mt-6 flex max-w-xl flex-wrap gap-3"
       >
         <NuxtLink
           class="btn btn-neutral"
@@ -87,11 +87,11 @@ defineCytoidPage({
     </template>
 
     <template #additionContent>
-      <div v-if="collection.state === 'UNLISTED'" class="alert alert-info shadow-lg mt-6">
+      <div v-if="collection.state === 'UNLISTED'" class="alert alert-info mt-6 shadow-lg">
         <Icon name="mdi:eye-off-outline" size="24" />
         <span> {{ $t('collection_details.message_unlisted') }} </span>
       </div>
-      <div v-else-if="collection.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
+      <div v-else-if="collection.state === 'PRIVATE'" class="alert alert-warning mt-6 shadow-lg">
         <Icon name="mdi:lock-outline" size="24" />
         <span> {{ $t('collection_details.message_private') }} </span>
       </div>
@@ -116,13 +116,13 @@ defineCytoidPage({
                 <NuxtLink
                   v-for="tag in collection.tags"
                   :key="tag"
-                  class="badge badge-neutral select-none mr-2 my-1 max-w-full"
+                  class="badge badge-neutral my-1 mr-2 max-w-full select-none"
                   :href="`/levels?tags=${tag.toLowerCase()}`"
                 >
                   <span class="truncate" v-text="tag" />
                 </NuxtLink>
               </div>
-              <div v-else class="opacity-60 select-none">
+              <div v-else class="select-none opacity-60">
                 None
               </div>
             </div>
@@ -166,7 +166,7 @@ defineCytoidPage({
           Levels
         </h2>
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-4"
+          class="grid grid-cols-1 gap-4 lg:grid-cols-2"
         >
           <LevelCard
             v-for="level in collection.levels" :key="fid(level)"

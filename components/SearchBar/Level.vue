@@ -102,8 +102,8 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
 <template>
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <div v-if="owner || tags.length > 0" class="flex items-center flex-wrap mb-4 gap-4">
-        <div v-if="owner" class="badge badge-lg h-8 flex">
+      <div v-if="owner || tags.length > 0" class="mb-4 flex flex-wrap items-center gap-4">
+        <div v-if="owner" class="badge badge-lg flex h-8">
           <span class="ellipsis">
             Owner: {{ owner }}
           </span>
@@ -111,7 +111,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             <Icon name="material-symbols:close" size="16" />
           </button>
         </div>
-        <div v-for="tag in tags" :key="tag" class="badge badge-lg h-8 flex">
+        <div v-for="tag in tags" :key="tag" class="badge badge-lg flex h-8">
           <span class="ellipsis">
             Tag: {{ tag }}
           </span>
@@ -123,31 +123,31 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
       <div class="form-control">
         <div class="join text-base-content">
           <input
-            v-model="search" type="text" placeholder="Search levels..." class="join-item input input-bordered w-full"
+            v-model="search" type="text" placeholder="Search levels..." class="input join-item input-bordered w-full"
             @keyup.enter="updateSearch"
           >
-          <button class="join-item btn btn-primary btn-square" :disabled="search === route.query.search" @click="updateSearch">
+          <button class="btn btn-square btn-primary join-item" :disabled="search === route.query.search" @click="updateSearch">
             <Icon name="material-symbols:search" size="24" />
           </button>
         </div>
       </div>
-      <div class="pt-4 w-full sm:flex">
-        <div class="sm:flex gap-4">
+      <div class="w-full pt-4 sm:flex">
+        <div class="gap-4 sm:flex">
           <div class="max-w-fit">
             <p class="card-subtitle">
               {{ $t('levels.sort_select_title') }}
             </p>
             <div class="form-control w-full max-w-xs pt-2">
               <div class="flex items-center justify-center gap-2">
-                <button v-if="order === 'desc'" class="join-item btn btn-square btn-neutral" @click="order = 'asc'">
+                <button v-if="order === 'desc'" class="btn btn-square join-item btn-neutral" @click="order = 'asc'">
                   <Icon name="fa-solid:sort-amount-down" size="20" />
                 </button>
-                <button v-else class="join-item btn btn-square btn-neutral" @click="order = 'desc'">
+                <button v-else class="btn btn-square join-item btn-neutral" @click="order = 'desc'">
                   <Icon name="fa-solid:sort-amount-up" size="20" />
                 </button>
                 <Selector
                   v-model="sort"
-                  class="join-item btn btn-square btn-neutral w-fit"
+                  class="btn btn-square join-item btn-neutral w-fit"
                   :items="[
                     { value: 'relevance', label: $t('levels.sort_select_relevance'), disabled: search.length === 0 },
                     { value: 'creation_date', label: $t('levels.sort_select_upload_date') },
@@ -170,7 +170,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             </p>
             <div class="join pt-2">
               <button
-                class="join-item btn btn-neutral"
+                class="btn join-item btn-neutral"
                 :class="{
                   'btn-active': !(featured || qualified),
                 }"
@@ -179,18 +179,18 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                 {{ $t('levels.category_select_item_all') }}
               </button>
               <button
-                class="join-item btn btn-fea btn-neutral"
+                class="btn-fea btn join-item btn-neutral"
                 :class="{
-                  'btn-active bg-featured/75': featured,
+                  'bg-featured/75 btn-active': featured,
                 }"
                 @click="featured = !featured"
               >
                 {{ $t('levels.category_select_item_featured') }}
               </button>
               <button
-                class="join-item btn btn-qua btn-neutral"
+                class="btn-qua btn join-item btn-neutral"
                 :class="{
-                  'btn-active bg-qualified/75': qualified,
+                  'bg-qualified/75 btn-active': qualified,
                 }"
                 @click="qualified = !qualified"
               >

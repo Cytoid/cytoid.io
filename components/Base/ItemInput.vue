@@ -116,7 +116,7 @@ function stringToTags(text: string) {
 
 <template>
   <div v-if="advancedMode">
-    <div class="w-full mb-2">
+    <div class="mb-2 w-full">
       <BaseItemInputItemConetent
         v-for="item in advancedPreviewItems" :key="item"
         :name="getItemName(item)"
@@ -124,8 +124,8 @@ function stringToTags(text: string) {
         :verified="getVerified(item)"
       />
     </div>
-    <div class="w-full flex gap-2">
-      <div class="flex-1 join join-vertical">
+    <div class="flex w-full gap-2">
+      <div class="join join-vertical flex-1">
         <button class="btn btn-primary join-item" :disabled="!advancedEdited" @click="saveAdvancedMode">
           <Icon name="mdi:check" size="24" />
         </button>
@@ -137,7 +137,7 @@ function stringToTags(text: string) {
     </div>
   </div>
   <div v-else>
-    <div class="w-full mb-2">
+    <div class="mb-2 w-full">
       <BaseItemInputItemConetent
         v-for="item in items" :key="item"
         :name="getItemName(item)"
@@ -146,11 +146,11 @@ function stringToTags(text: string) {
         :verified="getVerified(item)"
       />
     </div>
-    <div class="w-full flex flex-col sm:flex-row gap-2">
-      <div class="flex-1 flex relative">
-        <div ref="commonInputDom" class="flex-1 join flex">
+    <div class="flex w-full flex-col gap-2 sm:flex-row">
+      <div class="relative flex flex-1">
+        <div ref="commonInputDom" class="join flex flex-1">
           <input
-            v-model="tmpText" class="input input-bordered join-item flex-1"
+            v-model="tmpText" class="input join-item input-bordered flex-1"
             @keyup.enter="addTmpTextToItem"
             @keydown.delete.ctrl="removeLastItem"
             @click="showSuggestion = true"

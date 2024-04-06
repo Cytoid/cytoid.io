@@ -60,9 +60,9 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
     <template
       #dropZone="{ upload, reset, isOverDropZone, openDialog }"
     >
-      <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
+      <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
         <div
-          class="card-body card flex flex-col"
+          class="card card-body flex flex-col"
           :class="{
             'bg-secondary/25': replace,
             'bg-primary/25': !replace,
@@ -76,7 +76,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
             }}
           </h2>
           <div
-            class="flex-1 border-4 border-dashed p-6 my-2 rounded-2xl flex flex-col items-center justify-between select-none gap-2"
+            class="my-2 flex flex-1 select-none flex-col items-center justify-between gap-2 rounded-2xl border-4 border-dashed p-6"
             :class="{
               'border-neutral-content': isOverDropZone,
               'border-neutral-content/25': !isOverDropZone,
@@ -121,7 +121,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
       #default="{ message, progress, error }"
     >
       <div v-if="started">
-        <div v-if="uploading" class="alert bg-neutral border-0 shadow-lg">
+        <div v-if="uploading" class="alert border-0 bg-neutral shadow-lg">
           <Icon name="mdi:upload" size="24" />
           <div>
             <h3 class="font-bold">
@@ -160,7 +160,7 @@ async function afterUpload(data: FilePostResponse | null | undefined) {
             Don't know how to create one? Read our wiki
           </span>
           <a
-            class="btn btn-sm btn-ghost"
+            class="btn btn-ghost btn-sm"
             href="https://github.com/Cytoid/Cytoid/wiki/a.-Creating-a-level" target="_blank"
           >
             See

@@ -25,7 +25,7 @@ interface ConfirmCollectionData {
       {{ $t('studio.level_delete_confirm_title', { name: collection.title }) }}
     </template>
 
-    <div class="w-full flex flex-col gap-2">
+    <div class="flex w-full flex-col gap-2">
       <I18nT keypath="studio.level_delete_confirm_content1" tag="p">
         <strong class="font-bold"> {{ collection.title }} </strong>
       </I18nT>

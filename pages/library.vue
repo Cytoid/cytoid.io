@@ -29,8 +29,8 @@ defineCytoidPage({
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto">
-    <div class="h-24 relative">
+  <div class="mx-auto max-w-5xl">
+    <div class="relative h-24">
       <div id="contentTitle" class="absolute bottom-0 left-0">
         <h1 class="text-4xl font-bold">
           {{ $t('general.library') }}
@@ -38,7 +38,7 @@ defineCytoidPage({
       </div>
     </div>
     <div class="mt-4">
-      <div class="mt-4 md:mt-0 flex flex-col gap-4">
+      <div class="mt-4 flex flex-col gap-4 md:mt-0">
         <div v-if="ownedLevel.length > 0" class="card w-full bg-base-100 shadow-xl">
           <div class="card-body">
             <h2 class="card-subtitle">
@@ -46,7 +46,7 @@ defineCytoidPage({
             </h2>
             <!-- Owned -->
             <div
-              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
             >
               <LevelCard
                 v-for="level, index in ownedLevel" :key="index"
@@ -64,7 +64,7 @@ defineCytoidPage({
             </h2>
             <!-- Favorites -->
             <div
-              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
             >
               <LevelCard
                 v-for="level, index in lovedLevel" :key="index"

@@ -75,8 +75,8 @@ async function submit() {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div class="card bg-base-100 w-full shadow-xl">
+  <div class="flex w-full flex-col gap-5">
+    <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">
@@ -109,7 +109,7 @@ async function submit() {
           </div>
         </div>
 
-        <div class="flex flex-col gap-2 items-end">
+        <div class="flex flex-col items-end gap-2">
           <button class="btn btn-primary" :disabled="isSubmitting" @click="submit">
             <span v-if="isSubmitting" class="loading loading-spinner" />
             {{ $t('general.save_btn') }}
@@ -119,7 +119,7 @@ async function submit() {
     </div>
     <div
       v-if="isModerator"
-      class="card bg-base-100 w-full shadow-xl"
+      class="card w-full bg-base-100 shadow-xl"
     >
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2 sm:flex-row sm:gap-8">
@@ -127,14 +127,14 @@ async function submit() {
             <h2 class="card-subtitle">
               {{ $t('level_details.manage.admin.censorship_title') }}
             </h2>
-            <label class="label cursor-pointer flex gap-2 sm:flex-row-reverse">
+            <label class="label flex cursor-pointer gap-2 sm:flex-row-reverse">
               <span class="label-text">
                 {{ $t('level_details.manage.admin.censorship_checkbox_title') }}
               </span>
               <input v-model="censored" type="checkbox" class="toggle" :class="{ 'toggle-error': censored }">
             </label>
           </div>
-          <div class="flex-1 flex flex-col gap-2">
+          <div class="flex flex-1 flex-col gap-2">
             <h2 class="card-subtitle">
               {{ $t('level_details.manage.admin.censorship_reason_field') }}
             </h2>
@@ -166,7 +166,7 @@ async function submit() {
           />
         </div>
 
-        <div class="flex flex-col gap-2 items-end">
+        <div class="flex flex-col items-end gap-2">
           <button class="btn btn-secondary" :disabled="isSubmitting" @click="submit">
             <span v-if="isSubmitting" class="loading loading-spinner" />
             {{ $t('general.save_btn') }}

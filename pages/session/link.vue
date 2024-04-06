@@ -108,7 +108,7 @@ defineCytoidPage({
 <template>
   <LayoutSession>
     <div class="my-2">
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
         <div class="card-body">
           <h2 class="card-title">
             {{ t('link.title', { provider }) }}
@@ -117,23 +117,23 @@ defineCytoidPage({
           <div class="mt-2" />
           <div class="form-control">
             <div class="join w-full">
-              <label for="link-username" class="join-item btn btn-neutral">
+              <label for="link-username" class="btn join-item btn-neutral">
                 <Icon name="ph:user-bold" size="18" />
               </label>
               <input
                 id="link-username" v-model="linkForm.username" type="text" :placeholder="t('login.username_field_placeholder')"
-                class="join-item input input-bordered flex-1 w-full"
+                class="input join-item input-bordered w-full flex-1"
               >
             </div>
           </div>
           <div class="form-control">
             <div class="join w-full">
-              <label for="link-password" class="join-item btn btn-neutral">
+              <label for="link-password" class="btn join-item btn-neutral">
                 <Icon name="material-symbols:key" size="18" />
               </label>
               <input
                 id="link-password" v-model="linkForm.password" type="password" :placeholder="t('login.password_field_placeholder')"
-                class="join-item input input-bordered flex-1 w-full"
+                class="input join-item input-bordered w-full flex-1"
               >
             </div>
           </div>

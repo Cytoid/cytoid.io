@@ -34,7 +34,7 @@ const links: {
 </script>
 
 <template>
-  <footer class="footer footer-center my-10 text-base-content rounded">
+  <footer class="footer footer-center my-10 rounded text-base-content">
     <div>
       <div class="footer-item-box">
         <span
@@ -48,14 +48,14 @@ const links: {
           </NuxtLink>
         </span>
         <div
-          ref="langSelect" class="dropdown dropdown-top dropdown-hover dropdown-end" :class="{
+          ref="langSelect" class="dropdown dropdown-end dropdown-top dropdown-hover" :class="{
             'dropdown-open': keepShowLangSelectBox,
           }"
         >
           <button class="clickable select-none py-2" @click="keepShowLangSelectBox = !keepShowLangSelectBox">
             <Icon name="mdi:translate" size="16" /> {{ $t('general.language') }}
           </button>
-          <ul tabindex="0" class="dropdown-content menu menu-compact p-2 shadow bg-base-100 shadow-2xl rounded-box w-44">
+          <ul tabindex="0" class="menu-compact menu dropdown-content w-44 rounded-box bg-base-100 p-2 shadow-2xl">
             <li v-for="available in locales" :key="available.code">
               <button :class="{ active: locale === available.code }" @click="locale = available.code">
                 <span class="mx-auto" v-text="available.name" />
@@ -66,7 +66,7 @@ const links: {
       </div>
       <div>
         <p>
-          Cytoid built by <a href="https://cytoid.io/profile/tigerhix" class="link link-hover">TigerHix</a>, <a href="https://cytoid.io/profile/neo" class="link link-hover">Neo</a> and <a href="https://cytoid.io/profile/teages_0v0" class="link link-hover">Teages</a>. All rights
+          Cytoid built by <a href="https://cytoid.io/profile/tigerhix" class="link-hover link">TigerHix</a>, <a href="https://cytoid.io/profile/neo" class="link-hover link">Neo</a> and <a href="https://cytoid.io/profile/teages_0v0" class="link-hover link">Teages</a>. All rights
           reserved.
         </p>
       </div>

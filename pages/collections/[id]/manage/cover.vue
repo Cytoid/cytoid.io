@@ -34,10 +34,10 @@ async function coverUploaded(newData: FilePostResponse | null | undefined) {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div class="card bg-base-100 w-full shadow-xl">
+  <div class="flex w-full flex-col gap-5">
+    <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body gap-4">
-        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div class="flex flex-col gap-2">
             <h2 class="card-subtitle">
               Artist Name

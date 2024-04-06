@@ -32,7 +32,7 @@ const collection = computed(() => parseFragment(CollectionCardData, props.collec
     :to="{ name: 'collections-id', params: { id: collection.uid } }"
     :cover="collection.cover?.thumbnail ?? undefined"
   >
-    <div class="px-2 w-full flex flex-row items-center">
+    <div class="flex w-full flex-row items-center px-2">
       <div>
         <UserAvatar
           v-if="collection.owner"
@@ -50,12 +50,12 @@ const collection = computed(() => parseFragment(CollectionCardData, props.collec
     </div>
     <div class="flex-1" />
 
-    <div class="px-2 w-full flex flex-row">
+    <div class="flex w-full flex-row px-2">
       <div class="w-full">
         <h2 class="card-title block truncate">
           {{ collection.title }}
         </h2>
-        <h2 v-if="collection.slogan" class="text-neutral-content opacity-80 truncate">
+        <h2 v-if="collection.slogan" class="truncate text-neutral-content opacity-80">
           {{ collection.slogan }}
         </h2>
       </div>

@@ -105,8 +105,8 @@ function submit() {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div class="card bg-base-100 w-full shadow-xl">
+  <div class="flex w-full flex-col gap-5">
+    <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <!-- Title -->
         <div class="flex flex-col gap-2">

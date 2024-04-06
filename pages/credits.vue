@@ -21,13 +21,13 @@ defineCytoidPage({
   <template v-if="data">
     <div v-for="section, index in data.content" :key="index">
       <div v-if="!section.title" class="mb-4" />
-      <div v-else class="mt-0 w-full flex justify-center">
-        <div class="px-2 flex-1">
-          <div class="ml-auto w-fit opacity-75 tracking-widest">
+      <div v-else class="mt-0 flex w-full justify-center">
+        <div class="flex-1 px-2">
+          <div class="ml-auto w-fit tracking-widest opacity-75">
             {{ section.title }}
           </div>
         </div>
-        <div class="px-2 flex-1">
+        <div class="flex-1 px-2">
           <div v-for="member in section.members" :key="member">
             {{ member }}
           </div>
@@ -36,13 +36,13 @@ defineCytoidPage({
     </div>
 
     <div>
-      <p class="w-fit mx-auto my-8">
+      <p class="mx-auto my-8 w-fit">
         We would like to thank our {{ data.patronsCount }} patrons who donated to keep our servers alive.
       </p>
     </div>
 
     <div class="px-4">
-      <div v-for="patron in data.patrons" :key="patron.owner.uid" class="ml-4 my-6 flex items-center">
+      <div v-for="patron in data.patrons" :key="patron.owner.uid" class="my-6 ml-4 flex items-center">
         <UserAvatar
           :name="patron.owner.name ?? patron.owner.uid"
           :uid="patron.owner.uid"

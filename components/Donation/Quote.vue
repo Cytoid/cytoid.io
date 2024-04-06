@@ -38,8 +38,8 @@ async function updateQuote() {
 </script>
 
 <template>
-  <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
-    <div class="card-body card bg-secondary/25">
+  <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
+    <div class="card card-body bg-secondary/25">
       <div class="alert border-0 bg-secondary/25">
         <Icon name="mdi:heart" size="24" />
         <span>
@@ -54,13 +54,13 @@ async function updateQuote() {
       <h2 class="card-subtitle mt-2">
         {{ $t('general.sponsorship') }}
       </h2>
-      <div class="flex w-full m-4 mt-0">
+      <div class="m-4 mt-0 flex w-full">
         <div class="avatar">
-          <div class="w-16 h-16 mt-4 rounded-full">
+          <div class="mt-4 size-16 rounded-full">
             <img :src="avatar">
           </div>
         </div>
-        <div class="flex flex-col justify-center gap-1 flex-1 pt-6 px-4 w-0">
+        <div class="flex w-0 flex-1 flex-col justify-center gap-1 px-4 pt-6">
           <div>
             <p class="card-title break-all">
               {{ name }}
@@ -76,7 +76,7 @@ async function updateQuote() {
         {{ $t('general.sponsorship_quote') }}
       </h2>
       <div class="join flex">
-        <input v-model="quote" class="flex-1 input input-bordered input-secondary bg-base-100 join-item">
+        <input v-model="quote" class="input join-item input-bordered input-secondary flex-1 bg-base-100">
         <button class="btn btn-secondary join-item" @click="updateQuote">
           {{ $t('general.save_btn') }}
         </button>

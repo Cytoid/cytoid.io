@@ -48,14 +48,14 @@ async function saveProfile() {
 </script>
 
 <template>
-  <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
-    <div class="card-body card flex flex-col gap-2">
+  <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
+    <div class="card card-body flex flex-col gap-2">
       <h2 class="card-subtitle mb-2">
         {{ $t('general.birthday') }}
       </h2>
       <div class="form-control">
         <div class="join w-full">
-          <label for="birthday" class="join-item btn btn-neutral">
+          <label for="birthday" class="btn join-item btn-neutral">
             <Icon name="mdi:cake-variant-outline" size="20" />
           </label>
           <input
@@ -63,7 +63,7 @@ async function saveProfile() {
             :placeholder="$t('general.birthday')"
             min="1900-01-01"
             :max="new Date().toISOString().split('T')[0]"
-            class="join-item input input-bordered flex-1 w-full"
+            class="input join-item input-bordered w-full flex-1"
           >
         </div>
       </div>

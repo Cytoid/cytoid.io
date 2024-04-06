@@ -12,19 +12,19 @@ const isScrolled = computed(() => x.value > 0)
 </script>
 
 <template>
-  <div class="card bg-base-100 w-full md:flex md:flex-row">
-    <div class="relative card md:min-w-[20rem] md:w-80">
-      <div class="absolute h-full w-full card overflow-hidden flex">
+  <div class="card w-full bg-base-100 md:flex md:flex-row">
+    <div class="card relative md:w-80 md:min-w-80">
+      <div class="card absolute flex size-full overflow-hidden">
         <div
           class="flex-1 bg-cover bg-center transition-all"
           :style="`background-image: url(&quot;${cover}&quot;)`"
         >
-          <div class="bg-black/60 transition h-full w-full" />
+          <div class="size-full bg-black/60 transition" />
         </div>
       </div>
 
-      <div class="h-fit w-full flex-1 flex z-10">
-        <div class="h-full w-full p-3 flex-1 flex flex-col">
+      <div class="z-10 flex h-fit w-full flex-1">
+        <div class="flex size-full flex-1 flex-col p-3">
           <slot name="desperation" />
           <div class="flex-1" />
           <slot name="subDesperation" />
@@ -32,11 +32,11 @@ const isScrolled = computed(() => x.value > 0)
       </div>
     </div>
 
-    <div class="overflow-hidden mx-2 relative">
+    <div class="relative mx-2 overflow-hidden">
       <div ref="showcaseItemOuterBox" class="overflow-x-auto">
-        <div class="showcase-items flex flex-row w-fit gap-1">
+        <div class="showcase-items flex w-fit flex-row gap-1">
           <slot />
-          <NuxtLink v-if="more" :to="more" class="more-btn w-20 flex flex-col gap-4 items-center justify-center">
+          <NuxtLink v-if="more" :to="more" class="more-btn flex w-20 flex-col items-center justify-center gap-4">
             <button class="btn btn-circle btn-primary">
               <Icon name="mdi:chevron-right" size="24" />
             </button>
@@ -44,9 +44,9 @@ const isScrolled = computed(() => x.value > 0)
           </NuxtLink>
         </div>
       </div>
-      <div v-show="!isScrolled" class="absolute right-0 top-0 h-full w-24 flex items-center justify-end bg-gradient-to-r from-transparent to-gray-900/75">
+      <div v-show="!isScrolled" class="absolute right-0 top-0 flex h-full w-24 items-center justify-end bg-gradient-to-r from-transparent to-gray-900/75">
         <div class="aspect-square w-8 -rotate-90">
-          <Icon name="mdi:chevron-down" class="h-full w-full animate-bounce" />
+          <Icon name="mdi:chevron-down" class="size-full animate-bounce" />
         </div>
       </div>
     </div>

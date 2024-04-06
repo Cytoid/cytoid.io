@@ -248,20 +248,20 @@ defineCytoidPage({
 <template>
   <LayoutContent v-if="profileData?.profile && !hiddenProfile">
     <template #contentTitle>
-      <div class="flex w-full m-4">
+      <div class="m-4 flex w-full">
         <div class="avatar">
-          <div class="w-24 h-24 mt-4 rounded-full">
+          <div class="mt-4 size-24 rounded-full">
             <img v-if="profileData.profile.user?.avatar.large" :src="profileData.profile.user?.avatar.large">
           </div>
         </div>
-        <div class="flex flex-col justify-center gap-1 flex-1 pt-6 px-4 w-0">
+        <div class="flex w-0 flex-1 flex-col justify-center gap-1 px-4 pt-6">
           <div class="flex gap-1">
             <p class="card-title break-all">
               {{ profileData.profile.user?.name || profileData.profile.user?.uid }}
             </p>
             <NuxtLink
               v-if="isModerator"
-              class="btn btn-xs btn-ghost btn-circle"
+              class="btn btn-circle btn-ghost btn-xs"
               :to="{
                 name: 'studio-users',
                 hash: `#${profileData.profile.user?.uid ?? profileData.profile.user?.id}`,
@@ -281,7 +281,7 @@ defineCytoidPage({
             </div>
             <UserRatingBadge :rating="profileData.profile.rating" />
           </div>
-          <div class="flex gap-2 my-1">
+          <div class="my-1 flex gap-2">
             <span
               class="badge badge-sm"
               :class="{
@@ -299,7 +299,7 @@ defineCytoidPage({
 
     <template #subContent>
       <!-- Bio -->
-      <div class="card w-full bg-base-100 shadow-xl mb-5">
+      <div class="card mb-5 w-full bg-base-100 shadow-xl">
         <div class="card-body flex flex-col gap-4">
           <template v-if="profileData.profile.bio">
             <h2 class="card-subtitle">
@@ -317,26 +317,26 @@ defineCytoidPage({
       </div>
 
       <!-- Badges -->
-      <div v-if="faBadges.length + eventBadges.length > 0" class="card w-full bg-base-100 shadow-xl mb-5">
+      <div v-if="faBadges.length + eventBadges.length > 0" class="card mb-5 w-full bg-base-100 shadow-xl">
         <div class="card-body">
           <template v-if="eventBadges.length > 0">
             <h2 class="card-subtitle">
               {{ $t('profile.badges_title') }}
             </h2>
-            <div class="grid grid-cols-3 gap-2 mb-2">
+            <div class="mb-2 grid grid-cols-3 gap-2">
               <img v-for="badge in eventBadges" :key="badge.uid" :src="badge.metadata.imageUrl" :alt="badge.description ?? undefined" class="rounded-md">
             </div>
           </template>
           <template v-if="faBadges.length > 0">
             <div v-for="badge in faBadges" :key="badge.uid" class="collapse collapse-open my-2">
-              <div class="collapse-title min-h-0 py-0 px-2 flex items-center text-xl font-medium">
+              <div class="collapse-title flex min-h-0 items-center px-2 py-0 text-xl font-medium">
                 <FAIcon :package="badge.metadata.fontawesome.pack" :icon="badge.metadata.fontawesome.icon" :class="`h-6 w-6 inline-block mr-2 ${badge.metadata.fontawesome.class}`" />
                 {{ badge.title }}
               </div>
               <div
                 class="collapse-content p-0" style="padding-bottom: 0"
               >
-                <p class="pt-2 px-2">
+                <p class="px-2 pt-2">
                   {{ badge.description }}
                 </p>
               </div>
@@ -346,7 +346,7 @@ defineCytoidPage({
       </div>
 
       <!-- Recent plays -->
-      <div v-if="profileData.profile.recentRecords.length > 0" class="card w-full bg-base-100 shadow-xl mb-5">
+      <div v-if="profileData.profile.recentRecords.length > 0" class="card mb-5 w-full bg-base-100 shadow-xl">
         <div class="card-body">
           <h2 class="card-subtitle">
             {{ $t('profile.recent_ranks_title') }}
@@ -357,9 +357,9 @@ defineCytoidPage({
     </template>
 
     <!-- Gameplay -->
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl mb-5">
+    <div class="card mb-5 w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body bg-primary/25">
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
           <defineStatItem v-slot="{ title, data }">
             <div class="stat p-0">
               <div class="stat-title text-neutral-content">
@@ -378,9 +378,9 @@ defineCytoidPage({
           <StatItem :title="$t('profile.total_play_time')" :data="timeFormatDuration(profileData.profile.activity.totalPlayTime)" />
         </div>
 
-        <div class="overflow-auto w-auto">
+        <div class="w-auto overflow-auto">
           <div
-            class="tabs rounded-full w-max bg-neutral mt-2"
+            class="tabs mt-2 w-max rounded-full bg-neutral"
           >
             <a
               class="tab rounded-full"
@@ -412,14 +412,14 @@ defineCytoidPage({
     <!-- Collection -->
     <div
       v-if="collections && collections.length > 0"
-      class="card bg-base-100 overflow-hidden w-full shadow-xl mb-5"
+      class="card mb-5 w-full overflow-hidden bg-base-100 shadow-xl"
     >
       <div class="card-body bg-secondary/25">
         <h2 class="card-subtitle">
           {{ $t('profile.collections_title') }}
         </h2>
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-4"
+          class="grid grid-cols-1 gap-4 lg:grid-cols-2"
         >
           <CollectionCard
             v-for="collection in collections" :key="collection.id"
@@ -436,11 +436,11 @@ defineCytoidPage({
     <!-- Levels -->
     <div
       v-if="profileData.profile.user?.levelsCount ?? 0 > 0"
-      class="card w-full bg-base-100 shadow-xl overflow-hidden mb-5"
+      class="card mb-5 w-full overflow-hidden bg-base-100 shadow-xl"
     >
-      <div class="bg-base-100 card overflow-hidden">
+      <div class="card overflow-hidden bg-base-100">
         <div class="bg-qualified/25">
-          <div class="bg-base-100 card overflow-hidden">
+          <div class="card overflow-hidden bg-base-100">
             <div class="bg-featured/25">
               <!-- Featured Levels -->
               <div
@@ -450,7 +450,7 @@ defineCytoidPage({
                 <h2 class="card-subtitle">
                   {{ $t('profile.levels_title') }}
                 </h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                   <LevelCard
                     v-for="level, index in featuredLevels" :key="index"
                     class="h-48"
@@ -462,7 +462,7 @@ defineCytoidPage({
                     }"
                   />
                 </div>
-                <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, featured: 'true' } }" class="btn bg-featured mt-4">
+                <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, featured: 'true' } }" class="bg-featured btn mt-4">
                   {{ $t('profile.levels_featured_all_btn', { count: profileData.profile.user?.featuredLevelsCount }) }}
                 </NuxtLink>
               </div>
@@ -480,7 +480,7 @@ defineCytoidPage({
             >
               {{ $t('profile.levels_title') }}
             </h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
               <LevelCard
                 v-for="level, index in qualifiedLevels" :key="index"
                 class="h-48"
@@ -492,7 +492,7 @@ defineCytoidPage({
                 }"
               />
             </div>
-            <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, qualified: 'true' } }" class="btn bg-qualified mt-4">
+            <NuxtLink :to="{ name: 'levels', query: { owner: profileData.profile.user?.uid || profileData.profile.user?.id, qualified: 'true' } }" class="bg-qualified btn mt-4">
               {{ $t('profile.levels_qualified_all_btn', { count: profileData.profile.user?.qualifiedLevelsCount }) }}
             </NuxtLink>
           </div>
@@ -509,7 +509,7 @@ defineCytoidPage({
         >
           {{ $t('profile.levels_title') }}
         </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <LevelCard
             v-for="level, index in levels" :key="index"
             class="h-48"
@@ -536,7 +536,7 @@ defineCytoidPage({
   </LayoutContent>
 
   <!-- Admin -->
-  <div class="w-full flex">
+  <div class="flex w-full">
     <button
       v-if="(isModerator) && hiddenProfile === true"
       class="btn btn-ghost flex-1" @click="hiddenProfile = false"

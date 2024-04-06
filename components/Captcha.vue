@@ -59,15 +59,15 @@ function onErrorFn(errorStr: string) {
           'modal-open': lock && token === '',
         }"
       >
-        <div class="modal-box w-fit flex flex-col gap-4">
-          <h3 class="font-bold text-lg">
+        <div class="modal-box flex w-fit flex-col gap-4">
+          <h3 class="text-lg font-bold">
             Turnstile
           </h3>
           <div class="w-fit">
             <NuxtTurnstile
               ref="turnstile"
               v-model="token"
-              class="rounded-xl overflow-hidden bg-image-loading"
+              class="bg-image-loading overflow-hidden rounded-xl"
               style="width: 300px; height: 65px;"
               data-appearance="interaction-only"
               :options="{
