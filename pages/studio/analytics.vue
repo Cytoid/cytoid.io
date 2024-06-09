@@ -110,6 +110,11 @@ const records = computed(() => {
 const isMine = computed(() => {
   return userUid.value === user.value?.uid
 })
+watch(selected, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    page.value = 1
+  }
+})
 
 onMounted(() => {
   nextTick(() => {
