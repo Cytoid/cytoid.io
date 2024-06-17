@@ -59,7 +59,7 @@
     "eslint-plugin-tailwindcss": "^3.17.3",
     "howler": "^2.2.4",
     "marked": "^12.0.2",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.12.2",
     "nuxt-gtag": "^2.0.6",
     "nuxt-icon": "^0.6.8",
     "ogg-opus-decoder": "^1.6.12",
