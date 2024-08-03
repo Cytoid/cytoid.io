@@ -39,7 +39,7 @@ const ctdIdVerify = computed(() => {
 })
 
 const emailVerify = computed(() => {
-  const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  const emailRegex = /^[\w.!#$%&’*+/=?^`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
   if (form.value.email === '') {
     return t('signup.email_field_error_required')
   }
@@ -57,11 +57,11 @@ const passwordVerify = computed(() => {
     return t('general.password_requirement_length')
   }
 
-  if (!/[0-9]/.test(password)) {
+  if (!/\d/.test(password)) {
     return t('general.password_requirement_number')
   }
 
-  if (!/[a-zA-Z]/.test(password)) {
+  if (!/[a-z]/i.test(password)) {
     return t('general.password_requirement_letter')
   }
 

@@ -53,11 +53,11 @@ const newPasswordVerify = computed(() => {
     return t('general.password_requirement_length')
   }
 
-  if (!/[0-9]/.test(newPassword.value)) {
+  if (!/\d/.test(newPassword.value)) {
     return t('general.password_requirement_number')
   }
 
-  if (!/[a-zA-Z]/.test(newPassword.value)) {
+  if (!/[a-z]/i.test(newPassword.value)) {
     return t('general.password_requirement_letter')
   }
 

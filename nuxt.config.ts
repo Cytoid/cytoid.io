@@ -192,4 +192,6 @@ export default defineNuxtConfig({
   vite: {
     clearScreen: false,
   },
+
+  compatibilityDate: '2024-08-03',
 })

@@ -6,13 +6,13 @@ export default <NitroAppPlugin> function (nitroApp) {
     // Mark legacy chunks as nomodule (prevents modern browsers from loading them)
     // At the same time, unmark them as defer (otherwise System.register() in the legacy entry doesn't actually execute the code)
     response.body = response.body?.replace(
-      /(<script src="[^"]+\-legacy\.[^>]+") defer/g,
+      /(<script src="[^"]+-legacy\.[^>]+") defer/g,
       '$1 nomodule',
     )
 
     // Remove legacy chunks preload (fixes warnings in modern browsers)
     response.body = response.body?.replace(
-      /<link rel="preload" as="script" href="[^"]+\-legacy\..*?>/g,
+      /<link rel="preload" as="script" href="[^"]+-legacy\..*?>/g,
       '',
     )
 

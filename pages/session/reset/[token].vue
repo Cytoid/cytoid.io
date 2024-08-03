@@ -28,11 +28,11 @@ const passwordVerify = computed(() => {
     return t('general.password_requirement_length')
   }
 
-  if (!/[0-9]/.test(password)) {
+  if (!/\d/.test(password)) {
     return t('general.password_requirement_number')
   }
 
-  if (!/[a-zA-Z]/.test(password)) {
+  if (!/[a-z]/i.test(password)) {
     return t('general.password_requirement_letter')
   }
 
