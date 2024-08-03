@@ -55,7 +55,7 @@ const links: {
           <button class="clickable select-none py-2" @click="keepShowLangSelectBox = !keepShowLangSelectBox">
             <Icon name="mdi:translate" size="16" /> {{ $t('general.language') }}
           </button>
-          <ul tabindex="0" class="menu-compact menu dropdown-content w-44 rounded-box bg-base-100 p-2 shadow-2xl">
+          <ul tabindex="0" class="menu-compact menu dropdown-content h-52 w-44 flex-nowrap overflow-y-scroll rounded-box bg-base-100 p-2 shadow-2xl">
             <li v-for="available in locales" :key="available.code">
               <button :class="{ active: locale === available.code }" @click="locale = available.code">
                 <span class="mx-auto" v-text="available.name" />
