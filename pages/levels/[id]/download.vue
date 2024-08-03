@@ -116,7 +116,7 @@ async function sendCallback(verify: () => Promise<string>) {
     callbackUrl.searchParams.append('title', data.value.level.title)
   }
 
-  location.href = callbackUrl.toString()
+  navigateTo(callbackUrl.toString(), { external: true })
 }
 
 const downloadCytoidDialog = ref<HTMLDialogElement | null>(null)
@@ -157,7 +157,14 @@ function cancel() {
 
           <Captcha v-slot="{ verify }">
             <div class="flex h-full flex-col gap-2 sm:col-span-5">
-              <div v-if="!ready" />
+              <div v-if="!ready" class="flex h-full flex-wrap content-end gap-2">
+                <div class="flex w-full flex-col gap-2">
+                  <button class="btn btn-primary btn-block" disabled>
+                    <span class="loading loading-spinner" />
+                    Loading
+                  </button>
+                </div>
+              </div>
 
               <div v-else-if="!isLogin" class="flex h-full flex-wrap content-between gap-2">
                 <div role="alert" class="alert alert-warning">
@@ -182,7 +189,7 @@ function cancel() {
                   </h2>
                   <div v-if="!isTrusted" role="alert" class="alert alert-warning">
                     <Icon name="mdi:alert-circle-outline" size="24" />
-                    <span><b>{{ callbackName }}</b> wants to download this level as you. Make sure you trust the site.</span>
+                    <span><b>{{ callbackName }}</b> wants to download this level <b>as you</b>. Make sure you trust the site.</span>
                   </div>
                 </div>
 
