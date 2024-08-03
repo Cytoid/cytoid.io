@@ -19,16 +19,12 @@ export async function preDecodeAudio(url: string): Promise<string> {
   try {
     res = await decodeVorbis(new Uint8Array(file))
   }
-  catch (e) {
-    // ignore
-  }
+  catch { /* Ignore */ }
   if (!res) {
     try {
       res = await decodeOpus(new Uint8Array(file))
     }
-    catch (e) {
-      // ignore
-    }
+    catch { /* Ignore */ }
   }
   if (!res) {
     console.error('Failed to decode audio')

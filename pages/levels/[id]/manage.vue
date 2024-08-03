@@ -93,7 +93,7 @@ else if (!hasPermission.value) {
   }))
 }
 
-if (/^\/levels\/(.+)\/manage$/.exec(route.fullPath)) {
+if (/^\/levels\/.+\/manage$/.exec(route.fullPath)) {
   navigateTo({ name: 'levels-id-manage-listing', params: { id: levelId } }, {
     replace: true,
   })
