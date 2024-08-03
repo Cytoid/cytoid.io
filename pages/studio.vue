@@ -5,7 +5,7 @@ definePageMeta({
 
 const route = useRoute()
 
-const { user } = useAuth()
+const { user, isModerator } = useAuth()
 
 if (route.name === 'studio') {
   navigateTo({ name: 'studio-levels' }, {
@@ -27,7 +27,7 @@ defineCytoidPage({
           { title: $t('studio.menu_analytics'), icon: 'ion:analytics-sharp', id: 'studio-analytics', to: { name: 'studio-analytics' } },
           { title: $t('studio.menu_levels'), icon: 'mdi:folder-edit-outline', id: 'studio-levels', to: { name: 'studio-levels' } },
           { title: $t('studio.menu_collections'), icon: 'mdi:database-edit-outline', id: 'studio-collections', to: { name: 'studio-collections' } },
-          ...(['admin', 'moderator'].includes(user?.role ?? '') ? [
+          ...(isModerator ? [
             'Admin',
             { title: $t('studio.menu_posts'), icon: 'mdi:file-document', id: 'studio-posts', to: { name: 'studio-posts' } },
             { title: $t('studio.menu_users'), icon: 'mdi:account', id: 'studio-users', to: { name: 'studio-users' } },

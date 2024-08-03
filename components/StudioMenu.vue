@@ -16,9 +16,9 @@ interface MenuLink {
 </script>
 
 <template>
-  <ul class="menu bg-base-100 w-full p-6 pt-4 gap-2 rounded-box">
+  <ul class="menu w-full gap-2 rounded-box bg-base-100 p-6 pt-4">
     <li v-if="back">
-      <NuxtLink class="btn btn-block btn-neutral my-2 content-center" :to="back">
+      <NuxtLink class="btn btn-neutral btn-block my-2 content-center" :to="back">
         <Icon name="material-symbols:arrow-back" size="20" />
       </NuxtLink>
     </li>

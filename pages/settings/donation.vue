@@ -32,7 +32,7 @@ const { data: externals } = await externalsPending
     />
     <DonationVerifier v-else :externals="externals?.my?.externals ?? []" />
   </div>
-  <div v-else class="alert alert-error bg-secondary border-0">
+  <div v-else class="alert alert-error border-0 bg-secondary">
     <Icon name="mdi:loading" size="24" class="animate-spin" />
     <span>Loading...</span>
   </div>

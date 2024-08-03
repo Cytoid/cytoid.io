@@ -47,7 +47,7 @@ const record = computed(() => parseFragment(RecordCardData, props.record))
     :cover="record.chart.level?.bundle?.backgroundImage?.stripe ?? undefined"
     class="h-28"
   >
-    <div class="w-full flex flex-row gap-1">
+    <div class="flex w-full flex-row gap-1">
       <UserAvatar
         v-if="record.owner" :avatar="record.owner.avatar?.small ?? undefined"
         :name="record.owner.name || record.owner.uid || undefined"
@@ -57,12 +57,12 @@ const record = computed(() => parseFragment(RecordCardData, props.record))
       />
     </div>
     <div class="flex-1" />
-    <NestedLink :to="{ name: 'levels-id', params: { id: record.chart.level?.uid } }" class="max-w-full w-fit flex flex-row">
-      <h3 class="card-title text-lg block truncate py-1">
+    <NestedLink :to="{ name: 'levels-id', params: { id: record.chart.level?.uid } }" class="flex w-fit max-w-full flex-row">
+      <h3 class="card-title block truncate py-1 text-lg">
         {{ record.chart.level?.title }}
       </h3>
     </NestedLink>
-    <div class="w-full flex flex-warp flex-row items-center gap-2">
+    <div class="flex-warp flex w-full flex-row items-center gap-2">
       <div class="min-w-0">
         <LevelDiffBadgeSmall
           :type="record.chart.type"
@@ -74,7 +74,7 @@ const record = computed(() => parseFragment(RecordCardData, props.record))
       </div>
       <RecordScoreBadge class="badge-md flex-none" :score="record.score" />
       <div class="flex-1" />
-      <span v-if="record.date" class="w-fit h-fit grow-0 text-xs flex-none">
+      <span v-if="record.date" class="size-fit flex-none grow-0 text-xs">
         {{ dateFromNow(record.date) }}
       </span>
     </div>

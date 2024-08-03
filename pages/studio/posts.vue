@@ -2,7 +2,7 @@
 import type { PostType, ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const router = useRouter()
-const { user, ready } = useAuth()
+const { ready, isModerator } = useAuth()
 
 const query = gql(`
   query StudioGetPosts {
@@ -52,7 +52,7 @@ onMounted(() => {
   nextTick(async () => {
     try {
       await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+      if (!isModerator) {
         throw new Error('Permission denied')
       }
       else {
@@ -134,8 +134,8 @@ interface StudioPostData {
 </script>
 
 <template>
-  <div v-if="user && ['admin', 'moderator'].includes(user.role)" class="w-full flex flex-col gap-5">
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+  <div v-if="isModerator" class="flex w-full flex-col gap-5">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <h2 class="card-subtitle">
           Create a new post
@@ -155,7 +155,7 @@ interface StudioPostData {
           <input v-model="newPostUid" type="text" class="input input-bordered w-full">
         </div>
 
-        <div class="flex flex-col gap-2 items-end">
+        <div class="flex flex-col items-end gap-2">
           <button
             class="btn btn-primary"
             :disabled="!newPostUid || !newPostTitle || creatingPost"
@@ -168,7 +168,7 @@ interface StudioPostData {
       </div>
     </div>
 
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-subtitle">
           Manage
@@ -190,31 +190,31 @@ interface StudioPostData {
                 <td class="flex items-center space-x-3">
                   <div class="flex gap-4">
                     <div
-                      class="aspect-video h-12 sm:h-20 bg-cover rounded-lg"
+                      class="aspect-video h-12 rounded-lg bg-cover sm:h-20"
                       :style="`background-image: url(&quot;${post.cover?.sized}&quot;)`"
                     >
                       <NuxtLink
                         :to="{ name: 'posts-id', params: { id: post.uid } }"
-                        class="block w-full h-full opacity-0 hover:opacity-25 transition-opacity duration-200 bg-base-200"
+                        class="block size-full bg-base-200 opacity-0 transition-opacity duration-200 hover:opacity-25"
                       />
                     </div>
-                    <div class="max-w-[16rem] flex flex-col justify-center">
-                      <div class="font-bold truncate">
+                    <div class="flex max-w-64 flex-col justify-center">
+                      <div class="truncate font-bold">
                         {{ post.title }}
                       </div>
-                      <div class="text-sm opacity-50 truncate">
+                      <div class="truncate text-sm opacity-50">
                         {{ post.uid }}
                       </div>
-                      <div class="flex flex-warp gap-1">
+                      <div class="flex-warp flex gap-1">
                         <div class="flex gap-1">
                           <NuxtLink
-                            class="btn btn-sm btn-ghost btn-circle"
+                            class="btn btn-circle btn-ghost btn-sm"
                             :to="{ name: 'posts-id-manage', params: { id: post.uid } }"
                           >
                             <Icon name="mdi:briefcase-outline" size="18" />
                           </NuxtLink>
                           <button
-                            class="btn btn-sm btn-ghost btn-circle"
+                            class="btn btn-circle btn-ghost btn-sm"
                             :disabled="!!willDeletePostUid"
                             @click="willDeletePostUid = post.uid"
                           >
@@ -273,7 +273,7 @@ interface StudioPostData {
       Deleting {{ willDeletePost?.title || willDeletePostUid }}
     </template>
 
-    <div class="w-full flex flex-col gap-4">
+    <div class="flex w-full flex-col gap-4">
       <p>
         Are you sure you want to delete this post?
       </p>

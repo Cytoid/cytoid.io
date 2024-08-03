@@ -145,7 +145,7 @@ function onClick() {
 <template>
   <ClientOnly>
     <div v-if="pagePreview || previewState.state !== 'ended'" class="fixed bottom-6 right-6">
-      <button class="btn btn-secondary btn-lg btn btn-circle" @click="onClick()">
+      <button class="btn btn-circle btn-secondary btn-lg" @click="onClick()">
         <Icon v-if="previewState.state === 'loading'" name="mdi:loading" size="32" class="animate-spin" />
         <div v-else-if="progress" class="radial-progress" :style="`--value:${progress}; --size:3.5rem; --thickness: 0.3rem;`">
           <Icon v-if="pagePreview && pagePreview !== nowPlaying" name="mdi:stop" size="32" />

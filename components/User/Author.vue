@@ -19,7 +19,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
 <template>
   <DefineAvatarBody>
     <div
-      class="badge h-16 border-0 badge-lg py-4 clickable flex bg-transparent" :class="{
+      class="clickable badge badge-lg flex h-16 border-0 bg-transparent py-4" :class="{
         'bg-transparent': transparent,
         'pl-0': !reverse,
         'flex-row-reverse pr-0': reverse,

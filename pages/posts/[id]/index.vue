@@ -2,7 +2,7 @@
 const route = useRoute()
 const postId = route.params.id as string
 
-const { user } = useAuth()
+const { isModerator } = useAuth()
 
 const query = gql(`
   query GetPost($uid: String!) {
@@ -67,12 +67,12 @@ defineCytoidPage({
       <h1 class="text-5xl font-bold">
         {{ post.title }}
       </h1>
-      <p v-if="post.slogan" class="text-xl pt-6">
+      <p v-if="post.slogan" class="pt-6 text-xl">
         {{ post.slogan }}
       </p>
       <div
-        v-if="user && ['admin', 'moderator'].includes(user.role)"
-        class="mt-6 flex gap-3 flex-wrap max-w-xl"
+        v-if="isModerator"
+        class="mt-6 flex max-w-xl flex-wrap gap-3"
       >
         <NuxtLink
           class="btn btn-neutral"
@@ -85,11 +85,11 @@ defineCytoidPage({
     </template>
 
     <template #additionContent>
-      <div v-if="post.state === 'UNLISTED'" class="alert alert-info shadow-lg mt-6">
+      <div v-if="post.state === 'UNLISTED'" class="alert alert-info mt-6 shadow-lg">
         <Icon name="mdi:eye-off-outline" size="24" />
         <span> This post has expired </span>
       </div>
-      <div v-else-if="post.state === 'PRIVATE'" class="alert alert-warning shadow-lg mt-6">
+      <div v-else-if="post.state === 'PRIVATE'" class="alert alert-warning mt-6 shadow-lg">
         <Icon name="mdi:lock-outline" size="24" />
         <span> This post is not published </span>
       </div>
@@ -156,7 +156,7 @@ defineCytoidPage({
 
     <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body">
-        <div class="prose lg:prose-lg max-w-none" v-html="useSafeMarked(post?.content ?? '')" />
+        <div class="prose max-w-none lg:prose-lg" v-html="useSafeMarked(post?.content ?? '')" />
       </div>
     </div>
   </LayoutContent>

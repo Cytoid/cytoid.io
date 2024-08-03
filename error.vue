@@ -22,9 +22,9 @@ defineCytoidPage({
 
 <template>
   <Layout>
-    <div class="hero h-full my-auto p-0">
-      <div class="hero-content p-0 flex-col sm:flex-row-reverse">
-        <img src="/images/sayakacry.webp" class="max-w-screen sm:max-w-sm w-64" @click="showDetail += 1">
+    <div class="hero my-auto h-full p-0">
+      <div class="hero-content flex-col p-0 sm:flex-row-reverse">
+        <img src="/images/sayakacry.webp" class="max-w-screen w-64 sm:max-w-sm" @click="showDetail += 1">
         <div class="flex-1" />
         <div>
           <h1 class="text-5xl font-bold">
@@ -42,7 +42,7 @@ defineCytoidPage({
 
     <dialog ref="detailDom" class="modal">
       <form method="dialog" class="modal-box">
-        <h3 class="font-bold text-lg">
+        <h3 class="text-lg font-bold">
           Error Details
         </h3>
         <p class="py-4">

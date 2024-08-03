@@ -38,12 +38,12 @@ function afterPost(newPost: CommentResponse) {
       <UserAuthor :size="12" :avatar="post.owner.avatar.small" :uid="post.owner.uid" class="h-12" />
     </div>
     <div
-      class="flex-1 overflow-hidden card bg-base-100 min-h-16" :class="{
+      class="card min-h-16 flex-1 overflow-hidden bg-base-100" :class="{
         'shadow-xl': !lite,
       }"
     >
       <div class="card-body p-6">
-        <div class="flex justify-start items-center text-sm font-bold">
+        <div class="flex items-center justify-start text-sm font-bold">
           <UserAvatar
             v-if="lite" :avatar="post.owner.avatar.small" :uid="post.owner.uid" :name="post.owner.name ?? post.owner.uid"
             :transparent="true"
@@ -58,8 +58,8 @@ function afterPost(newPost: CommentResponse) {
             {{ dateFromNow(post.date) }}
           </span>
         </div>
-        <p class="pl-4 break-words prose" v-html="useMarked(post.content)" />
-        <div class="flex card-actions">
+        <p class="prose break-words pl-4" v-html="useMarked(post.content)" />
+        <div class="card-actions flex">
           <template v-if="replyCount">
             <button v-if="!showMore" class="btn btn-ghost btn-sm" @click="showMore = true">
               <Icon name="material-symbols:keyboard-arrow-down" class="mr-4" size="24" />
@@ -79,8 +79,8 @@ function afterPost(newPost: CommentResponse) {
           <CommentCreate :parent-id="post.id" :category="category" :thread="thread" :verify="verify" :after-post="afterPost" />
         </template>
         <template v-if="showMore">
-          <div class="border-solid border-l-8 border-gray-600" />
-          <CommentContent v-for="_post in data" :key="_post.id" :category="category" :thread="thread" :post="_post" :verify="verify" :lite="true" class="border-solid border-l-2 border-gray-600" />
+          <div class="border-l-8 border-solid border-gray-600" />
+          <CommentContent v-for="_post in data" :key="_post.id" :category="category" :thread="thread" :post="_post" :verify="verify" :lite="true" class="border-l-2 border-solid border-gray-600" />
         </template>
       </div>
     </div>

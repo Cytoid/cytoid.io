@@ -2,7 +2,8 @@
 defineProps<{
   close: () => void
 }>()
-const { user, logout: _logout } = useAuth()
+const { logout: _logout } = useWriteableAuth()
+const { user } = useAuth()
 
 const query = gql(`
   query FetchNavCard($id: ID!) {
@@ -42,18 +43,18 @@ async function logout() {
 </script>
 
 <template>
-  <div v-if="profile" class="fixed right-4 top-12 p-2 sm:absolute sm:top-8 sm:-right-4">
-    <div class="card bg-base-100 shadow-xl w-72">
-      <div class="card w-full bg-base-100 max-h-30 shadow-xl image-full aspect-video">
+  <div v-if="profile" class="fixed right-4 top-12 p-2 sm:absolute sm:-right-4 sm:top-8">
+    <div class="card w-72 bg-base-100 shadow-xl">
+      <div class="max-h-30 card image-full aspect-video w-full bg-base-100 shadow-xl">
         <figure><img v-if="profile.header?.thumbnail" :src="profile.header.thumbnail"></figure>
-        <div class="card-body px-6 py-2 select-none">
-          <div class="flex w-full mt-4">
+        <div class="card-body select-none px-6 py-2">
+          <div class="mt-4 flex w-full">
             <div class="avatar">
-              <NuxtLink class="w-16 h-16 mt-4" :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
+              <NuxtLink class="mt-4 size-16" :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
                 <img v-if="profile.user?.avatar.original" :src="profile.user.avatar.original" class="rounded-full">
               </NuxtLink>
             </div>
-            <div class="flex flex-col justify-center gap-1 flex-1 pt-4 px-4 w-0">
+            <div class="flex w-0 flex-1 flex-col justify-center gap-1 px-4 pt-4">
               <div>
                 <NuxtLink class="card-title break-all" :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
                   {{ user?.name || user?.uid }}
@@ -69,11 +70,11 @@ async function logout() {
           <div class="flex-1" />
           <div class="flex h-12 items-center gap-2">
             <div
-              class="tooltip flex-1 flex items-center"
+              class="tooltip flex flex-1 items-center"
               :data-tip="`${profile.exp.totalExp - profile.exp.currentLevelExp} / ${profile.exp.nextLevelExp - profile.exp.currentLevelExp}`"
             >
               <progress
-                class="progress progress-primary bg-base-100/60 h-3"
+                class="progress progress-primary h-3 bg-base-100/60"
                 :value="profile.exp.totalExp - profile.exp.currentLevelExp"
                 :max="profile.exp.nextLevelExp - profile.exp.currentLevelExp"
               />
@@ -86,7 +87,7 @@ async function logout() {
       </div>
 
       <div class="card-body p-4">
-        <ul class="menu bg-base-100 w-full p-0">
+        <ul class="menu w-full bg-base-100 p-0">
           <li class="hover-bordered">
             <NuxtLink :to="{ name: 'profile-id', params: { id: user?.uid || user?.id } }" @click="close">
               <Icon name="mdi:account" size="24" /> {{ $t('general.profile') }}

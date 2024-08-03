@@ -40,7 +40,7 @@ const loading = ref(false)
 
 const newEmail = ref('')
 const emailVerify = computed(() => {
-  const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  const emailRegex = /^[\w.!#$%&’*+/=?^`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
   if (newEmail.value === '') {
     return t('signup.email_field_error_required')
   }
@@ -133,9 +133,9 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
 
 <template>
   <Captcha v-slot="{ verify }">
-    <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div
-        class="card-body card flex flex-col gap-2"
+        class="card card-body flex flex-col gap-2"
       >
         <h2 class="card-subtitle">
           {{ $t('settings.email_title') }}
@@ -146,7 +146,7 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
             {{ $t('settings.email_verify_warning') }}
           </span>
         </div>
-        <div class="overflow-x-auto mb-4">
+        <div class="mb-4 overflow-x-auto">
           <table class="table">
             <tbody>
               <tr
@@ -163,11 +163,11 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
                     </div>
                   </div>
                 </td>
-                <td class="flex gap-2 justify-end">
+                <td class="flex justify-end gap-2">
                   <button
                     v-if="!email.primary && email.verified"
                     :disabled="loading"
-                    class="btn btn-sm btn-secondary"
+                    class="btn btn-secondary btn-sm"
                     @click="makePrimary(email.address)"
                   >
                     {{ $t('settings.email_make_primary') }}
@@ -175,14 +175,14 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
                   <button
                     v-if="!email.verified"
                     :disabled="loading"
-                    class="btn btn-sm btn-warning"
+                    class="btn btn-warning btn-sm"
                     @click="verifyEmail(email.address, verify)"
                   >
                     {{ $t('settings.email_verify') }}
                   </button>
                   <button
                     :disabled="loading"
-                    class="btn btn-sm btn-error"
+                    class="btn btn-error btn-sm"
                     @click="removeEmail(email.address)"
                   >
                     {{ $t('settings.email_delete') }}
@@ -199,14 +199,14 @@ async function verifyEmail(email: string, verify: () => Promise<string>) {
         </h2>
         <div>
           <div>
-            <div class="join w-full max-w-[24rem]">
-              <label for="reset-mail" class="join-item btn btn-neutral">
+            <div class="join w-full max-w-sm">
+              <label for="reset-mail" class="btn join-item btn-neutral">
                 <Icon name="mdi:email-outline" size="18" />
               </label>
               <input
                 id="reset-mail" v-model="newEmail" type="email" :class="{
                   'input-error': emailVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">

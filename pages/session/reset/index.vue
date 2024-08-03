@@ -86,7 +86,7 @@ defineCytoidPage({
 <template>
   <LayoutSession>
     <div class="my-2">
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
         <div class="card-body">
           <template v-if="sent !== ''">
             <h2 class="card-title">
@@ -106,12 +106,12 @@ defineCytoidPage({
             <div class="mt-2" />
             <div class="form-control">
               <div class="join w-full">
-                <label for="reset-mail" class="join-item btn btn-neutral">
+                <label for="reset-mail" class="btn join-item btn-neutral">
                   <Icon name="mdi:email-outline" size="18" />
                 </label>
                 <input
                   id="reset-mail" v-model="email" type="text" placeholder="Email Address"
-                  class="join-item input input-bordered flex-1 w-full"
+                  class="input join-item input-bordered w-full flex-1"
                 >
               </div>
             </div>

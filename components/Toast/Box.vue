@@ -19,8 +19,8 @@ function getDisplayState(toast: Toast) {
 </script>
 
 <template>
-  <div class="fixed bottom-0 w-screen z-20 overflow-visible">
-    <div class="toast-box flex flex-col gap-2 sm:max-w-lg w-full mx-auto p-4">
+  <div class="fixed bottom-0 z-20 w-screen overflow-visible">
+    <div class="toast-box mx-auto flex w-full flex-col gap-2 p-4 sm:max-w-lg">
       <ToastItem
         v-for="toast in onScreenToasts" :key="toast.id"
         :toast="toast"

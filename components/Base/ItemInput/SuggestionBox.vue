@@ -11,14 +11,14 @@ function getName(item: string) {
 </script>
 
 <template>
-  <div class="absolute -bottom-2 h-0 w-full z-20">
+  <div class="absolute -bottom-2 z-20 h-0 w-full">
     <div
-      class="bg-base-200 w-full shadow-xl rounded-lg"
+      class="w-full rounded-lg bg-base-200 shadow-xl"
     >
       <div class="p-2">
         <button
           v-for="item, i in suggestion" :key="i"
-          class="badge badge-lg badge-neutral m-1"
+          class="badge badge-neutral badge-lg m-1"
           @click="selectSuggestion(item)"
         >
           {{ getName(item) }}

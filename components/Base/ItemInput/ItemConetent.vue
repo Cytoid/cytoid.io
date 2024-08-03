@@ -36,7 +36,7 @@ function remove() {
 <template>
   <DefineItemContentBody>
     <div
-      class="badge badge-lg m-1 pr-1 badge-neutral"
+      class="badge badge-neutral badge-lg m-1 pr-1"
       :class="{
         'bg-error/25': verified === false,
         'bg-success/25': verified === true,
@@ -44,7 +44,7 @@ function remove() {
       }"
     >
       {{ stateInfo }} {{ name }}
-      <button class="btn btn-ghost btn-xs btn-circle ml-1" :disabled="removeItem === undefined" @click="remove">
+      <button class="btn btn-circle btn-ghost btn-xs ml-1" :disabled="removeItem === undefined" @click="remove">
         <Icon name="mdi:close" size="16" />
       </button>
     </div>

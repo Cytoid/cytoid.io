@@ -164,9 +164,9 @@ interface ConfirmLevelData {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
+  <div class="flex w-full flex-col gap-5">
     <LevelUploader />
-    <div class="card bg-base-100 w-full shadow-xl">
+    <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-subtitle">
           Manage
@@ -190,31 +190,31 @@ interface ConfirmLevelData {
                 <td class="flex items-center space-x-3">
                   <div class="flex gap-4">
                     <div
-                      class="aspect-video h-12 sm:h-20 bg-cover rounded-lg"
+                      class="aspect-video h-12 rounded-lg bg-cover sm:h-20"
                       :style="`background-image: url(&quot;${level.bundle?.backgroundImage?.sized}&quot;)`"
                     >
                       <NuxtLink
                         :to="{ name: 'levels-id', params: { id: level.uid } }"
-                        class="block w-full h-full opacity-0 hover:opacity-25 transition-opacity duration-200 bg-base-200"
+                        class="block size-full bg-base-200 opacity-0 transition-opacity duration-200 hover:opacity-25"
                       />
                     </div>
-                    <div class="max-w-[16rem] flex flex-col justify-center">
-                      <div class="font-bold truncate">
+                    <div class="flex max-w-64 flex-col justify-center">
+                      <div class="truncate font-bold">
                         {{ level.title }}
                       </div>
-                      <div class="text-sm opacity-50 truncate">
+                      <div class="truncate text-sm opacity-50">
                         {{ level.uid }}
                       </div>
-                      <div class="flex flex-warp gap-1">
+                      <div class="flex-warp flex gap-1">
                         <div class="flex gap-1">
                           <NuxtLink
-                            class="btn btn-sm btn-ghost btn-circle"
+                            class="btn btn-circle btn-ghost btn-sm"
                             :to="{ name: 'levels-id-manage', params: { id: level.uid } }"
                           >
                             <Icon name="mdi:briefcase-outline" size="18" />
                           </NuxtLink>
                           <button
-                            class="btn btn-sm btn-ghost btn-circle"
+                            class="btn btn-circle btn-ghost btn-sm"
                             :disabled="!!willDeleteLevel"
                             @click="openDeleteConfirm(level)"
                           >

@@ -21,7 +21,7 @@ const metaTypes = Object.keys(metadata).filter(v =>
     <p class="card-subtitle">
       {{ metaType }}
     </p>
-    <NuxtLink v-if="metadata[metaType].url" :href="metadata[metaType].url" class="text-2xl hover:underline underline-offset-4 decoration-primary/80" target="_blank">
+    <NuxtLink v-if="metadata[metaType].url" :href="metadata[metaType].url" class="text-2xl decoration-primary/80 underline-offset-4 hover:underline" target="_blank">
       {{ metadata[metaType].name }}<Icon name="mdi:link-variant" size="18" class="ml-2" />
     </NuxtLink>
     <p v-else class="text-2xl">

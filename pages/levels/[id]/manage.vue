@@ -6,8 +6,6 @@ definePageMeta({
 const route = useRoute()
 const levelId = route.params.id as string
 
-const { user } = useAuth()
-
 const query = gql(`
   query FetchLevelForEditing($uid: String!) {
     level(uid: $uid) {
@@ -68,6 +66,7 @@ const query = gql(`
     my {
       user {
         id
+        role
       }
     }
   }
@@ -79,7 +78,7 @@ const { data, error } = await useAsyncQuery(query, {
 
 const hasPermission = computed(() => {
   return data.value?.level?.owner?.id === data.value?.my?.user?.id
-    || ['admin', 'moderator'].includes(user.value?.role ?? '')
+    || ['admin', 'moderator'].includes((data.value?.my?.user?.role ?? '').toLowerCase())
 })
 if (levelId && !data.value?.level) {
   showError(error.value?.message ?? createError({
@@ -94,7 +93,7 @@ else if (!hasPermission.value) {
   }))
 }
 
-if (/^\/levels\/(.+)\/manage$/.exec(route.fullPath)) {
+if (/^\/levels\/.+\/manage$/.exec(route.fullPath)) {
   navigateTo({ name: 'levels-id-manage-listing', params: { id: levelId } }, {
     replace: true,
   })

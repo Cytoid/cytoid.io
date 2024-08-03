@@ -112,7 +112,7 @@ defineCytoidPage({
 
     <template v-if="haveLevel">
       <div
-        class="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mt-8 md:gap-6 xl:gap-8"
+        class="mt-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-8"
         :class="{
           'opacity-60': loading,
         }"
@@ -128,7 +128,7 @@ defineCytoidPage({
               musicPreview: level.musicPreview,
             },
           }"
-          class="shadow-xl h-56"
+          class="h-56 shadow-xl"
         />
       </div>
 

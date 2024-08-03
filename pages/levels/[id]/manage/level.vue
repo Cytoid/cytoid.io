@@ -194,7 +194,7 @@ function editedOrUndefined<T>(newVal: T, oldVal: T | undefined) {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
+  <div class="flex w-full flex-col gap-5">
     <div v-if="isFreezed" class="alert alert-error">
       <Icon name="material-symbols:error-circle-rounded-outline" size="24" />
       <span>
@@ -210,10 +210,10 @@ function editedOrUndefined<T>(newVal: T, oldVal: T | undefined) {
       </div>
       <LevelUploader :replace="data.level?.uid" />
 
-      <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+      <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
         <div class="card-body">
           <div class="flex flex-col gap-2">
-            <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="flex flex-col gap-2">
                 <h2 class="card-subtitle">
                   {{ $t('level_details.manage.metadata.title_field') }}
@@ -273,7 +273,7 @@ function editedOrUndefined<T>(newVal: T, oldVal: T | undefined) {
           <div class="divider my-2" />
 
           <div class="flex flex-col gap-2">
-            <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="flex flex-col gap-2">
                 <h2 class="card-subtitle">
                   {{ $t('level_details.manage.metadata.artist_field') }}
@@ -403,7 +403,7 @@ function editedOrUndefined<T>(newVal: T, oldVal: T | undefined) {
               Please follow the difficulty rating guidelines when rating your charts.
             </span>
 
-            <NuxtLink class="btn btn-sm btn-ghost" to="/posts/difficulty-v2">
+            <NuxtLink class="btn btn-ghost btn-sm" to="/posts/difficulty-v2">
               <Icon name="ic:sharp-chevron-right" size="24" />
             </NuxtLink>
           </div>
@@ -416,8 +416,8 @@ function editedOrUndefined<T>(newVal: T, oldVal: T | undefined) {
                   'diff-bg-extreme': chart.type === 'extreme',
                 }"
               />
-              <div class="flex-1 overflow-x-hidden flex flex-col gap-2">
-                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
+              <div class="flex flex-1 flex-col gap-2 overflow-x-hidden">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div class="flex flex-col gap-2">
                     <h2 class="card-subtitle">
                       {{ `${chart.type} Difficulty Name` }}

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const { t } = useLocales()
 
-const { user, updateUser } = useAuth()
+const { updateUser } = useWriteableAuth()
+const { user } = useAuth()
 
 const query = gql(`
   query GetUserSecuritySettings {
@@ -52,11 +53,11 @@ const newPasswordVerify = computed(() => {
     return t('general.password_requirement_length')
   }
 
-  if (!/[0-9]/.test(newPassword.value)) {
+  if (!/\d/.test(newPassword.value)) {
     return t('general.password_requirement_number')
   }
 
-  if (!/[a-zA-Z]/.test(newPassword.value)) {
+  if (!/[a-z]/i.test(newPassword.value)) {
     return t('general.password_requirement_letter')
   }
 
@@ -147,21 +148,21 @@ async function unLink(provider: string) {
 
 <template>
   <div class="flex flex-col gap-5">
-    <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
-      <div class="card-body card flex flex-col gap-2">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
+      <div class="card card-body flex flex-col gap-2">
         <h2 class="card-subtitle mb-2">
           {{ $t('general.password_field_label') }}
         </h2>
 
         <div class="form-control">
           <div class="join w-full">
-            <label for="password" class="join-item btn btn-neutral">
+            <label for="password" class="btn join-item btn-neutral">
               <Icon name="material-symbols:key" size="18" />
             </label>
             <input
               id="password" v-model="password" type="password"
               :placeholder="t('signup.password_field_placeholder')"
-              class="join-item input input-bordered flex-1 w-full"
+              class="input join-item input-bordered w-full flex-1"
             >
           </div>
           <label class="label">
@@ -171,14 +172,14 @@ async function unLink(provider: string) {
 
         <div class="form-control">
           <div class="join w-full">
-            <label for="reset-password" class="join-item btn btn-neutral">
+            <label for="reset-password" class="btn join-item btn-neutral">
               <Icon name="material-symbols:key" size="18" />
             </label>
             <input
               id="reset-password" v-model="newPassword" type="password"
               :placeholder="t('general.new_password_field_label')" :class="{
                 'input-error': newPasswordVerify !== null && newPassword !== '',
-              }" class="join-item input input-bordered flex-1 w-full"
+              }" class="input join-item input-bordered w-full flex-1"
             >
           </div>
           <label class="label">
@@ -188,14 +189,14 @@ async function unLink(provider: string) {
 
         <div class="form-control">
           <div class="join w-full">
-            <label for="reset-password-again" class="join-item btn btn-neutral">
+            <label for="reset-password-again" class="btn join-item btn-neutral">
               <Icon name="material-symbols:key" size="18" />
             </label>
             <input
               id="reset-password-again" v-model="newPasswordConfirm" type="password"
               :placeholder="t('signup.password_confirm_field_placeholder')" :class="{
                 'input-error': newPasswordConfirmVerify !== null,
-              }" class="join-item input input-bordered flex-1 w-full"
+              }" class="input join-item input-bordered w-full flex-1"
             >
           </div>
           <label class="label">
@@ -216,8 +217,8 @@ async function unLink(provider: string) {
       </div>
     </div>
 
-    <div class="card w-full bg-base-100 shadow-xl overflow-hidden">
-      <div class="card-body card flex flex-col gap-2">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
+      <div class="card card-body flex flex-col gap-2">
         <h2 class="card-subtitle mb-2">
           {{ $t('general.third_party_sign_on') }}
         </h2>

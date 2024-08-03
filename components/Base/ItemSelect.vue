@@ -13,7 +13,7 @@ const item = defineModel<string | null>({ required: true })
       <label
         v-if="icon"
         :for="props.id"
-        class="join-item btn"
+        class="btn join-item"
         :class="{
           'btn-neutral': !item,
           'btn-success': item && (verified || verified === ''),
@@ -26,7 +26,7 @@ const item = defineModel<string | null>({ required: true })
       <input
         :id="props.id"
         v-model="item" type="text"
-        class="join-item input input-bordered flex-1 w-full"
+        class="input join-item input-bordered w-full flex-1"
       >
     </div>
     <label v-if="item" class="label">

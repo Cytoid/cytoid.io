@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
-    'nuxt-icon',
+    '@nuxt/icon',
     '@nuxtjs/google-fonts',
     '@nuxtjs/turnstile',
     '@vite-pwa/nuxt',
@@ -192,4 +192,6 @@ export default defineNuxtConfig({
   vite: {
     clearScreen: false,
   },
+
+  compatibilityDate: '2024-08-03',
 })

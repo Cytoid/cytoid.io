@@ -47,8 +47,8 @@ else {
 </script>
 
 <template>
-  <div v-if="data?.page" class="max-w-4xl mx-auto">
-    <div class="h-24 relative">
+  <div v-if="data?.page" class="mx-auto max-w-4xl">
+    <div class="relative h-24">
       <div id="contentTitle" class="absolute bottom-0 left-0">
         <h1 class="text-4xl font-bold">
           {{ data.page.title }}
@@ -59,7 +59,7 @@ else {
       <div class="mt-4 md:mt-0">
         <div class="card w-full bg-base-100 shadow-xl">
           <div class="card-body">
-            <div class="prose lg:prose-lg max-w-none" v-html="useSafeMarked(data.page.content)" />
+            <div class="prose max-w-none lg:prose-lg" v-html="useSafeMarked(data.page.content)" />
           </div>
         </div>
       </div>

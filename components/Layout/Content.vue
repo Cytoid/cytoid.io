@@ -8,12 +8,12 @@
   <div>
     <slot name="additionContent" />
   </div>
-  <div class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
+  <div class="mt-4 md:grid md:grid-flow-col md:grid-cols-12 md:gap-4">
     <div id="subContent" class="col-span-5 lg:col-span-4 xl:col-span-3">
       <slot name="subContent" />
     </div>
 
-    <div class="col-span-7 lg:col-span-8 xl:col-span-9 mt-4 md:mt-0">
+    <div class="col-span-7 mt-4 md:mt-0 lg:col-span-8 xl:col-span-9">
       <slot />
     </div>
   </div>

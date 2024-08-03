@@ -28,11 +28,11 @@ const passwordVerify = computed(() => {
     return t('general.password_requirement_length')
   }
 
-  if (!/[0-9]/.test(password)) {
+  if (!/\d/.test(password)) {
     return t('general.password_requirement_number')
   }
 
-  if (!/[a-zA-Z]/.test(password)) {
+  if (!/[a-z]/i.test(password)) {
     return t('general.password_requirement_letter')
   }
 
@@ -88,7 +88,7 @@ defineCytoidPage({
 <template>
   <LayoutSession>
     <div class="my-2">
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
         <div v-if="status === ResetStatus.Nature" class="card-body">
           <h2 class="card-title">
             {{ 'Reset your password' }}
@@ -96,14 +96,14 @@ defineCytoidPage({
 
           <div class="form-control">
             <div class="join w-full">
-              <label for="reset-password" class="join-item btn btn-neutral">
+              <label for="reset-password" class="btn join-item btn-neutral">
                 <Icon name="material-symbols:key" size="18" />
               </label>
               <input
                 id="reset-password" v-model="form.password" type="password" :placeholder="t('general.new_password_field_label')"
                 :class="{
                   'input-error': passwordVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">
@@ -113,14 +113,14 @@ defineCytoidPage({
           </div>
           <div class="form-control">
             <div class="join w-full">
-              <label for="reset-password-again" class="join-item btn btn-neutral">
+              <label for="reset-password-again" class="btn join-item btn-neutral">
                 <Icon name="material-symbols:key" size="18" />
               </label>
               <input
                 id="reset-password-again" v-model="form.passwordAgain" type="password" :placeholder="t('general.password_confirm_field_label')"
                 :class="{
                   'input-error': passwordAgainVerify !== null,
-                }" class="join-item input input-bordered flex-1 w-full"
+                }" class="input join-item input-bordered w-full flex-1"
               >
             </div>
             <label class="label">

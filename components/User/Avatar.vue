@@ -19,7 +19,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
 <template>
   <DefineAvatarBody>
     <div
-      class="badge border-0 badge-lg py-4 clickable flex" :class="{
+      class="clickable badge badge-lg flex border-0 py-4" :class="{
         'bg-transparent': transparent,
         'pl-0': !reverse,
         'flex-row-reverse pr-0': reverse,
@@ -30,7 +30,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
       <UserAvatarIcon :avatar="avatar" :size="size" />
       <p
         v-if="name"
-        class="px-2 whitespace-nowrap"
+        class="whitespace-nowrap px-2"
         :class="{
           'pr-0': transparent && !reverse,
           'pl-0': transparent && reverse,
@@ -45,7 +45,7 @@ const [DefineAvatarBody, AvatarBody] = createReusableTemplate()
     <AvatarBody />
   </button>
 
-  <NestedLink v-else :to="{ name: 'profile-id', params: { id: uid } }">
+  <NestedLink v-else :to="{ name: 'profile-id', params: { id: uid } }" v-bind="$attrs">
     <AvatarBody />
   </NestedLink>
 </template>

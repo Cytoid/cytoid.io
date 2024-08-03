@@ -6,8 +6,8 @@ const level = computed(() => data.value.level)
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+  <div class="flex w-full flex-col gap-5">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-subtitle">
           Rating
@@ -15,7 +15,7 @@ const level = computed(() => data.value.level)
         <BackToOld />
       </div>
     </div>
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-subtitle">
           Plays & Downloads
@@ -23,7 +23,7 @@ const level = computed(() => data.value.level)
         <BackToOld />
       </div>
     </div>
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-subtitle">
           Rankings

@@ -1,14 +1,4 @@
 <script setup lang="ts">
-// auth
-onMounted(() => {
-  nextTick(async () => {
-    if (import.meta.client) {
-      const { init } = useAuth()
-      await init().catch(() => null)
-    }
-  })
-})
-
 useHead({
   titleTemplate(title) {
     return title || 'Cytoid'
@@ -23,7 +13,7 @@ useHead({
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="size-full">
     <NuxtLayout>
       <VitePwaManifest />
 

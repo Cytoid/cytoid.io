@@ -5,7 +5,7 @@ import { RecordQuerySort } from '#build/urql-client/codegen/default/graphql'
 const route = useRoute()
 const router = useRouter()
 
-const { user, isModerator } = useAuth()
+const { isModerator } = useAuth()
 
 const chartId = computed({
   get() {
@@ -115,14 +115,14 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
     <div class="card-body gap-4">
       <!-- Chart -->
       <div class="w-full sm:flex">
-        <div class="sm:flex gap-4 w-full">
+        <div class="w-full gap-4 sm:flex">
           <div class="w-full max-w-xl">
             <p class="card-subtitle">
               Chart
             </p>
             <div class="join w-full">
-              <input v-model="_chartId" class="join-item input input-bordered w-full max-w-xs" placeholder="Chart ID">
-              <button class="join-item btn btn-neutral" @click="_chartId = ''">
+              <input v-model="_chartId" class="input join-item input-bordered w-full max-w-xs" placeholder="Chart ID">
+              <button class="btn join-item btn-neutral" @click="_chartId = ''">
                 <Icon name="mdi:close" size="20" />
               </button>
             </div>
@@ -131,16 +131,16 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
       </div>
 
       <!-- Owner -->
-      <div v-if="['admin', 'moderator'].includes(user?.role ?? '')" class="w-full sm:flex">
-        <div class="sm:flex gap-4 w-full">
+      <div v-if="isModerator" class="w-full sm:flex">
+        <div class="w-full gap-4 sm:flex">
           <div class="w-full max-w-xl">
             <p class="card-subtitle">
               Owner
             </p>
             <div v-if="ownerIdOrUid !== '_'" class="join w-full">
-              <input v-model="_ownerIdOrUid" class="join-item input input-bordered w-full max-w-xs" placeholder="User ID or UID">
+              <input v-model="_ownerIdOrUid" class="input join-item input-bordered w-full max-w-xs" placeholder="User ID or UID">
               <button
-                class="join-item btn btn-neutral"
+                class="btn join-item btn-neutral"
                 @click="() => {
                   _ownerIdOrUid = ownerIdOrUid
                   ownerIdOrUid = '_'
@@ -162,7 +162,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
         </div>
       </div>
 
-      <div class="w-full flex justify-end">
+      <div class="flex w-full justify-end">
         <button class="btn btn-primary" @click="updateInput">
           Search
         </button>
@@ -178,10 +178,10 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
           <p class="card-subtitle">
             Date
           </p>
-          <div class="grid sm:grid-cols-2 gap-2 w-full max-w-xl">
+          <div class="grid w-full max-w-xl gap-2 sm:grid-cols-2">
             <div class="form-control">
               <div class="join w-full">
-                <label for="startDate" class="join-item btn btn-neutral">
+                <label for="startDate" class="btn join-item btn-neutral">
                   <Icon name="mdi:calendar-start-outline" size="20" />
                 </label>
                 <input
@@ -190,14 +190,14 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                   type="date"
                   min="1900-01-01"
                   :max="new Date().toISOString().split('T')[0]"
-                  class="input input-bordered join-item w-full"
+                  class="input join-item input-bordered w-full"
                   placeholder="Start date"
                 >
               </div>
             </div>
             <div class="form-control">
               <div class="join w-full">
-                <label for="endDate" class="join-item btn btn-neutral">
+                <label for="endDate" class="btn join-item btn-neutral">
                   <Icon name="mdi:calendar-end-outline" size="20" />
                 </label>
                 <input
@@ -206,7 +206,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                   type="date"
                   min="1900-01-01"
                   :max="new Date().toISOString().split('T')[0]"
-                  class="input input-bordered join-item w-full"
+                  class="input join-item input-bordered w-full"
                   placeholder="End date"
                 >
               </div>
@@ -216,7 +216,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
       </div>
 
       <div class="w-full sm:flex">
-        <div class="sm:flex gap-4">
+        <div class="gap-4 sm:flex">
           <!-- Sort -->
           <div class="max-w-fit">
             <p class="card-subtitle">
@@ -232,7 +232,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                 </button>
                 <Selector
                   v-model="sort"
-                  class="join-item btn btn-square btn-neutral w-fit"
+                  class="btn btn-square join-item btn-neutral w-fit"
                   :items="[
                     { value: RecordQuerySort.Date, label: 'Date', icon: 'ic:baseline-calendar-month' },
                     { value: RecordQuerySort.Accuracy, label: 'Accuracy', icon: 'mdi:alpha-p-circle-outline' },
@@ -256,7 +256,7 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             <div class="pt-4 sm:pt-0">
               <div class="join pt-2">
                 <button
-                  class="join-item btn btn-neutral"
+                  class="btn join-item btn-neutral"
                   :class="{
                     'btn-active': !best,
                   }"
@@ -265,9 +265,9 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                   ALL
                 </button>
                 <button
-                  class="join-item btn"
+                  class="btn join-item"
                   :class="{
-                    'btn-active btn-primary': best,
+                    'btn-primary btn-active': best,
                     'btn-neutral': !best,
                   }"
                   @click="best = !best"
@@ -286,9 +286,9 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
             <div class="pt-4 sm:pt-0">
               <div class="join pt-2">
                 <button
-                  class="join-item btn"
+                  class="btn join-item"
                   :class="{
-                    'btn-active btn-secondary': !ranked,
+                    'btn-secondary btn-active': !ranked,
                     'btn-neutral': ranked,
                   }"
                   @click="ranked = false"
@@ -296,9 +296,9 @@ async function updateRouter(val: LocationQueryRaw | undefined) {
                   Practice
                 </button>
                 <button
-                  class="join-item btn"
+                  class="btn join-item"
                   :class="{
-                    'btn-active btn-primary': ranked,
+                    'btn-primary btn-active': ranked,
                     'btn-neutral': !ranked,
                   }"
                   @click="ranked = true"

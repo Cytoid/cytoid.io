@@ -67,12 +67,12 @@ defineCytoidPage({
 <template>
   <div class="flex flex-col gap-5">
     <div
-      class="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mt-8 md:gap-6 xl:gap-8"
+      class="mt-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-8"
     >
       <CollectionCard
         v-for="collection in collections" :key="collection.id"
         :collection="collection"
-        class="shadow-xl h-56"
+        class="h-56 shadow-xl"
       />
     </div>
 

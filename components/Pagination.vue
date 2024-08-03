@@ -90,7 +90,7 @@ function jumpToPage() {
   <div class="flex">
     <div v-if="!open" class="flex pt-4">
       <div class="flex-1" />
-      <div class="shadow-xl flex content-center items-center gap-2">
+      <div class="flex content-center items-center gap-2 shadow-xl">
         <!-- <button class="btn btn-neutral btn-sm btn-square" :disabled="isFirstPage || disabled" @click="page -= 1">
           <Icon name="ic:round-keyboard-arrow-left" />
         </button> -->
@@ -111,25 +111,25 @@ function jumpToPage() {
         <!-- <button class="btn btn-neutral btn-sm btn-square" :disabled="isFinalPage || disabled" @click="page += 1">
           <Icon name="ic:round-keyboard-arrow-right" />
         </button> -->
-        <button class="btn btn-secondary btn-sm btn-circle" :disabled="disabled" @click="openJump">
+        <button class="btn btn-circle btn-secondary btn-sm" :disabled="disabled" @click="openJump">
           <Icon name="uil:enter" />
         </button>
       </div>
     </div>
 
     <div v-else class="flex pt-4">
-      <div class="join text-base-content w-full flex">
-        <button class="join-item btn btn-error btn-sm btn-square" :disabled="disabled" @click="open = false">
+      <div class="join flex w-full text-base-content">
+        <button class="btn btn-square btn-error join-item btn-sm" :disabled="disabled" @click="open = false">
           <Icon name="material-symbols:close" size="24" />
         </button>
         <input
-          v-model="customPage" type="number" :placeholder="page?.toString()" :min="1" :max="total" class="join-item input input-sm text-center w-20 input-bordered appearance-none"
+          v-model="customPage" type="number" :placeholder="page?.toString()" :min="1" :max="total" class="input input-sm join-item input-bordered w-20 appearance-none text-center"
           @keyup.enter="null"
         >
-        <button class="join-item btn btn-neutral w-20 font-bold btn-sm" :disabled="disabled" @click="customPage = total.toString()">
+        <button class="btn join-item btn-neutral btn-sm w-20 font-bold" :disabled="disabled" @click="customPage = total.toString()">
           / {{ total }}
         </button>
-        <button class="join-item btn btn-sm btn-primary btn-square" :disabled="disabled || customPage === ''" @click="jumpToPage">
+        <button class="btn btn-square btn-primary join-item btn-sm" :disabled="disabled || customPage === ''" @click="jumpToPage">
           <Icon name="uil:enter" size="24" />
         </button>
       </div>

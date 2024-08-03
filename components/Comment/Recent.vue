@@ -24,12 +24,12 @@ interface CommentData {
 
 <template>
   <div class="card-compact">
-    <div class="card-body recent-comment-reset-px">
+    <div class="recent-comment-reset-px card-body">
       <NuxtLink v-if="comment.metadata" :to="comment.metadata.path">
         {{ comment.metadata.title }}
       </NuxtLink>
       <p> {{ comment.content }}</p>
-      <div class="w-full flex flex-warp flex-row items-center gap-2">
+      <div class="flex-warp flex w-full flex-row items-center gap-2">
         <UserAvatar
           v-if="comment.owner"
           :avatar="comment.owner.avatar?.small ?? undefined"
@@ -39,7 +39,7 @@ interface CommentData {
           :transparent="true"
         />
         <div class="flex-1" />
-        <p v-if="comment.date" class="w-fit grow-0 text-xs flex-none">
+        <p v-if="comment.date" class="w-fit flex-none grow-0 text-xs">
           {{ dateFromNow(comment.date) }}
         </p>
       </div>

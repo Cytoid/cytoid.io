@@ -110,6 +110,11 @@ const records = computed(() => {
 const isMine = computed(() => {
   return userUid.value === user.value?.uid
 })
+watch(selected, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    page.value = 1
+  }
+})
 
 onMounted(() => {
   nextTick(() => {
@@ -128,19 +133,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="user" class="w-full flex flex-col gap-5">
-    <div v-if="userUid" class="card overflow-hidden bg-base-100 w-full shadow-xl">
+  <div v-if="user" class="flex w-full flex-col gap-5">
+    <div v-if="userUid" class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body gap-2">
         <h2 v-if="profile" class="card-subtitle">
           User Rating
         </h2>
-        <div v-if="profile" class="flex w-full m-4">
+        <div v-if="profile" class="m-4 flex w-full">
           <div class="avatar">
-            <div class="w-16 h-16 rounded-full">
+            <div class="size-16 rounded-full">
               <img v-if="profile.user?.avatar.large" :src="profile.user?.avatar.large">
             </div>
           </div>
-          <div class="flex flex-col justify-center gap-1 flex-1 px-4 w-0">
+          <div class="flex w-0 flex-1 flex-col justify-center gap-1 px-4">
             <div>
               <p class="card-title break-all">
                 {{ profile.user?.name || profile.user?.uid }}
@@ -155,9 +160,9 @@ onMounted(() => {
         <h2 class="card-subtitle">
           Rating Analytics
         </h2>
-        <div class="flex flex-col sm:flex-row sm:gap-4 sm:justify-between sm:items-center">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div
-            class="tabs rounded-full w-max bg-neutral mt-2"
+            class="tabs mt-2 w-max rounded-full bg-neutral"
           >
             <a
               class="tab rounded-full"
@@ -200,22 +205,22 @@ onMounted(() => {
                 <td class="flex items-center space-x-3">
                   <div class="flex gap-4">
                     <div
-                      class="aspect-video h-12 sm:h-20 bg-cover rounded-lg"
+                      class="aspect-video h-12 rounded-lg bg-cover sm:h-20"
                       :style="`background-image: url(&quot;${record.chart?.level?.bundle?.backgroundImage?.sized}&quot;)`"
                     >
                       <NuxtLink
                         :to="{ name: 'levels-id', params: { id: record.chart?.level?.uid } }"
-                        class="block w-full h-full opacity-0 hover:opacity-25 transition-opacity duration-200 bg-base-200"
+                        class="block size-full bg-base-200 opacity-0 transition-opacity duration-200 hover:opacity-25"
                       />
                     </div>
-                    <div class="max-w-[16rem] flex flex-col justify-center">
-                      <div class="font-bold truncate">
+                    <div class="flex max-w-64 flex-col justify-center">
+                      <div class="truncate font-bold">
                         {{ record.chart?.level?.title }}
                       </div>
-                      <div class="text-sm opacity-50 truncate">
+                      <div class="truncate text-sm opacity-50">
                         {{ record.chart?.level?.uid }}
                       </div>
-                      <div class="flex flex-warp mt-2">
+                      <div class="flex-warp mt-2 flex">
                         <LevelDiffBadgeSmall
                           v-if="record.chart"
                           :type="record.chart.type"

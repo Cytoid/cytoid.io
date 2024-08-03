@@ -16,8 +16,6 @@ const mutation = gql(`
 const route = useRoute()
 const collectionId = route.params.id as string
 
-const { user } = useAuth()
-
 const query = gql(`
   query FetchCollectionForEditing($uid: String!) {
     collection(uid: $uid) {
@@ -50,6 +48,7 @@ const query = gql(`
     my {
       user {
         id
+        role
       }
     }
   }
@@ -61,7 +60,7 @@ const { data, error } = await useAsyncQuery(query, {
 
 const hasPermission = computed(() => {
   return data.value?.collection?.owner?.id === data.value?.my?.user?.id
-    || ['admin', 'moderator'].includes(user.value?.role ?? '')
+    || ['admin', 'moderator'].includes((data.value?.my?.user?.role ?? '').toLowerCase())
 })
 if (collectionId && !data.value?.collection) {
   showError(error.value?.message ?? createError({

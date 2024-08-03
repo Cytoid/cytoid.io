@@ -90,10 +90,10 @@ resetCytoidPage()
 <template>
   <Hero />
 
-  <div v-if="data" class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
-    <div class="col-span-7 lg:col-span-8 mt-4 md:mt-0">
+  <div v-if="data" class="mt-4 md:grid md:grid-flow-col md:grid-cols-12 md:gap-4">
+    <div class="col-span-7 mt-4 md:mt-0 lg:col-span-8">
       <!-- News -->
-      <div class="card overflow-hidden bg-base-100 w-full shadow-xl mb-5">
+      <div class="card mb-5 w-full overflow-hidden bg-base-100 shadow-xl">
         <div class="card-body bg-primary/25">
           <h2 class="card-subtitle">
             {{ $t('homepage.news_title') }}
@@ -110,10 +110,10 @@ resetCytoidPage()
     <div class="col-span-5 lg:col-span-4">
       <!-- Getting Start -->
       <div
-        class="card w-full bg-base-100 shadow-xl overflow-hidden mb-4"
+        class="card mb-4 w-full overflow-hidden bg-base-100 shadow-xl"
       >
         <div
-          class="card-body card bg-secondary/25"
+          class="card card-body bg-secondary/25"
         >
           <h2 class="card-subtitle">
             {{ $t('homepage.featured_collection_title') }}
@@ -135,10 +135,10 @@ resetCytoidPage()
 
       <!-- Level -->
       <div
-        class="card w-full bg-base-100 shadow-xl overflow-hidden"
+        class="card w-full overflow-hidden bg-base-100 shadow-xl"
       >
         <div
-          class="card-body card bg-featured/25"
+          class="bg-featured/25 card card-body"
         >
           <h2 class="card-subtitle">
             {{ $t('homepage.featured_level_title') }}
@@ -167,9 +167,9 @@ resetCytoidPage()
     :collection="data.hitech"
   />
 
-  <div v-if="dataDynamic" class="mt-4 md:grid md:grid-cols-12 md:grid-flow-col md:gap-4">
-    <div class="col-span-7 md:col-span-6 lg:col-span-4 mt-4 md:mt-0">
-      <div class="card w-full bg-base-100 shadow-xl mb-5">
+  <div v-if="dataDynamic" class="mt-4 md:grid md:grid-flow-col md:grid-cols-12 md:gap-4">
+    <div class="col-span-7 mt-4 md:col-span-6 md:mt-0 lg:col-span-4">
+      <div class="card mb-5 w-full bg-base-100 shadow-xl">
         <div class="card-body">
           <h2 class="card-subtitle">
             {{ $t('profile.recent_ranks_title') }}
@@ -184,7 +184,7 @@ resetCytoidPage()
     </div>
 
     <div class="md:col-span-6 lg:col-span-8 lg:grid lg:grid-cols-8 lg:gap-4">
-      <div class="lg:col-span-4 mb-4">
+      <div class="mb-4 lg:col-span-4">
         <!-- Tweets -->
         <Tweet class="mb-4" />
 
@@ -214,13 +214,13 @@ resetCytoidPage()
       <div class="lg:col-span-4">
         <!-- Discord -->
         <div
-          class="card w-full bg-base-100 shadow-xl overflow-hidden mb-4"
+          class="card mb-4 w-full overflow-hidden bg-base-100 shadow-xl"
         >
           <div
-            class="card-body card bg-primary/25"
+            class="card card-body bg-primary/25"
           >
             <h2 class="card-subtitle">
-              <img src="/images/discord.webp" class="h-6 my-2 px-1">
+              <img src="/images/discord.webp" class="my-2 h-6 px-1">
             </h2>
             <p>
               {{ $t('homepage.connect_discord_content') }}
@@ -233,10 +233,10 @@ resetCytoidPage()
 
         <!-- Patreon -->
         <div
-          class="card w-full bg-base-100 shadow-xl overflow-hidden mb-4"
+          class="card mb-4 w-full overflow-hidden bg-base-100 shadow-xl"
         >
           <div
-            class="card-body card bg-secondary/25"
+            class="card card-body bg-secondary/25"
           >
             <h2 class="card-subtitle">
               <img src="/images/patreon.webp" class="h-8">

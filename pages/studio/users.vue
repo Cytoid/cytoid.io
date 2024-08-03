@@ -3,7 +3,7 @@ import type { StudioLookupUserQuery } from '#build/urql-client/codegen/default/g
 
 const route = useRoute()
 const router = useRouter()
-const { user, ready } = useAuth()
+const { ready, isModerator } = useAuth()
 
 const query = gql(`
   query StudioLookupUser($uid: String, $id: ID) {
@@ -63,7 +63,7 @@ onMounted(() => {
   nextTick(async () => {
     try {
       await until(ready).toBeTruthy({ timeout: 1000, throwOnTimeout: true })
-      if (!['admin', 'moderator'].includes(user.value?.role ?? '')) {
+      if (!isModerator) {
         throw new Error('Permission denied')
       }
       else {
@@ -151,15 +151,15 @@ async function setActive(active: boolean) {
 </script>
 
 <template>
-  <div v-if="user && ['admin', 'moderator'].includes(user.role)" class="w-full flex flex-col gap-5">
-    <div class="card overflow-hidden bg-base-100 w-full shadow-xl">
+  <div v-if="isModerator" class="flex w-full flex-col gap-5">
+    <div class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">
             User ID or UUID
           </h2>
           <div class="join">
-            <input v-model="userId" class="input w-full input-bordered join-item">
+            <input v-model="userId" class="input join-item input-bordered w-full">
             <button class="btn btn-primary join-item" @click="findUser(userId)">
               Search
             </button>
@@ -177,20 +177,20 @@ async function setActive(active: boolean) {
       <span>The user ({{ notFound }}) not found.</span>
     </div>
 
-    <div v-if="data?.user" class="card overflow-hidden bg-base-100 w-full shadow-xl">
+    <div v-if="data?.user" class="card w-full overflow-hidden bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">
             Profile
           </h2>
 
-          <div class="flex w-full m-4">
+          <div class="m-4 flex w-full">
             <div class="avatar">
-              <div class="w-16 h-16 rounded-full">
+              <div class="size-16 rounded-full">
                 <img v-if="data.user.avatar.large" :src="data.user.avatar.large">
               </div>
             </div>
-            <div class="flex flex-col justify-center gap-1 flex-1 px-4 w-0">
+            <div class="flex w-0 flex-1 flex-col justify-center gap-1 px-4">
               <div>
                 <NuxtLink :to="{ name: 'profile-id', params: { id: data.user.uid } }" class="card-title break-all">
                   {{ data.user.name ?? data.user.uid }}
@@ -312,7 +312,7 @@ async function setActive(active: boolean) {
             Grant Badge
           </h2>
           <div class="join">
-            <input v-model="badge" class="input w-full input-bordered join-item">
+            <input v-model="badge" class="input join-item input-bordered w-full">
             <button
               :disabled="mutationLoading || !badge"
               class="btn btn-primary join-item"
@@ -329,7 +329,7 @@ async function setActive(active: boolean) {
             <button
               :disabled="mutationLoading"
               class="btn btn-error"
-              @click="pendingBanUser = data.user.uid ?? ''"
+              @click="pendingBanUser = data?.user?.uid ?? null"
             >
               Ban User
             </button>
@@ -357,26 +357,26 @@ async function setActive(active: boolean) {
     </template>
 
     <template #default="{ quickConfirm }">
-      <div class="w-full flex flex-col gap-4">
+      <div class="flex w-full flex-col gap-4">
         <p>
           This is going to delete all his playing records, make the user inactive, and give the user a cheater badge.
         </p>
         <div class="flex flex-col gap-1">
           <strong>Reason:</strong>
-          <div class="flex gap-1 my-1">
+          <div class="my-1 flex gap-1">
             <button v-for="r in exampleBanReasons" :key="r" class="badge badge-accent" @click="setBanReason(r)">
               {{ r }}
             </button>
           </div>
           <div class="join w-full">
-            <label for="pending-ban-reason" class="join-item btn btn-neutral">
+            <label for="pending-ban-reason" class="btn join-item btn-neutral">
               <Icon name="mdi:account-question-outline" size="18" />
             </label>
             <input
               id="pending-ban-reason"
               v-model="pendingBanReason"
               placeholder="e.g. Cheating"
-              class="join-item input input-bordered flex-1 w-full"
+              class="input join-item input-bordered w-full flex-1"
             >
           </div>
         </div>

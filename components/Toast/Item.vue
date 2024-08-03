@@ -67,7 +67,7 @@ function close(clicked: boolean) {
 
 <template>
   <div
-    v-if="display" class="toast-item relative rounded-2xl shadow-md overflow-hidden"
+    v-if="display" class="toast-item relative overflow-hidden rounded-2xl shadow-md"
     :class="[toastClass, toast.onClick && 'cursor-pointer', jitterDone && 'jitter-done']"
     @click="toast.onClick ? close(true) : undefined"
   >
@@ -81,9 +81,9 @@ function close(clicked: boolean) {
           {{ toast.description }}
         </div>
       </div>
-      <span v-else class="flex-1 break-words overflow-x-hidden"> {{ toast.message }} </span>
+      <span v-else class="flex-1 overflow-x-hidden break-words"> {{ toast.message }} </span>
 
-      <button class="btn btn-sm btn-ghost btn-circle" @click.stop="close(false)">
+      <button class="btn btn-circle btn-ghost btn-sm" @click.stop="close(false)">
         <Icon name="mdi:close" size="24" />
       </button>
     </div>

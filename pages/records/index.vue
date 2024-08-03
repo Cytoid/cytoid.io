@@ -99,7 +99,7 @@ const syncData = useDebounceFn(async (recount: boolean = true) => {
 
   await until(user).toMatch(u => !!u)
   const ownerQuery = route.query.owner as string
-  const allowOwner = ['admin', 'moderator'].includes(user.value!.role)
+  const allowOwner = isModerator.value
   const owner = !allowOwner
     ? user.value!.id
     : ownerQuery === '_'
@@ -207,8 +207,8 @@ defineCytoidPage({
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto flex flex-col gap-4">
-    <div class="h-24 relative">
+  <div class="mx-auto flex max-w-5xl flex-col gap-4">
+    <div class="relative h-24">
       <div id="contentTitle" class="absolute bottom-0 left-0">
         <h1 class="text-4xl font-bold">
           Records
@@ -244,7 +244,7 @@ defineCytoidPage({
                 </td>
                 <td>
                   <p
-                    class="text-4xl font-light w-fit"
+                    class="w-fit text-4xl font-light"
                     :class="{
                       'grade-max-text-gradient': record.score === 1000000,
                       'grade-sss-text-gradient': record.score < 1000000 && record.details.maxCombo === record.chart?.notesCount,
@@ -252,7 +252,7 @@ defineCytoidPage({
                   >
                     {{ record.score }}
                   </p>
-                  <div class="flex flex-wrap-reverse gap-x-4 gap-y-1 items-center">
+                  <div class="flex flex-wrap-reverse items-center gap-x-4 gap-y-1">
                     <!-- Acc -->
                     <span class="flex flex-nowrap">
                       <template v-if="record.accuracy === 1">
@@ -274,7 +274,7 @@ defineCytoidPage({
                   </div>
 
                   <!-- Detail -->
-                  <div class="flex flex-nowarp gap-x-2">
+                  <div class="flex-nowarp flex gap-x-2">
                     <span class="text-blue-400">
                       {{ record.details.perfect }}
                     </span> /
@@ -301,7 +301,7 @@ defineCytoidPage({
                       ({{ truncateNum(record.recentRating ?? 0) }})
                     </span>
                   </template>
-                  <span v-else class="opacity-75 select-none">
+                  <span v-else class="select-none opacity-75">
                     Practice
                   </span>
                 </td>

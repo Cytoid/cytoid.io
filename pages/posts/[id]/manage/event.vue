@@ -145,8 +145,8 @@ function submit() {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div class="card bg-base-100 w-full shadow-xl">
+  <div class="flex w-full flex-col gap-5">
+    <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body gap-4">
         <div class="flex flex-col gap-2">
           <h2 class="card-subtitle">
@@ -186,13 +186,13 @@ function submit() {
           </h2>
           <div class="form-control">
             <div class="join w-full">
-              <label for="startDate" class="join-item btn btn-neutral">
+              <label for="startDate" class="btn join-item btn-neutral">
                 <Icon name="mdi:ray-start" size="20" />
               </label>
               <input
                 v-model="startDate" type="datetime-local"
                 min="1900-01-01T00:00"
-                class="join-item input input-bordered flex-1 w-full"
+                class="input join-item input-bordered w-full flex-1"
               >
             </div>
           </div>
@@ -204,13 +204,13 @@ function submit() {
           </h2>
           <div class="form-control">
             <div class="join w-full">
-              <label for="endDate" class="join-item btn btn-neutral">
+              <label for="endDate" class="btn join-item btn-neutral">
                 <Icon name="mdi:ray-end" size="20" />
               </label>
               <input
                 v-model="endDate" type="datetime-local"
                 min="1900-01-01T00:00"
-                class="join-item input input-bordered flex-1 w-full"
+                class="input join-item input-bordered w-full flex-1"
               >
             </div>
           </div>

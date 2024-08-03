@@ -21,7 +21,7 @@ function quickConfirm() {
       }"
     >
       <div class="modal-box">
-        <h3 class="font-bold text-lg mb-4">
+        <h3 class="mb-4 text-lg font-bold">
           <slot name="title" />
         </h3>
 
@@ -31,10 +31,10 @@ function quickConfirm() {
         <input
           v-model="confirmed"
           type="text"
-          class="input input-bordered w-full mt-4"
+          class="input input-bordered mt-4 w-full"
         >
         <div class="modal-action">
-          <button class="btn btn-neutral btn-square" @click="onCancel">
+          <button class="btn btn-square btn-neutral" @click="onCancel">
             <Icon name="mdi:close" size="18" />
           </button>
           <button
