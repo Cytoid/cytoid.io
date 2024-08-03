@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
-    'nuxt-icon',
+    '@nuxt/icon',
     '@nuxtjs/google-fonts',
     '@nuxtjs/turnstile',
     '@vite-pwa/nuxt',
