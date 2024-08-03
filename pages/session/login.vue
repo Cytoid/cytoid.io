@@ -95,7 +95,7 @@ function loginWithProvider(provider: string) {
 
 function loginNext() {
   if (route.query.origin) {
-    router.replace({ path: decodeURIComponent(route.query.origin.toString()) })
+    navigateTo(decodeURIComponent(route.query.origin.toString()))
   }
   else {
     router.replace({ name: 'settings-account' })

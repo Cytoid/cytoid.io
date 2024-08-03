@@ -65,7 +65,7 @@ if (levelId && !data.value?.level) {
 const downloadLink = ref<string | null>(null)
 async function getDownloadLink(verify: () => Promise<string>) {
   if (!isLogin.value) {
-    toLogin()
+    toLogin(route.fullPath)
     return
   }
 
@@ -176,7 +176,7 @@ function cancel() {
                   <button v-if="callback" class="btn btn-neutral btn-block" @click="cancel()">
                     Cancel
                   </button>
-                  <button class="btn btn-primary btn-block" @click="toLogin()">
+                  <button class="btn btn-primary btn-block" @click="toLogin(route.fullPath)">
                     Login
                   </button>
                 </div>
