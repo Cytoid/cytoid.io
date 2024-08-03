@@ -138,6 +138,10 @@ function cancel() {
     setTimeout(() => router.push(`/levels/${levelId}`), 1000)
   }
 }
+
+defineCytoidPage({
+  title: data.value?.level?.title ? `${data.value?.level?.title}` : 'Level',
+})
 </script>
 
 <template>
