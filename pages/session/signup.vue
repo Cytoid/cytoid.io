@@ -39,12 +39,11 @@ const ctdIdVerify = computed(() => {
 })
 
 const emailVerify = computed(() => {
-  const emailRegex = /^[\w.!#$%&’*+/=?^`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
   if (form.value.email === '') {
     return t('signup.email_field_error_required')
   }
 
-  return emailRegex.test(form.value.email) ? null : t('signup.email_field_error_invalid')
+  return verifyEmail(form.value.email) ? null : t('signup.email_field_error_invalid')
 })
 
 const passwordVerify = computed(() => {
