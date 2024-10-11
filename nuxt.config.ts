@@ -123,9 +123,6 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/images/icon.png', type: 'image/png' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon-180x180.png' },
       ],
-      script: [
-        { src: 'https://polyfill.io/v3/polyfill.min.js?version=3.110.1' },
-      ],
     },
   },
 
