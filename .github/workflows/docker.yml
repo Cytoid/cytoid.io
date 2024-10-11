@@ -60,7 +60,7 @@ jobs:
           docker save "$REGISTRY_HOSTNAME"/cytoid/"$IMAGE" | gzip > image.tar.gz
 
       - name: Upload Docker Image
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image
           path: image.tar.gz
