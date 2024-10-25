@@ -10,7 +10,7 @@ import * as dotenv from 'dotenv'
   const output = './gql/schema.graphql'
 
   const command = `npx get-graphql-schema -h 'user-agent=${ua}' ${gqlUrl} > ${output}`
-  // eslint-disable-next-line no-console
+
   console.log('$', command)
   child_process.exec(command)
 })()

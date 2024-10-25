@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ResourceState } from '#build/urql-client/codegen/default/graphql'
 import type { CollectionInput, FetchCollectionForEditingQuery } from '#build/urql-client/codegen/default/graphql'
+import { ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
   submit: (data: CollectionInput) => Promise<void>

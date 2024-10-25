@@ -109,12 +109,14 @@ const isFeatured = computed(() => !!levelData.value?.level?.category.includes('f
 
 const ratingDownCount = computed(() => {
   return levelData.value?.level?.rating.distribution
-    .slice(0, 5).reduce((a, b) => a + b, 0) ?? 0
+    .slice(0, 5)
+    .reduce((a, b) => a + b, 0) ?? 0
 })
 
 const ratingUpCount = computed(() => {
   return levelData.value?.level?.rating.distribution
-    .slice(5, 10).reduce((a, b) => a + b, 0) ?? 0
+    .slice(5, 10)
+    .reduce((a, b) => a + b, 0) ?? 0
 })
 
 const userRating = ref(levelData.value?.level?.rating.rating ?? 0)

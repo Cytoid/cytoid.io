@@ -8,7 +8,7 @@ function mergeTranslations(srcDir: string, destDir: string) {
     if (filename.endsWith('.json')) {
       const srcFile = path.join(srcDir, filename)
       const destFile = path.join(destDir, filename)
-      // eslint-disable-next-line no-console
+
       console.log(destFile)
       const srcContent = JSON.parse(fs.readFileSync(srcFile, 'utf-8'))
       let destContent = {}
@@ -23,7 +23,6 @@ function mergeTranslations(srcDir: string, destDir: string) {
         Object.keys(src).forEach((key) => {
           if (typeof src[key] === 'string') {
             if (!dst[key]) {
-              // eslint-disable-next-line no-console
               console.log('-', key)
               dst[key] = src[key]
             }

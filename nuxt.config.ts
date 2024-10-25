@@ -1,7 +1,7 @@
 import config from 'config'
 import * as dotenv from 'dotenv'
-import pkg from './package.json'
 import manifest from './manifest.json'
+import pkg from './package.json'
 
 dotenv.config()
 

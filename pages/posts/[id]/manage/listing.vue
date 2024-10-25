@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PostType, ResourceState } from '#build/urql-client/codegen/default/graphql'
 import type { FetchPostForEditingQuery, PostInput } from '#build/urql-client/codegen/default/graphql'
+import { PostType, ResourceState } from '#build/urql-client/codegen/default/graphql'
 
 const props = defineProps<{
   submit: (data: PostInput) => Promise<void>

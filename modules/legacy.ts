@@ -1,6 +1,6 @@
-import { defineNuxtModule } from 'nuxt/kit'
-import { pick } from 'lodash'
 import legacy from '@vitejs/plugin-legacy'
+import { pick } from 'lodash'
+import { defineNuxtModule } from 'nuxt/kit'
 
 // Fix vite-legacy build, see https://github.com/nuxt/nuxt/issues/15464
 export default defineNuxtModule<Options>({
