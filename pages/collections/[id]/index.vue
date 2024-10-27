@@ -107,7 +107,7 @@ defineCytoidPage({
               :name="collection.owner.name || collection.owner.uid || 'Unknown'"
               :uid="collection.owner.uid ?? undefined"
             />
-            <div class="prose prose-sm max-w-none" v-html="useMarked(collection.description ?? '')" />
+            <div class="prose prose-sm max-w-none" v-html="marked(collection.description ?? '')" />
             <div class="flex flex-col gap-2">
               <p class="card-subtitle pt-6">
                 {{ $t('level_details.details_card_tags_title') }}

@@ -59,7 +59,7 @@ else {
       <div class="mt-4 md:mt-0">
         <div class="card w-full bg-base-100 shadow-xl">
           <div class="card-body">
-            <div class="prose max-w-none lg:prose-lg" v-html="useSafeMarked(data.page.content)" />
+            <div class="prose max-w-none lg:prose-lg" v-html="trustedMarked(data.page.content)" />
           </div>
         </div>
       </div>

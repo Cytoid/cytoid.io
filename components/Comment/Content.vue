@@ -58,7 +58,7 @@ function afterPost(newPost: CommentResponse) {
             {{ dateFromNow(post.date) }}
           </span>
         </div>
-        <p class="prose break-words pl-4" v-html="useMarked(post.content)" />
+        <p class="prose break-words pl-4" v-html="marked(post.content)" />
         <div class="card-actions flex">
           <template v-if="replyCount">
             <button v-if="!showMore" class="btn btn-ghost btn-sm" @click="showMore = true">

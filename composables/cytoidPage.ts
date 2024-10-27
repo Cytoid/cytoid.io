@@ -21,7 +21,7 @@ export function defineCytoidPage(data: PageDataWithTitle, meta?: PageMeta) {
 
     const url = `${webURL}/${route.path}`
 
-    let markedDescription: string | undefined = sanitizeHtml(useMarked(meta?.unsafeDescription ?? ''), { allowedTags: [] })
+    let markedDescription: string | undefined = sanitizeHtml(marked(meta?.unsafeDescription ?? ''), { allowedTags: [] })
     if (markedDescription.length > 100) {
       markedDescription = markedDescription.substring(0, 250)
     }

@@ -8,6 +8,9 @@ function marked(raw: string): string {
   return md.parse(raw) as string
 }
 
+/**
+ * @deprecated use trustedMarked
+ */
 export function useSafeMarked(safeMdText: string) {
   return sanitizeHtml(marked(safeMdText), {
     allowedTags: false,
@@ -16,6 +19,9 @@ export function useSafeMarked(safeMdText: string) {
   })
 }
 
+/**
+ * @deprecated use marked
+ */
 export function useMarkedWithCleaner(mdText: string) {
   return sanitizeHtml(marked(mdText), {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat([
@@ -27,4 +33,7 @@ export function useMarkedWithCleaner(mdText: string) {
   })
 }
 
+/**
+ * @deprecated use marked
+ */
 export const useMarked = useMarkedWithCleaner

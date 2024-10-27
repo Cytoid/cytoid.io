@@ -365,7 +365,7 @@ defineCytoidPage({
             :name="levelData?.level?.owner.name || levelData?.level?.owner.uid || 'Unknown'"
             :uid="levelData?.level?.owner.uid ?? undefined"
           />
-          <div class="prose prose-sm mt-4 max-w-none" v-html="useMarked(levelData?.level?.description ?? '')" />
+          <div class="prose prose-sm mt-4 max-w-none" v-html="marked(levelData?.level?.description ?? '')" />
           <p class="card-subtitle pt-6">
             {{ $t('level_details.details_card_tags_title') }}
           </p>

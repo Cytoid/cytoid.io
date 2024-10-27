@@ -305,7 +305,7 @@ defineCytoidPage({
             <h2 class="card-subtitle">
               {{ $t('profile.bio_title') }}
             </h2>
-            <div class="prose prose-sm" v-html="useMarked(profileData.profile.bio)" />
+            <div class="prose prose-sm" v-html="marked(profileData.profile.bio)" />
           </template>
           <div class="flex gap-2 opacity-50">
             <Icon name="mdi:calendar-account" size="20" />

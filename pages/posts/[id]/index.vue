@@ -156,7 +156,7 @@ defineCytoidPage({
 
     <div class="card w-full bg-base-100 shadow-xl">
       <div class="card-body">
-        <div class="prose max-w-none lg:prose-lg" v-html="useSafeMarked(post?.content ?? '')" />
+        <div class="prose max-w-none lg:prose-lg" v-html="trustedMarked(post?.content ?? '')" />
       </div>
     </div>
   </LayoutContent>

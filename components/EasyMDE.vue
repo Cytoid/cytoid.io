@@ -12,7 +12,7 @@ onMounted(() => {
       const editor = new EasyMDE({
         element: editorDom.value,
         previewClass: 'prose',
-        previewRender: useMarked,
+        previewRender: marked,
         spellChecker: false,
         initialValue: content.value,
       })
