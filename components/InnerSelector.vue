@@ -1,9 +1,9 @@
-<script setup lang="ts" generic="T extends string | number | symbol">
+<script setup lang="ts">
 const props = defineProps<{
   items: Array<SelectorItem>
-  onChange?: (value: T) => void
+  onChange?: (value: string) => void
 }>()
-const selected = defineModel<T>()
+const selected = defineModel<string>()
 
 const items = computed(() => props.items)
 const selectedItem = computed(() => {
@@ -35,7 +35,7 @@ onMounted(() => {
   })
 })
 
-function change(value: T) {
+function change(value: string) {
   if (props.onChange) {
     props.onChange(value)
   }
@@ -48,7 +48,7 @@ function change(value: T) {
 interface SelectorItem {
   icon?: string
   label?: string
-  value: T
+  value: string
   disabled?: boolean
 }
 </script>

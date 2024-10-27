@@ -1,6 +1,6 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  avatar: string
+  avatar?: string
   name?: string
   uid?: string
   transparent?: boolean
