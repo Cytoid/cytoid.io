@@ -7,12 +7,10 @@ dotenv.config()
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2024-08-03',
   devtools: {
     enabled: true,
-
-    timeline: {
-      enabled: true,
-    },
+    timeline: { enabled: true },
   },
 
   modules: [
@@ -25,7 +23,7 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     'nuxt-gtag',
     '@teages/nuxt-locale-lite',
-    // '../nuxt-urql-client/src/modules',
+    'nuxt-vite-legacy',
     '@teages/nuxt-urql-client',
   ],
 
@@ -126,35 +124,23 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa: import.meta.env.NODE_ENV === 'production'
-    ? {
-        strategies: 'generateSW',
-        registerType: 'autoUpdate',
-        manifest,
-        workbox: {
-          navigateFallback: null,
-          globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
-        },
-        client: {
-          installPrompt: true,
-        },
-      }
-      // disable PWA in dev
-    : {},
+  pwa: {
+    strategies: 'generateSW',
+    registerType: 'autoUpdate',
+    manifest,
+    workbox: {
+      navigateFallback: null,
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    },
+    client: {
+      installPrompt: true,
+    },
+  },
 
   legacy: {
-    targets: [
-      'last 2 versions and not dead',
-      '> 0.3%',
-      'Firefox ESR',
-      'iOS >= 13.2',
-    ],
-    polyfills: [
-      'es.object.has-own',
-    ],
-    modernPolyfills: [
-      'es.object.has-own',
-    ],
+    targets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2'],
+    polyfills: ['es.object.has-own'],
+    modernPolyfills: ['es.object.has-own'],
   },
 
   // dev proxy
@@ -186,9 +172,5 @@ export default defineNuxtConfig({
     },
   },
 
-  vite: {
-    clearScreen: false,
-  },
-
-  compatibilityDate: '2024-08-03',
+  vite: { clearScreen: false },
 })
