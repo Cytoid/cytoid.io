@@ -43,7 +43,7 @@ const emailVerify = computed(() => {
     return t('signup.email_field_error_required')
   }
 
-  return verifyEmail(form.value.email) ? null : t('signup.email_field_error_invalid')
+  return isValidEmail(form.value.email) ? null : t('signup.email_field_error_invalid')
 })
 
 const passwordVerify = computed(() => {

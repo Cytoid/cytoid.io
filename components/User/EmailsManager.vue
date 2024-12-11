@@ -40,12 +40,11 @@ const loading = ref(false)
 
 const newEmail = ref('')
 const emailVerify = computed(() => {
-  const emailRegex = /^[\w.!#$%&’*+/=?^`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
   if (newEmail.value === '') {
     return t('signup.email_field_error_required')
   }
 
-  return emailRegex.test(newEmail.value) ? null : t('signup.email_field_error_invalid')
+  return isValidEmail(newEmail.value) ? null : t('signup.email_field_error_invalid')
 })
 
 const hasVerifiedEmail = computed(() => {
