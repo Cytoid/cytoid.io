@@ -52,6 +52,11 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.11.2",
+    "@iconify-json/fa-solid": "^1.2.0",
+    "@iconify-json/ic": "^1.2.1",
+    "@iconify-json/material-symbols": "^1.2.10",
+    "@iconify-json/mdi": "^1.2.1",
+    "@iconify-json/uil": "^1.2.1",
     "@nuxt/devtools": "^1.6.3",
     "@types/config": "^3.3.5",
     "@types/glob": "^8.1.0",

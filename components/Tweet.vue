@@ -35,7 +35,7 @@ useHead({
         {{ $t('homepage.latest_tweet_title') }}
       </h2>
     </div>
-    <div class="twitter-box mb-8 max-h-96 overflow-y-auto p-4 pt-0">
+    <div data-allow-mismatch="children" class="twitter-box mb-8 max-h-96 overflow-y-auto p-4 pt-0">
       <a
         class="twitter-timeline"
         data-dnt="true"
