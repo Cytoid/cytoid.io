@@ -75,6 +75,6 @@
     "nuxt-vite-legacy": "^1.3.1",
     "terser": "^5.37.0",
     "typescript": "^5.7.2",
-    "vue-tsc": "^2.1.10"
+    "vue-tsc": "https://pkg.pr.new/vuejs/language-tools/vue-tsc@3fb59af"
   }
 }
