@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@teages/nuxt-locale-lite',
     'nuxt-vite-legacy',
     '@teages/nuxt-urql-client',
+    '@nuxt/scripts',
   ],
 
   urqlClient: {
@@ -92,6 +93,16 @@ export default defineNuxtConfig({
       imageURL: config.get('imageURL'),
       webURL: config.get('webURL'),
       servicesUA: import.meta.env.SERVICES_UA ?? '',
+    },
+  },
+
+  scripts: {
+    globals: {
+      onedollarstats: {
+        'src': 'https://assets.onedollarstats.com/tracker.js',
+        'defer': true,
+        'data-site-id': 'cytoid.io',
+      },
     },
   },
 
