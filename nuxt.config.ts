@@ -151,7 +151,6 @@ export default defineNuxtConfig({
   legacy: {
     vite: {
       targets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2', 'not IE 11'],
-      modernTargets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2', 'not IE 11'],
       modernPolyfills: true,
     },
   },
