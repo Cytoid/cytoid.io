@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     'nuxt-gtag',
     '@teages/nuxt-locale-lite',
-    'nuxt-vite-legacy',
+    '@teages/nuxt-legacy',
     '@teages/nuxt-urql-client',
     '@nuxt/scripts',
   ],
@@ -149,9 +149,11 @@ export default defineNuxtConfig({
   },
 
   legacy: {
-    targets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2'],
-    polyfills: ['es.object.has-own'],
-    modernPolyfills: ['es.object.has-own'],
+    vite: {
+      targets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2', 'not IE 11'],
+      modernTargets: ['last 2 versions and not dead', '> 0.3%', 'Firefox ESR', 'iOS >= 13.2', 'not IE 11'],
+      modernPolyfills: true,
+    },
   },
 
   // dev proxy
