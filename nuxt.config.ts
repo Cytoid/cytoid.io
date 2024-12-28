@@ -44,6 +44,10 @@ export default defineNuxtConfig({
     },
   },
 
+  icon: {
+    provider: 'iconify',
+  },
+
   locale: {
     langDir: 'locale',
     lang: {
