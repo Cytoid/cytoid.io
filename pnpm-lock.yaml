@@ -15,7 +15,7 @@ importers:
         specifier: ^1.7.23
         version: 1.7.23(vue@3.5.13(typescript@5.7.2))
       '@nuxt/icon':
-        specifier: ^1.10.1
+        specifier: ^1.10.3
         version: 1.10.3(magicast@0.3.5)(rollup@4.29.1)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
       '@nuxt/scripts':
         specifier: 0.9.5
@@ -36,8 +36,8 @@ importers:
         specifier: ^0.5.15
         version: 0.5.15(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.10.2)(typescript@5.7.2)))
       '@teages/nuxt-legacy':
-        specifier: ^0.0.3
-        version: 0.0.3(@vitejs/plugin-legacy@6.0.0(terser@5.37.0)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)))(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.29.1)
+        specifier: ^0.0.5
+        version: 0.0.5(@vitejs/plugin-legacy@6.0.0(terser@5.37.0)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)))(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.29.1)
       '@teages/nuxt-locale-lite':
         specifier: ^0.0.7
         version: 0.0.7(magicast@0.3.5)(rollup@4.29.1)(vue@3.5.13(typescript@5.7.2))
@@ -48,19 +48,19 @@ importers:
         specifier: ^0.10.6
         version: 0.10.6(magicast@0.3.5)(rollup@4.29.1)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-build@7.3.0)(workbox-window@7.3.0)
       '@vueuse/components':
-        specifier: ^12.0.0
+        specifier: ^12.2.0
         version: 12.2.0(typescript@5.7.2)
       '@vueuse/nuxt':
-        specifier: ^12.0.0
+        specifier: ^12.2.0
         version: 12.2.0(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.29.1)(typescript@5.7.2)
       '@wasm-audio-decoders/ogg-vorbis':
         specifier: ^0.1.16
         version: 0.1.16
       apexcharts:
-        specifier: ^4.2.0
+        specifier: ^4.3.0
         version: 4.3.0
       daisyui:
-        specifier: ^4.12.20
+        specifier: ^4.12.23
         version: 4.12.23(postcss@8.4.49)
       date-fns:
         specifier: ^4.1.0
@@ -69,13 +69,13 @@ importers:
         specifier: ^2.18.0
         version: 2.18.0
       graphql:
-        specifier: ^16.9.0
+        specifier: ^16.10.0
         version: 16.10.0
       howler:
         specifier: ^2.2.4
         version: 2.2.4
       marked:
-        specifier: ^15.0.3
+        specifier: ^15.0.4
         version: 15.0.4
       nuxt:
         specifier: ^3.15.0
@@ -87,7 +87,7 @@ importers:
         specifier: ^1.6.14
         version: 1.6.14
       sanitize-html:
-        specifier: ^2.13.1
+        specifier: ^2.14.0
         version: 2.14.0
       vue:
         specifier: ^3.5.13
@@ -100,10 +100,10 @@ importers:
         version: 1.8.0(apexcharts@4.3.0)(vue@3.5.13(typescript@5.7.2))
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^3.11.2
+        specifier: ^3.12.1
         version: 3.12.1(@typescript-eslint/utils@8.18.2(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2))(@vue/compiler-sfc@3.5.13)(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
       '@nuxt/devtools':
-        specifier: ^1.6.3
+        specifier: ^1.7.0
         version: 1.7.0(rollup@4.29.1)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
       '@types/config':
         specifier: ^3.3.5
@@ -124,10 +124,10 @@ importers:
         specifier: ^2.13.0
         version: 2.13.0
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.18.0
+        specifier: ^8.18.2
         version: 8.18.2(@typescript-eslint/parser@8.18.2(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2))(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
       '@typescript-eslint/parser':
-        specifier: ^8.18.0
+        specifier: ^8.18.2
         version: 8.18.2(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
       '@vitejs/plugin-legacy':
         specifier: ^6.0.0
@@ -142,7 +142,7 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       eslint:
-        specifier: ^9.16.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-plugin-tailwindcss:
         specifier: ^3.17.5
@@ -2164,8 +2164,8 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
 
-  '@teages/nuxt-legacy@0.0.3':
-    resolution: {integrity: sha512-nMAPpnnRZdSeJnwEpT80KydCcVhf1haFSTb9xzau1Wra6h0+hIqjThIJs+NWfPmqHLv97kH5m+8/fYT3InmxxA==}
+  '@teages/nuxt-legacy@0.0.5':
+    resolution: {integrity: sha512-mbtUT0RvOqTVh2O7PjGKOSXGiiJ97DALbClchh+kngxFTpOtl3913XymJkstlRbZXJKCXFgZHJ3/AcUTw7lTSg==}
     peerDependencies:
       '@vitejs/plugin-legacy': ^6.0.0
       nuxt: '>=3.15.0'
@@ -6314,7 +6314,7 @@ packages:
     resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
 
   statuses@1.5.0:
-    resolution: {integrity: sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=}
+    resolution: {integrity: sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==}
     engines: {node: '>= 0.6'}
 
   statuses@2.0.1:
@@ -6518,7 +6518,7 @@ packages:
     resolution: {integrity: sha512-3/o9z3X0X0fTupwsYvR03pJ/DjWuqqrfwBgTQzdWDiQSm9KitAyz/9WqsT2JQW7KV2m+bC2ol/zqpW37NHxLaA==}
 
   thenify-all@1.6.0:
-    resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
+    resolution: {integrity: sha1-GhkY1ALY/D+Y+/I02wvMjMEOlyY=}
     engines: {node: '>=0.8'}
 
   thenify@3.3.1:
@@ -9935,7 +9935,7 @@ snapshots:
       '@tanstack/virtual-core': 3.11.2
       vue: 3.5.13(typescript@5.7.2)
 
-  '@teages/nuxt-legacy@0.0.3(@vitejs/plugin-legacy@6.0.0(terser@5.37.0)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)))(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.29.1)':
+  '@teages/nuxt-legacy@0.0.5(@vitejs/plugin-legacy@6.0.0(terser@5.37.0)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)))(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.29.1)':
     dependencies:
       '@nuxt/kit': 3.15.0(magicast@0.3.5)(rollup@4.29.1)
       nuxt: 3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.2)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(terser@5.37.0)(tsx@4.19.2)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1)
