@@ -9,7 +9,7 @@ const query = gql(`
   }
 `)
 
-const membershipPending = useServiceFetch<MembershipResponse>('/membership')
+const membershipPending = useServiceFetch<MembershipResponse>('/membership', { server: false })
 const externalsPending = useAsyncQuery(query)
 
 const { data: membership } = await membershipPending
