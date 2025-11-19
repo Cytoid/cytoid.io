@@ -47,6 +47,7 @@ async function syncMembershipStatus(provider: string) {
   try {
     await $fetch(useServiceUrl(`/membership/${provider}`), {
       method: 'PATCH',
+      credentials: 'include',
     })
     reloadNuxtApp()
   }
