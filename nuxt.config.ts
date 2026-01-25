@@ -159,6 +159,13 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    '/levels/*/manage/*': { ssr: false },
+    '/collections/*/manage/*': { ssr: false },
+    '/posts/*/manage/*': { ssr: false },
+    '/studio/*': { ssr: false },
+  },
+
   // dev proxy
   nitro: {
     devProxy: {

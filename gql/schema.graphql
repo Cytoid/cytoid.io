@@ -288,6 +288,7 @@ type Post {
   logo: Image
   metadata: PostMeta
   locked: Boolean
+  testers: [String!]
 }
 
 type PostDetail {
@@ -306,6 +307,7 @@ type PostDetail {
   logo: Image
   metadata: PostMeta
   locked: Boolean
+  testers: [String!]
   level: Level
   collection: Collection
   epicId: String
@@ -324,6 +326,7 @@ input PostInput {
   startDate: Date
   endDate: Date
   locked: Boolean
+  testers: [String!]
   levelId: Int
   collectionId: ID
 }
@@ -436,6 +439,8 @@ type Rating {
   total: Int!
   rating: Float
   distribution: [Int!]!
+  like: Int!
+  dislike: Int!
 }
 
 type Record {

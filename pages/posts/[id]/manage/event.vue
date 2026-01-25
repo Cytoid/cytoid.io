@@ -14,6 +14,7 @@ const levelId = ref(data.value.post?.level?.uid ?? null)
 const collectionId = ref(data.value.post?.collection?.uid ?? null)
 const startDate = ref<string>(data.value.post?.startDate ?? null)
 const endDate = ref<string>(data.value.post?.endDate ?? null)
+const testers = ref<string[]>(data.value.post?.testers ?? [])
 
 // id -> title pairs
 // - null means none
@@ -137,6 +138,7 @@ function submit() {
       collectionId: collectionId.value ? collectionCache.value[collectionId.value]?.id : null,
       startDate: startDate.value || null,
       endDate: endDate.value || null,
+      testers: testers.value,
     },
     levelData ?? undefined,
     collectionData ?? undefined,
@@ -213,6 +215,15 @@ function submit() {
                 class="input join-item input-bordered w-full flex-1"
               >
             </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <h2 class="card-subtitle">
+            Tester
+          </h2>
+          <div class="form-control">
+            <BaseItemInput v-model="testers" />
           </div>
         </div>
 

@@ -33,6 +33,7 @@ const query = gql(`
       state
       locked
       epicId
+      testers
       level {
         id
         uid
