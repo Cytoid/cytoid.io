@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   urqlClient: {
     clients: {
       default: {
-        url: config.get('graphqlURL'),
+        url: '/graphql',
         credentials: 'include',
         cookiesFilter: ['cyt:sess'],
         codegen: {
@@ -173,17 +173,6 @@ export default defineNuxtConfig({
         target: config.get('serviceURLServer'),
         changeOrigin: true,
         prependPath: false,
-        ws: true,
-        headers: {
-          'user-agent': import.meta.env.SERVICES_UA ?? '',
-        },
-        cookieDomainRewrite: {
-          'cytoid.io': 'localhost',
-        },
-      },
-      '/graphql': {
-        target: config.get('graphqlURLProxy'),
-        changeOrigin: true,
         ws: true,
         headers: {
           'user-agent': import.meta.env.SERVICES_UA ?? '',
