@@ -91,7 +91,6 @@ export default defineNuxtConfig({
     public: {
       description: pkg.description,
       assetURL: config.get('assetURL'),
-      staticURL: config.get('staticURL'),
       serviceURLClient: config.get('serviceURLClient'),
       serviceURLServer: config.get('serviceURLServer'),
       imageURL: config.get('imageURL'),

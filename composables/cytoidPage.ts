@@ -73,9 +73,9 @@ function getDefaultMeta(title?: string): Parameters<typeof useSeoMeta>[0] {
   const config = useRuntimeConfig()
 
   const webUrl = config.public.webURL
-  const staticURL = config.public.staticURL
+  const cdnURL = config.app.cdnURL
   const _title = title || 'Cytoid'
-  const imageUrl = `${staticURL}/img/session.jpg`
+  const imageUrl = `${cdnURL}/images/session.jpg`
   const description = config.public.description // TODO: i18n
   return {
     title: _title,
