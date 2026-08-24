@@ -61,6 +61,19 @@ defineCytoidPage({
   unsafeDescription: collection.value?.description,
   author: collection.value?.owner?.name ?? collection.value?.owner?.uid ?? undefined,
 })
+
+const { isIos, isAndroid, isMacOS, isApple } = useDevice()
+const isMobile = computed(() => {
+  return isAndroid || isIos || isMacOS || isApple
+})
+const downloadCytoidDialog = ref<HTMLDialogElement | null>(null)
+async function openWithCytoid() {
+  const url = `cytoid://collections/${collection.value!.uid}`
+  if (import.meta.client && window?.location) {
+    window.location.href = url
+  }
+  downloadCytoidDialog.value?.showModal()
+}
 </script>
 
 <template>
@@ -73,10 +86,15 @@ defineCytoidPage({
         {{ collection.slogan }}
       </p>
       <div
-        v-if="user && (isModerator || user.id === collection.owner?.id)"
+        v-if="isMobile || (user && (isModerator || user.id === collection.owner?.id))"
         class="mt-6 flex max-w-xl flex-wrap gap-3"
       >
+        <button v-if="isMobile" class="btn btn-accent" @click="openWithCytoid">
+          <Icon name="ph:circle-duotone" size="24" class="mr-2" />
+          Cytoid
+        </button>
         <NuxtLink
+          v-if="user && (isModerator || user.id === collection.owner?.id)"
           class="btn btn-neutral"
           :to="{ name: 'collections-id-manage', params: { id: collection.uid } }"
         >
@@ -178,4 +196,23 @@ defineCytoidPage({
       </div>
     </div>
   </LayoutContent>
+
+  <dialog ref="downloadCytoidDialog" class="modal">
+    <form method="dialog" class="modal-box">
+      <h3 class="text-lg font-bold">
+        Launching Cytoid...
+      </h3>
+      <p class="py-4">
+        Don't have Cytoid on your device yet? Download Cytoid now!
+      </p>
+      <div class="modal-action">
+        <button class="btn btn-square btn-neutral">
+          <Icon name="mdi:close" size="18" />
+        </button>
+        <NuxtLink class="btn btn-primary flex-1" :to="{ name: 'download' }">
+          Download Cytoid
+        </NuxtLink>
+      </div>
+    </form>
+  </dialog>
 </template>
